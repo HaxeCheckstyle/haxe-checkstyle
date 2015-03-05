@@ -1,25 +1,30 @@
 package checkstyle.reporter;
 
 import checkstyle.LintMessage.SeverityLevel;
-class Reporter implements IReporter{
-	public function new(){
+
+class Reporter implements IReporter {
+
+	public function new() {
 
 	}
 
-	static function severityString(s:SeverityLevel):String{
+	static function severityString(s:SeverityLevel):String {
 		return switch(s){
-		case INFO: return "info";
-		case WARNING: return "warning";
-		case ERROR: return "error";
+			case INFO: return "info";
+			case WARNING: return "warning";
+			case ERROR: return "error";
 		}
 	}
 
-	public function start():Void{}
-	public function finish():Void{}
-	public function fileStart(f:LintFile):Void{}
-	public function fileFinish(f:LintFile):Void{}
+	public function start():Void {}
 
-	public function addMessage(m:LintMessage){
+	public function finish():Void {}
+
+	public function fileStart(f:LintFile):Void {}
+
+	public function fileFinish(f:LintFile):Void {}
+
+	public function addMessage(m:LintMessage) {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);
 		sb.add(':');

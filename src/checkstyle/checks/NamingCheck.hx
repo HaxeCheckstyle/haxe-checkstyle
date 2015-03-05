@@ -77,6 +77,15 @@ class NamingCheck extends Check {
 	}
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
+		//trace(Std.string(f.kind));
+		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
+			_warnVoid(f.name, f.pos);
+		}
+
+		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
+			_warnNoReturnType(f.name, f.pos);
+		}
+
 		if (isPrivate || isPublic) {
 			var underscore:Int = f.name.lastIndexOf("_");
 			var set:Int = f.name.indexOf("set_");
@@ -90,18 +99,18 @@ class NamingCheck extends Check {
 				return;
 			}
 
-			if(Std.string(f.kind).indexOf("FVar") > -1 && Std.string(f.kind).indexOf("expr =>") > -1) {
+			if (Std.string(f.kind).indexOf("FVar") > -1 && Std.string(f.kind).indexOf("expr =>") > -1) {
 				_warnVarinit(f.name, f.pos);
 				return;
 			}
 		}
-		else if(isInline && Std.string(f.kind).indexOf("FVar") > -1) {
+		else if (isInline && Std.string(f.kind).indexOf("FVar") > -1) {
 			if(!capsRE.match(f.name)) {
 				_warnInline(f.name, f.pos);
 				return;
 			}
 		}
-		else if(isStatic) {
+		else if (isStatic) {
 
 		}
 	}
@@ -140,5 +149,13 @@ class NamingCheck extends Check {
 
 	function _warnInline(name:String, pos:Position) {
 		logPos('Inline constant variables should be uppercase \"${name}\"', pos, SeverityLevel.ERROR);
+	}
+
+	function _warnVoid(name:String, pos:Position) {
+		logPos('No need to return Void, Default function return value type is Void \"${name}\"', pos, SeverityLevel.INFO);
+	}
+
+	function _warnNoReturnType(name:String, pos:Position) {
+		logPos('Return type not specified when returning a value for function \"${name}\"', pos, SeverityLevel.INFO);
 	}
 }

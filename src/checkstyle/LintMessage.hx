@@ -1,6 +1,6 @@
 package checkstyle;
 
-enum SeverityLevel{
+enum SeverityLevel {
 	INFO;
 	WARNING;
 	ERROR;

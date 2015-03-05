@@ -1,5 +1,6 @@
 package checkstyle.checks;
 
+import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
@@ -10,7 +11,7 @@ class ArrayInstantiationCheck extends Check {
 	}
 
 	override function actualRun() {
-		ExprUtils.walkFile(_checker.ast, function(e) {
+		ExprUtils.walkFile(_checker.ast, function(e:Expr) {
 			switch(e.expr){
 				case ENew({pack:[], name:"Array"}, _):
 					var lp = _checker.getLinePos(e.pos.min);
