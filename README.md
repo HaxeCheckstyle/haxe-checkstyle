@@ -1,2 +1,1 @@
-# haxe-checkstyle
-Checkstyle for Haxe
+# haxe-static-analysis

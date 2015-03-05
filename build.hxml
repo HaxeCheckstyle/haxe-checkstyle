@@ -1,0 +1,18 @@
+-cp src
+
+#-lib hxparse:3.0.0
+#-lib haxeparser
+-lib haxeparser-substituted:1.0.1
+-lib compiletime:2.5.0
+-lib hxargs:3.0.0
+
+--each
+
+--next
+-main checkstyle.Main
+-neko bin/static_analysis.n
+
+#--next
+#-cp test
+#-main Test
+#--interp
