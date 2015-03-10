@@ -72,15 +72,16 @@ class NamingCheck extends Check {
 		}
 		else isPrivate = true;
 
+		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
+			_warnVoid(f.name, f.pos);
+		}
+
 		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
 		//trace(f.name, Std.string(f.kind).indexOf("FVar"), Std.string(f.kind).indexOf("expr => "));
 	}
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
 		//trace(Std.string(f.kind));
-		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
-			_warnVoid(f.name, f.pos);
-		}
 
 		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
 			_warnNoReturnType(f.name, f.pos);
