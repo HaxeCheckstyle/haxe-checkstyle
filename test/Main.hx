@@ -4,7 +4,5 @@ class Main {
 
 	public function new() {}
 
-	function _test() {
-		return null;
-	}
+	public override function execute() {}
 }

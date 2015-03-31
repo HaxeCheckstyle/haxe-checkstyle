@@ -76,8 +76,12 @@ class NamingCheck extends Check {
 			_warnVoid(f.name, f.pos);
 		}
 
+		_accessCheck(f);
 		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
-		//trace(f.name, Std.string(f.kind).indexOf("FVar"), Std.string(f.kind).indexOf("expr => "));
+	}
+
+	function _accessCheck(f:Field) {
+		if (f.access.indexOf(AOverride) > 0) logPos('override access modifier should be the at the start of the function for better code readability \"${f.name}\"', f.pos, SeverityLevel.WARNING);
 	}
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
