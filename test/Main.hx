@@ -4,5 +4,9 @@ class Main {
 
 	public function new() {}
 
-	public override function execute() {}
+	override public function execute() {
+		if (true) { //test
+			var x;
+		}
+	}
 }
