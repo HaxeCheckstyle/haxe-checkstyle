@@ -32,7 +32,7 @@ static inline var REEL_COUNT:Int = 3;
 - No anonymous functions. Using anonymous functions, types, etc will cause issues with static analysis. Use Typedef where possible.
 - No private keyword for private variables and functions in normal classes.
 - No public keyword in interfaces and externs.
-- No Void.
+- No Void return value type.
 
 http://haxe.org/manual/class-field-visibility.html
 
