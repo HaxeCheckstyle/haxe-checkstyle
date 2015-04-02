@@ -4,6 +4,12 @@ Please note that this project was originally created by [@mcheshkov](https://git
 
 I have customized and added additional checks based on my needs as listed below.
 
+### Installation ###
+
+```haxe
+haxelib install checkstyle
+```
+
 **Naming Convention:**
 
 private variables and functions - camelCase starting with underscore	
@@ -31,3 +37,7 @@ static inline var REEL_COUNT:Int = 3;
 http://haxe.org/manual/class-field-visibility.html
 
 http://adireddy.github.io/haxe/haxe-access-modifiers-return-types/
+
+### Issues ###
+
+Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
