@@ -5,13 +5,10 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("VariableInitialisation")
+@desc("Checks if the normal variables are initialised at class level")
 class VariableInitialisationCheck extends Check {
 
-	public static inline var DESC:String = "Checks if the normal variables are initialised at class level";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "ERROR";
 
 	override function actualRun() {
 		for (td in _checker.ast.decls) {
@@ -71,6 +68,6 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function _warnVarinit(name:String, pos:Position) {
-		logPos('Invalid variable initialisation \"${name}\" (move initialisation to constructor or function)', pos, SeverityLevel.ERROR);
+		logPos('Invalid variable initialisation \"${name}\" (move initialisation to constructor or function)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

@@ -7,13 +7,10 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("Spacing")
+@desc("Spacing check on if statement and arounf operators")
 class SpacingCheck extends Check {
 
-	public static inline var DESC:String = "Spacing check on if statement and arounf operators";
-
-	public function new(){
-		super();
-	}
+	public var severity:String = "INFO";
 
 	public var spaceAroundBinop = true;
 	public var noSpaceAroundUnop = true;
@@ -30,7 +27,7 @@ class SpacingCheck extends Check {
 
 			switch e.expr {
 			case EBinop(bo,l,r) if (spaceAroundBinop):
-				if (r.pos.min - l.pos.max < binopSize(bo)+2) logPos('No space around ${binopString(bo)}', e.pos, SeverityLevel.INFO);
+				if (r.pos.min - l.pos.max < binopSize(bo)+2) logPos('No space around ${binopString(bo)}', e.pos, Reflect.field(SeverityLevel, severity));
 			case EUnop(uo,post,e2) if (noSpaceAroundUnop):
 				var dist = 0;
 				if (post){
@@ -41,10 +38,10 @@ class SpacingCheck extends Check {
 					//++(...);
 					dist = e2.pos.min - e.pos.min;
 				}
-				if (dist > unopSize(uo)) logPos('Space around ${unopString(uo)}', e.pos, INFO);
+				if (dist > unopSize(uo)) logPos('Space around ${unopString(uo)}', e.pos, Reflect.field(SeverityLevel, severity));
 			case EIf(econd,eif,eelse) if (spaceIfCondition):
-				if (econd.pos.min - e.pos.min < "if (".length) logPos('No space between `if\' and condition', e.pos, SeverityLevel.INFO);
-				if (eif.pos.min - econd.pos.max < ") ".length) logPos('No space between `if\' and condition', e.pos, SeverityLevel.INFO);
+				if (econd.pos.min - e.pos.min < "if (".length) logPos('No space between if and condition', e.pos, Reflect.field(SeverityLevel, severity));
+				//if (eif.pos.min - econd.pos.max < ") ".length) logPos('No space between if and condition', e.pos, Reflect.field(SeverityLevel, severity));
 			default:
 			}
 

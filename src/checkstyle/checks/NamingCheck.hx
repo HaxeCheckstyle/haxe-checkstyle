@@ -5,9 +5,10 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("Naming")
+@desc("Various checks on naming conventions")
 class NamingCheck extends Check {
 
-	public static inline var DESC:String = "Various checks on naming conventions";
+	public var severity:String = "ERROR";
 
 	public function new() {
 		super();
@@ -102,7 +103,7 @@ class NamingCheck extends Check {
 			switch(e.expr){
 				case EVars(vars):
 					for (v in vars) {
-						if (!privateCamelCaseRE.match(v.name)) logPos('Invalid casing of variable ${v.name}', e.pos, SeverityLevel.WARNING);
+						if (!privateCamelCaseRE.match(v.name)) logPos('Invalid casing of variable ${v.name}', e.pos, Reflect.field(SeverityLevel, severity));
 					}
 				default:
 			}
@@ -110,14 +111,14 @@ class NamingCheck extends Check {
 	}
 
 	function _warnPrivate(name:String, pos:Position) {
-		logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, SeverityLevel.ERROR);
+		logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnPublic(name:String, pos:Position) {
-		logPos('Invalid public signature \"${name}\" (name should be camelCase)', pos, SeverityLevel.ERROR);
+		logPos('Invalid public signature \"${name}\" (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnInline(name:String, pos:Position) {
-		logPos('Inline constant variables should be uppercase \"${name}\"', pos, SeverityLevel.ERROR);
+		logPos('Inline constant variables should be uppercase \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

@@ -4,13 +4,10 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("HexadecimalLiterals")
+@desc("Checks Hexadecimal Literals")
 class HexadecimalLiteralsCheck extends Check {
 
-	public static inline var DESC:String = "Checks Hexadecimal Literals";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "INFO";
 
 	override function actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
@@ -31,13 +28,14 @@ class HexadecimalLiteralsCheck extends Check {
 			var prefixExpected = prefix;
 			if (lowerPrefix) prefixExpected = prefixExpected.toLowerCase();
 			else prefixExpected = prefixExpected.toUpperCase();
-			if (prefix != prefixExpected) logPos('Bad hexademical literal', p, SeverityLevel.INFO);
+			if (prefix != prefixExpected) logPos('Bad hexademical literal', p, Reflect.field(SeverityLevel, severity));
 
 			var bodyActual = s.substr(2);
 			var bodyExpected = bodyActual;
 			if (lowerBody) bodyExpected = bodyExpected.toLowerCase();
 			else bodyExpected = bodyExpected.toUpperCase();
-			if (bodyExpected != bodyActual) logPos('Bad hexademical literal', p, SeverityLevel.INFO);
+			if (bodyExpected != bodyActual) logPos('Bad hexademical literal, use uppercase', p, Reflect.field(SeverityLevel, severity));
+
 		}
 	}
 }

@@ -9,15 +9,12 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("MethodLength")
+@desc("Maximum function length (default 50 lines)")
 class MethodLengthCheck extends Check {
 
-	public static inline var DESC:String = "Maximum function length (50 lines)";
+	public var severity:String = "ERROR";
 
-	public function new(){
-		super();
-	}
-
-	var maxFunctionLines = 50;
+	public var maxFunctionLines:Int = 50;
 
 	override public function actualRun() {
 		for (td in _checker.ast.decls){
@@ -73,6 +70,6 @@ class MethodLengthCheck extends Check {
 	}
 
 	function _warnFunctionLength(name:String, pos:Int, ofs:Int) {
-		log('Function is too long: ${name} (try splitting into multiple functions)', pos, ofs, SeverityLevel.ERROR);
+		log('Function is too long: ${name} (> ${maxFunctionLines} lines, try splitting into multiple functions)', pos, ofs, Reflect.field(SeverityLevel, severity));
 	}
 }

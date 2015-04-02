@@ -9,13 +9,10 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("ListenerName")
+@desc("Checks listener function names")
 class ListenerNameCheck extends Check {
 
-	public static inline var DESC:String = "Checks listener function names";
-
-	public function new(){
-		super();
-	}
+	public var severity:String = "ERROR";
 
 	override public function actualRun() {
 		ExprUtils.walkFile(_checker.ast,function(e) {
@@ -55,6 +52,6 @@ class ListenerNameCheck extends Check {
 	function checkListenerName(name:String, line:Int, col:Int){
 		var re = ~/^_?on.*/;
 		var match = re.match(name);
-		if (!match) log("Wrong listener name: " + name, line, col, SeverityLevel.ERROR);
+		if (!match) log("Wrong listener name: " + name, line, col, Reflect.field(SeverityLevel, severity));
 	}
 }

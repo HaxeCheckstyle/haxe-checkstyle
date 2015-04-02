@@ -4,13 +4,10 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("TODOComment")
+@desc("Checks if there are any TODO's left")
 class TODOCommentCheck extends Check {
 
-	public static inline var DESC:String = "Checks if there are any TODO's left";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "INFO";
 
 	override function actualRun() {
 		var re = ~/TODO|FIXME/;
@@ -18,7 +15,7 @@ class TODOCommentCheck extends Check {
 			switch tk.tok {
 				case Comment(s) | CommentLine(s):
 					var lp = _checker.getLinePos(tk.pos.min);
-					if (re.match(s)) log('TODO comment: ' + s, lp.line + 1, lp.ofs + 1, SeverityLevel.INFO);
+					if (re.match(s)) log('TODO comment: ' + s, lp.line + 1, lp.ofs + 1, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		}

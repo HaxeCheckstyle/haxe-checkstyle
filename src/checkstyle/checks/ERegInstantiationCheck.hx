@@ -4,9 +4,10 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("ERegInstantiation")
+@desc("Checks instantiation of regular expressions is in between ~/ and /, not with new")
 class ERegInstantiationCheck extends Check {
 
-	public static inline var DESC:String = "Checks instantiation of regular expressions";
+	public var severity:String = "ERROR";
 
 	public function new() {
 		super();
@@ -20,7 +21,7 @@ class ERegInstantiationCheck extends Check {
 					[{expr:EConst(CString(re)), pos:_}, {expr:EConst(CString(opt)), pos:_}]
 				):
 					var lp = _checker.getLinePos(e.pos.min);
-					log('Bad EReg instantiation', lp.line + 1, lp.ofs + 1, SeverityLevel.ERROR);
+					log('Bad EReg instantiation, define expression between ~/ and /', lp.line + 1, lp.ofs + 1, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		});

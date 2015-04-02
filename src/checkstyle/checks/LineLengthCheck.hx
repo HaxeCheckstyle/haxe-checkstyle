@@ -4,19 +4,17 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("LineLength")
+@desc("Max line length (default 120)")
 class LineLengthCheck extends Check {
 
-	public static inline var DESC:String = "Max line length (240)";
+	public var severity:String = "WARNING";
 
-	public function new() {
-		super();
-	}
+	public var maxLines:Int = 120;
 
 	override function actualRun() {
-		var length = 240;
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];
-			if (line.length > length) log('Too long line', i + 1, 1, SeverityLevel.WARNING);
+			if (line.length > maxLines) log('Too long line (> ${maxLines})', i + 1, 1, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }

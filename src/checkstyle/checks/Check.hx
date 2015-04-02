@@ -48,4 +48,8 @@ class Check {
 		}
 		return moduleName;
 	}
+
+	public function getDescription():String {
+		return "";
+	}
 }

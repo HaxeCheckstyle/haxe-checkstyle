@@ -5,20 +5,17 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("ArrayInstantiation")
+@desc("Checks if the array is instantiated using [], not with new")
 class ArrayInstantiationCheck extends Check {
 
-	public static inline var DESC:String = "Checks if the Array is instantiated using new or []";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "ERROR";
 
 	override function actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e:Expr) {
 			switch(e.expr){
 				case ENew({pack:[], name:"Array"}, _):
 					var lp = _checker.getLinePos(e.pos.min);
-					log('Bad array instantiation, use the array literal notation [] which is faster', lp.line + 1, lp.ofs + 1, SeverityLevel.ERROR);
+					log('Bad array instantiation, use the array literal notation [] which is faster', lp.line + 1, lp.ofs + 1, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		});

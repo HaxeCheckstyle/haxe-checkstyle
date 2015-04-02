@@ -40,7 +40,7 @@ class ChecksInfo {
 	}
 
 	function getCheckDescription(cl:Class<Check>){
-		return Reflect.field(cl, "DESC");
+		return haxe.rtti.Meta.getType(cl).desc[0];
 	}
 
 	public function checks(){

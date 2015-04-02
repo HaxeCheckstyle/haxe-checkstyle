@@ -5,13 +5,10 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("Return")
+@desc("Warns if Void is used for return or if return type is not specified when returning")
 class ReturnCheck extends Check {
 
-	public static inline var DESC:String = "Warns if Void is used for return or if return type is not specified when returning";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "INFO";
 
 	override function actualRun() {
 		for (td in _checker.ast.decls) {
@@ -41,10 +38,10 @@ class ReturnCheck extends Check {
 	}
 
 	function _warnVoid(name:String, pos:Position) {
-		logPos('No need to return Void, Default function return value type is Void \"${name}\"', pos, SeverityLevel.INFO);
+		logPos('No need to return Void, Default function return value type is Void \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnNoReturnType(name:String, pos:Position) {
-		logPos('Return type not specified when returning a value for function \"${name}\"', pos, SeverityLevel.INFO);
+		logPos('Return type not specified when returning a value for function \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

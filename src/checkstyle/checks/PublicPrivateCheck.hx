@@ -5,13 +5,10 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("PublicPrivate")
+@desc("Check for explicit use of private in classes and public in interfaces/externs")
 class PublicPrivateCheck extends Check {
 
-	public static inline var DESC:String = "Check for explicit use of private in classes and public in interfaces/externs";
-
-	public function new() {
-		super();
-	}
+	public var severity:String = "INFO";
 
 	override function actualRun() {
 		for (td in _checker.ast.decls) {
@@ -47,10 +44,10 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function _warnPrivateKeyword(name:String, pos:Position) {
-		logPos('No need of private keyword \"${name}\" (fields are by default private in classes)', pos, SeverityLevel.INFO);
+		logPos('No need of private keyword \"${name}\" (fields are by default private in classes)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnPublicKeyword(name:String, pos:Position) {
-		logPos('No need of public keyword \"${name}\" (fields are by default public in interfaces)', pos, SeverityLevel.INFO);
+		logPos('No need of public keyword \"${name}\" (fields are by default public in interfaces)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }
