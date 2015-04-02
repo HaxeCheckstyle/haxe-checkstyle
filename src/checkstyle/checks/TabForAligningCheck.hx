@@ -4,6 +4,9 @@ import checkstyle.LintMessage.SeverityLevel;
 
 @name("TabForAligning")
 class TabForAligningCheck extends Check {
+
+	public static inline var DESC:String = "Checks if there are any tabs in the middle of a line";
+
 	public function new() {
 		super();
 	}

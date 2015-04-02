@@ -4,6 +4,9 @@ import checkstyle.LintMessage.SeverityLevel;
 
 @name("BlockFormatCheck")
 class BlockFormatCheck extends Check {
+
+	public static inline var DESC:String = "Checks empty blocks {} and first/lines of a block";
+
 	public function new(){
 		super();
 	}

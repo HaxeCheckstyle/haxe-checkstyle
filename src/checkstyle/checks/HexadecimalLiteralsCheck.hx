@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("HexadecimalLiterals")
 class HexadecimalLiteralsCheck extends Check {
+
+	public static inline var DESC:String = "Checks Hexadecimal Literals";
+
 	public function new() {
 		super();
 	}

@@ -10,6 +10,9 @@ import haxeparser.Data.Token;
 
 @name("MethodLength")
 class MethodLengthCheck extends Check {
+
+	public static inline var DESC:String = "Maximum function length (50 lines)";
+
 	public function new(){
 		super();
 	}

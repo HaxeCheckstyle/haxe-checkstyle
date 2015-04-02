@@ -1,0 +1,13 @@
+{
+  "checks": [
+    {
+      "type": "IndentationCharacter"
+    },
+    {
+      "type": "Spacing",
+      "props": {
+        "spaceIfCondition": true
+      }
+    }
+  ]
+}

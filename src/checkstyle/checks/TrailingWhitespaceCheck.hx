@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("TrailingWhitespace")
 class TrailingWhitespaceCheck extends Check {
+
+	public static inline var DESC:String = "Checks if there are any trailing white spaces";
+
 	public function new() {
 		super();
 	}

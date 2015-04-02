@@ -6,6 +6,9 @@ import haxe.macro.Expr;
 
 @name("Naming")
 class NamingCheck extends Check {
+
+	public static inline var DESC:String = "Various checks on naming conventions";
+
 	public function new() {
 		super();
 	}
@@ -48,10 +51,6 @@ class NamingCheck extends Check {
 		if (f.access.indexOf(AInline) > -1) isInline = true;
 		else if (f.access.indexOf(AStatic) > -1) isStatic = true;
 		else if (f.access.indexOf(APrivate) > -1) isPrivate = true;
-		else if (f.access.indexOf(APublic) > -1) {
-			_warnPublicKeyword(f.name, f.pos);
-			return;
-		}
 		else isPublic = true;
 
 		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
@@ -66,30 +65,13 @@ class NamingCheck extends Check {
 		if (f.access.indexOf(AInline) > -1) isInline = true;
 		else if (f.access.indexOf(AStatic) > -1) isStatic = true;
 		else if (f.access.indexOf(APublic) > -1) isPublic = true;
-		else if (f.access.indexOf(APrivate) > -1) {
-			_warnPrivateKeyword(f.name, f.pos);
-			return;
-		}
 		else isPrivate = true;
 
-		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
-			_warnVoid(f.name, f.pos);
-		}
-
-		_accessCheck(f);
 		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
-	}
-
-	function _accessCheck(f:Field) {
-		if (f.access.indexOf(AOverride) > 0) logPos('override access modifier should be the at the start of the function for better code readability \"${f.name}\"', f.pos, SeverityLevel.WARNING);
 	}
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
 		//trace(Std.string(f.kind));
-
-		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
-			_warnNoReturnType(f.name, f.pos);
-		}
 
 		if (isPrivate || isPublic) {
 			var underscore:Int = f.name.lastIndexOf("_");
@@ -101,11 +83,6 @@ class NamingCheck extends Check {
 			}
 			else if (isPublic && (!publicCamelCaseRE.match(f.name) || (underscore > -1 && set == -1 && get == -1) || underscore > 3 || (underscore > -1 && underscore < 3))) {
 				_warnPublic(f.name, f.pos);
-				return;
-			}
-
-			if (Std.string(f.kind).indexOf("FVar") > -1 && Std.string(f.kind).indexOf("expr =>") > -1) {
-				_warnVarinit(f.name, f.pos);
 				return;
 			}
 		}
@@ -132,14 +109,6 @@ class NamingCheck extends Check {
 		});
 	}
 
-	function _warnPrivateKeyword(name:String, pos:Position) {
-		logPos('No need of private keyword \"${name}\" (fields are by default private in classes)', pos, SeverityLevel.INFO);
-	}
-
-	function _warnPublicKeyword(name:String, pos:Position) {
-		logPos('No need of public keyword \"${name}\" (fields are by default public in interfaces)', pos, SeverityLevel.INFO);
-	}
-
 	function _warnPrivate(name:String, pos:Position) {
 		logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, SeverityLevel.ERROR);
 	}
@@ -148,19 +117,7 @@ class NamingCheck extends Check {
 		logPos('Invalid public signature \"${name}\" (name should be camelCase)', pos, SeverityLevel.ERROR);
 	}
 
-	function _warnVarinit(name:String, pos:Position) {
-		logPos('Invalid variable initialisation \"${name}\" (move initialisation to constructor or function)', pos, SeverityLevel.ERROR);
-	}
-
 	function _warnInline(name:String, pos:Position) {
 		logPos('Inline constant variables should be uppercase \"${name}\"', pos, SeverityLevel.ERROR);
-	}
-
-	function _warnVoid(name:String, pos:Position) {
-		logPos('No need to return Void, Default function return value type is Void \"${name}\"', pos, SeverityLevel.INFO);
-	}
-
-	function _warnNoReturnType(name:String, pos:Position) {
-		logPos('Return type not specified when returning a value for function \"${name}\"', pos, SeverityLevel.INFO);
 	}
 }

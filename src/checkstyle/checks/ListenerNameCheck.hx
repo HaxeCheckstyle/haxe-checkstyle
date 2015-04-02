@@ -10,6 +10,9 @@ import haxeparser.Data.Token;
 
 @name("ListenerName")
 class ListenerNameCheck extends Check {
+
+	public static inline var DESC:String = "Checks listener function names";
+
 	public function new(){
 		super();
 	}

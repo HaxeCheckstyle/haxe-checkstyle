@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("LineLength")
 class LineLengthCheck extends Check {
+
+	public static inline var DESC:String = "Max line length (240)";
+
 	public function new() {
 		super();
 	}

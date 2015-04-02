@@ -4,6 +4,9 @@ import haxeparser.Data.Token;
 
 @name("Indent")
 class IndentCheck extends Check {
+
+	public static inline var DESC:String = "NOT WORKING";
+
 	public function new() {
 		super();
 	}

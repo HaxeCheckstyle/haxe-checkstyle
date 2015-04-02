@@ -2,10 +2,11 @@ package ;
 
 class Main {
 
+	var a:Int = 2;
 	public function new() {}
 
-	override public function execute() {
-		if (true) { //test
+	private override function execute():Void {
+		if(true) {
 			var x;
 		}
 	}

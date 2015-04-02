@@ -6,6 +6,9 @@ import haxeparser.Data.Token;
 
 @name("ArrayInstantiation")
 class ArrayInstantiationCheck extends Check {
+
+	public static inline var DESC:String = "Checks if the Array is instantiated using new or []";
+
 	public function new() {
 		super();
 	}

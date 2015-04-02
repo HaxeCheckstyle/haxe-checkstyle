@@ -8,6 +8,9 @@ import haxeparser.Data.Token;
 
 @name("Spacing")
 class SpacingCheck extends Check {
+
+	public static inline var DESC:String = "Spacing check on if statement and arounf operators";
+
 	public function new(){
 		super();
 	}

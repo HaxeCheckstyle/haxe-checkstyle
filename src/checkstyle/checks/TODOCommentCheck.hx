@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("TODOComment")
 class TODOCommentCheck extends Check {
+
+	public static inline var DESC:String = "Checks if there are any TODO's left";
+
 	public function new() {
 		super();
 	}

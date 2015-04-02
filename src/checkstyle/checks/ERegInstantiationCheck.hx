@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("ERegInstantiation")
 class ERegInstantiationCheck extends Check {
+
+	public static inline var DESC:String = "Checks instantiation of regular expressions";
+
 	public function new() {
 		super();
 	}

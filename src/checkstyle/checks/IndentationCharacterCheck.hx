@@ -5,6 +5,9 @@ import haxeparser.Data.Token;
 
 @name("IndentationCharacter")
 class IndentationCharacterCheck extends Check {
+
+	public static inline var DESC:String = "Checks indentation character (tab)";
+
 	public function new() {
 		super();
 	}

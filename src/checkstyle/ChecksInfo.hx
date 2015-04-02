@@ -39,9 +39,8 @@ class ChecksInfo {
 		return getCheckNameFromClass(Type.getClass(check));
 	}
 
-	function getCheckDescription(cl){
-		// FIXME
-		return "some check";
+	function getCheckDescription(cl:Class<Check>){
+		return Reflect.field(cl, "DESC");
 	}
 
 	public function checks(){

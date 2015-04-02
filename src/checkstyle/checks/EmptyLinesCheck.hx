@@ -4,6 +4,9 @@ import checkstyle.LintMessage.SeverityLevel;
 
 @name("EmptyLines")
 class EmptyLinesCheck extends Check {
+
+	public static inline var DESC:String = "Checks if there is more that 1 empty line";
+
 	public function new(){
 		super();
 	}
