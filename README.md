@@ -1,8 +1,8 @@
 # Checkstyle for Haxe
 
-Please note that this project was originally created by [@mcheshkov](https://github.com/mcheshkov) called [haxelint](https://github.com/mcheshkov/haxelint). Full credit to @mcheshkov
+Please note that this project was originally created by [@mcheshkov](https://github.com/mcheshkov) called [haxelint](https://github.com/mcheshkov/haxelint). So full credit to him.
 
-I have customized and added additional checks based on my needs as listed below.
+I have customized and made it flexible with additional checks configurations.
 
 ### Installation ###
 
@@ -12,7 +12,7 @@ haxelib install checkstyle
 
 ### Configuration ###
 
-```json
+```
 {
   "checks": [
     {
