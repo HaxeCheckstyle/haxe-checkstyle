@@ -12,7 +12,7 @@ haxelib install checkstyle
 
 ### Configuration ###
 
-```
+```json
 {
   "checks": [
     {
