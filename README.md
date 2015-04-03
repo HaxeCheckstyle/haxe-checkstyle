@@ -1,6 +1,8 @@
 # Checkstyle for Haxe
 
-Automated code analysis tool ideal for projects that want to enforce a coding standard.
+Automated code analysis tool ideal for projects that want to enforce coding conventions.
+
+Code conventions improve readability, allowing team members to understand new code easily.
 
 Please note that this project was originally created by [@mcheshkov](https://github.com/mcheshkov) called [haxelint](https://github.com/mcheshkov/haxelint). So full credit to him.
 
