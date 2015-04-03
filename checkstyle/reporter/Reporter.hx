@@ -4,9 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 
 class Reporter implements IReporter {
 
-	public function new() {
-
-	}
+	public function new() {}
 
 	static function severityString(s:SeverityLevel):String {
 		return switch(s){

@@ -16,23 +16,23 @@ class Main {
 		var cwd;
 		var oldCwd = null;
 
-		try{
+		try {
 			args = Sys.args();
 			cwd = Sys.getCwd();
-			if (Sys.getEnv("HAXELIB_RUN") != null){
+			if (Sys.getEnv("HAXELIB_RUN") != null) {
 				cwd = args.pop();
 				oldCwd = Sys.getCwd();
 			}
-			if (oldCwd != null) Sys.setCwd(cwd); // FIXME instead of this one should gracefully parse absolute-relative path
+			if (oldCwd != null) Sys.setCwd(cwd);
 
 			var main = new Main();
 			main.run(args);
 		}
-		catch(e:Dynamic){
+		catch(e:Dynamic) {
 			trace(e);
 			trace(CallStack.toString(CallStack.exceptionStack()));
 		}
-		if (oldCwd != null) Sys.setCwd(oldCwd); // FIXME instead of this one should gracefully parse absolute-relative path
+		if (oldCwd != null) Sys.setCwd(oldCwd);
 	}
 
 	var reporter:IReporter;
@@ -40,16 +40,16 @@ class Main {
 	var checker:Checker;
 
 	static var report_type:String = "default";
-	static var path:String = "static_analysis.xml";
+	static var path:String = "check-style-report.xml";
 	static var style:String = "";
 
-	function new(){
+	function new() {
 		reporter = new Reporter();
 		info = new ChecksInfo();
 		checker = new Checker();
 	}
 
-	function run(args:Array<String>){
+	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var _configPath:String = null;
 
@@ -85,11 +85,8 @@ class Main {
 			toProcess.push({name:file,content:code});
 		}
 
-		if (_configPath == null){
-			addAllChecks();
-		}
+		if (_configPath == null) addAllChecks();
 		else {
-			//TODO split config loading to separate class
 			var configText = File.getContent(_configPath);
 			var config = Json.parse(configText);
 			var checks:Array<Dynamic> = config.checks;
@@ -98,7 +95,6 @@ class Main {
 				if (checkConf.props != null){
 					var props = Reflect.fields(checkConf.props);
 					for (prop in props){
-						//FIXME check available properties and their types
 						var val = Reflect.field(checkConf.props, prop);
 						Reflect.setField(check, prop, val);
 					}
@@ -110,48 +106,37 @@ class Main {
 		checker.process(toProcess);
 	}
 
-	function addAllChecks():Void{
-		for (check in info.checks()){
-			checker.addCheck(info.build(check.name));
-		}
+	function addAllChecks():Void {
+		for (check in info.checks()) checker.addCheck(info.build(check.name));
 	}
 
-	function listChecks():Void{
-		for (check in info.checks()){
-			Sys.println('${check.name}: ${check.description}');
-		}
+	function listChecks():Void {
+		for (check in info.checks()) Sys.println('${check.name}: ${check.description}');
 	}
 
-	//FIXME some macro maybe?
 	static function listReporters():Void {
 		Sys.println("default - Default reporter");
 		Sys.println("xml - Checkstyle-like XML reporter");
 		Sys.exit(0);
 	}
 
-	//FIXME some macro maybe?
-	static function createReporter():IReporter{
-		return switch(report_type){
-		case "xml": new XMLReporter(path, style);
-		case "default": new Reporter();
-		default: throw "Unknown reporter";
+	static function createReporter():IReporter {
+		return switch(report_type) {
+			case "xml": new XMLReporter(path, style);
+			case "default": new Reporter();
+			default: throw "Unknown reporter";
 		}
 	}
 
-	private static function pathJoin(s:String, t:String):String{
-		//FIXME
+	private static function pathJoin(s:String, t:String):String {
 		return s + "/" + t;
 	}
 
 	private static function traverse(node:String , files:Array<String>) {
-		if (FileSystem.isDirectory(node)){
+		if (FileSystem.isDirectory(node)) {
 			var nodes = FileSystem.readDirectory(node);
-			for (child in nodes){
-				traverse(pathJoin(node,child),files);
-			}
+			for (child in nodes) traverse(pathJoin(node,child), files);
 		}
-		else if (node.substr(-3) == ".hx"){
-			files.push(node);
-		}
+		else if (node.substr(-3) == ".hx") files.push(node);
 	}
 }
