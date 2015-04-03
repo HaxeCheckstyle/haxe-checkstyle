@@ -61,7 +61,7 @@ haxelib install checkstyle
       "type": "LineLength",
       "props": {
         "severity": "ERROR",
-        "maxLines": 120
+        "maxCharacters": 120
       }
     },
     {
