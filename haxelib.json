@@ -1,11 +1,11 @@
 {
-	"name": "haxelint",
-	"url": "https://github.com/adireddy/haxe-static-analysis",
+	"name": "checkstyle",
+	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"license": "MIT",
-	"description": "Static analysis and style checking for Haxe",
+	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"version": "1.0.0",
 	"releasenote": "initial release",
-	"contributors": ["adireddy", "mcheshkov"],
+	"contributors": ["adireddy"],
 	"dependencies": {
 		"haxeparser-substituted": "1.0.1"
 	}

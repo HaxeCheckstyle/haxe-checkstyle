@@ -45,8 +45,22 @@ class MultipleChecksTest {
 		trace("TEST");
 	}
 
-	// Void check
+	function returnCheck() {
+		return;
+	}
+
+	// setter/getter check
 	function set_test() {
 		trace("TEST");
 	}
+
+	// Block format check
+	function _blockFormat() { //aa
+	}
+
+	// Listener check
+	function _listener() {
+		addEventListener("click", onClick);
+	}
+	function onClick() {}
 }

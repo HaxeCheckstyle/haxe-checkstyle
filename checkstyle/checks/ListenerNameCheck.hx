@@ -9,7 +9,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("ListenerName")
-@desc("Checks listener function names")
+@desc("Checks that listener function names are prefixed with 'on'")
 class ListenerNameCheck extends Check {
 
 	public var severity:String = "ERROR";

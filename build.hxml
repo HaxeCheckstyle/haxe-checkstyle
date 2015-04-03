@@ -6,8 +6,5 @@
 -lib compiletime:2.5.0
 -lib hxargs:3.0.0
 
---each
-
---next
 -main checkstyle.Main
 -neko run.n

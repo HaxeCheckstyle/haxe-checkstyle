@@ -7,7 +7,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("Spacing")
-@desc("Spacing check on if statement and arounf operators")
+@desc("Spacing check on if statement and around operators")
 class SpacingCheck extends Check {
 
 	public var severity:String = "INFO";
