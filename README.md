@@ -16,6 +16,8 @@ haxelib install checkstyle
 
 ### Configuration ###
 
+More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki/Haxe-Checkstyle).
+
 ```json
 {
 	"checks": [
