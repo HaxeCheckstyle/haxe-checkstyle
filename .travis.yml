@@ -11,11 +11,11 @@ before_install:
     - sudo apt-get install haxe -y
     - mkdir -p ~/.haxe/lib
     - echo ~/.haxe/lib | haxelib setup
-    - haxelib install hxparse:3.0.0
+    - haxelib install hxparse 3.0.0
     - haxelib install haxeparser
-    - haxelib install haxeparser-substituted:1.0.1
-    - haxelib install compiletime:2.5.0
-    - haxelib install hxargs:3.0.0
+    - haxelib install haxeparser-substituted 1.0.1
+    - haxelib install compiletime 2.5.0
+    - haxelib install hxargs 3.0.0
 
 script:
     - haxe build.hxml
