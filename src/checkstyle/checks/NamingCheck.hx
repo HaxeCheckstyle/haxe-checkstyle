@@ -9,10 +9,7 @@ import haxe.macro.Expr;
 class NamingCheck extends Check {
 
 	public var severity:String = "ERROR";
-
-	public function new() {
-		super();
-	}
+	public var privateUnderscorePrefix:Bool = true;
 
 	var privateCamelCaseRE = ~/^_?[a-z0-9_]*$/i;
 	var publicCamelCaseRE = ~/^[a-z0-9_]*$/i;
@@ -20,6 +17,7 @@ class NamingCheck extends Check {
 	var capsRE = ~/^_?[A-Z][A-Z0-9_]*$/;
 
 	override function actualRun() {
+		if (!privateUnderscorePrefix) privateCamelCaseRE = ~/^[a-z0-9_]*$/i;
 		checkClassFields();
 		checkLocalVars();
 	}
@@ -73,12 +71,11 @@ class NamingCheck extends Check {
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
 		//trace(Std.string(f.kind));
-
 		if (isPrivate || isPublic) {
 			var underscore:Int = f.name.lastIndexOf("_");
 			var set:Int = f.name.indexOf("set_");
 			var get:Int = f.name.indexOf("get_");
-			if (isPrivate && (!privateCamelCaseRE.match(f.name) || underscore == -1 || (underscore > 0 && set == -1 && get == -1) || underscore > 3 || (underscore > 0 && underscore < 3))) {
+			if (isPrivate && (!privateCamelCaseRE.match(f.name) || (privateUnderscorePrefix && underscore == -1) || (underscore > 0 && set == -1 && get == -1) || underscore > 3 || (underscore > 0 && underscore < 3))) {
 				_warnPrivate(f.name, f.pos);
 				return;
 			}
@@ -111,7 +108,8 @@ class NamingCheck extends Check {
 	}
 
 	function _warnPrivate(name:String, pos:Position) {
-		logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, Reflect.field(SeverityLevel, severity));
+		if (privateUnderscorePrefix) logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, Reflect.field(SeverityLevel, severity));
+		else logPos('Invalid private signature \"${name}\" (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnPublic(name:String, pos:Position) {

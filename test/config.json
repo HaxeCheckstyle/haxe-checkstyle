@@ -1,12 +1,6 @@
 {
   "checks": [
     {
-      "type": "IndentationCharacter",
-      "props": {
-        "severity": "INFO"
-      }
-    },
-    {
       "type": "ArrayInstantiation",
       "props": {
         "severity": "ERROR"
@@ -56,6 +50,13 @@
       "props": {
         "severity": "ERROR",
         "maxFunctionLines": 50
+      }
+    },
+    {
+      "type": "Naming",
+      "props": {
+        "severity": "ERROR",
+        "privateUnderscorePrefix": false
       }
     },
     {

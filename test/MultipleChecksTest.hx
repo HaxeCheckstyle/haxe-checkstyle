@@ -44,4 +44,9 @@ class MultipleChecksTest {
 	function _test():Void {
 		trace("TEST");
 	}
+
+	// Void check
+	function set_test() {
+		trace("TEST");
+	}
 }
