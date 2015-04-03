@@ -144,7 +144,9 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 
 ###Options
 
-To see all the options available run `haxelib run checkstyle`
+To see all the options available run the following command.
+
+`haxelib run checkstyle`
 
 ```
 [-p | --path] <loc>              : Set reporter path
