@@ -3,7 +3,7 @@
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
-Code conventions improve readability, allowing team members to understand new code easily.
+Code conventions improve readability, allowing team members to understand each others code better.
 
 Please note that this project was originally created by [@mcheshkov](https://github.com/mcheshkov) called [haxelint](https://github.com/mcheshkov/haxelint). So full credit to him.
 
