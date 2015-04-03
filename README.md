@@ -10,29 +10,126 @@ I have customized and added additional checks based on my needs as listed below.
 haxelib install checkstyle
 ```
 
-**Naming Convention:**
+### Configuration ###
 
-private variables and functions - camelCase starting with underscore	
-```haxe
-var _playerCount:Int;
-function _getPlayerCount():Int {}
-```
-public variables and functions- camelCase
-```haxe
-public var playerCount:Int;
-public function getPlayerCount():Int {}
-```
-constants (static and inline)	- UPPERCASE separated with underscore
-```haxe
-static inline var REEL_COUNT:Int = 3;
+```json
+{
+  "checks": [
+    {
+      "type": "ArrayInstantiation",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "BlockFormatCheck",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "EmptyLines",
+      "props": {
+        "severity": "INFO",
+        "maxConsecutiveEmptyLines": 1
+      }
+    },
+    {
+      "type": "ERegInstantiation",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "HexadecimalLiterals",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "IndentationCharacter",
+      "props": {
+        "severity": "INFO",
+        "character": "tab"
+      }
+    },
+    {
+      "type": "LineLength",
+      "props": {
+        "severity": "ERROR",
+        "maxLines": 120
+      }
+    },
+    {
+      "type": "MethodLength",
+      "props": {
+        "severity": "ERROR",
+        "maxFunctionLines": 50
+      }
+    },
+    {
+      "type": "Naming",
+      "props": {
+        "severity": "ERROR",
+        "privateUnderscorePrefix": false
+      }
+    },
+    {
+      "type": "Override",
+      "props": {
+        "severity": "ERROR"
+      }
+    },
+    {
+      "type": "PublicPrivate",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "Return",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "Spacing",
+      "props": {
+        "severity": "INFO",
+        "spaceIfCondition": true,
+        "spaceAroundBinop": true,
+        "spaceAroundBinop": true
+      }
+    },
+    {
+      "type": "TabForAligning",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "TODOComment",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "TrailingWhitespace",
+      "props": {
+        "severity": "INFO"
+      }
+    },
+    {
+      "type": "VariableInitialisation",
+      "props": {
+        "severity": "ERROR"
+      }
+    }
+  ]
+}
 ```
 
-**Variables & Functions:**
-- Barring constants, variables should not be instantiated at class level.
-- No anonymous functions. Using anonymous functions, types, etc will cause issues with static analysis. Use Typedef where possible.
-- No private keyword for private variables and functions in normal classes.
-- No public keyword in interfaces and externs.
-- No Void return value type.
+### Reference ###
 
 http://haxe.org/manual/class-field-visibility.html
 
