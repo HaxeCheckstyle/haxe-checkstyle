@@ -9,13 +9,13 @@ Please note that this project was originally created by [@mcheshkov](https://git
 
 I have customized and made it flexible with additional checks and configurations.
 
-### Installation ###
+###Installation
 
 ```haxe
 haxelib install checkstyle
 ```
 
-### Configuration ###
+###Configuration
 
 More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki/Haxe-Checkstyle).
 
@@ -142,12 +142,36 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 }
 ```
 
-### Reference ###
+###Options
+
+To see all the options available run `haxelib run checkstyle`
+
+[-p | --path] <loc>              : Set reporter path
+[-x | --xslt] <x>                : Set reporter style (XSLT)
+[-r | --reporter] <reporterName> : Set reporter
+[--list-reporters]               : List all reporters
+[-c | --config] <configPath>     : Set config file
+[--list-checks]                  : List all checks
+[-s | --source] <sourcePath>     : Set sources to process
+
+###Hudson and Bamboo Integration
+
+You can generate the report in checkstyle XML format that can be integrated with Hudson and Bamboo easily.
+
+You can also set XSLT style for the XML generated. See the sample below.
+
+`haxelib run checkstyle -s src -c config.json -r xml -p report.xml -x report.xsl`
+
+Sample Hudson integration chart.
+
+![hudson](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/hudson.png)
+
+###Reference
 
 http://haxe.org/manual/class-field-visibility.html
 
 http://adireddy.github.io/haxe/haxe-access-modifiers-return-types/
 
-### Issues ###
+###Issues
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
