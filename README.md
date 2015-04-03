@@ -26,7 +26,7 @@ haxelib install checkstyle
       }
     },
     {
-      "type": "BlockFormatCheck",
+      "type": "BlockFormat",
       "props": {
         "severity": "ERROR"
       }
