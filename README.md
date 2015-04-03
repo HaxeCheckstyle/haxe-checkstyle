@@ -146,6 +146,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 
 To see all the options available run `haxelib run checkstyle`
 
+```
 [-p | --path] <loc>              : Set reporter path
 [-x | --xslt] <x>                : Set reporter style (XSLT)
 [-r | --reporter] <reporterName> : Set reporter
@@ -153,6 +154,7 @@ To see all the options available run `haxelib run checkstyle`
 [-c | --config] <configPath>     : Set config file
 [--list-checks]                  : List all checks
 [-s | --source] <sourcePath>     : Set sources to process
+```
 
 ###Hudson and Bamboo Integration
 
@@ -162,7 +164,7 @@ You can also set XSLT style for the XML generated. See the sample below.
 
 `haxelib run checkstyle -s src -c config.json -r xml -p report.xml -x report.xsl`
 
-Sample Hudson integration chart.
+Sample Hudson Checkstyle Trend Chart:
 
 ![hudson](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/hudson.png)
 
