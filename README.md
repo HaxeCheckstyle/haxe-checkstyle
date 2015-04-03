@@ -4,7 +4,7 @@ Automated code analysis tool ideal for projects that want to enforce a coding st
 
 Please note that this project was originally created by [@mcheshkov](https://github.com/mcheshkov) called [haxelint](https://github.com/mcheshkov/haxelint). So full credit to him.
 
-I have customized and made it flexible with additional checks configurations.
+I have customized and made it flexible with additional checks and configurations.
 
 ### Installation ###
 
