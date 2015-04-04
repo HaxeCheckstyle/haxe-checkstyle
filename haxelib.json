@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "initial release",
-	"version": "1.0.0",
+	"releasenote": "added anonymous structure check",
+	"version": "1.0.1",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
