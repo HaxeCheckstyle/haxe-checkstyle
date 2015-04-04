@@ -1,6 +1,12 @@
 {
 	"checks": [
 		{
+			"type": "Anonymous",
+			"props": {
+				"severity": "ERROR"
+			}
+		},
+		{
 			"type": "ArrayInstantiation",
 			"props": {
 				"severity": "ERROR"
