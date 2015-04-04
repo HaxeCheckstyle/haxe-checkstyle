@@ -58,11 +58,17 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
-		//trace(Std.string(f.kind));
 		if (isPrivate || isPublic) {
-			if (Std.string(f.kind).indexOf("FVar") > -1 && Std.string(f.kind).indexOf("expr =>") > -1) {
-				_warnVarinit(f.name, f.pos);
-				return;
+			switch (f.kind) {
+				case FVar(t, a):
+					if (Std.string(f.kind).indexOf("expr =>") > -1) {
+						_warnVarinit(f.name, f.pos);
+						return;
+					}
+				case FFun(f):
+					return;
+				case FProp(g, s, t, a):
+					return;
 			}
 		}
 	}
