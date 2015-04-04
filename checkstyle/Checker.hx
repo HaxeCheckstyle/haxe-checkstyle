@@ -9,9 +9,15 @@ import haxeparser.Data.Token;
 
 class Checker {
 
+	public var file:LintFile;
+	public var lines:Array<String>;
+	public var tokens:Array<Token>;
+	public var ast:Ast;
+
 	var checks:Array<Check>;
 	var reporters:Array<IReporter>;
-	public var file:LintFile;
+	var linesIdx:Array<LineIds>;
+	var lineSeparator:String;
 
 	public function new() {
 		checks = [];
@@ -44,18 +50,12 @@ class Checker {
 		if (left) linesIdx.push({l:last, r:code.length-1});
 	}
 
-	var linesIdx:Array<{l:Int,r:Int}>;
-
-	public function getLinePos(off:Int):{line:Int, ofs:Int} {
+	public function getLinePos(off:Int):LinePos {
 		for (i in 0...linesIdx.length) {
-			if (linesIdx[i].l <= off && linesIdx[i].r >= off) return {line:i,ofs:off-linesIdx[i].l};
+			if (linesIdx[i].l <= off && linesIdx[i].r >= off) return { line:i,ofs: off-linesIdx[i].l };
 		}
 		throw "Bad offset";
 	}
-
-	public var lines:Array<String>;
-
-	var lineSeparator:String;
 
 	function findLineSeparator() {
 		var code = file.content;
@@ -81,8 +81,6 @@ class Checker {
 		lines = code.split(lineSeparator);
 	}
 
-	public var tokens:Array<Token>;
-
 	function makeTokens() {
 		var code = file.content;
 		tokens = [];
@@ -95,8 +93,6 @@ class Checker {
 		}
 	}
 
-	public var ast:{pack: Array<String>, decls: Array<TypeDecl>};
-
 	function makeAST() {
 		var code = file.content;
 		var parser = new haxeparser.HaxeParser(byte.ByteData.ofString(code), file.name);
@@ -105,9 +101,7 @@ class Checker {
 
 	public function process(files:Array<LintFile>) {
 		for (reporter in reporters) reporter.start();
-
 		for (file in files) run(file);
-
 		for (reporter in reporters) reporter.finish();
 	}
 
@@ -155,4 +149,19 @@ class Checker {
 
 		for (reporter in reporters) reporter.fileFinish(file);
 	}
+}
+
+typedef LinePos = {
+	var line:Int;
+	var ofs:Int;
+}
+
+typedef LineIds = {
+	var l:Int;
+	var r:Int;
+}
+
+typedef Ast = {
+	var pack:Array<String>;
+	var decls:Array<TypeDecl>;
 }
