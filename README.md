@@ -26,6 +26,12 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 {
 	"checks": [
 		{
+			"type": "Anonymous",
+			"props": {
+				"severity": "ERROR"
+			}
+		},
+		{
 			"type": "ArrayInstantiation",
 			"props": {
 				"severity": "ERROR"
