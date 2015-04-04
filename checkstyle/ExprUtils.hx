@@ -11,9 +11,7 @@ import haxe.macro.Expr;
 class ExprUtils {
 
 	public static function walkFile(file:{pack: Array<String>, decls: Array<TypeDecl> }, cb:Expr -> Void) {
-		for (decl in file.decls){
-			walkTypeDecl(decl, cb);
-		}
+		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
 
 	public static function walkTypeDecl(td:TypeDecl, cb:Expr -> Void) {
@@ -48,21 +46,15 @@ class ExprUtils {
 			case HExtends(t) | HImplements(t): walkTypePath(t,cb);
 			default:
 		}
-		for (f in d.data) {
-			walkField(f,cb);
-		}
+		for (f in d.data) walkField(f,cb);
 	}
 
 	public static function walkEnum(d:Definition<EnumFlag, Array<EnumConstructor>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		for (ec in d.data) {
 			walkMeta(ec.meta, cb);
-			for (arg in ec.args) {
-				walkComplexType(arg.type, cb);
-			}
-			for (param in ec.params) {
-				walkTypeParamDecl(param, cb);
-			}
+			for (arg in ec.args) walkComplexType(arg.type, cb);
+			for (param in ec.params) walkTypeParamDecl(param, cb);
 			if (ec.type != null) walkComplexType(ec.type, cb);
 		}
 	}
@@ -73,9 +65,7 @@ class ExprUtils {
 			case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct,cb);
 			default:
 		}
-		for (f in d.data) {
-			walkField(f,cb);
-		}
+		for (f in d.data) walkField(f,cb);
 	}
 
 	public static function walkImport(sl, mode, cb:Expr -> Void) {
@@ -104,12 +94,8 @@ class ExprUtils {
 	}
 
 	public static function walkTypeParamDecl(tp:TypeParamDecl, cb:Expr -> Void) {
-		if (tp.constraints != null) {
-			for (c in tp.constraints) walkComplexType(c, cb);
-		}
-		if (tp.params != null) {
-			for (t in tp.params) walkTypeParamDecl(t, cb);
-		}
+		if (tp.constraints != null) for (c in tp.constraints) walkComplexType(c, cb);
+		if (tp.params != null) for (t in tp.params) walkTypeParamDecl(t, cb);
 	}
 
 	public static function walkFunction(f:Function, cb:Expr -> Void) {
@@ -119,17 +105,11 @@ class ExprUtils {
 		}
 		if (f.ret != null) walkComplexType(f.ret, cb);
 		if (f.expr != null) walkExpr(f.expr, cb);
-		if (f.params != null) {
-			for (tp in f.params) {
-				walkTypeParamDecl(tp, cb);
-			}
-		}
+		if (f.params != null) for (tp in f.params) walkTypeParamDecl(tp, cb);
 	}
 
 	public static function walkCase(c:Case, cb:Expr -> Void) {
-		for (v in c.values) {
-			walkExpr(v, cb);
-		}
+		for (v in c.values) walkExpr(v, cb);
 		if (c.guard != null) walkExpr(c.guard, cb);
 		if (c.expr != null) walkExpr(c.expr, cb);
 	}
@@ -180,33 +160,21 @@ class ExprUtils {
 			case EField(e, field): walkExpr(e, cb);
 			case EParenthesis(e): walkExpr(e, cb);
 			case EObjectDecl(fields):
-				for (f in fields) {
-					walkExpr(f.expr, cb);
-				}
+				for (f in fields) walkExpr(f.expr, cb);
 			case EArrayDecl(values):
-				for (v in values) {
-					walkExpr(v, cb);
-				}
+				for (v in values) walkExpr(v, cb);
 			case ECall(e, params):
 				walkExpr(e, cb);
-				for (p in params) {
-					walkExpr(p, cb);
-				}
+				for (p in params) walkExpr(p, cb);
 			case ENew(t, params):
 				walkTypePath(t, cb);
-				for (p in params) {
-					walkExpr(p, cb);
-				}
+				for (p in params) walkExpr(p, cb);
 			case EUnop(op, postFix, e): walkExpr(e, cb);
 			case EVars(vars):
-				for (v in vars) {
-					walkVar(v, cb);
-				}
+				for (v in vars) walkVar(v, cb);
 			case EFunction(name, f): walkFunction(f, cb);
 			case EBlock(exprs):
-				for (e in exprs) {
-					walkExpr(e, cb);
-				}
+				for (e in exprs) walkExpr(e, cb);
 			case EFor(it, expr): walkExpr(it, cb); walkExpr(expr, cb);
 			case EIn(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
 			case EIf(econd, eif, eelse):
@@ -217,9 +185,7 @@ class ExprUtils {
 			case ESwitch(e, cases, edef):
 				walkExpr(e, cb);
 				for (c in cases) walkCase(c, cb);
-				if (edef != null && edef.expr != null){
-					walkExpr(edef, cb);
-				}
+				if (edef != null && edef.expr != null) walkExpr(edef, cb);
 			case ETry(e, catches):
 				walkExpr(e, cb);
 				for (c in catches) walkCatch(c, cb);
@@ -242,11 +208,8 @@ class ExprUtils {
 				walkExpr(e, cb);
 				walkComplexType(t, cb);
 			case EMeta(s, e):
-				if (s.params != null) {
-					for (mp in s.params) walkExpr(mp, cb);
-				}
+				if (s.params != null) for (mp in s.params) walkExpr(mp, cb);
 				walkExpr(e, cb);
 		}
 	}
-
 }

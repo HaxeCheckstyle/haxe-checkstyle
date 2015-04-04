@@ -53,9 +53,7 @@ class ComplexTypeUtils {
 		walkCommonDefinition(d, cb);
 		for (ec in d.data) {
 			walkMeta(ec.meta, cb);
-			for (arg in ec.args) {
-				walkComplexType(arg.type, cb);
-			}
+			for (arg in ec.args) walkComplexType(arg.type, cb);
 			for (param in ec.params) walkTypeParamDecl(param, cb);
 			if (ec.type != null) walkComplexType(ec.type, cb);
 		}
@@ -173,9 +171,7 @@ class ComplexTypeUtils {
 				for (p in params) walkExpr(p, cb);
 			case EUnop(op, postFix, e): walkExpr(e, cb);
 			case EVars(vars):
-				for (v in vars) {
-					walkVar(v, cb);
-				}
+				for (v in vars) walkVar(v, cb);
 			case EFunction(name, f): walkFunction(f, cb);
 			case EBlock(exprs):
 				for (e in exprs) walkExpr(e, cb);
