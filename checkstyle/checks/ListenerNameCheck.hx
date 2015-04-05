@@ -14,7 +14,7 @@ import haxeparser.Data.Token;
 class ListenerNameCheck extends Check {
 
 	public var severity:String = "ERROR";
-	public var listeners:Array<String> = ["addEventListener", "addListener", "on", "once", "add", "addOnce", "addWithPriority", "addOnceWithPriority"];
+	public var listeners:Array<String> = ["addEventListener", "addListener", "on", "once"];
 
 	override public function actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
