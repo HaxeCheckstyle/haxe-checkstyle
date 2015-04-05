@@ -55,7 +55,7 @@
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
-				"listeners": ["addEventListener", "addListener", "on", "once", "add", "addOnce", "addWithPriority", "addOnceWithPriority"]
+				"listeners": ["addEventListener", "addListener", "on", "once"]
 			}
 		},
 		{
