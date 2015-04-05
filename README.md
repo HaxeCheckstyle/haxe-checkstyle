@@ -79,7 +79,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "ListenerName",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"listeners": ["addEventListener", "addListener", "on", "once", "add", "addOnce", "addWithPriority", "addOnceWithPriority"]
 			}
 		},
 		{
