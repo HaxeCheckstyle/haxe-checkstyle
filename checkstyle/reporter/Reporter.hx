@@ -14,13 +14,13 @@ class Reporter implements IReporter {
 		}
 	}
 
-	public function start():Void {}
+	public function start() {}
 
-	public function finish():Void {}
+	public function finish() {}
 
-	public function fileStart(f:LintFile):Void {}
+	public function fileStart(f:LintFile) {}
 
-	public function fileFinish(f:LintFile):Void {}
+	public function fileFinish(f:LintFile) {}
 
 	public function addMessage(m:LintMessage) {
 		var sb:StringBuf = new StringBuf();

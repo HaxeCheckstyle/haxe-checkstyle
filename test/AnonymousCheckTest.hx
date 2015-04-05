@@ -1,22 +1,30 @@
 package ;
 
-class AnonymousCheckTest{
+import checkstyle.checks.AnonymousCheck;
 
-	var _anonymous:{a:Int, b:Int};
+class AnonymousCheckTest extends CheckTestCase {
 
-	public var chips:Array<{chipIndex:Int, position:String}>;
-
-	public function test1(_chips:Array<{chipIndex:Int, position:String}>) {
-		chips = _chips;
+	public function testAnonymousStructureClassVar(){
+		var msg = checkMessage(AnonymousTests.TEST1, new AnonymousCheck());
+		assertEquals(msg, 'Anonymous structure found, it is advised to use a typedef instead "_anonymous"');
 	}
 
-	public function new() {
-		var b:{a:Int, b:Int};
-		_anonymous = {a: 2, b: 5};
+	public function testAnonymousStructureLocalVar(){
+		var msg = checkMessage(AnonymousTests.TEST2, new AnonymousCheck());
+		assertEquals(msg, 'Anonymous structure found, it is advised to use a typedef instead "b"');
 	}
 }
 
-typedef SettingsBucket = {
-	var width:Float;
-	var height:Float;
+class AnonymousTests {
+	public static inline var TEST1:String = "
+	class Test {
+		var _anonymous:{a:Int, b:Int};
+	}";
+
+	public static inline var TEST2:String =
+	"class Test {
+		public function new() {
+			var b:{a:Int, b:Int};
+		}
+	}";
 }

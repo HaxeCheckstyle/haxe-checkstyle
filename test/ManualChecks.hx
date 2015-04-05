@@ -1,6 +1,6 @@
 package ;
 
-class MultipleChecksTest {
+class ManualChecks {
 
 	var _arr1:Array;
 	var _arr2:Array;
@@ -60,7 +60,7 @@ class MultipleChecksTest {
 
 	// Listener check
 	function _listener() {
-		addEventListener("click", onClick);
+		addEventListener("click", testclick);
 	}
-	function onClick() {}
+	function testclick() {}
 }
