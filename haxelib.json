@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "improved and customisable listener check",
-	"version": "1.0.2",
+	"releasenote": "improved naming check",
+	"version": "1.0.3",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
