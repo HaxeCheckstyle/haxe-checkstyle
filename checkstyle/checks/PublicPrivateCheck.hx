@@ -44,10 +44,10 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function _warnPrivateKeyword(name:String, pos:Position) {
-		logPos('No need of private keyword \"${name}\" (fields are by default private in classes)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need of private keyword: ${name} (fields are by default private in classes)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnPublicKeyword(name:String, pos:Position) {
-		logPos('No need of public keyword \"${name}\" (fields are by default public in interfaces)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need of public keyword: ${name} (fields are by default public in interfaces)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

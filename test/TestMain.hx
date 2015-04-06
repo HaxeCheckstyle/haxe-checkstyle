@@ -16,6 +16,7 @@ class TestMain {
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new NamingCheckTest());
 		runner.add(new OverrideCheckTest());
+		runner.add(new PublicPrivateCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);

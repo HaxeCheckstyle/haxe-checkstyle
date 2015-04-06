@@ -13,6 +13,11 @@ class PublicPrivateCheckTest extends CheckTestCase {
 		var msg = checkMessage(PublicPrivateTests.TEST1, new PublicPrivateCheck());
 		assertEquals(msg, 'No need of private keyword: a (fields are by default private in classes)');
 	}
+
+	public function testInterface() {
+		var msg = checkMessage(PublicPrivateTests.TEST2, new PublicPrivateCheck());
+		assertEquals(msg, 'No need of public keyword: a (fields are by default public in interfaces)');
+	}
 }
 
 class PublicPrivateTests {
@@ -34,22 +39,7 @@ class PublicPrivateTests {
 	}";
 
 	public static inline var TEST2:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.on('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
-	}";
-
-	public static inline var TEST3:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.once('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
+	interface Test {
+		public var a:Int;
 	}";
 }
