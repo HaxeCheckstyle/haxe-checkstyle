@@ -9,6 +9,8 @@ class TestMain {
 		runner.add(new BlockFormatCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 
+		runner.add(new LineLengthCheckTest());
+
 		runner.add(new ListenerNameCheckTest());
 
 		var success = runner.run();

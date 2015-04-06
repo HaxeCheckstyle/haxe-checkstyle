@@ -9,22 +9,24 @@ class CheckTestCase extends haxe.unit.TestCase {
 
 	static inline var FILE_NAME = "Test.hx";
 
-	function messageEquals(expected:LintMessage, actual:LintMessage) {
-		assertEquals(expected.fileName, actual.fileName);
-		assertEquals(expected.moduleName, actual.moduleName);
-		assertEquals(expected.line, actual.line);
-		assertEquals(expected.column, actual.column);
-		assertEquals(expected.severity, actual.severity);
-		assertEquals(expected.message, actual.message);
+	var _checker:Checker;
+	var _reporter:TestReporter;
+
+	override public function setup() {
+		_checker = new Checker();
+		_reporter = new TestReporter();
 	}
 
 	function checkMessage(src, check):String {
-		var checker = new Checker();
-		var rep = new TestReporter();
-		checker.addCheck(check);
-		checker.addReporter(rep);
-		checker.process([{name:FILE_NAME, content:src}]);
-		return rep.message;
+		_checker.addCheck(check);
+		_checker.addReporter(_reporter);
+		_checker.process([{name:FILE_NAME, content:src}]);
+		return _reporter.message;
+	}
+
+	override public function tearDown() {
+		_checker = null;
+		_reporter = null;
 	}
 }
 
@@ -37,11 +39,8 @@ class TestReporter implements IReporter {
 	}
 
 	public function start() {}
-
 	public function finish() {}
-
 	public function fileStart(f:LintFile) {}
-
 	public function fileFinish(f:LintFile) {}
 
 	public function addMessage(m:LintMessage) {
