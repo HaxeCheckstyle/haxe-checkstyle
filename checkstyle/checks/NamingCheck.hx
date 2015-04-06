@@ -11,10 +11,13 @@ class NamingCheck extends Check {
 	public var severity:String = "ERROR";
 	public var privateUnderscorePrefix:Bool = true;
 
-	var privateCamelCaseRE = ~/^_?[a-z0-9_]*$/i;
-	var publicCamelCaseRE = ~/^[a-z0-9_]*$/i;
+	var privateCamelCaseRE = ~/^_[a-z]+[a-zA-Z0-9]*$/;
+	var publicCamelCaseRE = ~/^[a-z]+[a-zA-Z0-9]*$/;
+	var localCamelCaseRE = ~/^[a-z]+[a-zA-Z0-9]*$/;
+	var setterRE = ~/^set_[a-z0-9]*$/i;
+	var getterRE = ~/^get_[a-z0-9]*$/i;
 	var bigCamelCaseRE = ~/^_?[A-Z]\w*$/;
-	var capsRE = ~/^_?[A-Z][A-Z0-9_]*$/;
+	var capsRE = ~/^[A-Z]+[A-Z0-9_]*$/;
 
 	override function actualRun() {
 		if (!privateUnderscorePrefix) privateCamelCaseRE = ~/^[a-z0-9_]*$/i;
@@ -72,14 +75,20 @@ class NamingCheck extends Check {
 	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
 		//trace(Std.string(f.kind));
 		if (isPrivate || isPublic) {
-			var underscore:Int = f.name.lastIndexOf("_");
+			var setterGetter:Bool = false;
 			var set:Int = f.name.indexOf("set_");
 			var get:Int = f.name.indexOf("get_");
-			if (isPrivate && (!privateCamelCaseRE.match(f.name) || (privateUnderscorePrefix && underscore == -1) || (underscore > 0 && set == -1 && get == -1) || underscore > 3 || (underscore > 0 && underscore < 3))) {
+			var setterGetter:Bool = (set > -1 || get > -1);
+
+			if (setterGetter && (setterRE.match(f.name) || getterRE.match(f.name))) {
+				return;
+			}
+
+			if (isPrivate && !privateCamelCaseRE.match(f.name)) {
 				_warnPrivate(f.name, f.pos);
 				return;
 			}
-			else if (isPublic && (!publicCamelCaseRE.match(f.name) || (underscore > -1 && set == -1 && get == -1) || underscore > 3 || (underscore > -1 && underscore < 3))) {
+			else if (isPublic && !publicCamelCaseRE.match(f.name)) {
 				_warnPublic(f.name, f.pos);
 				return;
 			}
@@ -100,7 +109,7 @@ class NamingCheck extends Check {
 			switch(e.expr){
 				case EVars(vars):
 					for (v in vars) {
-						if (!privateCamelCaseRE.match(v.name)) logPos('Invalid casing of variable ${v.name}', e.pos, Reflect.field(SeverityLevel, severity));
+						if (!localCamelCaseRE.match(v.name)) logPos('Invalid local variable signature: ${v.name} (name should be camelCase)', e.pos, Reflect.field(SeverityLevel, severity));
 					}
 				default:
 			}
@@ -108,15 +117,15 @@ class NamingCheck extends Check {
 	}
 
 	function _warnPrivate(name:String, pos:Position) {
-		if (privateUnderscorePrefix) logPos('Invalid private signature \"${name}\" (name should be camelCase starting with underscore)', pos, Reflect.field(SeverityLevel, severity));
-		else logPos('Invalid private signature \"${name}\" (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
+		if (privateUnderscorePrefix) logPos('Invalid private signature: ${name} (name should be camelCase starting with underscore)', pos, Reflect.field(SeverityLevel, severity));
+		else logPos('Invalid private signature: ${name} (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnPublic(name:String, pos:Position) {
-		logPos('Invalid public signature \"${name}\" (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Invalid public signature: ${name} (name should be camelCase)', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnInline(name:String, pos:Position) {
-		logPos('Inline constant variables should be uppercase \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Inline constant variables should be uppercase: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }
