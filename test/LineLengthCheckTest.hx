@@ -4,17 +4,17 @@ import checkstyle.checks.LineLengthCheck;
 
 class LineLengthCheckTest extends CheckTestCase {
 
-	public function testDefaultLineLength(){
+	public function testDefaultLineLength() {
 		var msg = checkMessage(LineLengthTests.TEST1, new LineLengthCheck());
 		assertEquals(msg, 'Too long line (> 80)');
 	}
 
-	public function testCorrectLineLength(){
+	public function testCorrectLineLength() {
 		var msg = checkMessage(LineLengthTests.TEST2, new LineLengthCheck());
 		assertEquals(msg, '');
 	}
 
-	public function testConfigurableLineLength(){
+	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.maxCharacters = 40;
 
