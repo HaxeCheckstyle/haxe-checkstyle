@@ -22,7 +22,7 @@ class IndentationCharacterCheck extends Check {
 		}
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];
-			if (line.length > 0 && !re.match(line)) log('Wrong indentation character', i + 1, 1, Reflect.field(SeverityLevel, severity));
+			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (${character})', i + 1, 1, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }
