@@ -39,8 +39,11 @@ class TestReporter implements IReporter {
 	}
 
 	public function start() {}
+
 	public function finish() {}
+
 	public function fileStart(f:LintFile) {}
+
 	public function fileFinish(f:LintFile) {}
 
 	public function addMessage(m:LintMessage) {

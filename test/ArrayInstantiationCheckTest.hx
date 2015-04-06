@@ -4,12 +4,12 @@ import checkstyle.checks.ArrayInstantiationCheck;
 
 class ArrayInstantiationCheckTest extends CheckTestCase {
 
-	public function testWrongArrayInstantiation(){
+	public function testWrongArrayInstantiation() {
 		var msg = checkMessage(ArrayInstantiationTests.TEST1, new ArrayInstantiationCheck());
 		assertEquals(msg, 'Bad array instantiation, use the array literal notation [] which is faster');
 	}
 
-	public function testCorrectArrayInstantiation(){
+	public function testCorrectArrayInstantiation() {
 		var msg = checkMessage(ArrayInstantiationTests.TEST2, new ArrayInstantiationCheck());
 		assertEquals(msg, '');
 	}

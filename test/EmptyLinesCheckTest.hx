@@ -4,17 +4,17 @@ import checkstyle.checks.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase {
 
-	public function testDefaultEmptyLines(){
+	public function testDefaultEmptyLines() {
 		var msg = checkMessage(EmptyLinesTests.TEST1, new EmptyLinesCheck());
 		assertEquals(msg, 'Too many consecutive empty lines (> 1)');
 	}
 
-	public function testCorrectEmptyLines(){
+	public function testCorrectEmptyLines() {
 		var msg = checkMessage(EmptyLinesTests.TEST2, new EmptyLinesCheck());
 		assertEquals(msg, '');
 	}
 
-	public function testConfigurableEmptyLines(){
+	public function testConfigurableEmptyLines() {
 		var check = new EmptyLinesCheck();
 		check.maxConsecutiveEmptyLines = 2;
 

@@ -4,22 +4,22 @@ import checkstyle.checks.ListenerNameCheck;
 
 class ListenerNameCheckTest extends CheckTestCase {
 
-	public function testCorrectListenerName(){
+	public function testCorrectListenerName() {
 		var msg = checkMessage(ListernerTests.TEST, new ListenerNameCheck());
 		assertEquals(msg, '');
 	}
 
-	public function testListenerName1(){
+	public function testListenerName1() {
 		var msg = checkMessage(ListernerTests.TEST1, new ListenerNameCheck());
 		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
 	}
 
-	public function testListenerName2(){
+	public function testListenerName2() {
 		var msg = checkMessage(ListernerTests.TEST2, new ListenerNameCheck());
 		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
 	}
 
-	public function testListenerName3(){
+	public function testListenerName3() {
 		var msg = checkMessage(ListernerTests.TEST3, new ListenerNameCheck());
 		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
 	}

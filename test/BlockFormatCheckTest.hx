@@ -4,22 +4,22 @@ import checkstyle.checks.BlockFormatCheck;
 
 class BlockFormatCheckTest extends CheckTestCase {
 
-	public function testCorrectBlockFormat(){
+	public function testCorrectBlockFormat() {
 		var msg = checkMessage(BlockFormatTests.TEST, new BlockFormatCheck());
 		assertEquals(msg, '');
 	}
 
-	public function testWrongBlockFormat(){
+	public function testWrongBlockFormat() {
 		var msg = checkMessage(BlockFormatTests.TEST1, new BlockFormatCheck());
 		assertEquals(msg, 'Empty block should be written as {}');
 	}
 
-	public function testBlockFormatFirstLine(){
+	public function testBlockFormatFirstLine() {
 		var msg = checkMessage(BlockFormatTests.TEST2, new BlockFormatCheck());
 		assertEquals(msg, 'First line of multiline block should contain only {');
 	}
 
-	public function testBlockFormatLastLine(){
+	public function testBlockFormatLastLine() {
 		var msg = checkMessage(BlockFormatTests.TEST3, new BlockFormatCheck());
 		assertEquals(msg, 'Last line of multiline block should contain only } and maybe , or ;');
 	}
