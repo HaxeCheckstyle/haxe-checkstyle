@@ -12,24 +12,24 @@ class BlockFormatCheck extends Check {
 	var lastLineRE = ~/^\s*\}[,;\/*]?/;
 
 	override function actualRun() {
-		ExprUtils.walkFile(_checker.ast, function(e){
+		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
-			case EBlock([]) | EObjectDecl([]):
-				if (e.pos.max - e.pos.min > "{}".length)
-					logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
-			case EBlock(_) | EObjectDecl(_):
-				var lmin =_checker.getLinePos(e.pos.min).line;
-				var lmax =_checker.getLinePos(e.pos.max).line;
+				case EBlock([]) | EObjectDecl([]):
+					if (e.pos.max - e.pos.min > "{}".length)
+						logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
+				case EBlock(_) | EObjectDecl(_):
+					var lmin = _checker.getLinePos(e.pos.min).line;
+					var lmax = _checker.getLinePos(e.pos.max).line;
 
-				if (lmin != lmax) {
-					if (!firstLineRE.match(_checker.lines[lmin])) {
-						logPos("First line of multiline block should contain only '{'", e.pos, Reflect.field(SeverityLevel, severity));
+					if (lmin != lmax) {
+						if (!firstLineRE.match(_checker.lines[lmin])) {
+							logPos("First line of multiline block should contain only {", e.pos, Reflect.field(SeverityLevel, severity));
+						}
+						if (!lastLineRE.match(_checker.lines[lmax])) {
+							logPos("Last line of multiline block should contain only } and maybe , or ;", e.pos, Reflect.field(SeverityLevel, severity));
+						}
 					}
-					if (!lastLineRE.match(_checker.lines[lmax])) {
-						logPos("Last line of multiline block should contain only '}' and maybe ',' or ';'", e.pos, Reflect.field(SeverityLevel, severity));
-					}
-				}
-			default:
+				default:
 			}
 		});
 	}

@@ -23,16 +23,6 @@ class ListenerNameCheckTest extends CheckTestCase {
 		var msg = checkMessage(ListernerTests.TEST3, new ListenerNameCheck());
 		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
 	}
-
-	public function testListenerName4(){
-		var msg = checkMessage(ListernerTests.TEST4, new ListenerNameCheck());
-		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
-	}
-
-	public function testListenerName5(){
-		var msg = checkMessage(ListernerTests.TEST5, new ListenerNameCheck());
-		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
-	}
 }
 
 class ListernerTests {
@@ -71,26 +61,6 @@ class ListernerTests {
 		var a:Stage;
 		public function new() {
 			a.once('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
-	}";
-
-	public static inline var TEST4:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.add('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
-	}";
-
-	public static inline var TEST5:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.addOnce('update', _testUpdate);
 		}
 
 		function _testUpdate() {}
