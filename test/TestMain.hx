@@ -18,7 +18,7 @@ class TestMain {
 		runner.add(new OverrideCheckTest());
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());
-
+		runner.add(new SpacingCheckTest());
 		runner.add(new TODOCommentCheckTest());
 
 		var success = runner.run();
