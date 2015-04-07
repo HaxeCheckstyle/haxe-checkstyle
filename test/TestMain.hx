@@ -18,6 +18,8 @@ class TestMain {
 		runner.add(new OverrideCheckTest());
 		runner.add(new PublicPrivateCheckTest());
 
+		runner.add(new TODOCommentCheckTest());
+
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);
 	}
