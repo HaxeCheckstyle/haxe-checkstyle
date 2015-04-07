@@ -23,24 +23,9 @@ class VariableInitialisationCheck extends Check {
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
 		for (field in d.data) {
 			if (field.name != "new") {
-				if (d.flags.indexOf(HInterface) > -1) checkInterfaceField(field);
-				else checkField(field);
+				if (d.flags.indexOf(HInterface) == -1) checkField(field);
 			}
 		}
-	}
-
-	function checkInterfaceField(f:Field) {
-		var isPrivate = false;
-		var isPublic = false;
-		var isInline = false;
-		var isStatic = false;
-
-		if (f.access.indexOf(AInline) > -1) isInline = true;
-		else if (f.access.indexOf(AStatic) > -1) isStatic = true;
-		else if (f.access.indexOf(APrivate) > -1) isPrivate = true;
-		else isPublic = true;
-
-		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
 	}
 
 	function checkField(f:Field) {
@@ -54,10 +39,6 @@ class VariableInitialisationCheck extends Check {
 		else if (f.access.indexOf(APublic) > -1) isPublic = true;
 		else isPrivate = true;
 
-		_genericCheck(isInline, isPrivate, isPublic, isStatic, f);
-	}
-
-	function _genericCheck(isInline:Bool, isPrivate:Bool, isPublic:Bool, isStatic:Bool, f:Field) {
 		if (isPrivate || isPublic) {
 			switch (f.kind) {
 				case FVar(t, a):
@@ -74,6 +55,6 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function _warnVarinit(name:String, pos:Position) {
-		logPos('Invalid variable initialisation \"${name}\" (move initialisation to constructor or function)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Invalid variable initialisation: ${name} (move initialisation to constructor or function)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

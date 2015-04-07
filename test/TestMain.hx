@@ -21,6 +21,8 @@ class TestMain {
 		runner.add(new SpacingCheckTest());
 		runner.add(new TabForAligningCheckTest());
 		runner.add(new TODOCommentCheckTest());
+		runner.add(new TrailingWhiteSpacecheckTest());
+		runner.add(new VariableInitialisationCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);
