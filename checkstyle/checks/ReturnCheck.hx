@@ -38,10 +38,10 @@ class ReturnCheck extends Check {
 	}
 
 	function _warnVoid(name:String, pos:Position) {
-		logPos('No need to return Void, Default function return value type is Void \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need to return Void, Default function return value type is Void: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 
 	function _warnNoReturnType(name:String, pos:Position) {
-		logPos('Return type not specified when returning a value for function \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Return type not specified when returning a value for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

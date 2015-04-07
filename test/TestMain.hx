@@ -17,6 +17,7 @@ class TestMain {
 		runner.add(new NamingCheckTest());
 		runner.add(new OverrideCheckTest());
 		runner.add(new PublicPrivateCheckTest());
+		runner.add(new ReturnCheckTest());
 
 		runner.add(new TODOCommentCheckTest());
 
