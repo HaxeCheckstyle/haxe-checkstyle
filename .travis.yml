@@ -2,6 +2,7 @@ git:
     depth: 1
 
 language: haxe
-hxml:
+haxe:
   - "3.1.3"
+hxml:
   - build.hxml
