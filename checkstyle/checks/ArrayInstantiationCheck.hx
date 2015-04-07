@@ -10,7 +10,7 @@ class ArrayInstantiationCheck extends Check {
 
 	public var severity:String = "ERROR";
 
-	override function actualRun() {
+	override function _actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e:Expr) {
 			switch(e.expr){
 				case ENew({pack:[], name:"Array"}, _):

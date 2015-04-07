@@ -16,7 +16,7 @@ class SpacingCheck extends Check {
 	public var noSpaceAroundUnop = true;
 	public var spaceIfCondition = true;
 
-	override function actualRun() {
+	override function _actualRun() {
 		var lastExpr = null;
 
 		ExprUtils.walkFile(_checker.ast, function(e) {

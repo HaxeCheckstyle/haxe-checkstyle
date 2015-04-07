@@ -5,20 +5,20 @@ import checkstyle.LintMessage.SeverityLevel;
 
 class Check {
 
-	var messages:Array<LintMessage>;
-	var moduleName:String = null;
+	var _messages:Array<LintMessage>;
+	var _moduleName:String;
 	var _checker:Checker;
 
 	public function new() {}
 
 	public function run(checker:Checker) {
 		_checker = checker;
-		messages = [];
-		actualRun();
-		return messages;
+		_messages = [];
+		_actualRun();
+		return _messages;
 	}
 
-	function actualRun() {
+	function _actualRun() {
 		throw "Unimplemented";
 	}
 
@@ -28,7 +28,7 @@ class Check {
 	}
 
 	public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
-		messages.push({
+		_messages.push({
 					  fileName:_checker.file.name,
 					  message:msg,
 					  line:l,
@@ -39,11 +39,7 @@ class Check {
 	}
 
 	public function getModuleName():String {
-		if (moduleName == null) moduleName = ChecksInfo.getCheckName(this);
-		return moduleName;
-	}
-
-	public function getDescription():String {
-		return "";
+		if (_moduleName == null) _moduleName = ChecksInfo.getCheckName(this);
+		return _moduleName;
 	}
 }

@@ -10,7 +10,7 @@ class PublicPrivateCheck extends Check {
 
 	public var severity:String = "INFO";
 
-	override function actualRun() {
+	override function _actualRun() {
 		for (td in _checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):

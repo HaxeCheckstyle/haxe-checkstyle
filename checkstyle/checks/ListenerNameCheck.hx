@@ -16,7 +16,7 @@ class ListenerNameCheck extends Check {
 	public var severity:String = "ERROR";
 	public var listeners:Array<String> = ["addEventListener", "addListener", "on", "once"];
 
-	override public function actualRun() {
+	override public function _actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
 				case ECall(e, params):

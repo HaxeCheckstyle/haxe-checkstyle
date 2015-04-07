@@ -10,7 +10,7 @@ class AnonymousCheck extends Check {
 
 	public var severity:String = "ERROR";
 
-	override function actualRun() {
+	override function _actualRun() {
 		checkClassFields();
 		checkLocalVars();
 	}

@@ -11,7 +11,7 @@ class BlockFormatCheck extends Check {
 	var firstLineRE = ~/\{[\/*]?\s*$/;
 	var lastLineRE = ~/^\s*\}[,;\/*]?/;
 
-	override function actualRun() {
+	override function _actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
 				case EBlock([]) | EObjectDecl([]):

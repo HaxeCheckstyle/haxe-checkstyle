@@ -16,7 +16,7 @@ class MethodLengthCheck extends Check {
 
 	public var maxFunctionLines:Int = 50;
 
-	override public function actualRun() {
+	override public function _actualRun() {
 		for (td in _checker.ast.decls){
 			switch(td.decl){
 			case EClass(d): searchFields(d.data);

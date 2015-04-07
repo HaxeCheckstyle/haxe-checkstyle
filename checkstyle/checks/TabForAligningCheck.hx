@@ -8,7 +8,7 @@ class TabForAligningCheck extends Check {
 
 	public var severity:String = "WARNING";
 
-	override function actualRun() {
+	override function _actualRun() {
 		var re = ~/^\s*\S[^\t]*\t/;
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];

@@ -13,7 +13,7 @@ class ERegInstantiationCheck extends Check {
 		super();
 	}
 
-	override function actualRun() {
+	override function _actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
 				case ENew(

@@ -10,7 +10,7 @@ class ReturnCheck extends Check {
 
 	public var severity:String = "INFO";
 
-	override function actualRun() {
+	override function _actualRun() {
 		for (td in _checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
@@ -22,9 +22,7 @@ class ReturnCheck extends Check {
 
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
 		for (field in d.data) {
-			if (field.name != "new" && d.flags.indexOf(HInterface) == -1) {
-				checkField(field);
-			}
+			if (field.name != "new" && d.flags.indexOf(HInterface) == -1) checkField(field);
 		}
 	}
 

@@ -11,7 +11,7 @@ class IndentationCharacterCheck extends Check {
 
 	public var character:String = "tab";
 
-	override function actualRun() {
+	override function _actualRun() {
 		var re;
 		var tab = (character == "tab");
 		if (tab) {

@@ -19,7 +19,7 @@ class NamingCheck extends Check {
 	var bigCamelCaseRE = ~/^_?[A-Z]\w*$/;
 	var capsRE = ~/^[A-Z]+[A-Z0-9_]*$/;
 
-	override function actualRun() {
+	override function _actualRun() {
 		if (!privateUnderscorePrefix) privateCamelCaseRE = ~/^[a-z0-9_]*$/i;
 		checkClassFields();
 		checkLocalVars();
@@ -27,7 +27,7 @@ class NamingCheck extends Check {
 
 	function checkClassFields() {
 		for (td in _checker.ast.decls) {
-			switch (td.decl){
+			switch (td.decl) {
 				case EClass(d):
 					checkFields(d);
 				default:
@@ -94,14 +94,12 @@ class NamingCheck extends Check {
 			}
 		}
 		else if (isInline && Std.string(f.kind).indexOf("FVar") > -1) {
-			if(!capsRE.match(f.name)) {
+			if (!capsRE.match(f.name)) {
 				_warnInline(f.name, f.pos);
 				return;
 			}
 		}
-		else if (isStatic) {
-
-		}
+		else if (isStatic) {}
 	}
 
 	function checkLocalVars() {

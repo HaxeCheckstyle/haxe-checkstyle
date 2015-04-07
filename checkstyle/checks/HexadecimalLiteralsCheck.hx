@@ -9,7 +9,7 @@ class HexadecimalLiteralsCheck extends Check {
 
 	public var severity:String = "INFO";
 
-	override function actualRun() {
+	override function _actualRun() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
 				case EConst(CInt(s)):

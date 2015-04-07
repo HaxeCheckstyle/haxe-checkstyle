@@ -11,7 +11,7 @@ class LineLengthCheck extends Check {
 
 	public var maxCharacters:Int = 80;
 
-	override function actualRun() {
+	override function _actualRun() {
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];
 			if (line.length > maxCharacters) log('Too long line (> ${maxCharacters})', i + 1, 1, Reflect.field(SeverityLevel, severity));

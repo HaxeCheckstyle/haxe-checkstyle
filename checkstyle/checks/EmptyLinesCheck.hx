@@ -10,7 +10,7 @@ class EmptyLinesCheck extends Check {
 
 	public var maxConsecutiveEmptyLines:Int = 1;
 
-	override function actualRun() {
+	override function _actualRun() {
 		var re = ~/^\s*$/;
 		var inGroup = false;
 		var start = 0;

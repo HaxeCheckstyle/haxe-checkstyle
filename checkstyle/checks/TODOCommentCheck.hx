@@ -9,7 +9,7 @@ class TODOCommentCheck extends Check {
 
 	public var severity:String = "INFO";
 
-	override function actualRun() {
+	override function _actualRun() {
 		var re = ~/TODO|FIXME/;
 		for (tk in _checker.tokens) {
 			switch tk.tok {

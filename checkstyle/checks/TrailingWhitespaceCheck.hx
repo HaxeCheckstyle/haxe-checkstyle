@@ -9,7 +9,7 @@ class TrailingWhitespaceCheck extends Check {
 
 	public var severity:String = "INFO";
 
-	override function actualRun() {
+	override function _actualRun() {
 		var re = ~/\S\s+$/;
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];
