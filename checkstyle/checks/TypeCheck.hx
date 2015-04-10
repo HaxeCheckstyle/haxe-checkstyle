@@ -34,6 +34,6 @@ class TypeCheck extends Check {
 	}
 
 	function _error(name:String, pos:Position) {
-		logPos('Missing type: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Type not specified: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

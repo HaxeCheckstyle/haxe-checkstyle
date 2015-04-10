@@ -6,12 +6,12 @@ class TypeCheckTest extends CheckTestCase {
 
 	public function testClassVar() {
 		var msg = checkMessage(TypeTests.TEST1, new TypeCheck());
-		assertEquals(msg, 'Missing type: _a');
+		assertEquals(msg, 'Type not specified: _a');
 	}
 
 	public function testStaticClassVar() {
 		var msg = checkMessage(TypeTests.TEST2, new TypeCheck());
-		assertEquals(msg, 'Missing type: A');
+		assertEquals(msg, 'Type not specified: A');
 	}
 }
 
