@@ -118,6 +118,12 @@
 			}
 		},
 		{
+			"type": "Type",
+			"props": {
+				"severity": "ERROR"
+			}
+		},
+		{
 			"type": "VariableInitialisation",
 			"props": {
 				"severity": "ERROR"

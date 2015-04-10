@@ -104,7 +104,7 @@ class NamingCheck extends Check {
 
 	function checkLocalVars() {
 		ExprUtils.walkFile(_checker.ast, function(e) {
-			switch(e.expr){
+			switch(e.expr) {
 				case EVars(vars):
 					for (v in vars) {
 						if (!localCamelCaseRE.match(v.name)) logPos('Invalid local variable signature: ${v.name} (name should be camelCase)', e.pos, Reflect.field(SeverityLevel, severity));
