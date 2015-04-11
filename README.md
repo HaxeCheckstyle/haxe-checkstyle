@@ -143,6 +143,12 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "Type",
+			"props": {
+				"severity": "ERROR"
+			}
+		},
+		{
 			"type": "VariableInitialisation",
 			"props": {
 				"severity": "ERROR"
