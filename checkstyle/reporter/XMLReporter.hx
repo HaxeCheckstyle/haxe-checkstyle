@@ -1,5 +1,7 @@
 package checkstyle.reporter;
 
+import haxe.io.Path;
+import sys.FileSystem;
 import sys.io.File;
 import sys.io.FileOutput;
 import checkstyle.LintMessage.SeverityLevel;
@@ -12,6 +14,10 @@ class XMLReporter implements IReporter {
 
 	public function new(path:String, s:String) {
 		_report = new StringBuf();
+		var folder = Path.directory(path);
+		if (!FileSystem.exists(folder)) {
+			FileSystem.createDirectory(folder);
+		}
 		_file = File.write(path);
 		_style = s;
 	}
