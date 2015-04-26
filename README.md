@@ -1,7 +1,6 @@
 # Checkstyle for Haxe
 
 [![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-checkstyle.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/checkstyle) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) ![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)
-========
 
 ![logo](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/logo.png)
 
