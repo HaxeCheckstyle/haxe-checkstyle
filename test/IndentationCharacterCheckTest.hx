@@ -21,6 +21,11 @@ class IndentationCharacterCheckTest extends CheckTestCase {
 		var msg = checkMessage(IndentationTests.TEST3, check);
 		assertEquals(msg, 'Wrong indentation character (space)');
 	}
+
+	public function testMultilineIfIndentation() {
+		var msg = checkMessage(IndentationTests.TEST4, new IndentationCharacterCheck());
+		assertEquals(msg, '');
+	}
 }
 
 class IndentationTests {
@@ -39,5 +44,15 @@ class IndentationTests {
 	public static inline var TEST3:String =
 	"class Test {
 		public function new() {}
+	}";
+
+	public static inline var TEST4:String =
+	"class Test {
+		public function new() {
+			if (actionType == 'STREET' ||
+				(actionType == 'BASKET' && ( actionNumber == 2 || actionNumber == 4) )) {
+				return BetAreaModel.STREET;
+			}
+		}
 	}";
 }
