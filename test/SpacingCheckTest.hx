@@ -18,6 +18,11 @@ class SpacingCheckTest extends CheckTestCase {
 		var msg = checkMessage(SpacingTests.TEST3, new SpacingCheck());
 		assertEquals(msg, 'Space around ++');
 	}
+
+	public function testFor() {
+		var msg = checkMessage(SpacingTests.TEST4, new SpacingCheck());
+		assertEquals(msg, '');
+	}
 }
 
 class SpacingTests {
@@ -36,9 +41,18 @@ class SpacingTests {
 	}";
 
 	public static inline var TEST3:String =
-	"class Test {
+"class Test {
 		public function test() {
 			var a = a ++;
+		}
+	}";
+
+	public static inline var TEST4:String =
+	"class Test {
+		public function test() {
+			for(i in 0...10) {
+			
+			}
 		}
 	}";
 }

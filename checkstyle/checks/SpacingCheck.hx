@@ -15,6 +15,7 @@ class SpacingCheck extends Check {
 	public var spaceAroundBinop = true;
 	public var noSpaceAroundUnop = true;
 	public var spaceIfCondition = true;
+	public var ignoreRangeOperator = true;
 
 	override function _actualRun() {
 		var lastExpr = null;
@@ -27,6 +28,7 @@ class SpacingCheck extends Check {
 
 			switch e.expr {
 				case EBinop(bo, l, r) if (spaceAroundBinop):
+					if (ignoreRangeOperator && binopString(bo) == "...") return;
 					if (r.pos.min - l.pos.max < binopSize(bo) + 2) logPos('No space around ${binopString(bo)}', e.pos, Reflect.field(SeverityLevel, severity));
 				case EUnop(uo, post, e2) if (noSpaceAroundUnop):
 					var dist = 0;
