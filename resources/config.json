@@ -96,7 +96,8 @@
 				"severity": "INFO",
 				"spaceIfCondition": true,
 				"spaceAroundBinop": true,
-				"spaceAroundBinop": true
+				"spaceAroundBinop": true,
+				"ignoreRangeOperator": true
 			}
 		},
 		{
