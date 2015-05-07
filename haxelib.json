@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "added ignoreRangeOperator config for SpacingCheck",
-	"version": "1.0.5",
+	"releasenote": "added allowEmptyReturn config for ReturnCheck",
+	"version": "1.0.6",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
