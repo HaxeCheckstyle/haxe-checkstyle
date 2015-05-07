@@ -55,7 +55,12 @@
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
-				"listeners": ["addEventListener", "addListener", "on", "once"]
+				"listeners": [
+					"addEventListener",
+					"addListener",
+					"on",
+					"once"
+				]
 			}
 		},
 		{
@@ -87,7 +92,8 @@
 		{
 			"type": "Return",
 			"props": {
-				"severity": "INFO"
+				"severity": "INFO",
+				"allowEmptyReturn": true
 			}
 		},
 		{

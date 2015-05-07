@@ -9,6 +9,7 @@ import haxe.macro.Expr;
 class ReturnCheck extends Check {
 
 	public var severity:String = "INFO";
+	public var allowEmptyReturn:Bool = true;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -30,6 +31,7 @@ class ReturnCheck extends Check {
 		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
 			_warnVoid(f.name, f.pos);
 		}
+		if (allowEmptyReturn && Std.string(f.kind).indexOf("EReturn(null)") > -1) return;
 		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
 			_warnNoReturnType(f.name, f.pos);
 		}
