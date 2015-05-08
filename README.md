@@ -119,7 +119,9 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"severity": "INFO",
 				"spaceIfCondition": true,
 				"spaceAroundBinop": true,
-				"spaceAroundBinop": true
+				"spaceAroundBinop": true,
+				"ignoreRangeOperator": true
+				
 			}
 		},
 		{
