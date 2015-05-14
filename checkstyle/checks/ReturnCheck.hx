@@ -34,7 +34,9 @@ class ReturnCheck extends Check {
 				case FFun(fun):
 					if (fun.ret == null) {
 						_warnReturnTypeMissing(f.name, f.pos);
+						return;
 					}
+					return;
 				default:
 			}
 		}

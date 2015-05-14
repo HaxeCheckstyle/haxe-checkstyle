@@ -35,7 +35,7 @@ class ReturnCheckTest extends CheckTestCase {
 		assertEquals(msg, '');
 
 		msg = checkMessage(ReturnTests.TEST2, check);
-		assertEquals(msg, 'Return type not specified when returning a value for function: test1');
+		assertEquals(msg, 'Return type not specified for function: test1');
 
 		msg = checkMessage(ReturnTests.TEST3, check);
 		assertEquals(msg, 'Return type not specified for function: test2');
