@@ -30,10 +30,14 @@ class ReturnCheck extends Check {
 
 	function checkField(f:Field) {
 		if (enforceReturnType) {
-			if (Std.string(f.kind).indexOf("ret => null") > -1) {
-				_warnReturnTypeMissing(f.name, f.pos);
+			switch (f.kind) {
+				case FFun(fun):
+					if (fun.ret == null) {
+						_warnReturnTypeMissing(f.name, f.pos);
+					}
+				default:
 			}
-		} 
+		}
 		else {
 			if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
 				_warnVoid(f.name, f.pos);

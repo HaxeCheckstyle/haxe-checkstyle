@@ -24,16 +24,43 @@ class ReturnCheckTest extends CheckTestCase {
 		check.enforceReturnType = true;
 		var msg = checkMessage(ReturnTests.TEST1, check);
 		assertEquals(msg, '');
+		msg = checkMessage(ReturnTests.TEST4, check);
+		assertEquals(msg, '');
 	}
 
-	public function testReturnTypeAllowEmptyReturn() {
+	public function testEnforceReturnTypeMissing() {
+		var check = new ReturnCheck ();
+		check.enforceReturnType = true;
+		var msg = checkMessage(ReturnTests.TEST1, check);
+		assertEquals(msg, '');
+
+		msg = checkMessage(ReturnTests.TEST2, check);
+		assertEquals(msg, 'Return type not specified when returning a value for function: test1');
+
+		msg = checkMessage(ReturnTests.TEST3, check);
+		assertEquals(msg, 'Return type not specified for function: test2');
+	}
+
+	public function testReturnTypeAllowEmptyReturnFalse() {
 		var check = new ReturnCheck ();
 		check.allowEmptyReturn = false;
+
 		var msg = checkMessage(ReturnTests.TEST2, check);
 		assertEquals(msg, 'Return type not specified when returning a value for function: test1');
 
 		msg = checkMessage(ReturnTests.TEST3, check);
 		assertEquals(msg, 'Return type not specified when returning a value for function: test2');
+	}
+
+	public function testReturnTypeAllowEmptyReturnTrue() {
+		var check = new ReturnCheck ();
+		check.allowEmptyReturn = true;
+
+		var msg = checkMessage(ReturnTests.TEST3, check);
+		assertEquals(msg, '');
+
+		msg = checkMessage(ReturnTests.TEST2, check);
+		assertEquals(msg, 'Return type not specified when returning a value for function: test1');
 	}
 }
 
@@ -53,6 +80,13 @@ class ReturnTests {
 	public static inline var TEST3:String =
 	"class Test {
 		public function test2() {
+			return;
+		}
+	}";
+
+	public static inline var TEST4:String =
+	"class Test {
+		public function test3():Void {
 			return;
 		}
 	}";
