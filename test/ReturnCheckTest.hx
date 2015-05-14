@@ -18,6 +18,23 @@ class ReturnCheckTest extends CheckTestCase {
 		var msg = checkMessage(ReturnTests.TEST3, new ReturnCheck());
 		assertEquals(msg, '');
 	}
+
+	public function testEnforceReturnType() {
+		var check = new ReturnCheck ();
+		check.enforceReturnType = true;
+		var msg = checkMessage(ReturnTests.TEST1, check);
+		assertEquals(msg, '');
+	}
+
+	public function testReturnTypeAllowEmptyReturn() {
+		var check = new ReturnCheck ();
+		check.allowEmptyReturn = false;
+		var msg = checkMessage(ReturnTests.TEST2, check);
+		assertEquals(msg, 'Return type not specified when returning a value for function: test1');
+
+		msg = checkMessage(ReturnTests.TEST3, check);
+		assertEquals(msg, 'Return type not specified when returning a value for function: test2');
+	}
 }
 
 class ReturnTests {

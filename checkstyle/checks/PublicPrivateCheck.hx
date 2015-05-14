@@ -9,6 +9,7 @@ import haxe.macro.Expr;
 class PublicPrivateCheck extends Check {
 
 	public var severity:String = "INFO";
+	public var enforcePublicPrivate:Bool = false;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -30,16 +31,32 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function checkInterfaceField(f:Field) {
-		if (f.access.indexOf(APublic) > -1) {
-			_warnPublicKeyword(f.name, f.pos);
-			return;
+		if (enforcePublicPrivate) {
+			if (f.access.indexOf(APublic) < 0) {
+				_warnPublicKeywordMissing(f.name, f.pos);
+				return;
+			}
+		}
+		else {
+			if (f.access.indexOf(APublic) > -1) {
+				_warnPublicKeyword(f.name, f.pos);
+				return;
+			}
 		}
 	}
 
 	function checkField(f:Field) {
-		if (f.access.indexOf(APrivate) > -1) {
-			_warnPrivateKeyword(f.name, f.pos);
-			return;
+		if (enforcePublicPrivate) {
+			if ((f.access.indexOf(APublic) < 0) && (f.access.indexOf(APrivate) < 0)) {
+				_warnPrivateKeywordMissing(f.name, f.pos);
+				return;
+			}
+		}
+		else {
+			if (f.access.indexOf(APrivate) > -1) {
+				_warnPrivateKeyword(f.name, f.pos);
+				return;
+			}
 		}
 	}
 
@@ -49,5 +66,13 @@ class PublicPrivateCheck extends Check {
 
 	function _warnPublicKeyword(name:String, pos:Position) {
 		logPos('No need of public keyword: ${name} (fields are by default public in interfaces)', pos, Reflect.field(SeverityLevel, severity));
+	}
+
+	function _warnPrivateKeywordMissing(name:String, pos:Position) {
+		logPos('Missing private keyword: ${name}', pos, Reflect.field(SeverityLevel, severity));
+	}
+
+	function _warnPublicKeywordMissing(name:String, pos:Position) {
+		logPos('Missing public keyword: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

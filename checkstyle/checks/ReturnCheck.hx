@@ -10,6 +10,7 @@ class ReturnCheck extends Check {
 
 	public var severity:String = "INFO";
 	public var allowEmptyReturn:Bool = true;
+	public var enforceReturnType:Bool = false;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -28,8 +29,15 @@ class ReturnCheck extends Check {
 	}
 
 	function checkField(f:Field) {
-		if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
-			_warnVoid(f.name, f.pos);
+		if (enforceReturnType) {
+			if (Std.string(f.kind).indexOf("ret => null") > -1) {
+				_warnReturnTypeMissing(f.name, f.pos);
+			}
+		} 
+		else {
+			if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
+				_warnVoid(f.name, f.pos);
+			}
 		}
 		if (allowEmptyReturn && Std.string(f.kind).indexOf("EReturn(null)") > -1) return;
 		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
@@ -43,5 +51,9 @@ class ReturnCheck extends Check {
 
 	function _warnNoReturnType(name:String, pos:Position) {
 		logPos('Return type not specified when returning a value for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
+	}
+
+	function _warnReturnTypeMissing(name:String, pos:Position) {
+		logPos('Return type not specified for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

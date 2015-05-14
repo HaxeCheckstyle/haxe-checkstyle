@@ -104,13 +104,16 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "PublicPrivate",
 			"props": {
-				"severity": "INFO"
+				"severity": "INFO",
+				"enforcePublicPrivate": false
 			}
 		},
 		{
 			"type": "Return",
 			"props": {
-				"severity": "INFO"
+				"severity": "INFO",
+				"allowEmptyReturn": true,
+				"enforceReturnType": false
 			}
 		},
 		{
