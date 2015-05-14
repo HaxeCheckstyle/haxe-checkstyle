@@ -124,7 +124,6 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"spaceAroundBinop": true,
 				"spaceAroundBinop": true,
 				"ignoreRangeOperator": true
-				
 			}
 		},
 		{

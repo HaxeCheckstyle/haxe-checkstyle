@@ -15,7 +15,8 @@
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"emptyBlockCheck": false
 			}
 		},
 		{
