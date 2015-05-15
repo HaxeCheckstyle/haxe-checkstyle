@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "added emptyBlockCheck config for BlockFormatCheck",
-	"version": "1.0.7",
+	"releasenote": "introduced enforceReturnType and enforcePublicPrivate by @AlexHaxe",
+	"version": "1.0.8",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
