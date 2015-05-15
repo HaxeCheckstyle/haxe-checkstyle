@@ -7,6 +7,7 @@ import checkstyle.LintMessage.SeverityLevel;
 class BlockFormatCheck extends Check {
 
 	public var severity:String = "INFO";
+	public var emptyBlockCheck:Bool = true;
 
 	var firstLineRE = ~/\{[\/*]?\s*$/;
 	var lastLineRE = ~/^\s*\}[,;\/*]?/;
@@ -15,7 +16,7 @@ class BlockFormatCheck extends Check {
 		ExprUtils.walkFile(_checker.ast, function(e) {
 			switch(e.expr){
 				case EBlock([]) | EObjectDecl([]):
-					if (e.pos.max - e.pos.min > "{}".length)
+					if (emptyBlockCheck && e.pos.max - e.pos.min > "{}".length)
 						logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
 				case EBlock(_) | EObjectDecl(_):
 					var lmin = _checker.getLinePos(e.pos.min).line;
