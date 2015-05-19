@@ -38,6 +38,14 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		var msg = checkMessage(ParameterNumberTests.TEST5, new ParameterNumberCheck());
 		assertEquals('Too many parameters for function: test4 (> 10)', msg);
 	}
+
+	public function testIgnoreOverridenMethods() {
+		var check = new ParameterNumberCheck();
+		check.ignoreOverriddenMethods = true;
+
+		var msg = checkMessage(ParameterNumberTests.TEST3, check);
+		assertEquals('', msg);
+	}
 }
 
 class ParameterNumberTests {
@@ -65,7 +73,7 @@ class ParameterNumberTests {
 
 	public static inline var TEST3:String =
 	"class Test {
-		public function test2(param1:Int,
+		override public function test2(param1:Int,
 								param2:Int,
 								param3:Int,
 								param4:Int,

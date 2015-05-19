@@ -10,6 +10,7 @@ class ParameterNumberCheck extends Check {
 
 	public var severity:String = "INFO";
 	public var max:Int = 10;
+	public var ignoreOverriddenMethods:Bool = false;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -28,6 +29,7 @@ class ParameterNumberCheck extends Check {
 	}
 
 	function checkField(f:Field) {
+		if (ignoreOverriddenMethods && f.access.indexOf(AOverride) >= 0) return;
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {

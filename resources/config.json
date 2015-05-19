@@ -95,7 +95,8 @@
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"max": 10
+				"max": 10,
+				"ignoreOverriddenMethods": false
 			}
 		},
 		{

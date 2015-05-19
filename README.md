@@ -112,7 +112,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"max": 10
+				"max": 10,
+				"ignoreOverriddenMethods": false
 			}
 		},
 		{
