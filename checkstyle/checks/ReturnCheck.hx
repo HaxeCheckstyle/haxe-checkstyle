@@ -11,6 +11,7 @@ class ReturnCheck extends Check {
 	public var severity:String = "INFO";
 	public var allowEmptyReturn:Bool = true;
 	public var enforceReturnType:Bool = false;
+	public var warnVoidReturnType:Bool = true;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -40,7 +41,7 @@ class ReturnCheck extends Check {
 			}
 		}
 		else {
-			if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
+			if (warnVoidReturnType && Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
 				_warnVoid(f.name, f.pos);
 			}
 		}
