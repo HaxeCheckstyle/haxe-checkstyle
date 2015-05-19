@@ -55,6 +55,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "FileLength",
+			"props": {
+				"severity": "WARNING",
+				"maxLength": 1000
+			}
+		},
+		{
 			"type": "HexadecimalLiterals",
 			"props": {
 				"severity": "INFO"
@@ -99,6 +106,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "Override",
 			"props": {
 				"severity": "ERROR"
+			}
+		},
+		{
+			"type": "ParameterNumber",
+			"props": {
+				"severity": "INFO",
+				"maxParameter": 7
 			}
 		},
 		{
