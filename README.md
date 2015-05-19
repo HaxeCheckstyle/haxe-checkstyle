@@ -58,7 +58,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "FileLength",
 			"props": {
 				"severity": "WARNING",
-				"maxLength": 1000
+				"max": 2000
 			}
 		},
 		{
@@ -112,7 +112,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"maxParameter": 7
+				"max": 10
 			}
 		},
 		{

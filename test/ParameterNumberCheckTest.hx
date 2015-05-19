@@ -9,23 +9,23 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		assertEquals('', msg);
 	}
 
-	public function test7Parameters() {
+	public function test10Parameters() {
 		var msg = checkMessage(ParameterNumberTests.TEST2, new ParameterNumberCheck());
 		assertEquals('', msg);
 	}
 
-	public function test8Parameters() {
+	public function test11Parameters() {
 		var msg = checkMessage(ParameterNumberTests.TEST3, new ParameterNumberCheck());
-		assertEquals('Too many parameters for function: test2 (> 7)', msg);
+		assertEquals('Too many parameters for function: test2 (> 10)', msg);
 	}
 
 	public function testMaxParameter() {
 		var check = new ParameterNumberCheck();
-		check.maxParameter = 8;
+		check.max = 11;
 		var msg = checkMessage(ParameterNumberTests.TEST3, check);
 		assertEquals('', msg);
 
-		check.maxParameter = 3;
+		check.max = 3;
 
 		var msg = checkMessage(ParameterNumberTests.TEST4, check);
 		assertEquals('', msg);
@@ -36,7 +36,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 
 	public function testInterface() {
 		var msg = checkMessage(ParameterNumberTests.TEST5, new ParameterNumberCheck());
-		assertEquals('Too many parameters for function: test4 (> 7)', msg);
+		assertEquals('Too many parameters for function: test4 (> 10)', msg);
 	}
 }
 
@@ -55,7 +55,10 @@ class ParameterNumberTests {
 								param4:Int,
 								param5:Int,
 								param6:Int,
-								param7:Int) {
+								param7:Int,
+								param8:Int,
+								param9:Int,
+								param10:Int) {
 			return;
 		}
 	}";
@@ -69,7 +72,10 @@ class ParameterNumberTests {
 								param5:Int,
 								param6:Int,
 								param7:Int,
-								param8:Int) {
+								param8:Int,
+								param9:Int,
+								param10:Int,
+								param11:Int) {
 			return;
 		}
 	}";
@@ -92,6 +98,9 @@ class ParameterNumberTests {
 								param5:Int,
 								param6:Int,
 								param7:Int,
-								param8:Int);
+								param8:Int,
+								param9:Int,
+								param10:Int,
+								param11:Int);
 	}";
 }

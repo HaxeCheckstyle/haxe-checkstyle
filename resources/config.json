@@ -36,7 +36,7 @@
 			"type": "FileLength",
 			"props": {
 				"severity": "WARNING",
-				"maxLength": 1000
+				"max": 2000
 			}
 		},
 		{
@@ -95,7 +95,7 @@
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"maxParameter": 7
+				"max": 10
 			}
 		},
 		{

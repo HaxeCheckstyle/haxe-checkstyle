@@ -5,11 +5,11 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("ParameterNumber")
-@desc("Max number of parameters per method (default 7)")
+@desc("Max number of parameters per method (default 10)")
 class ParameterNumberCheck extends Check {
 
 	public var severity:String = "INFO";
-	public var maxParameter:Int = 7;
+	public var max:Int = 10;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -23,7 +23,6 @@ class ParameterNumberCheck extends Check {
 
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
 		for (field in d.data) {
-			//if (field.name != "new" && d.flags.indexOf(HInterface) == -1) checkField(field);
 			checkField(field);
 		}
 	}
@@ -31,7 +30,7 @@ class ParameterNumberCheck extends Check {
 	function checkField(f:Field) {
 		switch (f.kind) {
 			case FFun(fun):
-				if ((fun.args != null) && (fun.args.length > maxParameter)) {
+				if ((fun.args != null) && (fun.args.length > max)) {
 					_warnMaxParameter(f.name, f.pos);
 				}
 			default:
@@ -39,6 +38,6 @@ class ParameterNumberCheck extends Check {
 	}
 
 	function _warnMaxParameter(name:String, pos:Position) {
-		logPos('Too many parameters for function: ${name} (> ${maxParameter})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Too many parameters for function: ${name} (> ${max})', pos, Reflect.field(SeverityLevel, severity));
 	}
 }
