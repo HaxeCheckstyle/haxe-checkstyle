@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "introduced enforceReturnType and enforcePublicPrivate by @AlexHaxe",
-	"version": "1.0.8",
+	"releasenote": "added FileLengthCheck (default: 1000) and ParameterNumberCheck (default: 7) by @AlexHaxe",
+	"version": "1.0.9",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
