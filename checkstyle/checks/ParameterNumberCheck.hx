@@ -5,16 +5,16 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("ParameterNumber")
-@desc("Max number of parameters per method (default 10)")
+@desc("Max number of parameters per method (default 7)")
 class ParameterNumberCheck extends Check {
 
 	public var severity:String = "INFO";
-	public var max:Int = 10;
+	public var max:Int = 7;
 	public var ignoreOverriddenMethods:Bool = false;
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
-			switch (td.decl){
+			switch (td.decl) {
 				case EClass(d):
 					checkFields(d);
 				default:

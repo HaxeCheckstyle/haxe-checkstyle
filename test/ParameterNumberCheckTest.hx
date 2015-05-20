@@ -16,7 +16,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 
 	public function test11Parameters() {
 		var msg = checkMessage(ParameterNumberTests.TEST3, new ParameterNumberCheck());
-		assertEquals('Too many parameters for function: test2 (> 10)', msg);
+		assertEquals('Too many parameters for function: test2 (> 7)', msg);
 	}
 
 	public function testMaxParameter() {
@@ -36,7 +36,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 
 	public function testInterface() {
 		var msg = checkMessage(ParameterNumberTests.TEST5, new ParameterNumberCheck());
-		assertEquals('Too many parameters for function: test4 (> 10)', msg);
+		assertEquals('Too many parameters for function: test4 (> 7)', msg);
 	}
 
 	public function testIgnoreOverridenMethods() {
@@ -63,11 +63,8 @@ class ParameterNumberTests {
 								param4:Int,
 								param5:Int,
 								param6:Int,
-								param7:Int,
-								param8:Int,
-								param9:Int,
-								param10:Int) {
-			return;
+								param7:Int) {
+			return 3;
 		}
 	}";
 
@@ -80,10 +77,7 @@ class ParameterNumberTests {
 								param5:Int,
 								param6:Int,
 								param7:Int,
-								param8:Int,
-								param9:Int,
-								param10:Int,
-								param11:Int) {
+								param8:Int) {
 			return;
 		}
 	}";
@@ -106,9 +100,6 @@ class ParameterNumberTests {
 								param5:Int,
 								param6:Int,
 								param7:Int,
-								param8:Int,
-								param9:Int,
-								param10:Int,
-								param11:Int);
+								param8:Int);
 	}";
 }
