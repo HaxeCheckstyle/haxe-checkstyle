@@ -13,9 +13,11 @@ class TestMain {
 		runner.add(new IndentationCharacterCheckTest());
 		runner.add(new LineLengthCheckTest());
 		runner.add(new ListenerNameCheckTest());
+		runner.add(new FileLengthCheckTest());
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new NamingCheckTest());
 		runner.add(new OverrideCheckTest());
+		runner.add(new ParameterNumberCheckTest());
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());
 		runner.add(new SpacingCheckTest());

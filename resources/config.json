@@ -33,6 +33,13 @@
 			}
 		},
 		{
+			"type": "FileLength",
+			"props": {
+				"severity": "WARNING",
+				"max": 2000
+			}
+		},
+		{
 			"type": "HexadecimalLiterals",
 			"props": {
 				"severity": "INFO"
@@ -82,6 +89,14 @@
 			"type": "Override",
 			"props": {
 				"severity": "ERROR"
+			}
+		},
+		{
+			"type": "ParameterNumber",
+			"props": {
+				"severity": "INFO",
+				"max": 10,
+				"ignoreOverriddenMethods": false
 			}
 		},
 		{
