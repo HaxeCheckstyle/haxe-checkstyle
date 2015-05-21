@@ -103,6 +103,27 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "NestedForDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
+			"type": "NestedIfDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
+			"type": "NestedTryDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
 			"type": "Override",
 			"props": {
 				"severity": "ERROR"
@@ -112,7 +133,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"max": 10,
+				"max": 7,
 				"ignoreOverriddenMethods": false
 			}
 		},

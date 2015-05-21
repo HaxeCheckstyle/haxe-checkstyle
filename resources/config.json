@@ -86,6 +86,27 @@
 			}
 		},
 		{
+			"type": "NestedForDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
+			"type": "NestedIfDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
+			"type": "NestedTryDepth",
+			"props": {
+				"severity": "ERROR",
+				"max": 1
+			}
+		},
+		{
 			"type": "Override",
 			"props": {
 				"severity": "ERROR"
@@ -95,7 +116,7 @@
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
-				"max": 10,
+				"max": 7,
 				"ignoreOverriddenMethods": false
 			}
 		},
