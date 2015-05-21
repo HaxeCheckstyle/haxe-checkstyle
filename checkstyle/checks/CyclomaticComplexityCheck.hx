@@ -13,7 +13,7 @@ using Lambda;
 @desc("McCabe simplified cyclomatic complexity check")
 class CyclomaticComplexityCheck extends Check {
 
-	public var thresholds:Array<Threshold>;
+	public var thresholds:Array<Threshold> = [];
 
 	override function _actualRun() {
 		_checker.ast.decls.map(function(type:TypeDecl):Null<Definition<ClassFlag, Array<Field>>> {
@@ -99,6 +99,7 @@ class CyclomaticComplexityCheck extends Check {
 			case ExprDef.EDisplay(e, _) : evaluateExpr(e);
 			case ExprDef.ETernary(econd, eif, eelse) : 1 + evaluateExpr(econd) + evaluateExpr(eif) + evaluateExpr(eelse);
 			case ExprDef.ECheckType(e, _) : evaluateExpr(e);
+			case null: 0;
 			default: 0;
 		}
 	}
