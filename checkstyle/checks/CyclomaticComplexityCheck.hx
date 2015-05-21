@@ -54,6 +54,9 @@ class CyclomaticComplexityCheck extends Check {
 		if (e == null) {
 			return 0;
 		}
+		if (e.expr == null) {
+			return 0;
+		}
 		return switch(e.expr) {
 			case ExprDef.EArray(e1, e2) : evaluateExpr(e1) + evaluateExpr(e2);
 			case ExprDef.EBinop(op, e1, e2) : evaluateExpr(e1) + evaluateExpr(e2) + switch(op) {
@@ -99,7 +102,6 @@ class CyclomaticComplexityCheck extends Check {
 			case ExprDef.EDisplay(e, _) : evaluateExpr(e);
 			case ExprDef.ETernary(econd, eif, eelse) : 1 + evaluateExpr(econd) + evaluateExpr(eif) + evaluateExpr(eelse);
 			case ExprDef.ECheckType(e, _) : evaluateExpr(e);
-			case null: 0;
 			default: 0;
 		}
 	}
