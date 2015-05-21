@@ -15,8 +15,10 @@ class XMLReporter implements IReporter {
 	public function new(path:String, s:String) {
 		_report = new StringBuf();
 		var folder = Path.directory(path);
-		if (!FileSystem.exists(folder)) {
-			FileSystem.createDirectory(folder);
+		if (folder.length > 0) {
+			if (!FileSystem.exists(folder)) {
+				FileSystem.createDirectory(folder);
+			}
 		}
 		_file = File.write(path);
 		_style = s;
