@@ -42,16 +42,16 @@ class CyclomaticComplexityCheck extends Check {
 
 	function calculateComplexity(method:Target) {
 		var complexity:Int = 1 + evaluateExpr(method.expr);
-		
+
 		var risk:Null<Threshold> = thresholds.filter(function(t:Threshold):Bool {
 			return complexity >= t.complexity;
 		}).pop();
-		
+
 		if (risk != null) {
 			notify(method, complexity, risk);
 		}
 	}
-	
+
 	// This would not pass the cyclomatic complexity test.
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) {
@@ -65,9 +65,9 @@ class CyclomaticComplexityCheck extends Check {
 				default : 0;
 			};
 			case ExprDef.EParenthesis(e) : evaluateExpr(e);
-			case ExprDef.EObjectDecl(fields) : 
-				fields.map(function(f):Expr { 
-					return f.expr; 
+			case ExprDef.EObjectDecl(fields) :
+				fields.map(function(f):Expr {
+					return f.expr;
 				}).fold(function(e:Expr, total:Int):Int {
 					return total + evaluateExpr(e);
 				}, 0);
