@@ -13,7 +13,10 @@ using Lambda;
 @desc("McCabe simplified cyclomatic complexity check")
 class CyclomaticComplexityCheck extends Check {
 
-	public var thresholds:Array<Threshold>;
+	public var thresholds:Array<Threshold> = [ 
+		{ severity : "WARNING", complexity : 11 }, 
+		{ severity : "ERROR", complexity : 21 }
+	];
 
 	override function _actualRun() {
 		_checker.ast.decls.map(function(type:TypeDecl):Null<Definition<ClassFlag, Array<Field>>> {
@@ -51,7 +54,7 @@ class CyclomaticComplexityCheck extends Check {
 	
 	// This would not pass the cyclomatic complexity test.
 	function evaluateExpr(e:Expr):Int {
-		if (e == null) {
+		if (e == null || e.expr == null) {
 			return 0;
 		}
 		return switch(e.expr) {
