@@ -4,9 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-// TODO find a better way to make ChecksInfo ignore this class
-@name("")
-@desc("")
+@ignore("Base class for name checks")
 class NameCheckBase extends Check {
 
 	public var severity:String;
