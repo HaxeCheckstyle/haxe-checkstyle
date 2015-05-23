@@ -22,6 +22,7 @@ class TestMain {
 		runner.add(new NestedIfDepthCheckTest());
 		runner.add(new NestedTryDepthCheckTest());
 		runner.add(new OverrideCheckTest());
+		runner.add(new ParameterNameCheckTest());
 		runner.add(new ParameterNumberCheckTest());
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());

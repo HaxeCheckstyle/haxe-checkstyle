@@ -160,6 +160,14 @@
 			}
 		},
 		{
+			"type": "ParameterName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"tokens": []
+			}
+		},
+		{
 			"type": "ParameterNumber",
 			"props": {
 				"severity": "INFO",
