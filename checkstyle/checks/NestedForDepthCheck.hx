@@ -8,8 +8,14 @@ import haxe.macro.Expr;
 @desc("Max number of nested for blocks (default 1)")
 class NestedForDepthCheck extends Check {
 
-	public var severity:String = "ERROR";
-	public var max:Int = 1;
+	public var severity:String;
+	public var max:Int;
+
+	public function new() {
+		super();
+		severity = "ERROR";
+		max = 1;
+	}
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -61,6 +67,7 @@ class NestedForDepthCheck extends Check {
 	}
 
 	function _warnNestedForDepth(depth:Int, pos:Position) {
-		logPos('Nested for depth is $depth (max allowed is ${max})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Nested for depth is $depth (max allowed is ${max})',
+			pos, Reflect.field(SeverityLevel, severity));
 	}
 }
