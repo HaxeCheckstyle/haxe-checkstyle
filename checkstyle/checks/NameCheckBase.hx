@@ -29,21 +29,21 @@ class NameCheckBase extends Check {
 	}
 
 	override function _actualRun() {
-		formatRE = new EReg(format, "");
+		formatRE = new EReg (format, "");
 		checkClassFields();
 	}
 
 	function checkClassFields() {
 		for (td in _checker.ast.decls) {
 			switch (td.decl) {
-				case EClass(d):
-					checkClassType(d, td.pos);
-				case EEnum(d):
-					checkEnumType(d, td.pos);
-				case EAbstract(d):
-					checkAbstractType(d, td.pos);
-				case ETypedef(d):
-					checkTypedefType(d, td.pos);
+				case EClass (d):
+					checkClassType (d, td.pos);
+				case EEnum (d):
+					checkEnumType (d, td.pos);
+				case EAbstract (d):
+					checkAbstractType (d, td.pos);
+				case ETypedef (d):
+					checkTypedefType (d, td.pos);
 				default:
 			}
 		}
@@ -77,7 +77,7 @@ class NameCheckBase extends Check {
 
 	function matchTypeName(type:String, name:String, pos:Position)
 	{
-		if (!formatRE.match(name)) {
+		if (!formatRE.match (name)) {
 			_warn(type, name, pos);
 		}
 	}
