@@ -1,6 +1,7 @@
 package checkstyle.checks;
 
 import haxe.macro.Expr.Position;
+import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
 class Check {
@@ -29,17 +30,48 @@ class Check {
 
 	public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
 		_messages.push({
-					  fileName:_checker.file.name,
-					  message:msg,
-					  line:l,
-					  column:c,
-					  severity:sev,
-					  moduleName:getModuleName()
-					  });
+			fileName:_checker.file.name,
+			message:msg,
+			line:l,
+			column:c,
+			severity:sev,
+			moduleName:getModuleName()
+		});
 	}
 
 	public function getModuleName():String {
 		if (_moduleName == null) _moduleName = ChecksInfo.getCheckName(this);
 		return _moduleName;
+	}
+
+	function isCheckSuppressed(f:Field):Bool {
+		if (f == null || f.meta == null) return false;
+
+		var search = 'checkstyle:${getModuleName ()}';
+		for (meta in f.meta) {
+			if (meta.name != "SuppressWarnings") continue;
+			if (meta.params == null) continue;
+			for (param in meta.params) {
+				if (checkSuppressionConst (param, search)) return true;
+			}
+		}
+		return false;
+	}
+
+	function checkSuppressionConst (e:Expr, search:String):Bool {
+		switch (e.expr) {
+			case EArrayDecl (a):
+				for (e1 in a) {
+					if (checkSuppressionConst (e1, search)) return true;
+				}
+			case EConst (c):
+				switch (c) {
+					case CString (s):
+						if (s == search) return true;
+					default:
+				}
+			default:
+		}
+		return false;
 	}
 }

@@ -46,6 +46,7 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function checkField(f:Field) {
+		if (isCheckSuppressed (f)) return;
 		if (enforcePublicPrivate) {
 			if ((f.access.indexOf(APublic) < 0) && (f.access.indexOf(APrivate) < 0)) {
 				_warnPrivateKeywordMissing(f.name, f.pos);
