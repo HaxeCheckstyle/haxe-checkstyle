@@ -13,6 +13,7 @@ class ChecksInfo {
 		var checksClasses = CompileTime.getAllClasses(Check);
 
 		for (cl in checksClasses) {
+			if (ignoreClass(cl)) continue;
 			var name = getCheckNameFromClass(cl);
 			var desc = getCheckDescription(cl);
 			name2info[name] = {
@@ -21,6 +22,11 @@ class ChecksInfo {
 				clazz: cl
 			};
 		}
+	}
+
+	static function ignoreClass(cl:Class<Check>) {
+		var meta = haxe.rtti.Meta.getType(cl);
+		return (meta.ignore != null);
 	}
 
 	static function getCheckNameFromClass(cl:Class<Check>) {

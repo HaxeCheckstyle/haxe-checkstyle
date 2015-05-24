@@ -8,8 +8,14 @@ import haxe.macro.Expr;
 @desc("Max number of nested try blocks (default 1)")
 class NestedTryDepthCheck extends Check {
 
-	public var severity:String = "ERROR";
-	public var max:Int = 1;
+	public var severity:String;
+	public var max:Int;
+
+	public function new() {
+		super();
+		severity = "ERROR";
+		max = 1;
+	}
 
 	override function _actualRun() {
 		for (td in _checker.ast.decls) {
@@ -66,6 +72,7 @@ class NestedTryDepthCheck extends Check {
 	}
 
 	function _warnNestedTryDepth(depth:Int, pos:Position) {
-		logPos('Nested try depth is $depth (max allowed is ${max})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Nested try depth is $depth (max allowed is ${max})',
+			pos, Reflect.field(SeverityLevel, severity));
 	}
 }

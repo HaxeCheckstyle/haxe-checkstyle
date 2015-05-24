@@ -15,8 +15,10 @@ class XMLReporter implements IReporter {
 	public function new(path:String, s:String) {
 		_report = new StringBuf();
 		var folder = Path.directory(path);
-		if (!FileSystem.exists(folder)) {
-			FileSystem.createDirectory(folder);
+		if (folder.length > 0) {
+			if (!FileSystem.exists(folder)) {
+				FileSystem.createDirectory(folder);
+			}
 		}
 		_file = File.write(path);
 		_style = s;
@@ -25,7 +27,9 @@ class XMLReporter implements IReporter {
 	public function start() {
 		var sb = new StringBuf();
 		sb.add("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		if(_style != "") sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + _style +"\" ?>\n");
+		if(_style != "") {
+			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + _style + "\" ?>\n");
+		}
 		sb.add("<checkstyle version=\"5.0\">\n");
 		//Sys.stdout().writeString(sb.toString());
 		_report.add(sb.toString());
@@ -64,9 +68,9 @@ class XMLReporter implements IReporter {
 
 	static function severityString(s:SeverityLevel):String {
 		return switch(s){
-		case INFO: return "info";
-		case WARNING: return "warning";
-		case ERROR: return "error";
+			case INFO: return "info";
+			case WARNING: return "warning";
+			case ERROR: return "error";
 		}
 	}
 
@@ -75,12 +79,12 @@ class XMLReporter implements IReporter {
 	 * https://github.com/janl/mustache.js/blob/master/mustache.js#L49
 	 */
 	static var entityMap:Map<String,String> = [
-	"&" => "&amp;",
-	"<" => "&lt;",
-	">" => "&gt;",
-	'"' => "&quot;",
-	"'" => "&#39;",
-	"/" => "&#x2F;"
+		"&" => "&amp;",
+		"<" => "&lt;",
+		">" => "&gt;",
+		'"' => "&quot;",
+		"'" => "&#39;",
+		"/" => "&#x2F;"
 	];
 
 	static var entityRE = ~/[&<>"'\/]/g;

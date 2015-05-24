@@ -42,6 +42,22 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "ConstantName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"tokens": [ "INLINE" ]
+			}
+		},
+		{
+			"type": "ConstantName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"tokens": [ "NOTINLINE" ]
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
@@ -89,6 +105,22 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "MemberName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[A-Z]+[A-Z0-9_]*$",
+				"tokens": [ "ENUM" ]
+			}
+		},
+		{
+			"type": "MemberName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"tokens": [ "PUBLIC", "PRIVATE", "TYPEDEF" ]
+			}
+		},
+		{
 			"type": "MethodLength",
 			"props": {
 				"severity": "ERROR",
@@ -127,6 +159,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "Override",
 			"props": {
 				"severity": "ERROR"
+			}
+		},
+		{
+			"type": "ParameterName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$"
 			}
 		},
 		{
@@ -184,6 +223,22 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "Type",
 			"props": {
 				"severity": "ERROR"
+			}
+		},
+		{
+			"type": "TypeName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^I[A-Z]+[a-zA-Z0-9_]*$",
+				"tokens": [ "INTERFACE" ]
+			}
+		},
+		{
+			"type": "TypeName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[A-Z]+[a-zA-Z0-9_]*$",
+				"tokens": [ "CLASS", "ENUM", "TYPEDEF" ]
 			}
 		},
 		{

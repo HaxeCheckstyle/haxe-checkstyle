@@ -7,6 +7,7 @@ class TestMain {
 		runner.add(new AnonymousCheckTest());
 		runner.add(new ArrayInstantiationCheckTest());
 		runner.add(new BlockFormatCheckTest());
+		runner.add(new ConstantNameCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
@@ -14,12 +15,14 @@ class TestMain {
 		runner.add(new LineLengthCheckTest());
 		runner.add(new ListenerNameCheckTest());
 		runner.add(new FileLengthCheckTest());
+		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new NamingCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
 		runner.add(new NestedTryDepthCheckTest());
 		runner.add(new OverrideCheckTest());
+		runner.add(new ParameterNameCheckTest());
 		runner.add(new ParameterNumberCheckTest());
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());
@@ -28,6 +31,7 @@ class TestMain {
 		runner.add(new TODOCommentCheckTest());
 		runner.add(new TrailingWhitespaceCheckTest());
 		runner.add(new TypeCheckTest());
+		runner.add(new TypeNameCheckTest());
 		runner.add(new VariableInitialisationCheckTest());
 
 		var success = runner.run();
