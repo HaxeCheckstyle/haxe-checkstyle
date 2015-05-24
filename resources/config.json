@@ -24,7 +24,9 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
-				"tokens": [ "INLINE" ]
+				"tokens": [
+					"INLINE"
+				]
 			}
 		},
 		{
@@ -32,7 +34,9 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "NOTINLINE" ]
+				"tokens": [
+					"NOTINLINE"
+				]
 			}
 		},
 		{
@@ -40,12 +44,12 @@
 			"props": {
 				"thresholds": [
 					{
-						"severity" : "WARNING",
-						"complexity" : 11
+						"severity": "WARNING",
+						"complexity": 11
 					},
 					{
-						"severity" : "ERROR",
-						"complexity" : 21
+						"severity": "ERROR",
+						"complexity": 21
 					}
 				]
 			}
@@ -107,7 +111,9 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[A-Z]+[A-Z0-9_]*$",
-				"tokens": [ "ENUM" ]
+				"tokens": [
+					"ENUM"
+				]
 			}
 		},
 		{
@@ -115,7 +121,11 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "PUBLIC", "PRIVATE", "TYPEDEF" ]
+				"tokens": [
+					"PUBLIC",
+					"PRIVATE",
+					"TYPEDEF"
+				]
 			}
 		},
 		{
@@ -226,7 +236,9 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^I[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "INTERFACE" ]
+				"tokens": [
+					"INTERFACE"
+				]
 			}
 		},
 		{
@@ -234,7 +246,11 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "CLASS", "ENUM", "TYPEDEF" ]
+				"tokens": [
+					"CLASS",
+					"ENUM",
+					"TYPEDEF"
+				]
 			}
 		},
 		{
