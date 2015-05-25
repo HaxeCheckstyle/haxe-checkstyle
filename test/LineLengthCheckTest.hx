@@ -39,7 +39,7 @@ class LineLengthTests {
 	"class Test {
 		public function new() {
 			var b:Int;
-																																																					}
+		}
 
 		@SuppressWarnings('checkstyle:LineLength')
 		public function newi(param1:Int, param2:Int, param3:Int, param4:Int, param5:Int, param6:Int, param7:Int, param8:Int) {
