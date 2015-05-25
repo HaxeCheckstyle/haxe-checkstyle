@@ -128,6 +128,14 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "MethodName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"tokens": []
+			}
+		},
+		{
 			"type": "Naming",
 			"props": {
 				"severity": "ERROR",
