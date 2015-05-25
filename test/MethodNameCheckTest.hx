@@ -123,6 +123,10 @@ class MethodNameTests {
 		function testName() {}
 		public function testValue() {}
 		public function get_Test() {}
+		@SuppressWarnings('checkstyle:MethodName')
+		public function TEST() {}
+		@SuppressWarnings('checkstyle:MethodName')
+		function TEST2() {}
 	}
 	
 	typedef Test3 = {

@@ -29,6 +29,7 @@ class NestedTryDepthCheck extends Check {
 
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
 		for (field in d.data) {
+			if (isCheckSuppressed (field)) continue;
 			checkField(field);
 		}
 	}

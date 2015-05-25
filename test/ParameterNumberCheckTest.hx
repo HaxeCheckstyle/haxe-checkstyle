@@ -49,6 +49,18 @@ class ParameterNumberTests {
 	class Test {
 		var testVar1:Int;
 		public function test():Void {}
+
+		@SuppressWarnings('checkstyle:ParameterNumber')
+		override public function test2(param1:Int,
+								param2:Int,
+								param3:Int,
+								param4:Int,
+								param5:Int,
+								param6:Int,
+								param7:Int,
+								param8:Int) {
+			return;
+		}
 	}";
 
 	public static inline var TEST2:String =

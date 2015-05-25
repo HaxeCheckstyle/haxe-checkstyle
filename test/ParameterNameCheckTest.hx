@@ -51,6 +51,10 @@ class ParameterNameTests {
 		}
 		public function test2() {
 		}
+
+		@SuppressWarnings('checkstyle:ParameterName')
+		function test(param1:Int, ParamName:String) {
+		}
 	}
 
 	enum Test2 {

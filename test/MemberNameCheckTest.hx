@@ -106,6 +106,8 @@ class MemberNameTests {
 		static var COUNT:Int = 1;
 		static inline var COUNT2:Int = 1;
 		var count5:Int = 1;
+		@SuppressWarnings('checkstyle:MemberName')
+		var COUNT6:Int = 1;
 	}
 
 	enum Test2 {
@@ -116,6 +118,8 @@ class MemberNameTests {
 	typedef Test3 = {
 		var count1:Int;
 		var count2:String;
+		@SuppressWarnings('checkstyle:MemberName')
+		var COUNT6:Int = 1;
 	}";
 
 	public static inline var TEST1:String = "

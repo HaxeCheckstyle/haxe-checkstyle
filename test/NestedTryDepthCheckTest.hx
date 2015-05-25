@@ -37,6 +37,28 @@ class NestedTryDepthTests {
 			} catch(e:String) {
 			}
 		}
+
+		@SuppressWarnings('checkstyle:NestedTryDepth')
+		public function test1() {
+			try {                           // level 0
+				try {                       // level 0
+					throw 'test';
+				} catch(e:String) {
+					throw 'test';
+				}
+			} catch(e:String) {
+				try {                       // level 1
+				} catch(e1:String) {
+					try {                   // level 2
+					} catch(e1:String) {
+					}
+				}
+			} catch(e1:Int) {
+				try {                       // level 1
+				} catch(e2:String) {
+				}
+			}
+		}
 	}";
 
 	public static inline var TEST2:String =
