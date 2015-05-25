@@ -1,9 +1,12 @@
 package ;
 
+import haxe.PosInfos;
+
 import checkstyle.LintMessage;
 import checkstyle.LintFile;
 import checkstyle.reporter.IReporter;
 import checkstyle.Checker;
+import checkstyle.checks.Check;
 
 class CheckTestCase extends haxe.unit.TestCase {
 
@@ -13,11 +16,19 @@ class CheckTestCase extends haxe.unit.TestCase {
 	var _reporter:TestReporter;
 
 	override public function setup() {
-		_checker = new Checker();
-		_reporter = new TestReporter();
+	}
+
+	function assertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
+		var msg = checkMessage (testCase, check);
+		assertEquals (expected, msg, pos);
 	}
 
 	function checkMessage(src, check):String {
+		// a fresh Checker and Reporter for every checkMessage
+		// to allow multiple indipendant checkMessage calls in a single test
+		_checker = new Checker();
+		_reporter = new TestReporter();
+
 		_checker.addCheck(check);
 		_checker.addReporter(_reporter);
 		_checker.process([{name:FILE_NAME, content:src}]);
