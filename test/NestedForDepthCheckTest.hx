@@ -5,32 +5,25 @@ import checkstyle.checks.NestedForDepthCheck;
 class NestedForDepthCheckTest extends CheckTestCase {
 
 	public function testDefault() {
-		var msg = checkMessage(NestedForDepthTests.TEST1, new NestedForDepthCheck());
-		assertEquals('', msg);
+		var check = new NestedForDepthCheck();
+		assertMsg(check, NestedForDepthTests.TEST1, '');
 	}
 
 	public function testDefaultTooMany() {
-		var msg = checkMessage(NestedForDepthTests.TEST2, new NestedForDepthCheck());
-		assertEquals('Nested for depth is 2 (max allowed is 1)', msg);
+		var check = new NestedForDepthCheck();
+		assertMsg(check, NestedForDepthTests.TEST2, 'Nested for depth is 2 (max allowed is 1)');
 	}
 
 	public function testMaxParameter() {
 		var check = new NestedForDepthCheck();
 		check.max = 2;
 
-		var msg = checkMessage(NestedForDepthTests.TEST1, check);
-		assertEquals('', msg);
-
-		msg = checkMessage(NestedForDepthTests.TEST2, check);
-		assertEquals('', msg);
+		assertMsg(check, NestedForDepthTests.TEST1, '');
+		assertMsg(check, NestedForDepthTests.TEST2, '');
 
 		check.max = 0;
-
-		msg = checkMessage(NestedForDepthTests.TEST1, check);
-		assertEquals('', msg);
-
-		msg = checkMessage(NestedForDepthTests.TEST2, check);
-		assertEquals('Nested for depth is 1 (max allowed is 0)', msg);
+		assertMsg(check, NestedForDepthTests.TEST1, '');
+		assertMsg(check, NestedForDepthTests.TEST2, 'Nested for depth is 1 (max allowed is 0)');
 	}
 }
 

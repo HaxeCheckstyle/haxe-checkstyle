@@ -17,6 +17,7 @@ class TestMain {
 		runner.add(new FileLengthCheckTest());
 		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
+		runner.add(new MethodNameCheckTest());
 		runner.add(new NamingCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
