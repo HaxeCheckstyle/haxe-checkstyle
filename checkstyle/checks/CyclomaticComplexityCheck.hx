@@ -32,7 +32,7 @@ class CyclomaticComplexityCheck extends Check {
 	function checkFields(definition:Definition<ClassFlag, Array<Field>>) {
 		definition.data.map(function(field:Field):Null<Target> {
 			return switch (field.kind) {
-				case FieldType.FFun(f): 
+				case FieldType.FFun(f):
 					if (isCheckSuppressed (field))
 						null;
 					else

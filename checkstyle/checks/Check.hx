@@ -58,6 +58,26 @@ class Check {
 		return false;
 	}
 
+	function isLineSuppressed(i:Int):Bool {
+		var startPos:Int = 0;
+		for (j in 0 ... i + 1) {
+			startPos += _checker.lines[j].length;
+		}
+
+		for (td in _checker.ast.decls) {
+			switch (td.decl){
+				case EClass(d):
+					for (field in d.data) {
+						if (startPos > field.pos.max) continue;
+						if (startPos < field.pos.min) continue;
+						return isCheckSuppressed (field);
+					}
+				default:
+			}
+		}
+		return false;
+	}
+
 	function checkSuppressionConst (e:Expr, search:String):Bool {
 		switch (e.expr) {
 			case EArrayDecl (a):
