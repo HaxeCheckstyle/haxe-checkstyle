@@ -19,6 +19,9 @@ class TypeTests {
 	public static inline var TEST1:String = "
 	class Test {
 		var _a;
+
+		@SuppressWarnings('checkstyle:Type')
+		var _b;
 	}";
 
 	public static inline var TEST2:String = "
