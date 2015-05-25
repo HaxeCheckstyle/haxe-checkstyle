@@ -42,11 +42,9 @@ class VariableInitialisationCheck extends Check {
 
 		if (isPrivate || isPublic) {
 			switch (f.kind) {
-				case FVar(t, a):
-					if (Std.string(f.kind).indexOf("expr =>") > -1) {
-						_warnVarinit(f.name, f.pos);
-						return;
-					}
+				case FVar(t, e):
+					if (e == null) return;
+					_warnVarinit(f.name, f.pos);
 				case FFun(f):
 					return;
 				case FProp(g, s, t, a):
