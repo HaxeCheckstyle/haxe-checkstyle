@@ -69,6 +69,11 @@ class ConstantNameTests {
 		var Count4:Int = 1;
 		var count5:Int = 1;
 		var _count5:Int = 1;
+
+		@SuppressWarnings('checkstyle:ConstantName')
+		static inline var count6:Int = 1;
+		@SuppressWarnings('checkstyle:ConstantName')
+		static var count7:Int = 1;
 	}";
 
 	public static inline var TEST1:String = "

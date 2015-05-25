@@ -39,6 +39,20 @@ class NestedIfDepthTests {
 				return 2;
 			}
 		}
+
+		@SuppressWarnings('checkstyle:NestedIfDepth')
+		public function test1(param:Int) {
+			if (param == 1) {                           // level 0
+				return 1;
+			}
+			else {
+				if ((param == 2) || (param == 3)) {     // level 1
+					if (param == 3) return 3;           // level 2
+					return 2;
+				}
+			}
+			return 3;
+		}
 	}";
 
 	public static inline var TEST2:String =

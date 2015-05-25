@@ -20,6 +20,9 @@ class VariableInitialisationTests {
 	class Test {
 		var _a:Int = 1;
 
+		@SuppressWarnings('checkstyle:VariableInitialisation')
+		var _b:Int = 1;
+
 		public function new() {}
 	}";
 

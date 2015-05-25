@@ -25,6 +25,7 @@ class TypeCheck extends Check {
 	}
 
 	function checkField(f:Field) {
+		if (isCheckSuppressed (f)) return;
 		switch(f.kind) {
 			case FVar(t, e):
 				if (t == null) _error(f.name, f.pos);

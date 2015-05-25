@@ -44,6 +44,7 @@ class MethodNameCheck extends NameCheckBase {
 
 	function checkFields(d:Array<Field>) {
 		for (field in d) {
+			if (isCheckSuppressed (field)) continue;
 			switch (field.kind) {
 				case FFun (f):
 					checkField (field);

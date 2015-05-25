@@ -23,6 +23,7 @@ class PublicPrivateCheck extends Check {
 
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
 		for (field in d.data) {
+			if (isCheckSuppressed (field)) continue;
 			if (field.name != "new") {
 				if (d.flags.indexOf(HInterface) > -1) checkInterfaceField(field);
 				else checkField(field);
@@ -46,6 +47,7 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function checkField(f:Field) {
+		if (isCheckSuppressed (f)) return;
 		if (enforcePublicPrivate) {
 			if ((f.access.indexOf(APublic) < 0) && (f.access.indexOf(APrivate) < 0)) {
 				_warnPrivateKeywordMissing(f.name, f.pos);
