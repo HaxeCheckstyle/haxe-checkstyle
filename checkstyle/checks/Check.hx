@@ -59,17 +59,31 @@ class Check {
 	}
 
 	function isLineSuppressed(i:Int):Bool {
-		var startPos:Int = 0;
+		var pos:Int = 0;
 		for (j in 0 ... i + 1) {
-			startPos += _checker.lines[j].length;
+			pos += _checker.lines[j].length;
 		}
-
 		for (td in _checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
 					for (field in d.data) {
-						if (startPos > field.pos.max) continue;
-						if (startPos < field.pos.min) continue;
+						if (pos > field.pos.max) continue;
+						if (pos < field.pos.min) continue;
+						return isCheckSuppressed (field);
+					}
+				default:
+			}
+		}
+		return false;
+	}
+
+	function isPosSuppressed(pos:Position):Bool {
+		for (td in _checker.ast.decls) {
+			switch (td.decl){
+				case EClass(d):
+					for (field in d.data) {
+						if (pos.min > field.pos.max) continue;
+						if (pos.min < field.pos.min) continue;
 						return isCheckSuppressed (field);
 					}
 				default:
