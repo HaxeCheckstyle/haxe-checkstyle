@@ -55,6 +55,12 @@
 			}
 		},
 		{
+			"type": "Dynamic",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",

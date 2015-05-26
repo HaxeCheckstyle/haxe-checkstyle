@@ -58,6 +58,12 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "Dynamic",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
