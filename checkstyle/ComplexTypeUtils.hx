@@ -114,8 +114,8 @@ class ComplexTypeUtils {
 		if (c.expr != null) walkExpr(c.expr, cb);
 	}
 
-	public static function walkCatch(c:Catch, pos:Position, cb:ComplexTypeCallback) {
-		walkComplexType(c.type, c.name, pos, cb);
+	public static function walkCatch(c:Catch, cb:ComplexTypeCallback) {
+		walkComplexType(c.type, c.name, c.expr.pos, cb);
 		walkExpr(c.expr, cb);
 	}
 
@@ -188,7 +188,7 @@ class ComplexTypeUtils {
 				if (edef != null && edef.expr != null) walkExpr(edef, cb);
 			case ETry(e, catches):
 				walkExpr(e, cb);
-				for (c in catches) walkCatch(c, e.pos, cb);
+				for (c in catches) walkCatch(c, cb);
 			case EReturn(e):
 				if (e != null) walkExpr(e, cb);
 			case EBreak:
@@ -197,16 +197,16 @@ class ComplexTypeUtils {
 			case EThrow(e): walkExpr(e, cb);
 			case ECast(e, t):
 				walkExpr(e, cb);
-				if (t != null) walkComplexType(t, t.getName(), e.pos, cb);
+				if (t != null) walkComplexType(t, "", e.pos, cb);
 			case EDisplay(e, isCall): walkExpr(e, cb);
-			case EDisplayNew(t): walkTypePath(t, "", e.pos, cb);
+			case EDisplayNew(t): walkTypePath(t, t.name, e.pos, cb);
 			case ETernary(econd, eif, eelse):
 				walkExpr(econd, cb);
 				walkExpr(eif, cb);
 				walkExpr(eelse, cb);
 			case ECheckType(e, t):
 				walkExpr(e, cb);
-				walkComplexType(t, t.getName(), e.pos, cb);
+				walkComplexType(t, "", e.pos, cb);
 			case EMeta(s, e):
 				if (s.params != null) for (mp in s.params) walkExpr(mp, cb);
 				walkExpr(e, cb);

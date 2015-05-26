@@ -25,7 +25,7 @@ class DynamicCheck extends Check {
 		if (isPosSuppressed (pos)) return;
 		switch (t) {
 			case TPath(p):
-				if (Std.string (p).indexOf ("name => Dynamic") > -1) _error (name, pos);
+				if (p.name == "Dynamic") _error (name, pos);
 			default:
 		}
 	}
