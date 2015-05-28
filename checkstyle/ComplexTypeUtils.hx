@@ -53,9 +53,9 @@ class ComplexTypeUtils {
 		walkCommonDefinition(d, pos, cb);
 		for (ec in d.data) {
 			walkMeta(ec.meta, cb);
-			for (arg in ec.args) walkComplexType(arg.type, ec.name, pos, cb);
-			for (param in ec.params) walkTypeParamDecl(param, pos, cb);
-			if (ec.type != null) walkComplexType(ec.type, ec.name, pos, cb);
+			for (arg in ec.args) walkComplexType(arg.type, ec.name, ec.pos, cb);
+			for (param in ec.params) walkTypeParamDecl(param, ec.pos, cb);
+			if (ec.type != null) walkComplexType(ec.type, ec.name, ec.pos, cb);
 		}
 	}
 

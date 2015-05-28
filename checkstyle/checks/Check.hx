@@ -45,10 +45,15 @@ class Check {
 	}
 
 	function isCheckSuppressed(f:Field):Bool {
-		if (f == null || f.meta == null) return false;
+		if (f == null) return false;
+		if (hasSuppressWarningsMeta (f.meta)) return true;
+		return isPosSuppressed (f.pos);
+	}
 
+	function hasSuppressWarningsMeta(m:Metadata):Bool {
+		if (m == null) return false;
 		var search = 'checkstyle:${getModuleName ()}';
-		for (meta in f.meta) {
+		for (meta in m) {
 			if (meta.name != "SuppressWarnings") continue;
 			if (meta.params == null) continue;
 			for (param in meta.params) {
@@ -73,11 +78,44 @@ class Check {
 	function isCharPosSuppressed(pos:Int):Bool {
 		for (td in _checker.ast.decls) {
 			switch (td.decl){
-				case EClass(d):
+				case EAbstract(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						if (hasSuppressWarningsMeta (d.meta)) return true;
+					}
 					for (field in d.data) {
 						if (pos > field.pos.max) continue;
 						if (pos < field.pos.min) continue;
-						return isCheckSuppressed (field);
+						return hasSuppressWarningsMeta (field.meta);
+					}
+				case EClass(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						if (hasSuppressWarningsMeta (d.meta)) return true;
+					}
+					for (field in d.data) {
+						if (pos > field.pos.max) continue;
+						if (pos < field.pos.min) continue;
+						return hasSuppressWarningsMeta (field.meta);
+					}
+				case EEnum(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						if (hasSuppressWarningsMeta (d.meta)) return true;
+					}
+					for (item in d.data) {
+						if (pos > item.pos.max) continue;
+						if (pos < item.pos.min) continue;
+						return hasSuppressWarningsMeta (item.meta);
+					}
+				case ETypedef(d):
+					switch (d.data) {
+						case TAnonymous(fields):
+							for (field in fields) {
+								if (pos > field.pos.max) continue;
+								if (pos < field.pos.min) continue;
+								if (hasSuppressWarningsMeta (field.meta)) return true;
+								// typedef pos does not include body
+								return hasSuppressWarningsMeta (d.meta);
+							}
+						default:
 					}
 				default:
 			}

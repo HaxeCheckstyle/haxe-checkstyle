@@ -38,14 +38,40 @@ class DynamicTests {
 		}
 	}
 
+	@SuppressWarnings('checkstyle:Dynamic')
+	class Testa {
+		public var a:Int;
+		private var b:Int;
+		static var COUNT:Int = 1;
+		var count6:Dynamic;
+
+		function calc(val:Dynamic, val2:Dynamic):Dynamic {
+			return null;
+		}
+	}
+
 	enum Test2 {
 		count;
-		a;
+		@SuppressWarnings('checkstyle:Dynamic')
+		a(field:Dynamic);
 	}
-	
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	enum Test2a {
+		count;
+		a(field:Dynamic);
+	}
+
 	typedef Test3 = {
 		var count1:Int;
-		var count2:String;
+		@SuppressWarnings('checkstyle:Dynamic')
+		var count2:Dynamic;
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	typedef Test3a = {
+		var count1:Int;
+		var count2:Dynamic;
 	}";
 
 	public static inline var TEST1:String = "
