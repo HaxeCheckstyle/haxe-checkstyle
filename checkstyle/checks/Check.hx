@@ -106,6 +106,9 @@ class Check {
 						return hasSuppressWarningsMeta (item.meta);
 					}
 				case ETypedef(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						if (hasSuppressWarningsMeta (d.meta)) return true;
+					}
 					switch (d.data) {
 						case TAnonymous(fields):
 							for (field in fields) {

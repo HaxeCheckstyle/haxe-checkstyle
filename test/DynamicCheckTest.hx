@@ -72,7 +72,10 @@ class DynamicTests {
 	typedef Test3a = {
 		var count1:Int;
 		var count2:Dynamic;
-	}";
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	typedef Test3b = Array<Dynamic>;";
 
 	public static inline var TEST1:String = "
 	class Test {
