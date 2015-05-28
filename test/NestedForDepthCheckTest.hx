@@ -49,6 +49,21 @@ class NestedForDepthTests {
 				}
 			}
 		}
+	}
+
+	@SuppressWarnings('checkstyle:NestedForDepth')
+	class Test2 {
+		public function test2(param:Array<Int>) {
+			for (outerParam in params) {                      // level 0
+				for (middleParam in params) {                 // level 1
+					for (innerParam in params) {              // level 2
+						if (outerParam == innerParam) {
+							trace (param);
+						}
+					}
+				}
+			}
+		}
 	}";
 
 	public static inline var TEST2:String =
