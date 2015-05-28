@@ -46,12 +46,12 @@ class Check {
 
 	function isCheckSuppressed(f:Field):Bool {
 		if (f == null) return false;
+		if (hasSuppressWarningsMeta (f.meta)) return true;
 		return isPosSuppressed (f.pos);
 	}
 
 	function hasSuppressWarningsMeta(m:Metadata):Bool {
 		if (m == null) return false;
-
 		var search = 'checkstyle:${getModuleName ()}';
 		for (meta in m) {
 			if (meta.name != "SuppressWarnings") continue;
