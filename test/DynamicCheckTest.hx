@@ -56,7 +56,7 @@ class DynamicTests {
 		a(field:Dynamic);
 	}
 
-		@SuppressWarnings('checkstyle:Dynamic')
+	@SuppressWarnings('checkstyle:Dynamic')
 	enum Test2a {
 		count;
 		a(field:Dynamic);
