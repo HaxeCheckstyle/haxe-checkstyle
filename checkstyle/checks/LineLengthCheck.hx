@@ -14,7 +14,10 @@ class LineLengthCheck extends Check {
 	override function _actualRun() {
 		for (i in 0 ... _checker.lines.length) {
 			var line = _checker.lines[i];
-			if (line.length > maxCharacters) log('Too long line (> ${maxCharacters})', i + 1, 1, Reflect.field(SeverityLevel, severity));
+			if (line.length > maxCharacters) {
+				if (isLineSuppressed(i)) continue;
+				log('Too long line (> ${maxCharacters})', i + 1, 1, Reflect.field(SeverityLevel, severity));
+			}
 		}
 	}
 }

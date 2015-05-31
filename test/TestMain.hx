@@ -8,6 +8,7 @@ class TestMain {
 		runner.add(new ArrayInstantiationCheckTest());
 		runner.add(new BlockFormatCheckTest());
 		runner.add(new ConstantNameCheckTest());
+		runner.add(new DynamicCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
@@ -17,6 +18,7 @@ class TestMain {
 		runner.add(new FileLengthCheckTest());
 		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
+		runner.add(new MethodNameCheckTest());
 		runner.add(new NamingCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());

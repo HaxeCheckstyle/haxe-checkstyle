@@ -32,6 +32,7 @@ class MethodLengthCheck extends Check {
 
 	function searchFields(fs:Array<Field>){
 		for (f in fs) {
+			if (isCheckSuppressed (f)) continue;
 			switch(f.kind){
 			case FFun(ff):
 				checkMethod(f);

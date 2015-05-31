@@ -32,7 +32,11 @@ class CyclomaticComplexityCheck extends Check {
 	function checkFields(definition:Definition<ClassFlag, Array<Field>>) {
 		definition.data.map(function(field:Field):Null<Target> {
 			return switch (field.kind) {
-				case FieldType.FFun(f): {name:field.name, expr:f.expr, pos:field.pos};
+				case FieldType.FFun(f):
+					if (isCheckSuppressed (field))
+						null;
+					else
+						{name:field.name, expr:f.expr, pos:field.pos};
 				default: null;
 			}
 		}).filter(function(f:Null<Target>):Bool {
@@ -53,6 +57,7 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
+	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) {
 			return 0;

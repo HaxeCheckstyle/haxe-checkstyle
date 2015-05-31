@@ -107,5 +107,20 @@ class MethodLengthTests {
 
 			tarce('TEST');
 		}
+
+		@SuppressWarnings('checkstyle:MethodLength')
+		public function test1() {
+			tarce('TEST');
+
+			tarce('TEST');
+
+			tarce('TEST');
+
+			tarce('TEST');
+
+			tarce('TEST');
+
+			tarce('TEST');
+		}
 	}";
 }

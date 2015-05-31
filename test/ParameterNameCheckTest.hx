@@ -6,65 +6,41 @@ import checkstyle.checks.ParameterNameCheck;
 class ParameterNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
-		var msg = checkMessage (ParameterNameTests.TEST, new ParameterNameCheck ());
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST2, new ParameterNameCheck ());
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST4, new ParameterNameCheck ());
-		assertEquals ('', msg);
+		var check = new ParameterNameCheck ();
+		assertMsg(check, ParameterNameTests.TEST, '');
+		assertMsg(check, ParameterNameTests.TEST2, '');
+		assertMsg(check, ParameterNameTests.TEST4, '');
 	}
 
 	public function testWrongNaming() {
-		var msg = checkMessage (ParameterNameTests.TEST1, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST3, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST5, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
+		var check = new ParameterNameCheck ();
+		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
 	}
 
 	public function testIgnoreExtern() {
 		var check = new ParameterNameCheck ();
 		check.ignoreExtern = false;
 
-		var msg = checkMessage (ParameterNameTests.TEST, check);
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST4, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: Param1 (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST3, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST5, new ParameterNameCheck ());
-		assertEquals ('Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)', msg);
+		assertMsg(check, ParameterNameTests.TEST, '');
+		assertMsg(check, ParameterNameTests.TEST2, '');
+		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
 	}
 
 	public function testFormat() {
 		var check = new ParameterNameCheck ();
 		check.format = "^[A-Z][a-zA-Z]*$";
 
-		var msg = checkMessage (ParameterNameTests.TEST5, check);
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST1, check);
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST2, check);
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST4, check);
-		assertEquals ('', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST, check);
-		assertEquals ('Invalid parameter name signature: paramName (name should be ~/^[A-Z][a-zA-Z]*$/)', msg);
-
-		msg = checkMessage (ParameterNameTests.TEST3, check);
-		assertEquals ('Invalid parameter name signature: param1 (name should be ~/^[A-Z][a-zA-Z]*$/)', msg);
+		assertMsg(check, ParameterNameTests.TEST, 'Invalid parameter name signature: paramName (name should be ~/^[A-Z][a-zA-Z]*$/)');
+		assertMsg(check, ParameterNameTests.TEST2, '');
+		assertMsg(check, ParameterNameTests.TEST1, '');
+		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: param1 (name should be ~/^[A-Z][a-zA-Z]*$/)');
+		assertMsg(check, ParameterNameTests.TEST4, '');
+		assertMsg(check, ParameterNameTests.TEST5, '');
 	}
 }
 
@@ -74,6 +50,10 @@ class ParameterNameTests {
 		function test(param1:Int, paramName:String) {
 		}
 		public function test2() {
+		}
+
+		@SuppressWarnings('checkstyle:ParameterName')
+		function test(param1:Int, ParamName:String) {
 		}
 	}
 

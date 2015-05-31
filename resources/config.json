@@ -55,6 +55,12 @@
 			}
 		},
 		{
+			"type": "Dynamic",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
@@ -133,6 +139,14 @@
 			"props": {
 				"severity": "ERROR",
 				"maxFunctionLines": 50
+			}
+		},
+		{
+			"type": "MethodName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"tokens": []
 			}
 		},
 		{

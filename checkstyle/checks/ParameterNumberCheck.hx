@@ -30,6 +30,7 @@ class ParameterNumberCheck extends Check {
 
 	function checkField(f:Field) {
 		if (ignoreOverriddenMethods && f.access.indexOf(AOverride) >= 0) return;
+		if (isCheckSuppressed (f)) return;
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {

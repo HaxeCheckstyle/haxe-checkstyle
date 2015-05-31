@@ -19,7 +19,10 @@ class AnonymousCheck extends Check {
 		for (td in _checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
-					for (field in d.data) if (field.name != "new") checkField(field);
+					for (field in d.data) {
+						if (isCheckSuppressed (field)) continue;
+						if (field.name != "new") checkField(field);
+					}
 				default:
 			}
 		}

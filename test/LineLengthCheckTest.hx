@@ -40,6 +40,14 @@ class LineLengthTests {
 		public function new() {
 			var b:Int;
 		}
+
+		@SuppressWarnings('checkstyle:LineLength')
+		public function newi(param1:Int, param2:Int, param3:Int, param4:Int, param5:Int, param6:Int, param7:Int, param8:Int) {
+			_a = 10;
+			if (_a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290) {
+				_a = -1;
+			}
+		}
 	}";
 
 	public static inline var TEST3:String =
