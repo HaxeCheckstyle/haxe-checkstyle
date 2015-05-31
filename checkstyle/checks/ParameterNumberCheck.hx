@@ -7,13 +7,18 @@ import haxe.macro.Expr;
 @name("ParameterNumber")
 @desc("Max number of parameters per method (default 7)")
 class ParameterNumberCheck extends Check {
+	
+	public var max:Int;
+	public var ignoreOverriddenMethods:Bool;
 
-	public var severity:String = "INFO";
-	public var max:Int = 7;
-	public var ignoreOverriddenMethods:Bool = false;
+	public function new() {
+		super();
+		max = 7;
+		ignoreOverriddenMethods = false;
+	}
 
-	override function _actualRun() {
-		for (td in _checker.ast.decls) {
+	override function actualRun() {
+		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass(d):
 					checkFields(d);
@@ -34,13 +39,13 @@ class ParameterNumberCheck extends Check {
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {
-					_warnMaxParameter(f.name, f.pos);
+					warnMaxParameter(f.name, f.pos);
 				}
 			default:
 		}
 	}
 
-	function _warnMaxParameter(name:String, pos:Position) {
+	function warnMaxParameter(name:String, pos:Position) {
 		logPos('Too many parameters for function: ${name} (> ${max})', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

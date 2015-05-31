@@ -13,7 +13,6 @@ class ConstantNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		severity = "ERROR";
 		format = "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$";
 	}
 

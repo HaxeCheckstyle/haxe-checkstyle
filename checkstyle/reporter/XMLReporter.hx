@@ -8,41 +8,41 @@ import checkstyle.LintMessage.SeverityLevel;
 
 class XMLReporter implements IReporter {
 
-	var _report:StringBuf;
-	var _file:FileOutput;
-	var _style:String;
+	var report:StringBuf;
+	var file:FileOutput;
+	var style:String;
 
 	public function new(path:String, s:String) {
-		_report = new StringBuf();
+		report = new StringBuf();
 		var folder = Path.directory(path);
 		if (folder.length > 0) {
 			if (!FileSystem.exists(folder)) {
 				FileSystem.createDirectory(folder);
 			}
 		}
-		_file = File.write(path);
-		_style = s;
+		file = File.write(path);
+		style = s;
 	}
 
 	public function start() {
 		var sb = new StringBuf();
 		sb.add("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		if(_style != "") {
-			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + _style + "\" ?>\n");
+		if (style != "") {
+			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + style + "\" ?>\n");
 		}
 		sb.add("<checkstyle version=\"5.0\">\n");
 		//Sys.stdout().writeString(sb.toString());
-		_report.add(sb.toString());
+		report.add(sb.toString());
 	}
 
 	public function finish() {
 		var sb = new StringBuf();
 		sb.add("</checkstyle>\n");
 		//Sys.stdout().writeString(sb.toString());
-		_report.add(sb.toString());
+		report.add(sb.toString());
 
-		_file.writeString(_report.toString());
-		_file.close();
+		file.writeString(report.toString());
+		file.close();
 		//trace(report.toString());
 	}
 
@@ -56,18 +56,18 @@ class XMLReporter implements IReporter {
 		sb.add(encode(f.name));
 		sb.add("\">\n");
 		//Sys.stdout().writeString(sb.toString());
-		_report.add(sb.toString());
+		report.add(sb.toString());
 	}
 
 	public function fileFinish(f:LintFile) {
 		var sb = new StringBuf();
 		sb.add("\t</file>\n");
 		//Sys.stdout().writeString(sb.toString());
-		_report.add(sb.toString());
+		report.add(sb.toString());
 	}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch(s){
+		return switch(s) {
 			case INFO: return "info";
 			case WARNING: return "warning";
 			case ERROR: return "error";
@@ -75,10 +75,10 @@ class XMLReporter implements IReporter {
 	}
 
 	/*
-	 * Solution from mustache.js
-	 * https://github.com/janl/mustache.js/blob/master/mustache.js#L49
-	 */
-	static var entityMap:Map<String,String> = [
+	* Solution from mustache.js
+	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
+	*/
+	static var ENTITY_MAP:Map<String,String> = [
 		"&" => "&amp;",
 		"<" => "&lt;",
 		">" => "&gt;",
@@ -87,16 +87,16 @@ class XMLReporter implements IReporter {
 		"/" => "&#x2F;"
 	];
 
-	static var entityRE = ~/[&<>"'\/]/g;
+	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
 
 	static function replace(str:String, re:EReg):String {
-		return re.map(str,function(re){
-			return entityMap[re.matched(0)];
+		return re.map(str, function(re):String {
+			return ENTITY_MAP[re.matched(0)];
 		});
 	}
 
 	static function escapeXML(string:String):String {
-		return replace(string, entityRE);
+		return replace(string, ENTITY_RE);
 	}
 
 	public function addMessage(m:LintMessage) {
@@ -121,6 +121,6 @@ class XMLReporter implements IReporter {
 		sb.add("\"/>\n");
 
 		//Sys.stdout().writeString(sb.toString());
-		_report.add(sb.toString());
+		report.add(sb.toString());
 	}
 }

@@ -10,17 +10,23 @@ import haxeparser.Data.Token;
 @desc("Spacing check on if statement and around operators")
 class SpacingCheck extends Check {
 
-	public var severity:String = "INFO";
+	public var spaceAroundBinop:Bool;
+	public var noSpaceAroundUnop:Bool;
+	public var spaceIfCondition:Bool;
+	public var ignoreRangeOperator:Bool;
 
-	public var spaceAroundBinop = true;
-	public var noSpaceAroundUnop = true;
-	public var spaceIfCondition = true;
-	public var ignoreRangeOperator = true;
+	public function new() {
+		super();
+		spaceAroundBinop = true;
+		noSpaceAroundUnop = true;
+		spaceIfCondition = true;
+		ignoreRangeOperator = true;
+	}
 
-	override function _actualRun() {
+	override function actualRun() {
 		var lastExpr = null;
 
-		ExprUtils.walkFile(_checker.ast, function(e) {
+		ExprUtils.walkFile(checker.ast, function(e) {
 			if (lastExpr == null) {
 				lastExpr = e;
 				return;
@@ -44,19 +50,19 @@ class SpacingCheck extends Check {
 		});
 	}
 
-	function binopSize(bo:Binop) {
+	function binopSize(bo:Binop):Int {
 		return binopString(bo).length;
 	}
 
-	function binopString(bo:Binop) {
+	function binopString(bo:Binop):String {
 		return (new Printer()).printBinop(bo);
 	}
 
-	function unopSize(uo:Unop) {
+	function unopSize(uo:Unop):Int {
 		return unopString(uo).length;
 	}
 
-	function unopString(uo:Unop) {
+	function unopString(uo:Unop):String {
 		return (new Printer()).printUnop(uo);
 	}
 }

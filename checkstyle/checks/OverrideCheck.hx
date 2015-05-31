@@ -8,19 +8,19 @@ import haxe.macro.Expr;
 @desc("Checks if override is not the starting access modifier")
 class OverrideCheck extends Check {
 
-	public var severity:String = "WARNING";
-
-	override function _actualRun() {
-		for (td in _checker.ast.decls) {
+	override function actualRun() {
+		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
-					for (field in d.data) if (field.name != "new") _overrideCheck(field);
+					for (field in d.data) if (field.name != "new") overrideCheck(field);
 				default:
 			}
 		}
 	}
 
-	function _overrideCheck(f:Field) {
-		if (f.access.indexOf(AOverride) > 0) logPos('override access modifier should be the at the start of the function for better code readability: ${f.name}', f.pos, Reflect.field(SeverityLevel, severity));
+	function overrideCheck(f:Field) {
+		if (f.access.indexOf(AOverride) > 0) {
+			logPos('override access modifier should be the at the start of the function for better code readability: ${f.name}', f.pos, Reflect.field(SeverityLevel, severity));
+		}
 	}
 }

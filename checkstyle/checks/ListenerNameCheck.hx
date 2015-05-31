@@ -13,11 +13,15 @@ import haxeparser.Data.Token;
 @desc("Checks that listener function names are prefixed with 'on'")
 class ListenerNameCheck extends Check {
 
-	public var severity:String = "ERROR";
-	public var listeners:Array<String> = ["addEventListener", "addListener", "on", "once"];
+	public var listeners:Array<String>;
 
-	override public function _actualRun() {
-		ExprUtils.walkFile(_checker.ast, function(e) {
+	public function new() {
+		super();
+		listeners = ["addEventListener", "addListener", "on", "once"];
+	}
+
+	override public function actualRun() {
+		ExprUtils.walkFile(checker.ast, function(e) {
 			switch(e.expr){
 				case ECall(e, params):
 					searchCall(e, params);
@@ -30,7 +34,7 @@ class ListenerNameCheck extends Check {
 		for (listener in listeners) if (searchLeftCall(e, listener)) searchCallParam(p);
 	}
 
-	function searchLeftCall(e, name) {
+	function searchLeftCall(e, name):Bool {
 		switch(e.expr){
 			case EConst(CIdent(ident)): return ident == name;
 			case EField(e2, field): return field == name;
@@ -43,7 +47,7 @@ class ListenerNameCheck extends Check {
 		var listener = p[1];
 		switch(listener.expr){
 			case EConst(CIdent(ident)):
-				var lp = _checker.getLinePos(listener.pos.min);
+				var lp = checker.getLinePos(listener.pos.min);
 				checkListenerName(ident, lp.line, lp.ofs);
 			default:
 		}
