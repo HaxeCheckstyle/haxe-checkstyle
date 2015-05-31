@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "added @SuppressWarnings to typedefs and enums, added DynamicCheck by @AlexHaxe",
-	"version": "1.1.3",
+	"releasenote": "refactoring and cleanup",
+	"version": "1.1.4",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
