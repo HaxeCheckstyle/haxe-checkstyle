@@ -55,11 +55,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "ConstantName",
 			"props": {
-				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
-				"tokens": [
-					"NOTINLINE"
-				]
+				"severity": "ERROR"
 			}
 		},
 		{
@@ -68,11 +64,11 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"thresholds": [
 					{
 						"severity": "WARNING",
-						"complexity": 11
+						"complexity": 20
 					},
 					{
 						"severity": "ERROR",
-						"complexity": 21
+						"complexity": 30
 					}
 				]
 			}
@@ -120,7 +116,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
-				"maxCharacters": 80
+				"maxCharacters": 200
 			}
 		},
 		{
@@ -170,13 +166,6 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": []
-			}
-		},
-		{
-			"type": "Naming",
-			"props": {
-				"severity": "ERROR",
-				"privateUnderscorePrefix": false
 			}
 		},
 		{
@@ -272,8 +261,21 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
+				"format": "^I[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": [
+					"INTERFACE"
+				]
+			}
+		},
+		{
+			"type": "TypeName",
+			"props": {
+				"severity": "ERROR",
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
-				"tokens": []
+				"tokens": [
+						"CLASS",
+						"ENUM"
+				]
 			}
 		},
 		{
