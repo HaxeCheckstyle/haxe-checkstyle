@@ -7,18 +7,16 @@ import haxe.macro.Expr;
 @name("NestedIfDepth")
 @desc("Max number of nested if-else blocks (default 1)")
 class NestedIfDepthCheck extends Check {
-
-	public var severity:String;
+	
 	public var max:Int;
 
 	public function new() {
 		super();
-		severity = "ERROR";
 		max = 1;
 	}
 
-	override function _actualRun() {
-		for (td in _checker.ast.decls) {
+	override function actualRun() {
+		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass(d):
 					checkFields(d);
@@ -45,7 +43,7 @@ class NestedIfDepthCheck extends Check {
 	function scanBlock(e:Expr, depth:Int) {
 		if (e == null) return;
 		if (depth > max) {
-			_warnNestedIfDepth(depth, e.pos);
+			warnNestedIfDepth(depth, e.pos);
 			return;
 		}
 		switch(e.expr) {
@@ -66,8 +64,7 @@ class NestedIfDepthCheck extends Check {
 		}
 	}
 
-	function _warnNestedIfDepth(depth:Int, pos:Position) {
-		logPos('Nested if-else depth is $depth (max allowed is ${max})',
-			pos, Reflect.field(SeverityLevel, severity));
+	function warnNestedIfDepth(depth:Int, pos:Position) {
+		logPos('Nested if-else depth is $depth (max allowed is ${max})', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

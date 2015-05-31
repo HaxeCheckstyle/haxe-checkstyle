@@ -7,12 +7,10 @@ import haxeparser.Data.Token;
 @desc("Checks if there are any trailing white spaces")
 class TrailingWhitespaceCheck extends Check {
 
-	public var severity:String = "INFO";
-
-	override function _actualRun() {
+	override function actualRun() {
 		var re = ~/\S\s+$/;
-		for (i in 0 ... _checker.lines.length) {
-			var line = _checker.lines[i];
+		for (i in 0 ... checker.lines.length) {
+			var line = checker.lines[i];
 			if (re.match(line)) log('Trailing whitespace', i + 1, line.length, Reflect.field(SeverityLevel, severity));
 		}
 	}

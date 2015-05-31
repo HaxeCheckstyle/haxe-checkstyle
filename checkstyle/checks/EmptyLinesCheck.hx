@@ -6,17 +6,20 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for consecutive empty lines (default 1)")
 class EmptyLinesCheck extends Check {
 
-	public var severity:String = "INFO";
+	public var maxConsecutiveEmptyLines:Int;
 
-	public var maxConsecutiveEmptyLines:Int = 1;
+	public function new() {
+		super();
+		maxConsecutiveEmptyLines = 1;
+	}
 
-	override function _actualRun() {
+	override function actualRun() {
 		var re = ~/^\s*$/;
 		var inGroup = false;
 		var start = 0;
 		var end = 0;
-		for (i in 0 ... _checker.lines.length) {
-			var line = _checker.lines[i];
+		for (i in 0 ... checker.lines.length) {
+			var line = checker.lines[i];
 			if (re.match(line)) {
 				if (!inGroup) {
 					inGroup = true;
@@ -27,18 +30,18 @@ class EmptyLinesCheck extends Check {
 			else {
 				if (inGroup) {
 					inGroup = false;
-					if (end - start + 1 > maxConsecutiveEmptyLines) _logInfo(start);
+					if (end - start + 1 > maxConsecutiveEmptyLines) logInfo(start);
 				}
 			}
 		}
 
 		if (inGroup) {
 			inGroup = false;
-			if (end - start + 1 > maxConsecutiveEmptyLines) _logInfo(start);
+			if (end - start + 1 > maxConsecutiveEmptyLines) logInfo(start);
 		}
 	}
 
-	function _logInfo(pos) {
+	function logInfo(pos) {
 		log('Too many consecutive empty lines (> ${maxConsecutiveEmptyLines})', pos, 0, Reflect.field(SeverityLevel, severity));
 	}
 }

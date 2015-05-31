@@ -16,43 +16,40 @@ class TypeNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		severity = "ERROR";
 		format = "^[A-Z]+[a-zA-Z0-9]*$";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (HExtern) > -1)) return;
+		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
 
-		var isInterface:Bool = (d.flags.indexOf (HInterface) > -1);
+		var isInterface:Bool = (d.flags.indexOf(HInterface) > -1);
 
-		if (!hasToken (INTERFACE) && isInterface) return;
-		if (!hasToken (CLAZZ) && !isInterface) return;
-		if (isInterface)
-		{
-			matchTypeName ("interface", d.name, pos);
+		if (!hasToken(INTERFACE) && isInterface) return;
+		if (!hasToken(CLAZZ) && !isInterface) return;
+		if (isInterface) {
+			matchTypeName("interface", d.name, pos);
 		}
-		else
-		{
-			matchTypeName ("class", d.name, pos);
+		else {
+			matchTypeName("class", d.name, pos);
 		}
 	}
 
 	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
-		if (!hasToken (ENUM)) return;
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
+		if (!hasToken(ENUM)) return;
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
-		matchTypeName ("enum", d.name, pos);
+		matchTypeName("enum", d.name, pos);
 	}
 
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
-		if (!hasToken (ABSTRACT)) return;
-		matchTypeName ("abstract", d.name, pos);
+		if (!hasToken(ABSTRACT)) return;
+		matchTypeName("abstract", d.name, pos);
 	}
 
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (!hasToken (TYPEDEF)) return;
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
+		if (!hasToken(TYPEDEF)) return;
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
-		matchTypeName ("typedef", d.name, pos);
+		matchTypeName("typedef", d.name, pos);
 	}
 }

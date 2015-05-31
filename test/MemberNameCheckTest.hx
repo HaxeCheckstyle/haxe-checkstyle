@@ -67,7 +67,6 @@ class MemberNameCheckTest extends CheckTestCase {
 
 		assertMsg(check, MemberNameTests.TEST, '');
 		assertMsg(check, MemberNameTests.TEST1, '');
-		assertMsg(check, MemberNameTests.TEST2, '');
 		assertMsg(check, MemberNameTests.TEST3, '');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
@@ -79,7 +78,6 @@ class MemberNameCheckTest extends CheckTestCase {
 
 		assertMsg(check, MemberNameTests.TEST, '');
 		assertMsg(check, MemberNameTests.TEST1, '');
-		assertMsg(check, MemberNameTests.TEST2, '');
 		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, '');

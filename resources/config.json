@@ -32,11 +32,7 @@
 		{
 			"type": "ConstantName",
 			"props": {
-				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
-				"tokens": [
-					"NOTINLINE"
-				]
+				"severity": "ERROR"
 			}
 		},
 		{
@@ -45,11 +41,11 @@
 				"thresholds": [
 					{
 						"severity": "WARNING",
-						"complexity": 11
+						"complexity": 20
 					},
 					{
 						"severity": "ERROR",
-						"complexity": 21
+						"complexity": 30
 					}
 				]
 			}
@@ -97,7 +93,7 @@
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
-				"maxCharacters": 80
+				"maxCharacters": 200
 			}
 		},
 		{
@@ -147,13 +143,6 @@
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": []
-			}
-		},
-		{
-			"type": "Naming",
-			"props": {
-				"severity": "ERROR",
-				"privateUnderscorePrefix": false
 			}
 		},
 		{
@@ -249,8 +238,21 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
+				"format": "^I[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": [
+					"INTERFACE"
+				]
+			}
+		},
+		{
+			"type": "TypeName",
+			"props": {
+				"severity": "ERROR",
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
-				"tokens": []
+				"tokens": [
+						"CLASS",
+						"ENUM"
+				]
 			}
 		},
 		{
