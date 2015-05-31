@@ -274,7 +274,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
 				"tokens": [
 					"CLASS",
-					"ENUM"
+					"ENUM",
+					"TYPEDEF"
 				]
 			}
 		},
