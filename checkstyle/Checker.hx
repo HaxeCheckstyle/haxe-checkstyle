@@ -3,6 +3,7 @@ package checkstyle;
 import haxe.CallStack;
 import checkstyle.checks.Check;
 import haxeparser.Data.TypeDecl;
+import haxeparser.HaxeParser;
 import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
@@ -40,31 +41,33 @@ class Checker {
 		var left = false;
 
 		for (i in 0...code.length) {
-			if (code.charAt(i) == '\n'){
+			if (code.charAt(i) == '\n') {
 				linesIdx.push({l:last, r:i});
-				last = i+1;
+				last = i + 1;
 				left = false;
 			}
 			left = true;
 		}
-		if (left) linesIdx.push({l:last, r:code.length-1});
+		if (left) linesIdx.push({l:last, r:code.length - 1});
 	}
 
 	public function getLinePos(off:Int):LinePos {
 		for (i in 0...linesIdx.length) {
-			if (linesIdx[i].l <= off && linesIdx[i].r >= off) return { line:i,ofs: off-linesIdx[i].l };
+			if (linesIdx[i].l <= off && linesIdx[i].r >= off) {
+				return { line:i, ofs: off - linesIdx[i].l };
+			}
 		}
 		throw "Bad offset";
 	}
 
 	function findLineSeparator() {
 		var code = file.content;
-		for (i in 0 ... code.length){
+		for (i in 0 ... code.length) {
 			var char = code.charAt(i);
 			if (char == "\r" || char == "\n") {
 				lineSeparator = char;
-				if (char == "\r" && i + 1 < code.length){
-					char = code.charAt(i+1);
+				if (char == "\r" && i + 1 < code.length) {
+					char = code.charAt(i + 1);
 					if (char == "\n") lineSeparator += char;
 				}
 				return;
@@ -86,16 +89,16 @@ class Checker {
 		tokens = [];
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), file.name);
 		var t:Token = lexer.token(HaxeLexer.tok);
-		while (t.tok != Eof){
-			tokens.push(t);
 
+		while (t.tok != Eof) {
+			tokens.push(t);
 			t = lexer.token(haxeparser.HaxeLexer.tok);
 		}
 	}
 
 	function makeAST() {
 		var code = file.content;
-		var parser = new haxeparser.HaxeParser(byte.ByteData.ofString(code), file.name);
+		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
 		ast = parser.parse();
 	}
 
@@ -105,6 +108,7 @@ class Checker {
 		for (reporter in reporters) reporter.finish();
 	}
 
+	@SuppressWarnings("checkstyle:Dynamic")
 	public function run(file:LintFile) {
 		for (reporter in reporters) reporter.fileStart(file);
 
@@ -119,7 +123,8 @@ class Checker {
 		catch (e:Dynamic) {
 			for (reporter in reporters) reporter.addMessage({
 				fileName:file.name,
-				message:"Parsing failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
+				message: "Parsing failed: " + e + "\nStacktrace: " +
+							CallStack.toString(CallStack.exceptionStack()),
 				line:1,
 				column:1,
 				severity:ERROR,
@@ -138,7 +143,8 @@ class Checker {
 			catch (e:Dynamic) {
 				for (reporter in reporters) reporter.addMessage({
 					fileName:file.name,
-					message:"Check " + check.getModuleName() + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
+					message:"Check " + check.getModuleName() + " failed: " +
+								e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
 					line:1,
 					column:1,
 					severity:ERROR,

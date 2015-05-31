@@ -7,13 +7,18 @@ import haxe.macro.Expr;
 @name("Return")
 @desc("Warns if Void is used for return or if return type is not specified when returning")
 class ReturnCheck extends Check {
+	
+	public var allowEmptyReturn:Bool;
+	public var enforceReturnType:Bool;
 
-	public var severity:String = "INFO";
-	public var allowEmptyReturn:Bool = true;
-	public var enforceReturnType:Bool = false;
+	public function new() {
+		super();
+		allowEmptyReturn = true;
+		enforceReturnType = false;
+	}
 
-	override function _actualRun() {
-		for (td in _checker.ast.decls) {
+	override function actualRun() {
+		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
 					checkFields(d);
@@ -29,12 +34,13 @@ class ReturnCheck extends Check {
 		}
 	}
 
+	@SuppressWarnings('checkstyle:Return')
 	function checkField(f:Field) {
 		if (enforceReturnType) {
 			switch (f.kind) {
 				case FFun(fun):
 					if (fun.ret == null) {
-						_warnReturnTypeMissing(f.name, f.pos);
+						warnReturnTypeMissing(f.name, f.pos);
 					}
 					return;
 				default:
@@ -42,24 +48,24 @@ class ReturnCheck extends Check {
 		}
 		else {
 			if (Std.string(f.kind).indexOf("ret => TPath({ name => Void") > -1) {
-				_warnVoid(f.name, f.pos);
+				warnVoid(f.name, f.pos);
 			}
 		}
 		if (allowEmptyReturn && Std.string(f.kind).indexOf("EReturn(null)") > -1) return;
 		if (Std.string(f.kind).indexOf("expr => EReturn") > -1 && Std.string(f.kind).indexOf("ret => null") > -1) {
-			_warnNoReturnType(f.name, f.pos);
+			warnNoReturnType(f.name, f.pos);
 		}
 	}
 
-	function _warnVoid(name:String, pos:Position) {
+	function warnVoid(name:String, pos:Position) {
 		logPos('No need to return Void, Default function return value type is Void: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 
-	function _warnNoReturnType(name:String, pos:Position) {
+	function warnNoReturnType(name:String, pos:Position) {
 		logPos('Return type not specified when returning a value for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 
-	function _warnReturnTypeMissing(name:String, pos:Position) {
+	function warnReturnTypeMissing(name:String, pos:Position) {
 		logPos('Return type not specified for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

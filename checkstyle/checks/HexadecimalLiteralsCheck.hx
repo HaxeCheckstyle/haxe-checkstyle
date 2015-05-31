@@ -7,10 +7,17 @@ import haxeparser.Data.Token;
 @desc("Checks Hexadecimal Literals")
 class HexadecimalLiteralsCheck extends Check {
 
-	public var severity:String = "INFO";
+	var lowerPrefix:Bool;
+	var lowerBody:Bool;
 
-	override function _actualRun() {
-		ExprUtils.walkFile(_checker.ast, function(e) {
+	public function new() {
+		super();
+		lowerPrefix = true;
+		lowerBody = false;
+	}
+
+	override function actualRun() {
+		ExprUtils.walkFile(checker.ast, function(e) {
 			switch(e.expr){
 				case EConst(CInt(s)):
 					checkString(s, e.pos);
@@ -18,9 +25,6 @@ class HexadecimalLiteralsCheck extends Check {
 			}
 		});
 	}
-
-	var lowerPrefix = true;
-	var lowerBody = false;
 
 	function checkString(s:String, p) {
 		var prefix = s.substr(0, 2);

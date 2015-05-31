@@ -8,10 +8,8 @@ import haxe.macro.Expr;
 @desc("Checks if the normal variables are initialised at class level")
 class VariableInitialisationCheck extends Check {
 
-	public var severity:String = "ERROR";
-
-	override function _actualRun() {
-		for (td in _checker.ast.decls) {
+	override function actualRun() {
+		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
 					checkFields(d);
@@ -44,7 +42,7 @@ class VariableInitialisationCheck extends Check {
 			switch (f.kind) {
 				case FVar(t, e):
 					if (e == null) return;
-					_warnVarinit(f.name, f.pos);
+					warnVarinit(f.name, f.pos);
 				case FFun(f):
 					return;
 				case FProp(g, s, t, a):
@@ -53,7 +51,7 @@ class VariableInitialisationCheck extends Check {
 		}
 	}
 
-	function _warnVarinit(name:String, pos:Position) {
+	function warnVarinit(name:String, pos:Position) {
 		logPos('Invalid variable initialisation: ${name} (move initialisation to constructor or function)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

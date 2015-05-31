@@ -8,14 +8,12 @@ import haxe.macro.Expr;
 @desc("Type check for class variables")
 class TypeCheck extends Check {
 
-	public var severity:String = "ERROR";
-
-	override function _actualRun() {
+	override function actualRun() {
 		checkClassFields();
 	}
 
 	function checkClassFields() {
-		for (td in _checker.ast.decls) {
+		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EClass(d):
 					for (field in d.data) if (field.name != "new") checkField(field);
@@ -28,13 +26,13 @@ class TypeCheck extends Check {
 		if (isCheckSuppressed (f)) return;
 		switch(f.kind) {
 			case FVar(t, e):
-				if (t == null) _error(f.name, f.pos);
+				if (t == null) error(f.name, f.pos);
 			case FProp(g, s, t, e):
 			case FFun(f):
 		}
 	}
 
-	function _error(name:String, pos:Position) {
+	function error(name:String, pos:Position) {
 		logPos('Type not specified: ${name}', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

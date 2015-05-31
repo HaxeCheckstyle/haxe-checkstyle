@@ -15,42 +15,42 @@ class MemberNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		severity = "ERROR";
-		format = "^[a-z]+[a-zA-Z0-9_]*$";
+		format = "^[a-z]+[a-zA-Z0-9]*$";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (HExtern) > -1)) return;
-		checkFields (d.data);
+		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
+		checkFields(d.data);
 	}
 
 	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
-		if (!hasToken (ENUM)) return;
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
-		checkEnumFields (d.data);
+		if (!hasToken(ENUM)) return;
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		checkEnumFields(d.data);
 	}
 
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
-		checkFields (d.data);
+		checkFields(d.data);
 	}
 
+	@SuppressWarnings('checkstyle:Anonymous')
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (!hasToken (TYPEDEF)) return;
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
+		if (!hasToken(TYPEDEF)) return;
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
 		switch (d.data) {
-			case TAnonymous (f):
-				checkTypedefFields (f);
+			case TAnonymous(f):
+				checkTypedefFields(f);
 			default:
 		}
 	}
 
 	function checkFields(d:Array<Field>) {
 		for (field in d) {
-			if (isCheckSuppressed (field)) continue;
+			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
-				case FVar (t, e):
-					checkField (field, t, e);
+				case FVar(t, e):
+					checkField(field, t, e);
 				default:
 			}
 		}
@@ -58,10 +58,10 @@ class MemberNameCheck extends NameCheckBase {
 
 	function checkTypedefFields(d:Array<Field>) {
 		for (field in d) {
-			if (isCheckSuppressed (field)) continue;
+			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
-				case FVar (t, e):
-					checkTypedefField (field, t, e);
+				case FVar(t, e):
+					checkTypedefField(field, t, e);
 				default:
 			}
 		}
@@ -69,21 +69,21 @@ class MemberNameCheck extends NameCheckBase {
 
 	function checkEnumFields(d:Array<EnumConstructor>) {
 		for (field in d) {
-			matchTypeName ("enum member", field.name, field.pos);
+			matchTypeName("enum member", field.name, field.pos);
 		}
 	}
 
 	function checkField(f:Field, t:ComplexType, e:Expr) {
-		var access = getFieldAccess (f);
+		var access = getFieldAccess(f);
 
 		if (access.isStatic) return;
-		if (!hasToken (PUBLIC) && access.isPublic) return;
-		if (!hasToken (PRIVATE) && access.isPrivate) return;
+		if (!hasToken(PUBLIC) && access.isPublic) return;
+		if (!hasToken(PRIVATE) && access.isPrivate) return;
 
-		matchTypeName ("member", f.name, f.pos);
+		matchTypeName("member", f.name, f.pos);
 	}
 
 	function checkTypedefField(f:Field, t:ComplexType, e:Expr) {
-		matchTypeName ("typedef member", f.name, f.pos);
+		matchTypeName("typedef member", f.name, f.pos);
 	}
 }

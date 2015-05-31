@@ -10,8 +10,7 @@ class ParameterNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		severity = "ERROR";
-		format = "^[a-z]+[a-zA-Z0-9_]*$";
+		format = "^[a-z]+[a-zA-Z0-9]*$";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
@@ -28,6 +27,7 @@ class ParameterNameCheck extends NameCheckBase {
 		checkFields (d.data);
 	}
 
+	@SuppressWarnings('checkstyle:Anonymous')
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
 
