@@ -273,8 +273,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 				"severity": "ERROR",
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
 				"tokens": [
-						"CLASS",
-						"ENUM"
+					"CLASS",
+					"ENUM"
 				]
 			}
 		},
