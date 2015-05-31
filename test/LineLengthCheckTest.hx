@@ -6,7 +6,7 @@ class LineLengthCheckTest extends CheckTestCase {
 
 	public function testDefaultLineLength() {
 		var msg = checkMessage(LineLengthTests.TEST1, new LineLengthCheck());
-		assertEquals(msg, 'Too long line (> 80)');
+		assertEquals(msg, 'Too long line (> 200)');
 	}
 
 	public function testCorrectLineLength() {
@@ -29,7 +29,7 @@ class LineLengthTests {
 		var _a:Int;
 		public function new() {
 			_a = 10;
-			if (_a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290) {
+			if (_a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290 && _a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290) {
 				_a = -1;
 			}
 		}

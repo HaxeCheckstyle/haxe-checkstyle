@@ -6,8 +6,7 @@ import haxe.macro.Expr;
 
 @ignore("Base class for name checks")
 class NameCheckBase extends Check {
-
-	public var severity:String;
+	
 	public var format:String;
 	public var tokens:Array<String>;
 	public var ignoreExtern:Bool;
@@ -16,7 +15,6 @@ class NameCheckBase extends Check {
 
 	public function new() {
 		super();
-		severity = "ERROR";
 		format = "^.*$";
 		tokens = [];
 		ignoreExtern = true;
@@ -28,13 +26,13 @@ class NameCheckBase extends Check {
 		return false;
 	}
 
-	override function _actualRun() {
+	override function actualRun() {
 		formatRE = new EReg (format, "");
 		checkClassFields();
 	}
 
 	function checkClassFields() {
-		for (td in _checker.ast.decls) {
+		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass (d):
 					checkClassType (d, td.pos);
@@ -75,14 +73,13 @@ class NameCheckBase extends Check {
 		};
 	}
 
-	function matchTypeName(type:String, name:String, pos:Position)
-	{
+	function matchTypeName(type:String, name:String, pos:Position) {
 		if (!formatRE.match (name)) {
-			_warn(type, name, pos);
+			warn(type, name, pos);
 		}
 	}
 
-	function _warn(type:String, name:String, pos:Position) {
+	function warn(type:String, name:String, pos:Position) {
 		logPos('Invalid ${type} signature: ${name} (name should be ~/${format}/)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

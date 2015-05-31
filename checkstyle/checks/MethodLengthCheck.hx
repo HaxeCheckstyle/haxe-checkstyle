@@ -12,31 +12,33 @@ import haxeparser.Data.Token;
 @desc("Maximum function length (default 50 lines)")
 class MethodLengthCheck extends Check {
 
-	public var severity:String = "ERROR";
+	public var maxFunctionLines:Int;
 
-	public var maxFunctionLines:Int = 50;
+	public function new() {
+		super();
+		maxFunctionLines = 50;
+	}
 
-	override public function _actualRun() {
-		for (td in _checker.ast.decls){
+	override public function actualRun() {
+		for (td in checker.ast.decls) {
 			switch(td.decl){
-			case EClass(d): searchFields(d.data);
-			case EAbstract(a): searchFields(a.data);
-
-			case EEnum(d): //trace("Enum");
-			case EImport(sl, mode): //trace("Import");
-			case ETypedef(d): //trace("typedef");
-			case EUsing(path): //trace("Using");
+				case EClass(d): searchFields(d.data);
+				case EAbstract(a): searchFields(a.data);
+				case EEnum(d): //trace("Enum");
+				case EImport(sl, mode): //trace("Import");
+				case ETypedef(d): //trace("typedef");
+				case EUsing(path): //trace("Using");
 			}
 		}
 	}
 
-	function searchFields(fs:Array<Field>){
+	function searchFields(fs:Array<Field>) {
 		for (f in fs) {
-			if (isCheckSuppressed (f)) continue;
+			if (isCheckSuppressed(f)) continue;
 			switch(f.kind){
-			case FFun(ff):
-				checkMethod(f);
-			default:
+				case FFun(ff):
+					checkMethod(f);
+				default:
 			}
 
 			ExprUtils.walkField(f, function(e) {
@@ -49,28 +51,28 @@ class MethodLengthCheck extends Check {
 		}
 	}
 
-	function checkMethod(f:Field){
-		var lp = _checker.getLinePos(f.pos.min);
+	function checkMethod(f:Field) {
+		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
-		var lmax = _checker.getLinePos(f.pos.max).line;
-		if (lmax - lmin > maxFunctionLines) _warnFunctionLength(f.name, lp.line+1, lp.ofs+1);
+		var lmax = checker.getLinePos(f.pos.max).line;
+		if (lmax - lmin > maxFunctionLines) warnFunctionLength(f.name, lp.line + 1, lp.ofs + 1);
 	}
 
-	function checkFunction(f:Expr){
-		var lp = _checker.getLinePos(f.pos.min);
+	function checkFunction(f:Expr) {
+		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
-		var lmax = _checker.getLinePos(f.pos.max).line;
+		var lmax = checker.getLinePos(f.pos.max).line;
 		var fname = "(anonymous)";
 		switch(f.expr){
-		case EFunction(name, ff):
-			if (name != null) fname = name;
-		default: throw "EFunction only";
+			case EFunction(name, ff):
+				if (name != null) fname = name;
+			default: throw "EFunction only";
 		}
 
-		if (lmax - lmin > maxFunctionLines) _warnFunctionLength(fname, lp.line+1, lp.ofs+1);
+		if (lmax - lmin > maxFunctionLines) warnFunctionLength(fname, lp.line + 1, lp.ofs + 1);
 	}
 
-	function _warnFunctionLength(name:String, pos:Int, ofs:Int) {
+	function warnFunctionLength(name:String, pos:Int, ofs:Int) {
 		log('Function is too long: ${name} (> ${maxFunctionLines} lines, try splitting into multiple functions)', pos, ofs, Reflect.field(SeverityLevel, severity));
 	}
 }

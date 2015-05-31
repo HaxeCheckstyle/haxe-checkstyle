@@ -11,6 +11,8 @@ import haxe.CallStack;
 import sys.io.File;
 
 class Main {
+
+	@SuppressWarnings('checkstyle:Dynamic')
 	public static function main() {
 		var args;
 		var cwd;
@@ -39,9 +41,9 @@ class Main {
 	var info:ChecksInfo;
 	var checker:Checker;
 
-	static var report_type:String = "default";
-	static var path:String = "check-style-report.xml";
-	static var style:String = "";
+	static var REPORT_TYPE:String = "default";
+	static var PATH:String = "check-style-report.xml";
+	static var STYLE:String = "";
 
 	function new() {
 		reporter = new Reporter();
@@ -49,25 +51,19 @@ class Main {
 		checker = new Checker();
 	}
 
+	@SuppressWarnings('checkstyle:Dynamic')
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
-		var _configPath:String = null;
+		var configPath:String = null;
 
 		var argHandler = Args.generate([
-		@doc("Set reporter path")
-		["-p", "--path"] => function(loc:String) path = loc,
-		@doc("Set reporter style (XSLT)")
-		["-x", "--xslt"] => function(x:String) style = x,
-		@doc("Set reporter")
-		["-r", "--reporter"] => function(reporterName:String) report_type = reporterName,
-		@doc("List all reporters")
-		["--list-reporters"] => function() listReporters(),
-		@doc("Set config file")
-		["-c", "--config"] => function(configPath:String) _configPath = configPath,
-		@doc("List all checks")
-		["--list-checks"] => function() listChecks(),
-		@doc("Set sources to process")
-		["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
+		@doc("Set reporter path") ["-p", "--path"] => function(loc:String) PATH = loc,
+		@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
+		@doc("Set reporter") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
+		@doc("List all reporters") ["--list-reporters"] => function() listReporters(),
+		@doc("Set config file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
+		@doc("List all checks") ["--list-checks"] => function() listChecks(),
+		@doc("Set sources to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
 		_ => function(arg:String) throw "Unknown command: " + arg
 		]);
 
@@ -85,9 +81,9 @@ class Main {
 			toProcess.push({name:file,content:code});
 		}
 
-		if (_configPath == null) addAllChecks();
+		if (configPath == null) addAllChecks();
 		else {
-			var configText = File.getContent(_configPath);
+			var configText = File.getContent(configPath);
 			var config = Json.parse(configText);
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks){
@@ -106,33 +102,33 @@ class Main {
 		checker.process(toProcess);
 	}
 
-	function addAllChecks():Void {
+	function addAllChecks() {
 		for (check in info.checks()) checker.addCheck(info.build(check.name));
 	}
 
-	function listChecks():Void {
+	function listChecks() {
 		for (check in info.checks()) Sys.println('${check.name}: ${check.description}');
 	}
 
-	static function listReporters():Void {
+	static function listReporters() {
 		Sys.println("default - Default reporter");
 		Sys.println("xml - Checkstyle-like XML reporter");
 		Sys.exit(0);
 	}
 
 	static function createReporter():IReporter {
-		return switch(report_type) {
-			case "xml": new XMLReporter(path, style);
+		return switch(REPORT_TYPE) {
+			case "xml": new XMLReporter(PATH, STYLE);
 			case "default": new Reporter();
 			default: throw "Unknown reporter";
 		}
 	}
 
-	private static function pathJoin(s:String, t:String):String {
+	static function pathJoin(s:String, t:String):String {
 		return s + "/" + t;
 	}
 
-	private static function traverse(node:String , files:Array<String>) {
+	static function traverse(node:String , files:Array<String>) {
 		if (FileSystem.isDirectory(node)) {
 			var nodes = FileSystem.readDirectory(node);
 			for (child in nodes) traverse(pathJoin(node,child), files);
