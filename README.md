@@ -38,7 +38,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"emptyBlockCheck": false
 			}
 		},
 		{
@@ -46,15 +47,34 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"props": {
 				"severity": "ERROR",
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
-				"tokens": [ "INLINE" ]
+				"tokens": [
+					"INLINE"
+				]
 			}
 		},
 		{
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "NOTINLINE" ]
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"tokens": [
+					"NOTINLINE"
+				]
+			}
+		},
+		{
+			"type": "CyclomaticComplexity",
+			"props": {
+				"thresholds": [
+					{
+						"severity": "WARNING",
+						"complexity": 11
+					},
+					{
+						"severity": "ERROR",
+						"complexity": 21
+					}
+				]
 			}
 		},
 		{
@@ -107,23 +127,34 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
-				"listeners": ["addEventListener", "addListener", "on", "once"]
+				"listeners": [
+					"addEventListener",
+					"addListener",
+					"on",
+					"once"
+				]
 			}
 		},
 		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[A-Z0-9_]*$",
-				"tokens": [ "ENUM" ]
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"tokens": [
+					"ENUM"
+				]
 			}
 		},
 		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "PUBLIC", "PRIVATE", "TYPEDEF" ]
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"tokens": [
+					"PUBLIC",
+					"PRIVATE",
+					"TYPEDEF"
+				]
 			}
 		},
 		{
@@ -137,7 +168,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "MethodName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": []
 			}
 		},
@@ -179,7 +210,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$"
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -193,16 +224,14 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "PublicPrivate",
 			"props": {
-				"severity": "INFO",
-				"enforcePublicPrivate": false
+				"severity": "INFO"
 			}
 		},
 		{
 			"type": "Return",
 			"props": {
 				"severity": "INFO",
-				"allowEmptyReturn": true,
-				"enforceReturnType": false
+				"allowEmptyReturn": true
 			}
 		},
 		{
@@ -243,16 +272,8 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^I[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "INTERFACE" ]
-			}
-		},
-		{
-			"type": "TypeName",
-			"props": {
-				"severity": "ERROR",
-				"format": "^[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [ "CLASS", "ENUM", "TYPEDEF" ]
+				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": []
 			}
 		},
 		{

@@ -17,7 +17,7 @@ class TypeNameCheck extends NameCheckBase {
 	public function new() {
 		super();
 		severity = "ERROR";
-		format = "^[A-Z]+[a-zA-Z0-9_]*$";
+		format = "^[A-Z]+[a-zA-Z0-9]*$";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {

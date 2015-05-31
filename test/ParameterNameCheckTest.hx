@@ -14,9 +14,9 @@ class ParameterNameCheckTest extends CheckTestCase {
 
 	public function testWrongNaming() {
 		var check = new ParameterNameCheck ();
-		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
-		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
-		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
 	}
 
 	public function testIgnoreExtern() {
@@ -25,10 +25,10 @@ class ParameterNameCheckTest extends CheckTestCase {
 
 		assertMsg(check, ParameterNameTests.TEST, '');
 		assertMsg(check, ParameterNameTests.TEST2, '');
-		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
-		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
-		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
-		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9_]*$/)');
+		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
 	}
 
 	public function testFormat() {

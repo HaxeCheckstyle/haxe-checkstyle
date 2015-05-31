@@ -11,6 +11,11 @@ class TypeNameCheckTest extends CheckTestCase {
 		assertMsg(check, TypeNameTests.TEST4, '');
 	}
 
+	public function testIncorrectNaming() {
+		var check = new TypeNameCheck ();
+		assertMsg(check, TypeNameTests.TEST6, 'Invalid class signature: Test_ (name should be ~/^[A-Z]+[a-zA-Z0-9]*$/)');
+	}
+
 	public function testFormat() {
 		var check = new TypeNameCheck ();
 		check.format = "^C[A-Z][a-z]*$";
@@ -134,5 +139,9 @@ class TypeNameTests {
 	public static inline var TEST5:String =
 	"enum EnumTest {
 		VALUE;
+	}";
+
+	public static inline var TEST6:String = "
+	class Test_ {
 	}";
 }

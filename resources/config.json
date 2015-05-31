@@ -33,7 +33,7 @@
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": [
 					"NOTINLINE"
 				]
@@ -116,7 +116,7 @@
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[A-Z0-9_]*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
 				"tokens": [
 					"ENUM"
 				]
@@ -126,7 +126,7 @@
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": [
 					"PUBLIC",
 					"PRIVATE",
@@ -145,7 +145,7 @@
 			"type": "MethodName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$",
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"tokens": []
 			}
 		},
@@ -187,7 +187,7 @@
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9_]*$"
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -249,22 +249,8 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^I[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [
-					"INTERFACE"
-				]
-			}
-		},
-		{
-			"type": "TypeName",
-			"props": {
-				"severity": "ERROR",
-				"format": "^[A-Z]+[a-zA-Z0-9_]*$",
-				"tokens": [
-					"CLASS",
-					"ENUM",
-					"TYPEDEF"
-				]
+				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": []
 			}
 		},
 		{
