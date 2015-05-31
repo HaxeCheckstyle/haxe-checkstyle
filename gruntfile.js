@@ -10,7 +10,7 @@ module.exports = function (grunt) {
          },
 
          zip: {
-             "checkstyle.zip": ["checkstyle/**", "haxelib.json", "run.n"]
+             "checkstyle.zip": ["checkstyle/**", "haxelib.json", "run.n", "README.md"]
          }
      });
 
