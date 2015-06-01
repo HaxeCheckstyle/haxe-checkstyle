@@ -32,8 +32,7 @@ class MemberNameCheck extends NameCheckBase {
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		checkFields(d.data);
 	}
-
-	@SuppressWarnings('checkstyle:Anonymous')
+	
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;

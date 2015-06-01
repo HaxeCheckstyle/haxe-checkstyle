@@ -29,18 +29,26 @@ class AnonymousCheck extends Check {
 			}
 		}
 	}
-
-	@SuppressWarnings('checkstyle:Anonymous')
+	
 	function checkField(f:Field) {
-		if (Std.string(f.kind).indexOf("TAnonymous") > -1) error(f.name, f.pos);
+		switch(f.kind) {
+			case FVar(TAnonymous(fields), val):
+				error(f.name, f.pos);
+			default:
+		}
 	}
-
-	@SuppressWarnings('checkstyle:Anonymous')
+	
 	function checkLocalVars() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			switch(e.expr){
 				case EVars(vars):
-					for (v in vars) if (Std.string(v).indexOf("TAnonymous") > -1) error(v.name, e.pos);
+					for (v in vars) {
+						switch(v.type) {
+							case TAnonymous(fields):
+								error(v.name, e.pos);
+							default:
+						}
+					}
 				default:
 			}
 		});
