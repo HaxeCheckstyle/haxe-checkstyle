@@ -11,7 +11,7 @@ class LineLengthCheck extends Check {
 
 	public function new() {
 		super();
-		maxCharacters = 200;
+		maxCharacters = 160;
 	}
 
 	override function actualRun() {

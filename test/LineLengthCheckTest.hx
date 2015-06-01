@@ -6,7 +6,7 @@ class LineLengthCheckTest extends CheckTestCase {
 
 	public function testDefaultLineLength() {
 		var msg = checkMessage(LineLengthTests.TEST1, new LineLengthCheck());
-		assertEquals(msg, 'Too long line (> 200)');
+		assertEquals(msg, 'Too long line (> 160)');
 	}
 
 	public function testCorrectLineLength() {

@@ -20,7 +20,8 @@ class OverrideCheck extends Check {
 
 	function overrideCheck(f:Field) {
 		if (f.access.indexOf(AOverride) > 0) {
-			logPos('override access modifier should be the at the start of the function for better code readability: ${f.name}', f.pos, Reflect.field(SeverityLevel, severity));
+			logPos('override access modifier should be the at the start of the function for better code readability: ${f.name}',
+					f.pos, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }
