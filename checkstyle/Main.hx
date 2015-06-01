@@ -29,6 +29,11 @@ class Main {
 
 			var main = new Main();
 			main.run(args);
+			
+			if (REPORT) {
+				var reporter = new Report();
+				reporter.generateReport(PATH);
+			}
 		}
 		catch(e:Dynamic) {
 			trace(e);
@@ -41,6 +46,7 @@ class Main {
 	var info:ChecksInfo;
 	var checker:Checker;
 
+	static var REPORT:Bool = false;
 	static var REPORT_TYPE:String = "default";
 	static var PATH:String = "check-style-report.xml";
 	static var STYLE:String = "";
@@ -63,6 +69,7 @@ class Main {
 		@doc("List all reporters") ["--list-reporters"] => function() listReporters(),
 		@doc("Set config file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
 		@doc("List all checks") ["--list-checks"] => function() listChecks(),
+		@doc("Generate build time report") ["-report"] => function() REPORT = true,
 		@doc("Set sources to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
 		_ => function(arg:String) throw "Unknown command: " + arg
 		]);

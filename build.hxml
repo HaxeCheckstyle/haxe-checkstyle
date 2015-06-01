@@ -13,11 +13,7 @@
 
 --next
 
--cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml
-
--main Report
--neko report.n
--cmd neko report
+-cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml -report
 
 --next
 -cp test

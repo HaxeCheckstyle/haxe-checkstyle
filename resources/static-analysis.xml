@@ -83,6 +83,8 @@
 	</file>
 	<file name="checkstyle&#x2F;Main.hx">
 	</file>
+	<file name="checkstyle&#x2F;Report.hx">
+	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;IReporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;Reporter.hx">
