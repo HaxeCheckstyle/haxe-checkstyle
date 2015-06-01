@@ -9,6 +9,7 @@
 --each
 
 -main checkstyle.Main
+-D checkstyle
 -neko run.n
 
 --next

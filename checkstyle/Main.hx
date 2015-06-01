@@ -30,7 +30,7 @@ class Main {
 			var main = new Main();
 			main.run(args);
 			
-			if (REPORT) {
+			if (REPORT && REPORT_TYPE == "xml") {
 				var reporter = new Report();
 				reporter.generateReport(PATH);
 			}
@@ -47,7 +47,7 @@ class Main {
 	var checker:Checker;
 
 	static var REPORT:Bool = false;
-	static var REPORT_TYPE:String = "default";
+	static var REPORT_TYPE:String = "xml";
 	static var PATH:String = "check-style-report.xml";
 	static var STYLE:String = "";
 
@@ -66,7 +66,6 @@ class Main {
 		@doc("Set reporter path") ["-p", "--path"] => function(loc:String) PATH = loc,
 		@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
 		@doc("Set reporter") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
-		@doc("List all reporters") ["--list-reporters"] => function() listReporters(),
 		@doc("Set config file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
 		@doc("List all checks") ["--list-checks"] => function() listChecks(),
 		@doc("Generate build time report") ["-report"] => function() REPORT = true,
@@ -115,12 +114,6 @@ class Main {
 
 	function listChecks() {
 		for (check in info.checks()) Sys.println('${check.name}: ${check.description}');
-	}
-
-	static function listReporters() {
-		Sys.println("default - Default reporter");
-		Sys.println("xml - Checkstyle-like XML reporter");
-		Sys.exit(0);
 	}
 
 	static function createReporter():IReporter {
