@@ -1,10 +1,4 @@
 -cp resources
--cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml
--x StaticAnalysis
-
--cmd rm StaticAnalysis.n
---next
-
 -cp checkstyle
 -lib hxparse:3.0.0
 -lib haxeparser
@@ -16,6 +10,14 @@
 
 -main checkstyle.Main
 -neko run.n
+
+--next
+
+-cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml
+
+-main Report
+-neko report.n
+-cmd neko report
 
 --next
 -cp test
