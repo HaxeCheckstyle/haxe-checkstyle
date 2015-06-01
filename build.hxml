@@ -11,10 +11,11 @@
 -main checkstyle.Main
 -D checkstyle
 -neko run.n
+-cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml -report
 
 --next
-
--cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml -report
+-main checkstyle.Main
+-neko run.n
 
 --next
 -cp test

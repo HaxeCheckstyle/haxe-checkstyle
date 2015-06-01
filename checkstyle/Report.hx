@@ -1,14 +1,17 @@
 package checkstyle;
 
+import sys.io.File;
 #if checkstyle
 import sys.io.FileOutput;
-import sys.io.File;
 #end
 
 class Report {
 
 	var staticAnalysisXML:Xml;
+
+	#if checkstyle
 	var reportFile:FileOutput;
+	#end
 
 	public function new() {}
 
