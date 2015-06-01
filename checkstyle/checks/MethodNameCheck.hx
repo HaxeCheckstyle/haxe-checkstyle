@@ -1,6 +1,5 @@
 package checkstyle.checks;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -31,8 +30,7 @@ class MethodNameCheck extends NameCheckBase {
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		checkFields(d.data);
 	}
-
-	@SuppressWarnings('checkstyle:Anonymous')
+	
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 

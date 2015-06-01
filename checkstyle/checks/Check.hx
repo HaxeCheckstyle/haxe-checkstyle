@@ -78,8 +78,7 @@ class Check {
 	function isPosSuppressed(pos:Position):Bool {
 		return isCharPosSuppressed(pos.min);
 	}
-
-	@SuppressWarnings('checkstyle:Anonymous')
+	
 	function isCharPosSuppressed(pos:Int):Bool {
 		for (td in checker.ast.decls) {
 			switch (td.decl){

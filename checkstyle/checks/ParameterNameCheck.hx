@@ -1,8 +1,7 @@
 package checkstyle.checks;
 
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data;
 import haxe.macro.Expr;
+import haxeparser.Data;
 
 @name("ParameterName")
 @desc("Checks on naming conventions of parameters")
@@ -14,36 +13,35 @@ class ParameterNameCheck extends NameCheckBase {
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (HExtern) > -1)) return;
-		checkFields (d.data);
+		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
+		checkFields(d.data);
 	}
 
 	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
-		checkEnumFields (d.data);
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		checkEnumFields(d.data);
 	}
 
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
-		checkFields (d.data);
+		checkFields(d.data);
 	}
 
-	@SuppressWarnings('checkstyle:Anonymous')
 	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (EExtern) > -1)) return;
+		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
 		switch (d.data) {
-			case TAnonymous (f):
-				checkFields (f);
+			case TAnonymous(f):
+				checkFields(f);
 			default:
 		}
 	}
 
 	function checkFields(d:Array<Field>) {
 		for (field in d) {
-			if (isCheckSuppressed (field)) continue;
+			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
-				case FFun (f):
-					checkField (f.args, field.pos);
+				case FFun(f):
+					checkField(f.args, field.pos);
 				default:
 			}
 		}
@@ -52,7 +50,7 @@ class ParameterNameCheck extends NameCheckBase {
 	function checkEnumFields(d:Array<EnumConstructor>) {
 		for (field in d) {
 			for (arg in field.args) {
-				matchTypeName ("parameter name", arg.name, field.pos);
+				matchTypeName("parameter name", arg.name, field.pos);
 			}
 		}
 	}
@@ -61,7 +59,7 @@ class ParameterNameCheck extends NameCheckBase {
 		if (args == null || args.length <= 0) return;
 
 		for (arg in args) {
-			matchTypeName ("parameter name", arg.name, pos);
+			matchTypeName("parameter name", arg.name, pos);
 		}
 	}
 }

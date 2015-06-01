@@ -6,7 +6,7 @@ class AnonymousCheckTest extends CheckTestCase {
 
 	public function testAnonymousStructureClassVar() {
 		var msg = checkMessage(AnonymousTests.TEST1, new AnonymousCheck());
-		assertEquals(msg, 'Anonymous structure found, it is advised to use a typedef instead "_anonymous"');
+		assertEquals(msg, 'Anonymous structure found, it is advised to use a typedef instead "anonymous"');
 	}
 
 	public function testAnonymousStructureLocalVar() {
@@ -18,7 +18,7 @@ class AnonymousCheckTest extends CheckTestCase {
 class AnonymousTests {
 	public static inline var TEST1:String = "
 	class Test {
-		var _anonymous:{a:Int, b:Int};
+		var anonymous:{a:Int, b:Int};
 	}";
 
 	public static inline var TEST2:String =
