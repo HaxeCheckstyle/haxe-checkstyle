@@ -1,12 +1,5 @@
 -cp resources
--cmd echo "*** Default check - no config ***"
 -cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml
--x StaticAnalysis
-
---next
--cp resources
--cmd echo "*** Default check - with config ***"
--cmd neko run -s checkstyle -c ./resources/config.json -r xml -p resources/static-analysis.xml
 -x StaticAnalysis
 
 -cmd rm StaticAnalysis.n

@@ -9,7 +9,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;Check.hx">
-		<error line="83" column="2" severity="error" message="Function &quot;isCharPosSuppressed&quot; is too complex (score: 32)." source="checkstyle&#x2F;checks&#x2F;Check.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
 	</file>
@@ -78,6 +77,9 @@
 	<file name="checkstyle&#x2F;LintFile.hx">
 	</file>
 	<file name="checkstyle&#x2F;LintMessage.hx">
+		<error line="4" column="2" severity="info" message="Invalid enum member signature: INFO (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
+		<error line="5" column="2" severity="info" message="Invalid enum member signature: WARNING (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
+		<error line="6" column="2" severity="info" message="Invalid enum member signature: ERROR (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;Main.hx">
 	</file>
