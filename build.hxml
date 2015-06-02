@@ -11,7 +11,7 @@
 -main checkstyle.Main
 -D checkstyle
 -neko run.n
--cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml -report
+-cmd neko run -s checkstyle -p resources/static-analysis.xml -report
 
 --next
 -main checkstyle.Main
