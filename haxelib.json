@@ -10,8 +10,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "refactoring and cleanup",
-	"version": "1.1.4",
+	"releasenote": "added -report option to see all the issues at build time (only works with xml report now)",
+	"version": "1.1.5",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 

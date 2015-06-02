@@ -1,17 +1,4 @@
 -cp resources
--cmd echo "*** Default check - no config ***"
--cmd neko run -s checkstyle -r xml -p resources/static-analysis.xml
--x StaticAnalysis
-
---next
--cp resources
--cmd echo "*** Default check - with config ***"
--cmd neko run -s checkstyle -c ./resources/config.json -r xml -p resources/static-analysis.xml
--x StaticAnalysis
-
--cmd rm StaticAnalysis.n
---next
-
 -cp checkstyle
 -lib hxparse:3.0.0
 -lib haxeparser
@@ -21,6 +8,12 @@
 
 --each
 
+-main checkstyle.Main
+-D checkstyle
+-neko run.n
+-cmd neko run -s checkstyle -p resources/static-analysis.xml -report
+
+--next
 -main checkstyle.Main
 -neko run.n
 

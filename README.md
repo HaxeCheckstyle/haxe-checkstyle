@@ -299,11 +299,18 @@ To see all the options available run the following command.
 [-p | --path] <loc>              : Set reporter path
 [-x | --xslt] <x>                : Set reporter style (XSLT)
 [-r | --reporter] <reporterName> : Set reporter
-[--list-reporters]               : List all reporters
 [-c | --config] <configPath>     : Set config file
 [--list-checks]                  : List all checks
+[-report]                        : Generate build time report
 [-s | --source] <sourcePath>     : Set sources to process
 ```
+###Compile Time Report
+
+Now you can generate compile time report in console by passing `-report` option.
+
+`haxelib run checkstyle -s src -p report.xml -report`
+
+Note that `-report` option only works with `xml` report.
 
 ###Hudson and Bamboo Integration
 
@@ -311,7 +318,7 @@ You can generate the report in checkstyle XML format that can be integrated with
 
 You can also set XSLT style for the XML generated. See the sample below.
 
-`haxelib run checkstyle -s src -c config.json -r xml -p report.xml -x report.xsl`
+`haxelib run checkstyle -s src -c config.json -p report.xml -x report.xsl`
 
 Sample Hudson Checkstyle Trend Chart:
 
