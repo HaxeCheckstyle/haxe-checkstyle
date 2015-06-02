@@ -41,7 +41,7 @@ class NestedTryDepthCheck extends Check {
 	}
 
 	function scanBlock(e:Expr, depth:Int) {
-		if (e == null) return null;
+		if (e == null) return;
 		if (depth > max) {
 			warnNestedTryDepth(depth, e.pos);
 			return;

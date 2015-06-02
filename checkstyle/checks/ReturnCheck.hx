@@ -20,12 +20,13 @@ class ReturnCheck extends Check {
 
 	override function actualRun() {
 		for (td in checker.ast.decls) {
-			switch (td.decl){
+			switch(td.decl){
 				case EClass(d):
 					checkFields(d);
 				default:
 			}
 		}
+		checkInlineFunctions();
 	}
 
 	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
@@ -37,7 +38,7 @@ class ReturnCheck extends Check {
 	
 	function checkField(f:Field) {
 		var noReturn = false;
-		switch (f.kind) {
+		switch(f.kind) {
 			case FFun(fun):
 				noReturn = (fun.ret == null);
 				if (enforceReturnType && fun.ret == null) {
@@ -45,25 +46,62 @@ class ReturnCheck extends Check {
 					return;
 				}
 			
-				switch (fun.ret) {
+				switch(fun.ret) {
 					case TPath(val):
 						if (!enforceReturnType && Std.string(val.name) == "Void") warnVoid(f.name, f.pos);
 					default:
 				}
 
-				switch (fun.expr.expr) {
-					case EBlock(fields):
-						for (field in fields) {
-							switch (field.expr) {
-								case EReturn(val):
-									if (noReturn && allowEmptyReturn && val == null) return;
-									else if (noReturn) {
-										warnReturnTypeMissing(f.name, f.pos);
-									}
-								default:
-							}
-						}
-					default:
+				walkExpr(fun.expr, noReturn, f.name, f.pos);
+			default:
+		}
+	}
+
+	function checkInlineFunctions() {
+		ExprUtils.walkFile(checker.ast, function(e) {
+			switch(e.expr) {
+				case EFunction(fname, f):
+					var funNoReturn:Bool = (f.ret == null);
+					walkExpr (f.expr, funNoReturn, fname, e.pos);
+				default:
+			}
+		});
+	}
+
+	@SuppressWarnings("checkstyle:CyclomaticComplexity")
+	function walkExpr(e:Expr, noReturn:Bool, name:String, pos:Position) {
+		if ((e == null) || (e.expr == null)) {
+			return;
+		}
+		// function has a return, no need to dig deeper
+		// -> compiler will complain if types do not match
+		if (!noReturn) return;
+		switch(e.expr) {
+			case EBlock(exprs):
+				for (expr in exprs) {
+					walkExpr(expr, noReturn, name, pos);
+				}
+			case EFor(it, expr):
+				walkExpr(expr, noReturn, name, pos);
+			case EIf(econd, eif, eelse):
+				walkExpr(eif, noReturn, name, pos);
+				walkExpr(eelse, noReturn, name, pos);
+			case EWhile(econd, expr, _):
+				walkExpr(expr, noReturn, name, pos);
+			case ESwitch(expr, cases, edef):
+				for (ecase in cases) {
+					walkExpr(ecase.expr, noReturn, name, pos);
+				}
+				walkExpr(edef, noReturn, name, pos);
+			case ETry(expr, catches):
+				walkExpr(expr, noReturn, name, pos);
+				for (ecatch in catches) {
+					walkExpr(ecatch.expr, noReturn, name, pos);
+				}
+			case EReturn(expr):
+				if (noReturn && allowEmptyReturn && expr == null) return;
+				else if (noReturn) {
+					warnReturnTypeMissing(name, pos);
 				}
 			default:
 		}
@@ -74,6 +112,11 @@ class ReturnCheck extends Check {
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
-		logPos('Return type not specified for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		if (name == null) {
+			logPos('Return type not specified for anonymous function', pos, Reflect.field(SeverityLevel, severity));
+		}
+		else {
+			logPos('Return type not specified for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		}
 	}
 }
