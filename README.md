@@ -301,16 +301,15 @@ To see all the options available run the following command.
 [-r | --reporter] <reporterName> : Set reporter
 [-c | --config] <configPath>     : Set config file
 [--list-checks]                  : List all checks
+[--list-reporters]				 : List all reporters 
 [-report]                        : Generate build time report
 [-s | --source] <sourcePath>     : Set sources to process
 ```
 ###Compile Time Report
 
-Now you can generate compile time report in console by passing `-report` option.
+Now when using default `xml` reporting, you can display readable compile time report in console by passing `-report` option.
 
 `haxelib run checkstyle -s src -p report.xml -report`
-
-Note that `-report` option only works with `xml` report.
 
 ###Hudson and Bamboo Integration
 
