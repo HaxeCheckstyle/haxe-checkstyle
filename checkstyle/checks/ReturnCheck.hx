@@ -41,15 +41,17 @@ class ReturnCheck extends Check {
 		switch(f.kind) {
 			case FFun(fun):
 				noReturn = (fun.ret == null);
-				if (enforceReturnType && fun.ret == null) {
+				if (enforceReturnType && noReturn) {
 					warnReturnTypeMissing(f.name, f.pos);
 					return;
 				}
-			
-				switch(fun.ret) {
-					case TPath(val):
-						if (!enforceReturnType && Std.string(val.name) == "Void") warnVoid(f.name, f.pos);
-					default:
+
+				if (!noReturn) {
+					switch(fun.ret) {
+						case TPath(val):
+							if (!enforceReturnType && Std.string(val.name) == "Void") warnVoid(f.name, f.pos);
+						default:
+					}
 				}
 
 				walkExpr(fun.expr, noReturn, f.name, f.pos);
