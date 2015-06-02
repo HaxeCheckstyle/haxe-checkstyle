@@ -46,7 +46,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"INLINE"
 				]
@@ -135,7 +135,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[A-Z0-9_]*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"ENUM"
 				]
