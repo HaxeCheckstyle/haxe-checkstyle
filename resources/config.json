@@ -93,7 +93,7 @@
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
-				"maxCharacters": 200
+				"maxCharacters": 160
 			}
 		},
 		{
