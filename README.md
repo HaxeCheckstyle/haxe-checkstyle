@@ -325,9 +325,11 @@ Sample Hudson Checkstyle Trend Chart:
 
 ###Reference
 
+http://checkstyle.sourceforge.net
+
 http://haxe.org/manual/class-field-visibility.html
 
-http://adireddy.github.io/haxe/haxe-access-modifiers-return-types/
+http://adireddy.github.io/haxe/haxe-access-modifiers-return-types
 
 ###Issues
 

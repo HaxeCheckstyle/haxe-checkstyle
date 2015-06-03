@@ -1,0 +1,7 @@
+*.iml
+*.iws
+*.log
+*.cache
+.DS_Store
+CHECKS.md
+*.n
