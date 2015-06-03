@@ -43,6 +43,7 @@ class AnonymousCheck extends Check {
 			switch(e.expr){
 				case EVars(vars):
 					for (v in vars) {
+						if (v.type == null) continue;
 						switch(v.type) {
 							case TAnonymous(fields):
 								error(v.name, e.pos);

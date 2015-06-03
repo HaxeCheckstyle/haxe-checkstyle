@@ -23,7 +23,7 @@
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"INLINE"
 				]
@@ -112,7 +112,7 @@
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[A-Z0-9_]*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"ENUM"
 				]

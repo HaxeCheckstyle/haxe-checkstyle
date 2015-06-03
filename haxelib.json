@@ -5,13 +5,16 @@
 		"checkstyle",
 		"haxe",
 		"standards",
+		"static",
 		"analysis",
-		"style"
+		"coding",
+		"style",
+		"cross"
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "added -report option to see all the issues at build time (only works with xml report now)",
-	"version": "1.1.5",
+	"releasenote": "improved ReturnCheck",
+	"version": "1.1.6",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 

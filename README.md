@@ -46,7 +46,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"INLINE"
 				]
@@ -135,7 +135,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[A-Z0-9_]*$",
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$",
 				"tokens": [
 					"ENUM"
 				]
@@ -301,16 +301,15 @@ To see all the options available run the following command.
 [-r | --reporter] <reporterName> : Set reporter
 [-c | --config] <configPath>     : Set config file
 [--list-checks]                  : List all checks
+[--list-reporters]				 : List all reporters 
 [-report]                        : Generate build time report
 [-s | --source] <sourcePath>     : Set sources to process
 ```
 ###Compile Time Report
 
-Now you can generate compile time report in console by passing `-report` option.
+Now when using default `xml` reporting, you can display readable compile time report in console by passing `-report` option.
 
 `haxelib run checkstyle -s src -p report.xml -report`
-
-Note that `-report` option only works with `xml` report.
 
 ###Hudson and Bamboo Integration
 
@@ -326,9 +325,11 @@ Sample Hudson Checkstyle Trend Chart:
 
 ###Reference
 
+http://checkstyle.sourceforge.net
+
 http://haxe.org/manual/class-field-visibility.html
 
-http://adireddy.github.io/haxe/haxe-access-modifiers-return-types/
+http://adireddy.github.io/haxe/haxe-access-modifiers-return-types
 
 ###Issues
 
