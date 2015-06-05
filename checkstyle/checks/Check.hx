@@ -75,6 +75,10 @@ class Check {
 		return isCharPosSuppressed(pos);
 	}
 
+	function isPosExtern(pos:Position):Bool {
+		return isCharPosExtern(pos.min);
+	}
+
 	function isPosSuppressed(pos:Position):Bool {
 		return isCharPosSuppressed(pos.min);
 	}
@@ -122,6 +126,37 @@ class Check {
 								if (hasSuppressWarningsMeta(field.meta)) return true;
 								// typedef pos does not include body
 								return hasSuppressWarningsMeta(d.meta);
+							}
+						default:
+					}
+				default:
+			}
+		}
+		return false;
+	}
+
+	function isCharPosExtern(pos:Int):Bool {
+		for (td in checker.ast.decls) {
+			switch (td.decl){
+				case EAbstract(d):
+				case EClass(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						return d.flags.indexOf(HExtern) > -1;
+					}
+				case EEnum(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						return d.flags.indexOf(EExtern) > -1;
+					}
+				case ETypedef(d):
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
+						return d.flags.indexOf(EExtern) > -1;
+					}
+					switch (d.data) {
+						case TAnonymous(fields):
+							for (field in fields) {
+								if (pos > field.pos.max) continue;
+								if (pos < field.pos.min) continue;
+								return d.flags.indexOf(EExtern) > -1;
 							}
 						default:
 					}

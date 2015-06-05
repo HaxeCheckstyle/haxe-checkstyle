@@ -11,11 +11,12 @@ class TestMain {
 		runner.add(new DynamicCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
+		runner.add(new FileLengthCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
 		runner.add(new IndentationCharacterCheckTest());
 		runner.add(new LineLengthCheckTest());
 		runner.add(new ListenerNameCheckTest());
-		runner.add(new FileLengthCheckTest());
+		runner.add(new LocalVariableNameCheckTest());
 		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new MethodNameCheckTest());

@@ -109,6 +109,13 @@
 			}
 		},
 		{
+			"type": "LocalVariableName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
+			}
+		},
+		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
