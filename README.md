@@ -132,6 +132,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "LocalVariableName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
+			}
+		},
+		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
