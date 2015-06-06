@@ -153,6 +153,14 @@
 			}
 		},
 		{
+			"type": "NeedBraces",
+			"props": {
+				"severity": "WARNING",
+				"allowSingleLineStatement": true,
+				"tokens": []
+			}
+		},
+		{
 			"type": "NestedForDepth",
 			"props": {
 				"severity": "ERROR",
