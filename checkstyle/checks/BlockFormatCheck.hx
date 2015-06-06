@@ -22,8 +22,9 @@ class BlockFormatCheck extends Check {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			switch(e.expr){
 				case EBlock([]) | EObjectDecl([]):
-					if (emptyBlockCheck && e.pos.max - e.pos.min > "{}".length)
+					if (emptyBlockCheck && e.pos.max - e.pos.min > "{}".length) {
 						logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
+					}
 				case EBlock(_) | EObjectDecl(_):
 					var lmin = checker.getLinePos(e.pos.min).line;
 					var lmax = checker.getLinePos(e.pos.max).line;

@@ -176,6 +176,14 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "NeedBraces",
+			"props": {
+				"severity": "WARNING",
+				"allowSingleLineStatement": true,
+				"tokens": []
+			}
+		},
+		{
 			"type": "NestedForDepth",
 			"props": {
 				"severity": "ERROR",

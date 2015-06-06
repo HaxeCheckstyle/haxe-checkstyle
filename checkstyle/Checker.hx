@@ -121,15 +121,17 @@ class Checker {
 			makeAST();
 		}
 		catch (e:Dynamic) {
-			for (reporter in reporters) reporter.addMessage({
-				fileName:file.name,
-				message: "Parsing failed: " + e + "\nStacktrace: " +
-							CallStack.toString(CallStack.exceptionStack()),
-				line:1,
-				column:1,
-				severity:ERROR,
-				moduleName:"Checker"
-			});
+			for (reporter in reporters) {
+				reporter.addMessage({
+					fileName:file.name,
+					message: "Parsing failed: " + e + "\nStacktrace: " +
+								CallStack.toString(CallStack.exceptionStack()),
+					line:1,
+					column:1,
+					severity:ERROR,
+					moduleName:"Checker"
+				});
+			}
 			for (reporter in reporters) reporter.fileFinish(file);
 			return;
 		}
@@ -141,15 +143,17 @@ class Checker {
 				for (reporter in reporters) for (m in messages) reporter.addMessage(m);
 			}
 			catch (e:Dynamic) {
-				for (reporter in reporters) reporter.addMessage({
-					fileName:file.name,
-					message:"Check " + check.getModuleName() + " failed: " +
-								e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
-					line:1,
-					column:1,
-					severity:ERROR,
-					moduleName:"Checker"
-				});
+				for (reporter in reporters) {
+					reporter.addMessage({
+						fileName:file.name,
+						message:"Check " + check.getModuleName() + " failed: " +
+									e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
+						line:1,
+						column:1,
+						severity:ERROR,
+						moduleName:"Checker"
+					});
+				}
 			}
 		}
 

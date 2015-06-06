@@ -20,6 +20,7 @@ class TestMain {
 		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new MethodNameCheckTest());
+		runner.add(new NeedBracesCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
 		runner.add(new NestedTryDepthCheckTest());
