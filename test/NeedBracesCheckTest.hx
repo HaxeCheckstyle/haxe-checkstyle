@@ -13,6 +13,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST9, '');
 		assertMsg(check, NeedBracesTests.TEST10, '');
 		assertMsg(check, NeedBracesTests.TEST12, '');
+		assertMsg(check, NeedBracesTests.TEST13, '');
 	}
 
 	public function testWrongBraces() {
@@ -42,6 +43,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST10, 'Body of if branch on same line');
 		assertMsg(check, NeedBracesTests.TEST11, 'Body of else branch on same line');
 		assertMsg(check, NeedBracesTests.TEST12, 'Body of else branch on same line');
+		assertMsg(check, NeedBracesTests.TEST13, 'Single line Block detected');
 	}
 
 	public function testTokenFOR() {
@@ -61,6 +63,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST10, '');
 		assertMsg(check, NeedBracesTests.TEST11, '');
 		assertMsg(check, NeedBracesTests.TEST12, '');
+		assertMsg(check, NeedBracesTests.TEST13, '');
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, NeedBracesTests.TEST, 'Body of for loop on same line');
@@ -84,11 +87,13 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST10, '');
 		assertMsg(check, NeedBracesTests.TEST11, 'No braces used for body of if branch');
 		assertMsg(check, NeedBracesTests.TEST12, 'No braces used for body of else branch');
+		assertMsg(check, NeedBracesTests.TEST13, '');
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, NeedBracesTests.TEST, 'Body of if branch on same line');
 		assertMsg(check, NeedBracesTests.TEST10, 'Body of if branch on same line');
 		assertMsg(check, NeedBracesTests.TEST11, 'Body of else branch on same line');
+		assertMsg(check, NeedBracesTests.TEST13, 'Single line Block detected');
 	}
 
 	public function testTokenELSE_IF() {
@@ -108,12 +113,14 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST10, '');
 		assertMsg(check, NeedBracesTests.TEST11, 'No braces used for body of if branch');
 		assertMsg(check, NeedBracesTests.TEST12, '');
+		assertMsg(check, NeedBracesTests.TEST13, '');
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, NeedBracesTests.TEST, 'Body of if branch on same line');
 		assertMsg(check, NeedBracesTests.TEST10, 'Body of if branch on same line');
 		assertMsg(check, NeedBracesTests.TEST11, 'Body of else branch on same line');
 		assertMsg(check, NeedBracesTests.TEST12, 'Body of else branch on same line');
+		assertMsg(check, NeedBracesTests.TEST13, 'Single line Block detected');
 	}
 
 	public function testTokenWHILE() {
@@ -133,6 +140,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST10, '');
 		assertMsg(check, NeedBracesTests.TEST11, '');
 		assertMsg(check, NeedBracesTests.TEST12, '');
+		assertMsg(check, NeedBracesTests.TEST13, '');
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, NeedBracesTests.TEST, 'Body of while loop on same line');
@@ -275,6 +283,14 @@ class NeedBracesTests {
 			else if (false) {
 				return;
 			}
+		}
+	}";
+
+	public static inline var TEST13:String = "
+	class Test {
+		function test() {
+			if (true) return;
+			else if (false) { return; }
 		}
 	}";
 
