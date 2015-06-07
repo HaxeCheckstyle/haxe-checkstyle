@@ -43,7 +43,7 @@ class ComplexTypeUtils {
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
 		for (f in d.flags) {
-			switch f {
+			switch(f) {
 				case HExtends(t) | HImplements(t): walkTypePath(t, d.name, pos, cb);
 				default:
 			}
@@ -64,7 +64,7 @@ class ComplexTypeUtils {
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
 		for (f in d.flags) {
-			switch f {
+			switch(f) {
 				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, f.getName(), pos, cb);
 				default:
 			}

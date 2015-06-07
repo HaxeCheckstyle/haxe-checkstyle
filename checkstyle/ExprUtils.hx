@@ -43,7 +43,7 @@ class ExprUtils {
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
-			switch f {
+			switch(f) {
 				case HExtends(t) | HImplements(t): walkTypePath(t,cb);
 				default:
 			}
@@ -64,7 +64,7 @@ class ExprUtils {
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
-			switch f {
+			switch(f) {
 				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct,cb);
 				default:
 			}
