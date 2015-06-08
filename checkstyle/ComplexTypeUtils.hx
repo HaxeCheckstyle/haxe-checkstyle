@@ -9,7 +9,7 @@ import haxeparser.Data.EnumConstructor;
 import haxe.macro.Expr;
 
 class ComplexTypeUtils {
-	
+
 	public static function walkFile(file:{ pack:Array<String>, decls:Array<TypeDecl> }, cb:ComplexTypeCallback) {
 		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
@@ -133,7 +133,7 @@ class ComplexTypeUtils {
 				if (e != null) walkExpr(e, cb);
 		}
 	}
-	
+
 	public static function walkComplexType(t:ComplexType, name:String, pos:Position, cb:ComplexTypeCallback) {
 		cb(t, name, pos);
 		switch(t){

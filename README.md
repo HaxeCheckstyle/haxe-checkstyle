@@ -113,6 +113,29 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "LeftCurly",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"CLASS_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				]
+			}
+		},
+		{
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",

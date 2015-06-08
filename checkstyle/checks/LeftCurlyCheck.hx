@@ -19,7 +19,6 @@ class LeftCurlyCheck extends Check {
 	public static inline var FUNCTION:String = "FUNCTION";
 	public static inline var FOR:String = "FOR";
 	public static inline var IF:String = "IF";
-	public static inline var ELSE_IF:String = "ELSE_IF";
 	public static inline var WHILE:String = "WHILE";
 	public static inline var SWITCH:String = "SWITCH";
 	public static inline var TRY:String = "TRY";
@@ -27,7 +26,6 @@ class LeftCurlyCheck extends Check {
 
 	public static inline var EOL:String = "eol";
 	public static inline var NL:String = "nl";
-	public static inline var INLINE:String = "inline";
 
 	public var tokens:Array<String>;
 	public var option:String;
@@ -41,10 +39,10 @@ class LeftCurlyCheck extends Check {
 			ABSTRACT_DEF,
 			TYPEDEF_DEF,
 			INTERFACE_DEF,
+			//OBJECT_DECL, // => allow inline object declarations
 			FUNCTION,
 			FOR,
 			IF,
-			ELSE_IF,
 			WHILE,
 			SWITCH,
 			TRY,
@@ -56,7 +54,7 @@ class LeftCurlyCheck extends Check {
 
 	function hasToken(token:String):Bool {
 		if (tokens.length == 0) return true;
-		if (tokens.indexOf (token) > -1) return true;
+		if (tokens.indexOf(token) > -1) return true;
 		return false;
 	}
 
@@ -66,17 +64,10 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function walkDecl() {
-
 		for (td in checker.ast.decls) {
-			switch (td.decl) {
-				case EClass (d):
-					for (field in d.data) {
-						switch (field.kind) {
-							case FFun(f):
-								checkBlocks(f.expr);
-							default:
-						}
-					}
+			switch(td.decl) {
+				case EClass(d):
+					checkFields(d.data);
 					if (d.flags.indexOf(HInterface) > -1 && !hasToken(INTERFACE_DEF)) return;
 					if (d.flags.indexOf(HInterface) < 0 && !hasToken(CLASS_DEF)) return;
 					if (d.data.length == 0) {
@@ -84,21 +75,15 @@ class LeftCurlyCheck extends Check {
 						return;
 					}
 					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
-				case EEnum (d):
+				case EEnum(d):
 					if (!hasToken(ENUM_DEF)) return;
 					if (d.data.length == 0) {
 						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
 						return;
 					}
 					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
-				case EAbstract (d):
-					for (field in d.data) {
-						switch (field.kind) {
-							case FFun(f):
-								checkBlocks(f.expr);
-							default:
-						}
-					}
+				case EAbstract(d):
+					checkFields(d.data);
 					if (!hasToken(ABSTRACT_DEF)) return;
 					if (d.data.length == 0) {
 						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
@@ -106,37 +91,54 @@ class LeftCurlyCheck extends Check {
 					}
 					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
 				case ETypedef (d):
-					if (!hasToken(TYPEDEF_DEF)) return;
-					// TODO handling of typedefs
-					//checkLinesBetween(td.pos.min, td.pos.max, td.pos);
+					checkTypeDef(td);
 				default:
 			}
 		}
 	}
 
-	//function checkTypedef(d:ComplexType, pos:Position) {
-	//    switch(d) {
-	//        case TAnonymous(fields):
-	//            for (field in fields) {
-	//                //checkBlocks(field.expr);
-	//            }
-	//        default:
-	//    }
-	//}
+	function checkFields(fields:Array<Field>) {
+		for (field in fields) {
+			if (isCheckSuppressed(field)) return;
+			switch (field.kind) {
+				case FFun(f):
+					checkBlocks(f.expr);
+				default:
+			}
+		}
+	}
+
+	function checkTypeDef(td:TypeDecl) {
+		var firstPos:Position = null;
+
+		ComplexTypeUtils.walkTypeDecl(td, function(t:ComplexType, name:String, pos:Position) {
+			if (firstPos == null) {
+				if (pos != td.pos) firstPos = pos;
+			}
+			switch(t) {
+				case TAnonymous(_):
+					checkLinesBetween(pos.min, pos.max, pos);
+				default:
+			}
+		});
+		if (firstPos == null) return;
+		if (!hasToken(TYPEDEF_DEF)) return;
+		checkLinesBetween(td.pos.max, firstPos.min, td.pos);
+	}
 
 	function walkFile() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
 			switch(e.expr) {
-				case EObjectDecl (fields):
+				case EObjectDecl(fields):
 					if (!hasToken(OBJECT_DECL)) return;
 					var linePos:LinePos = checker.getLinePos(e.pos.min);
 					var line:String = checker.lines[linePos.line];
 					checkLeftCurly(line, e.pos);
-				case EFunction (_, f):
+				case EFunction(_, f):
 					if (!hasToken(FUNCTION)) return;
 					checkBlocks(f.expr);
-				case EFor (it, expr):
+				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
 					checkBlocks(expr);
 				case EIf(econd, eif, eelse):
@@ -171,7 +173,7 @@ class LeftCurlyCheck extends Check {
 	function checkBlocks(e:Expr) {
 		if ((e == null) || (e.expr == null)) return;
 
-		switch (e.expr) {
+		switch(e.expr) {
 			case EBlock([]):
 				checkEmptyBlock(e);
 			case EBlock(_):
@@ -183,7 +185,7 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function checkLinesBetween(min:Int, max:Int, pos:Position) {
-
+		if (isPosSuppressed(pos)) return;
 		var bracePos:Int = checker.file.content.lastIndexOf("{", max);
 		if (bracePos < 0 || bracePos < min) return;
 
@@ -212,6 +214,7 @@ class LeftCurlyCheck extends Check {
 		checkLeftCurly(line, e.pos);
 	}
 
+	@SuppressWarnings("checkstyle:BlockFormat")
 	function checkLeftCurly(line:String, pos:Position) {
 		var lineLength:Int = line.length;
 		line = StringTools.trim(line);
@@ -223,17 +226,15 @@ class LeftCurlyCheck extends Check {
 			if (curlyAtEOL) {
 				logErrorIf ((option == NL), 'Left curly should be on new line', pos);
 				logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
-				if (option == INLINE) return;
 				logErrorIf ((option != EOL), 'Left curly unknown option ${option}', pos);
 				return;
 			}
 			logErrorIf ((option == EOL), 'Left curly should be at EOL', pos);
-			logErrorIf ((option == INLINE), 'Left curly should be on same line', pos);
-			logErrorIf (!curlyOnNL, 'Left curly should be on NL', pos);
+			logErrorIf ((!curlyOnNL), 'Left curly should be on NL', pos);
 			logErrorIf ((option != NL), 'Left curly unknown option ${option}', pos);
 		}
 		catch (e:String) {
-			// return
+			// one of the error messages fired -> do nothing
 		}
 	}
 

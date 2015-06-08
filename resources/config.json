@@ -90,6 +90,28 @@
 			}
 		},
 		{
+			"type": "LeftCurly",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"CLASS_DEF",
+					"INTERFACE_DEF",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				]
+			}
+		},
+		{
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",

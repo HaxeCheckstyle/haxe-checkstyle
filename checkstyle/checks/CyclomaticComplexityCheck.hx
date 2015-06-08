@@ -22,7 +22,7 @@ class CyclomaticComplexityCheck extends Check {
 			{ severity : "ERROR", complexity : 25 }
 		];
 	}
-	
+
 	override function actualRun() {
 		checker.ast.decls.map(function(type:TypeDecl):Null<Definition<ClassFlag, Array<Field>>> {
 			return switch (type.decl) {
@@ -33,7 +33,7 @@ class CyclomaticComplexityCheck extends Check {
 			return definition != null;
 		}).iter(checkFields);
 	}
-	
+
 	function checkFields(definition:Definition<ClassFlag, Array<Field>>) {
 		definition.data.map(function(field:Field):Null<Target> {
 			return switch (field.kind) {
@@ -46,7 +46,7 @@ class CyclomaticComplexityCheck extends Check {
 			return f != null;
 		}).iter(calculateComplexity);
 	}
-	
+
 	function calculateComplexity(method:Target) {
 		var complexity:Int = 1 + evaluateExpr(method.expr);
 
@@ -61,7 +61,7 @@ class CyclomaticComplexityCheck extends Check {
 
 	// This would not pass the cyclomatic complexity test.
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
+	@SuppressWarnings(['checkstyle:CyclomaticComplexity', 'checkstyle:LeftCurly'])
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch(e.expr) {
