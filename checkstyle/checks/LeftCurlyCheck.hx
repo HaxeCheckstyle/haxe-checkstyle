@@ -197,10 +197,12 @@ class LeftCurlyCheck extends Check {
 	@SuppressWarnings("checkstyle:BlockFormat")
 	function checkLeftCurly(line:String, pos:Position) {
 		var lineLength:Int = line.length;
-		line = StringTools.trim(line);
 
-		var curlyAtEOL:Bool = ~/^.+\{\}?([ \t]*|[ \t]*\/\/.*)$/.match(line);
-		var curlyOnNL:Bool = ~/^\{\}?/.match(line);
+		// must have at least one non whitespace character before curly
+		// and only whitespace, } or // + comment after curly
+		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\/.*)$/.match(line);
+		// must have only whitespace before curly
+		var curlyOnNL:Bool = ~/^\s*\{\}?/.match(line);
 
 		try {
 			if (curlyAtEOL) {
