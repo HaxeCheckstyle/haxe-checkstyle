@@ -9,11 +9,13 @@ class TestMain {
 		runner.add(new BlockFormatCheckTest());
 		runner.add(new ConstantNameCheckTest());
 		runner.add(new DynamicCheckTest());
+		runner.add(new EmptyBlockCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new FileLengthCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
 		runner.add(new IndentationCharacterCheckTest());
+		runner.add(new LeftCurlyCheckTest());
 		runner.add(new LineLengthCheckTest());
 		runner.add(new ListenerNameCheckTest());
 		runner.add(new LocalVariableNameCheckTest());

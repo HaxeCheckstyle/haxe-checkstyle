@@ -29,7 +29,7 @@ class AnonymousCheck extends Check {
 			}
 		}
 	}
-	
+
 	function checkField(f:Field) {
 		switch(f.kind) {
 			case FVar(TAnonymous(fields), val):
@@ -37,7 +37,7 @@ class AnonymousCheck extends Check {
 			default:
 		}
 	}
-	
+
 	function checkLocalVars() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			switch(e.expr){

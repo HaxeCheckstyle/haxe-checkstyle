@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 @name("NestedIfDepth")
 @desc("Max number of nested if-else blocks (default 1)")
 class NestedIfDepthCheck extends Check {
-	
+
 	public var max:Int;
 
 	public function new() {

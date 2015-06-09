@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 @name("PublicPrivate")
 @desc("Check for explicit use of private in classes and public in interfaces/externs")
 class PublicPrivateCheck extends Check {
-	
+
 	public var enforcePublicPrivate:Bool;
 
 	public function new() {

@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 @name("NestedTryDepth")
 @desc("Max number of nested try blocks (default 1)")
 class NestedTryDepthCheck extends Check {
-	
+
 	public var max:Int;
 
 	public function new() {

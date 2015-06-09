@@ -6,7 +6,7 @@ import haxe.macro.Expr;
 
 @ignore("Base class for name checks")
 class NameCheckBase extends Check {
-	
+
 	public var format:String;
 	public var tokens:Array<String>;
 	public var ignoreExtern:Bool;

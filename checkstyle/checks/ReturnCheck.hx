@@ -35,7 +35,7 @@ class ReturnCheck extends Check {
 			if (field.name != "new" && d.flags.indexOf(HInterface) == -1) checkField(field);
 		}
 	}
-	
+
 	function checkField(f:Field) {
 		var noReturn = false;
 		switch(f.kind) {
