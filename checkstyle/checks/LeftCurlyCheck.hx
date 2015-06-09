@@ -212,7 +212,6 @@ class LeftCurlyCheck extends Check {
 				return;
 			}
 			logErrorIf ((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
-			logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
 			logErrorIf ((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
 			logErrorIf ((option != NL), 'Left curly unknown option ${option}', pos);
 		}
