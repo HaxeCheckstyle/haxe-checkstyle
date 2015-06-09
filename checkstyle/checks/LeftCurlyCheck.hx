@@ -102,6 +102,7 @@ class LeftCurlyCheck extends Check {
 			if (isCheckSuppressed(field)) return;
 			switch (field.kind) {
 				case FFun(f):
+					if (!hasToken(FUNCTION)) return;
 					checkBlocks(f.expr);
 				default:
 			}
@@ -115,6 +116,7 @@ class LeftCurlyCheck extends Check {
 			if (firstPos == null) {
 				if (pos != td.pos) firstPos = pos;
 			}
+			if (!hasToken(OBJECT_DECL)) return;
 			switch(t) {
 				case TAnonymous(_):
 					checkLinesBetween(pos.min, pos.max, pos);
@@ -224,13 +226,14 @@ class LeftCurlyCheck extends Check {
 
 		try {
 			if (curlyAtEOL) {
-				logErrorIf ((option == NL), 'Left curly should be on new line', pos);
+				logErrorIf ((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
 				logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
 				logErrorIf ((option != EOL), 'Left curly unknown option ${option}', pos);
 				return;
 			}
-			logErrorIf ((option == EOL), 'Left curly should be at EOL', pos);
-			logErrorIf ((!curlyOnNL), 'Left curly should be on NL', pos);
+			logErrorIf ((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
+			logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
+			logErrorIf ((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
 			logErrorIf ((option != NL), 'Left curly unknown option ${option}', pos);
 		}
 		catch (e:String) {
