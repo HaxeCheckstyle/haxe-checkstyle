@@ -176,8 +176,6 @@ class LeftCurlyCheck extends Check {
 		if ((e == null) || (e.expr == null)) return;
 
 		switch(e.expr) {
-			case EBlock([]):
-				checkEmptyBlock(e);
 			case EBlock(_):
 				var linePos:LinePos = checker.getLinePos(e.pos.min);
 				var line:String = checker.lines[linePos.line];
@@ -194,26 +192,6 @@ class LeftCurlyCheck extends Check {
 		var lineNum:Int = checker.getLinePos(bracePos).line;
 		var line:String = checker.lines[lineNum];
 		checkLeftCurly(line, pos);
-	}
-
-	function checkEmptyBlock(e:Expr) {
-		if ((e == null) || (e.expr == null)) return;
-
-		var lineMin:Int = checker.getLinePos(e.pos.min).line;
-		var lineMax:Int = checker.getLinePos(e.pos.max).line;
-		if (lineMin != lineMax) {
-			var block:String = "";
-			for (lineIndex in lineMin...(lineMax + 1)) {
-				block += StringTools.trim(checker.lines[lineIndex]);
-			}
-			if (~/.*\{\}($|[ \t]*\/\/.*$)/.match(block)) {
-				logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
-			}
-		}
-
-		var linePos:LinePos = checker.getLinePos(e.pos.min);
-		var line:String = checker.lines[linePos.line];
-		checkLeftCurly(line, e.pos);
 	}
 
 	@SuppressWarnings("checkstyle:BlockFormat")

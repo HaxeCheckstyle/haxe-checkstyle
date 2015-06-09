@@ -57,6 +57,14 @@
 			}
 		},
 		{
+			"type": "EmptyBlock",
+			"props": {
+				"severity": "ERROR",
+				"option": "empty",
+				"tokens": []
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
