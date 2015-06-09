@@ -83,9 +83,9 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"type": "EmptyBlock",
 			"props": {
 				"severity": "ERROR",
-				"option": "empty",
-				"tokens": []
+				"option": "empty"
 			}
+		},
 		{
 			"type": "EmptyLines",
 			"props": {

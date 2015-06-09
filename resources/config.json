@@ -60,8 +60,7 @@
 			"type": "EmptyBlock",
 			"props": {
 				"severity": "ERROR",
-				"option": "empty",
-				"tokens": []
+				"option": "empty"
 			}
 		},
 		{
