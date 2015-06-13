@@ -80,6 +80,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "EmptyBlock",
+			"props": {
+				"severity": "ERROR",
+				"option": "empty"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
@@ -113,6 +120,29 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
+			"type": "LeftCurly",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"CLASS_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				]
+			}
+		},
+		{
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
@@ -129,6 +159,13 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 					"on",
 					"once"
 				]
+			}
+		},
+		{
+			"type": "LocalVariableName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -165,6 +202,14 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			"props": {
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"tokens": []
+			}
+		},
+		{
+			"type": "NeedBraces",
+			"props": {
+				"severity": "WARNING",
+				"allowSingleLineStatement": true,
 				"tokens": []
 			}
 		},

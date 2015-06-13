@@ -57,6 +57,13 @@
 			}
 		},
 		{
+			"type": "EmptyBlock",
+			"props": {
+				"severity": "ERROR",
+				"option": "empty"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
@@ -90,6 +97,28 @@
 			}
 		},
 		{
+			"type": "LeftCurly",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"CLASS_DEF",
+					"INTERFACE_DEF",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				]
+			}
+		},
+		{
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
@@ -106,6 +135,13 @@
 					"on",
 					"once"
 				]
+			}
+		},
+		{
+			"type": "LocalVariableName",
+			"props": {
+				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -142,6 +178,14 @@
 			"props": {
 				"severity": "ERROR",
 				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"tokens": []
+			}
+		},
+		{
+			"type": "NeedBraces",
+			"props": {
+				"severity": "WARNING",
+				"allowSingleLineStatement": true,
 				"tokens": []
 			}
 		},

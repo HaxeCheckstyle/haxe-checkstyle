@@ -5,7 +5,7 @@ import checkstyle.LintMessage.SeverityLevel;
 @name("BlockFormat")
 @desc("Checks empty blocks and first/last lines of a block")
 class BlockFormatCheck extends Check {
-	
+
 	public var emptyBlockCheck:Bool;
 
 	var firstLineRE:EReg;
@@ -20,10 +20,12 @@ class BlockFormatCheck extends Check {
 
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
+			if (isPosSuppressed(e.pos)) return;
 			switch(e.expr){
 				case EBlock([]) | EObjectDecl([]):
-					if (emptyBlockCheck && e.pos.max - e.pos.min > "{}".length)
+					if (emptyBlockCheck && e.pos.max - e.pos.min > "{}".length) {
 						logPos("Empty block should be written as {}", e.pos, Reflect.field(SeverityLevel, severity));
+					}
 				case EBlock(_) | EObjectDecl(_):
 					var lmin = checker.getLinePos(e.pos.min).line;
 					var lmax = checker.getLinePos(e.pos.max).line;

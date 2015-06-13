@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 @name("ParameterNumber")
 @desc("Max number of parameters per method (default 7)")
 class ParameterNumberCheck extends Check {
-	
+
 	public var max:Int;
 	public var ignoreOverriddenMethods:Bool;
 

@@ -9,7 +9,7 @@ import haxeparser.Data.EnumConstructor;
 import haxe.macro.Expr;
 
 class ExprUtils {
-	
+
 	public static function walkFile(file:{ pack: Array<String>, decls: Array<TypeDecl> }, cb:Expr -> Void) {
 		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
@@ -42,9 +42,11 @@ class ExprUtils {
 
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
-		for (f in d.flags) switch f {
-			case HExtends(t) | HImplements(t): walkTypePath(t,cb);
-			default:
+		for (f in d.flags) {
+			switch(f) {
+				case HExtends(t) | HImplements(t): walkTypePath(t,cb);
+				default:
+			}
 		}
 		for (f in d.data) walkField(f,cb);
 	}
@@ -61,9 +63,11 @@ class ExprUtils {
 
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
-		for (f in d.flags) switch f {
-			case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct,cb);
-			default:
+		for (f in d.flags) {
+			switch(f) {
+				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct,cb);
+				default:
+			}
 		}
 		for (f in d.data) walkField(f,cb);
 	}
@@ -129,7 +133,7 @@ class ExprUtils {
 				if (e != null) walkExpr(e, cb);
 		}
 	}
-	
+
 	public static function walkComplexType(t:ComplexType, cb:Expr -> Void) {
 		switch(t){
 			case TPath(p): walkTypePath(p, cb);

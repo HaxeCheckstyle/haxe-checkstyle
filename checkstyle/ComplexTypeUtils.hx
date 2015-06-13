@@ -9,7 +9,7 @@ import haxeparser.Data.EnumConstructor;
 import haxe.macro.Expr;
 
 class ComplexTypeUtils {
-	
+
 	public static function walkFile(file:{ pack:Array<String>, decls:Array<TypeDecl> }, cb:ComplexTypeCallback) {
 		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
@@ -42,9 +42,11 @@ class ComplexTypeUtils {
 
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
-		for (f in d.flags) switch f {
-			case HExtends(t) | HImplements(t): walkTypePath(t, d.name, pos, cb);
-			default:
+		for (f in d.flags) {
+			switch(f) {
+				case HExtends(t) | HImplements(t): walkTypePath(t, d.name, pos, cb);
+				default:
+			}
 		}
 		for (f in d.data) walkField(f, cb);
 	}
@@ -61,9 +63,11 @@ class ComplexTypeUtils {
 
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
-		for (f in d.flags) switch f {
-			case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, f.getName(), pos, cb);
-			default:
+		for (f in d.flags) {
+			switch(f) {
+				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, f.getName(), pos, cb);
+				default:
+			}
 		}
 		for (f in d.data) walkField(f, cb);
 	}
@@ -129,7 +133,7 @@ class ComplexTypeUtils {
 				if (e != null) walkExpr(e, cb);
 		}
 	}
-	
+
 	public static function walkComplexType(t:ComplexType, name:String, pos:Position, cb:ComplexTypeCallback) {
 		cb(t, name, pos);
 		switch(t){

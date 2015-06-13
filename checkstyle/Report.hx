@@ -23,7 +23,7 @@ class Report {
 		reportFile = File.write("CHECKS.md", false);
 		reportFile.writeString("###Report of default checks on CheckStyle library itself\n\n");
 		#end
-		
+
 		var errors = 0;
 		var warnings = 0;
 		var infos = 0;
