@@ -16,6 +16,8 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;EmptyBlockCheck.hx">
+	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
@@ -26,9 +28,13 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
 	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
+	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
 	</file>
@@ -37,6 +43,8 @@
 	<file name="checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
 	</file>

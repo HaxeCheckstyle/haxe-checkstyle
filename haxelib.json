@@ -13,8 +13,8 @@
 	],
 	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
 	"contributors": ["adireddy"],
-	"releasenote": "improved ReturnCheck",
-	"version": "1.1.6",
+	"releasenote": "added LeftCurlyCheck and EmptyBlockCheck by @AlexHaxe",
+	"version": "1.1.7",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
