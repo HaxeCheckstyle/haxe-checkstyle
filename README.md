@@ -334,6 +334,12 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 }
 ```
 
+###SuppressWarnings
+
+Note that the warnings can be suppressed at class/method level as shown below.
+
+`@SuppressWarnings("checkstyle:Dynamic", "checkstyle:MethodLength")`
+
 ###Options
 
 To see all the options available run the following command.
