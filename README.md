@@ -392,3 +392,7 @@ Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-chec
 <img alt="MIT license" height="40" src="http://upload.wikimedia.org/wikipedia/commons/c/c3/License_icon-mit.svg" /></a>
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+
+### Contributor Code of Conduct ###
+
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.1.0](http://contributor-covenant.org/version/1/1/0/)
