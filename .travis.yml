@@ -7,3 +7,4 @@ haxe:
   - "3.2.0"
 hxml:
   - build.hxml
+sudo: false
