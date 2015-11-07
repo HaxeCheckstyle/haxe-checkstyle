@@ -220,12 +220,6 @@
 			}
 		},
 		{
-			"type": "Override",
-			"props": {
-				"severity": "ERROR"
-			}
-		},
-		{
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
