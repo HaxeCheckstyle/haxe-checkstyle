@@ -4,6 +4,7 @@ class TestMain {
 
 	public function new() {
 		var runner = new haxe.unit.TestRunner();
+		runner.add(new AccessOrderCheckTest());
 		runner.add(new AnonymousCheckTest());
 		runner.add(new ArrayInstantiationCheckTest());
 		runner.add(new BlockFormatCheckTest());
@@ -26,7 +27,6 @@ class TestMain {
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
 		runner.add(new NestedTryDepthCheckTest());
-		runner.add(new OverrideCheckTest());
 		runner.add(new ParameterNameCheckTest());
 		runner.add(new ParameterNumberCheckTest());
 		runner.add(new PublicPrivateCheckTest());

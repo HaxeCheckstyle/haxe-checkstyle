@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.0">
-	<file name="checkstyle&#x2F;Checker.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;OverrideCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
+	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx">
 	</file>
@@ -10,43 +40,25 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;Check.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
-	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;EmptyBlockCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;OverrideCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
 	</file>
@@ -56,39 +68,34 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;SpacingCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
-	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;TrailingWhitespaceCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;ChecksInfo.hx">
-	</file>
-	<file name="checkstyle&#x2F;ComplexTypeUtils.hx">
-	</file>
-	<file name="checkstyle&#x2F;ExprUtils.hx">
-	</file>
-	<file name="checkstyle&#x2F;LintFile.hx">
-	</file>
-	<file name="checkstyle&#x2F;LintMessage.hx">
-		<error line="4" column="2" severity="info" message="Invalid enum member signature: INFO (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
-		<error line="5" column="2" severity="info" message="Invalid enum member signature: WARNING (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
-		<error line="6" column="2" severity="info" message="Invalid enum member signature: ERROR (name should be ~&#x2F;^[a-z]+[a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;LintMessage.hx"/>
-	</file>
-	<file name="checkstyle&#x2F;Main.hx">
-	</file>
-	<file name="checkstyle&#x2F;Report.hx">
+	<file name="checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;IReporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;Reporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;XMLReporter.hx">
+	</file>
+	<file name="checkstyle&#x2F;LintFile.hx">
+	</file>
+	<file name="checkstyle&#x2F;LintMessage.hx">
+	</file>
+	<file name="checkstyle&#x2F;ChecksInfo.hx">
+	</file>
+	<file name="checkstyle&#x2F;Main.hx">
+	</file>
+	<file name="checkstyle&#x2F;Checker.hx">
+	</file>
+	<file name="checkstyle&#x2F;ComplexTypeUtils.hx">
+	</file>
+	<file name="checkstyle&#x2F;ExprUtils.hx">
+	</file>
+	<file name="checkstyle&#x2F;Report.hx">
 	</file>
 </checkstyle>

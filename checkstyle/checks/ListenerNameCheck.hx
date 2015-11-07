@@ -22,6 +22,7 @@ class ListenerNameCheck extends Check {
 
 	override public function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
+			if (isPosSuppressed(e.pos)) return;
 			switch(e.expr){
 				case ECall(e, params):
 					searchCall(e, params);

@@ -1,6 +1,20 @@
 {
 	"checks": [
 		{
+			"type": "AccessOrder",
+			"props": {
+				"severity": "WARNING",
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				]
+			}
+		},
+		{
 			"type": "Anonymous",
 			"props": {
 				"severity": "ERROR"

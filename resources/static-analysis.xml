@@ -2,6 +2,8 @@
 <checkstyle version="5.0">
 	<file name="checkstyle&#x2F;Checker.hx">
 	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx">
+	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
@@ -51,8 +53,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
-	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;OverrideCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
 	</file>

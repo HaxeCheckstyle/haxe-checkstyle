@@ -1,7 +1,5 @@
-# Checkstyle for Haxe
-
-[![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-checkstyle.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/checkstyle) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle)
-
+[![Haxelib Version](https://img.shields.io/github/tag/adireddy/haxe-checkstyle.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/checkstyle) [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+=========
 ![logo](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/logo.png)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
@@ -23,6 +21,20 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 ```json
 {
 	"checks": [
+		{
+			"type": "AccessOrder",
+			"props": {
+				"severity": "WARNING",
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				]
+			}
+		},
 		{
 			"type": "Anonymous",
 			"props": {
