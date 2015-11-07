@@ -22,6 +22,19 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 {
 	"checks": [
 		{
+			"type": "AccessOrder",
+			"props": {
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				]
+			}
+		},
+		{
 			"type": "Anonymous",
 			"props": {
 				"severity": "ERROR"
