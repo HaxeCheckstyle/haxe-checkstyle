@@ -24,6 +24,19 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 {
 	"checks": [
 		{
+			"type": "AccessOrder",
+			"props": {
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				]
+			}
+		},
+		{
 			"type": "Anonymous",
 			"props": {
 				"severity": "ERROR"
@@ -395,4 +408,4 @@ This content is released under the [MIT](http://opensource.org/licenses/MIT) Lic
 
 ### Contributor Code of Conduct ###
 
-[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.2.0](http://contributor-covenant.org/version/1/2/0/)
+[Code of Conduct](https://github.com/CoralineAda/contributor_covenant) is adapted from [Contributor Covenant, version 1.2.0](http://contributor-covenant.org/version/1/2/0/)
