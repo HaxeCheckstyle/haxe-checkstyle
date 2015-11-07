@@ -65,12 +65,6 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 			}
 		},
 		{
-			"type": "ConstantName",
-			"props": {
-				"severity": "ERROR"
-			}
-		},
-		{
 			"type": "CyclomaticComplexity",
 			"props": {
 				"thresholds": [
