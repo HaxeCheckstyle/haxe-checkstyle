@@ -24,6 +24,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "AccessOrder",
 			"props": {
+				"severity": "WARNING",
 				"modifiers": [
 					"MACRO",
 					"OVERRIDE",
