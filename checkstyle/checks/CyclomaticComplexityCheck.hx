@@ -18,7 +18,6 @@ class CyclomaticComplexityCheck extends Check {
 	public function new() {
 		super();
 		thresholds = [
-			{ severity : "INFO", complexity : 15 },
 			{ severity : "WARNING", complexity : 20 },
 			{ severity : "ERROR", complexity : 25 }
 		];
