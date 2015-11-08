@@ -50,8 +50,7 @@ More information in [wiki page](https://github.com/adireddy/haxe-checkstyle/wiki
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR",
-				"emptyBlockCheck": false
+				"severity": "ERROR"
 			}
 		},
 		{

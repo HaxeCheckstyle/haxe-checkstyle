@@ -29,8 +29,7 @@
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR",
-				"emptyBlockCheck": false
+				"severity": "ERROR"
 			}
 		},
 		{
@@ -217,12 +216,6 @@
 			"props": {
 				"severity": "ERROR",
 				"max": 1
-			}
-		},
-		{
-			"type": "Override",
-			"props": {
-				"severity": "ERROR"
 			}
 		},
 		{
