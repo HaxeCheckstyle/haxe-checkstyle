@@ -154,7 +154,7 @@ class LeftCurlyCheck extends Check {
 					if (!hasToken(SWITCH)) return;
 					var firstCase:Expr = edef;
 					if (cases.length > 0) {
-						firstCase = cases[0].expr;
+						firstCase = cases[0].values[0];
 					}
 					if (firstCase == null) {
 						checkLinesBetween(e.pos.min, e.pos.max, e.pos);

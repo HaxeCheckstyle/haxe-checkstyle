@@ -48,6 +48,12 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.tokens = [LeftCurlyCheck.FUNCTION];
 		assertMsg(check, LeftCurlyTests.TEST13, '');
 	}
+
+	public function testSwitch() {
+		var check = new LeftCurlyCheck ();
+		check.option = LeftCurlyCheck.NL;
+		assertMsg(check, LeftCurlyTests.TEST15, '');
+	}
 }
 
 class LeftCurlyTests {
@@ -230,5 +236,19 @@ class LeftCurlyTests {
 		y:Int,
 		z:Int,
 		point:{x:Int, y:Int, z:Int}
+	}";
+
+	public static inline var TEST15:String = "
+	class Test
+	{
+		public function test(val:Bool):String
+		{
+			switch(val)
+			{
+				case true: // do nothing
+				default:
+					return 'test abc ${val}';
+			}
+		}
 	}";
 }
