@@ -23,13 +23,6 @@ class BlockFormatCheckTest extends CheckTestCase {
 		var msg = checkMessage(BlockFormatTests.TEST3, new BlockFormatCheck());
 		assertEquals(msg, 'Last line of multiline block should contain only } and maybe , or ;');
 	}
-
-	public function testDisabledBlockFormat() {
-		var test = new BlockFormatCheck();
-		test.emptyBlockCheck = false;
-		var msg = checkMessage(BlockFormatTests.TEST4, test);
-		assertEquals(msg, '');
-	}
 }
 
 class BlockFormatTests {
@@ -56,12 +49,5 @@ class BlockFormatTests {
 	"class Test {
 		public function new() {
 			var a:Int; }
-	}";
-
-	public static inline var TEST4:String = "
-	class Test {
-		public function new() {
-		
-		}
 	}";
 }
