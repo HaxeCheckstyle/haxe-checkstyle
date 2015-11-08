@@ -7,13 +7,11 @@ import haxeparser.Data.Token;
 @desc("Checks Hexadecimal Literals")
 class HexadecimalLiteralsCheck extends Check {
 
-	var lowerPrefix:Bool;
-	var lowerBody:Bool;
+	public var option:String;
 
 	public function new() {
 		super();
-		lowerPrefix = true;
-		lowerBody = false;
+		option = "upperCase";
 	}
 
 	override function actualRun() {
@@ -29,17 +27,11 @@ class HexadecimalLiteralsCheck extends Check {
 	function checkString(s:String, p) {
 		var prefix = s.substr(0, 2);
 		if (prefix.toLowerCase() == "0x") {
-			var prefixExpected = prefix;
-			if (lowerPrefix) prefixExpected = prefixExpected.toLowerCase();
-			else prefixExpected = prefixExpected.toUpperCase();
-			if (prefix != prefixExpected) logPos('Bad hexademical literal', p, Reflect.field(SeverityLevel, severity));
-
 			var bodyActual = s.substr(2);
 			var bodyExpected = bodyActual;
-			if (lowerBody) bodyExpected = bodyExpected.toLowerCase();
+			if (option.toLowerCase() == "lowercase") bodyExpected = bodyExpected.toLowerCase();
 			else bodyExpected = bodyExpected.toUpperCase();
-			if (bodyExpected != bodyActual) logPos('Bad hexademical literal, use uppercase', p, Reflect.field(SeverityLevel, severity));
-
+			if (bodyExpected != bodyActual) logPos('Bad hexademical literal, use ' + option, p, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }

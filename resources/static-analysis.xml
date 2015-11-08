@@ -18,8 +18,6 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;EmptyBlockCheck.hx">
-	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">

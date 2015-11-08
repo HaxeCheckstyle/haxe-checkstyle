@@ -29,7 +29,8 @@
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"option": "empty"
 			}
 		},
 		{
@@ -65,13 +66,6 @@
 			}
 		},
 		{
-			"type": "EmptyBlock",
-			"props": {
-				"severity": "ERROR",
-				"option": "empty"
-			}
-		},
-		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
@@ -94,7 +88,8 @@
 		{
 			"type": "HexadecimalLiterals",
 			"props": {
-				"severity": "INFO"
+				"severity": "INFO",
+				"option": "upperCase"
 			}
 		},
 		{
