@@ -23,6 +23,17 @@ class BlockFormatCheckTest extends CheckTestCase {
 		var msg = checkMessage(BlockFormatTests.TEST3, new BlockFormatCheck());
 		assertEquals(msg, 'Last line of multiline block should contain only } and maybe , or ;');
 	}
+
+	public function testWrongEmptyBlock() {
+		var msg = checkMessage(BlockFormatTests.TEST4, new BlockFormatCheck());
+		assertEquals(msg, 'Empty block should be written as {}');
+	}
+
+	public function testOptionText () {
+		var check = new BlockFormatCheck();
+		check.option = BlockFormatCheck.TEXT;
+		assertEquals(checkMessage(BlockFormatTests.TEST4, check), 'Empty block should contain a comment');
+	}
 }
 
 class BlockFormatTests {
@@ -49,5 +60,43 @@ class BlockFormatTests {
 	"class Test {
 		public function new() {
 			var a:Int; }
+	}";
+
+	public static inline var TEST4:String = "
+	class Test {
+		public function new(){
+
+		}
+	}";
+
+	public static inline var TEST5:String =
+	"class Test {
+		public function new() {
+			// comment
+		}
+	}";
+
+	public static inline var TEST6:String =
+	"class Test {
+		public function new() {
+			var a = {};
+		}
+	}";
+
+	public static inline var TEST7:String = "
+	class Test {
+		public function new() {
+			var a = {
+			};
+		}
+	}";
+
+	public static inline var TEST8:String = "
+	class Test {
+		public function new() {
+			var a = {
+				// comment
+			};
+		}
 	}";
 }

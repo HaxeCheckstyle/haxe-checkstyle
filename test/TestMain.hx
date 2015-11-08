@@ -10,7 +10,6 @@ class TestMain {
 		runner.add(new BlockFormatCheckTest());
 		runner.add(new ConstantNameCheckTest());
 		runner.add(new DynamicCheckTest());
-		runner.add(new EmptyBlockCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new FileLengthCheckTest());
