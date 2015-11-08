@@ -29,7 +29,8 @@
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"option": "empty"
 			}
 		},
 		{
@@ -62,13 +63,6 @@
 			"type": "Dynamic",
 			"props": {
 				"severity": "INFO"
-			}
-		},
-		{
-			"type": "EmptyBlock",
-			"props": {
-				"severity": "ERROR",
-				"option": "empty"
 			}
 		},
 		{
