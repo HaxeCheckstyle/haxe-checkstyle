@@ -88,7 +88,8 @@
 		{
 			"type": "HexadecimalLiterals",
 			"props": {
-				"severity": "INFO"
+				"severity": "INFO",
+				"option": "upperCase"
 			}
 		},
 		{
