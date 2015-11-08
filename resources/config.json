@@ -29,8 +29,7 @@
 		{
 			"type": "BlockFormat",
 			"props": {
-				"severity": "ERROR",
-				"emptyBlockCheck": false
+				"severity": "ERROR"
 			}
 		},
 		{
