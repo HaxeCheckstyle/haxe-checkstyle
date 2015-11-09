@@ -4,6 +4,7 @@ enum SeverityLevel {
 	INFO;
 	WARNING;
 	ERROR;
+	IGNORE;
 }
 
 typedef LintMessage = {

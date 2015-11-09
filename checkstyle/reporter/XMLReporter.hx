@@ -71,6 +71,7 @@ class XMLReporter implements IReporter {
 			case INFO: return "info";
 			case WARNING: return "warning";
 			case ERROR: return "error";
+			case IGNORE: return "ignore";
 		}
 	}
 
