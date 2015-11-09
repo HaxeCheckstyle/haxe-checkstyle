@@ -53,6 +53,17 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.option = LeftCurlyCheck.NL;
 		assertMsg(check, LeftCurlyTests.TEST15, '');
 	}
+
+	public function testNLOW() {
+		var check = new LeftCurlyCheck();
+		check.option = LeftCurlyCheck.NLOW;
+		assertMsg(check, LeftCurlyTests.TEST, '');
+		assertMsg(check, LeftCurlyTests.TEST12, '');
+		assertMsg(check, LeftCurlyTests.TEST16, '');
+		assertMsg(check, LeftCurlyTests.TEST17, 'Left curly should be at EOL (previous expression is not split over muliple lines)');
+		assertMsg(check, LeftCurlyTests.TEST18, 'Left curly should be on new line (previous expression is split over muliple lines)');
+		assertMsg(check, LeftCurlyTests.TEST19, 'Left curly should be on new line (previous expression is split over muliple lines)');
+	}
 }
 
 class LeftCurlyTests {
@@ -241,6 +252,58 @@ class LeftCurlyTests {
 				case true: // do nothing
 				default:
 					return 'test abc ${val}';
+			}
+		}
+	}";
+
+	public static inline var TEST16:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val * 10 -
+					val / 10)
+			{
+				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST17:String = "
+	class Test {
+		public function test(val:Int, val2:Int):String
+		{
+			switch(val * 10 - val / 10)
+			{
+				case 1: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST18:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String {
+			switch(val * 10 -
+					val / 10)
+			{
+				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST19:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val * 10 -
+					val / 10) {
+				case 0: // do nothing
+				default:
 			}
 		}
 	}";
