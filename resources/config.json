@@ -27,13 +27,6 @@
 			}
 		},
 		{
-			"type": "BlockFormat",
-			"props": {
-				"severity": "ERROR",
-				"option": "empty"
-			}
-		},
-		{
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
@@ -132,6 +125,7 @@
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
+				"format": "^[a-z]+[a-zA-Z0-9]*$",
 				"listeners": [
 					"addEventListener",
 					"addListener",

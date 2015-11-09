@@ -5,23 +5,16 @@ import checkstyle.checks.ListenerNameCheck;
 class ListenerNameCheckTest extends CheckTestCase {
 
 	public function testCorrectListenerName() {
-		var msg = checkMessage(ListernerTests.TEST, new ListenerNameCheck());
+		var check = new ListenerNameCheck();
+		var msg = checkMessage(ListernerTests.TEST, check);
 		assertEquals(msg, '');
 	}
 
 	public function testListenerName1() {
-		var msg = checkMessage(ListernerTests.TEST1, new ListenerNameCheck());
-		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
-	}
-
-	public function testListenerName2() {
-		var msg = checkMessage(ListernerTests.TEST2, new ListenerNameCheck());
-		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
-	}
-
-	public function testListenerName3() {
-		var msg = checkMessage(ListernerTests.TEST3, new ListenerNameCheck());
-		assertEquals(msg, 'Wrong listener name, prefix with "on": _testUpdate');
+		var check = new ListenerNameCheck();
+		check.format = "^_?on.*";
+		var msg = checkMessage(ListernerTests.TEST1, check);
+		assertEquals(msg, 'Wrong listener name: _testUpdate (should be ~/^_?on.*/)');
 	}
 }
 
@@ -41,26 +34,6 @@ class ListernerTests {
 		var a:Stage;
 		public function new() {
 			a.addEventListener('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
-	}";
-
-	public static inline var TEST2:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.on('update', _testUpdate);
-		}
-
-		function _testUpdate() {}
-	}";
-
-	public static inline var TEST3:String = "
-	class Test {
-		var a:Stage;
-		public function new() {
-			a.once('update', _testUpdate);
 		}
 
 		function _testUpdate() {}

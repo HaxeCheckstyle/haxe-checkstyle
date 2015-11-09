@@ -10,14 +10,17 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("ListenerName")
-@desc("Checks that listener function names are prefixed with 'on'")
+@desc("Checks on naming conventions of event listener methods")
 class ListenerNameCheck extends Check {
 
 	public var listeners:Array<String>;
+	public var format:String;
+	var formatRE:EReg;
 
 	public function new() {
 		super();
 		listeners = ["addEventListener", "addListener", "on", "once"];
+		format = "^_?[a-z]+[a-zA-Z0-9]*$";
 	}
 
 	override public function actualRun() {
@@ -55,8 +58,8 @@ class ListenerNameCheck extends Check {
 	}
 
 	function checkListenerName(name:String, line:Int, col:Int) {
-		var re = ~/^_?on.*/;
-		var match = re.match(name);
-		if (!match) log('Wrong listener name, prefix with "on": ' + name, line, col, Reflect.field(SeverityLevel, severity));
+		formatRE = new EReg (format, "");
+		var match = formatRE.match(name);
+		if (!match) log('Wrong listener name: ' + name + ' (should be ~/${format}/)', line, col, Reflect.field(SeverityLevel, severity));
 	}
 }
