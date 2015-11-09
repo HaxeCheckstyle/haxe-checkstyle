@@ -23,7 +23,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST5, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST7, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST10, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST11, 'Left curly placement exceeds 120 character limit');
+		assertMsg(check, LeftCurlyTests.TEST11, 'Left curly placement exceeds 160 character limit');
 	}
 
 	public function testBraceOnNL() {
@@ -200,7 +200,7 @@ class LeftCurlyTests {
 
 	public static inline var TEST11:String = "
 	class Test {
-		function test():Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>> {
+		function test(aaaa:Int, bbbbb:String, ccccc:Float):Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>> {
 		}
 	}";
 

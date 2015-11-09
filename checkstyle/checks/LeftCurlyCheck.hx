@@ -49,7 +49,7 @@ class LeftCurlyCheck extends Check {
 			CATCH
 		];
 		option = EOL;
-		maxLineLength = 120;
+		maxLineLength = 160;
 	}
 
 	function hasToken(token:String):Bool {
