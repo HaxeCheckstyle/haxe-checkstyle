@@ -29,7 +29,6 @@ class LeftCurlyCheck extends Check {
 
 	public var tokens:Array<String>;
 	public var option:String;
-	public var maxLineLength:Int;
 
 	public function new() {
 		super();
@@ -49,7 +48,6 @@ class LeftCurlyCheck extends Check {
 			CATCH
 		];
 		option = EOL;
-		maxLineLength = 160;
 	}
 
 	function hasToken(token:String):Bool {
@@ -207,7 +205,6 @@ class LeftCurlyCheck extends Check {
 		try {
 			if (curlyAtEOL) {
 				logErrorIf ((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
-				logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
 				logErrorIf ((option != EOL), 'Left curly unknown option ${option}', pos);
 				return;
 			}

@@ -5,7 +5,7 @@ import checkstyle.checks.LeftCurlyCheck;
 class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectBraces() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		assertMsg(check, LeftCurlyTests.TEST, '');
 		assertMsg(check, LeftCurlyTests.TEST4, '');
 		assertMsg(check, LeftCurlyTests.TEST6, '');
@@ -15,7 +15,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 	}
 
 	public function testWrongBraces() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		assertMsg(check, LeftCurlyTests.TEST1, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST2, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST3, 'Left curly should be at EOL (only linebreak or comment after curly)');
@@ -23,11 +23,10 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST5, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST7, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST10, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST11, 'Left curly placement exceeds 160 character limit');
 	}
 
 	public function testBraceOnNL() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 
 		assertMsg(check, LeftCurlyTests.TEST, 'Left curly should be on new line (only whitespace before curly)');
@@ -50,7 +49,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 	}
 
 	public function testSwitch() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 		assertMsg(check, LeftCurlyTests.TEST15, '');
 	}
@@ -195,12 +194,6 @@ class LeftCurlyTests {
 	{
 		function test() {
 			if (true) return;
-		}
-	}";
-
-	public static inline var TEST11:String = "
-	class Test {
-		function test(aaaa:Int, bbbbb:String, ccccc:Float):Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>> {
 		}
 	}";
 
