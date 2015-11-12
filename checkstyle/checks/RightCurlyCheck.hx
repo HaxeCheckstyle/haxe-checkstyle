@@ -103,11 +103,13 @@ class RightCurlyCheck extends Check {
 
 	function checkTypeDef(td:TypeDecl) {
 		var firstPos:Position = null;
+		var maxPos:Int = td.pos.max;
 
 		ComplexTypeUtils.walkTypeDecl(td, function(t:ComplexType, name:String, pos:Position) {
 			if (firstPos == null) {
 				if (pos != td.pos) firstPos = pos;
 			}
+			if (pos.max > maxPos) maxPos = pos.max;
 			if (!hasToken(OBJECT_DECL)) return;
 			switch(t) {
 				case TAnonymous(_):
@@ -117,6 +119,10 @@ class RightCurlyCheck extends Check {
 		});
 		if (firstPos == null) return;
 		if (!hasToken(TYPEDEF_DEF)) return;
+		// td.pos only holds pos info about the type itself
+		// members only hold pos info about themself
+		// so real pos.max is pos.max of last member + 1
+		td.pos.max = maxPos + 1;
 		checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 	}
 
@@ -126,9 +132,9 @@ class RightCurlyCheck extends Check {
 			switch(e.expr) {
 				case EObjectDecl(fields):
 					if (!hasToken(OBJECT_DECL)) return;
-					var linePos:LinePos = checker.getLinePos(e.pos.min);
-					var line:String = checker.lines[linePos.line];
-					//checkLeftCurly(line, e.pos);
+					if (fields.length <= 0) return;
+					var lastExpr:Expr = fields[fields.length - 1].expr;
+					checkBlocks(lastExpr, isSingleLine(e.pos.min, lastExpr.pos.max));
 				case EFunction(_, f):
 					if (!hasToken(FUNCTION)) return;
 					checkBlocks(f.expr, isSingleLine(e.pos.min, f.expr.pos.max));
