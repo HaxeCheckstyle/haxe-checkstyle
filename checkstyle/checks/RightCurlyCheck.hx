@@ -5,9 +5,9 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("LeftCurly")
-@desc("Checks for placement of left curly braces")
-class LeftCurlyCheck extends Check {
+@name("RightCurly")
+@desc("Checks for placement of right curly braces")
+class RightCurlyCheck extends Check {
 
 	public static inline var CLASS_DEF:String = "CLASS_DEF";
 	public static inline var ENUM_DEF:String = "ENUM_DEF";
@@ -24,9 +24,9 @@ class LeftCurlyCheck extends Check {
 	public static inline var TRY:String = "TRY";
 	public static inline var CATCH:String = "CATCH";
 
-	public static inline var EOL:String = "eol";
-	public static inline var NL:String = "nl";
-	public static inline var NLOW:String = "nlow";
+	public static inline var SAME:String = "same";
+	public static inline var ALONE:String = "alone";
+	public static inline var ALONE_OR_SINGLELINE:String = "aloneorsingle";
 
 	public var tokens:Array<String>;
 	public var option:String;
@@ -48,7 +48,7 @@ class LeftCurlyCheck extends Check {
 			TRY,
 			CATCH
 		];
-		option = EOL;
+		option = ALONE_OR_SINGLELINE;
 	}
 
 	function hasToken(token:String):Bool {
@@ -69,26 +69,14 @@ class LeftCurlyCheck extends Check {
 					checkFields(d.data);
 					if (d.flags.indexOf(HInterface) > -1 && !hasToken(INTERFACE_DEF)) return;
 					if (d.flags.indexOf(HInterface) < 0 && !hasToken(CLASS_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
 				case EEnum(d):
 					if (!hasToken(ENUM_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
 				case EAbstract(d):
 					checkFields(d.data);
 					if (!hasToken(ABSTRACT_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
 				case ETypedef (d):
 					checkTypeDef(td);
 				default:
@@ -102,7 +90,8 @@ class LeftCurlyCheck extends Check {
 			switch (field.kind) {
 				case FFun(f):
 					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr, isFieldWrapped(field));
+					if (f.expr == null) return;
+					checkBlocks(f.expr, isSingleLine (f.expr.pos.min, f.expr.pos.max), false);
 				default:
 			}
 		}
@@ -124,7 +113,7 @@ class LeftCurlyCheck extends Check {
 		});
 		if (firstPos == null) return;
 		if (!hasToken(TYPEDEF_DEF)) return;
-		checkLinesBetween(td.pos.max, firstPos.min, td.pos);
+		checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
 	}
 
 	function walkFile() {
@@ -135,20 +124,26 @@ class LeftCurlyCheck extends Check {
 					if (!hasToken(OBJECT_DECL)) return;
 					var linePos:LinePos = checker.getLinePos(e.pos.min);
 					var line:String = checker.lines[linePos.line];
-					checkLeftCurly(line, e.pos);
+					//checkLeftCurly(line, e.pos);
 				case EFunction(_, f):
 					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr);
+					checkBlocks(f.expr, isSingleLine(e.pos.min, f.expr.pos.max), false);
 				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
-					checkBlocks(expr, isWrapped(it));
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), false);
 				case EIf(econd, eif, eelse):
 					if (!hasToken(IF)) return;
-					checkBlocks(eif, isWrapped(econd));
-					checkBlocks(eelse);
+					var sameLine:Bool = false;
+					if (eelse != null) {
+						sameLine = isSameLine (eif.pos.max, ~/\s*else/);
+					}
+					checkBlocks(eif, isSingleLine(e.pos.min, eif.pos.max), sameLine);
+					if (eelse != null) {
+						checkBlocks(eelse, isSingleLine(e.pos.min, eelse.pos.max), false);
+					}
 				case EWhile(econd, expr, _):
 					if (!hasToken(WHILE)) return;
-					checkBlocks(expr, isWrapped(econd));
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), false);
 				case ESwitch(expr, cases, edef):
 					if (!hasToken(SWITCH)) return;
 					var firstCase:Expr = edef;
@@ -156,86 +151,73 @@ class LeftCurlyCheck extends Check {
 						firstCase = cases[0].values[0];
 					}
 					if (firstCase == null) {
-						checkLinesBetween(e.pos.min, e.pos.max, isWrapped(expr), e.pos);
+						checkLinesBetween(e.pos.min, e.pos.max, e.pos);
 						return;
 					}
-					checkLinesBetween(expr.pos.max, firstCase.pos.min, isWrapped(expr), e.pos);
+					checkLinesBetween(expr.pos.max, firstCase.pos.min, e.pos);
 				case ETry(expr, catches):
 					if (!hasToken(TRY)) return;
-					checkBlocks(expr);
+					var sameLine:Bool = isSameLine (expr.pos.max, ~/\s*catch/);
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), sameLine);
 					for (ecatch in catches) {
-						checkBlocks(ecatch.expr);
+						sameLine = isSameLine (ecatch.expr.pos.max, ~/\s*catch/);
+						checkBlocks(ecatch.expr, isSingleLine(e.pos.min, ecatch.expr.pos.max), sameLine);
 					}
 				default:
 			}
 		});
 	}
 
-	function isFieldWrapped(field:Field):Bool {
-		var pos1:Int = field.pos.min;
-		var pos2:Int = pos1;
-		switch (field.kind) {
-			case FFun(f):
-				if (f.expr == null) {
-					return false;
-				}
-				pos2 = f.expr.pos.min;
-			default:
-				return false;
-		}
-
-		var functionDef:String = checker.file.content.substring(pos1, pos2);
-		return (functionDef.indexOf('\n') >= 0) ||
-				(functionDef.indexOf('\r') >= 0);
+	function checkPos(pos:Position, singleLine:Bool, needsSame:Bool) {
+		var linePos:Int = checker.getLinePos(pos.max).line;
+		var line:String = checker.lines[linePos];
+		checkRightCurly(line, singleLine, needsSame, pos);
 	}
 
-	function isWrapped(e:Expr):Bool {
-		if (e == null) return false;
-		return (checker.getLinePos(e.pos.min).line != checker.getLinePos(e.pos.max).line);
-	}
-
-	function checkBlocks(e:Expr, wrapped:Bool = false) {
+	function checkBlocks(e:Expr, singleLine:Bool, needsSame:Bool) {
 		if ((e == null) || (e.expr == null)) return;
 
 		switch(e.expr) {
 			case EBlock(_):
-				var linePos:LinePos = checker.getLinePos(e.pos.min);
-				var line:String = checker.lines[linePos.line];
-				checkLeftCurly(line, wrapped, e.pos);
+				var linePos:Int = checker.getLinePos(e.pos.max).line;
+				var line:String = checker.lines[linePos];
+				checkRightCurly(line, singleLine, needsSame, e.pos);
 			default:
 		}
 	}
 
-	function checkLinesBetween(min:Int, max:Int, wrapped:Bool = false, pos:Position) {
+	function isSingleLine(start:Int, end:Int):Bool {
+		var startLine:Int = checker.getLinePos(start).line;
+		var endLine:Int = checker.getLinePos(end).line;
+		return startLine == endLine;
+	}
+
+	function isSameLine(pos:Int, regex:EReg):Bool {
+		var linePos:LinePos = checker.getLinePos(pos);
+		var line:String = checker.lines[linePos.line].substr(linePos.ofs);
+
+		return regex.match(line);
+	}
+
+	function checkLinesBetween(min:Int, max:Int, pos:Position) {
 		if (isPosSuppressed(pos)) return;
 		var bracePos:Int = checker.file.content.lastIndexOf("{", max);
 		if (bracePos < 0 || bracePos < min) return;
 
 		var lineNum:Int = checker.getLinePos(bracePos).line;
 		var line:String = checker.lines[lineNum];
-		checkLeftCurly(line, wrapped, pos);
+		//checkLeftCurly(line, pos);
 	}
 
-	function checkLeftCurly(line:String, wrapped:Bool = false, pos:Position) {
-		var lineLength:Int = line.length;
-
-		// must have at least one non whitespace character before curly
-		// and only whitespace, } or // + comment after curly
-		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\/.*)$/.match(line);
-		// must have only whitespace before curly
-		var curlyOnNL:Bool = ~/^\s*\{\}?/.match(line);
-
+	function checkRightCurly(line:String, singleLine:Bool, needsSame:Bool, pos:Position) {
 		try {
-			if (curlyAtEOL) {
-				logErrorIf ((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
-				logErrorIf ((option == NLOW) && wrapped, 'Left curly should be on new line (previous expression is split over muliple lines)', pos);
-				logErrorIf ((option != EOL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
-				return;
-			}
-			logErrorIf ((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
-			logErrorIf ((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
-			logErrorIf ((option == NLOW) && !wrapped, 'Left curly should be at EOL (previous expression is not split over muliple lines)', pos);
-			logErrorIf ((option != NL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
+			logErrorIf (singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
+			if (singleLine) return;
+
+			var curlyAlone:Bool = ~/^\s*\}[\);\s]*(|\/\/.*)$/.match(line);
+			logErrorIf (!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
+			logErrorIf (curlyAlone && needsSame, 'Right curly should be alone on a new line', pos);
+			logErrorIf (needsSame && (option != SAME), 'Right curly must be on same line as following block (e.g. "} else {")', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
