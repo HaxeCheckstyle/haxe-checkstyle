@@ -236,6 +236,29 @@
 			}
 		},
 		{
+			"type": "RightCurly",
+			"props": {
+				"severity": "WARNING",
+				"option": "aloneorsingle",
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"CLASS_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				]
+			}
+		},
+		{
 			"type": "Spacing",
 			"props": {
 				"severity": "INFO",
