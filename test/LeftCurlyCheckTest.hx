@@ -12,6 +12,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST8, '');
 		assertMsg(check, LeftCurlyTests.TEST9, '');
 		assertMsg(check, LeftCurlyTests.TEST14, '');
+		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
 	}
 
 	public function testWrongBraces() {
@@ -23,6 +24,8 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST5, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST7, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST10, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
 	}
 
 	public function testBraceOnNL() {
@@ -52,6 +55,9 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 		assertMsg(check, LeftCurlyTests.TEST15, '');
+		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, '');
+		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
 	}
 
 	public function testNLOW() {
@@ -60,6 +66,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST, '');
 		assertMsg(check, LeftCurlyTests.TEST12, '');
 		assertMsg(check, LeftCurlyTests.TEST16, '');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, '');
 		assertMsg(check, LeftCurlyTests.TEST17, 'Left curly should be at EOL (previous expression is not split over muliple lines)');
 		assertMsg(check, LeftCurlyTests.TEST18, 'Left curly should be on new line (previous expression is split over muliple lines)');
 		assertMsg(check, LeftCurlyTests.TEST19, 'Left curly should be on new line (previous expression is split over muliple lines)');
@@ -303,6 +310,52 @@ class LeftCurlyTests {
 			switch(val * 10 -
 					val / 10) {
 				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var NL_CASEBLOCK:String = "
+	class Test
+	{
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val)
+			{
+				case 0:
+				{
+					// do nothing
+				}
+				default:
+			}
+		}
+	}";
+
+	public static inline var EOL_CASEBLOCK:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String {
+			switch(val) {
+				case 0: {
+					// do nothing
+				}
+				default:
+			}
+		}
+	}";
+
+	public static inline var NLOW_CASEBLOCK:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val) {
+				case (true ||
+					!false):
+				{
+					// do nothing
+				}
 				default:
 			}
 		}

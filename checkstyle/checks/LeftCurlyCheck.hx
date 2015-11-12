@@ -155,6 +155,10 @@ class LeftCurlyCheck extends Check {
 					if (cases.length > 0) {
 						firstCase = cases[0].values[0];
 					}
+					for (c in cases) {
+						checkBlocks(c.expr, isListWrapped(c.values));
+					}
+					checkBlocks(edef);
 					if (firstCase == null) {
 						checkLinesBetween(e.pos.min, e.pos.max, isWrapped(expr), e.pos);
 						return;
@@ -189,6 +193,14 @@ class LeftCurlyCheck extends Check {
 				(functionDef.indexOf('\r') >= 0);
 	}
 
+	function isListWrapped(es:Array<Expr>):Bool {
+		if (es == null) return false;
+		if (es.length <= 0) return false;
+		var posMin:Int = es[0].pos.min;
+		var posMax:Int = es[es.length - 1].pos.max;
+		return (checker.getLinePos(posMin).line != checker.getLinePos(posMax).line);
+	}
+
 	function isWrapped(e:Expr):Bool {
 		if (e == null) return false;
 		return (checker.getLinePos(e.pos.min).line != checker.getLinePos(e.pos.max).line);
@@ -196,6 +208,7 @@ class LeftCurlyCheck extends Check {
 
 	function checkBlocks(e:Expr, wrapped:Bool = false) {
 		if ((e == null) || (e.expr == null)) return;
+		if (checker.file.content.charAt(e.pos.min) != "{") return;
 
 		switch(e.expr) {
 			case EBlock(_):

@@ -247,6 +247,7 @@
 					"TYPEDEF_DEF",
 					"CLASS_DEF",
 					"INTERFACE_DEF",
+					"OBJECT_DECL",
 					"FUNCTION",
 					"FOR",
 					"IF",
