@@ -28,6 +28,8 @@ class RightCurlyCheck extends Check {
 	public static inline var ALONE:String = "alone";
 	public static inline var ALONE_OR_SINGLELINE:String = "aloneorsingle";
 
+	static var sameRegex:EReg;
+
 	public var tokens:Array<String>;
 	public var option:String;
 
@@ -49,6 +51,8 @@ class RightCurlyCheck extends Check {
 			CATCH
 		];
 		option = ALONE_OR_SINGLELINE;
+
+		sameRegex = ~/^\s*(else|catch)/;
 	}
 
 	function hasToken(token:String):Bool {
@@ -69,14 +73,14 @@ class RightCurlyCheck extends Check {
 					checkFields(d.data);
 					if (d.flags.indexOf(HInterface) > -1 && !hasToken(INTERFACE_DEF)) return;
 					if (d.flags.indexOf(HInterface) < 0 && !hasToken(CLASS_DEF)) return;
-					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 				case EEnum(d):
 					if (!hasToken(ENUM_DEF)) return;
-					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 				case EAbstract(d):
 					checkFields(d.data);
 					if (!hasToken(ABSTRACT_DEF)) return;
-					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
+					checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 				case ETypedef (d):
 					checkTypeDef(td);
 				default:
@@ -91,7 +95,7 @@ class RightCurlyCheck extends Check {
 				case FFun(f):
 					if (!hasToken(FUNCTION)) return;
 					if (f.expr == null) return;
-					checkBlocks(f.expr, isSingleLine (f.expr.pos.min, f.expr.pos.max), false);
+					checkBlocks(f.expr, isSingleLine (f.expr.pos.min, f.expr.pos.max));
 				default:
 			}
 		}
@@ -113,7 +117,7 @@ class RightCurlyCheck extends Check {
 		});
 		if (firstPos == null) return;
 		if (!hasToken(TYPEDEF_DEF)) return;
-		checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max), false);
+		checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 	}
 
 	function walkFile() {
@@ -127,23 +131,19 @@ class RightCurlyCheck extends Check {
 					//checkLeftCurly(line, e.pos);
 				case EFunction(_, f):
 					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr, isSingleLine(e.pos.min, f.expr.pos.max), false);
+					checkBlocks(f.expr, isSingleLine(e.pos.min, f.expr.pos.max));
 				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
-					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), false);
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max));
 				case EIf(econd, eif, eelse):
 					if (!hasToken(IF)) return;
-					var sameLine:Bool = false;
+					checkBlocks(eif, isSingleLine(e.pos.min, eif.pos.max));
 					if (eelse != null) {
-						sameLine = isSameLine (eif.pos.max, ~/\s*else/);
-					}
-					checkBlocks(eif, isSingleLine(e.pos.min, eif.pos.max), sameLine);
-					if (eelse != null) {
-						checkBlocks(eelse, isSingleLine(e.pos.min, eelse.pos.max), false);
+						checkBlocks(eelse, isSingleLine(e.pos.min, eelse.pos.max));
 					}
 				case EWhile(econd, expr, _):
 					if (!hasToken(WHILE)) return;
-					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), false);
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max));
 				case ESwitch(expr, cases, edef):
 					if (!hasToken(SWITCH)) return;
 					var firstCase:Expr = edef;
@@ -157,31 +157,29 @@ class RightCurlyCheck extends Check {
 					checkLinesBetween(expr.pos.max, firstCase.pos.min, e.pos);
 				case ETry(expr, catches):
 					if (!hasToken(TRY)) return;
-					var sameLine:Bool = isSameLine (expr.pos.max, ~/\s*catch/);
-					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max), sameLine);
+					checkBlocks(expr, isSingleLine(e.pos.min, expr.pos.max));
 					for (ecatch in catches) {
-						sameLine = isSameLine (ecatch.expr.pos.max, ~/\s*catch/);
-						checkBlocks(ecatch.expr, isSingleLine(e.pos.min, ecatch.expr.pos.max), sameLine);
+						checkBlocks(ecatch.expr, isSingleLine(e.pos.min, ecatch.expr.pos.max));
 					}
 				default:
 			}
 		});
 	}
 
-	function checkPos(pos:Position, singleLine:Bool, needsSame:Bool) {
+	function checkPos(pos:Position, singleLine:Bool) {
 		var linePos:Int = checker.getLinePos(pos.max).line;
 		var line:String = checker.lines[linePos];
-		checkRightCurly(line, singleLine, needsSame, pos);
+		checkRightCurly(line, singleLine, pos);
 	}
 
-	function checkBlocks(e:Expr, singleLine:Bool, needsSame:Bool) {
+	function checkBlocks(e:Expr, singleLine:Bool) {
 		if ((e == null) || (e.expr == null)) return;
 
 		switch(e.expr) {
 			case EBlock(_):
 				var linePos:Int = checker.getLinePos(e.pos.max).line;
 				var line:String = checker.lines[linePos];
-				checkRightCurly(line, singleLine, needsSame, e.pos);
+				checkRightCurly(line, singleLine, e.pos);
 			default:
 		}
 	}
@@ -209,15 +207,28 @@ class RightCurlyCheck extends Check {
 		//checkLeftCurly(line, pos);
 	}
 
-	function checkRightCurly(line:String, singleLine:Bool, needsSame:Bool, pos:Position) {
+	function checkRightCurly(line:String, singleLine:Bool, pos:Position) {
 		try {
+
+			var linePos:LinePos = checker.getLinePos(pos.max);
+			var afterCurly:String = checker.lines[linePos.line].substr(linePos.ofs);
+			var needsSame:Bool = sameRegex.match(afterCurly);
+			var couldBeSame:Bool = false;
+			if (checker.lines.length > linePos.line + 1) {
+				var nextLine:String = checker.lines[linePos.line + 1];
+				couldBeSame = sameRegex.match(nextLine);
+			}
+			// adjust to show correct line number in log message
+			pos.min = pos.max;
+
 			logErrorIf (singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
 			if (singleLine) return;
 
 			var curlyAlone:Bool = ~/^\s*\}[\);\s]*(|\/\/.*)$/.match(line);
 			logErrorIf (!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
 			logErrorIf (curlyAlone && needsSame, 'Right curly should be alone on a new line', pos);
-			logErrorIf (needsSame && (option != SAME), 'Right curly must be on same line as following block (e.g. "} else {")', pos);
+			logErrorIf (needsSame && (option != SAME), 'Right curly must not be on same line as following block', pos);
+			logErrorIf (couldBeSame && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else {")', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
