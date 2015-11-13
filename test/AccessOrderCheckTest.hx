@@ -27,6 +27,12 @@ class AccessOrderCheckTest extends CheckTestCase {
 		assertMsg(check, AccessOrderTests.TEST5, '');
 	}
 
+	public function testIgnore() {
+		var check = new AccessOrderCheck();
+		check.severity = "ignore";
+		assertMsg(check, AccessOrderTests.TEST1, '');
+	}
+
 }
 
 class AccessOrderTests {

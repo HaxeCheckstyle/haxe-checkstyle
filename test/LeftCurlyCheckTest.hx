@@ -5,17 +5,18 @@ import checkstyle.checks.LeftCurlyCheck;
 class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectBraces() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		assertMsg(check, LeftCurlyTests.TEST, '');
 		assertMsg(check, LeftCurlyTests.TEST4, '');
 		assertMsg(check, LeftCurlyTests.TEST6, '');
 		assertMsg(check, LeftCurlyTests.TEST8, '');
 		assertMsg(check, LeftCurlyTests.TEST9, '');
 		assertMsg(check, LeftCurlyTests.TEST14, '');
+		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
 	}
 
 	public function testWrongBraces() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		assertMsg(check, LeftCurlyTests.TEST1, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST2, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST3, 'Left curly should be at EOL (only linebreak or comment after curly)');
@@ -23,11 +24,12 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST5, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST7, 'Left curly should be at EOL (only linebreak or comment after curly)');
 		assertMsg(check, LeftCurlyTests.TEST10, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST11, 'Left curly placement exceeds 120 character limit');
+		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
 	}
 
 	public function testBraceOnNL() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 
 		assertMsg(check, LeftCurlyTests.TEST, 'Left curly should be on new line (only whitespace before curly)');
@@ -50,9 +52,24 @@ class LeftCurlyCheckTest extends CheckTestCase {
 	}
 
 	public function testSwitch() {
-		var check = new LeftCurlyCheck ();
+		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 		assertMsg(check, LeftCurlyTests.TEST15, '');
+		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, '');
+		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
+	}
+
+	public function testNLOW() {
+		var check = new LeftCurlyCheck();
+		check.option = LeftCurlyCheck.NLOW;
+		assertMsg(check, LeftCurlyTests.TEST, '');
+		assertMsg(check, LeftCurlyTests.TEST12, '');
+		assertMsg(check, LeftCurlyTests.TEST16, '');
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, '');
+		assertMsg(check, LeftCurlyTests.TEST17, 'Left curly should be at EOL (previous expression is not split over muliple lines)');
+		assertMsg(check, LeftCurlyTests.TEST18, 'Left curly should be on new line (previous expression is split over muliple lines)');
+		assertMsg(check, LeftCurlyTests.TEST19, 'Left curly should be on new line (previous expression is split over muliple lines)');
 	}
 }
 
@@ -198,12 +215,6 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST11:String = "
-	class Test {
-		function test():Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<Array<String>>>>>>>>>>>>>>> {
-		}
-	}";
-
 	public static inline var TEST12:String = "
 	class Test {
 		function test() {
@@ -248,6 +259,104 @@ class LeftCurlyTests {
 				case true: // do nothing
 				default:
 					return 'test abc ${val}';
+			}
+		}
+	}";
+
+	public static inline var TEST16:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val * 10 -
+					val / 10)
+			{
+				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST17:String = "
+	class Test {
+		public function test(val:Int, val2:Int):String
+		{
+			switch(val * 10 - val / 10)
+			{
+				case 1: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST18:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String {
+			switch(val * 10 -
+					val / 10)
+			{
+				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var TEST19:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val * 10 -
+					val / 10) {
+				case 0: // do nothing
+				default:
+			}
+		}
+	}";
+
+	public static inline var NL_CASEBLOCK:String = "
+	class Test
+	{
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val)
+			{
+				case 0:
+				{
+					// do nothing
+				}
+				default:
+			}
+		}
+	}";
+
+	public static inline var EOL_CASEBLOCK:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String {
+			switch(val) {
+				case 0: {
+					// do nothing
+				}
+				default:
+			}
+		}
+	}";
+
+	public static inline var NLOW_CASEBLOCK:String = "
+	class Test {
+		public function test(val:Int,
+				val2:Int):String
+		{
+			switch(val) {
+				case (true ||
+					!false):
+				{
+					// do nothing
+				}
+				default:
 			}
 		}
 	}";

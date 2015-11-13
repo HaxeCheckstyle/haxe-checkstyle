@@ -6,4 +6,6 @@
 
 `Info: LINE - 6: Invalid enum member signature: ERROR (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)`
 
-`Total Issues: 3 (Errors: 0 Warnings: 0 Infos: 3)`
+`Info: LINE - 7: Invalid enum member signature: IGNORE (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)`
+
+`Total Issues: 4 (Errors: 0 Warnings: 0 Infos: 4)`

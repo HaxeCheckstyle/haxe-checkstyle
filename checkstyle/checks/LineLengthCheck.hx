@@ -4,7 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("LineLength")
-@desc("Max line length (default 200)")
+@desc("Max line length (default 160)")
 class LineLengthCheck extends Check {
 
 	public var maxCharacters:Int;

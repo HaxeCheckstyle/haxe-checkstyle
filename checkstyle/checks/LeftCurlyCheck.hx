@@ -26,10 +26,10 @@ class LeftCurlyCheck extends Check {
 
 	public static inline var EOL:String = "eol";
 	public static inline var NL:String = "nl";
+	public static inline var NLOW:String = "nlow";
 
 	public var tokens:Array<String>;
 	public var option:String;
-	public var maxLineLength:Int;
 
 	public function new() {
 		super();
@@ -49,7 +49,6 @@ class LeftCurlyCheck extends Check {
 			CATCH
 		];
 		option = EOL;
-		maxLineLength = 120;
 	}
 
 	function hasToken(token:String):Bool {
@@ -103,7 +102,7 @@ class LeftCurlyCheck extends Check {
 			switch (field.kind) {
 				case FFun(f):
 					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr);
+					checkBlocks(f.expr, isFieldWrapped(field));
 				default:
 			}
 		}
@@ -142,25 +141,29 @@ class LeftCurlyCheck extends Check {
 					checkBlocks(f.expr);
 				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
-					checkBlocks(expr);
+					checkBlocks(expr, isWrapped(it));
 				case EIf(econd, eif, eelse):
 					if (!hasToken(IF)) return;
-					checkBlocks(eif);
+					checkBlocks(eif, isWrapped(econd));
 					checkBlocks(eelse);
 				case EWhile(econd, expr, _):
 					if (!hasToken(WHILE)) return;
-					checkBlocks(expr);
+					checkBlocks(expr, isWrapped(econd));
 				case ESwitch(expr, cases, edef):
 					if (!hasToken(SWITCH)) return;
 					var firstCase:Expr = edef;
 					if (cases.length > 0) {
 						firstCase = cases[0].values[0];
 					}
+					for (c in cases) {
+						checkBlocks(c.expr, isListWrapped(c.values));
+					}
+					checkBlocks(edef);
 					if (firstCase == null) {
-						checkLinesBetween(e.pos.min, e.pos.max, e.pos);
+						checkLinesBetween(e.pos.min, e.pos.max, isWrapped(expr), e.pos);
 						return;
 					}
-					checkLinesBetween(expr.pos.max, firstCase.pos.min, e.pos);
+					checkLinesBetween(expr.pos.max, firstCase.pos.min, isWrapped(expr), e.pos);
 				case ETry(expr, catches):
 					if (!hasToken(TRY)) return;
 					checkBlocks(expr);
@@ -172,30 +175,61 @@ class LeftCurlyCheck extends Check {
 		});
 	}
 
-	function checkBlocks(e:Expr) {
+	function isFieldWrapped(field:Field):Bool {
+		var pos1:Int = field.pos.min;
+		var pos2:Int = pos1;
+		switch (field.kind) {
+			case FFun(f):
+				if (f.expr == null) {
+					return false;
+				}
+				pos2 = f.expr.pos.min;
+			default:
+				return false;
+		}
+
+		var functionDef:String = checker.file.content.substring(pos1, pos2);
+		return (functionDef.indexOf('\n') >= 0) ||
+				(functionDef.indexOf('\r') >= 0);
+	}
+
+	function isListWrapped(es:Array<Expr>):Bool {
+		if (es == null) return false;
+		if (es.length <= 0) return false;
+		var posMin:Int = es[0].pos.min;
+		var posMax:Int = es[es.length - 1].pos.max;
+		return (checker.getLinePos(posMin).line != checker.getLinePos(posMax).line);
+	}
+
+	function isWrapped(e:Expr):Bool {
+		if (e == null) return false;
+		return (checker.getLinePos(e.pos.min).line != checker.getLinePos(e.pos.max).line);
+	}
+
+	function checkBlocks(e:Expr, wrapped:Bool = false) {
 		if ((e == null) || (e.expr == null)) return;
+		if (checker.file.content.charAt(e.pos.min) != "{") return;
 
 		switch(e.expr) {
 			case EBlock(_):
 				var linePos:LinePos = checker.getLinePos(e.pos.min);
 				var line:String = checker.lines[linePos.line];
-				checkLeftCurly(line, e.pos);
+				checkLeftCurly(line, wrapped, e.pos);
 			default:
 		}
 	}
 
-	function checkLinesBetween(min:Int, max:Int, pos:Position) {
+	function checkLinesBetween(min:Int, max:Int, wrapped:Bool = false, pos:Position) {
 		if (isPosSuppressed(pos)) return;
 		var bracePos:Int = checker.file.content.lastIndexOf("{", max);
 		if (bracePos < 0 || bracePos < min) return;
 
 		var lineNum:Int = checker.getLinePos(bracePos).line;
 		var line:String = checker.lines[lineNum];
-		checkLeftCurly(line, pos);
+		checkLeftCurly(line, wrapped, pos);
 	}
 
-	@SuppressWarnings("checkstyle:BlockFormat")
-	function checkLeftCurly(line:String, pos:Position) {
+	function checkLeftCurly(line:String, wrapped:Bool = false, pos:Position) {
 		var lineLength:Int = line.length;
 
 		// must have at least one non whitespace character before curly
@@ -207,13 +241,14 @@ class LeftCurlyCheck extends Check {
 		try {
 			if (curlyAtEOL) {
 				logErrorIf ((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
-				logErrorIf ((lineLength > maxLineLength), 'Left curly placement exceeds ${maxLineLength} character limit', pos);
-				logErrorIf ((option != EOL), 'Left curly unknown option ${option}', pos);
+				logErrorIf ((option == NLOW) && wrapped, 'Left curly should be on new line (previous expression is split over muliple lines)', pos);
+				logErrorIf ((option != EOL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
 				return;
 			}
 			logErrorIf ((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
 			logErrorIf ((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
-			logErrorIf ((option != NL), 'Left curly unknown option ${option}', pos);
+			logErrorIf ((option == NLOW) && !wrapped, 'Left curly should be at EOL (previous expression is not split over muliple lines)', pos);
+			logErrorIf ((option != NL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
