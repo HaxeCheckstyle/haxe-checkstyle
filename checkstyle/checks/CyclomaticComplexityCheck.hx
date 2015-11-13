@@ -11,6 +11,7 @@ using Lambda;
 
 @name("CyclomaticComplexity")
 @desc("McCabe simplified cyclomatic complexity check")
+@SuppressWarnings(['checkstyle:CyclomaticComplexity', 'checkstyle:LeftCurly', 'checkstyle:RightCurly'])
 class CyclomaticComplexityCheck extends Check {
 
 	public var thresholds:Array<Threshold>;
@@ -60,8 +61,6 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
-
-	@SuppressWarnings(['checkstyle:CyclomaticComplexity', 'checkstyle:LeftCurly'])
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch(e.expr) {

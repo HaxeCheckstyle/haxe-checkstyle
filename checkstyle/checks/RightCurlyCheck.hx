@@ -172,6 +172,7 @@ class RightCurlyCheck extends Check {
 	}
 
 	function checkPos(pos:Position, singleLine:Bool) {
+		if (isPosSuppressed(pos)) return;
 		var bracePos:Int = checker.file.content.lastIndexOf("}", pos.max);
 		if (bracePos < 0 || bracePos < pos.min) return;
 
