@@ -15,8 +15,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added RightCurlyCheck",
-	"version": "1.1.9",
+	"releasenote": "breaking changes in FileLength, LineLength, MethodLength & EmptyLines checks",
+	"version": "1.2.0",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
