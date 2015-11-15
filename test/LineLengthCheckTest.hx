@@ -16,7 +16,7 @@ class LineLengthCheckTest extends CheckTestCase {
 
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
-		check.maxCharacters = 40;
+		check.max = 40;
 
 		var msg = checkMessage(LineLengthTests.TEST3, check);
 		assertEquals(msg, 'Too long line (> 40)');
