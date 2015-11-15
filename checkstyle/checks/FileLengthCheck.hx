@@ -15,6 +15,12 @@ class FileLengthCheck extends Check {
 	}
 
 	override function actualRun() {
+		for (td in checker.ast.decls) {
+			switch (td.decl){
+				case EClass(d): for (field in d.data) if (isCheckSuppressed (field)) return;
+				default:
+			}
+		}
 		if (checker.lines.length > max) log('Too many lines in file (> ${max})', checker.lines.length, 1, Reflect.field(SeverityLevel, severity));
 	}
 }
