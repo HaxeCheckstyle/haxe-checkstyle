@@ -21,6 +21,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, '');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, '');
+		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, '');
 
 		assertMsg(check, RightCurlyTests.ALONE_IF, '');
 		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
@@ -35,12 +36,14 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
+		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
 	}
 
 	public function testIncorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, 'Right curly should be alone on a new line');
 	}
 
 	public function testCorrectSame() {
@@ -48,6 +51,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		check.option = RightCurlyCheck.SAME;
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, '');
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
+		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, '');
 
 		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
 		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
@@ -60,6 +64,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
+		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
 	}
 
 	public function testIncorrectSame() {
@@ -77,6 +82,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, 'Right curly should not be on same line as left curly');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, 'Right curly should not be on same line as left curly');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, 'Right curly should not be on same line as left curly');
 
 		assertMsg(check, RightCurlyTests.ALONE_IF, 'Right curly should be on same line as following block (e.g. "} else" or "} catch")');
 		assertMsg(check, RightCurlyTests.ALONE_TRY_CATCH, 'Right curly should be on same line as following block (e.g. "} else" or "} catch")');
@@ -97,6 +103,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
+		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
 	}
 
 	public function testIncorrectAlone() {
@@ -115,9 +122,11 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, 'Right curly should not be on same line as left curly');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, 'Right curly should not be on same line as left curly');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, 'Right curly should not be on same line as left curly');
 
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, 'Right curly should be alone on a new line');
 	}
 
 	public function testTokenIF() {
@@ -320,14 +329,14 @@ class RightCurlyTests {
 	}";
 
 	public static inline var SINGLELINE_TYPEDEF:String = "
-	typedef Test = { x:Int, y:Int, z:Int };";
+	typedef Test = { x:Int, y:Int, z:Int }";
 
 	public static inline var ALONE_TYPEDEF:String = "
 	typedef Test = {
 		x:Int,
 		y:Int,
 		z:Int
-	};";
+	}";
 
 	public static inline var SINGLELINE_SWITCH:String = "
 	class Test {
@@ -416,5 +425,76 @@ class RightCurlyTests {
 		Thursday;
 		Friday;
 		Weekend(day:String);
+	}";
+
+	public static inline var SINGLELINE_NESTED_OBJECT:String = "
+	class Test {
+		public function test() {
+			var l = {
+				p1 : { x:100, y: 10, z: 2 },
+				p2 : { x:200, y: 50, z: 2 }
+			};
+			var l2 = [
+				{ x:100, y: 10, z: 2 },
+				{ x:200, y: 50, z: 2 }];
+		}
+	}";
+
+	public static inline var SAMELINE_NESTED_OBJECT:String = "
+	class Test {
+		public function test() {
+			var l = {
+				p1 : {
+					x:100,
+					y: 10,
+					z: 2
+				},
+				p2 : {
+					x:200,
+					y: 50,
+					z: 2
+				}};
+			var l2 = [
+				{
+					x:100,
+					y: 10,
+					z: 2
+				},
+				{
+					x:200,
+					y: 50,
+					z: 2
+				}];
+		}
+	}";
+
+	public static inline var ALONE_NESTED_OBJECT:String = "
+	class Test {
+		public function test() {
+			var l = {
+				p1 : {
+					x:100,
+					y: 10,
+					z: 2
+				},
+				p2 : {
+					x:200,
+					y: 50,
+					z: 2
+				}
+			};
+			var l2 = [
+				{
+					x:100,
+					y: 10,
+					z: 2
+				},
+				{
+					x:200,
+					y: 50,
+					z: 2
+				}
+			];
+		}
 	}";
 }

@@ -52,7 +52,6 @@ class Checker {
 	}
 
 	public function getLinePos(off:Int):LinePos {
-		if (off == file.content.length) off--;
 		for (i in 0...linesIdx.length) {
 			if (linesIdx[i].l <= off && linesIdx[i].r >= off) {
 				return { line:i, ofs: off - linesIdx[i].l };
