@@ -1,5 +1,6 @@
 package checkstyle;
 
+@SuppressWarnings('checkstyle:MemberName')
 enum SeverityLevel {
 	INFO;
 	WARNING;

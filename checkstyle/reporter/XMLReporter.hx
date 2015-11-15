@@ -31,7 +31,6 @@ class XMLReporter implements IReporter {
 			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + style + "\" ?>\n");
 		}
 		sb.add("<checkstyle version=\"5.0\">\n");
-		//Sys.stdout().writeString(sb.toString());
 		report.add(sb.toString());
 	}
 

@@ -26,7 +26,7 @@ class MemberNameCheck extends NameCheckBase {
 	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
-		checkEnumFields(d.data);
+		if (!hasSuppressWarningsMeta(d.meta)) checkEnumFields(d.data);
 	}
 
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
@@ -67,9 +67,7 @@ class MemberNameCheck extends NameCheckBase {
 	}
 
 	function checkEnumFields(d:Array<EnumConstructor>) {
-		for (field in d) {
-			matchTypeName("enum member", field.name, field.pos);
-		}
+		for (field in d) matchTypeName("enum member", field.name, field.pos);
 	}
 
 	function checkField(f:Field, t:ComplexType, e:Expr) {

@@ -63,14 +63,14 @@ class Main {
 		var configPath:String = null;
 
 		var argHandler = Args.generate([
-			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) PATH = loc,
+			@doc("Set reporter path (.xml file)") ["-p", "--path"] => function(loc:String) PATH = loc,
 			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
-			@doc("Set reporter") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
-			@doc("Set config file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
-			@doc("List all checks") ["--list-checks"] => function() listChecks(),
-			@doc("List all reporters") ["--list-reporters"] => function() listReporters(),
-			@doc("Generate build time report") ["-report"] => function() REPORT = true,
-			@doc("Set sources to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
+			@doc("Set reporter (xml or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
+			@doc("Set config (.json) file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
+			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
+			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
+			@doc("Show report") ["-report"] => function() REPORT = true,
+			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
 			_ => function(arg:String) throw "Unknown command: " + arg
 		]);
 

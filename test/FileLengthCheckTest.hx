@@ -24,6 +24,14 @@ class FileLengthCheckTest extends CheckTestCase {
 		var msg = checkMessage(FileLengthTests.TEST41, check);
 		assertEquals('Too many lines in file (> 40)', msg);
 	}
+
+	public function testSupressFileLength() {
+		var check = new FileLengthCheck();
+		check.max = 40;
+
+		var msg = checkMessage(FileLengthTests.TEST42, check);
+		assertEquals('', msg);
+	}
 }
 
 class FileLengthTests {
@@ -122,6 +130,15 @@ class FileLengthTests {
 	}";                                                                                                        // 2000
 
 	public static inline var TEST41:String = "
+	class Test {
+		public function new() {
+		}
+		//                10                   20                   30                   40                 49 //  6
+		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n                                // 40
+	}";
+	
+	public static inline var TEST42:String = "
+	@SuppressWarnings('checkstyle:FileLength')
 	class Test {
 		public function new() {
 		}
