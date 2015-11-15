@@ -9,14 +9,14 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("MethodLength")
-@desc("Maximum function length (default 50 lines)")
+@desc("Maximum function length (default 150 lines)")
 class MethodLengthCheck extends Check {
 
 	public var maxFunctionLines:Int;
 
 	public function new() {
 		super();
-		maxFunctionLines = 50;
+		maxFunctionLines = 150;
 	}
 
 	override public function actualRun() {
