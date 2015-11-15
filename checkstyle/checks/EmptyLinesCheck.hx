@@ -6,11 +6,11 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for consecutive empty lines (default 1)")
 class EmptyLinesCheck extends Check {
 
-	public var maxConsecutiveEmptyLines:Int;
+	public var max:Int;
 
 	public function new() {
 		super();
-		maxConsecutiveEmptyLines = 1;
+		max = 1;
 	}
 
 	override function actualRun() {
@@ -30,18 +30,18 @@ class EmptyLinesCheck extends Check {
 			else {
 				if (inGroup) {
 					inGroup = false;
-					if (end - start + 1 > maxConsecutiveEmptyLines) logInfo(start);
+					if (end - start + 1 > max) logInfo(start);
 				}
 			}
 		}
 
 		if (inGroup) {
 			inGroup = false;
-			if (end - start + 1 > maxConsecutiveEmptyLines) logInfo(start);
+			if (end - start + 1 > max) logInfo(start);
 		}
 	}
 
 	function logInfo(pos) {
-		log('Too many consecutive empty lines (> ${maxConsecutiveEmptyLines})', pos, 0, Reflect.field(SeverityLevel, severity));
+		log('Too many consecutive empty lines (> ${max})', pos, 0, Reflect.field(SeverityLevel, severity));
 	}
 }

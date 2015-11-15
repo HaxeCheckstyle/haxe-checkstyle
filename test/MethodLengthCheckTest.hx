@@ -6,7 +6,7 @@ class MethodLengthCheckTest extends CheckTestCase {
 
 	public function testWrongMethodLength() {
 		var msg = checkMessage(MethodLengthTests.TEST1, new MethodLengthCheck());
-		assertEquals(msg, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
+		assertEquals(msg, 'Function is too long: test (> 150 lines, try splitting into multiple functions)');
 	}
 
 	public function testCorrectMethodLength() {
@@ -16,7 +16,7 @@ class MethodLengthCheckTest extends CheckTestCase {
 
 	public function testConfigurableMethodLength() {
 		var check = new MethodLengthCheck();
-		check.maxFunctionLines = 10;
+		check.max = 10;
 
 		var msg = checkMessage(MethodLengthTests.TEST3, check);
 		assertEquals(msg, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
@@ -27,57 +27,16 @@ class MethodLengthTests {
 	public static inline var TEST1:String = "
 	class Test {
 		public function test() {
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
-
-			tarce('TEST');
+			tarce('TEST');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 		}
 	}";
 
