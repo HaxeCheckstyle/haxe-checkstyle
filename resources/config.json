@@ -62,7 +62,7 @@
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",
-				"maxConsecutiveEmptyLines": 1
+				"max": 1
 			}
 		},
 		{
@@ -118,7 +118,7 @@
 			"type": "LineLength",
 			"props": {
 				"severity": "ERROR",
-				"maxCharacters": 160
+				"max": 160
 			}
 		},
 		{
@@ -167,7 +167,7 @@
 			"type": "MethodLength",
 			"props": {
 				"severity": "ERROR",
-				"maxFunctionLines": 50
+				"max": 50
 			}
 		},
 		{
