@@ -16,7 +16,7 @@ class MethodLengthCheckTest extends CheckTestCase {
 
 	public function testConfigurableMethodLength() {
 		var check = new MethodLengthCheck();
-		check.maxFunctionLines = 10;
+		check.max = 10;
 
 		var msg = checkMessage(MethodLengthTests.TEST3, check);
 		assertEquals(msg, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');

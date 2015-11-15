@@ -7,19 +7,19 @@ import haxeparser.Data.Token;
 @desc("Max line length (default 160)")
 class LineLengthCheck extends Check {
 
-	public var maxCharacters:Int;
+	public var max:Int;
 
 	public function new() {
 		super();
-		maxCharacters = 160;
+		max = 160;
 	}
 
 	override function actualRun() {
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
-			if (line.length > maxCharacters) {
+			if (line.length > max) {
 				if (isLineSuppressed(i)) continue;
-				log('Too long line (> ${maxCharacters})', i + 1, 1, Reflect.field(SeverityLevel, severity));
+				log('Too long line (> ${max})', i + 1, 1, Reflect.field(SeverityLevel, severity));
 			}
 		}
 	}

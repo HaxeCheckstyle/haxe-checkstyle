@@ -16,7 +16,7 @@ class EmptyLinesCheckTest extends CheckTestCase {
 
 	public function testConfigurableEmptyLines() {
 		var check = new EmptyLinesCheck();
-		check.maxConsecutiveEmptyLines = 2;
+		check.max = 2;
 
 		var msg = checkMessage(EmptyLinesTests.TEST3, check);
 		assertEquals(msg, '');
