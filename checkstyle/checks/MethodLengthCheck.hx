@@ -9,14 +9,14 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("MethodLength")
-@desc("Maximum function length (default 150 lines)")
+@desc("Checks for long methods (default 50 lines)")
 class MethodLengthCheck extends Check {
 
-	public var maxFunctionLines:Int;
+	public var max:Int;
 
 	public function new() {
 		super();
-		maxFunctionLines = 150;
+		max = 150;
 	}
 
 	override public function actualRun() {
@@ -55,7 +55,7 @@ class MethodLengthCheck extends Check {
 		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
-		if (lmax - lmin > maxFunctionLines) warnFunctionLength(f.name, lp.line + 1, lp.ofs + 1);
+		if (lmax - lmin > max) warnFunctionLength(f.name, lp.line + 1, lp.ofs + 1);
 	}
 
 	function checkFunction(f:Expr) {
@@ -69,10 +69,10 @@ class MethodLengthCheck extends Check {
 			default: throw "EFunction only";
 		}
 
-		if (lmax - lmin > maxFunctionLines) warnFunctionLength(fname, lp.line + 1, lp.ofs + 1);
+		if (lmax - lmin > max) warnFunctionLength(fname, lp.line + 1, lp.ofs + 1);
 	}
 
 	function warnFunctionLength(name:String, pos:Int, ofs:Int) {
-		log('Function is too long: ${name} (> ${maxFunctionLines} lines, try splitting into multiple functions)', pos, ofs, Reflect.field(SeverityLevel, severity));
+		log('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos, ofs, Reflect.field(SeverityLevel, severity));
 	}
 }
