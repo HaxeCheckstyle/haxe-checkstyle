@@ -13,10 +13,10 @@ class MemberNameCheckTest extends CheckTestCase {
 
 	public function testWrongNaming() {
 		var check = new MemberNameCheck ();
-		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/${check.format}/)');
 	}
 
 	public function testIgnoreExtern() {
@@ -24,11 +24,11 @@ class MemberNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		assertMsg(check, MemberNameTests.TEST, '');
-		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST4, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST4, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/${check.format}/)');
 	}
 
 	public function testTokenPUBLIC() {
@@ -36,14 +36,14 @@ class MemberNameCheckTest extends CheckTestCase {
 		check.tokens = [ "PUBLIC" ];
 
 		assertMsg(check, MemberNameTests.TEST, '');
-		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST2, '');
 		assertMsg(check, MemberNameTests.TEST3, '');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, '');
 
 		check.tokens = [ "PUBLIC", "TYPEDEF" ];
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
 	}
 
 	public function testTokenPRIVATE() {
@@ -52,13 +52,13 @@ class MemberNameCheckTest extends CheckTestCase {
 
 		assertMsg(check, MemberNameTests.TEST, '');
 		assertMsg(check, MemberNameTests.TEST1, '');
-		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST3, '');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, '');
 
 		check.tokens = [ "PRIVATE", "TYPEDEF" ];
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
 	}
 
 	public function testTokenENUM() {
@@ -69,8 +69,8 @@ class MemberNameCheckTest extends CheckTestCase {
 		assertMsg(check, MemberNameTests.TEST1, '');
 		assertMsg(check, MemberNameTests.TEST3, '');
 		assertMsg(check, MemberNameTests.TEST4, '');
-		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, MemberNameTests.TEST6, 'Invalid enum member signature: VALUE (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST6, 'Invalid enum member signature: VALUE (name should be ~/${check.format}/)');
 	}
 
 	public function testTokenTYPEDEF() {
@@ -79,7 +79,7 @@ class MemberNameCheckTest extends CheckTestCase {
 
 		assertMsg(check, MemberNameTests.TEST, '');
 		assertMsg(check, MemberNameTests.TEST1, '');
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, '');
 	}
@@ -88,17 +88,17 @@ class MemberNameCheckTest extends CheckTestCase {
 		var check = new MemberNameCheck ();
 		check.format = "^[A-Z_]*$";
 
-		assertMsg(check, MemberNameTests.TEST, 'Invalid typedef member signature: count2 (name should be ~/^[A-Z_]*$/)');
-		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/^[A-Z_]*$/)');
-		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/^[A-Z_]*$/)');
-		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/^[A-Z_]*$/)');
+		assertMsg(check, MemberNameTests.TEST, 'Invalid typedef member signature: count2 (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST1, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST4, '');
 		assertMsg(check, MemberNameTests.TEST5, '');
 		assertMsg(check, MemberNameTests.TEST6, '');
 
 		check.format = "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$";
-		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST_ (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$/)');
-		assertMsg(check, MemberNameTests.TEST6, 'Invalid enum member signature: VALUE_ (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$/)');
+		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST_ (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.TEST6, 'Invalid enum member signature: VALUE_ (name should be ~/${check.format}/)');
 	}
 }
 
