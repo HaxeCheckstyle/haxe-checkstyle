@@ -20,7 +20,7 @@ class ListenerNameCheck extends Check {
 	public function new() {
 		super();
 		listeners = ["addEventListener", "addListener", "on", "once"];
-		format = "^_?[a-z]+[a-zA-Z0-9]*$";
+		format = "^_?[a-z][a-zA-Z0-9]*$";
 	}
 
 	override public function actualRun() {

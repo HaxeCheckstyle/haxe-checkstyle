@@ -14,7 +14,7 @@ class ListenerNameCheckTest extends CheckTestCase {
 		var check = new ListenerNameCheck();
 		check.format = "^_?on.*";
 		var msg = checkMessage(ListernerTests.TEST1, check);
-		assertEquals(msg, 'Wrong listener name: _testUpdate (should be ~/^_?on.*/)');
+		assertEquals(msg, 'Wrong listener name: _testUpdate (should be ~/${check.format}/)');
 	}
 }
 

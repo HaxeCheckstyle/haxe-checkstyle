@@ -125,7 +125,7 @@
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"format": "^[a-z][a-zA-Z0-9]*$",
 				"listeners": [
 					"addEventListener",
 					"addListener",
@@ -303,7 +303,7 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^I[A-Z]+[a-zA-Z0-9]*$",
+				"format": "^I[A-Z][a-zA-Z0-9]*$",
 				"tokens": [
 					"INTERFACE"
 				]
@@ -313,7 +313,7 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"format": "^[A-Z][a-zA-Z0-9]*$",
 				"tokens": [
 					"CLASS",
 					"ENUM",
