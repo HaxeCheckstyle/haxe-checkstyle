@@ -138,7 +138,7 @@
 			"type": "LocalVariableName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$"
+				"format": "^[a-z][a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -155,7 +155,7 @@
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [
 					"PUBLIC",
 					"PRIVATE",
@@ -174,8 +174,15 @@
 			"type": "MethodName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
-				"tokens": []
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [
+					"PUBLIC",
+					"PRIVATE",
+					"STATIC",
+					"NOTSTATIC",
+					"INLINE",
+					"NOTINLINE"
+				]
 			}
 		},
 		{
@@ -211,7 +218,7 @@
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$"
+				"format": "^[a-z][a-zA-Z0-9]*$"
 			}
 		},
 		{

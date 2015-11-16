@@ -5,12 +5,12 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("LocalVariableName")
-@desc("Checks on naming conventions of local variables")
+@desc("Checks the local variable names")
 class LocalVariableNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		format = "^[a-z]+[a-zA-Z0-9]*$";
+		format = "^[a-z][a-zA-Z0-9]*$";
 	}
 
 	override function actualRun() {

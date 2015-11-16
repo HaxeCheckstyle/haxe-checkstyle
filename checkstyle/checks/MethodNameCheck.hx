@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("MethodName")
-@desc("Checks on naming conventions of methods")
+@desc("Checks the method names")
 class MethodNameCheck extends NameCheckBase {
 
 	public static inline var PUBLIC:String = "PUBLIC";
@@ -16,7 +16,7 @@ class MethodNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		format = "^[a-z]+[a-zA-Z0-9]*$";
+		format = "^[a-z][a-zA-Z0-9]*$";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
