@@ -14,22 +14,91 @@ class TreeTokenizer {
 	public static function makeTokenTree(tokens:Array<Token>):TokenTree {
 		var root:TokenTree = new TokenTree(null, null);
 		var stream:TokenStream = new TokenStream(tokens);
-		walkTokens(stream, root);
+		//walkTokens(stream, root);
+		walkFile(stream, root);
 		trace (root);
 		return root;
 	}
 
-	//static function walkFile(stream:TokenStream, parent:TokenTree):TokenTree {
-	//    var newChild:TokenTree = null;
-	//    while (stream.hasMore()) {
-	//        newChild = stream.consumeToken();
-	//        parent.addChild(newChild);
-	//        switch (newChild.tok) {
-	//            case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdClass), Kwd(KwdInterface):
-	//            walkTokens(stream, newChild);
-	//        }
-	//    }
-	//}
+	static function walkFile(stream:TokenStream, parent:TokenTree) {
+		var newChild:TokenTree = null;
+		var tempStore:Array<TokenTree> = [];
+		while (stream.hasMore()) {
+			switch (stream.token()) {
+				case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdUsing):
+					for (stored in tempStore) parent.addChild(stored);
+					tempStore = [];
+					walkPackageImport(stream, parent);
+				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdMacro), Kwd(KwdEnum), Kwd(KwdTypedef), Kwd(KwdAbstract):
+					walkType(stream, parent, tempStore);
+				default:
+					tempStore.push(stream.consumeToken());
+			}
+		}
+	}
+	static function walkType(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
+		var newChild:TokenTree = stream.consumeToken();
+		// add keyword (class, interface, abstract, macro, typedef, enum)
+		parent.addChild(newChild);
+		parent = newChild;
+		// add name
+		// TODO <> handling!!!
+		newChild = stream.consumeToken();
+		parent.addChild(newChild);
+		// add all comments, annotations
+		for (prefix in prefixes) newChild.addChild(prefix);
+		switch (parent.tok) {
+			case Kwd(KwdClass):
+				walkClass(stream, newChild);
+			case Kwd(KwdInterface):
+				walkInterface(stream, newChild);
+			case Kwd(KwdAbstract):
+				walkAbstract(stream, newChild);
+			case Kwd(KwdTypedef):
+				walkTypedef(stream, newChild);
+			case Kwd(KwdEnum):
+				walkEnum(stream, newChild);
+			default:
+		}
+	}
+
+	static function walkClass(stream:TokenStream, parent:TokenTree) {
+		var newChild:TokenTree;
+		if (stream.is(Kwd(KwdExtends))) {
+			newChild = stream.consumeToken();
+			parent.addChild(newChild);
+			newChild.addChild(stream.consumeConstIdent());
+		}
+		if (stream.is(Kwd(KwdImplements))) {
+			newChild = stream.consumeToken();
+			parent.addChild(newChild);
+			var interfaceParts:TokenTree;
+			while (true) {
+				newChild.addChild(stream.consumeConstIdent());
+				if (stream.is(Comma)) {
+					newChild.addChild(stream.consumeTokenDef(Comma));
+					continue;
+				}
+
+
+			}
+
+
+		}
+	}
+
+
+	static function walkInterface(stream:TokenStream, parent:TokenTree) {
+	}
+
+	static function walkAbstract(stream:TokenStream, parent:TokenTree) {
+	}
+
+	static function walkTypedef(stream:TokenStream, parent:TokenTree) {
+	}
+
+	static function walkEnum(stream:TokenStream, parent:TokenTree) {
+	}
 
 	static function walkTokens(stream:TokenStream, parent:TokenTree, ?stopAt:TokenDef) {
 		var newChild:TokenTree = null;
@@ -39,7 +108,7 @@ class TreeTokenizer {
 			if ((stopAt != null) && (Type.enumEq(stopAt, newChild.tok))) {
 				return;
 			}
-			
+
 			switch (newChild.tok) {
 				case Kwd(KwdPackage), Kwd(KwdImport):
 					walkPackageImport(stream, newChild);
@@ -47,10 +116,15 @@ class TreeTokenizer {
 					walkTokens(stream, newChild);
 				case Kwd(KwdFunction):
 					walkFunction(stream, newChild);
+				case Kwd(KwdVar), Kwd(KwdNew):
+					walkTokens(stream, newChild, Semicolon);
 				case Kwd(KwdReturn):
 					walkTokens(stream, newChild, Semicolon);
 					if (stopAt == Semicolon) return;
-				case Const(CIdent(_)):
+				case Const(_):
+					//walkTokens(stream, newChild, Semicolon);
+					//if (stopAt == Semicolon) return;
+				//case Const(CIdent(_)):
 					//if (stream.is(POpen)) return walkTokens(stream, newChild, Semicolon);
 				case BrOpen:
 					return walkTokens(stream, newChild, BrClose);
@@ -63,7 +137,9 @@ class TreeTokenizer {
 					walkIf(stream, newChild);
 				case Kwd(KwdSwitch):
 					walkSwitch(stream, newChild);
-				case Kwd(KwdCase), Kwd(KwdDefault):
+				case Kwd(KwdCase):
+					walkCase(stream, newChild);
+				case Kwd(KwdDefault):
 					walkCase(stream, newChild);
 				case Kwd(KwdElse):
 					return walkBlock(stream, newChild);
@@ -76,9 +152,12 @@ class TreeTokenizer {
 			}
 			if (!stream.hasMore()) return;
 			switch (stream.token()) {
+				case BrOpen:
+					//return walkTokens(stream, newChild, stopAt);
 				case BrOpen, BkOpen, POpen:
-					return walkTokens(stream, newChild, stopAt);
+					//return walkTokens(stream, newChild, stopAt);
 				default:
+					//return walkTokens(stream, newChild, stopAt);
 			}
 		}
 		return;
@@ -95,16 +174,21 @@ class TreeTokenizer {
 	static function walkBlock(stream:TokenStream, parent:TokenTree) {
 		if (stream.is(BrOpen)) walkTokens(stream, parent);
 		else {
-			//trace ("xxx");
-			//stream.printRemain();
-			walkTokens(stream, parent, Semicolon);
-			//trace ("yyy");
-			//stream.printRemain();
+		var newChild:TokenTree = null;
+			while(true) {
+				switch (stream.token()) {
+					case Comment(_), CommentLine(_):
+						newChild = stream.consumeToken();
+						parent.addChild(newChild);
+					case Kwd(KwdCase): return;
+					// TODO: Semicolon is not sufficient for switch/cases -> blocks are implicit
+					default: return walkTokens(stream, parent, Semicolon);
+				}
+			}
 		}
 	}
 
 	static function walkFunction(stream:TokenStream, parent:TokenTree) {
-
 		var newChild:TokenTree = null;
 		switch (stream.token()) {
 			case Const(CIdent(_)):
@@ -128,10 +212,6 @@ class TreeTokenizer {
 		newChild = stream.consumeToken();
 		parent.addChild(newChild);
 		walkTokens(stream, newChild, PClose);
-		//while (stream.hasMore()) {
-		//    newChild = stream.consumeToken();
-		//    parent.addChild(newChild);
-		//}
 	}
 
 	static function walkIf(stream:TokenStream, parent:TokenTree) {
@@ -147,12 +227,25 @@ class TreeTokenizer {
 
 	static function walkSwitch(stream:TokenStream, parent:TokenTree) {
 		walkPOpen(stream, parent);
+		if (stream.is(Kwd(KwdCase))) return;
 		walkBlock(stream, parent);
 	}
 
 	static function walkCase(stream:TokenStream, parent:TokenTree) {
 		walkTokens(stream, parent, DblDot);
-		walkBlock(stream, parent);
+
+		var newChild:TokenTree = null;
+		while(stream.hasMore()) {
+			switch (stream.token()) {
+				case Kwd(KwdCase), Kwd(KwdDefault), BrClose: return;
+				case BrOpen: walkTokens(stream, parent);
+				case Comment(_), CommentLine(_):
+					newChild = stream.consumeToken();
+					parent.addChild(newChild);
+				default:
+					walkTokens(stream, parent, Semicolon);
+			}
+		}
 	}
 
 	static function walkFor(stream:TokenStream, parent:TokenTree) {
@@ -178,7 +271,7 @@ class TreeTokenizer {
 			for (child in childs) { trace(child).lah(); }
 			for (i in 0...10) { trace('xxx'); }
 			while ((i > 10) && ((j < 100) || (j >1000))) { trace('xxx'); }
-			if (true) { return; } else { return; 
+			if (true) { return; } else { return;
 				if (text == 'fdklfklgdk') return 1;
 				else return 2;
 			}

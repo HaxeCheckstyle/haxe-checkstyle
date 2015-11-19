@@ -25,6 +25,17 @@ class TokenStream {
 		return new TokenTree(token.tok, token.pos);
 	}
 
+	public function consumeConstIdent():TokenTree {
+		switch (token()) {
+			case Const(CIdent(_)): return consumeToken();
+			default: throw "bad token";
+		}
+	}
+	public function consumeTokenDef(tokenDef:TokenDef):TokenTree {
+		if (is(tokenDef)) return consumeToken();
+		throw "bad token";
+	}
+
 	public function is(tokenDef:TokenDef):Bool {
 		if ((current < 0) || (current >= tokens.length)) return false;
 		var token:Token = tokens[current];
