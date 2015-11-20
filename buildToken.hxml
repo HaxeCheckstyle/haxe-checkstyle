@@ -1,0 +1,16 @@
+-cp resources
+-cp checkstyle
+-lib hxparse:3.0.0
+-lib haxeparser
+-lib haxeparser-substituted:1.0.1
+-lib compiletime:2.5.1
+-lib hxargs:3.0.0
+
+--each
+
+-debug
+-main checkstyle.TokenTreeBuilder
+-D absolute-path
+-D checkstyle
+-neko tree.n
+-cmd neko tree

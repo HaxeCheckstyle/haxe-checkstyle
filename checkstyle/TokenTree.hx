@@ -15,6 +15,11 @@ class TokenTree extends Token {
 		super(tok, pos);
 	}
 
+	public function is(tokenDef:TokenDef):Bool {
+		if (tok == null) return false;
+		return Type.enumEq(tokenDef, tok);
+	}
+
 	public function addChild(child:TokenTree) {
 		if (childs == null) childs = [];
 		if (childs.length > 0) child.previousSibling = childs[childs.length - 1];

@@ -19,7 +19,7 @@ class TokenStream {
 	}
 
 	public function consumeToken():TokenTree {
-		if ((current < 0) || (current >= tokens.length)) return null;
+		if ((current < 0) || (current >= tokens.length)) throw "no more tokens";
 		var token:Token = tokens[current];
 		current++;
 		return new TokenTree(token.tok, token.pos);
@@ -28,22 +28,23 @@ class TokenStream {
 	public function consumeConstIdent():TokenTree {
 		switch (token()) {
 			case Const(CIdent(_)): return consumeToken();
-			default: throw "bad token";
+			default: throw 'bad token ${token()} != Const(CIdent(_))';
 		}
 	}
+
 	public function consumeTokenDef(tokenDef:TokenDef):TokenTree {
 		if (is(tokenDef)) return consumeToken();
-		throw "bad token";
+		throw 'bad token ${token()} != $tokenDef';
 	}
 
 	public function is(tokenDef:TokenDef):Bool {
-		if ((current < 0) || (current >= tokens.length)) return false;
+		if ((current < 0) || (current >= tokens.length)) throw "no more tokens";
 		var token:Token = tokens[current];
 		return Type.enumEq(tokenDef, token.tok);
 	}
 
 	public function token():TokenDef {
-		if ((current < 0) || (current >= tokens.length)) return null;
+		if ((current < 0) || (current >= tokens.length)) throw "no more tokens";
 		return tokens[current].tok;
 	}
 
