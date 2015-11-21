@@ -20,15 +20,15 @@ class AvoidStarImportCheck extends Check {
 		if (allowStarUsing && allowStarImports) return;
 		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
 
-		checkImports(root.filter([Kwd(KwdImport)], All));
-		checkUsing(root.filter([Kwd(KwdUsing)], All));
+		checkImports(root.filter([Kwd(KwdImport)], ALL));
+		checkUsing(root.filter([Kwd(KwdUsing)], ALL));
 	}
 
 	function checkImports(importEntries:Array<TokenTree>) {
 		if (allowStarImports) return;
 
 		for (entry in importEntries) {
-			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], All);
+			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
 			logPos("Import line uses a star (.*) import - consider using full type names", entry.pos, Reflect.field(SeverityLevel, severity));
 		}
@@ -38,7 +38,7 @@ class AvoidStarImportCheck extends Check {
 		if (allowStarUsing) return;
 
 		for (entry in usingEntries) {
-			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], All);
+			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
 			logPos("Using line uses a star (.*) import - consider using full type names", entry.pos, Reflect.field(SeverityLevel, severity));
 		}

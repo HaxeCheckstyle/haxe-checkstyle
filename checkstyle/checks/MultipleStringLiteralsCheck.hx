@@ -9,31 +9,31 @@ class MultipleStringLiteralsCheck extends Check {
 
 	public var allowDuplicates:Int;
 	public var minLength:Int;
+	public var ignore:String;
+
+	var ignoreRE:EReg;
 
 	public function new() {
 		super();
-		allowDuplicates = 1;
+		ignore = "^\\s+$";
+		allowDuplicates = 2;
 		minLength = 2;
 	}
 
 	override function actualRun() {
+		ignoreRE = new EReg (ignore, "");
 		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
-		var allStringLiterals:Array<TokenTree> = root.filterConstString(All);
+		var allStringLiterals:Array<TokenTree> = root.filterConstString(ALL);
 		for (literalToken in allStringLiterals) {
 			if (!filterLiteral(literalToken)) continue;
 
 			switch (literalToken.tok) {
 				case Const(CString(s)):
-					if (s.length <  minLength) continue;
-					if (!allLiterals.exists(s)) {
-						allLiterals.set(s, 1);
-					}
-					else {
-						allLiterals.set(s, allLiterals.get(s) + 1);
-					}
-					if (allLiterals.get(s) > allowDuplicates) {
+					if (ignoreRE.match(s)) continue;
+					if (s.length < minLength) continue;
+					if (checkLiteralCount(s, allLiterals)) {
 						if (isPosSuppressed(literalToken.pos)) continue;
 						logPos('Multiple string literal "$s" detected - consider using a constant', literalToken.pos, Reflect.field(SeverityLevel, severity));
 					}
@@ -42,13 +42,23 @@ class MultipleStringLiteralsCheck extends Check {
 		}
 	}
 
+	function checkLiteralCount(literal:String, map:Map<String, Int>):Bool {
+		if (!map.exists(literal)) {
+			map.set(literal, 1);
+		}
+		else {
+			map.set(literal, map.get(literal) + 1);
+		}
+		return (map.get(literal) > allowDuplicates);
+	}
+
 	function filterLiteral(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return true;
 		return switch (token.tok) {
 			case At:
 				false;
 			case Kwd(KwdVar):
-				if (token.filter([Kwd(KwdStatic)], FirstLevel).length > 0) false;
+				if (token.filter([Kwd(KwdStatic)], FIRSTLEVEL).length > 0) false;
 				true;
 			default:
 				filterLiteral(token.parent);

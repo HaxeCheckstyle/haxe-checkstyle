@@ -27,6 +27,14 @@
 			}
 		},
 		{
+			"type": "AvoidStarImport",
+			"props": {
+				"severity": "INFO",
+				"allowStarImports": false,
+				"allowStarUsing": false
+			}
+		},
+		{
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
@@ -183,6 +191,15 @@
 					"INLINE",
 					"NOTINLINE"
 				]
+			}
+		},
+		{
+			"type": "MultipleStringLiterals",
+			"props": {
+				"severity": "WARNING",
+				"allowDuplicates": 2,
+				"minLength": 2,
+				"ignore": "^\\s+$"
 			}
 		},
 		{

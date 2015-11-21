@@ -47,25 +47,27 @@ class TokenTree extends Token {
 
 	public function filter(searchFor:Array<TokenDef>, mode:TokenFilterMode):Array<TokenTree> {
 		return filterCallback(function(token:TokenTree):Bool {
-			return token.matchesAny(searchFor);
-		}, mode);
+				return token.matchesAny(searchFor);
+			},
+			mode);
 	}
 
 	public function filterConstString(mode:TokenFilterMode):Array<TokenTree> {
 		return filterCallback(function(token:TokenTree):Bool {
-			if (token.tok == null) return false;
-			return switch (token.tok) {
-				case Const(CString(_)): true;
-				default: false;
-			}
-		}, mode);
+				if (token.tok == null) return false;
+				return switch (token.tok) {
+					case Const(CString(_)): true;
+					default: false;
+				}
+			},
+			mode);
 	}
 
 	function filterCallback(callback:FilterCallback, mode:TokenFilterMode):Array<TokenTree> {
 		var results:Array<TokenTree> = [];
 
 		if (callback(this)) {
-			if (mode == All) {
+			if (mode == ALL) {
 				results.push (this);
 			}
 			else {
@@ -95,30 +97,20 @@ class TokenTree extends Token {
 		return printTokenTree();
 	}
 
-	public function printTree(prefix:String = ""):String {
-		var buf:StringBuf = new StringBuf();
-		if (tok != null) buf.add('$prefix${super.toString()} ${tok} ${getPos()}');
-		if (childs == null) return buf.toString();
-		for (child in childs) {
-			buf.add('\n$prefix${child.printTree(prefix + "  ")}');// ${child.pos}');
-		}
-		return buf.toString();
-	}
-
 	public function printTokenTree(prefix:String = ""):String {
 		var buf:StringBuf = new StringBuf();
 		if (tok != null) buf.add('$prefix${tok}\t\t\t\t${getPos()}');
 		if (childs == null) return buf.toString();
 		for (child in childs) {
-			buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');// ${child.pos}');
+			buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');
 		}
 		return buf.toString();
 	}
 }
 
 enum TokenFilterMode {
-	All;
-	FirstLevel;
+	ALL;
+	FIRSTLEVEL;
 }
 
 typedef FilterCallback = TokenTree -> Bool;
