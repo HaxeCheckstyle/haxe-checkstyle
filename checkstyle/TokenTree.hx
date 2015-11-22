@@ -52,18 +52,7 @@ class TokenTree extends Token {
 			mode);
 	}
 
-	public function filterConstString(mode:TokenFilterMode):Array<TokenTree> {
-		return filterCallback(function(token:TokenTree):Bool {
-				if (token.tok == null) return false;
-				return switch (token.tok) {
-					case Const(CString(_)): true;
-					default: false;
-				}
-			},
-			mode);
-	}
-
-	function filterCallback(callback:FilterCallback, mode:TokenFilterMode):Array<TokenTree> {
+	public function filterCallback(callback:FilterCallback, mode:TokenFilterMode):Array<TokenTree> {
 		var results:Array<TokenTree> = [];
 
 		if (callback(this)) {
@@ -110,7 +99,7 @@ class TokenTree extends Token {
 
 enum TokenFilterMode {
 	ALL;
-	FIRSTLEVEL;
+	FIRST;
 }
 
 typedef FilterCallback = TokenTree -> Bool;

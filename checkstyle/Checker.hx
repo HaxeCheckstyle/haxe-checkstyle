@@ -8,6 +8,9 @@ import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 
+import checkstyle.TokenTree;
+import checkstyle.TokenTreeBuilder;
+
 class Checker {
 
 	public var file:LintFile;
@@ -19,6 +22,7 @@ class Checker {
 	var reporters:Array<IReporter>;
 	var linesIdx:Array<LineIds>;
 	var lineSeparator:String;
+	var tokenTree:TokenTree;
 
 	public function new() {
 		checks = [];
@@ -31,6 +35,14 @@ class Checker {
 
 	public function addReporter(r:IReporter) {
 		reporters.push(r);
+	}
+
+	public function getTokenTree():TokenTree {
+		if (tokens == null) return null;
+		if (tokenTree == null) {
+			tokenTree = TokenTreeBuilder.buildTokenTree(tokens);
+		}
+		return tokenTree;
 	}
 
 	function makePosIndices() {
@@ -87,6 +99,7 @@ class Checker {
 	function makeTokens() {
 		var code = file.content;
 		tokens = [];
+		tokenTree = null;
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), file.name);
 		var t:Token = lexer.token(HaxeLexer.tok);
 

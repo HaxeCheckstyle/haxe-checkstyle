@@ -34,6 +34,13 @@ class TokenStream {
 		}
 	}
 
+	public function consumeConst():TokenTree {
+		switch (token()) {
+			case Const(_): return consumeToken();
+			default: throw 'bad token ${token()} != Const(_)';
+		}
+	}
+
 	public function consumeTokenDef(tokenDef:TokenDef):TokenTree {
 		if (is(tokenDef)) return consumeToken();
 		throw 'bad token ${token()} != $tokenDef';

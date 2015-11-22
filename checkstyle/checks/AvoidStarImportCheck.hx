@@ -4,7 +4,7 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
 @name("AvoidStarImport")
-@desc("Checks for .* import and using directives.")
+@desc("Checks for .* import and using directives")
 class AvoidStarImportCheck extends Check {
 
 	public var allowStarImports:Bool;
@@ -18,7 +18,7 @@ class AvoidStarImportCheck extends Check {
 
 	override function actualRun() {
 		if (allowStarUsing && allowStarImports) return;
-		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
+		var root:TokenTree = checker.getTokenTree();
 
 		checkImports(root.filter([Kwd(KwdImport)], ALL));
 		checkUsing(root.filter([Kwd(KwdUsing)], ALL));

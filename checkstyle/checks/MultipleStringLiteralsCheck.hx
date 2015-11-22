@@ -25,7 +25,15 @@ class MultipleStringLiteralsCheck extends Check {
 		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
-		var allStringLiterals:Array<TokenTree> = root.filterConstString(ALL);
+		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
+				if (token.tok == null) return false;
+				return switch (token.tok) {
+					case Const(CString(_)): true;
+					default: false;
+				}
+			},
+			ALL);
+
 		for (literalToken in allStringLiterals) {
 			if (!filterLiteral(literalToken)) continue;
 
@@ -35,7 +43,8 @@ class MultipleStringLiteralsCheck extends Check {
 					if (s.length < minLength) continue;
 					if (checkLiteralCount(s, allLiterals)) {
 						if (isPosSuppressed(literalToken.pos)) continue;
-						logPos('Multiple string literal "$s" detected - consider using a constant', literalToken.pos, Reflect.field(SeverityLevel, severity));
+						logPos('Multiple string literal "$s" detected - consider using a constant',
+								literalToken.pos, Reflect.field(SeverityLevel, severity));
 					}
 				default:
 			}
@@ -55,13 +64,11 @@ class MultipleStringLiteralsCheck extends Check {
 	function filterLiteral(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return true;
 		return switch (token.tok) {
-			case At:
-				false;
+			case At: false;
 			case Kwd(KwdVar):
-				if (token.filter([Kwd(KwdStatic)], FIRSTLEVEL).length > 0) false;
+				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false;
 				true;
-			default:
-				filterLiteral(token.parent);
+			default: filterLiteral(token.parent);
 		}
 	}
 }

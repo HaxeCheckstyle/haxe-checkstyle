@@ -5,6 +5,7 @@ import sys.io.File;
 import sys.io.FileOutput;
 #end
 
+@SuppressWarnings("checkstyle:MultipleStringLiterals")
 class Report {
 
 	var staticAnalysisXML:Xml;

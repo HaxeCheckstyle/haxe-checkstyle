@@ -150,6 +150,18 @@
 			}
 		},
 		{
+			"type": "MagicNumber",
+			"props": {
+				"severity": "INFO",
+				"ignoreNumbers": [
+					-1,
+					0,
+					1,
+					2
+				]
+			}
+		},
+		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
