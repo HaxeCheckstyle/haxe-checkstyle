@@ -101,6 +101,12 @@
 			}
 		},
 		{
+			"type": "InnerAssignment",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "LeftCurly",
 			"props": {
 				"severity": "WARNING",
@@ -208,7 +214,7 @@
 		{
 			"type": "MultipleStringLiterals",
 			"props": {
-				"severity": "WARNING",
+				"severity": "INFO",
 				"allowDuplicates": 2,
 				"minLength": 2,
 				"ignore": "^\\s+$"
