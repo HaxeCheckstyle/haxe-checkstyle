@@ -45,24 +45,24 @@ class TokenTreeBuilder {
 	}
 	function walkType(parent:TokenTree, prefixes:Array<TokenTree>) {
 		var newChild:TokenTree = stream.consumeToken();
-		// add keyword (class, interface, abstract, macro, typedef, enum)
+		// add keyword (class, interface, abstract, typedef, enum)
 		parent.addChild(newChild);
 		parent = newChild;
 		// add name
-		walkTypeNameDef(parent);
+		var name:TokenTree = walkTypeNameDef(parent);
 		// add all comments, annotations
-		for (prefix in prefixes) newChild.addChild(prefix);
+		for (prefix in prefixes) name.addChild(prefix);
 		switch (parent.tok) {
 			case Kwd(KwdClass):
-				walkClass(newChild);
+				walkClass(name);
 			case Kwd(KwdInterface):
-				walkInterface(newChild);
+				walkInterface(name);
 			case Kwd(KwdAbstract):
-				walkAbstract(newChild);
+				walkAbstract(name);
 			case Kwd(KwdTypedef):
-				walkTypedef(newChild);
+				walkTypedef(name);
 			case Kwd(KwdEnum):
-				walkEnum(newChild);
+				walkEnum(name);
 			default:
 		}
 	}
@@ -134,15 +134,48 @@ class TokenTreeBuilder {
 	}
 
 	function walkAbstract(parent:TokenTree) {
-		// TODO write walker function
+		if (stream.is(POpen)) walkPOpen(parent);
+		var typeParent:TokenTree = parent;
+		var typeChild:TokenTree;
+		while(true) {
+			switch (stream.token()) {
+				case BrOpen: break;
+				default:
+					typeChild = stream.consumeToken();
+					typeParent.addChild(typeChild);
+					typeParent = typeChild;
+			}
+		}
+		var tempStore:Array<TokenTree> = [];
+		var block:TokenTree = stream.consumeTokenDef(BrOpen);
+		parent.addChild(block);
+
+		while (stream.hasMore()) {
+			switch (stream.token()) {
+				case Kwd(KwdVar):
+					walkVar(block, tempStore);
+					tempStore = [];
+				case Kwd(KwdFunction):
+					walkFunction(block, tempStore);
+					tempStore = [];
+				case At:
+					tempStore.push(walkAt());
+				case BrClose: break;
+				default:
+					tempStore.push(stream.consumeToken());
+			}
+		}
+		block.addChild(stream.consumeTokenDef(BrClose));
 	}
 
 	function walkTypedef(parent:TokenTree) {
-		// TODO write walker function
+		var assign:TokenTree = stream.consumeTokenDef(Binop(OpAssign));
+		parent.addChild(assign);
+		walkBlock(assign);
 	}
 
 	function walkEnum(parent:TokenTree) {
-		// TODO write walker function
+		walkBlock(parent);
 	}
 
 	function walkExtends(parent:TokenTree) {
@@ -516,12 +549,12 @@ class TokenTreeBuilder {
 
 	public static function main() {
 
-		//var code = File.getContent('checkstyle/TokenTreeBuilder.hx');
-		//var code = File.getContent('checkstyle/Main.hx');
+		//var code = File.getContent('checkstyle/TokenTree.hx');
+		var code = File.getContent('checkstyle/Checker.hx');
 		//var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
 		//var code = File.getContent('checkstyle/checks/TypeNameCheck.hx');
 		// var code = File.getContent('checkstyle/checks/RightCurlyCheck.hx');
-		var code = TOKENTREE_BUILDER_TEST;
+		//var code = TOKENTREE_BUILDER_TEST;
 		var tokens:Array<Token> = [];
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), "TokenStream");
 		var t:Token = lexer.token(HaxeLexer.tok);
@@ -533,5 +566,8 @@ class TokenTreeBuilder {
 
 		var root:TokenTree = TokenTreeBuilder.buildTokenTree(tokens);
 		trace (root);
+		//trace (root.filter([Kwd(KwdEnum)], ALL));
+		//trace (root.filter([Kwd(KwdTypedef)], ALL));
+		//trace (root.filter([Kwd(KwdAbstract)], ALL));
 	}
 }
