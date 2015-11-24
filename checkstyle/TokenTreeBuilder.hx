@@ -304,19 +304,15 @@ class TokenTreeBuilder {
 				walkCase(newChild);
 			case Kwd(KwdElse):
 				walkBlock(newChild);
-			case Kwd(KwdFor), Kwd(KwdWhile):
+			case Kwd(KwdWhile):
+				walkWhile(newChild);
+			case Kwd(KwdFor):
 				walkFor(newChild);
 			case Kwd(KwdTry):
 				walkTry(newChild);
 			case Kwd(KwdCatch):
 				walkCatch(newChild);
-			case Comment(_), CommentLine(_):
-				return;
-			case Comma:
-				return;
-			case Semicolon:
-				return;
-			case BrClose, BkClose, PClose:
+			case Comment(_), CommentLine(_), Comma, Semicolon, BrClose, BkClose, PClose:
 				return;
 			default:
 				walkStatement(newChild);
@@ -475,7 +471,9 @@ class TokenTreeBuilder {
 		switch (newChild.tok) {
 			case Kwd(KwdIf):
 				walkIf(newChild);
-			case Kwd(KwdFor), Kwd(KwdWhile):
+			case Kwd(KwdWhile):
+				walkWhile(newChild);
+			case Kwd(KwdFor):
 				walkFor(newChild);
 			case Comment(_), CommentLine(_):
 				return;
@@ -500,9 +498,35 @@ class TokenTreeBuilder {
 		walkBlock(parent);
 	}
 
-	function walkFor(parent:TokenTree) {
+	function walkWhile(parent:TokenTree) {
 		walkPOpen(parent);
 		walkBlock(parent);
+	}
+
+	function walkFor(parent:TokenTree) {
+		walkForPOpen(parent);
+		walkBlock(parent);
+	}
+
+	function walkForPOpen(parent:TokenTree) {
+		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
+		var iterator:TokenTree = stream.consumeConstIdent();
+		if (!stream.is(Kwd(KwdIn))) {
+			stream.rewind();
+			stream.rewind();
+			walkPOpen(parent);
+			return;
+		}
+		parent.addChild(pOpen);
+		pOpen.addChild(iterator);
+		var inTok:TokenTree = stream.consumeTokenDef(Kwd(KwdIn));
+		iterator.addChild(inTok);
+		while (true) {
+			if (stream.is(PClose)) break;
+			walkStatement(inTok);
+		}
+		pOpen.addChild(stream.consumeTokenDef(PClose));
+		return;
 	}
 
 	function walkSharp(parent:TokenTree) {
