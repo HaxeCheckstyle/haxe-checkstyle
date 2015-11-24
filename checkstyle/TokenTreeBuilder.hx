@@ -306,6 +306,10 @@ class TokenTreeBuilder {
 				walkBlock(newChild);
 			case Kwd(KwdFor), Kwd(KwdWhile):
 				walkFor(newChild);
+			case Kwd(KwdTry):
+				walkTry(newChild);
+			case Kwd(KwdCatch):
+				walkCatch(newChild);
 			case Comment(_), CommentLine(_):
 				return;
 			case Comma:
@@ -485,6 +489,15 @@ class TokenTreeBuilder {
 				walkStatement(newChild);
 		}
 		return;
+	}
+
+	function walkTry(parent:TokenTree) {
+		walkBlock(parent);
+	}
+
+	function walkCatch(parent:TokenTree) {
+		walkPOpen(parent);
+		walkBlock(parent);
 	}
 
 	function walkFor(parent:TokenTree) {
