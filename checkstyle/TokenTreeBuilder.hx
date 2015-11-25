@@ -311,42 +311,30 @@ class TokenTreeBuilder {
 		switch (stream.token()) {
 			case POpen:
 				walkPOpen(parent);
-				return;
 			case BrOpen:
 				walkObjectDecl(parent);
-				return;
 			case BkOpen:
 				walkArrayAccess(parent);
-				return;
 			case Sharp(_):
 				walkSharp(parent);
-				return;
 			case Kwd(KwdFunction):
 				walkFunction(parent, []);
-				return;
 			case Kwd(KwdIf):
 				walkIf(parent);
-				return;
 			case Kwd(KwdTry):
 				walkTry(parent);
-				return;
 			case Kwd(KwdFor):
 				walkFor(parent);
-				return;
 			case Kwd(KwdWhile):
 				walkWhile(parent);
-				return;
 			case Kwd(KwdSwitch):
 				walkSwitch(parent);
-				return;
 			case BrClose, BkClose, PClose:
-				return;
 			default:
 				newChild = stream.consumeToken();
 				parent.addChild(newChild);
 				switch (newChild.tok) {
 					case Comment(_), CommentLine(_), Comma, Semicolon:
-						return;
 					default:
 						walkStatement(newChild);
 				}
@@ -532,9 +520,7 @@ class TokenTreeBuilder {
 			switch (stream.token()) {
 				case BrClose:
 					break;
-				case Kwd(KwdCase):
-					walkCase(brOpen);
-				case Kwd(KwdDefault):
+				case Kwd(KwdCase), Kwd(KwdDefault):
 					walkCase(brOpen);
 				default:
 					walkStatement(switchTok);
@@ -586,28 +572,19 @@ class TokenTreeBuilder {
 			switch (stream.token()) {
 				case POpen:
 					walkPOpen(parent);
-					//return;
 				case BrOpen:
 					walkObjectDecl(parent);
-					//return;
 				case BkOpen:
 					walkArrayAccess(parent);
-					//return;
 				case Kwd(KwdFunction):
 					walkFunction(parent, []);
-					//return;
 				case Kwd(KwdIf):
 					walkIf(parent);
-					//return;
 				case Kwd(KwdFor):
 					walkFor(parent);
-					//return;
 				case Kwd(KwdWhile):
 					walkWhile(parent);
-					//return;
-				case Comment(_), CommentLine(_), Semicolon, BrClose, BkClose, PClose:
-					return;
-				case DblDot:
+				case Comment(_), CommentLine(_), Semicolon, BrClose, BkClose, PClose, DblDot:
 					return;
 				default:
 					var child:TokenTree = stream.consumeToken();
@@ -796,23 +773,7 @@ class TokenTreeBuilder {
 	public static inline var TOKENTREE_BUILDER_TEST:String = "
 	class Test {
 		public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
-			var x:Int = 0;
-			x+=100;
-			x*=100;
-			x/=100;
-			x|=100;
-			x&=100;
-			x>>=100;
-			x<<=100;
-			x>>>=100;
-			messages.push({
-				//fileName:checker.file.name,
-				//message:msg,
-				//line:l,
-				//column:c,
-				//severity:sev,
-				moduleName:getModuleName()
-			});
+			var x:Int = -100;
 			for (index in 0...100) {
 				trace(index);
 			}
@@ -823,10 +784,10 @@ class TokenTreeBuilder {
 
 		//var code = File.getContent('checkstyle/TokenTree.hx');
 		//var code = File.getContent('checkstyle/Checker.hx');
-		var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
+		//var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
 		//var code = File.getContent('checkstyle/checks/TypeNameCheck.hx');
 		// var code = File.getContent('checkstyle/checks/RightCurlyCheck.hx');
-		//var code = TOKENTREE_BUILDER_TEST;
+		var code = TOKENTREE_BUILDER_TEST;
 		var tokens:Array<Token> = [];
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), "TokenStream");
 		var t:Token = lexer.token(HaxeLexer.tok);
