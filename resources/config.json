@@ -30,8 +30,7 @@
 			"type": "AvoidStarImport",
 			"props": {
 				"severity": "INFO",
-				"allowStarImports": false,
-				"allowStarUsing": false
+				"allowStarImports": false
 			}
 		},
 		{

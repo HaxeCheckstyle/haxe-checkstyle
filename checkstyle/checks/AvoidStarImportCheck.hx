@@ -8,20 +8,17 @@ import checkstyle.LintMessage.SeverityLevel;
 class AvoidStarImportCheck extends Check {
 
 	public var allowStarImports:Bool;
-	public var allowStarUsing:Bool;
 
 	public function new() {
 		super();
 		allowStarImports = false;
-		allowStarUsing = false;
 	}
 
 	override function actualRun() {
-		if (allowStarUsing && allowStarImports) return;
+		if (allowStarImports) return;
 		var root:TokenTree = checker.getTokenTree();
 
 		checkImports(root.filter([Kwd(KwdImport)], ALL));
-		checkUsing(root.filter([Kwd(KwdUsing)], ALL));
 	}
 
 	function checkImports(importEntries:Array<TokenTree>) {
@@ -31,16 +28,6 @@ class AvoidStarImportCheck extends Check {
 			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
 			logPos("Import line uses a star (.*) import - consider using full type names", entry.pos, Reflect.field(SeverityLevel, severity));
-		}
-	}
-
-	function checkUsing(usingEntries:Array<TokenTree>) {
-		if (allowStarUsing) return;
-
-		for (entry in usingEntries) {
-			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
-			if (stars.length <= 0) continue;
-			logPos("Using line uses a star (.*) import - consider using full type names", entry.pos, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }

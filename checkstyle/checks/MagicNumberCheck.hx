@@ -26,17 +26,16 @@ class MagicNumberCheck extends Check {
 			},
 			ALL);
 		for (numberToken in allNumbers) {
+			if (isPosSuppressed(numberToken.pos)) continue;
 			if (!filterNumber(numberToken)) continue;
 			switch (numberToken.tok) {
 				case Const(CInt(n)):
 					var number:Int = Std.parseInt(n);
 					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					if (isPosSuppressed(numberToken.pos)) continue;
 					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
 				case Const(CFloat(n)):
 					var number:Float = Std.parseFloat(n);
 					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					if (isPosSuppressed(numberToken.pos)) continue;
 					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
 				default:
 			}
@@ -49,7 +48,7 @@ class MagicNumberCheck extends Check {
 			case At: false;
 			case Kwd(KwdVar):
 				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false;
-				true;
+				else true;
 			default: filterNumber(token.parent);
 		}
 	}

@@ -4,9 +4,11 @@ class TestMain {
 
 	public function new() {
 		var runner = new haxe.unit.TestRunner();
+
 		runner.add(new AccessOrderCheckTest());
 		runner.add(new AnonymousCheckTest());
 		runner.add(new ArrayInstantiationCheckTest());
+		runner.add(new AvoidStarImportCheckTest());
 		runner.add(new BlockFormatCheckTest());
 		runner.add(new ConstantNameCheckTest());
 		runner.add(new DynamicCheckTest());
@@ -15,13 +17,16 @@ class TestMain {
 		runner.add(new FileLengthCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
 		runner.add(new IndentationCharacterCheckTest());
+		runner.add(new InnerAssignmentCheckTest());
 		runner.add(new LeftCurlyCheckTest());
 		runner.add(new LineLengthCheckTest());
 		runner.add(new ListenerNameCheckTest());
 		runner.add(new LocalVariableNameCheckTest());
+		runner.add(new MagicNumberCheckTest());
 		runner.add(new MemberNameCheckTest());
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new MethodNameCheckTest());
+		runner.add(new MultipleStringLiteralsCheckTest());
 		runner.add(new NeedBracesCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());

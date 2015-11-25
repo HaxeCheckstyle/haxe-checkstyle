@@ -1,6 +1,7 @@
 package checkstyle.checks;
 
 import haxe.macro.Expr;
+import haxeparser.Data.TokenDef;
 import checkstyle.LintMessage.SeverityLevel;
 
 @name("InnerAssignment")
@@ -49,7 +50,11 @@ class InnerAssignmentCheck extends Check {
 				false;
 			case Kwd(KwdFunction):
 				false;
+			case Kwd(KwdReturn):
+				true;
 			case BrOpen:
+				false;
+			case DblDot:
 				false;
 			case POpen:
 				filterPOpen(token.parent);
@@ -63,6 +68,11 @@ class InnerAssignmentCheck extends Check {
 				false;
 			case Kwd(KwdVar):
 				false;
+			case Kwd(KwdNew):
+				if (Type.enumEq(Kwd(KwdFunction), token.parent.tok)) false;
+				else true;
+			case Kwd(KwdReturn):
+				true;
 			case Kwd(KwdWhile):
 				false;
 			case POpen, Const(_):

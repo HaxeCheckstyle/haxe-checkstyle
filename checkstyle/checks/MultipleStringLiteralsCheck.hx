@@ -67,7 +67,7 @@ class MultipleStringLiteralsCheck extends Check {
 			case At: false;
 			case Kwd(KwdVar):
 				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false;
-				true;
+				else true;
 			default: filterLiteral(token.parent);
 		}
 	}
