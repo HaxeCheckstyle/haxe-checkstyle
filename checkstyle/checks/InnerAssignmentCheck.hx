@@ -19,16 +19,14 @@ class InnerAssignmentCheck extends Check {
 				Binop(OpAssign),
 				Binop(OpAssignOp(OpAdd)),
 				Binop(OpAssignOp(OpSub)),
-				Binop(OpAssignOp(OpMult)),
 				Binop(OpAssignOp(OpDiv)),
+				Binop(OpAssignOp(OpMult)),
+				Binop(OpAssignOp(OpShl)),
+				Binop(OpAssignOp(OpShr)),
+				Binop(OpAssignOp(OpUShr)),
 				Binop(OpAssignOp(OpAnd)),
 				Binop(OpAssignOp(OpOr)),
-				Binop(OpAssignOp(OpXor)),
-				Binop(OpAssignOp(OpLte)),
-				Binop(OpAssignOp(OpGte)), // currently not supported by HaxeLexer
-				Binop(OpAssignOp(OpShl)),
-				Binop(OpAssignOp(OpShr)), // currently not supported by HaxeLexer
-				Binop(OpAssignOp(OpUShr)) // currently not supported by HaxeLexer
+				Binop(OpAssignOp(OpXor))
 				], ALL);
 		var x:Int = 0;
 		for (assignToken in allAssignments) {

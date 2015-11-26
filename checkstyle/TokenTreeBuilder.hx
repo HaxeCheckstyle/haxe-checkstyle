@@ -329,6 +329,14 @@ class TokenTreeBuilder {
 				walkWhile(parent);
 			case Kwd(KwdSwitch):
 				walkSwitch(parent);
+			case Binop(OpGt):
+				newChild = stream.consumeOpGt();
+				parent.addChild(newChild);
+				walkStatement(newChild);
+			case Binop(OpSub):
+				newChild = stream.consumeOpSub();
+				parent.addChild(newChild);
+				walkStatement(newChild);
 			case BrClose, BkClose, PClose:
 			default:
 				newChild = stream.consumeToken();
@@ -584,6 +592,14 @@ class TokenTreeBuilder {
 					walkFor(parent);
 				case Kwd(KwdWhile):
 					walkWhile(parent);
+				case Binop(OpGt):
+					var child:TokenTree = stream.consumeOpGt();
+					parent.addChild(child);
+					walkCaseExpr(child);
+				case Binop(OpSub):
+					var child:TokenTree = stream.consumeOpSub();
+					parent.addChild(child);
+					walkCaseExpr(child);
 				case Comment(_), CommentLine(_), Semicolon, BrClose, BkClose, PClose, DblDot:
 					return;
 				default:
@@ -773,10 +789,10 @@ class TokenTreeBuilder {
 	public static inline var TOKENTREE_BUILDER_TEST:String = "
 	class Test {
 		public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
-			var x:Int = -100;
-			for (index in 0...100) {
-				trace(index);
-			}
+			var x = 1 >> 5;
+			x >>= 5;
+			x >>>= 5;
+			var z = x >= 10;
 		}
 	}";
 
@@ -785,9 +801,10 @@ class TokenTreeBuilder {
 		//var code = File.getContent('checkstyle/TokenTree.hx');
 		//var code = File.getContent('checkstyle/Checker.hx');
 		//var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
+		var code = File.getContent('checkstyle/checks/MagicNumberCheck.hx');
 		//var code = File.getContent('checkstyle/checks/TypeNameCheck.hx');
 		// var code = File.getContent('checkstyle/checks/RightCurlyCheck.hx');
-		var code = TOKENTREE_BUILDER_TEST;
+		//var code = TOKENTREE_BUILDER_TEST;
 		var tokens:Array<Token> = [];
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), "TokenStream");
 		var t:Token = lexer.token(HaxeLexer.tok);
