@@ -97,11 +97,18 @@ class TokenStream {
 		switch (token()) {
 			case Binop(OpGt):
 				var innerGt:TokenTree = consumeTokenDef(Binop(OpGt));
-				var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
-				return new TokenTree(Binop(OpAssignOp(OpUShr)), {
+				if (is(Binop(OpAssign))) {
+					var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
+					return new TokenTree(Binop(OpAssignOp(OpUShr)), {
+							file:parent.pos.file,
+							min:parent.pos.min,
+							max:assignTok.pos.max
+						});
+				}
+				return new TokenTree(Binop(OpUShr), {
 						file:parent.pos.file,
 						min:parent.pos.min,
-						max:assignTok.pos.max
+						max:innerGt.pos.max
 					});
 			case Binop(OpAssign):
 				var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));

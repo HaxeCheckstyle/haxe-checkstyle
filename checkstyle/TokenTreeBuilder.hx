@@ -793,6 +793,7 @@ class TokenTreeBuilder {
 			x >>= 5;
 			x >>>= 5;
 			var z = x >= 10;
+			x = 1 >>> 5;
 		}
 	}";
 
@@ -801,10 +802,10 @@ class TokenTreeBuilder {
 		//var code = File.getContent('checkstyle/TokenTree.hx');
 		//var code = File.getContent('checkstyle/Checker.hx');
 		//var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
-		var code = File.getContent('checkstyle/checks/MagicNumberCheck.hx');
+		//var code = File.getContent('checkstyle/checks/MagicNumberCheck.hx');
 		//var code = File.getContent('checkstyle/checks/TypeNameCheck.hx');
 		// var code = File.getContent('checkstyle/checks/RightCurlyCheck.hx');
-		//var code = TOKENTREE_BUILDER_TEST;
+		var code = TOKENTREE_BUILDER_TEST;
 		var tokens:Array<Token> = [];
 		var lexer = new HaxeLexer(byte.ByteData.ofString(code), "TokenStream");
 		var t:Token = lexer.token(HaxeLexer.tok);
