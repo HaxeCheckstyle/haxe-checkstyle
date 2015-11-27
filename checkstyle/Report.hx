@@ -15,7 +15,7 @@ class Report {
 
 	public function new() {}
 
-	@SuppressWarnings('checkstyle:LineLength')
+	@SuppressWarnings(['checkstyle:LineLength', 'checkstyle:MultipleStringLiterals'])
 	public function generateReport(path:String) {
 		staticAnalysisXML = Xml.parse(File.getContent(path));
 

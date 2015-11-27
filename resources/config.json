@@ -27,6 +27,13 @@
 			}
 		},
 		{
+			"type": "AvoidStarImport",
+			"props": {
+				"severity": "INFO",
+				"allowStarImports": false
+			}
+		},
+		{
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
@@ -93,6 +100,12 @@
 			}
 		},
 		{
+			"type": "InnerAssignment",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "LeftCurly",
 			"props": {
 				"severity": "WARNING",
@@ -142,6 +155,18 @@
 			}
 		},
 		{
+			"type": "MagicNumber",
+			"props": {
+				"severity": "INFO",
+				"ignoreNumbers": [
+					-1,
+					0,
+					1,
+					2
+				]
+			}
+		},
+		{
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
@@ -183,6 +208,15 @@
 					"INLINE",
 					"NOTINLINE"
 				]
+			}
+		},
+		{
+			"type": "MultipleStringLiterals",
+			"props": {
+				"severity": "INFO",
+				"allowDuplicates": 2,
+				"minLength": 2,
+				"ignore": "^\\s+$"
 			}
 		},
 		{
