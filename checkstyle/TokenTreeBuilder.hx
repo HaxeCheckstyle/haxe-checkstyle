@@ -785,40 +785,4 @@ class TokenTreeBuilder {
 			}
 		}
 	}
-
-	public static inline var TOKENTREE_BUILDER_TEST:String = "
-	class Test {
-		public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
-			var x = 1 >> 5;
-			x >>= 5;
-			x >>>= 5;
-			var z = x >= 10;
-			x = 1 >>> 5;
-		}
-	}";
-
-	public static function main() {
-
-		//var code = File.getContent('checkstyle/TokenTree.hx');
-		//var code = File.getContent('checkstyle/Checker.hx');
-		//var code = File.getContent('checkstyle/checks/CyclomaticComplexityCheck.hx');
-		//var code = File.getContent('checkstyle/checks/MagicNumberCheck.hx');
-		//var code = File.getContent('checkstyle/checks/TypeNameCheck.hx');
-		// var code = File.getContent('checkstyle/checks/RightCurlyCheck.hx');
-		var code = TOKENTREE_BUILDER_TEST;
-		var tokens:Array<Token> = [];
-		var lexer = new HaxeLexer(byte.ByteData.ofString(code), "TokenStream");
-		var t:Token = lexer.token(HaxeLexer.tok);
-
-		while (t.tok != Eof) {
-			tokens.push(t);
-			t = lexer.token(haxeparser.HaxeLexer.tok);
-		}
-
-		var root:TokenTree = TokenTreeBuilder.buildTokenTree(tokens);
-		trace (root);
-		//trace (root.filter([Kwd(KwdEnum)], ALL));
-		//trace (root.filter([Kwd(KwdTypedef)], ALL));
-		//trace (root.filter([Kwd(KwdAbstract)], ALL));
-	}
 }

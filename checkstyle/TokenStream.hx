@@ -167,8 +167,4 @@ class TokenStream {
 				throw NO_MORE_TOKENS;
 		}
 	}
-
-	public function printRemain() {
-		for (index in current...tokens.length) trace (tokens[index]);
-	}
 }
