@@ -39,6 +39,7 @@ class TestMain {
 		runner.add(new SpacingCheckTest());
 		runner.add(new TabForAligningCheckTest());
 		runner.add(new TODOCommentCheckTest());
+		runner.add(new TokenTreeBuilderTest());
 		runner.add(new TrailingWhitespaceCheckTest());
 		runner.add(new TypeCheckTest());
 		runner.add(new TypeNameCheckTest());
