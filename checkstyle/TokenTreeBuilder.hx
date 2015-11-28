@@ -33,6 +33,8 @@ class TokenTreeBuilder {
 					for (stored in tempStore) parent.addChild(stored);
 					tempStore = [];
 					walkPackageImport(parent);
+				case Sharp(_):
+					walkSharp(parent);
 				case At:
 					tempStore.push(walkAt());
 				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdEnum), Kwd(KwdTypedef), Kwd(KwdAbstract):
@@ -111,11 +113,13 @@ class TokenTreeBuilder {
 		while (true) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
-						walkVar(block, tempStore);
+					walkVar(block, tempStore);
 					tempStore = [];
 				case Kwd(KwdFunction):
 					walkFunction(block, tempStore);
 					tempStore = [];
+				case Sharp(_):
+					walkSharp(block);
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
@@ -145,6 +149,8 @@ class TokenTreeBuilder {
 				case Kwd(KwdFunction):
 					walkFunction(block, tempStore);
 					tempStore = [];
+				case Sharp(_):
+					walkSharp(block);
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
@@ -185,6 +191,8 @@ class TokenTreeBuilder {
 				case Kwd(KwdFunction):
 					walkFunction(block, tempStore);
 					tempStore = [];
+				case Sharp(_):
+					walkSharp(block);
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
@@ -248,6 +256,13 @@ class TokenTreeBuilder {
 			return;
 		}
 		name.addChild(stream.consumeTokenDef(Semicolon));
+	}
+
+	function walkNew(parent:TokenTree) {
+		var newTok:TokenTree = stream.consumeTokenDef(Kwd(KwdNew));
+		parent.addChild(newTok);
+		var name:TokenTree = walkTypeNameDef(newTok);
+		walkPOpen(name);
 	}
 
 	function walkFunction(parent:TokenTree, prefixes:Array<TokenTree>) {
@@ -329,6 +344,8 @@ class TokenTreeBuilder {
 				walkWhile(parent);
 			case Kwd(KwdSwitch):
 				walkSwitch(parent);
+			case Kwd(KwdNew):
+				walkNew(parent);
 			case Binop(OpGt):
 				newChild = stream.consumeOpGt();
 				parent.addChild(newChild);
@@ -592,6 +609,8 @@ class TokenTreeBuilder {
 					walkFor(parent);
 				case Kwd(KwdWhile):
 					walkWhile(parent);
+				case Kwd(KwdNew):
+					walkNew(parent);
 				case Binop(OpGt):
 					var child:TokenTree = stream.consumeOpGt();
 					parent.addChild(child);
@@ -779,8 +798,11 @@ class TokenTreeBuilder {
 				case POpen:
 					walkPOpen(parent);
 					return;
+				case Const(CIdent(_)):
+					childToken = stream.consumeToken();
+					parent.addChild(childToken);
+					walkSharpExpr(childToken);
 				default:
-					parent.addChild(stream.consumeToken());
 					return;
 			}
 		}

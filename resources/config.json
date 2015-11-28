@@ -93,6 +93,15 @@
 			}
 		},
 		{
+			"type": "HiddenField",
+			"props": {
+				"severity": "INFO",
+				"ignoreConstructorParameter": true,
+				"ignoreSetter": true,
+				"ignoreFormat": "^(main)$"
+			}
+		},
+		{
 			"type": "IndentationCharacter",
 			"props": {
 				"severity": "INFO",
