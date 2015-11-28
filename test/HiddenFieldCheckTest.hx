@@ -69,6 +69,10 @@ class HiddenFieldCheckTests {
 		public function test(fieldVal:Int) {
 			var field5:String = '';
 		}
+		@SuppressWarnings('checkstyle:HiddenField')
+		public function test(field1:Int) {
+			var field2:String = '';
+		}
 	}";
 
 	public static inline var HIDDEN_FIELDS_CONSTRUCTOR:String = "
