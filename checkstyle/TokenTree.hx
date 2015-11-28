@@ -7,6 +7,8 @@ import haxeparser.Data.TokenDef;
 
 class TokenTree extends Token {
 
+	static inline var MAX_LEVEL:Int = 9999;
+
 	public var parent:TokenTree;
 	public var previousSibling:TokenTree;
 	public var childs:Array<TokenTree>;
@@ -45,16 +47,17 @@ class TokenTree extends Token {
 		return fullPos;
 	}
 
-	public function filter(searchFor:Array<TokenDef>, mode:TokenFilterMode):Array<TokenTree> {
+	public function filter(searchFor:Array<TokenDef>, mode:TokenFilterMode, maxLevel:Int = MAX_LEVEL):Array<TokenTree> {
 		return filterCallback(function(token:TokenTree):Bool {
 				return token.matchesAny(searchFor);
 			},
-			mode);
+			mode, maxLevel);
 	}
 
-	public function filterCallback(callback:FilterCallback, mode:TokenFilterMode):Array<TokenTree> {
+	public function filterCallback(callback:FilterCallback, mode:TokenFilterMode, maxLevel:Int = MAX_LEVEL):Array<TokenTree> {
 		var results:Array<TokenTree> = [];
 
+		if (maxLevel < 0) return [];
 		if (callback(this)) {
 			if (mode == ALL) {
 				results.push (this);
@@ -65,7 +68,7 @@ class TokenTree extends Token {
 		}
 		if (childs == null) return results;
 		for (child in childs) {
-			results = results.concat(child.filterCallback(callback, mode));
+			results = results.concat(child.filterCallback(callback, mode, maxLevel - 1));
 		}
 		return results;
 	}

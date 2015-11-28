@@ -16,6 +16,7 @@ class TestMain {
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new FileLengthCheckTest());
 		runner.add(new HexadecimalLiteralsCheckTest());
+		runner.add(new HiddenFieldCheckTest());
 		runner.add(new IndentationCharacterCheckTest());
 		runner.add(new InnerAssignmentCheckTest());
 		runner.add(new LeftCurlyCheckTest());
