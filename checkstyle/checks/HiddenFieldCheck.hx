@@ -31,9 +31,11 @@ class HiddenFieldCheck extends Check {
 
 	function checkClasses(classes:Array<TokenTree>) {
 		for (clazz in classes) {
+			if (isPosSuppressed(clazz.pos)) continue;
 			var memberNames:Array<String> = collectMemberNames(clazz);
 			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], FIRST, MAX_FIELD_LEVEL);
 			for (method in methods) {
+				if (isPosSuppressed(method.pos)) continue;
 				checkMethod(method, memberNames);
 			}
 		}
