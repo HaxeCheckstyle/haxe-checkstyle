@@ -292,6 +292,12 @@ class TokenTreeBuilder {
 		var name:TokenTree;
 		name = stream.consumeConst();
 		parent.addChild(name);
+		if (stream.is(Dot)) {
+			var dot:TokenTree = stream.consumeTokenDef(Dot);
+			name.addChild(dot);
+			walkTypeNameDef(dot);
+			return name;
+		}
 		if (stream.is(Binop(OpLt))) walkLtGt(name);
 		if (stream.is(Arrow)) {
 			var arrow:TokenTree = stream.consumeTokenDef(Arrow);
