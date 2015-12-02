@@ -39,7 +39,7 @@ class LeftCurlyCheck extends Check {
 			ABSTRACT_DEF,
 			TYPEDEF_DEF,
 			INTERFACE_DEF,
-			//OBJECT_DECL, // => allow inline object declarations
+				//OBJECT_DECL, // => allow inline object declarations
 			FUNCTION,
 			FOR,
 			IF,
@@ -190,7 +190,7 @@ class LeftCurlyCheck extends Check {
 
 		var functionDef:String = checker.file.content.substring(pos1, pos2);
 		return (functionDef.indexOf('\n') >= 0) ||
-				(functionDef.indexOf('\r') >= 0);
+		(functionDef.indexOf('\r') >= 0);
 	}
 
 	function isListWrapped(es:Array<Expr>):Bool {
