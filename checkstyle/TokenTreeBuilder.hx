@@ -245,6 +245,9 @@ class TokenTreeBuilder {
 		parent.addChild(varTok);
 		name = stream.consumeConstIdent();
 		varTok.addChild(name);
+		if (stream.is(POpen)) {
+			walkPOpen(name);
+		}
 		for (stored in prefixes) name.addChild(stored);
 		if (stream.is(DblDot)) {
 			var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
@@ -253,6 +256,9 @@ class TokenTreeBuilder {
 		}
 		if (stream.is(Binop(OpAssign))) {
 			walkStatement(name);
+			if (stream.is(Semicolon)) {
+				name.addChild(stream.consumeTokenDef(Semicolon));
+			}
 			return;
 		}
 		name.addChild(stream.consumeTokenDef(Semicolon));
