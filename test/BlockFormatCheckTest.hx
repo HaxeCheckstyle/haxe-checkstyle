@@ -5,13 +5,14 @@ import checkstyle.checks.BlockFormatCheck;
 class BlockFormatCheckTest extends CheckTestCase {
 
 	public function testCorrectBlockFormat() {
-		var msg = checkMessage(BlockFormatTests.TEST, new BlockFormatCheck());
-		assertEquals(msg, '');
+		var check:BlockFormatCheck = new BlockFormatCheck();
+		assertMsg(check, BlockFormatTests.TEST, '');
+		assertMsg(check, BlockFormatTests.BLOCK_COMMENT, '');
 	}
 
 	public function testWrongBlockFormat() {
-		var msg = checkMessage(BlockFormatTests.TEST1, new BlockFormatCheck());
-		assertEquals(msg, 'Empty block should be written as {}');
+		var check:BlockFormatCheck = new BlockFormatCheck();
+		assertMsg(check, BlockFormatTests.TEST1, 'Empty block should be written as {}');
 	}
 
 	public function testBlockFormatFirstLine() {
@@ -96,6 +97,15 @@ class BlockFormatTests {
 		public function new() {
 			var a = {
 				// comment
+			};
+		}
+	}";
+
+	public static inline var BLOCK_COMMENT:String = "
+	class Test {                                  
+		public function new() { /* comment
+								 */
+			var a = { // comment
 			};
 		}
 	}";

@@ -20,7 +20,9 @@ class BlockFormatCheck extends Check {
 
 	public function new() {
 		super();
-		firstLineRE = ~/\{[\/*]?\s*$/;
+		// allow whitespace and comments after left curly
+		// (trailing whitespace is handled in a separate check)
+		firstLineRE = ~/\{\s*(\/\/.*|\/\*.*|)$/;
 		lastLineRE = ~/^\s*\}[,;\/*]?/;
 		option = EMPTY;
 	}

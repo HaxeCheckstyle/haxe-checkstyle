@@ -39,7 +39,7 @@ class LeftCurlyCheck extends Check {
 			ABSTRACT_DEF,
 			TYPEDEF_DEF,
 			INTERFACE_DEF,
-			//OBJECT_DECL, // => allow inline object declarations
+				//OBJECT_DECL, // => allow inline object declarations
 			FUNCTION,
 			FOR,
 			IF,
@@ -190,7 +190,7 @@ class LeftCurlyCheck extends Check {
 
 		var functionDef:String = checker.file.content.substring(pos1, pos2);
 		return (functionDef.indexOf('\n') >= 0) ||
-				(functionDef.indexOf('\r') >= 0);
+		(functionDef.indexOf('\r') >= 0);
 	}
 
 	function isListWrapped(es:Array<Expr>):Bool {
@@ -233,8 +233,8 @@ class LeftCurlyCheck extends Check {
 		var lineLength:Int = line.length;
 
 		// must have at least one non whitespace character before curly
-		// and only whitespace, } or // + comment after curly
-		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\/.*)$/.match(line);
+		// and only whitespace, }, /* + comment or // + comment after curly
+		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\*.*|\/\/.*)$/.match(line);
 		// must have only whitespace before curly
 		var curlyOnNL:Bool = ~/^\s*\{\}?/.match(line);
 
