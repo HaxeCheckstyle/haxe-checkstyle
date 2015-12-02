@@ -89,7 +89,7 @@ class LeftCurlyTests {
 			if (true) { // comment
 				return;
 			}
-			else if (false) {
+			else if (false) { /* comment */
 				return;
 			}
 

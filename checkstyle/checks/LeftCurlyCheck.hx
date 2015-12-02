@@ -233,8 +233,8 @@ class LeftCurlyCheck extends Check {
 		var lineLength:Int = line.length;
 
 		// must have at least one non whitespace character before curly
-		// and only whitespace, } or // + comment after curly
-		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\/.*)$/.match(line);
+		// and only whitespace, }, /* + comment or // + comment after curly
+		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\*.*|\/\/.*)$/.match(line);
 		// must have only whitespace before curly
 		var curlyOnNL:Bool = ~/^\s*\{\}?/.match(line);
 
