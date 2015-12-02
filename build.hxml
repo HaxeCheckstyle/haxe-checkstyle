@@ -1,18 +1,14 @@
 -cmd haxelib newrepo
--cmd haxelib install hxparse 3.0.0 || true
--cmd haxelib install haxeparser || true
--cmd haxelib install haxeparser-substituted 1.0.1 || true
--cmd haxelib install compiletime 2.5.1 || true
+-cmd haxelib install haxeparser 1.0.0 || true
+-cmd haxelib install compiletime 2.6.0 || true
 -cmd haxelib install hxargs 3.0.0 || true
 
 --next
 
 -cp resources
 -cp checkstyle
--lib hxparse:3.0.0
--lib haxeparser
--lib haxeparser-substituted:1.0.1
--lib compiletime:2.5.1
+-lib haxeparser:1.0.0
+-lib compiletime:2.6.0
 -lib hxargs:3.0.0
 
 --each
