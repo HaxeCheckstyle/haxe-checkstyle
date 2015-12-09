@@ -58,175 +58,85 @@ class LeftCurlyCheck extends Check {
 	}
 
 	override function actualRun() {
-		walkDecl();
-		walkFile();
-	}
+		var root:TokenTree = checker.getTokenTree();
+		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], ALL);
 
-	function walkDecl() {
-		for (td in checker.ast.decls) {
-			switch(td.decl) {
-				case EClass(d):
-					checkFields(d.data);
-					if (d.flags.indexOf(HInterface) > -1 && !hasToken(INTERFACE_DEF)) return;
-					if (d.flags.indexOf(HInterface) < 0 && !hasToken(CLASS_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
-				case EEnum(d):
-					if (!hasToken(ENUM_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
-				case EAbstract(d):
-					checkFields(d.data);
-					if (!hasToken(ABSTRACT_DEF)) return;
-					if (d.data.length == 0) {
-						checkLinesBetween(td.pos.min, td.pos.max, td.pos);
-						return;
-					}
-					checkLinesBetween(td.pos.min, d.data[0].pos.min, td.pos);
-				case ETypedef (d):
-					checkTypeDef(td);
-				default:
-			}
+		for (brOpen in allBrOpen) {
+			if (isPosSuppressed(brOpen.pos)) continue;
+			var parent:ParentToken = findParentToken(brOpen.parent);
+			if (!parent.hasToken) continue;
+			check(brOpen, isParentWrapped(parent.token, brOpen));
 		}
 	}
 
-	function checkFields(fields:Array<Field>) {
-		for (field in fields) {
-			if (isCheckSuppressed(field)) return;
-			switch (field.kind) {
-				case FFun(f):
-					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr, isFieldWrapped(field));
-				default:
-			}
-		}
-	}
-
-	function checkTypeDef(td:TypeDecl) {
-		var firstPos:Position = null;
-
-		ComplexTypeUtils.walkTypeDecl(td, function(t:ComplexType, name:String, pos:Position) {
-			if (firstPos == null) {
-				if (pos != td.pos) firstPos = pos;
-			}
-			if (!hasToken(OBJECT_DECL)) return;
-			switch(t) {
-				case TAnonymous(_):
-					checkLinesBetween(pos.min, pos.max, pos);
-				default:
-			}
-		});
-		if (firstPos == null) return;
-		if (!hasToken(TYPEDEF_DEF)) return;
-		checkLinesBetween(td.pos.max, firstPos.min, td.pos);
-	}
-
-	function walkFile() {
-		ExprUtils.walkFile(checker.ast, function(e) {
-			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr) {
-				case EObjectDecl(fields):
-					if (!hasToken(OBJECT_DECL)) return;
-					var linePos:LinePos = checker.getLinePos(e.pos.min);
-					var line:String = checker.lines[linePos.line];
-					checkLeftCurly(line, e.pos);
-				case EFunction(_, f):
-					if (!hasToken(FUNCTION)) return;
-					checkBlocks(f.expr);
-				case EFor(it, expr):
-					if (!hasToken(FOR)) return;
-					checkBlocks(expr, isWrapped(it));
-				case EIf(econd, eif, eelse):
-					if (!hasToken(IF)) return;
-					checkBlocks(eif, isWrapped(econd));
-					checkBlocks(eelse);
-				case EWhile(econd, expr, _):
-					if (!hasToken(WHILE)) return;
-					checkBlocks(expr, isWrapped(econd));
-				case ESwitch(expr, cases, edef):
-					if (!hasToken(SWITCH)) return;
-					var firstCase:Expr = edef;
-					if (cases.length > 0) {
-						firstCase = cases[0].values[0];
+	function findParentToken(token:TokenTree):ParentToken {
+		if (token == null) return {token:token, hasToken: false};
+		switch(token.tok) {
+			case Kwd(KwdClass):
+				return {token: token, hasToken: hasToken(CLASS_DEF)};
+			case Kwd(KwdInterface):
+				return {token: token, hasToken: hasToken(INTERFACE_DEF)};
+			case Kwd(KwdAbstract):
+				return {token: token, hasToken: hasToken(ABSTRACT_DEF)};
+			case Kwd(KwdTypedef):
+				return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+			case Kwd(KwdEnum):
+				return {token: token, hasToken: hasToken(ENUM_DEF)};
+			case Kwd(KwdFunction):
+				return {token: token, hasToken: hasToken(FUNCTION)};
+			case Kwd(KwdIf), Kwd(KwdElse):
+				return {token: token, hasToken: hasToken(IF)};
+			case Kwd(KwdFor):
+				return {token: token, hasToken: hasToken(FOR)};
+			case Kwd(KwdWhile):
+				return {token: token, hasToken: hasToken(WHILE)};
+			case Kwd(KwdTry):
+				return {token: token, hasToken: hasToken(TRY)};
+			case Kwd(KwdCatch):
+				return {token: token, hasToken: hasToken(CATCH)};
+			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault):
+				return {token: token, hasToken: hasToken(SWITCH)};
+			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
+				return {token: token, hasToken: hasToken(OBJECT_DECL)};
+			case Binop(OpAssign):
+				if ((token.parent != null) && (token.parent.parent != null)) {
+					switch (token.parent.parent.tok) {
+						case Kwd(KwdTypedef):
+							return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+						default:
 					}
-					for (c in cases) {
-						checkBlocks(c.expr, isListWrapped(c.values));
-					}
-					checkBlocks(edef);
-					if (firstCase == null) {
-						checkLinesBetween(e.pos.min, e.pos.max, isWrapped(expr), e.pos);
-						return;
-					}
-					checkLinesBetween(expr.pos.max, firstCase.pos.min, isWrapped(expr), e.pos);
-				case ETry(expr, catches):
-					if (!hasToken(TRY)) return;
-					checkBlocks(expr);
-					for (ecatch in catches) {
-						checkBlocks(ecatch.expr);
-					}
-				default:
-			}
-		});
-	}
-
-	function isFieldWrapped(field:Field):Bool {
-		var pos1:Int = field.pos.min;
-		var pos2:Int = pos1;
-		switch (field.kind) {
-			case FFun(f):
-				if (f.expr == null) {
-					return false;
 				}
-				pos2 = f.expr.pos.min;
+				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			default:
-				return false;
-		}
-
-		var functionDef:String = checker.file.content.substring(pos1, pos2);
-		return (functionDef.indexOf('\n') >= 0) ||
-		(functionDef.indexOf('\r') >= 0);
-	}
-
-	function isListWrapped(es:Array<Expr>):Bool {
-		if (es == null) return false;
-		if (es.length <= 0) return false;
-		var posMin:Int = es[0].pos.min;
-		var posMax:Int = es[es.length - 1].pos.max;
-		return (checker.getLinePos(posMin).line != checker.getLinePos(posMax).line);
-	}
-
-	function isWrapped(e:Expr):Bool {
-		if (e == null) return false;
-		return (checker.getLinePos(e.pos.min).line != checker.getLinePos(e.pos.max).line);
-	}
-
-	function checkBlocks(e:Expr, wrapped:Bool = false) {
-		if ((e == null) || (e.expr == null)) return;
-		if (checker.file.content.charAt(e.pos.min) != "{") return;
-
-		switch(e.expr) {
-			case EBlock(_):
-				var linePos:LinePos = checker.getLinePos(e.pos.min);
-				var line:String = checker.lines[linePos.line];
-				checkLeftCurly(line, wrapped, e.pos);
-			default:
+				return findParentToken(token.parent);
 		}
 	}
 
-	function checkLinesBetween(min:Int, max:Int, wrapped:Bool = false, pos:Position) {
-		if (isPosSuppressed(pos)) return;
-		var bracePos:Int = checker.file.content.lastIndexOf("{", max);
-		if (bracePos < 0 || bracePos < min) return;
+	function isParentWrapped(parent:TokenTree, brOpen:TokenTree):Bool {
+		var lineNumStart:Int = checker.getLinePos(parent.pos.min).line;
+		var previous:TokenTree = brOpen.previousSibling;
+		while (previous != null) {
+			switch (previous.tok) {
+				case Comment(_), CommentLine(_), At:
+					previous = previous.previousSibling;
+				default:
+					break;
+			}
+		}
+		var lineNumEnd:Int;
+		if (previous == null) {
+			lineNumEnd = checker.getLinePos(brOpen.parent.pos.max).line;
+		}
+		else {
+			lineNumEnd = checker.getLinePos(previous.getPos().max).line;
+		}
+		return (lineNumStart != lineNumEnd);
+	}
 
-		var lineNum:Int = checker.getLinePos(bracePos).line;
+	function check(token:TokenTree, wrapped:Bool) {
+		var lineNum:Int = checker.getLinePos(token.pos.min).line;
 		var line:String = checker.lines[lineNum];
-		checkLeftCurly(line, wrapped, pos);
+		checkLeftCurly(line, wrapped, token.pos);
 	}
 
 	function checkLeftCurly(line:String, wrapped:Bool = false, pos:Position) {
@@ -261,4 +171,9 @@ class LeftCurlyCheck extends Check {
 			throw "exit";
 		}
 	}
+}
+
+typedef ParentToken = {
+	token:TokenTree,
+	hasToken:Bool
 }
