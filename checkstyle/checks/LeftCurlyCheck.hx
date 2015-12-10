@@ -69,6 +69,9 @@ class LeftCurlyCheck extends Check {
 		}
 	}
 
+	/**
+	 * find effective parent token and check against configured tokens
+	 */
 	function findParentToken(token:TokenTree):ParentToken {
 		if (token == null) return {token:token, hasToken: false};
 		switch(token.tok) {
@@ -99,6 +102,7 @@ class LeftCurlyCheck extends Check {
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			case Binop(OpAssign):
+				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
 					switch (token.parent.parent.tok) {
 						case Kwd(KwdTypedef):
