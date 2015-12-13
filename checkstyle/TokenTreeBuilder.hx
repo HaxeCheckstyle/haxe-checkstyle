@@ -315,6 +315,7 @@ class TokenTreeBuilder {
 
 	function walkLtGt(parent:TokenTree) {
 		var ltTok:TokenTree = stream.consumeTokenDef(Binop(OpLt));
+		parent.addChild(ltTok);
 		while(true) {
 			switch (stream.token()) {
 				case Comma:
@@ -356,6 +357,8 @@ class TokenTreeBuilder {
 				walkWhile(parent);
 			case Kwd(KwdSwitch):
 				walkSwitch(parent);
+			case Kwd(KwdVar):
+				walkVar(parent, []);
 			case Kwd(KwdNew):
 				walkNew(parent);
 			case Binop(OpGt):

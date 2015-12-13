@@ -369,6 +369,16 @@
 			"props": {
 				"severity": "ERROR"
 			}
+		},
+		{
+			"type": "WhitespaceAfter",
+			"props": {
+				"severity": "WARNING",
+				"tokens": [
+					",",
+					";"
+				]
+			}
 		}
 	]
 }
