@@ -825,32 +825,71 @@ class TokenTreeBuilder {
 			case Sharp("if"), Sharp("elseif"):
 				var ifToken:TokenTree = stream.consumeToken();
 				parent.addChild(ifToken);
+				walkSharpIfExpr(ifToken);
 				walkSharpExpr(ifToken);
-			case Sharp("else"), Sharp("end"):
+			case Sharp("else"):
+				var elseToken:TokenTree = stream.consumeToken();
+				parent.addChild(elseToken);
+				walkSharpExpr(elseToken);
+			case Sharp("end"):
 				parent.addChild(stream.consumeToken());
+			case Sharp("error"):
+				var errorToken:TokenTree = stream.consumeToken();
+				parent.addChild(errorToken);
+				switch (stream.token()) {
+					case Const(CString(_)):
+						errorToken.addChild(stream.consumeToken());
+					default:
+				}
 			case Sharp(_): // TODO handle other #directives
 				parent.addChild(stream.consumeToken());
 			default:
 		}
 	}
 
-	function walkSharpExpr(parent:TokenTree) {
+	function walkSharpIfExpr(parent:TokenTree) {
 		var childToken:TokenTree;
 		while (true) {
 			switch (stream.token()) {
 				case Unop(OpNot):
 					childToken = stream.consumeToken();
 					parent.addChild(childToken);
-					walkSharpExpr(childToken);
+					walkSharpIfExpr(childToken);
+					return;
 				case POpen:
 					walkPOpen(parent);
 					return;
 				case Const(CIdent(_)):
 					childToken = stream.consumeToken();
 					parent.addChild(childToken);
-					walkSharpExpr(childToken);
+					return;
 				default:
 					return;
+			}
+		}
+	}
+
+	function walkSharpExpr(parent:TokenTree) {
+		var prefixes:Array<TokenTree> = [];
+		while (true) {
+			switch (stream.token()) {
+				case Kwd(KwdClass):
+					walkClass(parent, prefixes);
+				case Kwd(KwdInterface):
+					walkInterface(parent, prefixes);
+				case Kwd(KwdAbstract):
+					walkAbstract(parent, prefixes);
+				case Kwd(KwdTypedef):
+					walkTypedef(parent, prefixes);
+				case Kwd(KwdEnum):
+					walkEnum(parent, prefixes);
+				case BrOpen:
+					walkBlock(parent);
+				case Sharp(_):
+					walkSharp(parent);
+					return;
+				default:
+					walkStatement(parent);
 			}
 		}
 	}

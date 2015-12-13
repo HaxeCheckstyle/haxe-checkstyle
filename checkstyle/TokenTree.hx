@@ -68,7 +68,12 @@ class TokenTree extends Token {
 		}
 		if (childs == null) return results;
 		for (child in childs) {
-			results = results.concat(child.filterCallback(callback, mode, maxLevel - 1));
+			switch (child.tok) {
+				case Sharp(_):
+					results = results.concat(child.filterCallback(callback, mode, maxLevel));
+				default:
+					results = results.concat(child.filterCallback(callback, mode, maxLevel - 1));
+			}
 		}
 		return results;
 	}
