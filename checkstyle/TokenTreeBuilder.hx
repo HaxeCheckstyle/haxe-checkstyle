@@ -844,7 +844,7 @@ class TokenTreeBuilder {
 						errorToken.addChild(stream.consumeToken());
 					default:
 				}
-			case Sharp(_): // TODO handle other #directives
+			case Sharp(_):
 				parent.addChild(stream.consumeToken());
 			default:
 		}
