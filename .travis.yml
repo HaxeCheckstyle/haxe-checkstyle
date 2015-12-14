@@ -2,8 +2,13 @@ git:
     depth: 1
 
 language: haxe
+os:
+  - linux
+  - osx
 haxe:
   - "3.2.0"
+  - "3.2.1"
+  - development
 hxml:
   - build.hxml
 sudo: false
