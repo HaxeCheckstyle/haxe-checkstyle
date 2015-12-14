@@ -70,7 +70,7 @@ class Main {
 			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
 			@doc("Show report") ["-report"] => function() REPORT = true,
-			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
+			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
 			_ => function(arg:String) throw "Unknown command: " + arg
 		]);
 
@@ -85,7 +85,7 @@ class Main {
 		var toProcess:Array<LintFile> = [];
 		for (file in files){
 			var code = File.getContent(file);
-			toProcess.push({name:file,content:code});
+			toProcess.push({name:file, content:code});
 		}
 
 		if (configPath == null) addAllChecks();
@@ -138,7 +138,7 @@ class Main {
 	static function traverse(node:String , files:Array<String>) {
 		if (FileSystem.isDirectory(node)) {
 			var nodes = FileSystem.readDirectory(node);
-			for (child in nodes) traverse(pathJoin(node,child), files);
+			for (child in nodes) traverse(pathJoin(node, child), files);
 		}
 		else if (node.substr(-3) == ".hx") files.push(node);
 	}

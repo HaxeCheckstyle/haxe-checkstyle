@@ -17,26 +17,26 @@ class ExprUtils {
 	public static function walkTypeDecl(td:TypeDecl, cb:Expr -> Void) {
 		switch(td.decl){
 		case EClass(d):
-			walkClass(d,cb);
+			walkClass(d, cb);
 		case EEnum(d):
-			walkEnum(d,cb);
+			walkEnum(d, cb);
 		case EAbstract(a):
-			walkAbstract(a,cb);
+			walkAbstract(a, cb);
 		case EImport(sl, mode):
-			walkImport(sl, mode,cb);
+			walkImport(sl, mode, cb);
 		case ETypedef(d):
-			walkTypedef(d,cb);
+			walkTypedef(d, cb);
 		case EUsing(path):
-			walkTypePath(path,cb);
+			walkTypePath(path, cb);
 		}
 	}
 
 	static function walkMeta(meta:Metadata, cb:Expr -> Void){
-		for (m in meta) for (p in m.params) walkExpr(p,cb);
+		for (m in meta) for (p in m.params) walkExpr(p, cb);
 	}
 
-	static function walkCommonDefinition<A,B> (d:Definition<A, B>, cb:Expr -> Void) {
-		for (p in d.params) walkTypeParamDecl(p,cb);
+	static function walkCommonDefinition<A, B> (d:Definition<A, B>, cb:Expr -> Void) {
+		for (p in d.params) walkTypeParamDecl(p, cb);
 		walkMeta(d.meta, cb);
 	}
 
@@ -44,11 +44,11 @@ class ExprUtils {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
 			switch(f) {
-				case HExtends(t) | HImplements(t): walkTypePath(t,cb);
+				case HExtends(t) | HImplements(t): walkTypePath(t, cb);
 				default:
 			}
 		}
-		for (f in d.data) walkField(f,cb);
+		for (f in d.data) walkField(f, cb);
 	}
 
 	public static function walkEnum(d:Definition<EnumFlag, Array<EnumConstructor>>, cb:Expr -> Void) {
@@ -65,11 +65,11 @@ class ExprUtils {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
 			switch(f) {
-				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct,cb);
+				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, cb);
 				default:
 			}
 		}
-		for (f in d.data) walkField(f,cb);
+		for (f in d.data) walkField(f, cb);
 	}
 
 	public static function walkImport(sl, mode, cb:Expr -> Void) {}
