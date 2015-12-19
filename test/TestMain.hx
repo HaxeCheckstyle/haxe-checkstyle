@@ -37,6 +37,7 @@ class TestMain {
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());
 		runner.add(new RightCurlyCheckTest());
+		runner.add(new SeparatorWrapCheckTest());
 		runner.add(new SpacingCheckTest());
 		runner.add(new TabForAligningCheckTest());
 		runner.add(new TODOCommentCheckTest());

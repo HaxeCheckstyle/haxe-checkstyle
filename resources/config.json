@@ -309,6 +309,17 @@
 			}
 		},
 		{
+			"type": "SeparatorWrap",
+			"props": {
+				"severity": "INFO",
+				"option": "eol",
+				"tokens": [
+					".",
+					","
+				]
+			}
+		},
+		{
 			"type": "Spacing",
 			"props": {
 				"severity": "INFO",

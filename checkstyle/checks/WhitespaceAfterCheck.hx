@@ -92,7 +92,7 @@ class WhitespaceAfterCheck extends Check {
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
 
-			var contentAfter:String = checker.file.content.substr (tok.pos.max, 1);
+			var contentAfter:String = checker.file.content.substr(tok.pos.max, 1);
 			if (~/^(\s|)$/.match(contentAfter)) continue;
 
 			logPos('No whitespace after "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
