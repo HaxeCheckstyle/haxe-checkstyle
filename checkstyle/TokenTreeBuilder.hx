@@ -173,6 +173,10 @@ class TokenTreeBuilder {
 		while(true) {
 			switch (stream.token()) {
 				case BrOpen: break;
+				case Const(CIdent("from")), Const(CIdent("to")):
+					var fromToken:TokenTree = stream.consumeToken();
+					name.addChild(fromToken);
+					walkTypeNameDef(fromToken);
 				default:
 					typeChild = stream.consumeToken();
 					typeParent.addChild(typeChild);
