@@ -55,9 +55,18 @@ class SeparatorWrapTests {
 	class Test {
 		function test(param1:String,
 				param2:String) {
-			var x = { x: 100,
-				y: 100,
+			var x = { x: 100, // x-coordinate
+				y: 100, /* y-coordinate */
 				z: 20
+			};
+		}
+
+		@SuppressWarnings('checkstyle:SeparatorWrap')
+		function test(param1:String
+				, param2:String) {
+			var x = { x: 100
+				, y: 100
+				, z: 20
 			};
 		}
 	}
