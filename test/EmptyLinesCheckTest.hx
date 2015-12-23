@@ -1,6 +1,6 @@
 package ;
 
-import checkstyle.checks.EmptyLinesCheck;
+import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase {
 

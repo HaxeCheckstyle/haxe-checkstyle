@@ -1,6 +1,6 @@
 package ;
 
-import checkstyle.checks.EmptyBlockCheck;
+import checkstyle.checks.block.EmptyBlockCheck;
 
 class EmptyBlockCheckTest extends CheckTestCase {
 
@@ -23,6 +23,7 @@ class EmptyBlockCheckTest extends CheckTestCase {
 	public function testEmptyBlockComment() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = EmptyBlockCheck.TEXT;
+
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT, '');
@@ -37,6 +38,7 @@ class EmptyBlockCheckTest extends CheckTestCase {
 	public function testEmptyBlockStatement() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = EmptyBlockCheck.STATEMENT;
+
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
 

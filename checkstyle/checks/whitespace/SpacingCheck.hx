@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.whitespace;
 
 import haxe.macro.Printer;
 import haxe.macro.Expr.Binop;

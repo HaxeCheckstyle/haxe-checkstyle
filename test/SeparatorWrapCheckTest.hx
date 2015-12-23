@@ -1,6 +1,6 @@
 package ;
 
-import checkstyle.checks.SeparatorWrapCheck;
+import checkstyle.checks.whitespace.SeparatorWrapCheck;
 
 class SeparatorWrapCheckTest extends CheckTestCase {
 
@@ -38,7 +38,7 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 		assertMsg(check, SeparatorWrapTests.NOWRAP_CALL, '');
 		assertMsg(check, SeparatorWrapTests.NOWRAP_IMPORT, '');
 
-		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, 'Token "." must on a new line');
+		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, 'Token "," must on a new line');
 		assertMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY, 'Token "," must on a new line');
 		assertMsg(check, SeparatorWrapTests.EOL_WRAP_IMPORT, 'Token "." must on a new line');
 	}

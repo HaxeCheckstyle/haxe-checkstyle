@@ -10,6 +10,8 @@ class ChecksInfo {
 		name2info = new Map();
 
 		CompileTime.importPackage("checkstyle.checks"); // must be string constant
+		CompileTime.importPackage("checkstyle.checks.block");
+		CompileTime.importPackage("checkstyle.checks.whitespace");
 		var checksClasses = CompileTime.getAllClasses(Check);
 
 		for (cl in checksClasses) {

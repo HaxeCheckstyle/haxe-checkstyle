@@ -1,6 +1,6 @@
 package ;
 
-import checkstyle.checks.WhitespaceAfterCheck;
+import checkstyle.checks.whitespace.WhitespaceAfterCheck;
 
 class WhitespaceAfterCheckTest extends CheckTestCase {
 
