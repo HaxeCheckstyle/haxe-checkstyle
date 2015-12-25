@@ -34,6 +34,16 @@ class TokenTree extends Token {
 		return childs.length > 0;
 	}
 
+	public function getFirstChild():TokenTree {
+		if (!hasChilds()) return null;
+		return childs[0];
+	}
+
+	public function getLastChild():TokenTree {
+		if (!hasChilds()) return null;
+		return childs[childs.length - 1];
+	}
+
 	public function getPos():Position {
 		if ((childs == null) || (childs.length <= 0)) return pos;
 
