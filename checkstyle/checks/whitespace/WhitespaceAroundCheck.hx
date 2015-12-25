@@ -13,6 +13,7 @@ class WhitespaceAroundCheck extends Check {
 
 	public function new() {
 		super();
+		severity = "IGNORE";
 		tokens = [
 			"=",
 			"+",
@@ -136,7 +137,6 @@ class WhitespaceAroundCheck extends Check {
 				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
 				continue;
 			}
-
 
 		}
 	}
