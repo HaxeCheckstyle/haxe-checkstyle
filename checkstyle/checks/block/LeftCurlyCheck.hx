@@ -73,6 +73,7 @@ class LeftCurlyCheck extends Check {
 	/**
 	 * find effective parent token and check against configured tokens
 	 */
+	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function findParentToken(token:TokenTree):ParentToken {
 		if (token == null) return {token:token, hasToken: false};
 		switch(token.tok) {
