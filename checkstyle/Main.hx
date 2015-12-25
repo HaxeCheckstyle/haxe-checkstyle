@@ -7,6 +7,7 @@ import haxe.Json;
 import sys.FileSystem;
 import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.Reporter;
+import checkstyle.reporter.ExitCodeReporter;
 import haxe.CallStack;
 import sys.io.File;
 
@@ -40,6 +41,7 @@ class Main {
 			trace(CallStack.toString(CallStack.exceptionStack()));
 		}
 		if (oldCwd != null) Sys.setCwd(oldCwd);
+		Sys.exit(exitCode);
 	}
 
 	var reporter:IReporter;
@@ -50,11 +52,14 @@ class Main {
 	static var REPORT_TYPE:String = "xml";
 	static var PATH:String = "check-style-report.xml";
 	static var STYLE:String = "";
+	static var EXIT_CODE:Bool = false;
+	static var exitCode:Int;
 
 	function new() {
 		reporter = new Reporter();
 		info = new ChecksInfo();
 		checker = new Checker();
+		exitCode = 0;
 	}
 
 	@SuppressWarnings('checkstyle:Dynamic')
@@ -70,6 +75,7 @@ class Main {
 			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
 			@doc("Show report") ["-report"] => function() REPORT = true,
+			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
 			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
 			_ => function(arg:String) throw "Unknown command: " + arg
 		]);
@@ -79,8 +85,6 @@ class Main {
 			Sys.exit(0);
 		}
 		argHandler.parse(args);
-
-		reporter = createReporter();
 
 		var toProcess:Array<LintFile> = [];
 		for (file in files){
@@ -105,7 +109,8 @@ class Main {
 				checker.addCheck(check);
 			}
 		}
-		checker.addReporter(reporter);
+		checker.addReporter(createReporter());
+		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
 	}
 
@@ -141,5 +146,9 @@ class Main {
 			for (child in nodes) traverse(pathJoin(node, child), files);
 		}
 		else if (node.substr(-3) == ".hx") files.push(node);
+	}
+
+	public static function setExitCode(newExitCode:Int) {
+		exitCode = newExitCode;
 	}
 }
