@@ -13,6 +13,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST9, '');
 		assertMsg(check, LeftCurlyTests.TEST14, '');
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
+		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, '');
 	}
 
 	public function testWrongBraces() {
@@ -70,6 +71,12 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST17, 'Left curly should be at EOL (previous expression is not split over muliple lines)');
 		assertMsg(check, LeftCurlyTests.TEST18, 'Left curly should be on new line (previous expression is split over muliple lines)');
 		assertMsg(check, LeftCurlyTests.TEST19, 'Left curly should be on new line (previous expression is split over muliple lines)');
+	}
+
+	public function testReification() {
+		var check = new LeftCurlyCheck();
+		check.tokens = [LeftCurlyCheck.REIFICATION];
+		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, 'Left curly should be at EOL (only linebreak or comment after curly)');
 	}
 }
 
@@ -358,6 +365,15 @@ class LeftCurlyTests {
 				}
 				default:
 			}
+		}
+	}";
+
+	public static inline var MACRO_REIFICATION:String = "
+	class Test {
+		public function test(val:Int) {
+			var str = 'Hello, world';
+			var expr = macro for (i in 0...10) trace($v{str});
+			var e = macro ${str}.toLowerCase();
 		}
 	}";
 }

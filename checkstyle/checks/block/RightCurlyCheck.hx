@@ -23,6 +23,7 @@ class RightCurlyCheck extends Check {
 	public static inline var SWITCH:String = "SWITCH";
 	public static inline var TRY:String = "TRY";
 	public static inline var CATCH:String = "CATCH";
+	public static inline var REIFICATION:String = "REIFICATION";
 
 	public static inline var SAME:String = "same";
 	public static inline var ALONE:String = "alone";
@@ -103,6 +104,8 @@ class RightCurlyCheck extends Check {
 				return !hasToken(SWITCH);
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
 				return !hasToken(OBJECT_DECL);
+			case Dollar(_):
+				return !hasToken(REIFICATION);
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
