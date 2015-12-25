@@ -5,8 +5,8 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("SeparatorWrap")
-@desc("Checks line wrapping with separators")
+@name("OperatorWrap")
+@desc("Checks line wrapping with operators")
 class OperatorWrapCheck extends WrapCheckBase {
 
 	public function new() {
