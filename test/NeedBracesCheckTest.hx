@@ -15,6 +15,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST12, '');
 		assertMsg(check, NeedBracesTests.TEST13, '');
 		assertMsg(check, NeedBracesTests.TEST14, '');
+		assertMsg(check, NeedBracesTests.INTERFACE_DEF, '');
 	}
 
 	public function testWrongBraces() {
@@ -46,6 +47,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST12, 'No braces used for body of "else"');
 		assertMsg(check, NeedBracesTests.TEST13, 'Body of "else" on same line');
 		assertMsg(check, NeedBracesTests.TEST14, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.INTERFACE_DEF, '');
 	}
 
 	public function testTokenFOR() {
@@ -316,5 +318,10 @@ class NeedBracesTests {
 				anotherAction();
 			}
 		}
+	}";
+
+	public static inline var INTERFACE_DEF:String = "
+	interface Test {
+		function test();
 	}";
 }

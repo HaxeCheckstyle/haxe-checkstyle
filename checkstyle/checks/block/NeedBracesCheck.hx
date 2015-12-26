@@ -91,6 +91,8 @@ class NeedBracesCheck extends Check {
 		switch (lastChild.tok) {
 			case BrOpen:
 				return;
+			case Semicolon:
+				return;
 			default:
 				checkNoBraces(token, lastChild);
 		}
