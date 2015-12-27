@@ -13,7 +13,6 @@ class WhitespaceAroundCheck extends Check {
 
 	public function new() {
 		super();
-		severity = "IGNORE";
 		tokens = [
 			"=",
 			"+",
@@ -63,8 +62,11 @@ class WhitespaceAroundCheck extends Check {
 		if (hasToken(",")) tokenList.push(Comma);
 		if (hasToken(";")) tokenList.push(Semicolon);
 		if (hasToken("(")) tokenList.push(POpen);
+		if (hasToken(")")) tokenList.push(PClose);
 		if (hasToken("[")) tokenList.push(BkOpen);
+		if (hasToken("]")) tokenList.push(BkClose);
 		if (hasToken("{")) tokenList.push(BrOpen);
+		if (hasToken("}")) tokenList.push(BrClose);
 		if (hasToken(":")) tokenList.push(DblDot);
 		if (hasToken(".")) tokenList.push(Dot);
 
@@ -122,6 +124,7 @@ class WhitespaceAroundCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
+			if (isTypeParameter(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -137,7 +140,23 @@ class WhitespaceAroundCheck extends Check {
 				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
 				continue;
 			}
+		}
+	}
 
+	function isTypeParameter(token:TokenTree):Bool {
+		switch (token.tok) {
+			case Binop(OpGt):
+				return switch (token.parent.tok) {
+					case Binop(OpLt): true;
+					default: false;
+				}
+			case Binop(OpLt):
+				return switch (token.getLastChild().tok) {
+					case Binop(OpGt): true;
+					default: false;
+				}
+			default:
+				return false;
 		}
 	}
 }
