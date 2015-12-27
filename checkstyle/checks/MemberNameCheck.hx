@@ -11,6 +11,8 @@ class MemberNameCheck extends NameCheckBase {
 	public static inline var PUBLIC:String = "PUBLIC";
 	public static inline var PRIVATE:String = "PRIVATE";
 	public static inline var ENUM:String = "ENUM";
+	public static inline var CLASS:String = "CLASS";
+	public static inline var ABSTRACT:String = "ABSTRACT";
 	public static inline var TYPEDEF:String = "TYPEDEF";
 
 	public function new() {
@@ -19,6 +21,7 @@ class MemberNameCheck extends NameCheckBase {
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
+		if (!hasToken(CLASS)) return;
 		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
 		checkFields(d.data);
 	}
@@ -30,6 +33,7 @@ class MemberNameCheck extends NameCheckBase {
 	}
 
 	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
+		if (!hasToken(ABSTRACT)) return;
 		checkFields(d.data);
 	}
 
