@@ -123,6 +123,8 @@ class TokenTreeBuilder {
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
+				case Semicolon:
+					block.addChild(stream.consumeToken());
 				default:
 					tempStore.push(stream.consumeToken());
 			}
@@ -155,6 +157,8 @@ class TokenTreeBuilder {
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
+				case Semicolon:
+					block.addChild(stream.consumeToken());
 				default:
 					tempStore.push(stream.consumeToken());
 			}
@@ -202,6 +206,8 @@ class TokenTreeBuilder {
 				case At:
 					tempStore.push(walkAt());
 				case BrClose: break;
+				case Semicolon:
+					block.addChild(stream.consumeToken());
 				default:
 					tempStore.push(stream.consumeToken());
 			}
@@ -466,13 +472,29 @@ class TokenTreeBuilder {
 				walkStatement(newChild);
 			case BrClose, BkClose, PClose:
 			default:
-				newChild = stream.consumeToken();
-				parent.addChild(newChild);
-				switch (newChild.tok) {
-					case Comment(_), CommentLine(_), Comma, Semicolon:
-					default:
-						walkStatement(newChild);
-				}
+				walkOtherStatement(parent);
+				return;
+		}
+		continueWalkStatement(parent);
+	}
+
+	function walkOtherStatement(parent:TokenTree) {
+		var newChild:TokenTree = stream.consumeToken();
+		parent.addChild(newChild);
+		switch (newChild.tok) {
+			case Comment(_), CommentLine(_), Comma, Semicolon:
+			default:
+				walkStatement(newChild);
+		}
+	}
+
+	function continueWalkStatement(parent:TokenTree) {
+		switch (stream.token()) {
+			case Dot:
+				walkStatement(parent);
+			case BkOpen:
+				walkStatement(parent);
+			default:
 		}
 	}
 
