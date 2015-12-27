@@ -92,7 +92,13 @@ class TokenTreeBuilder {
 			atTok.addChild(dblDot);
 			parent = dblDot;
 		}
-		var name:TokenTree = stream.consumeConstIdent();
+		var name:TokenTree;
+		switch (stream.token()) {
+			case Const(_):
+				name = stream.consumeConstIdent();
+			default:
+				name = stream.consumeToken();
+		}
 		parent.addChild(name);
 		if (stream.is(POpen)) walkPOpen(name);
 		return atTok;
