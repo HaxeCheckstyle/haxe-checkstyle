@@ -14,6 +14,7 @@ class NeedBracesCheck extends Check {
 	public static inline var IF:String = "IF";
 	public static inline var ELSE_IF:String = "ELSE_IF";
 	public static inline var WHILE:String = "WHILE";
+	public static inline var DO_WHILE:String = "DO_WHILE";
 	public static inline var CATCH:String = "CATCH";
 
 	public var tokens:Array<String>;
@@ -41,6 +42,7 @@ class NeedBracesCheck extends Check {
 			tokenList.push(Kwd(KwdElse));
 		}
 		if (hasToken(WHILE)) tokenList.push(Kwd(KwdWhile));
+		if (hasToken(DO_WHILE)) tokenList.push(Kwd(KwdDo));
 		if (hasToken(CATCH)) tokenList.push(Kwd(KwdCatch));
 
 		if (tokenList.length <= 0) return;
@@ -55,6 +57,10 @@ class NeedBracesCheck extends Check {
 					checkIfChild(tok);
 				case Kwd(KwdFunction):
 					checkFunctionChild(tok);
+				case Kwd(KwdDo):
+					checkDoWhileChild(tok);
+				case Kwd(KwdWhile):
+					checkWhileChild(tok);
 				default:
 					checkLastChild(tok);
 			}
@@ -70,7 +76,7 @@ class NeedBracesCheck extends Check {
 			lastChild = lastChild.previousSibling;
 		}
 		switch (lastChild.tok) {
-			case BrOpen:
+			case POpen, BrOpen:
 				return;
 			default:
 				checkNoBraces(token, lastChild);
@@ -92,6 +98,34 @@ class NeedBracesCheck extends Check {
 			case BrOpen:
 				return;
 			case Semicolon:
+				return;
+			default:
+				checkNoBraces(token, lastChild);
+		}
+	}
+
+	function checkDoWhileChild(token:TokenTree) {
+		if (token == null) return;
+		if (!token.hasChilds()) return;
+
+		var lastChild:TokenTree = token.getLastChild();
+		var expr:TokenTree = lastChild.previousSibling;
+		switch (expr.tok) {
+			case BrOpen:
+				return;
+			default:
+				checkNoBraces(token, lastChild);
+		}
+	}
+
+	function checkWhileChild(token:TokenTree) {
+		if (token == null) return;
+		if (!token.hasChilds()) return;
+		if (Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
+
+		var lastChild:TokenTree = token.getLastChild();
+		switch (lastChild.tok) {
+			case BrOpen:
 				return;
 			default:
 				checkNoBraces(token, lastChild);
