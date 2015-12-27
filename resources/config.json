@@ -214,6 +214,8 @@
 				"severity": "ERROR",
 				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [
+					"CLASS",
+					"ABSTRACT",
 					"PUBLIC",
 					"PRIVATE",
 					"TYPEDEF"
