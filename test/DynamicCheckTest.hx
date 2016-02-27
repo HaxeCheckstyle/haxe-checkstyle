@@ -17,6 +17,8 @@ class DynamicCheckTest extends CheckTestCase {
 		assertMsg(check, DynamicTests.TEST4, 'Dynamic type used: param');
 		assertMsg(check, DynamicTests.TEST5, 'Dynamic type used: test');
 		assertMsg(check, DynamicTests.TEST6, 'Dynamic type used: Test');
+
+		assertMsg(check, DynamicTests.ISSUE_43, '');
 	}
 }
 
@@ -114,5 +116,12 @@ class DynamicTests {
 
 	public static inline var TEST6:String =
 	"typedef Test = String -> Dynamic;";
+
+	public static inline var ISSUE_43:String =
+	"class Test {
+		function test() {
+			cast (Type.createInstance(Array, []));
+		}
+	}";
 
 }

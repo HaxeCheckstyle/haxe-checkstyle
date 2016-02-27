@@ -135,6 +135,7 @@ class ExprUtils {
 	}
 
 	public static function walkComplexType(t:ComplexType, cb:Expr -> Void) {
+		if (t == null) return;
 		switch(t){
 			case TPath(p): walkTypePath(p, cb);
 			case TFunction(args, ret):
