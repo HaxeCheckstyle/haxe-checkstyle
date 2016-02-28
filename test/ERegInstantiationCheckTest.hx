@@ -13,6 +13,11 @@ class ERegInstantiationCheckTest extends CheckTestCase {
 		var msg = checkMessage(ERegInstantiationTests.TEST2, new ERegInstantiationCheck());
 		assertEquals(msg, '');
 	}
+
+	public function testIssue43() {
+		var msg = checkMessage(ERegInstantiationTests.ISSUE_43, new ERegInstantiationCheck());
+		assertEquals(msg, '');
+	}
 }
 
 class ERegInstantiationTests {
@@ -24,5 +29,12 @@ class ERegInstantiationTests {
 	public static inline var TEST2:String =
 	"class Test {
 		var _reg:EReg = ~/test/i;
+	}";
+
+	public static inline var ISSUE_43:String =
+	"class Test {
+		function test() {
+			cast (Type.createInstance(Array, []));
+		}
 	}";
 }

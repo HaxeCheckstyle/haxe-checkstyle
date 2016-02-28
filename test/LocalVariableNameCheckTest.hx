@@ -12,8 +12,8 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 
 	public function testWrongNaming() {
 		var check = new LocalVariableNameCheck ();
-		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
 	}
 
 	public function testIgnoreExtern() {
@@ -21,16 +21,16 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		assertMsg(check, LocalVariableNameTests.TEST, '');
-		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
-		assertMsg(check, LocalVariableNameTests.TEST4, 'Invalid local var signature: Count (name should be ~/^[a-z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, LocalVariableNameTests.TEST4, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
 	}
 
 	public function testFormat() {
 		var check = new LocalVariableNameCheck ();
 		check.format = "^[A-Za-z_]*$";
 
-		assertMsg(check, LocalVariableNameTests.TEST, 'Invalid local var signature: count2 (name should be ~/^[A-Za-z_]*$/)');
+		assertMsg(check, LocalVariableNameTests.TEST, 'Invalid local var signature: count2 (name should be ~/${check.format}/)');
 		assertMsg(check, LocalVariableNameTests.TEST1, '');
 		assertMsg(check, LocalVariableNameTests.TEST3, '');
 		assertMsg(check, LocalVariableNameTests.TEST4, '');

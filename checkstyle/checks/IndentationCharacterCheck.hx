@@ -18,7 +18,7 @@ class IndentationCharacterCheck extends Check {
 		var re;
 		var tab = (character == "tab");
 		if (tab) {
-			re = ~/^\t*(\S.*)?$/;
+			re = ~/^\t*(\S.*| \*.*)?$/;
 		}
 		else {
 			re = ~/^ *(\S.*)?$/;

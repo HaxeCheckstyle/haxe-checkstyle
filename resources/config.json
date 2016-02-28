@@ -27,6 +27,13 @@
 			}
 		},
 		{
+			"type": "AvoidStarImport",
+			"props": {
+				"severity": "INFO",
+				"allowStarImports": false
+			}
+		},
+		{
 			"type": "ConstantName",
 			"props": {
 				"severity": "ERROR",
@@ -86,10 +93,25 @@
 			}
 		},
 		{
+			"type": "HiddenField",
+			"props": {
+				"severity": "INFO",
+				"ignoreConstructorParameter": true,
+				"ignoreSetter": true,
+				"ignoreFormat": "^(main)$"
+			}
+		},
+		{
 			"type": "IndentationCharacter",
 			"props": {
 				"severity": "INFO",
 				"character": "tab"
+			}
+		},
+		{
+			"type": "InnerAssignment",
+			"props": {
+				"severity": "INFO"
 			}
 		},
 		{
@@ -125,7 +147,7 @@
 			"type": "ListenerName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"format": "^[a-z][a-zA-Z0-9]*$",
 				"listeners": [
 					"addEventListener",
 					"addListener",
@@ -138,7 +160,19 @@
 			"type": "LocalVariableName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$"
+				"format": "^[a-z][a-zA-Z0-9]*$"
+			}
+		},
+		{
+			"type": "MagicNumber",
+			"props": {
+				"severity": "INFO",
+				"ignoreNumbers": [
+					-1,
+					0,
+					1,
+					2
+				]
 			}
 		},
 		{
@@ -155,8 +189,10 @@
 			"type": "MemberName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
+				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [
+					"CLASS",
+					"ABSTRACT",
 					"PUBLIC",
 					"PRIVATE",
 					"TYPEDEF"
@@ -174,8 +210,24 @@
 			"type": "MethodName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$",
-				"tokens": []
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [
+					"PUBLIC",
+					"PRIVATE",
+					"STATIC",
+					"NOTSTATIC",
+					"INLINE",
+					"NOTINLINE"
+				]
+			}
+		},
+		{
+			"type": "MultipleStringLiterals",
+			"props": {
+				"severity": "INFO",
+				"allowDuplicates": 2,
+				"minLength": 2,
+				"ignore": "^\\s+$"
 			}
 		},
 		{
@@ -183,7 +235,7 @@
 			"props": {
 				"severity": "WARNING",
 				"allowSingleLineStatement": true,
-				"tokens": []
+				"tokens": ["IF", "ELSE_IF", "FOR", "WHILE", "TRY", "CATCH"]
 			}
 		},
 		{
@@ -211,7 +263,7 @@
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[a-z]+[a-zA-Z0-9]*$"
+				"format": "^[a-z][a-zA-Z0-9]*$"
 			}
 		},
 		{
@@ -296,7 +348,7 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^I[A-Z]+[a-zA-Z0-9]*$",
+				"format": "^I[A-Z][a-zA-Z0-9]*$",
 				"tokens": [
 					"INTERFACE"
 				]
@@ -306,7 +358,7 @@
 			"type": "TypeName",
 			"props": {
 				"severity": "ERROR",
-				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"format": "^[A-Z][a-zA-Z0-9]*$",
 				"tokens": [
 					"CLASS",
 					"ENUM",

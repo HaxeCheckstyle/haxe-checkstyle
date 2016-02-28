@@ -123,7 +123,7 @@ class RightCurlyCheck extends Check {
 		// td.pos only holds pos info about the type itself
 		// members only hold pos info about themself
 		// so real pos.max is pos.max of last member + 1
-		td.pos.max = maxPos + 1;
+		td.pos.max = checker.file.content.indexOf ('}', maxPos - 1);
 		checkPos(td.pos, isSingleLine (td.pos.min, td.pos.max));
 	}
 
@@ -176,6 +176,7 @@ class RightCurlyCheck extends Check {
 		var bracePos:Int = checker.file.content.lastIndexOf("}", pos.max);
 		if (bracePos < 0 || bracePos < pos.min) return;
 
+		if (pos.max >= checker.file.content.length) pos.max = checker.file.content.length - 1;
 		var linePos:Int = checker.getLinePos(pos.max).line;
 		var line:String = checker.lines[linePos];
 		checkRightCurly(line, singleLine, pos);
@@ -197,14 +198,24 @@ class RightCurlyCheck extends Check {
 
 	function isSingleLine(start:Int, end:Int):Bool {
 		var startLine:Int = checker.getLinePos(start).line;
+		if (end >= checker.file.content.length) end = checker.file.content.length - 1;
 		var endLine:Int = checker.getLinePos(end).line;
 		return startLine == endLine;
 	}
 
 	function checkRightCurly(line:String, singleLine:Bool, pos:Position) {
 		try {
+			var eof:Bool = false;
+			if (pos.max >= checker.file.content.length) {
+				pos.max = checker.file.content.length - 1;
+				eof = true;
+			}
 			var linePos:LinePos = checker.getLinePos(pos.max);
-			var afterCurly:String = checker.lines[linePos.line].substr(linePos.ofs);
+			var afterCurly:String = "";
+			if (!eof) {
+				var afterLine:String = checker.lines[linePos.line];
+				if (linePos.ofs < afterLine.length) afterCurly = afterLine.substr(linePos.ofs);
+			}
 			var needsSameOption:Bool = sameRegex.match(afterCurly);
 			var shouldHaveSameOption:Bool = false;
 			if (checker.lines.length > linePos.line + 1) {
@@ -217,7 +228,7 @@ class RightCurlyCheck extends Check {
 			logErrorIf (singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
 			if (singleLine) return;
 
-			var curlyAlone:Bool = ~/^\s*\}[\);\s]*(|\/\/.*)$/.match(line);
+			var curlyAlone:Bool = ~/^\s*\}[\)\],;\s]*(|\/\/.*)$/.match(line);
 			logErrorIf (!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
 			logErrorIf (curlyAlone && needsSameOption, 'Right curly should be alone on a new line', pos);
 			logErrorIf (needsSameOption && (option != SAME), 'Right curly must not be on same line as following block', pos);

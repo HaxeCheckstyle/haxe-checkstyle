@@ -25,7 +25,7 @@ class NeedBracesCheck extends Check {
 
 	function hasToken(token:String):Bool {
 		if (tokens.length == 0) return true;
-		if (tokens.indexOf (token) > -1) return true;
+		if (tokens.indexOf(token) > -1) return true;
 		return false;
 	}
 
@@ -33,7 +33,7 @@ class NeedBracesCheck extends Check {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
 			switch(e.expr) {
-				case EFor (it, expr):
+				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
 					var itLine:LinePos = checker.getLinePos(it.pos.max);
 					var exprLine:LinePos = checker.getLinePos(expr.pos.min);
@@ -43,7 +43,7 @@ class NeedBracesCheck extends Check {
 					var condLine:LinePos = checker.getLinePos(econd.pos.max);
 					var ifLine:LinePos = checker.getLinePos(eif.pos.min);
 					var elseSameLine:Bool = false;
-					if (eelse != null){
+					if (eelse != null) {
 						var elseLine:LinePos = checker.getLinePos(eelse.pos.min);
 						var line:String = checker.lines[elseLine.line];
 						if (StringTools.startsWith(StringTools.trim(line), "else")) elseSameLine = true;

@@ -12,6 +12,21 @@ class XMLReporter implements IReporter {
 	var file:FileOutput;
 	var style:String;
 
+	/*
+	* Solution from mustache.js
+	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
+	*/
+	static var ENTITY_MAP:Map<String,String> = [
+		"&" => "&amp;",
+		"<" => "&lt;",
+		">" => "&gt;",
+		'"' => "&quot;",
+		"'" => "&#39;",
+		"/" => "&#x2F;"
+	];
+
+	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
+
 	public function new(path:String, s:String) {
 		report = new StringBuf();
 		var folder = Path.directory(path);
@@ -30,7 +45,7 @@ class XMLReporter implements IReporter {
 		if (style != "") {
 			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + style + "\" ?>\n");
 		}
-		sb.add("<checkstyle version=\"5.0\">\n");
+		sb.add("<checkstyle version=\"5.7\">\n");
 		report.add(sb.toString());
 	}
 
@@ -74,21 +89,6 @@ class XMLReporter implements IReporter {
 		}
 	}
 
-	/*
-	* Solution from mustache.js
-	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
-	*/
-	static var ENTITY_MAP:Map<String,String> = [
-		"&" => "&amp;",
-		"<" => "&lt;",
-		">" => "&gt;",
-		'"' => "&quot;",
-		"'" => "&#39;",
-		"/" => "&#x2F;"
-	];
-
-	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
-
 	static function replace(str:String, re:EReg):String {
 		return re.map(str, function(re):String {
 			return ENTITY_MAP[re.matched(0)];
@@ -114,7 +114,7 @@ class XMLReporter implements IReporter {
 		sb.add(severityString(m.severity));
 		sb.add("\"");
 		sb.add(" message=\"");
-		sb.add(encode(m.message));
+		sb.add(encode(m.moduleName) + " - " + encode(m.message));
 		sb.add("\"");
 		sb.add(" source=\"");
 		sb.add(encode(m.fileName));
