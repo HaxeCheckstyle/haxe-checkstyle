@@ -121,7 +121,7 @@ class Checker {
 		for (reporter in reporters) reporter.finish();
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
+	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
 	public function run(file:LintFile) {
 		for (reporter in reporters) reporter.fileStart(file);
 
