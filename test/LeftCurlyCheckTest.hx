@@ -14,7 +14,6 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST14, '');
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
 		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, '');
-
 	}
 
 	public function testWrongBraces() {
