@@ -7,6 +7,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
 		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_57, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -88,6 +89,15 @@ class WhitespaceAfterTests {
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>= [];
+		}
+	}";
+
+	public static inline var ISSUE_57:String = "
+	class Test
+	{
+		public function new()
+		{
+			trace(#if true cast #end 'text');
 		}
 	}";
 }

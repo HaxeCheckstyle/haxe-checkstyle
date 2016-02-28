@@ -1012,7 +1012,7 @@ class TokenTreeBuilder {
 				case POpen:
 					walkPOpen(parent);
 					return;
-				case Const(CIdent(_)):
+				case Kwd(_), Const(CIdent(_)):
 					childToken = stream.consumeToken();
 					parent.addChild(childToken);
 					return;
@@ -1043,6 +1043,7 @@ class TokenTreeBuilder {
 					return;
 				default:
 					walkStatement(parent);
+					return;
 			}
 		}
 	}
