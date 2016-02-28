@@ -12,4 +12,4 @@ trim_trailing_whitespace = false
 end_of_line = lf
 
 [*.json]
-indent_size = 2
+indent_size = 4
