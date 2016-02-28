@@ -31,6 +31,7 @@ class LeftCurlyCheck extends Check {
 
 	public var tokens:Array<String>;
 	public var option:String;
+	public var ignoreEmptySingleline:Bool;
 
 	public function new() {
 		super();
@@ -50,6 +51,7 @@ class LeftCurlyCheck extends Check {
 			CATCH
 		];
 		option = EOL;
+		ignoreEmptySingleline = true;
 	}
 
 	function hasToken(token:String):Bool {
@@ -64,10 +66,18 @@ class LeftCurlyCheck extends Check {
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;
+			if (ignoreEmptySingleline && isSingleLine(brOpen)) continue;
 			var parent:ParentToken = findParentToken(brOpen.parent);
 			if (!parent.hasToken) continue;
 			check(brOpen, isParentWrapped(parent.token, brOpen));
 		}
+	}
+
+	function isSingleLine(brOpen:TokenTree):Bool {
+		var brClose:TokenTree = brOpen.getLastChild();
+		if (brClose == null) return false;
+		if (brOpen.pos.max == brClose.pos.min) return true;
+		return false;
 	}
 
 	/**
@@ -151,10 +161,10 @@ class LeftCurlyCheck extends Check {
 		var lineLength:Int = line.length;
 
 		// must have at least one non whitespace character before curly
-		// and only whitespace, }, /* + comment or // + comment after curly
-		var curlyAtEOL:Bool = ~/^\s*\S.*\{\}?\s*(|\/\*.*|\/\/.*)$/.match(line);
+		// and only whitespace, /* + comment or // + comment after curly
+		var curlyAtEOL:Bool = ~/^\s*\S.*\{\s*(|\/\*.*|\/\/.*)$/.match(line);
 		// must have only whitespace before curly
-		var curlyOnNL:Bool = ~/^\s*\{\}?/.match(line);
+		var curlyOnNL:Bool = ~/^\s*\{/.match(line);
 
 		try {
 			if (curlyAtEOL) {

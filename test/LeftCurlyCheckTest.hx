@@ -14,6 +14,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST14, '');
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
 		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, '');
+
 	}
 
 	public function testWrongBraces() {
@@ -77,6 +78,17 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		var check = new LeftCurlyCheck();
 		check.tokens = [LeftCurlyCheck.REIFICATION];
 		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, 'Left curly should be at EOL (only linebreak or comment after curly)');
+	}
+
+	public function testIgnoreEmptySingleline() {
+		var check = new LeftCurlyCheck();
+		check.ignoreEmptySingleline = false;
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, 'Left curly should be at EOL (only linebreak or comment after curly)');
+
+		check.ignoreEmptySingleline = true;
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, '');
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, '');
 	}
 }
 
@@ -375,5 +387,14 @@ class LeftCurlyTests {
 			var expr = macro for (i in 0...10) trace($v{str});
 			var e = macro ${str}.toLowerCase();
 		}
+	}";
+
+	public static inline var NO_FIELDS_CLASS:String = "
+	class Test {}
+	";
+
+	public static inline var NO_FIELDS_MACRO:String = "
+	class Test {
+		var definition = macro class Font extends flash.text.Font {};
 	}";
 }
