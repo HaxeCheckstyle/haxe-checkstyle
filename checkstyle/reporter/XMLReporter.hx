@@ -16,7 +16,7 @@ class XMLReporter implements IReporter {
 	* Solution from mustache.js
 	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
 	*/
-	static var ENTITY_MAP:Map<String,String> = [
+	static var ENTITY_MAP:Map<String, String> = [
 		"&" => "&amp;",
 		"<" => "&lt;",
 		">" => "&gt;",

@@ -1,5 +1,6 @@
 package checkstyle;
 
+import checkstyle.reporter.JSONReporter;
 import checkstyle.ChecksInfo;
 import checkstyle.reporter.IReporter;
 import hxargs.Args;
@@ -33,7 +34,7 @@ class Main {
 
 			if (REPORT && REPORT_TYPE == "xml") {
 				var reporter = new Report();
-				reporter.generateReport(PATH);
+				reporter.generateReport(XML_PATH);
 			}
 		}
 		catch(e:Dynamic) {
@@ -50,7 +51,8 @@ class Main {
 
 	static var REPORT:Bool = false;
 	static var REPORT_TYPE:String = "xml";
-	static var PATH:String = "check-style-report.xml";
+	static var XML_PATH:String = "check-style-report.xml";
+	static var JSON_PATH:String = "check-style-report.json";
 	static var STYLE:String = "";
 	static var EXIT_CODE:Bool = false;
 	static var exitCode:Int;
@@ -68,9 +70,9 @@ class Main {
 		var configPath:String = null;
 
 		var argHandler = Args.generate([
-			@doc("Set reporter path (.xml file)") ["-p", "--path"] => function(loc:String) PATH = loc,
+			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) { XML_PATH = loc; JSON_PATH = loc; },
 			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
-			@doc("Set reporter (xml or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
+			@doc("Set reporter (xml, json or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
 			@doc("Set config (.json) file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
 			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
@@ -124,7 +126,8 @@ class Main {
 
 	static function createReporter():IReporter {
 		return switch(REPORT_TYPE) {
-			case "xml": new XMLReporter(PATH, STYLE);
+			case "xml": new XMLReporter(XML_PATH, STYLE);
+			case "json": new JSONReporter(JSON_PATH);
 			case "text": new Reporter();
 			default: throw "Unknown reporter";
 		}
@@ -132,6 +135,7 @@ class Main {
 
 	static function listReporters() {
 		Sys.println("xml - Checkstyle XML reporter (default)");
+		Sys.println("json - JSON reporter");
 		Sys.println("text - Text reporter");
 		Sys.exit(0);
 	}
@@ -145,7 +149,7 @@ class Main {
 			var nodes = FileSystem.readDirectory(node);
 			for (child in nodes) traverse(pathJoin(node,child), files);
 		}
-		else if (node.substr(-3) == ".hx") files.push(node);
+		else if (~/(.hx)$/i.match(".hx")) files.push(node);
 	}
 
 	public static function setExitCode(newExitCode:Int) {

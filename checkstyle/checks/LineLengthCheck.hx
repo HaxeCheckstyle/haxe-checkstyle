@@ -1,17 +1,18 @@
 package checkstyle.checks;
 
 import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("LineLength")
 @desc("Max line length (default 160)")
 class LineLengthCheck extends Check {
 
+	static var DEFAULT_MAX_LENGTH:Int = 160;
+
 	public var max:Int;
 
 	public function new() {
 		super();
-		max = 160;
+		max = DEFAULT_MAX_LENGTH;
 	}
 
 	override function actualRun() {
