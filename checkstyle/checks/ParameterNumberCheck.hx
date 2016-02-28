@@ -8,12 +8,14 @@ import haxe.macro.Expr;
 @desc("Max number of parameters per method (default 7)")
 class ParameterNumberCheck extends Check {
 
+	static var DEFAULT_MAX_PARAMS:Int = 7;
+
 	public var max:Int;
 	public var ignoreOverriddenMethods:Bool;
 
 	public function new() {
 		super();
-		max = 7;
+		max = DEFAULT_MAX_PARAMS;
 		ignoreOverriddenMethods = false;
 	}
 

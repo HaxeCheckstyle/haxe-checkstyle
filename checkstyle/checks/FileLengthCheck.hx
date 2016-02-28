@@ -7,11 +7,13 @@ import haxeparser.Data.Token;
 @desc("Max number of lines per file (default 2000)")
 class FileLengthCheck extends Check {
 
+	static var DEFAULT_MAX_LENGTH:Int = 2000;
+
 	public var max:Int;
 
 	public function new() {
 		super();
-		max = 2000;
+		max = DEFAULT_MAX_LENGTH;
 	}
 
 	override function actualRun() {

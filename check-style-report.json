@@ -1,0 +1,261 @@
+[
+	{
+		"fileName": "checkstyle/Checker.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/AccessOrderCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/AnonymousCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ArrayInstantiationCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/AvoidStarImportCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/BlockFormatCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/Check.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ConstantNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/CyclomaticComplexityCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/DynamicCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/EmptyLinesCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ERegInstantiationCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/FileLengthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/HexadecimalLiteralsCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/HiddenFieldCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/IndentationCharacterCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/InnerAssignmentCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/LeftCurlyCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/LineLengthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ListenerNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/LocalVariableNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/MagicNumberCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/MemberNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/MethodLengthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/MethodNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/MultipleStringLiteralsCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/NameCheckBase.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/NeedBracesCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/NestedForDepthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/NestedIfDepthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/NestedTryDepthCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ParameterNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ParameterNumberCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/PublicPrivateCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/ReturnCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/RightCurlyCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/SpacingCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/TabForAligningCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/TODOCommentCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/TrailingWhitespaceCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/TypeCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/TypeNameCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/checks/VariableInitialisationCheck.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/ChecksInfo.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/ComplexTypeUtils.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/ExprUtils.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/LintFile.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/LintMessage.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/Main.hx",
+		"messages": [
+			{
+				"column": 71,
+				"line": 73,
+				"message": "Left curly should be at EOL (only linebreak or comment after curly)",
+				"severity": "info"
+			}
+		]
+	},
+	{
+		"fileName": "checkstyle/Report.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/reporter/ExitCodeReporter.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/reporter/IReporter.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/reporter/JSONReporter.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/reporter/Reporter.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/reporter/XMLReporter.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/TokenStream.hx",
+		"messages": []
+	},
+	{
+		"fileName": "checkstyle/TokenTree.hx",
+		"messages": [
+			{
+				"column": 2,
+				"line": 104,
+				"message": "Invalid enum member signature: ALL (name should be ~/^[a-z][a-zA-Z0-9]*$/)",
+				"severity": "info"
+			},
+			{
+				"column": 2,
+				"line": 105,
+				"message": "Invalid enum member signature: FIRST (name should be ~/^[a-z][a-zA-Z0-9]*$/)",
+				"severity": "info"
+			}
+		]
+	},
+	{
+		"fileName": "checkstyle/TokenTreeBuilder.hx",
+		"messages": [
+			{
+				"column": 19,
+				"line": 796,
+				"message": "TODO comment: TODO handle other #directives",
+				"severity": "info"
+			}
+		]
+	}
+]

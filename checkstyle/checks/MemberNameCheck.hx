@@ -54,6 +54,8 @@ class MemberNameCheck extends NameCheckBase {
 			switch (field.kind) {
 				case FVar(t, e):
 					checkField(field, t, e);
+				case FProp(_, _, t, e):
+					checkField(field, t, e);
 				default:
 			}
 		}
