@@ -8,10 +8,10 @@
 
 -cp resources
 -cp checkstyle
--lib haxeparser:3.2.0
--lib compiletime:2.6.0
--lib hxargs:3.0.0
--lib hxtelemetry:0.3.3
+-lib haxeparser
+-lib compiletime
+-lib hxargs
+-lib hxtelemetry
 
 --each
 

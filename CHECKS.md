@@ -12,7 +12,7 @@
 
 `Info: LINE - 16: MagicNumber - Magic number "7" detected - consider using a constant`
 
-`Info: LINE - 143: MagicNumber - Magic number "-3" detected - consider using a constant`
+`Info: LINE - 148: MagicNumber - Magic number "-3" detected - consider using a constant`
 
 `Info: LINE - 104: MemberName - Invalid enum member signature: ALL (name should be ~/^[a-z][a-zA-Z0-9]*$/)`
 

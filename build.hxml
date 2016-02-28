@@ -7,9 +7,9 @@
 
 -cp resources
 -cp checkstyle
--lib haxeparser:3.2.0
--lib compiletime:2.6.0
--lib hxargs:3.0.0
+-lib haxeparser
+-lib compiletime
+-lib hxargs
 
 --each
 

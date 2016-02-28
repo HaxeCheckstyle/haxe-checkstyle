@@ -258,7 +258,7 @@
 			"props": {
 				"severity": "WARNING",
 				"allowSingleLineStatement": true,
-				"tokens": []
+				"tokens": ["IF", "ELSE_IF", "FOR", "WHILE", "TRY", "CATCH"]
 			}
 		},
 		{

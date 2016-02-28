@@ -103,9 +103,11 @@
 	<file name="checkstyle&#x2F;LintMessage.hx">
 	</file>
 	<file name="checkstyle&#x2F;Main.hx">
-		<error line="143" column="24" severity="info" message="MagicNumber - Magic number &quot;-3&quot; detected - consider using a constant" source="checkstyle&#x2F;Main.hx"/>
+		<error line="148" column="24" severity="info" message="MagicNumber - Magic number &quot;-3&quot; detected - consider using a constant" source="checkstyle&#x2F;Main.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;Report.hx">
+	</file>
+	<file name="checkstyle&#x2F;reporter&#x2F;ExitCodeReporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;IReporter.hx">
 	</file>
