@@ -105,9 +105,9 @@ class XMLReporter implements IReporter {
 		sb.add("\t\t<error line=\"");
 		sb.add(m.line);
 		sb.add("\"");
-		if (m.column > 0) {
+		if (m.startColumn >= 0) {
 			sb.add(" column=\"");
-			sb.add(m.column);
+			sb.add(m.startColumn);
 			sb.add("\"");
 		}
 		sb.add(" severity=\"");

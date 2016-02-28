@@ -51,15 +51,14 @@ class ListenerNameCheck extends Check {
 		var listener = p[1];
 		switch(listener.expr){
 			case EConst(CIdent(ident)):
-				var lp = checker.getLinePos(listener.pos.min);
-				checkListenerName(ident, lp.line, lp.ofs);
+				checkListenerName(ident, listener.pos);
 			default:
 		}
 	}
 
-	function checkListenerName(name:String, line:Int, col:Int) {
+	function checkListenerName(name:String, pos:Position) {
 		formatRE = new EReg (format, "");
 		var match = formatRE.match(name);
-		if (!match) log('Wrong listener name: ' + name + ' (should be ~/${format}/)', line, col, Reflect.field(SeverityLevel, severity));
+		if (!match) logPos('Wrong listener name: ' + name + ' (should be ~/${format}/)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

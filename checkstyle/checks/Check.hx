@@ -29,15 +29,18 @@ class Check {
 
 	public function logPos(msg:String, pos:Position, sev:SeverityLevel) {
 		var lp = checker.getLinePos(pos.min);
-		log(msg, lp.line + 1, lp.ofs + 1, sev);
+		var length = pos.max - pos.min;
+		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
 	}
 
-	public function log(msg:String, l:Int, c:Int, sev:SeverityLevel) {
+	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, sev:SeverityLevel) {
+		if (endColumn == null) endColumn = startColumn;
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
 			line:l,
-			column:c,
+			startColumn:startColumn,
+			endColumn:endColumn,
 			severity:sev,
 			moduleName:getModuleName()
 		});
