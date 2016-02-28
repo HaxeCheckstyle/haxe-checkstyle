@@ -97,7 +97,6 @@
 	<file name="checkstyle&#x2F;LintMessage.hx">
 	</file>
 	<file name="checkstyle&#x2F;Main.hx">
-		<error line="73" column="71" severity="info" message="LeftCurly - Left curly should be at EOL (only linebreak or comment after curly)" source="checkstyle&#x2F;Main.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;Report.hx">
 	</file>

@@ -13,7 +13,6 @@ import haxe.CallStack;
 import sys.io.File;
 
 class Main {
-
 	@SuppressWarnings('checkstyle:Dynamic')
 	public static function main() {
 		var args;
@@ -37,7 +36,7 @@ class Main {
 				reporter.generateReport(XML_PATH);
 			}
 		}
-		catch(e:Dynamic) {
+		catch (e:Dynamic) {
 			trace(e);
 			trace(CallStack.toString(CallStack.exceptionStack()));
 		}
@@ -64,13 +63,16 @@ class Main {
 		exitCode = 0;
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
+	@SuppressWarnings(['checkstyle:Dynamic', 'checkstyle:MethodLength'])
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var configPath:String = null;
 
 		var argHandler = Args.generate([
-			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) { XML_PATH = loc; JSON_PATH = loc; },
+			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) {
+				XML_PATH = loc;
+				JSON_PATH = loc;
+			},
 			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
 			@doc("Set reporter (xml, json or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
 			@doc("Set config (.json) file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
@@ -78,7 +80,7 @@ class Main {
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
 			@doc("Show report") ["-report"] => function() REPORT = true,
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
-			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath,files),
+			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
 			_ => function(arg:String) throw "Unknown command: " + arg
 		]);
 
@@ -89,9 +91,9 @@ class Main {
 		argHandler.parse(args);
 
 		var toProcess:Array<LintFile> = [];
-		for (file in files){
+		for (file in files) {
 			var code = File.getContent(file);
-			toProcess.push({name:file,content:code});
+			toProcess.push({name:file, content:code});
 		}
 
 		if (configPath == null) addAllChecks();
@@ -99,11 +101,11 @@ class Main {
 			var configText = File.getContent(configPath);
 			var config = Json.parse(configText);
 			var checks:Array<Dynamic> = config.checks;
-			for (checkConf in checks){
+			for (checkConf in checks) {
 				var check = info.build(checkConf.type);
-				if (checkConf.props != null){
+				if (checkConf.props != null) {
 					var props = Reflect.fields(checkConf.props);
-					for (prop in props){
+					for (prop in props) {
 						var val = Reflect.field(checkConf.props, prop);
 						Reflect.setField(check, prop, val);
 					}
@@ -144,10 +146,10 @@ class Main {
 		return s + "/" + t;
 	}
 
-	static function traverse(node:String , files:Array<String>) {
+	static function traverse(node:String, files:Array<String>) {
 		if (FileSystem.isDirectory(node)) {
 			var nodes = FileSystem.readDirectory(node);
-			for (child in nodes) traverse(pathJoin(node,child), files);
+			for (child in nodes) traverse(pathJoin(node, child), files);
 		}
 		else if (~/(.hx)$/i.match(".hx")) files.push(node);
 	}
