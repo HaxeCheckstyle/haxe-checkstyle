@@ -5,3 +5,5 @@
 .DS_Store
 *.n
 *.zip
+*.hxproj
+.haxelib/

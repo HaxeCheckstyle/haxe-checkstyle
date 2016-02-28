@@ -42,6 +42,6 @@ class EmptyLinesCheck extends Check {
 	}
 
 	function logInfo(pos) {
-		log('Too many consecutive empty lines (> ${max})', pos, 0, Reflect.field(SeverityLevel, severity));
+		log('Too many consecutive empty lines (> ${max})', pos, 0, null, Reflect.field(SeverityLevel, severity));
 	}
 }
