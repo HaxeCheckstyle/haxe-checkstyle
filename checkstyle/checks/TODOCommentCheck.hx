@@ -12,8 +12,7 @@ class TODOCommentCheck extends Check {
 		for (tk in checker.tokens) {
 			switch(tk.tok) {
 				case Comment(s) | CommentLine(s):
-					var lp = checker.getLinePos(tk.pos.min);
-					if (re.match(s)) log('TODO comment:' + s, lp.line + 1, lp.ofs + 1, Reflect.field(SeverityLevel, severity));
+					if (re.match(s)) logPos('TODO comment:' + s, tk.pos, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		}

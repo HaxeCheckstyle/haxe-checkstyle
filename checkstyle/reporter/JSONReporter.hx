@@ -35,7 +35,7 @@ class JSONReporter implements IReporter {
 	public function addMessage(m:LintMessage) {
 		var reportMessage:ReportMessage = {
 			line: m.line,
-			column: m.column,
+			column: m.startColumn,
 			severity: severityString(m.severity),
 			message: m.message
 		};
