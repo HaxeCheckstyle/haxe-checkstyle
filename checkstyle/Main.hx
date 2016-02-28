@@ -151,7 +151,7 @@ class Main {
 			var nodes = FileSystem.readDirectory(node);
 			for (child in nodes) traverse(pathJoin(node, child), files);
 		}
-		else if (~/(.hx)$/i.match(".hx")) files.push(node);
+		else if (~/(.hx)$/i.match(node)) files.push(node);
 	}
 
 	public static function setExitCode(newExitCode:Int) {
