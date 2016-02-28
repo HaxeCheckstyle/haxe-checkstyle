@@ -30,7 +30,7 @@ class Reporter implements IReporter {
 		sb.add(m.line);
 		if (m.startColumn >= 0) {
 			var isRange = m.startColumn != m.endColumn;
-			sb.add(': character${isRange ? 's' : ''} ');
+			sb.add(': character${isRange ? "s" : ""} ');
 			sb.add(m.startColumn);
 			if (isRange) {
 				sb.add('-');
@@ -43,7 +43,7 @@ class Reporter implements IReporter {
 		sb.add(": ");
 		sb.add(m.message);
 		sb.add("\n");
-		
+
 		var output = (m.severity == ERROR || m.severity == WARNING) ? Sys.stderr() : Sys.stdout();
 		output.writeString(sb.toString());
 	}
