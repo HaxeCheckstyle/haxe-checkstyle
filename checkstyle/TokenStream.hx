@@ -73,6 +73,7 @@ class TokenStream {
 			token = tokens[index++];
 			switch(token.tok) {
 				case Dot:
+				case DblDot:
 				case Comma:
 				case Const(CIdent(_)):
 				case Kwd(_):
