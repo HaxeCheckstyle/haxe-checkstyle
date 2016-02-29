@@ -8,6 +8,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		var check = new WhitespaceAfterCheck();
 		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_57, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_58, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -33,7 +34,6 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, 'No whitespace after ">"');
 	}
 }
-
 
 class WhitespaceAfterTests {
 	public static inline var CORRECT_WHITESPACE_AFTER:String = "
@@ -93,11 +93,16 @@ class WhitespaceAfterTests {
 	}";
 
 	public static inline var ISSUE_57:String = "
-	class Test
-	{
-		public function new()
-		{
+	class Test {
+		public function new() {
 			trace(#if true cast #end 'text');
+		}
+	}";
+
+	public static inline var ISSUE_58:String = "
+	class Test {
+		public function new() {
+			var x:Int, y:Int;
 		}
 	}";
 }

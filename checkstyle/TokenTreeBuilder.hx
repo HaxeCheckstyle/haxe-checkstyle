@@ -259,26 +259,34 @@ class TokenTreeBuilder {
 	}
 
 	function walkVar(parent:TokenTree, prefixes:Array<TokenTree>) {
-		var name:TokenTree;
+		var name:TokenTree = null;
 		var varTok:TokenTree = stream.consumeTokenDef(Kwd(KwdVar));
 		parent.addChild(varTok);
-		name = stream.consumeConstIdent();
-		varTok.addChild(name);
-		if (stream.is(POpen)) {
-			walkPOpen(name);
-		}
-		for (stored in prefixes) name.addChild(stored);
-		if (stream.is(DblDot)) {
-			var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
-			name.addChild(dblDot);
-			walkTypeNameDef(dblDot);
-		}
-		if (stream.is(Binop(OpAssign))) {
-			walkStatement(name);
-			if (stream.is(Semicolon)) {
-				name.addChild(stream.consumeTokenDef(Semicolon));
+		while (true) {
+			name = stream.consumeConstIdent();
+			varTok.addChild(name);
+			if (stream.is(POpen)) {
+				walkPOpen(name);
 			}
-			return;
+			for (stored in prefixes) name.addChild(stored);
+			if (stream.is(DblDot)) {
+				var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
+				name.addChild(dblDot);
+				walkTypeNameDef(dblDot);
+			}
+			if (stream.is(Binop(OpAssign))) {
+				walkStatement(name);
+				if (stream.is(Semicolon)) {
+					name.addChild(stream.consumeTokenDef(Semicolon));
+				}
+				return;
+			}
+			if (stream.is(Comma)) {
+				var comma:TokenTree = stream.consumeTokenDef(Comma);
+				name.addChild(comma);
+				continue;
+			}
+			break;
 		}
 		name.addChild(stream.consumeTokenDef(Semicolon));
 	}
@@ -399,7 +407,6 @@ class TokenTreeBuilder {
 				return parent.getFirstChild();
 			default:
 				name = stream.consumeToken();
-				trace (name);
 		}
 		parent.addChild(name);
 		if (stream.is(Dot)) {
