@@ -9,6 +9,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_70, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_71, '');
+		assertMsg(check, WhitespaceAroundTests.ISSUE_72, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -113,4 +114,8 @@ class WhitespaceAroundTests {
 			trace((null : Array<Int, String>));
 		}
 	}";
+
+	public static inline var ISSUE_72:String = "
+	abstract Test<T>(Array<T>) {}
+	";
 }
