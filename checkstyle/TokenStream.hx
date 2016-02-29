@@ -61,6 +61,28 @@ class TokenStream {
 		}
 	}
 
+	public function isTypedParam():Bool {
+		if ((current < 0) || (current >= tokens.length)) return false;
+		var index:Int = current + 1;
+		var token:Token = tokens[current];
+		switch(token.tok) {
+			case Binop(OpLt):
+			default: return false;
+		}
+		while (true) {
+			token = tokens[index++];
+			switch(token.tok) {
+				case Dot:
+				case Comma:
+				case Const(CIdent(_)):
+				case Kwd(_):
+				case Binop(OpLt):
+				case Binop(OpGt): return true;
+				default: return false;
+			}
+		}
+	}
+
 	public function token():TokenDef {
 		if ((current < 0) || (current >= tokens.length)) throw NO_MORE_TOKENS;
 		return tokens[current].tok;

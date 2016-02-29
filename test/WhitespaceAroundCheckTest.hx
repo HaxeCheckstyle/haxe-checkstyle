@@ -8,6 +8,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 		var check = new WhitespaceAroundCheck();
 		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_70, '');
+		assertMsg(check, WhitespaceAroundTests.ISSUE_71, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -105,4 +106,11 @@ class WhitespaceAroundTests {
 	public static inline var ISSUE_70:String = "
 		import haxe.macro.*;
 	";
+
+	public static inline var ISSUE_71:String = "
+		class Test {
+		function foo<T, X>() {
+			trace((null : Array<Int, String>));
+		}
+	}";
 }

@@ -495,6 +495,10 @@ class TokenTreeBuilder {
 	}
 
 	function walkOtherStatement(parent:TokenTree) {
+		if (stream.isTypedParam()) {
+			walkLtGt(parent);
+			return;
+		}
 		var newChild:TokenTree = stream.consumeToken();
 		parent.addChild(newChild);
 		switch (newChild.tok) {
