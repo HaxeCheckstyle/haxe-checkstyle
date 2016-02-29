@@ -103,28 +103,29 @@ class Main {
 			var config = Json.parse(configText);
 			var defaultSeverity = config.defaultSeverity;
 			var checks:Array<Dynamic> = config.checks;
-			for (checkConf in checks) {
-				var check:Check = cast info.build(checkConf.type);
-				if (check == null) continue;
-				if (checkConf.props != null) {
-					var props = Reflect.fields(checkConf.props);
-					for (prop in props) {
-						var val = Reflect.field(checkConf.props, prop);
-						if (!Reflect.hasField(check, prop)) {
-							failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
-						}
-						Reflect.setField(check, prop, val);
-					}
-					if (defaultSeverity != null && props.indexOf("severity") < 0) {
-						check.severity = defaultSeverity;
-					}
-				}
-				checker.addCheck(check);
-			}
+			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
 		checker.addReporter(createReporter());
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
+	}
+
+	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
+		var check:Check = cast info.build(checkConf.type);
+		if (check == null || checkConf.props == null) return;
+		var props = Reflect.fields(checkConf.props);
+
+		for (prop in props) {
+			var val = Reflect.field(checkConf.props, prop);
+			if (!Reflect.hasField(check, prop)) {
+				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
+			}
+			Reflect.setField(check, prop, val);
+		}
+		if (defaultSeverity != null && props.indexOf("severity") < 0) {
+			check.severity = defaultSeverity;
+		}
+		checker.addCheck(check);
 	}
 
 	function addAllChecks() {
