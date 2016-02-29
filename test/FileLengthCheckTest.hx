@@ -35,7 +35,7 @@ class FileLengthCheckTest extends CheckTestCase {
 }
 
 class FileLengthTests {
-	public static inline var TEST2001:String = "
+	public static inline var TEST2001:String = "\n
 	class Test {
 		public function new() {
 		}
@@ -79,10 +79,10 @@ class FileLengthTests {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n // 1906
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
-		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n           // 2000
+		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n             // 2000
 	}";                                                                                                        // 2001
 
-	public static inline var TEST2000:String = "
+	public static inline var TEST2000:String = "\n
 	class Test {
 		public function new() {
 		}
@@ -126,18 +126,18 @@ class FileLengthTests {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n // 1906
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
-		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n             // 1999
+		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n               // 1999
 	}";                                                                                                        // 2000
 
-	public static inline var TEST41:String = "
+	public static inline var TEST41:String = "\n
 	class Test {
 		public function new() {
 		}
 		//                10                   20                   30                   40                 49 //  6
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n                                // 40
 	}";
-	
-	public static inline var TEST42:String = "
+
+	public static inline var TEST42:String = "\n
 	@SuppressWarnings('checkstyle:FileLength')
 	class Test {
 		public function new() {

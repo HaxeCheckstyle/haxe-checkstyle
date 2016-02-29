@@ -12,11 +12,13 @@ import haxeparser.Data.Token;
 @desc("Checks for long methods (default 50 lines)")
 class MethodLengthCheck extends Check {
 
+	static var DEFAULT_MAX_LENGTH:Int = 50;
+
 	public var max:Int;
 
 	public function new() {
 		super();
-		max = 150;
+		max = DEFAULT_MAX_LENGTH;
 	}
 
 	override public function actualRun() {
@@ -55,7 +57,7 @@ class MethodLengthCheck extends Check {
 		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
-		if (lmax - lmin > max) warnFunctionLength(f.name, lp.line + 1, lp.ofs + 1);
+		if (lmax - lmin > max) warnFunctionLength(f.name, f.pos);
 	}
 
 	function checkFunction(f:Expr) {
@@ -69,10 +71,10 @@ class MethodLengthCheck extends Check {
 			default: throw "EFunction only";
 		}
 
-		if (lmax - lmin > max) warnFunctionLength(fname, lp.line + 1, lp.ofs + 1);
+		if (lmax - lmin > max) warnFunctionLength(fname, f.pos);
 	}
 
-	function warnFunctionLength(name:String, pos:Int, ofs:Int) {
-		log('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos, ofs, Reflect.field(SeverityLevel, severity));
+	function warnFunctionLength(name:String, pos:Position) {
+		logPos('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

@@ -17,8 +17,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
-		<error line="22" column="41" severity="info" message="MagicNumber - Magic number &quot;20&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx"/>
-		<error line="23" column="39" severity="info" message="MagicNumber - Magic number &quot;25&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
@@ -27,7 +25,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
-		<error line="14" column="9" severity="info" message="MagicNumber - Magic number &quot;2000&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
 	</file>
@@ -40,7 +37,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
-		<error line="14" column="9" severity="info" message="MagicNumber - Magic number &quot;160&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
 	</file>
@@ -51,7 +47,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
-		<error line="19" column="9" severity="info" message="MagicNumber - Magic number &quot;150&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
 	</file>
@@ -70,7 +65,6 @@
 	<file name="checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
-		<error line="16" column="9" severity="info" message="MagicNumber - Magic number &quot;7&quot; detected - consider using a constant" source="checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
 	</file>
@@ -103,13 +97,14 @@
 	<file name="checkstyle&#x2F;LintMessage.hx">
 	</file>
 	<file name="checkstyle&#x2F;Main.hx">
-		<error line="148" column="24" severity="info" message="MagicNumber - Magic number &quot;-3&quot; detected - consider using a constant" source="checkstyle&#x2F;Main.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;Report.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;ExitCodeReporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;IReporter.hx">
+	</file>
+	<file name="checkstyle&#x2F;reporter&#x2F;JSONReporter.hx">
 	</file>
 	<file name="checkstyle&#x2F;reporter&#x2F;Reporter.hx">
 	</file>
@@ -118,10 +113,10 @@
 	<file name="checkstyle&#x2F;TokenStream.hx">
 	</file>
 	<file name="checkstyle&#x2F;TokenTree.hx">
-		<error line="104" column="2" severity="info" message="MemberName - Invalid enum member signature: ALL (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
-		<error line="105" column="2" severity="info" message="MemberName - Invalid enum member signature: FIRST (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
+		<error line="104" column="1" severity="info" message="MemberName - Invalid enum member signature: ALL (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
+		<error line="105" column="1" severity="info" message="MemberName - Invalid enum member signature: FIRST (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
 	</file>
 	<file name="checkstyle&#x2F;TokenTreeBuilder.hx">
-		<error line="796" column="19" severity="info" message="TODOComment - TODO comment: TODO handle other #directives" source="checkstyle&#x2F;TokenTreeBuilder.hx"/>
+		<error line="796" column="18" severity="info" message="TODOComment - TODO comment: TODO handle other #directives" source="checkstyle&#x2F;TokenTreeBuilder.hx"/>
 	</file>
 </checkstyle>

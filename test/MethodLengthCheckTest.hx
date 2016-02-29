@@ -6,7 +6,7 @@ class MethodLengthCheckTest extends CheckTestCase {
 
 	public function testWrongMethodLength() {
 		var msg = checkMessage(MethodLengthTests.TEST1, new MethodLengthCheck());
-		assertEquals(msg, 'Function is too long: test (> 150 lines, try splitting into multiple functions)');
+		assertEquals(msg, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
 	}
 
 	public function testCorrectMethodLength() {

@@ -8,10 +8,10 @@ class Reporter implements IReporter {
 
 	static function severityString(s:SeverityLevel):String {
 		return switch(s){
-			case INFO: return "info";
-			case WARNING: return "warning";
-			case ERROR: return "error";
-			case IGNORE: return "ignore";
+			case INFO: return "Info";
+			case WARNING: return "Warning";
+			case ERROR: return "Error";
+			case IGNORE: return "Ignore";
 		}
 	}
 
@@ -28,15 +28,23 @@ class Reporter implements IReporter {
 		sb.add(m.fileName);
 		sb.add(':');
 		sb.add(m.line);
-		if (m.column > 0) {
-			sb.add(':');
-			sb.add(m.column);
+		if (m.startColumn >= 0) {
+			var isRange = m.startColumn != m.endColumn;
+			sb.add(': character${isRange ? "s" : ""} ');
+			sb.add(m.startColumn);
+			if (isRange) {
+				sb.add('-');
+				sb.add(m.endColumn);
+			}
+			sb.add(' ');
 		}
 		sb.add(": ");
 		sb.add(severityString(m.severity));
 		sb.add(": ");
 		sb.add(m.message);
 		sb.add("\n");
-		Sys.stdout().writeString(sb.toString());
+
+		var output = (m.severity == ERROR || m.severity == WARNING) ? Sys.stderr() : Sys.stdout();
+		output.writeString(sb.toString());
 	}
 }

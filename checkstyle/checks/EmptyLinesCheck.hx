@@ -1,31 +1,37 @@
 package checkstyle.checks;
 
+import StringTools;
 import checkstyle.LintMessage.SeverityLevel;
 
 @name("EmptyLines")
-@desc("Checks for consecutive empty lines (default 1)")
+@desc("Checks for consecutive empty lines")
 class EmptyLinesCheck extends Check {
 
 	public var max:Int;
+	public var allowEmptyLineAfterComment:Bool;
 
 	public function new() {
 		super();
 		max = 1;
+		allowEmptyLineAfterComment = true;
 	}
 
 	override function actualRun() {
-		var re = ~/^\s*$/;
 		var inGroup = false;
 		var start = 0;
 		var end = 0;
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
-			if (re.match(line)) {
+			if (~/^\s*$/.match(line)) {
 				if (!inGroup) {
 					inGroup = true;
 					start = i;
 				}
 				end = i;
+
+				if (i > 0 && !allowEmptyLineAfterComment && ~/^(\/\/).*|^(\/\*).*|(\*\/)$/.match(StringTools.trim(checker.lines[i - 1]))) {
+					log('Empty line not allowed after comment(s)', start, 0, null, Reflect.field(SeverityLevel, severity));
+				}
 			}
 			else {
 				if (inGroup) {
@@ -42,6 +48,6 @@ class EmptyLinesCheck extends Check {
 	}
 
 	function logInfo(pos) {
-		log('Too many consecutive empty lines (> ${max})', pos, 0, Reflect.field(SeverityLevel, severity));
+		log('Too many consecutive empty lines (> ${max})', pos, 0, null, Reflect.field(SeverityLevel, severity));
 	}
 }

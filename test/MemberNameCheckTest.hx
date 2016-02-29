@@ -16,6 +16,7 @@ class MemberNameCheckTest extends CheckTestCase {
 		assertMsg(check, MemberNameTests.TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, MemberNameTests.TEST5, 'Invalid enum member signature: VALUE_TEST (name should be ~/${check.format}/)');
+		assertMsg(check, MemberNameTests.PROPERTY_NAME, 'Invalid member signature: Example (name should be ~/^[a-z][a-zA-Z0-9]*$/)');
 	}
 
 	public function testIgnoreExtern() {
@@ -124,6 +125,7 @@ class MemberNameTests {
 		private var b:Int;
 		static var COUNT:Int = 1;
 		static inline var COUNT2:Int = 1;
+		public var example(default, null):Int;
 		var count5:Int = 1;
 		@SuppressWarnings('checkstyle:MemberName')
 		var COUNT6:Int = 1;
@@ -191,4 +193,10 @@ class MemberNameTests {
 
 		static public function doSomething () : Void trace(NORMAL_CONST);
 	}";
+
+	public static inline var PROPERTY_NAME:String = "
+	class Test {
+		public var Example(default, null):Int;
+	}";
+
 }

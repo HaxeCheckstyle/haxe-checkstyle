@@ -1,17 +1,18 @@
 package checkstyle.checks;
 
 import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("LineLength")
 @desc("Max line length (default 160)")
 class LineLengthCheck extends Check {
 
+	static var DEFAULT_MAX_LENGTH:Int = 160;
+
 	public var max:Int;
 
 	public function new() {
 		super();
-		max = 160;
+		max = DEFAULT_MAX_LENGTH;
 	}
 
 	override function actualRun() {
@@ -19,7 +20,7 @@ class LineLengthCheck extends Check {
 			var line = checker.lines[i];
 			if (line.length > max) {
 				if (isLineSuppressed(i)) continue;
-				log('Too long line (> ${max})', i + 1, 1, Reflect.field(SeverityLevel, severity));
+				log('Too long line (> ${max})', i + 1, 0, line.length, Reflect.field(SeverityLevel, severity));
 			}
 		}
 	}

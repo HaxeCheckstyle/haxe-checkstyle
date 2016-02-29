@@ -16,7 +16,7 @@ class XMLReporter implements IReporter {
 	* Solution from mustache.js
 	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
 	*/
-	static var ENTITY_MAP:Map<String,String> = [
+	static var ENTITY_MAP:Map<String, String> = [
 		"&" => "&amp;",
 		"<" => "&lt;",
 		">" => "&gt;",
@@ -105,9 +105,9 @@ class XMLReporter implements IReporter {
 		sb.add("\t\t<error line=\"");
 		sb.add(m.line);
 		sb.add("\"");
-		if (m.column > 0) {
+		if (m.startColumn >= 0) {
 			sb.add(" column=\"");
-			sb.add(m.column);
+			sb.add(m.startColumn);
 			sb.add("\"");
 		}
 		sb.add(" severity=\"");

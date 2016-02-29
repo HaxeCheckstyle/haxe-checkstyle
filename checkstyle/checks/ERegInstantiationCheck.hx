@@ -19,8 +19,7 @@ class ERegInstantiationCheck extends Check {
 					{pack:[], name:"EReg"},
 					[{expr:EConst(CString(re)), pos:_}, {expr:EConst(CString(opt)), pos:_}]
 				):
-					var lp = checker.getLinePos(e.pos.min);
-					log('Bad EReg instantiation, define expression between ~/ and /', lp.line + 1, lp.ofs + 1, Reflect.field(SeverityLevel, severity));
+					logPos('Bad EReg instantiation, define expression between ~/ and /', e.pos, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		});

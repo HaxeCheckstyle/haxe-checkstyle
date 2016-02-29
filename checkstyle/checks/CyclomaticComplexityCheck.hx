@@ -14,13 +14,16 @@ using Lambda;
 @SuppressWarnings(['checkstyle:CyclomaticComplexity', 'checkstyle:LeftCurly', 'checkstyle:RightCurly'])
 class CyclomaticComplexityCheck extends Check {
 
+	static var DEFAULT_COMPLEXITY_WARNING:Int = 20;
+	static var DEFAULT_COMPLEXITY_ERROR:Int = 25;
+
 	public var thresholds:Array<Threshold>;
 
 	public function new() {
 		super();
 		thresholds = [
-			{ severity : "WARNING", complexity : 20 },
-			{ severity : "ERROR", complexity : 25 }
+			{ severity : "WARNING", complexity : DEFAULT_COMPLEXITY_WARNING },
+			{ severity : "ERROR", complexity : DEFAULT_COMPLEXITY_ERROR }
 		];
 	}
 
@@ -61,6 +64,7 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
+
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch(e.expr) {

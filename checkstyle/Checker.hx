@@ -121,7 +121,7 @@ class Checker {
 		for (reporter in reporters) reporter.finish();
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
+	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
 	public function run(file:LintFile) {
 		for (reporter in reporters) reporter.fileStart(file);
 
@@ -140,7 +140,8 @@ class Checker {
 					message: "Parsing failed: " + e + "\nStacktrace: " +
 								CallStack.toString(CallStack.exceptionStack()),
 					line:1,
-					column:1,
+					startColumn:0,
+					endColumn:0,
 					severity:ERROR,
 					moduleName:"Checker"
 				});
@@ -162,7 +163,8 @@ class Checker {
 						message:"Check " + check.getModuleName() + " failed: " +
 									e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
 						line:1,
-						column:1,
+						startColumn:0,
+						endColumn:0,
 						severity:ERROR,
 						moduleName:"Checker"
 					});
