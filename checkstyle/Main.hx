@@ -111,6 +111,9 @@ class Main {
 					var props = Reflect.fields(checkConf.props);
 					for (prop in props) {
 						var val = Reflect.field(checkConf.props, prop);
+						if (!Reflect.hasField(check, prop)) {
+							throw 'Check ${check.getModuleName()} has no property named \'$prop\'';
+						}
 						Reflect.setField(check, prop, val);
 					}
 					if (defaultSeverity != null && props.indexOf("severity") < 0) {
