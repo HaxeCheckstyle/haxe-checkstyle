@@ -47,7 +47,7 @@ class TokenStream {
 	}
 
 	public function is(tokenDef:TokenDef):Bool {
-		if ((current < 0) || (current >= tokens.length)) throw NO_MORE_TOKENS;
+		if ((current < 0) || (current >= tokens.length)) return false;
 		var token:Token = tokens[current];
 		return Type.enumEq(tokenDef, token.tok);
 	}
