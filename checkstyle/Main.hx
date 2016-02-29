@@ -40,6 +40,7 @@ class Main {
 		catch (e:Dynamic) {
 			Sys.stderr().writeString(e + "\n");
 			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
+			exitCode = 1;
 		}
 		if (oldCwd != null) Sys.setCwd(oldCwd);
 		Sys.exit(exitCode);
@@ -87,7 +88,7 @@ class Main {
 
 		if (args.length == 0) {
 			Sys.println(argHandler.getDoc());
-			Sys.exit(0);
+			Sys.exit(1);
 		}
 		argHandler.parse(args);
 
