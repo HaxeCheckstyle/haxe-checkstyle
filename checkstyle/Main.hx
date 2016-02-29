@@ -105,31 +105,45 @@ class Main {
 		else {
 			var configText = File.getContent(configPath);
 			var config = Json.parse(configText);
+			verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
 			var defaultSeverity = config.defaultSeverity;
 			var checks:Array<Dynamic> = config.checks;
-			for (checkConf in checks) {
-				var check:Check = cast info.build(checkConf.type);
-				if (check == null) continue;
-				if (checkConf.props != null) {
-					var props = Reflect.fields(checkConf.props);
-					for (prop in props) {
-						var val = Reflect.field(checkConf.props, prop);
-						if (!Reflect.hasField(check, prop)) {
-							failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
-						}
-						Reflect.setField(check, prop, val);
-					}
-					if (defaultSeverity != null && props.indexOf("severity") < 0) {
-						check.severity = defaultSeverity;
-					}
-				}
-				checker.addCheck(check);
-			}
+			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
 		checker.addReporter(createReporter());
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter());
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
+		var check:Check = cast info.build(checkConf.type);
+		if (check == null) return;
+		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
+		if (checkConf.props == null) return;
+
+		var props = Reflect.fields(checkConf.props);
+		for (prop in props) {
+			var val = Reflect.field(checkConf.props, prop);
+			if (!Reflect.hasField(check, prop)) {
+				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
+			}
+			Reflect.setField(check, prop, val);
+		}
+		if (defaultSeverity != null && props.indexOf("severity") < 0) {
+			check.severity = defaultSeverity;
+		}
+		checker.addCheck(check);
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	function verifyAllowedFields(object:Dynamic, allowedFields:Array<String>, messagePrefix:String) {
+		for (field in Reflect.fields(object)) {
+			if (allowedFields.indexOf(field) < 0) {
+				failWith(messagePrefix + " has unknown field '" + field + "'");
+			}
+		}
 	}
 
 	function addAllChecks() {
