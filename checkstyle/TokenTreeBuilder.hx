@@ -110,6 +110,7 @@ class TokenTreeBuilder {
 		var name:TokenTree = walkTypeNameDef(typeTok);
 		// add all comments, annotations
 		for (prefix in prefixes) name.addChild(prefix);
+		if (stream.isSharp()) walkSharp(name);
 		walkExtends(name);
 		walkImplements(name);
 		var tempStore:Array<TokenTree> = [];

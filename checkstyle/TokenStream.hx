@@ -52,6 +52,15 @@ class TokenStream {
 		return Type.enumEq(tokenDef, token.tok);
 	}
 
+	public function isSharp():Bool {
+		if ((current < 0) || (current >= tokens.length)) return false;
+		var token:Token = tokens[current];
+		return switch (token.tok) {
+			case Sharp(_): true;
+			default: false;
+		}
+	}
+
 	public function token():TokenDef {
 		if ((current < 0) || (current >= tokens.length)) throw NO_MORE_TOKENS;
 		return tokens[current].tok;

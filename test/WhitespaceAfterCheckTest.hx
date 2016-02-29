@@ -11,6 +11,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.ISSUE_58, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_59, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_63, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_64, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -114,5 +115,9 @@ class WhitespaceAfterTests {
 
 	public static inline var ISSUE_63:String = "
 		typedef Test = #if true Int #else String #end
+	";
+
+	public static inline var ISSUE_64:String = "
+		class Test #if true extends Base #end {}
 	";
 }
