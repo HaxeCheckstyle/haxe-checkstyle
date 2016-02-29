@@ -101,6 +101,7 @@ class Main {
 		else {
 			var configText = File.getContent(configPath);
 			var config = Json.parse(configText);
+			verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
 			var defaultSeverity = config.defaultSeverity;
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
@@ -112,9 +113,11 @@ class Main {
 
 	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
 		var check:Check = cast info.build(checkConf.type);
-		if (check == null || checkConf.props == null) return;
-		var props = Reflect.fields(checkConf.props);
+		if (check == null) return;
+		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
+		if (checkConf.props == null) return;
 
+		var props = Reflect.fields(checkConf.props);
 		for (prop in props) {
 			var val = Reflect.field(checkConf.props, prop);
 			if (!Reflect.hasField(check, prop)) {
@@ -126,6 +129,14 @@ class Main {
 			check.severity = defaultSeverity;
 		}
 		checker.addCheck(check);
+	}
+
+	function verifyAllowedFields(object:Dynamic, allowedFields:Array<String>, messagePrefix:String) {
+		for (field in Reflect.fields(object)) {
+			if (allowedFields.indexOf(field) < 0) {
+				failWith(messagePrefix + " has unknown field '" + field + "'");
+			}
+		}
 	}
 
 	function addAllChecks() {
