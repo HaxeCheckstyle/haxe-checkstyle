@@ -111,6 +111,7 @@ class Main {
 		checker.process(toProcess);
 	}
 
+	@SuppressWarnings('checkstyle:Dynamic')
 	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
 		var check:Check = cast info.build(checkConf.type);
 		if (check == null) return;
@@ -131,6 +132,7 @@ class Main {
 		checker.addCheck(check);
 	}
 
+	@SuppressWarnings('checkstyle:Dynamic')
 	function verifyAllowedFields(object:Dynamic, allowedFields:Array<String>, messagePrefix:String) {
 		for (field in Reflect.fields(object)) {
 			if (allowedFields.indexOf(field) < 0) {
