@@ -25,7 +25,7 @@ class IndentationCharacterCheck extends Check {
 		}
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
-			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (${character})', i + 1, 0, null, Reflect.field(SeverityLevel, severity));
+			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (should be ${character})', i + 1, 0, null, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }
