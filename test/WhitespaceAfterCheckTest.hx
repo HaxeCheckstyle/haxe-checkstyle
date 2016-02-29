@@ -13,6 +13,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.ISSUE_63, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_64, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_65, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_66, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -130,5 +131,10 @@ class WhitespaceAfterTests {
 				case _:
 			}
 		}
+	}";
+
+	public static inline var ISSUE_66:String = "
+	class Test {
+		public inline function new<T>() {}
 	}";
 }

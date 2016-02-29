@@ -306,8 +306,7 @@ class TokenTreeBuilder {
 		var name:TokenTree = funcTok;
 		switch (stream.token()) {
 			case Kwd(KwdNew):
-				name = stream.consumeToken();
-				funcTok.addChild(name);
+				name = walkTypeNameDef(funcTok);
 			case POpen:
 			default:
 				name = walkTypeNameDef(funcTok);
@@ -399,7 +398,7 @@ class TokenTreeBuilder {
 		}
 		var name:TokenTree;
 		switch (stream.token()) {
-			case Kwd(KwdMacro), Kwd(KwdExtern):
+			case Kwd(KwdMacro), Kwd(KwdExtern), Kwd(KwdNew):
 				name = stream.consumeToken();
 			case Const(_):
 				name = stream.consumeConst();
