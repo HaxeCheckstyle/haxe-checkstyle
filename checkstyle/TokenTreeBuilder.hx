@@ -308,6 +308,9 @@ class TokenTreeBuilder {
 			case Kwd(KwdNew):
 				name = walkTypeNameDef(funcTok);
 			case POpen:
+			case Binop(OpLt):
+				walkLtGt(funcTok);
+				name = funcTok.getLastChild();
 			default:
 				name = walkTypeNameDef(funcTok);
 		}

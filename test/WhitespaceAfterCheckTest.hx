@@ -14,6 +14,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.ISSUE_64, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_65, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_66, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_67, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -136,5 +137,13 @@ class WhitespaceAfterTests {
 	public static inline var ISSUE_66:String = "
 	class Test {
 		public inline function new<T>() {}
+	}";
+
+	public static inline var ISSUE_67:String = "
+	extern class Promise<T>
+	{
+		@:overload(function<T>(promise : Promise<T>) : Promise<T> {})
+		@:overload(function<T>(thenable : Thenable<T>) : Promise<T> {})
+		static function resolve<T>( value : T ) : Promise<T>;
 	}";
 }
