@@ -112,6 +112,9 @@ class Checker {
 	function makeAST() {
 		var code = file.content;
 		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
+		parser.define("cross");
+		parser.define("scriptable");
+		parser.define("unsafe");
 		ast = parser.parse();
 	}
 
