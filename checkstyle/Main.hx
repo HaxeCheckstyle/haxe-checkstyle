@@ -38,8 +38,8 @@ class Main {
 			}
 		}
 		catch (e:Dynamic) {
-			trace(e);
-			trace(CallStack.toString(CallStack.exceptionStack()));
+			Sys.stderr().writeString(e + "\n");
+			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
 		}
 		if (oldCwd != null) Sys.setCwd(oldCwd);
 		Sys.exit(exitCode);

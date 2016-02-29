@@ -52,7 +52,7 @@ class ChecksInfo {
 	@SuppressWarnings('checkstyle:Dynamic')
 	public function build(name:String):Dynamic {
 		if (!name2info.exists(name)) {
-			trace('Skipping unknown check: $name');
+			Sys.stderr().writeString('Skipping unknown check: ${name}\n');
 			return null;
 		}
 		var cl = name2info[name].clazz;
