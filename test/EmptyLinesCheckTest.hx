@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase {
@@ -19,6 +17,41 @@ class EmptyLinesCheckTest extends CheckTestCase {
 		check.max = 2;
 
 		var msg = checkMessage(EmptyLinesTests.TEST3, check);
+		assertEquals(msg, '');
+	}
+
+	public function testEmptyLineAfterSingleLineComment() {
+		var check = new EmptyLinesCheck();
+		check.allowEmptyLineAfterComment = false;
+
+		var msg = checkMessage(EmptyLinesTests.TEST4, check);
+		assertEquals(msg, 'Empty line not allowed after comment(s)');
+
+		msg = checkMessage(EmptyLinesTests.TEST5, check);
+		assertEquals(msg, 'Empty line not allowed after comment(s)');
+
+		msg = checkMessage(EmptyLinesTests.TEST6, check);
+		assertEquals(msg, 'Empty line not allowed after comment(s)');
+	}
+
+	public function testEmptyLineAfterMultiLineComment() {
+		var check = new EmptyLinesCheck();
+		check.allowEmptyLineAfterComment = false;
+
+		var msg = checkMessage(EmptyLinesTests.TEST6, check);
+		assertEquals(msg, 'Empty line not allowed after comment(s)');
+
+		msg = checkMessage(EmptyLinesTests.TEST7, check);
+		assertEquals(msg, 'Empty line not allowed after comment(s)');
+	}
+
+	public function testAllowEmptyLineAfterComment() {
+		var check = new EmptyLinesCheck();
+
+		var msg = checkMessage(EmptyLinesTests.TEST6, check);
+		assertEquals(msg, '');
+
+		msg = checkMessage(EmptyLinesTests.TEST7, check);
 		assertEquals(msg, '');
 	}
 }
@@ -45,6 +78,46 @@ class EmptyLinesTests {
 			var b:Int;
 
 
+		}
+	}";
+
+	public static inline var TEST4:String =
+	"class Test {
+
+		// comments
+
+		public function new() {
+			var b:Int;
+		}
+	}";
+
+	public static inline var TEST5:String =
+	"class Test {
+
+		// comments
+
+		var a:Int;
+	}";
+
+	public static inline var TEST6:String =
+	"class Test {
+
+		/**
+		 *comments
+		 */
+
+		var a:Int;
+	}";
+
+	public static inline var TEST7:String =
+	"class Test {
+
+		/**
+		 *comments
+		 */
+
+		public function new() {
+			var b:Int;
 		}
 	}";
 }

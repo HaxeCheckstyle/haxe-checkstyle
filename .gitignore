@@ -7,3 +7,6 @@
 *.zip
 *.hxproj
 .haxelib/
+
+check-style-report.json
+check-style-report.xml

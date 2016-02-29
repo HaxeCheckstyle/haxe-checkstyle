@@ -1,16 +1,18 @@
 package checkstyle;
 
-import checkstyle.reporter.JSONReporter;
 import checkstyle.ChecksInfo;
+import checkstyle.checks.Check;
+import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
-import hxargs.Args;
-import haxe.Json;
-import sys.FileSystem;
-import checkstyle.reporter.XMLReporter;
+import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.Reporter;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.ProgressReporter;
+import checkstyle.reporter.XMLReporter;
 import haxe.CallStack;
+import haxe.Json;
+import hxargs.Args;
+import sys.FileSystem;
 import sys.io.File;
 
 class Main {
@@ -103,14 +105,18 @@ class Main {
 		else {
 			var configText = File.getContent(configPath);
 			var config = Json.parse(configText);
+			var defaultSeverity = config.defaultSeverity;
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks) {
-				var check = info.build(checkConf.type);
+				var check:Check = cast info.build(checkConf.type);
 				if (checkConf.props != null) {
 					var props = Reflect.fields(checkConf.props);
 					for (prop in props) {
 						var val = Reflect.field(checkConf.props, prop);
 						Reflect.setField(check, prop, val);
+					}
+					if (defaultSeverity != null && props.indexOf("severity") < 0) {
+						check.severity = defaultSeverity;
 					}
 				}
 				checker.addCheck(check);
