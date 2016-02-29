@@ -138,7 +138,7 @@ class Main {
 			case "xml": new XMLReporter(XML_PATH, STYLE);
 			case "json": new JSONReporter(JSON_PATH);
 			case "text": new Reporter();
-			default: throw "Unknown reporter";
+			default: throw 'Unknown reporter: $REPORT_TYPE';
 		}
 	}
 
