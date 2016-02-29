@@ -12,6 +12,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.ISSUE_59, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_63, '');
 		assertMsg(check, WhitespaceAfterTests.ISSUE_64, '');
+		assertMsg(check, WhitespaceAfterTests.ISSUE_65, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -110,14 +111,24 @@ class WhitespaceAfterTests {
 	}";
 
 	public static inline var ISSUE_59:String = "
-		typedef Test = Int
+	typedef Test = Int
 	";
 
 	public static inline var ISSUE_63:String = "
-		typedef Test = #if true Int #else String #end
+	typedef Test = #if true Int #else String #end
 	";
 
 	public static inline var ISSUE_64:String = "
-		class Test #if true extends Base #end {}
+	class Test #if true extends Base #end {}
 	";
+
+	public static inline var ISSUE_65:String = "
+	class Test {
+		function foo() {
+			switch (0) {
+				case 0, /*1,*/ 2:
+				case _:
+			}
+		}
+	}";
 }

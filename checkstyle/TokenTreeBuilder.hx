@@ -805,8 +805,11 @@ class TokenTreeBuilder {
 					var child:TokenTree = stream.consumeOpSub();
 					parent.addChild(child);
 					walkCaseExpr(child);
-				case Comment(_), CommentLine(_), Semicolon, BrClose, BkClose, PClose, DblDot:
+				case Semicolon, BrClose, BkClose, PClose, DblDot:
 					return;
+				case Comment(_), CommentLine(_):
+					var child:TokenTree = stream.consumeToken();
+					parent.addChild(child);
 				default:
 					var child:TokenTree = stream.consumeToken();
 					parent.addChild(child);
