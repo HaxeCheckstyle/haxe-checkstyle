@@ -40,7 +40,6 @@ class Main {
 		catch (e:Dynamic) {
 			Sys.stderr().writeString(e + "\n");
 			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
-			exitCode = 1;
 		}
 		if (oldCwd != null) Sys.setCwd(oldCwd);
 		Sys.exit(exitCode);
@@ -83,12 +82,12 @@ class Main {
 			@doc("Show report") ["-report"] => function() REPORT = true,
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
 			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
-			_ => function(arg:String) throw "Unknown command: " + arg
+			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
 		if (args.length == 0) {
 			Sys.println(argHandler.getDoc());
-			Sys.exit(1);
+			Sys.exit(0);
 		}
 		argHandler.parse(args);
 
@@ -112,7 +111,7 @@ class Main {
 					for (prop in props) {
 						var val = Reflect.field(checkConf.props, prop);
 						if (!Reflect.hasField(check, prop)) {
-							throw 'Check ${check.getModuleName()} has no property named \'$prop\'';
+							failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
 						}
 						Reflect.setField(check, prop, val);
 					}
@@ -141,7 +140,7 @@ class Main {
 			case "xml": new XMLReporter(XML_PATH, STYLE);
 			case "json": new JSONReporter(JSON_PATH);
 			case "text": new Reporter();
-			default: throw 'Unknown reporter: $REPORT_TYPE';
+			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
 
@@ -162,6 +161,11 @@ class Main {
 			for (child in nodes) traverse(pathJoin(node, child), files);
 		}
 		else if (~/(.hx)$/i.match(node)) files.push(node);
+	}
+
+	static function failWith(message:String) {
+		Sys.stderr().writeString(message + "\n");
+		Sys.exit(1);
 	}
 
 	public static function setExitCode(newExitCode:Int) {
