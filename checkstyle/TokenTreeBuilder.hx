@@ -502,6 +502,7 @@ class TokenTreeBuilder {
 	}
 
 	function continueWalkStatement(parent:TokenTree) {
+		if (!stream.hasMore()) return;
 		switch (stream.token()) {
 			case Dot:
 				walkStatement(parent);
