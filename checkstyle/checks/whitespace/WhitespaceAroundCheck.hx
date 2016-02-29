@@ -125,6 +125,7 @@ class WhitespaceAroundCheck extends Check {
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
 			if (isTypeParameter(tok)) continue;
+			if (isImport(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -140,6 +141,27 @@ class WhitespaceAroundCheck extends Check {
 				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
 				continue;
 			}
+		}
+	}
+
+	function isImport(token:TokenTree):Bool {
+		switch (token.tok) {
+			case Binop(OpMult), Dot:
+				var parent:TokenTree = token.parent;
+				while(parent != null) {
+					switch (parent.tok) {
+						case Kwd(KwdMacro):
+						case Kwd(KwdExtern):
+						case Const(CIdent(_)):
+						case Dot:
+						case Kwd(KwdImport): return true;
+						default: return false;
+					}
+					parent = parent.parent;
+				}
+				return false;
+			default:
+				return false;
 		}
 	}
 

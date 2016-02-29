@@ -47,6 +47,7 @@ class TestMain {
 		runner.add(new TypeNameCheckTest());
 		runner.add(new VariableInitialisationCheckTest());
 		runner.add(new WhitespaceAfterCheckTest());
+		runner.add(new WhitespaceAroundCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);
