@@ -105,6 +105,7 @@ class Main {
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks) {
 				var check:Check = cast info.build(checkConf.type);
+				if (check == null) continue;
 				if (checkConf.props != null) {
 					var props = Reflect.fields(checkConf.props);
 					for (prop in props) {
