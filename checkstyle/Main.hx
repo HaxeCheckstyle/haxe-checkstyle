@@ -121,7 +121,7 @@ class Main {
 		var check:Check = cast info.build(checkConf.type);
 		if (check == null) return;
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
-		if (checkConf.props == null) return;
+		if (checkConf.props == null) checkConf.props = [];
 
 		var props = Reflect.fields(checkConf.props);
 		for (prop in props) {
