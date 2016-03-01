@@ -8,12 +8,14 @@ import checkstyle.LintMessage.SeverityLevel;
 class EmptyLinesCheck extends Check {
 
 	public var max:Int;
-	public var allowEmptyLineAfterComment:Bool;
+	public var allowEmptyLineAfterSingleLineComment:Bool;
+	public var allowEmptyLineAfterMultiLineComment:Bool;
 
 	public function new() {
 		super();
 		max = 1;
-		allowEmptyLineAfterComment = true;
+		allowEmptyLineAfterSingleLineComment = true;
+		allowEmptyLineAfterMultiLineComment = true;
 	}
 
 	override function actualRun() {
@@ -29,9 +31,8 @@ class EmptyLinesCheck extends Check {
 				}
 				end = i;
 
-				if (i > 0 && !allowEmptyLineAfterComment && ~/^(\/\/).*|^(\/\*).*|(\*\/)$/.match(StringTools.trim(checker.lines[i - 1]))) {
-					log('Empty line not allowed after comment(s)', start, 0, null, Reflect.field(SeverityLevel, severity));
-				}
+				if (!allowEmptyLineAfterSingleLineComment) checkComment(i, start, ~/^(\/\/).*$/);
+				if (!allowEmptyLineAfterMultiLineComment) checkComment(i, start, ~/^^(\/\*).*|(\*\/)$/);
 			}
 			else {
 				if (inGroup) {
@@ -44,6 +45,12 @@ class EmptyLinesCheck extends Check {
 		if (inGroup) {
 			inGroup = false;
 			if (end - start + 1 > max) logInfo(start);
+		}
+	}
+
+	function checkComment(i, start, regex) {
+		if (i > 0 && regex.match(StringTools.trim(checker.lines[i - 1]))) {
+			log('Empty line not allowed after comment(s)', start, 0, null, Reflect.field(SeverityLevel, severity));
 		}
 	}
 

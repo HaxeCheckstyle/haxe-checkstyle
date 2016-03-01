@@ -6,7 +6,7 @@ class IndentationCharacterCheckTest extends CheckTestCase {
 
 	public function testWrongIndentation() {
 		var msg = checkMessage(IndentationTests.TEST1, new IndentationCharacterCheck());
-		assertEquals(msg, 'Wrong indentation character (tab)');
+		assertEquals(msg, 'Wrong indentation character (should be tab)');
 	}
 
 	public function testCorrectIndentation() {
@@ -19,7 +19,7 @@ class IndentationCharacterCheckTest extends CheckTestCase {
 		check.character = "space";
 
 		var msg = checkMessage(IndentationTests.TEST3, check);
-		assertEquals(msg, 'Wrong indentation character (space)');
+		assertEquals(msg, 'Wrong indentation character (should be space)');
 	}
 
 	public function testMultilineIfIndentation() {
