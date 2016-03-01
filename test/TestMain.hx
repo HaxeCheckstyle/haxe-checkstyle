@@ -1,4 +1,4 @@
-package ;
+package;
 
 class TestMain {
 
@@ -33,6 +33,7 @@ class TestMain {
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
 		runner.add(new NestedTryDepthCheckTest());
+		runner.add(new NullParameterCheckTest());
 		runner.add(new ParameterNameCheckTest());
 		runner.add(new ParameterNumberCheckTest());
 		runner.add(new PublicPrivateCheckTest());
