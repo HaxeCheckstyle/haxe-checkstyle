@@ -1,6 +1,7 @@
 ##Limitations of checkstyle checks
 
 checkstyle has three types of checks:
+
 1. line based
 2. token based
 3. AST based
