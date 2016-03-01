@@ -10,6 +10,7 @@ class TestMain {
 		runner.add(new ArrayInstantiationCheckTest());
 		runner.add(new AvoidStarImportCheckTest());
 		runner.add(new ConstantNameCheckTest());
+		runner.add(new CyclomaticComplexityCheckTest());
 		runner.add(new DynamicCheckTest());
 		runner.add(new EmptyBlockCheckTest());
 		runner.add(new EmptyLinesCheckTest());

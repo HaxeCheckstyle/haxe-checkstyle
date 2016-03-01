@@ -5,7 +5,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("PublicPrivate")
-@desc("Check for explicit use of private in classes and public in interfaces/externs")
+@desc("Check for explicit use of private in classes and abstracts and public in interfaces/externs")
 class PublicPrivateCheck extends Check {
 
 	public var enforcePublicPrivate:Bool;
@@ -16,23 +16,12 @@ class PublicPrivateCheck extends Check {
 	}
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch (td.decl){
-				case EClass(d):
-					checkFields(d);
-				default:
-			}
-		}
-	}
-
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			if (isCheckSuppressed (field)) continue;
+		forEachField(function(field, parent) {
 			if (field.name != "new") {
-				if (d.flags.indexOf(HInterface) > -1) checkInterfaceField(field);
+				if (parent == INTERFACE) checkInterfaceField(field);
 				else checkField(field);
 			}
-		}
+		});
 	}
 
 	function checkInterfaceField(f:Field) {
@@ -51,7 +40,6 @@ class PublicPrivateCheck extends Check {
 	}
 
 	function checkField(f:Field) {
-		if (isCheckSuppressed (f)) return;
 		if (enforcePublicPrivate) {
 			if ((f.access.indexOf(APublic) < 0) && (f.access.indexOf(APrivate) < 0)) {
 				warnPrivateKeywordMissing(f.name, f.pos);

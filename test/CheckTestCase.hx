@@ -1,4 +1,4 @@
-package ;
+package;
 
 import haxe.PosInfos;
 
@@ -19,13 +19,23 @@ class CheckTestCase extends haxe.unit.TestCase {
 	}
 
 	function assertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
-		var msg = checkMessage (testCase, check);
-		assertEquals (expected, msg, pos);
+		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
+		if (re.match(testCase)) {
+			actualAssertMsg(check, re.replace(testCase, "class $1"), expected, pos);
+			actualAssertMsg(check, re.replace(testCase, "abstract $1(Int)"), expected, pos);
+		}
+		else actualAssertMsg(check, testCase, expected, pos);
+	}
+
+	function actualAssertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
+		
+		var msg = checkMessage(testCase, check);
+		assertEquals(expected, msg, pos);
 	}
 
 	function checkMessage(src, check):String {
 		// a fresh Checker and Reporter for every checkMessage
-		// to allow multiple indipendant checkMessage calls in a single test
+		// to allow multiple independant checkMessage calls in a single test
 		_checker = new Checker();
 		_reporter = new TestReporter();
 

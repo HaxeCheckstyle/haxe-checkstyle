@@ -1,4 +1,4 @@
-package ;
+package;
 
 import checkstyle.checks.MagicNumberCheck;
 
@@ -42,7 +42,7 @@ class MagicNumberCheckTest extends CheckTestCase {
 
 class MagicNumberCheckTests {
 	public static inline var STANDARD_MAGIC_NUMBERS:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			a = -1;
 			b = 0;
@@ -52,41 +52,41 @@ class MagicNumberCheckTests {
 	}";
 
 	public static inline var INT_NUMBER_ASSIGN:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			a = 5;
 		}
 	}";
 
 	public static inline var NEGATIVE_INT_NUMBER_ASSIGN:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			a = -2;
 		}
 	}";
 
 	public static inline var FLOAT_NUMBER_ASSIGN:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			a = 5.0;
 		}
 	}";
 
 	public static inline var INT_NUMBER_IF:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			if (a > 5) return;
 		}
 	}";
 
 	public static inline var INT_NUMBER_FUNCTION:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new(a:Int = 10) {
 		}
 	}";
 
 	public static inline var ALLOWED_MAGIC_NUMBER:String = "
-	class Test {
+	abstractAndClass Test {
 		static inline var VAL = 5;
 		public function new() {
 			a = VAL;

@@ -37,7 +37,7 @@ class AccessOrderCheckTest extends CheckTestCase {
 
 class AccessOrderTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		override public function test1() {}
 		override private function test2() {}
 		static function test3() {}
@@ -47,22 +47,22 @@ class AccessOrderTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public override function test() {}
 	}";
 
 	public static inline var TEST3:String =
-	"class Test {
+	"abstractAndClass Test {
 		public inline static function test() {}
 	}";
 
 	public static inline var TEST4:String =
-	"class Test {
+	"abstractAndClass Test {
 		public macro function test() {}
 	}";
 
 	public static inline var TEST5:String =
-	"class Test {
+	"abstractAndClass Test {
 		dynamic public function test() {}
 	}";
 }

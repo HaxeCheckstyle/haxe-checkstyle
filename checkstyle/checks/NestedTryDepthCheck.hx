@@ -16,28 +16,13 @@ class NestedTryDepthCheck extends Check {
 	}
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch (td.decl) {
-				case EClass(d):
-					checkFields(d);
+		forEachField(function(f, _) {
+			switch (f.kind) {
+				case FFun(fun):
+					scanBlock(fun.expr, -1);
 				default:
 			}
-		}
-	}
-
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			if (isCheckSuppressed (field)) continue;
-			checkField(field);
-		}
-	}
-
-	function checkField(f:Field) {
-		switch (f.kind) {
-			case FFun(fun):
-				scanBlock(fun.expr, -1);
-			default:
-		}
+		});
 	}
 
 	function scanBlock(e:Expr, depth:Int) {

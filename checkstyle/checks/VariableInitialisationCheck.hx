@@ -1,6 +1,7 @@
 package checkstyle.checks;
 
 import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.checks.Check.FieldParent;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -9,25 +10,12 @@ import haxe.macro.Expr;
 class VariableInitialisationCheck extends Check {
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch (td.decl){
-				case EClass(d):
-					checkFields(d);
-				default:
-			}
-		}
+		forEachField(checkField);
 	}
 
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			if (isCheckSuppressed (field)) continue;
-			if (field.name != "new") {
-				if (d.flags.indexOf(HInterface) == -1) checkField(field);
-			}
-		}
-	}
+	function checkField(f:Field, p:FieldParent) {
+		if (f.name == "new" || p == INTERFACE) return;
 
-	function checkField(f:Field) {
 		var isPrivate = false;
 		var isPublic = false;
 		var isInline = false;
@@ -43,10 +31,7 @@ class VariableInitialisationCheck extends Check {
 				case FVar(t, e):
 					if (e == null) return;
 					warnVarinit(f.name, f.pos);
-				case FFun(f):
-					return;
-				case FProp(g, s, t, a):
-					return;
+				case _:
 			}
 		}
 	}

@@ -1,31 +1,28 @@
-package ;
+package;
 
 import checkstyle.checks.MethodLengthCheck;
 
 class MethodLengthCheckTest extends CheckTestCase {
 
 	public function testWrongMethodLength() {
-		var msg = checkMessage(MethodLengthTests.TEST1, new MethodLengthCheck());
-		assertEquals(msg, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
+		assertMsg(new MethodLengthCheck(), MethodLengthTests.TEST1, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
 	}
 
 	public function testCorrectMethodLength() {
-		var msg = checkMessage(MethodLengthTests.TEST2, new MethodLengthCheck());
-		assertEquals(msg, '');
+		assertMsg(new MethodLengthCheck(), MethodLengthTests.TEST2, '');
 	}
 
 	public function testConfigurableMethodLength() {
 		var check = new MethodLengthCheck();
 		check.max = 10;
 
-		var msg = checkMessage(MethodLengthTests.TEST3, check);
-		assertEquals(msg, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
+		assertMsg(check, MethodLengthTests.TEST3, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
 	}
 }
 
 class MethodLengthTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test() {
 			tarce('TEST');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
@@ -41,7 +38,7 @@ class MethodLengthTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test() {
 			tarce('TEST');
 
@@ -52,7 +49,7 @@ class MethodLengthTests {
 	}";
 
 	public static inline var TEST3:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test() {
 			tarce('TEST');
 

@@ -22,21 +22,18 @@ class EmptyLinesCheckTest extends CheckTestCase {
 
 	public function testEmptyLineAfterSingleLineComment() {
 		var check = new EmptyLinesCheck();
-		check.allowEmptyLineAfterComment = false;
+		check.allowEmptyLineAfterSingleLineComment = false;
 
 		var msg = checkMessage(EmptyLinesTests.TEST4, check);
 		assertEquals(msg, 'Empty line not allowed after comment(s)');
 
 		msg = checkMessage(EmptyLinesTests.TEST5, check);
 		assertEquals(msg, 'Empty line not allowed after comment(s)');
-
-		msg = checkMessage(EmptyLinesTests.TEST6, check);
-		assertEquals(msg, 'Empty line not allowed after comment(s)');
 	}
 
 	public function testEmptyLineAfterMultiLineComment() {
 		var check = new EmptyLinesCheck();
-		check.allowEmptyLineAfterComment = false;
+		check.allowEmptyLineAfterMultiLineComment = false;
 
 		var msg = checkMessage(EmptyLinesTests.TEST6, check);
 		assertEquals(msg, 'Empty line not allowed after comment(s)');
@@ -47,6 +44,12 @@ class EmptyLinesCheckTest extends CheckTestCase {
 
 	public function testAllowEmptyLineAfterComment() {
 		var check = new EmptyLinesCheck();
+
+		var msg = checkMessage(EmptyLinesTests.TEST4, check);
+		assertEquals(msg, '');
+
+		var msg = checkMessage(EmptyLinesTests.TEST5, check);
+		assertEquals(msg, '');
 
 		var msg = checkMessage(EmptyLinesTests.TEST6, check);
 		assertEquals(msg, '');

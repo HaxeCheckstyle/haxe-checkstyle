@@ -30,23 +30,10 @@ class AccessOrderCheck extends Check {
 	}
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch (td.decl){
-				case EClass(d):
-					checkFields(d);
-				default:
-			}
-		}
+		forEachField(checkField);
 	}
 
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			if (isCheckSuppressed (field)) continue;
-			checkField(field);
-		}
-	}
-
-	function checkField(f:Field) {
+	function checkField(f:Field, _) {
 		var lastIndex:Int = -1;
 		var index:Int;
 
