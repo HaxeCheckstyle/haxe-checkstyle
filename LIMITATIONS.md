@@ -12,7 +12,7 @@ Which check uses what type is not instantly clear to the user.
 * scan files line by line
 * usually applies a regex to each line
 * tries to detect line separator by finding first occurrence of \r, \n or \r\n
-* support all features of Haxe
+* supports all features of Haxe
 * can work with files that won't compile
 
 ###token based checks
@@ -29,7 +29,7 @@ Which check uses what type is not instantly clear to the user.
 
 ###AST based checks
 * relies on HaxeParser from haxeparser library
-* no support for #if, #else, #elseif, etc.
+* partial support for #if, #else, #elseif (only active conditionals)
 * macro support unclear (needs to be confirmed / checked)
 * no parent info for a given Expr or ComplexType
 * position info available only for a subset of all AST nodes
