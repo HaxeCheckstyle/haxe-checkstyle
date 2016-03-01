@@ -29,7 +29,7 @@ class NestedIfDepthCheckTest extends CheckTestCase {
 
 class NestedIfDepthTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test(param:Int):Void {
 			if (param == 0) return 0;                   // level 0
 			if (param == 1) {                           // level 0
@@ -56,7 +56,7 @@ class NestedIfDepthTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test1(param:Int) {
 			if (param == 1) {                           // level 0
 				return 1;

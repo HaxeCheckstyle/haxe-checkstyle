@@ -22,28 +22,28 @@ class InnerAssignmentCheckTest extends CheckTestCase {
 
 class InnerAssignmentCheckTests {
 	public static inline var IF_COND:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			if ((a=b) > 0) return;
 		}
 	}";
 
 	public static inline var IF_EXPR:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			if (a==b) a=b;
 		}
 	}";
 
 	public static inline var IF_RETURN_EXPR:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			if (a==b) return a=b;
 		}
 	}";
 
 	public static inline var WHILE_COND:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			while ((a=b) > 0) {
 				b=c;
@@ -52,7 +52,7 @@ class InnerAssignmentCheckTests {
 	}";
 
 	public static inline var WHILE_COND_RETURN:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new() {
 			while ((a=b) > 0) {
 				return b=c;
@@ -61,13 +61,13 @@ class InnerAssignmentCheckTests {
 	}";
 
 	public static inline var METHOD_DEF:String = "
-	class Test {
+	abstractAndClass Test {
 		public function new(a:Null<Int> = 1, b:String = 'test', c = []) {
 		}
 	}";
 
 	public static inline var MEMBER_DEF:String = "
-	class Test {
+	abstractAndClass Test {
 		var a:Null<Int> = 1;
 		var b:String = 'test';
 		var c = [];

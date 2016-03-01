@@ -1,8 +1,7 @@
-package ;
+package;
 
 import checkstyle.checks.ParameterNameCheck;
 
-// TODO abstract tests
 class ParameterNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
@@ -46,7 +45,7 @@ class ParameterNameCheckTest extends CheckTestCase {
 
 class ParameterNameTests {
 	public static inline var TEST:String = "
-	class Test {
+	abstractAndClass Test {
 		function test(param1:Int, paramName:String) {
 		}
 		public function test2() {
@@ -67,13 +66,13 @@ class ParameterNameTests {
 	}";
 
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test(Count:Int) {
 		}
 	}";
 
 	public static inline var TEST2:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test() {
 		}
 	}";

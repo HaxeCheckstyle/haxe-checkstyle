@@ -9,10 +9,6 @@ import checkstyle.ComplexTypeUtils;
 @desc("Checks for use of Dynamic type")
 class DynamicCheck extends Check {
 
-	public function new() {
-		super();
-	}
-
 	override function actualRun() {
 		ComplexTypeUtils.walkFile (checker.ast, callbackComplexType);
 	}

@@ -8,29 +8,13 @@ import haxe.macro.Expr;
 @desc("Anonymous type structures check")
 class AnonymousCheck extends Check {
 
-	public function new() {
-		super();
-	}
-
 	override function actualRun() {
-		checkClassFields();
+		forEachField(checkField);
 		checkLocalVars();
 	}
 
-	function checkClassFields() {
-		for (td in checker.ast.decls) {
-			switch (td.decl){
-				case EClass(d):
-					for (field in d.data) {
-						if (isCheckSuppressed (field)) continue;
-						if (field.name != "new") checkField(field);
-					}
-				default:
-			}
-		}
-	}
-
-	function checkField(f:Field) {
+	function checkField(f:Field, _) {
+		if (f.name == "new") return;
 		switch(f.kind) {
 			case FVar(TAnonymous(fields), val):
 				error(f.name, f.pos);

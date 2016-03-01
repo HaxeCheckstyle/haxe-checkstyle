@@ -1,4 +1,4 @@
-package ;
+package;
 
 import checkstyle.checks.NestedTryDepthCheck;
 
@@ -29,7 +29,7 @@ class NestedTryDepthCheckTest extends CheckTestCase {
 
 class NestedTryDepthTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test() {
 			try { } catch(e:String) { }    // level 0
 			try {                          // level 0
@@ -62,7 +62,7 @@ class NestedTryDepthTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test1() {
 			try {                           // level 0
 				try {                       // level 0

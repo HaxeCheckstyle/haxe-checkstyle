@@ -20,24 +20,11 @@ class ParameterNumberCheck extends Check {
 	}
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch (td.decl) {
-				case EClass(d):
-					checkFields(d);
-				default:
-			}
-		}
+		forEachField(checkField);
 	}
 
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			checkField(field);
-		}
-	}
-
-	function checkField(f:Field) {
+	function checkField(f:Field, _) {
 		if (ignoreOverriddenMethods && f.access.indexOf(AOverride) >= 0) return;
-		if (isCheckSuppressed (f)) return;
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {

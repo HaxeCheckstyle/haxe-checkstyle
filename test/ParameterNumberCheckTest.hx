@@ -1,6 +1,8 @@
-package ;
+package;
 
+import checkstyle.checks.Check;
 import checkstyle.checks.ParameterNumberCheck;
+import haxe.PosInfos;
 
 class ParameterNumberCheckTest extends CheckTestCase {
 
@@ -46,7 +48,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 
 class ParameterNumberTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		var testVar1:Int;
 		public function test():Void {}
 
@@ -64,7 +66,7 @@ class ParameterNumberTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test1(param1:Int,
 								param2:Int,
 								param3:Int,
@@ -77,7 +79,7 @@ class ParameterNumberTests {
 	}";
 
 	public static inline var TEST3:String =
-	"class Test {
+	"abstractAndClass Test {
 		override public function test2(param1:Int,
 								param2:Int,
 								param3:Int,
@@ -91,7 +93,7 @@ class ParameterNumberTests {
 	}";
 	
 	public static inline var TEST4:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test3(param1:Int,
 								param2:Int,
 								param3:Int) {

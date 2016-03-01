@@ -9,7 +9,7 @@ class ParameterNameCheck extends NameCheckBase {
 
 	public function new() {
 		super();
-		format = "^[a-z][a-zA-Z0-9]*$";
+		format = "^(_|[a-z][a-zA-Z0-9]*$)";
 	}
 
 	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {

@@ -7,10 +7,6 @@ import haxeparser.Data.Token;
 @desc("Checks instantiation of regular expressions is in between ~/ and /, not with new")
 class ERegInstantiationCheck extends Check {
 
-	public function new() {
-		super();
-	}
-
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
