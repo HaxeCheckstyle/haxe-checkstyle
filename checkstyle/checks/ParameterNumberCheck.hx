@@ -23,14 +23,16 @@ class ParameterNumberCheck extends Check {
 		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass(d):
-					checkFields(d);
+					checkFields(d.data);
+				case EAbstract(a):
+					checkFields(a.data);
 				default:
 			}
 		}
 	}
 
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
+	function checkFields(fields:Array<Field>) {
+		for (field in fields) {
 			checkField(field);
 		}
 	}

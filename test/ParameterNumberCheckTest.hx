@@ -1,6 +1,9 @@
-package ;
+package;
 
+import checkstyle.checks.Check;
 import checkstyle.checks.ParameterNumberCheck;
+import haxe.PosInfos;
+using StringTools;
 
 class ParameterNumberCheckTest extends CheckTestCase {
 
@@ -41,6 +44,11 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		check.ignoreOverriddenMethods = true;
 
 		assertMsg(check, ParameterNumberTests.TEST3, '');
+	}
+
+	override function assertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
+		super.assertMsg(check, testCase, expected, pos);
+		super.assertMsg(check, testCase.replace("class Test", "abstract Test(Int)"), expected, pos);
 	}
 }
 
