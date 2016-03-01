@@ -371,6 +371,12 @@
 			"props": {
 				"severity": "ERROR"
 			}
+		},
+		{
+			"type": "NullParameter",
+			"props": {
+				"severity": "ERROR"
+			}
 		}
 	]
 }
