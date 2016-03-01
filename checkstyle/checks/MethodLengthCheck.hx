@@ -22,35 +22,23 @@ class MethodLengthCheck extends Check {
 	}
 
 	override public function actualRun() {
-		for (td in checker.ast.decls) {
-			switch(td.decl){
-				case EClass(d): searchFields(d.data);
-				case EAbstract(a): searchFields(a.data);
-				case EEnum(d): //trace("Enum");
-				case EImport(sl, mode): //trace("Import");
-				case ETypedef(d): //trace("typedef");
-				case EUsing(path): //trace("Using");
-			}
-		}
+		forEachField(searchField);
 	}
 
-	function searchFields(fs:Array<Field>) {
-		for (f in fs) {
-			if (isCheckSuppressed(f)) continue;
-			switch(f.kind){
-				case FFun(ff):
-					checkMethod(f);
+	function searchField(f:Field, _) {
+		switch(f.kind){
+			case FFun(ff):
+				checkMethod(f);
+			default:
+		}
+
+		ExprUtils.walkField(f, function(e) {
+			switch(e.expr){
+				case EFunction(name, ff):
+					checkFunction(e);
 				default:
 			}
-
-			ExprUtils.walkField(f, function(e) {
-				switch(e.expr){
-					case EFunction(name, ff):
-						checkFunction(e);
-					default:
-				}
-			});
-		}
+		});
 	}
 
 	function checkMethod(f:Field) {

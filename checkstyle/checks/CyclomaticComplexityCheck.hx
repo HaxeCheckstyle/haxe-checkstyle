@@ -28,27 +28,13 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	override function actualRun() {
-		checker.ast.decls.map(function(type:TypeDecl):Null<Definition<ClassFlag, Array<Field>>> {
-			return switch (type.decl) {
-				case TypeDef.EClass(definition): definition;
-				default: null;
-			}
-		}).filter(function(definition):Bool {
-			return definition != null;
-		}).iter(checkFields);
-	}
-
-	function checkFields(definition:Definition<ClassFlag, Array<Field>>) {
-		definition.data.map(function(field:Field):Null<Target> {
-			return switch (field.kind) {
+		forEachField(function(field, _) {
+			switch (field.kind) {
 				case FieldType.FFun(f):
-					if (isCheckSuppressed(field)) null;
-					else { name:field.name, expr:f.expr, pos:field.pos};
-				default: null;
+					calculateComplexity({ name:field.name, expr:f.expr, pos:field.pos});
+				default:
 			}
-		}).filter(function(f:Null<Target>):Bool {
-			return f != null;
-		}).iter(calculateComplexity);
+		});
 	}
 
 	function calculateComplexity(method:Target) {

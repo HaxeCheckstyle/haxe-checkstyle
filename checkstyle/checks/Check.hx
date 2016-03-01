@@ -3,6 +3,7 @@ package checkstyle.checks;
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
+import haxeparser.Data;
 
 class Check {
 
@@ -49,6 +50,27 @@ class Check {
 	public function getModuleName():String {
 		if (moduleName == null) moduleName = ChecksInfo.getCheckName(this);
 		return moduleName;
+	}
+
+	function forEachField(cb:Field -> FieldParent -> Void) {
+		for (td in checker.ast.decls) {
+			var fields:Array<Field> = null;
+			var parent:FieldParent = null;
+			switch (td.decl) {
+				case EClass(d):
+					fields = d.data;
+					parent = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
+				case EAbstract(a):
+					fields = a.data;
+					parent = ABSTRACT;
+				default:
+			}
+
+			if (fields == null) continue;
+			for (field in fields) {
+				if (!isCheckSuppressed(field)) cb(field, parent);
+			}
+		}
 	}
 
 	function isCheckSuppressed(f:Field):Bool {
@@ -185,4 +207,11 @@ class Check {
 		}
 		return false;
 	}
+}
+
+@SuppressWarnings('checkstyle:MemberName')
+enum FieldParent {
+	CLASS;
+	INTERFACE;
+	ABSTRACT;
 }

@@ -19,21 +19,10 @@ class ReturnCheck extends Check {
 	}
 
 	override function actualRun() {
-		for (td in checker.ast.decls) {
-			switch(td.decl){
-				case EClass(d):
-					checkFields(d);
-				default:
-			}
-		}
+		forEachField(function(field, parent) {
+			if (field.name != "new" && parent != INTERFACE) checkField(field);
+		});
 		checkInlineFunctions();
-	}
-
-	function checkFields(d:Definition<ClassFlag, Array<Field>>) {
-		for (field in d.data) {
-			if (isCheckSuppressed(field)) continue;
-			if (field.name != "new" && d.flags.indexOf(HInterface) == -1) checkField(field);
-		}
 	}
 
 	function checkField(f:Field) {
