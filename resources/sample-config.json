@@ -375,7 +375,8 @@
 		{
 			"type": "NullParameter",
 			"props": {
-				"severity": "ERROR"
+				"severity": "ERROR",
+				"nullDefaultValueStyle": "questionmark"
 			}
 		}
 	]
