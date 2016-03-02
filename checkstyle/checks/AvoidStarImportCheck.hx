@@ -8,8 +8,13 @@ import checkstyle.LintMessage.SeverityLevel;
 class AvoidStarImportCheck extends Check {
 
 	override function actualRun() {
-		var root:TokenTree = checker.getTokenTree();
-		checkImports(root.filter([Kwd(KwdImport)], ALL));
+		try {
+			var root:TokenTree = checker.getTokenTree();
+			checkImports(root.filter([Kwd(KwdImport)], ALL));
+		}
+		catch (e:String) {
+			//TokenTree exception
+		}
 	}
 
 	function checkImports(importEntries:Array<TokenTree>) {

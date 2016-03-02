@@ -24,9 +24,14 @@ class HiddenFieldCheck extends Check {
 	}
 
 	override function actualRun() {
-		if (ignoreFormat != null) ignoreFormatRE = new EReg (ignoreFormat, "");
-		var root:TokenTree = checker.getTokenTree();
-		checkClasses(root.filter([Kwd(KwdClass)], ALL));
+		try {
+			if (ignoreFormat != null) ignoreFormatRE = new EReg (ignoreFormat, "");
+			var root:TokenTree = checker.getTokenTree();
+			checkClasses(root.filter([Kwd(KwdClass)], ALL));
+		}
+		catch (e:String) {
+			//TokenTree exception
+		}
 	}
 
 	function checkClasses(classes:Array<TokenTree>) {

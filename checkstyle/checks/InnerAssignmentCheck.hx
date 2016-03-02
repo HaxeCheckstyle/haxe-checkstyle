@@ -13,26 +13,30 @@ class InnerAssignmentCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = checker.getTokenTree();
-
-		var allAssignments:Array<TokenTree> = root.filter([
-				Binop(OpAssign),
-				Binop(OpAssignOp(OpAdd)),
-				Binop(OpAssignOp(OpSub)),
-				Binop(OpAssignOp(OpDiv)),
-				Binop(OpAssignOp(OpMult)),
-				Binop(OpAssignOp(OpShl)),
-				Binop(OpAssignOp(OpShr)),
-				Binop(OpAssignOp(OpUShr)),
-				Binop(OpAssignOp(OpAnd)),
-				Binop(OpAssignOp(OpOr)),
-				Binop(OpAssignOp(OpXor))
-				], ALL);
-		var x:Int = 0;
-		for (assignToken in allAssignments) {
-			if (isPosSuppressed(assignToken.pos)) continue;
-			if (!filterAssignment(assignToken)) continue;
-			logPos('Inner assignment detected', assignToken.pos, Reflect.field(SeverityLevel, severity));
+		try {
+			var root:TokenTree = checker.getTokenTree();
+			var allAssignments:Array<TokenTree> = root.filter([
+					Binop(OpAssign),
+					Binop(OpAssignOp(OpAdd)),
+					Binop(OpAssignOp(OpSub)),
+					Binop(OpAssignOp(OpDiv)),
+					Binop(OpAssignOp(OpMult)),
+					Binop(OpAssignOp(OpShl)),
+					Binop(OpAssignOp(OpShr)),
+					Binop(OpAssignOp(OpUShr)),
+					Binop(OpAssignOp(OpAnd)),
+					Binop(OpAssignOp(OpOr)),
+					Binop(OpAssignOp(OpXor))
+					], ALL);
+			var x:Int = 0;
+			for (assignToken in allAssignments) {
+				if (isPosSuppressed(assignToken.pos)) continue;
+				if (!filterAssignment(assignToken)) continue;
+				logPos('Inner assignment detected', assignToken.pos, Reflect.field(SeverityLevel, severity));
+			}
+		}
+		catch (e:String) {
+			//TokenTree exception
 		}
 	}
 

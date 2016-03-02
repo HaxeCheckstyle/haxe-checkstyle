@@ -14,31 +14,36 @@ class MagicNumberCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = checker.getTokenTree();
-
-		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
+		try {
+			var root:TokenTree = checker.getTokenTree();
+			var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
 				if (token.tok == null) return false;
 				return switch (token.tok) {
 					case Const(CInt(_)): true;
 					case Const(CFloat(_)): true;
 					default: false;
 				}
-			},
-			ALL);
-		for (numberToken in allNumbers) {
-			if (isPosSuppressed(numberToken.pos)) continue;
-			if (!filterNumber(numberToken)) continue;
-			switch (numberToken.tok) {
-				case Const(CInt(n)):
-					var number:Int = Std.parseInt(n);
-					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
-				case Const(CFloat(n)):
-					var number:Float = Std.parseFloat(n);
-					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
-				default:
 			}
+			, ALL);
+
+			for (numberToken in allNumbers) {
+				if (isPosSuppressed(numberToken.pos)) continue;
+				if (!filterNumber(numberToken)) continue;
+				switch (numberToken.tok) {
+					case Const(CInt(n)):
+						var number:Int = Std.parseInt(n);
+						if (ignoreNumbers.indexOf(number) >= 0) continue;
+						logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
+					case Const(CFloat(n)):
+						var number:Float = Std.parseFloat(n);
+						if (ignoreNumbers.indexOf(number) >= 0) continue;
+						logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
+					default:
+				}
+			}
+		}
+		catch (e:String) {
+			//TokenTree exception
 		}
 	}
 
