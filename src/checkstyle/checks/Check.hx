@@ -36,8 +36,12 @@ class Check {
 	}
 
 	public function logPos(msg:String, pos:Position, sev:SeverityLevel) {
-		var lp = checker.getLinePos(pos.min);
-		var length = pos.max - pos.min;
+		logRange(msg, pos.min, pos.max, sev);
+	}
+
+	public function logRange(msg:String, startPos:Int, endPos:Int, sev:SeverityLevel) {
+		var lp = checker.getLinePos(startPos);
+		var length = endPos - startPos;
 		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
 	}
 
