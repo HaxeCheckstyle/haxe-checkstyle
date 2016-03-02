@@ -4,7 +4,7 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
 @name("AvoidInlineConditionals")
-@desc("Check to detect and warn about inline conditionals")
+@desc("Detects inline conditionals")
 class AvoidInlineConditionalsCheck extends Check {
 
 	override function actualRun() {
