@@ -152,6 +152,7 @@ class TokenTreeBuilder {
 		// add all comments, annotations
 		for (prefix in prefixes) name.addChild(prefix);
 		walkExtends(name);
+		walkImplements(name);
 		var tempStore:Array<TokenTree> = [];
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
