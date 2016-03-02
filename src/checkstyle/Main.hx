@@ -111,14 +111,13 @@ class Main {
 		checker.process(toProcess);
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
+	@SuppressWarnings('checkstyle:Dynamic', 'checkstyle:AvoidInlineConditionals')
 	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
 		var check:Check = cast info.build(checkConf.type);
 		if (check == null) return;
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
-		if (checkConf.props == null) checkConf.props = [];
 
-		var props = Reflect.fields(checkConf.props);
+		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
 		for (prop in props) {
 			var val = Reflect.field(checkConf.props, prop);
 			if (!Reflect.hasField(check, prop)) {
