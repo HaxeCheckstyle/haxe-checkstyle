@@ -23,6 +23,7 @@ class Reporter implements IReporter {
 
 	public function fileFinish(f:LintFile) {}
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	public function addMessage(m:LintMessage) {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);

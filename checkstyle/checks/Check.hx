@@ -52,6 +52,7 @@ class Check {
 		return moduleName;
 	}
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function forEachField(cb:Field -> FieldParent -> Void) {
 		for (td in checker.ast.decls) {
 			var fields:Array<Field> = null;

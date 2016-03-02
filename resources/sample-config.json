@@ -27,10 +27,15 @@
 			}
 		},
 		{
+			"type": "AvoidInlineConditionals",
+			"props": {
+				"severity": "WARNING"
+			}
+		},
+		{
 			"type": "AvoidStarImport",
 			"props": {
-				"severity": "INFO",
-				"allowStarImports": false
+				"severity": "INFO"
 			}
 		},
 		{

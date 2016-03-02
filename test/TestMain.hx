@@ -1,5 +1,3 @@
-package ;
-
 class TestMain {
 
 	public function new() {
@@ -46,6 +44,7 @@ class TestMain {
 		runner.add(new TypeCheckTest());
 		runner.add(new TypeNameCheckTest());
 		runner.add(new VariableInitialisationCheckTest());
+		runner.add(new AvoidInlineConditionalsCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);
