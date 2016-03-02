@@ -15,16 +15,16 @@ class MagicNumberCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-
 		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
-				if (token.tok == null) return false;
-				return switch (token.tok) {
-					case Const(CInt(_)): true;
-					case Const(CFloat(_)): true;
-					default: false;
-				}
-			},
-			ALL);
+			if (token.tok == null) return false;
+			return switch (token.tok) {
+				case Const(CInt(_)): true;
+				case Const(CFloat(_)): true;
+				default: false;
+			}
+		}
+		, ALL);
+
 		for (numberToken in allNumbers) {
 			if (isPosSuppressed(numberToken.pos)) continue;
 			if (!filterNumber(numberToken)) continue;

@@ -45,6 +45,7 @@ class TestMain {
 		runner.add(new TypeNameCheckTest());
 		runner.add(new VariableInitialisationCheckTest());
 		runner.add(new AvoidInlineConditionalsCheckTest());
+		runner.add(new SimplifyBooleanExpressionCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);

@@ -26,13 +26,13 @@ class MultipleStringLiteralsCheck extends Check {
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
-				if (token.tok == null) return false;
-				return switch (token.tok) {
-					case Const(CString(_)): true;
-					default: false;
-				}
-			},
-			ALL);
+			if (token.tok == null) return false;
+			return switch (token.tok) {
+				case Const(CString(_)): true;
+				default: false;
+			}
+		},
+		ALL);
 
 		for (literalToken in allStringLiterals) {
 			if (!filterLiteral(literalToken)) continue;
@@ -44,7 +44,7 @@ class MultipleStringLiteralsCheck extends Check {
 					if (checkLiteralCount(s, allLiterals)) {
 						if (isPosSuppressed(literalToken.pos)) continue;
 						logPos('Multiple string literal "$s" detected - consider using a constant',
-								literalToken.pos, Reflect.field(SeverityLevel, severity));
+						literalToken.pos, Reflect.field(SeverityLevel, severity));
 					}
 				default:
 			}

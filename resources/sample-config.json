@@ -316,6 +316,12 @@
 			}
 		},
 		{
+			"type": "SimplifyBooleanExpression",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "Spacing",
 			"props": {
 				"severity": "INFO",

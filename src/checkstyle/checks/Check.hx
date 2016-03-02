@@ -20,7 +20,14 @@ class Check {
 	public function run(checker:Checker):Array<LintMessage> {
 		this.checker = checker;
 		messages = [];
-		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) actualRun();
+		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) {
+			try {
+				actualRun();
+			}
+			catch(e:String) {
+				//exception
+			}
+		}
 		return messages;
 	}
 
