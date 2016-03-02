@@ -74,6 +74,8 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx">
 	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
+	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;SpacingCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
