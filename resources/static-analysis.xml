@@ -8,6 +8,8 @@
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
 	</file>
+	<file name="checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx">
+	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
 	</file>
 	<file name="checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx">

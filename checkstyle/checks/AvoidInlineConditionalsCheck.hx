@@ -1,0 +1,20 @@
+package checkstyle.checks;
+
+import haxe.macro.Expr;
+import checkstyle.LintMessage.SeverityLevel;
+
+@name("AvoidInlineConditionals")
+@desc("Check to detect and warn about inline conditionals")
+class AvoidInlineConditionalsCheck extends Check {
+
+	override function actualRun() {
+		ExprUtils.walkFile(checker.ast, function(e:Expr) {
+			if (isPosSuppressed(e.pos)) return;
+			switch(e.expr){
+				case ETernary(econd, eif, eelse):
+					logPos('Avoid inline conditionals', e.pos, Reflect.field(SeverityLevel, severity));
+				default:
+			}
+		});
+	}
+}
