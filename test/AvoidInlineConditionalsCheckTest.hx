@@ -2,7 +2,7 @@ import checkstyle.checks.AvoidInlineConditionalsCheck;
 
 class AvoidInlineConditionalsCheckTest extends CheckTestCase {
 
-	public function testWrongArrayInstantiation() {
+	public function testInlineCondition() {
 		assertMsg(new AvoidInlineConditionalsCheck(), AvoidInlineConditionalsTests.TEST1, 'Avoid inline conditionals');
 	}
 }
