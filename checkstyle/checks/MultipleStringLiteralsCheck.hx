@@ -21,38 +21,33 @@ class MultipleStringLiteralsCheck extends Check {
 	}
 
 	override function actualRun() {
-		try {
-			ignoreRE = new EReg (ignore, "");
-			var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
+		ignoreRE = new EReg (ignore, "");
+		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
 
-			var allLiterals:Map<String, Int> = new Map<String, Int>();
-			var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
-				if (token.tok == null) return false;
-				return switch (token.tok) {
-					case Const(CString(_)): true;
-					default: false;
-				}
-			},
-			ALL);
-
-			for (literalToken in allStringLiterals) {
-				if (!filterLiteral(literalToken)) continue;
-
-				switch (literalToken.tok) {
-					case Const(CString(s)):
-						if (ignoreRE.match(s)) continue;
-						if (s.length < minLength) continue;
-						if (checkLiteralCount(s, allLiterals)) {
-							if (isPosSuppressed(literalToken.pos)) continue;
-							logPos('Multiple string literal "$s" detected - consider using a constant',
-							literalToken.pos, Reflect.field(SeverityLevel, severity));
-						}
-					default:
-				}
+		var allLiterals:Map<String, Int> = new Map<String, Int>();
+		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
+			if (token.tok == null) return false;
+			return switch (token.tok) {
+				case Const(CString(_)): true;
+				default: false;
 			}
-		}
-		catch (e:String) {
-			//TokenTree exception
+		},
+		ALL);
+
+		for (literalToken in allStringLiterals) {
+			if (!filterLiteral(literalToken)) continue;
+
+			switch (literalToken.tok) {
+				case Const(CString(s)):
+					if (ignoreRE.match(s)) continue;
+					if (s.length < minLength) continue;
+					if (checkLiteralCount(s, allLiterals)) {
+						if (isPosSuppressed(literalToken.pos)) continue;
+						logPos('Multiple string literal "$s" detected - consider using a constant',
+						literalToken.pos, Reflect.field(SeverityLevel, severity));
+					}
+				default:
+			}
 		}
 	}
 

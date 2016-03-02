@@ -8,26 +8,21 @@ import checkstyle.LintMessage.SeverityLevel;
 class SimplifyBooleanExpressionCheck extends Check {
 
 	override function actualRun() {
-		try {
-			var root:TokenTree = checker.getTokenTree();
-			var acceptableTokens:Array<TokenTree> = root.filter([
-				Kwd(KwdTrue),
-				Kwd(KwdFalse),
-				Binop(OpEq),
-				Binop(OpNotEq),
-				Unop(OpNot),
-				Binop(OpOr),
-				Binop(OpAnd),
-				Binop(OpBoolOr),
-				Binop(OpBoolAnd)
-			], ALL);
+		var root:TokenTree = checker.getTokenTree();
+		var acceptableTokens:Array<TokenTree> = root.filter([
+			Kwd(KwdTrue),
+			Kwd(KwdFalse),
+			Binop(OpEq),
+			Binop(OpNotEq),
+			Unop(OpNot),
+			Binop(OpOr),
+			Binop(OpAnd),
+			Binop(OpBoolOr),
+			Binop(OpBoolAnd)
+		], ALL);
 
-			for (token in acceptableTokens) {
-				if (token.is(Kwd(KwdTrue)) || token.is(Kwd(KwdFalse))) checkToken(token);
-			}
-		}
-		catch (e:String) {
-			//TokenTree exception
+		for (token in acceptableTokens) {
+			if (token.is(Kwd(KwdTrue)) || token.is(Kwd(KwdFalse))) checkToken(token);
 		}
 	}
 
