@@ -15,7 +15,7 @@ class ComplexTypeUtils {
 	}
 
 	public static function walkTypeDecl(td:TypeDecl, cb:ComplexTypeCallback) {
-		switch(td.decl){
+		switch (td.decl){
 			case EClass(d):
 				walkClass(d, td.pos, cb);
 			case EEnum(d):
@@ -43,7 +43,7 @@ class ComplexTypeUtils {
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
 		for (f in d.flags) {
-			switch(f) {
+			switch (f) {
 				case HExtends(t) | HImplements(t): walkTypePath(t, d.name, pos, cb);
 				default:
 			}
@@ -64,7 +64,7 @@ class ComplexTypeUtils {
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
 		for (f in d.flags) {
-			switch(f) {
+			switch (f) {
 				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, f.getName(), pos, cb);
 				default:
 			}
@@ -82,7 +82,7 @@ class ComplexTypeUtils {
 	public static function walkTypePath(tp:TypePath, name:String, pos:Position, cb:ComplexTypeCallback) {
 		if (tp.params != null) {
 			for (p in tp.params) {
-				switch(p){
+				switch (p){
 					case TPType(t): walkComplexType(t, name, pos, cb);
 					case TPExpr(e): walkExpr(e, cb);
 				}
@@ -122,7 +122,7 @@ class ComplexTypeUtils {
 	}
 
 	public static function walkField(f:Field, cb:ComplexTypeCallback) {
-		switch(f.kind){
+		switch (f.kind){
 			case FVar(t, e):
 				if (t != null) walkComplexType(t, f.name, f.pos, cb);
 				if (e != null) walkExpr(e, cb);
@@ -156,7 +156,7 @@ class ComplexTypeUtils {
 
 	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	public static function walkExpr(e:Expr, cb:ComplexTypeCallback) {
-		switch(e.expr){
+		switch (e.expr){
 			case EConst(c):
 			case EArray(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
 			case EBinop(op, e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);

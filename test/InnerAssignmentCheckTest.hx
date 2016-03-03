@@ -17,6 +17,7 @@ class InnerAssignmentCheckTest extends CheckTestCase {
 		assertMsg(check, InnerAssignmentCheckTests.IF_COND, 'Inner assignment detected');
 		assertMsg(check, InnerAssignmentCheckTests.IF_RETURN_EXPR, 'Inner assignment detected');
 		assertMsg(check, InnerAssignmentCheckTests.WHILE_COND_RETURN, 'Inner assignment detected');
+		assertMsg(check, InnerAssignmentCheckTests.SWITCH, 'Inner assignment detected');
 	}
 }
 
@@ -69,9 +70,21 @@ class InnerAssignmentCheckTests {
 	public static inline var MEMBER_DEF:String = "
 	abstractAndClass Test {
 		var a:Null<Int> = 1;
+		var a(default, null):Null<Int> = 1;
 		var b:String = 'test';
 		var c = [];
 		public function new() {
+		}
+	}";
+
+	public static inline var SWITCH:String = "
+	class Test {
+		public function new() {
+			var p = 1;
+			switch p=1 {
+				case 1:
+					trace(1);
+			}
 		}
 	}";
 }

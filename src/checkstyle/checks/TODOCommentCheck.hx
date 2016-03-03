@@ -10,7 +10,7 @@ class TODOCommentCheck extends Check {
 	override function actualRun() {
 		var re = ~/TODO|FIXME/;
 		for (tk in checker.tokens) {
-			switch(tk.tok) {
+			switch (tk.tok) {
 				case Comment(s) | CommentLine(s):
 					if (re.match(s)) logPos('TODO comment:' + s, tk.pos, Reflect.field(SeverityLevel, severity));
 				default:

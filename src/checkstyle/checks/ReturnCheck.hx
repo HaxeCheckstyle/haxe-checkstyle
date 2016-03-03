@@ -36,7 +36,7 @@ class ReturnCheck extends Check {
 				}
 
 				if (!noReturn) {
-					switch(fun.ret) {
+					switch (fun.ret) {
 						case TPath(val):
 							if (!enforceReturnType && Std.string(val.name) == "Void") warnVoid(f.name, f.pos);
 						default:
@@ -50,7 +50,7 @@ class ReturnCheck extends Check {
 
 	function checkInlineFunctions() {
 		ExprUtils.walkFile(checker.ast, function(e) {
-			switch(e.expr) {
+			switch (e.expr) {
 				case EFunction(fname, f):
 					var funNoReturn:Bool = (f.ret == null);
 					walkExpr (f.expr, funNoReturn, fname, e.pos);

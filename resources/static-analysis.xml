@@ -8,11 +8,15 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;EmptyBlockCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;LeftCurlyCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;NeedBracesCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;RightCurlyCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx">
 	</file>
@@ -22,8 +26,6 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
@@ -32,11 +34,7 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
 	</file>
@@ -54,11 +52,7 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleVariableDeclarationsCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
 	</file>
@@ -74,23 +68,33 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SpacingCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TrailingWhitespaceCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;EmptyLinesCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;IndentationCharacterCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;OperatorWrapCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;SeparatorWrapCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;SpacingCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;TabForAligningCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;TrailingWhitespaceCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WhitespaceAfterCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WhitespaceAroundCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WrapCheckBase.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;ChecksInfo.hx">
 	</file>
@@ -112,6 +116,8 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;JSONReporter.hx">
 	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;ProgressReporter.hx">
+	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;Reporter.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;XMLReporter.hx">
@@ -121,6 +127,5 @@
 	<file name="src&#x2F;checkstyle&#x2F;TokenTree.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx">
-		<error line="796" column="18" severity="info" message="TODOComment - TODO comment: TODO handle other #directives" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
 	</file>
 </checkstyle>

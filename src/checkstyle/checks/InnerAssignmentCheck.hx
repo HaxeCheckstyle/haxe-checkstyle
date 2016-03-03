@@ -47,11 +47,11 @@ class InnerAssignmentCheck extends Check {
 				false;
 			case Kwd(KwdFunction):
 				false;
+			case Kwd(KwdSwitch):
+				true;
 			case Kwd(KwdReturn):
 				true;
-			case BrOpen:
-				false;
-			case DblDot:
+			case BrOpen, DblDot:
 				false;
 			case POpen:
 				filterPOpen(token.parent);

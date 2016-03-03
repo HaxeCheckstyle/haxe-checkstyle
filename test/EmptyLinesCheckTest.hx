@@ -1,4 +1,4 @@
-import checkstyle.checks.EmptyLinesCheck;
+import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase {
 
@@ -23,7 +23,7 @@ class EmptyLinesCheckTest extends CheckTestCase {
 	public function testEmptyLineAfterSingleLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterSingleLineComment = false;
-		
+
 		var msg = checkMessage(EmptyLinesTests.TEST4, check);
 		assertEquals(msg, 'Empty line not allowed after comment(s)');
 
@@ -86,9 +86,9 @@ class EmptyLinesTests {
 
 	public static inline var TEST4:String =
 	"class Test {
-	
+
 		// comments
-		
+
 		public function new() {
 			var b:Int;
 		}
@@ -96,29 +96,29 @@ class EmptyLinesTests {
 
 	public static inline var TEST5:String =
 	"class Test {
-	
+
 		// comments
-		
+
 		var a:Int;
 	}";
 
 	public static inline var TEST6:String =
 	"class Test {
-	
+
 		/**
 		 *comments
 		 */
-		
+
 		var a:Int;
 	}";
 
 	public static inline var TEST7:String =
 	"class Test {
-	
+
 		/**
 		 *comments
 		 */
-		
+
 		public function new() {
 			var b:Int;
 		}

@@ -11,6 +11,7 @@ class MagicNumberCheck extends Check {
 	public function new() {
 		super();
 		ignoreNumbers = [-1, 0, 1, 2];
+		severity = "IGNORE";
 	}
 
 	override function actualRun() {
@@ -22,8 +23,8 @@ class MagicNumberCheck extends Check {
 				case Const(CFloat(_)): true;
 				default: false;
 			}
-		}
-		, ALL);
+		},
+		ALL);
 
 		for (numberToken in allNumbers) {
 			if (isPosSuppressed(numberToken.pos)) continue;

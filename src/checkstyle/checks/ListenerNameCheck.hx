@@ -39,7 +39,7 @@ class ListenerNameCheck extends Check {
 	}
 
 	function searchLeftCall(e, name):Bool {
-		switch(e.expr){
+		switch (e.expr){
 			case EConst(CIdent(ident)): return ident == name;
 			case EField(e2, field): return field == name;
 			default:return false;

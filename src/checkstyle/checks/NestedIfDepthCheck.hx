@@ -40,8 +40,8 @@ class NestedIfDepthCheck extends Check {
 
 	function scanExprs(exprs:Array<Expr>, depth:Int) {
 		for (e in exprs) {
-			switch(e.expr) {
-				case EIf(_, ifPart,elsePart):
+			switch (e.expr) {
+				case EIf(_, ifPart, elsePart):
 					scanBlock(ifPart, depth + 1);
 					scanBlock(elsePart, depth + 1);
 				default:

@@ -118,11 +118,25 @@ class Checker {
 		ast = parser.parse();
 	}
 
+#if hxtelemetry
+	public function process(files:Array<LintFile>) {
+		var hxt = new hxtelemetry.HxTelemetry();
+		for (reporter in reporters) reporter.start();
+		for (file in files) {
+			run(file);
+			hxt.advance_frame();
+		}
+		hxt.advance_frame();
+		for (reporter in reporters) reporter.finish();
+		hxt.advance_frame();
+	}
+#else
 	public function process(files:Array<LintFile>) {
 		for (reporter in reporters) reporter.start();
 		for (file in files) run(file);
 		for (reporter in reporters) reporter.finish();
 	}
+#end
 
 	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
 	public function run(file:LintFile) {

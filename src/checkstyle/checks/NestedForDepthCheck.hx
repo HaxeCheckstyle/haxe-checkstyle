@@ -40,7 +40,7 @@ class NestedForDepthCheck extends Check {
 
 	function scanExprs(exprs:Array<Expr>, depth:Int) {
 		for (e in exprs) {
-			switch(e.expr) {
+			switch (e.expr) {
 				case EFor(_, expr):
 					scanBlock(expr, depth + 1);
 				case EWhile(_, expr, _):

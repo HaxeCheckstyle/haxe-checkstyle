@@ -40,8 +40,8 @@ class NestedTryDepthCheck extends Check {
 
 	function scanExprs(exprs:Array<Expr>, depth:Int) {
 		for (e in exprs) {
-			switch(e.expr) {
-				case ETry(expr,catches):
+			switch (e.expr) {
+				case ETry(expr, catches):
 					scanBlock(expr, depth + 1);
 					scanCatches(catches, depth + 1);
 				default:

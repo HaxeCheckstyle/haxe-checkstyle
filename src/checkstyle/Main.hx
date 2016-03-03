@@ -6,6 +6,8 @@ import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.Reporter;
+import checkstyle.reporter.ExitCodeReporter;
+import checkstyle.reporter.ProgressReporter;
 import checkstyle.reporter.XMLReporter;
 import haxe.CallStack;
 import haxe.Json;
@@ -54,6 +56,7 @@ class Main {
 	static var XML_PATH:String = "check-style-report.xml";
 	static var JSON_PATH:String = "check-style-report.json";
 	static var STYLE:String = "";
+	static var SHOW_PROGRESS:Bool = false;
 	static var EXIT_CODE:Bool = false;
 	static var exitCode:Int;
 
@@ -80,6 +83,7 @@ class Main {
 			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
 			@doc("Show report") ["-report"] => function() REPORT = true,
+			@doc("Show progress") ["-progress"] => function() SHOW_PROGRESS = true,
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
 			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
@@ -107,6 +111,7 @@ class Main {
 			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
 		checker.addReporter(createReporter());
+		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter());
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
 	}

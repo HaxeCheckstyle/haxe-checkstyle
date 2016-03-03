@@ -10,7 +10,7 @@ class ArrayInstantiationCheck extends Check {
 
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
-			switch(e.expr){
+			switch (e.expr){
 				case ENew({pack:[], name:"Array"}, _):
 					logPos('Bad array instantiation, use the array literal notation [] which is faster', e.pos, Reflect.field(SeverityLevel, severity));
 				default:

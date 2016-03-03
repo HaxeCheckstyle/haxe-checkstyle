@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.whitespace;
 
 import StringTools;
 import checkstyle.LintMessage.SeverityLevel;

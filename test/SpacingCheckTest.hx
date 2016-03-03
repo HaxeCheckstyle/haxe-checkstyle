@@ -1,4 +1,6 @@
-import checkstyle.checks.SpacingCheck;
+package ;
+
+import checkstyle.checks.whitespace.SpacingCheck;
 
 class SpacingCheckTest extends CheckTestCase {
 
