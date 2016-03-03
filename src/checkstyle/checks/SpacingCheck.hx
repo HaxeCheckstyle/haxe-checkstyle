@@ -84,10 +84,9 @@ class SpacingCheck extends Check {
 		return (new Printer()).printUnop(uo);
 	}
 
-	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr, offset:Int = 0) {
-		var e2Pos = e2.pos.min + offset;
-		if (e2Pos - e1.pos.min < '$name ('.length) {
-			logRange('No space between $name and (', e1.pos.min, e2Pos, Reflect.field(SeverityLevel, severity));
+	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr) {
+		if (e2.pos.min - e1.pos.min < '$name ('.length) {
+			logRange('No space between $name and (', e1.pos.min, e2.pos.min, Reflect.field(SeverityLevel, severity));
 		}
 	}
 }
