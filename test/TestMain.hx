@@ -46,6 +46,7 @@ class TestMain {
 		runner.add(new VariableInitialisationCheckTest());
 		runner.add(new AvoidInlineConditionalsCheckTest());
 		runner.add(new SimplifyBooleanExpressionCheckTest());
+		runner.add(new MultipleVariableDeclarationsCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);
