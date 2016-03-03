@@ -33,7 +33,7 @@ class HiddenFieldCheck extends Check {
 		for (clazz in classes) {
 			if (isPosSuppressed(clazz.pos)) continue;
 			var memberNames:Array<String> = collectMemberNames(clazz);
-			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], FIRST, MAX_FIELD_LEVEL);
+			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], FIRST);
 			for (method in methods) {
 				if (isPosSuppressed(method.pos)) continue;
 				checkMethod(method, memberNames);
@@ -58,6 +58,7 @@ class HiddenFieldCheck extends Check {
 
 		checkParams(method, memberNames);
 		checkVars(method, memberNames);
+		checkForLoops(method, memberNames);
 	}
 
 	function isSetterFunction(methodName:TokenTree, memberNames:Array<String>):Bool {
@@ -85,30 +86,36 @@ class HiddenFieldCheck extends Check {
 		}
 		var paramList:Array<TokenTree> = paramDef[0].childs;
 		for (param in paramList) {
-			switch (param.tok) {
-				case Const(CIdent(name)):
-					if (memberNames.indexOf(name) >= 0) {
-						logPos('Parameter definition of "$name" masks member of same name', param.pos, Reflect.field(SeverityLevel, severity));
-					}
-				default:
-			}
+			checkName(param, memberNames, "Parameter definition");
 		}
 	}
 
 	function checkVars(method:TokenTree, memberNames:Array<String>) {
 		var vars:Array<TokenTree> = method.filter([Kwd(KwdVar)], ALL);
 		for (v in vars) {
-			if (!v.hasChilds()) {
-				throw "var has invalid structure!";
-			}
-			switch (v.childs[0].tok) {
-				case Const(CIdent(name)):
-					if (memberNames.indexOf(name) >= 0) {
-						logPos('Variable definition of "$name" masks member of same name', v.pos, Reflect.field(SeverityLevel, severity));
-					}
-				default:
-					throw "var has invalid structure!";
-			}
+			if (!v.hasChilds()) throw "var has invalid structure!";
+			checkName(v.childs[0], memberNames, "Variable definition");
+		}
+	}
+
+	function checkForLoops(method:TokenTree, memberNames:Array<String>) {
+		var fors:Array<TokenTree> = method.filter([Kwd(KwdFor)], ALL);
+		for (f in fors) {
+			var popens:Array<TokenTree> = f.filter([POpen], FIRST, 2);
+			if (popens.length <= 0) continue;
+			var pOpen:TokenTree = popens[0];
+			if (!pOpen.hasChilds()) continue;
+			checkName(pOpen.childs[0], memberNames, "For loop definition");
+		}
+	}
+
+	function checkName(token:TokenTree, memberNames:Array<String>, logText:String) {
+		switch (token.tok) {
+			case Const(CIdent(name)):
+				if (memberNames.indexOf(name) >= 0) {
+					logPos('$logText of "$name" masks member of same name', token.pos, Reflect.field(SeverityLevel, severity));
+				}
+			default:
 		}
 	}
 
@@ -122,12 +129,11 @@ class HiddenFieldCheck extends Check {
 		//          |- Kwd(KwdFunction)
 		var varFields:Array<TokenTree> = clazz.filter([Kwd(KwdVar)], FIRST, MAX_FIELD_LEVEL);
 		for (member in varFields) {
-			if (!member.hasChilds()) throw "var field has invalid structure!";
+			if (!member.hasChilds()) continue;
 			switch (member.childs[0].tok) {
 				case Const(CIdent(name)):
 					memberNames.push(name);
 				default:
-					throw "var field has invalid structure!";
 			}
 		}
 		return memberNames;

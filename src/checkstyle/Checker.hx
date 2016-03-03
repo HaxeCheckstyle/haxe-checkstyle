@@ -123,10 +123,10 @@ class Checker {
 	public function process(files:Array<LintFile>) {
 		var hxt = new hxtelemetry.HxTelemetry();
 		for (reporter in reporters) reporter.start();
-		for (file in files) {
-			loadFileContent(file);
-			run(file);
-			unloadFileContent(file);
+		for (lintFile in files) {
+			loadFileContent(lintFile);
+			run(lintFile);
+			unloadFileContent(lintFile);
 			hxt.advance_frame();
 		}
 		hxt.advance_frame();
@@ -136,10 +136,10 @@ class Checker {
 #else
 	public function process(files:Array<LintFile>) {
 		for (reporter in reporters) reporter.start();
-		for (file in files) {
-			loadFileContent(file);
-			run(file);
-			unloadFileContent(file);
+		for (lintFile in files) {
+			loadFileContent(lintFile);
+			run(lintFile);
+			unloadFileContent(lintFile);
 		}
 		for (reporter in reporters) reporter.finish();
 	}
