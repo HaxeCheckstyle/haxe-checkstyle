@@ -31,7 +31,7 @@ class NestedIfDepthCheck extends Check {
 			warnNestedIfDepth(depth, e.pos);
 			return;
 		}
-		switch(e.expr) {
+		switch (e.expr) {
 			case EBlock(exprs):
 				scanExprs(exprs, depth);
 			default:

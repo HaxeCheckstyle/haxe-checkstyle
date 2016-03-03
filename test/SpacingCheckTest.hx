@@ -1,35 +1,48 @@
-package ;
-
 import checkstyle.checks.SpacingCheck;
 
 class SpacingCheckTest extends CheckTestCase {
 
 	public function testIf() {
-		var msg = checkMessage(SpacingTests.TEST1, new SpacingCheck());
-		assertEquals(msg, 'No space between if and condition');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST1a, 'No space between if and (');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST1b, '');
 	}
 
 	public function testBinaryOperator() {
-		var msg = checkMessage(SpacingTests.TEST2, new SpacingCheck());
-		assertEquals(msg, 'No space around +');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST2, 'No space around +');
 	}
 
 	public function testUnaryOperator() {
-		var msg = checkMessage(SpacingTests.TEST3, new SpacingCheck());
-		assertEquals(msg, 'Space around ++');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST3, 'Space around ++');
 	}
 
 	public function testFor() {
-		var msg = checkMessage(SpacingTests.TEST4, new SpacingCheck());
-		assertEquals(msg, '');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST4a, 'No space between for and (');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST4b, '');
+	}
+
+	public function testWhile() {
+		assertMsg(new SpacingCheck(), SpacingTests.TEST5a, 'No space between while and (');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST5b, '');
+	}
+
+	public function testSwitch() {
+		assertMsg(new SpacingCheck(), SpacingTests.TEST6a, 'No space between switch and (');
+		assertMsg(new SpacingCheck(), SpacingTests.TEST6b, '');
 	}
 }
 
 class SpacingTests {
-	public static inline var TEST1:String = "
+	public static inline var TEST1a:String = "
 	class Test {
 		public function test() {
 			if(true) {}
+		}
+	}";
+
+	public static inline var TEST1b:String = "
+	class Test {
+		public function test() {
+			if (true) {}
 		}
 	}";
 
@@ -41,17 +54,60 @@ class SpacingTests {
 	}";
 
 	public static inline var TEST3:String =
-"class Test {
+	"class Test {
 		public function test() {
 			var a = a ++;
 		}
 	}";
 
-	public static inline var TEST4:String =
+	public static inline var TEST4a:String =
 	"class Test {
 		public function test() {
 			for(i in 0...10) {
 			
+			}
+		}
+	}";
+
+	public static inline var TEST4b:String =
+	"class Test {
+		public function test() {
+			for (i in 0...10) {
+			
+			}
+		}
+	}";
+
+	public static inline var TEST5a:String =
+	"class Test {
+		public function test() {
+			while(true) {}
+		}
+	}";
+
+	public static inline var TEST5b:String =
+	"class Test {
+		public function test() {
+			while (true) {}
+		}
+	}";
+
+	public static inline var TEST6a:String =
+	"class Test {
+		public function test() {
+			switch(0) {
+				case 1:
+				case _:
+			}
+		}
+	}";
+
+	public static inline var TEST6b:String =
+	"class Test {
+		public function test() {
+			switch (0) {
+				case 1:
+				case _:
 			}
 		}
 	}";

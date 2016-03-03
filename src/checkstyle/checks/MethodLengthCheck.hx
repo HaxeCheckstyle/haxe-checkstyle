@@ -26,14 +26,14 @@ class MethodLengthCheck extends Check {
 	}
 
 	function searchField(f:Field, _) {
-		switch(f.kind){
+		switch (f.kind){
 			case FFun(ff):
 				checkMethod(f);
 			default:
 		}
 
 		ExprUtils.walkField(f, function(e) {
-			switch(e.expr){
+			switch (e.expr){
 				case EFunction(name, ff):
 					checkFunction(e);
 				default:
@@ -53,7 +53,7 @@ class MethodLengthCheck extends Check {
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
 		var fname = "(anonymous)";
-		switch(f.expr){
+		switch (f.expr){
 			case EFunction(name, ff):
 				if (name != null) fname = name;
 			default: throw "EFunction only";

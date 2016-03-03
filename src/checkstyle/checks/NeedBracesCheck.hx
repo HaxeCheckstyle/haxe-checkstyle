@@ -32,7 +32,7 @@ class NeedBracesCheck extends Check {
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr) {
+			switch (e.expr) {
 				case EFor(it, expr):
 					if (!hasToken(FOR)) return;
 					var itLine:LinePos = checker.getLinePos(it.pos.max);

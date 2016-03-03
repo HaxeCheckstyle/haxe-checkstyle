@@ -11,7 +11,7 @@ class ERegInstantiationCheck extends Check {
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr){
+			switch (e.expr){
 				case ENew(
 					{pack:[], name:"EReg"},
 					[{expr:EConst(CString(re)), pos:_}, {expr:EConst(CString(opt)), pos:_}]

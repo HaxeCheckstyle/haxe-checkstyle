@@ -149,7 +149,7 @@ class Main {
 	}
 
 	static function createReporter():IReporter {
-		return switch(REPORT_TYPE) {
+		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(XML_PATH, STYLE);
 			case "json": new JSONReporter(JSON_PATH);
 			case "text": new Reporter();

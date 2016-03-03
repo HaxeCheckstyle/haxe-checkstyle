@@ -112,7 +112,7 @@ class RightCurlyCheck extends Check {
 			}
 			if (pos.max > maxPos) maxPos = pos.max;
 			if (!hasToken(OBJECT_DECL)) return;
-			switch(t) {
+			switch (t) {
 				case TAnonymous(_):
 					checkPos(pos, isSingleLine(pos.min, pos.max));
 				default:
@@ -130,7 +130,7 @@ class RightCurlyCheck extends Check {
 	function walkFile() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr) {
+			switch (e.expr) {
 				case EObjectDecl(fields):
 					if (!hasToken(OBJECT_DECL)) return;
 					if (fields.length <= 0) return;
@@ -187,7 +187,7 @@ class RightCurlyCheck extends Check {
 		var bracePos:Int = checker.file.content.lastIndexOf("}", e.pos.max);
 		if (bracePos < 0 || bracePos < e.pos.min) return;
 
-		switch(e.expr) {
+		switch (e.expr) {
 			case EBlock(_), EObjectDecl(_):
 				var linePos:Int = checker.getLinePos(e.pos.max).line;
 				var line:String = checker.lines[linePos];

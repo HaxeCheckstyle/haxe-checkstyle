@@ -30,7 +30,7 @@ class BlockFormatCheck extends Check {
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr){
+			switch (e.expr){
 				case EBlock([]) | EObjectDecl([]):
 					checkEmptyBlock(e);
 				case EBlock(_) | EObjectDecl(_):
