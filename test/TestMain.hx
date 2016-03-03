@@ -28,6 +28,7 @@ class TestMain {
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new MethodNameCheckTest());
 		runner.add(new MultipleStringLiteralsCheckTest());
+		runner.add(new MultipleVariableDeclarationsCheckTest());
 		runner.add(new NeedBracesCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
