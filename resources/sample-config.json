@@ -236,6 +236,12 @@
 			}
 		},
 		{
+			"type": "MultipleVariableDeclarations",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "NeedBraces",
 			"props": {
 				"severity": "WARNING",
