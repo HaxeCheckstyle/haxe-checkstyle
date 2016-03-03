@@ -7,7 +7,7 @@
 --next
 
 -cp resources
--cp checkstyle
+-cp src
 -lib haxeparser
 -lib compiletime
 -lib hxargs

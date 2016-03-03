@@ -122,9 +122,11 @@ class Main {
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
+		// use Type.getInstanceFields to make it work in c++ / profiler
+		var checkFields:Array<String> = Type.getInstanceFields(Type.getClass(check));
 		for (prop in props) {
 			var val = Reflect.field(checkConf.props, prop);
-			if (!Reflect.hasField(check, prop)) {
+			if (checkFields.indexOf(prop) < 0) {
 				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
 			}
 			Reflect.setField(check, prop, val);
