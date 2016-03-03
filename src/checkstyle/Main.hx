@@ -97,8 +97,7 @@ class Main {
 
 		var toProcess:Array<LintFile> = [];
 		for (file in files) {
-			var code = File.getContent(file);
-			toProcess.push({name:file, content:code});
+			toProcess.push({name:file, content:null});
 		}
 
 		if (configPath == null) addAllChecks();

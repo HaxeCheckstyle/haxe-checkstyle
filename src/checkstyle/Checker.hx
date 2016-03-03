@@ -7,6 +7,7 @@ import haxeparser.HaxeParser;
 import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
+import sys.io.File;
 
 import checkstyle.TokenTree;
 import checkstyle.TokenTreeBuilder;
@@ -123,7 +124,9 @@ class Checker {
 		var hxt = new hxtelemetry.HxTelemetry();
 		for (reporter in reporters) reporter.start();
 		for (file in files) {
+			loadFileContent(file);
 			run(file);
+			unloadFileContent(file);
 			hxt.advance_frame();
 		}
 		hxt.advance_frame();
@@ -133,10 +136,26 @@ class Checker {
 #else
 	public function process(files:Array<LintFile>) {
 		for (reporter in reporters) reporter.start();
-		for (file in files) run(file);
+		for (file in files) {
+			loadFileContent(file);
+			run(file);
+			unloadFileContent(file);
+		}
 		for (reporter in reporters) reporter.finish();
 	}
 #end
+
+	function loadFileContent(lintFile:LintFile) {
+		// unittests set content before running Checker
+		// real checks load content here
+		if (lintFile.content == null) {
+			lintFile.content = File.getContent(lintFile.name);
+		}
+	}
+
+	function unloadFileContent(lintFile:LintFile) {
+		lintFile.content = null;
+	}
 
 	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
 	public function run(file:LintFile) {
