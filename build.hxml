@@ -5,8 +5,7 @@
 
 --next
 
--cp resources
--cp checkstyle
+-cp src
 -lib haxeparser
 -lib compiletime
 -lib hxargs
@@ -16,11 +15,13 @@
 -main checkstyle.Main
 -D checkstyle
 -neko run.n
--cmd neko run -s checkstyle -p resources/static-analysis.xml -report
 
 --next
 -main checkstyle.Main
 -neko run.n
+
+--next
+-cmd neko run -s src -p resources/static-analysis.xml -report
 
 --next
 -cp test

@@ -1,5 +1,6 @@
 {
 	"name": "checkstyle",
+	"classPath": "src",
 	"license": "MIT",
 	"tags": [
 		"checkstyle",
