@@ -43,7 +43,7 @@ class JSONReporter implements IReporter {
 	}
 
 	static function severityString(s:SeverityLevel):String {
-		switch(s) {
+		switch (s) {
 			case INFO: return "info";
 			case WARNING: return "warning";
 			case ERROR: return "error";

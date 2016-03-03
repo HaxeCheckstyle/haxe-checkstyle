@@ -16,7 +16,7 @@ class LocalVariableNameCheck extends NameCheckBase {
 	override function actualRun() {
 		formatRE = new EReg (format, "");
 		ExprUtils.walkFile(checker.ast, function(e) {
-			switch(e.expr) {
+			switch (e.expr) {
 				case EVars(vars):
 					if (ignoreExtern && isPosExtern(e.pos)) return;
 					if (isPosSuppressed(e.pos)) return;

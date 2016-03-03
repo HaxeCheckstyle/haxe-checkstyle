@@ -15,7 +15,7 @@ class ExprUtils {
 	}
 
 	public static function walkTypeDecl(td:TypeDecl, cb:Expr -> Void) {
-		switch(td.decl){
+		switch (td.decl){
 		case EClass(d):
 			walkClass(d, cb);
 		case EEnum(d):
@@ -43,7 +43,7 @@ class ExprUtils {
 	public static function walkClass(d:Definition<ClassFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
-			switch(f) {
+			switch (f) {
 				case HExtends(t) | HImplements(t): walkTypePath(t, cb);
 				default:
 			}
@@ -64,7 +64,7 @@ class ExprUtils {
 	public static function walkAbstract(d:Definition<AbstractFlag, Array<Field>>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
-			switch(f) {
+			switch (f) {
 				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, cb);
 				default:
 			}
@@ -82,7 +82,7 @@ class ExprUtils {
 	public static function walkTypePath(tp:TypePath, cb:Expr -> Void) {
 		if (tp.params != null) {
 			for (p in tp.params) {
-				switch(p){
+				switch (p){
 					case TPType(t): walkComplexType(t, cb);
 					case TPExpr(e): walkExpr(e, cb);
 				}
@@ -122,7 +122,7 @@ class ExprUtils {
 	}
 
 	public static function walkField(f:Field, cb:Expr -> Void) {
-		switch(f.kind){
+		switch (f.kind){
 			case FVar(t, e):
 				if (t != null) walkComplexType(t, cb);
 				if (e != null) walkExpr(e, cb);
