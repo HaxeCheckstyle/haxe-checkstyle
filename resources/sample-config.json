@@ -27,10 +27,15 @@
 			}
 		},
 		{
+			"type": "AvoidInlineConditionals",
+			"props": {
+				"severity": "WARNING"
+			}
+		},
+		{
 			"type": "AvoidStarImport",
 			"props": {
-				"severity": "INFO",
-				"allowStarImports": false
+				"severity": "INFO"
 			}
 		},
 		{
@@ -260,6 +265,30 @@
 			}
 		},
 		{
+			"type": "OperatorWrap",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+						  "=", "+", "-", "*", "/", "%", ">", "<",
+						  ">=", "<=", "==", "!=", "&", "|", "^", "&&",
+						  "||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=",
+						  "%=", "<<=", ">>=", ">>>=", "|=", "&=", "^=", "...",
+						  "=>", "++", "--"
+				]
+			}
+		},
+		{
+			"type": "OperatorWrap",
+			"props": {
+				"severity": "WARNING",
+				"option": "nl",
+				"tokens": [
+							"!"
+				]
+			}
+		},
+		{
 			"type": "ParameterName",
 			"props": {
 				"severity": "ERROR",
@@ -308,6 +337,32 @@
 					"TRY",
 					"CATCH"
 				]
+			}
+		},
+		{
+			"type": "SeparatorWrap",
+			"props": {
+				"severity": "WARNING",
+				"option": "eol",
+				"tokens": [
+							","
+				]
+			}
+		},
+		{
+			"type": "SeparatorWrap",
+			"props": {
+				"severity": "WARNING",
+				"option": "nl",
+				"tokens": [
+							"."
+				]
+			}
+        },
+		{
+			"type": "SimplifyBooleanExpression",
+			"props": {
+				"severity": "INFO"
 			}
 		},
 		{
@@ -370,6 +425,25 @@
 			"type": "VariableInitialisation",
 			"props": {
 				"severity": "ERROR"
+			}
+		},
+		{
+			"type": "WhitespaceAfter",
+			"props": {
+				"severity": "WARNING",
+				"tokens": [ ",", ";" ]
+			}
+		},
+		{
+			"type": "WhitespaceAround",
+			"props": {
+				"severity": "WARNING",
+				"tokens": [ 
+					"=", "+", "-", "*", "/", "%", ">", "<",
+					">=", "<=", "==", "!=", "&", "|", "^", "&&",
+					"||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=",
+					"%=", "<<=", ">>=", ">>>=", "|=", "&=", "^="
+				]
 			}
 		}
 	]

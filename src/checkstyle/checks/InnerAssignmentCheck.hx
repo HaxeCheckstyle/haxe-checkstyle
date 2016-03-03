@@ -14,7 +14,6 @@ class InnerAssignmentCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-
 		var allAssignments:Array<TokenTree> = root.filter([
 				Binop(OpAssign),
 				Binop(OpAssignOp(OpAdd)),

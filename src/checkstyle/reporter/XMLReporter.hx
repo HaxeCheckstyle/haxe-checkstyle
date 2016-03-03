@@ -81,7 +81,7 @@ class XMLReporter implements IReporter {
 	}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch(s) {
+		return switch (s) {
 			case INFO: return "info";
 			case WARNING: return "warning";
 			case ERROR: return "error";

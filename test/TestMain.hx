@@ -1,5 +1,3 @@
-package ;
-
 class TestMain {
 
 	public function new() {
@@ -8,6 +6,7 @@ class TestMain {
 		runner.add(new AccessOrderCheckTest());
 		runner.add(new AnonymousCheckTest());
 		runner.add(new ArrayInstantiationCheckTest());
+		runner.add(new AvoidInlineConditionalsCheckTest());
 		runner.add(new AvoidStarImportCheckTest());
 		runner.add(new ConstantNameCheckTest());
 		runner.add(new CyclomaticComplexityCheckTest());
@@ -39,6 +38,7 @@ class TestMain {
 		runner.add(new ReturnCheckTest());
 		runner.add(new RightCurlyCheckTest());
 		runner.add(new SeparatorWrapCheckTest());
+		runner.add(new SimplifyBooleanExpressionCheckTest());
 		runner.add(new SpacingCheckTest());
 		runner.add(new TabForAligningCheckTest());
 		runner.add(new TODOCommentCheckTest());

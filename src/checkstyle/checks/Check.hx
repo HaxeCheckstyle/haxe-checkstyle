@@ -20,7 +20,14 @@ class Check {
 	public function run(checker:Checker):Array<LintMessage> {
 		this.checker = checker;
 		messages = [];
-		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) actualRun();
+		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) {
+			try {
+				actualRun();
+			}
+			catch(e:String) {
+				//exception
+			}
+		}
 		return messages;
 	}
 
@@ -29,8 +36,12 @@ class Check {
 	}
 
 	public function logPos(msg:String, pos:Position, sev:SeverityLevel) {
-		var lp = checker.getLinePos(pos.min);
-		var length = pos.max - pos.min;
+		logRange(msg, pos.min, pos.max, sev);
+	}
+
+	public function logRange(msg:String, startPos:Int, endPos:Int, sev:SeverityLevel) {
+		var lp = checker.getLinePos(startPos);
+		var length = endPos - startPos;
 		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
 	}
 
@@ -52,6 +63,7 @@ class Check {
 		return moduleName;
 	}
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function forEachField(cb:Field -> FieldParent -> Void) {
 		for (td in checker.ast.decls) {
 			var fields:Array<Field> = null;

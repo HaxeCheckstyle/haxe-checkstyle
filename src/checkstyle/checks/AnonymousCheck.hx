@@ -15,7 +15,7 @@ class AnonymousCheck extends Check {
 
 	function checkField(f:Field, _) {
 		if (f.name == "new") return;
-		switch(f.kind) {
+		switch (f.kind) {
 			case FVar(TAnonymous(fields), val):
 				error(f.name, f.pos);
 			default:
@@ -24,11 +24,11 @@ class AnonymousCheck extends Check {
 
 	function checkLocalVars() {
 		ExprUtils.walkFile(checker.ast, function(e) {
-			switch(e.expr){
+			switch (e.expr){
 				case EVars(vars):
 					for (v in vars) {
 						if (v.type == null) continue;
-						switch(v.type) {
+						switch (v.type) {
 							case TAnonymous(fields):
 								error(v.name, e.pos);
 							default:

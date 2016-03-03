@@ -7,7 +7,7 @@ class Reporter implements IReporter {
 	public function new() {}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch(s){
+		return switch (s){
 			case INFO: return "Info";
 			case WARNING: return "Warning";
 			case ERROR: return "Error";
@@ -23,6 +23,7 @@ class Reporter implements IReporter {
 
 	public function fileFinish(f:LintFile) {}
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	public function addMessage(m:LintMessage) {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);

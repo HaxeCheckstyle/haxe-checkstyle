@@ -136,7 +136,7 @@ class ExprUtils {
 
 	public static function walkComplexType(t:ComplexType, cb:Expr -> Void) {
 		if (t == null) return;
-		switch(t){
+		switch (t){
 			case TPath(p): walkTypePath(p, cb);
 			case TFunction(args, ret):
 				for (a in args) walkComplexType(a, cb);
@@ -156,7 +156,7 @@ class ExprUtils {
 	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	public static function walkExpr(e:Expr, cb:Expr -> Void) {
 		cb(e);
-		switch(e.expr){
+		switch (e.expr){
 			case EConst(c):
 			case EArray(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
 			case EBinop(op, e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);

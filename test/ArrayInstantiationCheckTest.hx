@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.ArrayInstantiationCheck;
 
 class ArrayInstantiationCheckTest extends CheckTestCase {

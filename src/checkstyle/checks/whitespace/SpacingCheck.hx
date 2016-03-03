@@ -1,5 +1,6 @@
 package checkstyle.checks.whitespace;
 
+import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
@@ -13,6 +14,9 @@ class SpacingCheck extends Check {
 	public var spaceAroundBinop:Bool;
 	public var noSpaceAroundUnop:Bool;
 	public var spaceIfCondition:Bool;
+	public var spaceForLoop:Bool;
+	public var spaceWhileLoop:Bool;
+	public var spaceSwitchCase:Bool;
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -20,6 +24,9 @@ class SpacingCheck extends Check {
 		spaceAroundBinop = true;
 		noSpaceAroundUnop = true;
 		spaceIfCondition = true;
+		spaceForLoop = true;
+		spaceWhileLoop = true;
+		spaceSwitchCase = true;
 		ignoreRangeOperator = true;
 	}
 
@@ -32,7 +39,7 @@ class SpacingCheck extends Check {
 				return;
 			}
 
-			switch(e.expr) {
+			switch (e.expr) {
 				case EBinop(bo, l, r) if (spaceAroundBinop):
 					if (ignoreRangeOperator && binopString(bo) == "...") return;
 					if (r.pos.min - l.pos.max < binopSize(bo) + 2) logPos('No space around ${binopString(bo)}', e.pos, Reflect.field(SeverityLevel, severity));
@@ -41,8 +48,19 @@ class SpacingCheck extends Check {
 					if (post) dist = e.pos.max - e2.pos.max;
 					else dist = e2.pos.min - e.pos.min;
 					if (dist > unopSize(uo)) logPos('Space around ${unopString(uo)}', e.pos, Reflect.field(SeverityLevel, severity));
-				case EIf(econd, eif, eelse) if (spaceIfCondition):
-					if (econd.pos.min - e.pos.min < "if (".length) logPos('No space between if and condition', e.pos, Reflect.field(SeverityLevel, severity));
+				case EIf(econd, _, _) if (spaceIfCondition):
+					checkSpaceBetweenExpressions('if', e, econd);
+				case EFor(it, _) if (spaceForLoop):
+					checkSpaceBetweenExpressions('for', e, it);
+				case EWhile(econd, _, true) if (spaceWhileLoop):
+					checkSpaceBetweenExpressions('while', e, econd);
+				case ESwitch(eswitch, _, _) if (spaceSwitchCase):
+					var prevExprUntilSwitch = checker.file.content.substring(lastExpr.pos.min, eswitch.pos.min + 1);
+					var switchPos = prevExprUntilSwitch.lastIndexOf('switch(');
+					if (switchPos > -1) {
+						var fileSwitchPos = lastExpr.pos.min + switchPos;
+						logRange('No space between switch and (', fileSwitchPos, fileSwitchPos + 'switch('.length, Reflect.field(SeverityLevel, severity));
+					}
 				default:
 			}
 
@@ -64,5 +82,11 @@ class SpacingCheck extends Check {
 
 	function unopString(uo:Unop):String {
 		return (new Printer()).printUnop(uo);
+	}
+
+	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr) {
+		if (e2.pos.min - e1.pos.min < '$name ('.length) {
+			logRange('No space between $name and (', e1.pos.min, e2.pos.min, Reflect.field(SeverityLevel, severity));
+		}
 	}
 }

@@ -7,23 +7,12 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for .* import and using directives")
 class AvoidStarImportCheck extends Check {
 
-	public var allowStarImports:Bool;
-
-	public function new() {
-		super();
-		allowStarImports = false;
-	}
-
 	override function actualRun() {
-		if (allowStarImports) return;
 		var root:TokenTree = checker.getTokenTree();
-
 		checkImports(root.filter([Kwd(KwdImport)], ALL));
 	}
 
 	function checkImports(importEntries:Array<TokenTree>) {
-		if (allowStarImports) return;
-
 		for (entry in importEntries) {
 			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;

@@ -188,7 +188,7 @@ class TokenTreeBuilder {
 		if (stream.is(POpen)) walkPOpen(name);
 		var typeParent:TokenTree = name;
 		var typeChild:TokenTree;
-		while(true) {
+		while (true) {
 			switch (stream.token()) {
 				case BrOpen: break;
 				case Const(CIdent("from")), Const(CIdent("to")):
@@ -444,7 +444,7 @@ class TokenTreeBuilder {
 	function walkLtGt(parent:TokenTree) {
 		var ltTok:TokenTree = stream.consumeTokenDef(Binop(OpLt));
 		parent.addChild(ltTok);
-		while(true) {
+		while (true) {
 			switch (stream.token()) {
 				case Comma:
 					var comma:TokenTree = stream.consumeTokenDef(Comma);
@@ -797,7 +797,7 @@ class TokenTreeBuilder {
 		var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 		caseTok.addChild(dblDot);
 		var newChild:TokenTree = null;
-		while(true) {
+		while (true) {
 			switch (stream.token()) {
 				case Kwd(KwdCase), Kwd(KwdDefault), BrClose:
 					return;
