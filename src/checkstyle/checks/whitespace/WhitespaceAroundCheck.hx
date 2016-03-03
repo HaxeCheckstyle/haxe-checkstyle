@@ -148,7 +148,7 @@ class WhitespaceAroundCheck extends Check {
 		switch (token.tok) {
 			case Binop(OpMult), Dot:
 				var parent:TokenTree = token.parent;
-				while(parent != null) {
+				while (parent != null) {
 					switch (parent.tok) {
 						case Kwd(KwdMacro):
 						case Kwd(KwdExtern):

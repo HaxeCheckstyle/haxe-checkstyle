@@ -78,7 +78,7 @@ class RightCurlyCheck extends Check {
 	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
-		switch(token.tok) {
+		switch (token.tok) {
 			case Kwd(KwdClass):
 				return !hasToken(CLASS_DEF);
 			case Kwd(KwdInterface):

@@ -86,7 +86,7 @@ class LeftCurlyCheck extends Check {
 	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function findParentToken(token:TokenTree):ParentToken {
 		if (token == null) return {token:token, hasToken: false};
-		switch(token.tok) {
+		switch (token.tok) {
 			case Kwd(KwdClass):
 				return {token: token, hasToken: hasToken(CLASS_DEF)};
 			case Kwd(KwdInterface):

@@ -619,7 +619,7 @@ class TokenTreeBuilder {
 		parent.addChild(bkOpen);
 		var tempStore:Array<TokenTree> = [];
 		while (true) {
-			switch(stream.token()) {
+			switch (stream.token()) {
 				case POpen:
 					for (stored in tempStore) bkOpen.addChild(stored);
 					tempStore = [];
