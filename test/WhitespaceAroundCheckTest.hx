@@ -10,6 +10,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAroundTests.ISSUE_70, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_71, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_72, '');
+		assertMsg(check, WhitespaceAroundTests.ISSUE_77, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_80, '');
 	}
 
@@ -118,6 +119,19 @@ class WhitespaceAroundTests {
 
 	public static inline var ISSUE_72:String = "
 	abstract Test<T>(Array<T>) {}
+	";
+
+	public static inline var ISSUE_77:String = "
+	// comment
+	class Test // comment
+	{ // comment
+		function foo() // comment
+		{ // comment
+			switch ('Test') // comment
+			{ // comment
+			} // comment
+		} // comment
+	} // comment
 	";
 
 	public static inline var ISSUE_80:String = "
