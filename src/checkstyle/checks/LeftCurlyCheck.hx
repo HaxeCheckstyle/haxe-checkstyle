@@ -116,7 +116,7 @@ class LeftCurlyCheck extends Check {
 				if (pos != td.pos) firstPos = pos;
 			}
 			if (!hasToken(OBJECT_DECL)) return;
-			switch(t) {
+			switch (t) {
 				case TAnonymous(_):
 					checkLinesBetween(pos.min, pos.max, pos);
 				default:
@@ -130,7 +130,7 @@ class LeftCurlyCheck extends Check {
 	function walkFile() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr) {
+			switch (e.expr) {
 				case EObjectDecl(fields):
 					if (!hasToken(OBJECT_DECL)) return;
 					var linePos:LinePos = checker.getLinePos(e.pos.min);
@@ -210,7 +210,7 @@ class LeftCurlyCheck extends Check {
 		if ((e == null) || (e.expr == null)) return;
 		if (checker.file.content.charAt(e.pos.min) != "{") return;
 
-		switch(e.expr) {
+		switch (e.expr) {
 			case EBlock(_):
 				var linePos:LinePos = checker.getLinePos(e.pos.min);
 				var line:String = checker.lines[linePos.line];

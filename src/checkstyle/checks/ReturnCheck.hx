@@ -27,7 +27,7 @@ class ReturnCheck extends Check {
 
 	function checkField(f:Field) {
 		var noReturn = false;
-		switch(f.kind) {
+		switch (f.kind) {
 			case FFun(fun):
 				noReturn = (fun.ret == null);
 				if (enforceReturnType && noReturn) {
@@ -67,7 +67,7 @@ class ReturnCheck extends Check {
 		// function has a return, no need to dig deeper
 		// -> compiler will complain if types do not match
 		if (!noReturn) return;
-		switch(e.expr) {
+		switch (e.expr) {
 			case EBlock(exprs):
 				for (expr in exprs) {
 					walkExpr(expr, noReturn, name, pos);

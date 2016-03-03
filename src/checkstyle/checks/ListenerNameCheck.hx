@@ -26,7 +26,7 @@ class ListenerNameCheck extends Check {
 	override public function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e) {
 			if (isPosSuppressed(e.pos)) return;
-			switch(e.expr){
+			switch (e.expr){
 				case ECall(e, params):
 					searchCall(e, params);
 				default:
@@ -49,7 +49,7 @@ class ListenerNameCheck extends Check {
 	function searchCallParam(p:Array<Expr>) {
 		if (p.length < 2) return;
 		var listener = p[1];
-		switch(listener.expr){
+		switch (listener.expr){
 			case EConst(CIdent(ident)):
 				checkListenerName(ident, listener.pos);
 			default:

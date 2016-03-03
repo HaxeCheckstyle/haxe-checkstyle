@@ -39,7 +39,7 @@ class SpacingCheck extends Check {
 				return;
 			}
 
-			switch(e.expr) {
+			switch (e.expr) {
 				case EBinop(bo, l, r) if (spaceAroundBinop):
 					if (ignoreRangeOperator && binopString(bo) == "...") return;
 					if (r.pos.min - l.pos.max < binopSize(bo) + 2) logPos('No space around ${binopString(bo)}', e.pos, Reflect.field(SeverityLevel, severity));

@@ -11,7 +11,7 @@ class TypeCheck extends Check {
 	override function actualRun() {
 		forEachField(function(f, _) {
 			if (f.name == "new") return;
-			switch(f.kind) {
+			switch (f.kind) {
 				case FVar(t, e):
 					if (t == null) error(f.name, f.pos);
 				case _:

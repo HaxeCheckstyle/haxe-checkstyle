@@ -3,249 +3,122 @@
 	<file name="src&#x2F;checkstyle&#x2F;Checker.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx">
-		<error line="65" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx">
-		<error line="22" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx"/>
-		<error line="38" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx"/>
-		<error line="35" column="7" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
-		<error line="17" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx">
-		<error line="17" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx">
-		<error line="49" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx">
-		<error line="79" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="170" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="168" column="6" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="201" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="199" column="6" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="219" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
-		<error line="217" column="5" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
-		<error line="39" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
-		<error line="56" column="9" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx"/>
-		<error line="58" column="75" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
-		<error line="23" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;DynamicCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
-		<error line="21" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx">
-		<error line="57" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx"/>
-		<error line="72" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx"/>
-		<error line="94" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx"/>
-		<error line="111" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx"/>
-		<error line="131" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx">
-		<error line="59" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx"/>
-		<error line="78" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
-		<error line="95" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
-		<error line="107" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
-		<error line="123" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
-		<error line="174" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
-		<error line="189" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
-		<error line="219" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
-		<error line="33" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx"/>
-		<error line="46" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx"/>
-		<error line="56" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
-		<error line="27" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx"/>
-		<error line="41" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx"/>
-		<error line="53" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
-		<error line="48" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx"/>
-		<error line="60" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx"/>
-		<error line="71" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
-		<error line="33" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx"/>
-		<error line="40" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx"/>
-		<error line="60" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
-		<error line="41" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx"/>
-		<error line="51" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
-		<error line="33" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx"/>
-		<error line="50" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx"/>
-		<error line="72" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
-		<error line="46" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx">
-		<error line="59" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx"/>
-		<error line="94" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx"/>
-		<error line="38" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx"/>
-		<error line="49" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx"/>
-		<error line="38" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx"/>
-		<error line="48" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
-		<error line="24" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx"/>
-		<error line="38" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx"/>
-		<error line="48" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
-		<error line="36" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx"/>
-		<error line="46" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
-		<error line="34" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
-		<error line="48" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx"/>
-		<error line="43" column="6" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx"/>
-		<error line="58" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx"/>
-		<error line="98" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx">
-		<error line="88" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx"/>
-		<error line="101" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx"/>
-		<error line="119" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx"/>
-		<error line="170" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx"/>
-		<error line="196" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SpacingCheck.hx">
-		<error line="60" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;SpacingCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
-		<error line="17" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TrailingWhitespaceCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
-		<error line="18" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
-		<error line="35" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;ChecksInfo.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx">
-		<error line="31" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="49" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="70" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="88" column="5" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="134" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="154" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
-		<error line="202" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;ExprUtils.hx">
-		<error line="31" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="49" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="70" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="88" column="5" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="134" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="153" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
-		<error line="203" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;ExprUtils.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;LintFile.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;LintMessage.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;Main.hx">
-		<error line="157" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;Main.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;Report.hx">
-		<error line="51" column="5" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;Report.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;ExitCodeReporter.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;IReporter.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;JSONReporter.hx">
-		<error line="51" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;reporter&#x2F;JSONReporter.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;Reporter.hx">
-		<error line="15" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;reporter&#x2F;Reporter.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;XMLReporter.hx">
-		<error line="89" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;reporter&#x2F;XMLReporter.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;TokenStream.hx">
-		<error line="34" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="41" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="92" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="126" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="142" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="150" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
-		<error line="168" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenStream.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;TokenTree.hx">
-		<error line="104" column="1" severity="info" message="MemberName - Invalid enum member signature: ALL (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="src&#x2F;checkstyle&#x2F;TokenTree.hx"/>
-		<error line="105" column="1" severity="info" message="MemberName - Invalid enum member signature: FIRST (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="src&#x2F;checkstyle&#x2F;TokenTree.hx"/>
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx">
 		<error line="796" column="18" severity="info" message="TODOComment - TODO comment: TODO handle other #directives" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="45" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="62" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="128" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="159" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="173" column="2" severity="info" message="Spacing - No space between while and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="180" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="201" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="286" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="318" column="2" severity="info" message="Spacing - No space between while and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="331" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="378" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="377" column="5" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="492" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="564" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="595" column="2" severity="info" message="Spacing - No space between while and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="603" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="640" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="799" column="3" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
-		<error line="819" column="4" severity="info" message="Spacing - No space between switch and (" source="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx"/>
 	</file>
 </checkstyle>

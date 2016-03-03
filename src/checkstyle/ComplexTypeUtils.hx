@@ -137,7 +137,7 @@ class ComplexTypeUtils {
 	public static function walkComplexType(t:ComplexType, name:String, pos:Position, cb:ComplexTypeCallback) {
 		cb(t, name, pos);
 		if (t == null) return;
-		switch(t){
+		switch (t){
 			case TPath(p): walkTypePath(p, name, pos, cb);
 			case TFunction(args, ret):
 				for (a in args) walkComplexType(a, name, pos, cb);

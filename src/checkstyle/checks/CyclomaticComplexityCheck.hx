@@ -53,9 +53,9 @@ class CyclomaticComplexityCheck extends Check {
 	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
-		return switch(e.expr) {
+		return switch (e.expr) {
 			case ExprDef.EArray(e1, e2) : evaluateExpr(e1) + evaluateExpr(e2);
-			case ExprDef.EBinop(op, e1, e2) : evaluateExpr(e1) + evaluateExpr(e2) + switch(op) {
+			case ExprDef.EBinop(op, e1, e2) : evaluateExpr(e1) + evaluateExpr(e2) + switch (op) {
 				case Binop.OpBoolAnd : 1;
 				case Binop.OpBoolOr : 1;
 				default : 0;

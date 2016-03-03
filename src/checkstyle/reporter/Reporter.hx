@@ -7,7 +7,7 @@ class Reporter implements IReporter {
 	public function new() {}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch(s){
+		return switch (s){
 			case INFO: return "Info";
 			case WARNING: return "Warning";
 			case ERROR: return "Error";
