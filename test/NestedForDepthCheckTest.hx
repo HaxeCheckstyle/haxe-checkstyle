@@ -29,7 +29,7 @@ class NestedForDepthCheckTest extends CheckTestCase {
 
 class NestedForDepthTests {
 	public static inline var TEST1:String = "
-	class Test {
+	abstractAndClass Test {
 		public function test(params:Array<Int>):Void {
 			for (param in params) trace(param);               // level 0
 			for (i in 0...params.length) {                    // level 0
@@ -52,7 +52,7 @@ class NestedForDepthTests {
 	}
 
 	@SuppressWarnings('checkstyle:NestedForDepth')
-	class Test2 {
+	abstractAndClass Test2 {
 		public function test2(param:Array<Int>) {
 			for (outerParam in params) {                      // level 0
 				for (middleParam in params) {                 // level 1
@@ -67,7 +67,7 @@ class NestedForDepthTests {
 	}";
 
 	public static inline var TEST2:String =
-	"class Test {
+	"abstractAndClass Test {
 		public function test1(param:Array<Int>) {
 			for (outerParam in params) {                      // level 0
 				for (middleParam in params) {                 // level 1

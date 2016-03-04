@@ -1,5 +1,3 @@
-package ;
-
 class TestMain {
 
 	public function new() {
@@ -8,10 +6,12 @@ class TestMain {
 		runner.add(new AccessOrderCheckTest());
 		runner.add(new AnonymousCheckTest());
 		runner.add(new ArrayInstantiationCheckTest());
+		runner.add(new AvoidInlineConditionalsCheckTest());
 		runner.add(new AvoidStarImportCheckTest());
-		runner.add(new BlockFormatCheckTest());
 		runner.add(new ConstantNameCheckTest());
+		runner.add(new CyclomaticComplexityCheckTest());
 		runner.add(new DynamicCheckTest());
+		runner.add(new EmptyBlockCheckTest());
 		runner.add(new EmptyLinesCheckTest());
 		runner.add(new ERegInstantiationCheckTest());
 		runner.add(new FileLengthCheckTest());
@@ -28,6 +28,7 @@ class TestMain {
 		runner.add(new MethodLengthCheckTest());
 		runner.add(new MethodNameCheckTest());
 		runner.add(new MultipleStringLiteralsCheckTest());
+		runner.add(new MultipleVariableDeclarationsCheckTest());
 		runner.add(new NeedBracesCheckTest());
 		runner.add(new NestedForDepthCheckTest());
 		runner.add(new NestedIfDepthCheckTest());
@@ -37,6 +38,8 @@ class TestMain {
 		runner.add(new PublicPrivateCheckTest());
 		runner.add(new ReturnCheckTest());
 		runner.add(new RightCurlyCheckTest());
+		runner.add(new SeparatorWrapCheckTest());
+		runner.add(new SimplifyBooleanExpressionCheckTest());
 		runner.add(new SpacingCheckTest());
 		runner.add(new TabForAligningCheckTest());
 		runner.add(new TODOCommentCheckTest());
@@ -45,6 +48,8 @@ class TestMain {
 		runner.add(new TypeCheckTest());
 		runner.add(new TypeNameCheckTest());
 		runner.add(new VariableInitialisationCheckTest());
+		runner.add(new WhitespaceAfterCheckTest());
+		runner.add(new WhitespaceAroundCheckTest());
 
 		var success = runner.run();
 		Sys.exit(success ? 0 : 1);

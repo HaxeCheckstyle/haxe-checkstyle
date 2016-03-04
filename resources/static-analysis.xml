@@ -1,122 +1,137 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <checkstyle version="5.7">
-	<file name="checkstyle&#x2F;Checker.hx">
+	<file name="src&#x2F;checkstyle&#x2F;Checker.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AccessOrderCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AnonymousCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;BlockFormatCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;Check.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;EmptyBlockCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;LeftCurlyCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;NeedBracesCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;RightCurlyCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;EmptyLinesCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;IndentationCharacterCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;LeftCurlyCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HiddenFieldCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NeedBracesCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleVariableDeclarationsCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedIfDepthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;RightCurlyCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;SpacingCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TabForAligningCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TrailingWhitespaceCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;EmptyLinesCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;IndentationCharacterCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;ChecksInfo.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;OperatorWrapCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;ComplexTypeUtils.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;SeparatorWrapCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;ExprUtils.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;SpacingCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;LintFile.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;TabForAligningCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;LintMessage.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;TrailingWhitespaceCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;Main.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WhitespaceAfterCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;Report.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WhitespaceAroundCheck.hx">
 	</file>
-	<file name="checkstyle&#x2F;reporter&#x2F;ExitCodeReporter.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;whitespace&#x2F;WrapCheckBase.hx">
 	</file>
-	<file name="checkstyle&#x2F;reporter&#x2F;IReporter.hx">
+	<file name="src&#x2F;checkstyle&#x2F;ChecksInfo.hx">
 	</file>
-	<file name="checkstyle&#x2F;reporter&#x2F;JSONReporter.hx">
+	<file name="src&#x2F;checkstyle&#x2F;ComplexTypeUtils.hx">
 	</file>
-	<file name="checkstyle&#x2F;reporter&#x2F;Reporter.hx">
+	<file name="src&#x2F;checkstyle&#x2F;ExprUtils.hx">
 	</file>
-	<file name="checkstyle&#x2F;reporter&#x2F;XMLReporter.hx">
+	<file name="src&#x2F;checkstyle&#x2F;LintFile.hx">
 	</file>
-	<file name="checkstyle&#x2F;TokenStream.hx">
+	<file name="src&#x2F;checkstyle&#x2F;LintMessage.hx">
 	</file>
-	<file name="checkstyle&#x2F;TokenTree.hx">
-		<error line="104" column="1" severity="info" message="MemberName - Invalid enum member signature: ALL (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
-		<error line="105" column="1" severity="info" message="MemberName - Invalid enum member signature: FIRST (name should be ~&#x2F;^[a-z][a-zA-Z0-9]*$&#x2F;)" source="checkstyle&#x2F;TokenTree.hx"/>
+	<file name="src&#x2F;checkstyle&#x2F;Main.hx">
 	</file>
-	<file name="checkstyle&#x2F;TokenTreeBuilder.hx">
-		<error line="796" column="18" severity="info" message="TODOComment - TODO comment: TODO handle other #directives" source="checkstyle&#x2F;TokenTreeBuilder.hx"/>
+	<file name="src&#x2F;checkstyle&#x2F;Report.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;ExitCodeReporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;IReporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;JSONReporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;ProgressReporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;Reporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;reporter&#x2F;XMLReporter.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;TokenStream.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;TokenTree.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;TokenTreeBuilder.hx">
 	</file>
 </checkstyle>

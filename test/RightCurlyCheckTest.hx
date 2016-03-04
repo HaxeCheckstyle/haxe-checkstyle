@@ -1,6 +1,6 @@
 package ;
 
-import checkstyle.checks.RightCurlyCheck;
+import checkstyle.checks.block.RightCurlyCheck;
 
 class RightCurlyCheckTest extends CheckTestCase {
 
@@ -22,6 +22,8 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, '');
 		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, '');
+
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
 
 		assertMsg(check, RightCurlyTests.ALONE_IF, '');
 		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
@@ -65,6 +67,8 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
 		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
+
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
 	}
 
 	public function testIncorrectSame() {
@@ -104,6 +108,8 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
 		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
 		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
+
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
 	}
 
 	public function testIncorrectAlone() {
@@ -154,6 +160,18 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
 		assertMsg(check, RightCurlyTests.ALONE_IF, '');
 		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
+	}
+
+	public function testTokenMacroReification() {
+		var check = new RightCurlyCheck();
+		check.tokens = [RightCurlyCheck.REIFICATION];
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
+
+		check.option = RightCurlyCheck.SAME;
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, 'Right curly should not be on same line as left curly');
+
+		check.option = RightCurlyCheck.ALONE;
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, 'Right curly should not be on same line as left curly');
 	}
 }
 
@@ -495,6 +513,15 @@ class RightCurlyTests {
 					z: 2
 				}
 			];
+		}
+	}";
+
+	public static inline var MACRO_REIFICATION:String = "
+	class Test {
+		public function test(val:Int) {
+			var str = 'Hello, world';
+			var expr = macro for (i in 0...10) trace($v{str});
+			var e = macro ${str}.toLowerCase();
 		}
 	}";
 }

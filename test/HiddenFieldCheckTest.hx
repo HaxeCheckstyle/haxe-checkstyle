@@ -1,4 +1,4 @@
-package ;
+package;
 
 import checkstyle.checks.HiddenFieldCheck;
 
@@ -16,6 +16,7 @@ class HiddenFieldCheckTest extends CheckTestCase {
 	public function testDetectHiddenFields() {
 		var check = new HiddenFieldCheck();
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsInConstructor() {
@@ -121,6 +122,15 @@ class HiddenFieldCheckTests {
 		var field2:Int = 1;
 		public static function main() {
 			var field2:String = 'test';
+		}
+	}";
+
+	public static inline var HIDDEN_FIELDS_FOR:String = "
+	class Test {
+		var field1:Int;
+		var field2:Int = 1;
+		public function test() {
+			for (field1 in []) trace(field1);
 		}
 	}";
 }
