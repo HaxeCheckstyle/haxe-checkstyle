@@ -1,8 +1,8 @@
 -cp src
 -cp test
--lib haxeparser
--lib compiletime
--lib hxargs
+-lib haxeparser:3.2.0
+-lib compiletime:2.6.0
+-lib hxargs:3.0.0
 
 --each
 
