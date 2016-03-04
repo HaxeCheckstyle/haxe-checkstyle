@@ -17,6 +17,7 @@ class ERegInstantiationCheck extends Check {
 					{pack:[], name:"EReg"},
 					[{expr:EConst(CString(re)), pos:_}, {expr:EConst(CString(opt)), pos:_}]
 				):
+					if (~/\$\{.+\}/.match(re)) return;
 					logPos('Bad EReg instantiation, define expression between ~/ and /', e.pos, Reflect.field(SeverityLevel, severity));
 				default:
 			}

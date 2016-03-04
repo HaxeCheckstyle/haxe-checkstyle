@@ -5,15 +5,19 @@ import checkstyle.checks.ERegInstantiationCheck;
 class ERegInstantiationCheckTest extends CheckTestCase {
 
 	public function testCorrectEReg() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST1, 'Bad EReg instantiation, define expression between ~/ and /');
+		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST2, '');
 	}
 
 	public function testWrongEReg() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST2, '');
+		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST1, 'Bad EReg instantiation, define expression between ~/ and /');
 	}
 
 	public function testIssue43() {
 		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.ISSUE_43, '');
+	}
+
+	public function testIssue99() {
+		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.REGEX_WITH_STRING_INTERPOLATION, '');
 	}
 }
 
@@ -33,5 +37,10 @@ class ERegInstantiationTests {
 		function test() {
 			cast (Type.createInstance(Array, []));
 		}
+	}";
+
+	public static inline var REGEX_WITH_STRING_INTERPOLATION:String =
+	"abstractAndClass Test {
+		var regex = new EReg('^${pattern}$', 'ig');
 	}";
 }
