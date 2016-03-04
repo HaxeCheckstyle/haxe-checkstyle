@@ -44,6 +44,7 @@ class Main {
 	var info:ChecksInfo;
 	var checker:Checker;
 
+	static var DEFAULT_CONFIG:String = "checkstyle.json";
 	static var REPORT_TYPE:String = "text";
 	static var XML_PATH:String = "check-style-report.xml";
 	static var JSON_PATH:String = "check-style-report.json";
@@ -92,6 +93,10 @@ class Main {
 		var i:Int = 0;
 		for (file in files) {
 			toProcess.push({name:file, content:null, index:i++});
+		}
+
+		if (configPath == null && FileSystem.exists(DEFAULT_CONFIG) && !FileSystem.isDirectory(DEFAULT_CONFIG)) {
+			configPath = DEFAULT_CONFIG;
 		}
 
 		if (configPath == null) addAllChecks();
