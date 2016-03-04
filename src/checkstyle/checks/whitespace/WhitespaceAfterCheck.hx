@@ -7,7 +7,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("WhitespaceAfter")
-@desc("Checks for placement of right curly braces")
+@desc("Checks for whitespace after a token")
 class WhitespaceAfterCheck extends Check {
 
 	public var tokens:Array<String>;
