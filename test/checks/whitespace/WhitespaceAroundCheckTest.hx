@@ -12,6 +12,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAroundTests.ISSUE_72, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_77, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_80, '');
+		assertMsg(check, WhitespaceAroundTests.ISSUE_98, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -137,4 +138,10 @@ class WhitespaceAroundTests {
 	public static inline var ISSUE_80:String = "
 	interface Test implements Dynamic {}
 	";
+
+	public static inline var ISSUE_98:String = "
+	class Test {
+		// °öäüßÖÄÜ@łĸŋđđðſðæµ”“„¢«»Ø→↓←Ŧ¶€Ł}][{¬½¼³²
+		var test:Int = 0;
+	}";
 }
