@@ -4,7 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import sys.io.File;
 import sys.io.FileOutput;
 
-class Reporter implements IReporter {
+class TextReporter implements IReporter {
 
 	var report:StringBuf;
 	var file:FileOutput;

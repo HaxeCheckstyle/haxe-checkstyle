@@ -5,9 +5,8 @@ import checkstyle.checks.Check;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
-import checkstyle.reporter.Reporter;
-import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.ProgressReporter;
+import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
 import haxe.CallStack;
 import haxe.Json;
@@ -158,7 +157,7 @@ class Main {
 		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(XML_PATH, STYLE);
 			case "json": new JSONReporter(JSON_PATH);
-			case "text": new Reporter(TEXT_PATH);
+			case "text": new TextReporter(TEXT_PATH);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
