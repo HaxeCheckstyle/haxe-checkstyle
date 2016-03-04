@@ -23,7 +23,7 @@ class ProgressReporter implements IReporter {
 		Sys.print(line);
 
 		if (f.index == numFiles - 1) {
-			Sys.print("\n\n");
+			Sys.print("\n");
 		}
 	}
 

@@ -21,7 +21,7 @@ class TextReporter extends BaseReporter {
 		}
 
 		var line = sb.toString();
-		output.writeString(line);
+		output.writeString(applyColour(line, m.severity));
 		if (file != null) report.add(line);
 	}
 }

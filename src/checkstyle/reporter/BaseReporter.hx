@@ -67,6 +67,15 @@ class BaseReporter implements IReporter {
 		return '\033[${style}m${s}\033[0m';
 	}
 
+	function applyColour(msg:String, s:SeverityLevel):String {
+		return switch (s) {
+			case ERROR: styleText(msg, Style.RED);
+			case WARNING: styleText(msg, Style.MAGENTA);
+			case INFO: styleText(msg, Style.BLUE);
+			case IGNORE: styleText(msg, Style.BLUE);
+		}
+	}
+
 	function getMessage(m:LintMessage):StringBuf {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);

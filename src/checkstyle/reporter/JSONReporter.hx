@@ -43,7 +43,7 @@ class JSONReporter extends BaseReporter {
 			default:
 		}
 
-		Sys.print(getMessage(m).toString());
+		Sys.print(applyColour(getMessage(m).toString(), m.severity));
 	}
 }
 
