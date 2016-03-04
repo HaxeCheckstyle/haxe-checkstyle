@@ -1,15 +1,10 @@
 package checkstyle.reporter;
 
-import haxe.io.Path;
-import sys.FileSystem;
-import sys.io.File;
 import sys.io.FileOutput;
 import checkstyle.LintMessage.SeverityLevel;
 
-class XMLReporter implements IReporter {
+class XMLReporter extends BaseReporter {
 
-	var report:StringBuf;
-	var file:FileOutput;
 	var style:String;
 
 	/*
@@ -28,65 +23,46 @@ class XMLReporter implements IReporter {
 	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
 
 	public function new(path:String, s:String) {
-		report = new StringBuf();
-		var folder = Path.directory(path);
-		if (folder.length > 0) {
-			if (!FileSystem.exists(folder)) {
-				FileSystem.createDirectory(folder);
-			}
-		}
-		file = File.write(path);
+		super(path);
 		style = s;
 	}
 
-	public function start() {
+	override public function start() {
 		var sb = new StringBuf();
 		sb.add("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
 		if (style != "") {
 			sb.add("<?xml-stylesheet type=\"text/xsl\" href=\"" + style + "\" ?>\n");
 		}
 		sb.add("<checkstyle version=\"5.7\">\n");
-		report.add(sb.toString());
+		if (file != null) report.add(sb.toString());
+
+		super.start();
 	}
 
-	public function finish() {
+	override public function finish() {
 		var sb = new StringBuf();
 		sb.add("</checkstyle>\n");
-		//Sys.stdout().writeString(sb.toString());
-		report.add(sb.toString());
+		if (file != null) report.add(sb.toString());
 
-		file.writeString(report.toString());
-		file.close();
-		//trace(report.toString());
+		super.finish();
 	}
 
 	function encode(s:String):String {
 		return escapeXML(s);
 	}
 
-	public function fileStart(f:LintFile) {
+	override public function fileStart(f:LintFile) {
 		var sb = new StringBuf();
 		sb.add("\t<file name=\"");
 		sb.add(encode(f.name));
 		sb.add("\">\n");
-		//Sys.stdout().writeString(sb.toString());
-		report.add(sb.toString());
+		if (file != null) report.add(sb.toString());
 	}
 
-	public function fileFinish(f:LintFile) {
+	override public function fileFinish(f:LintFile) {
 		var sb = new StringBuf();
 		sb.add("\t</file>\n");
-		//Sys.stdout().writeString(sb.toString());
-		report.add(sb.toString());
-	}
-
-	static function severityString(s:SeverityLevel):String {
-		return switch (s) {
-			case INFO: return "info";
-			case WARNING: return "warning";
-			case ERROR: return "error";
-			case IGNORE: return "ignore";
-		}
+		if (file != null) report.add(sb.toString());
 	}
 
 	static function replace(str:String, re:EReg):String {
@@ -99,7 +75,7 @@ class XMLReporter implements IReporter {
 		return replace(string, ENTITY_RE);
 	}
 
-	public function addMessage(m:LintMessage) {
+	override public function addMessage(m:LintMessage) {
 		var sb:StringBuf = new StringBuf();
 
 		sb.add("\t\t<error line=\"");
@@ -111,7 +87,7 @@ class XMLReporter implements IReporter {
 			sb.add("\"");
 		}
 		sb.add(" severity=\"");
-		sb.add(severityString(m.severity));
+		sb.add(BaseReporter.severityString(m.severity));
 		sb.add("\"");
 		sb.add(" message=\"");
 		sb.add(encode(m.moduleName) + " - " + encode(m.message));
@@ -120,7 +96,15 @@ class XMLReporter implements IReporter {
 		sb.add(encode(m.fileName));
 		sb.add("\"/>\n");
 
-		//Sys.stdout().writeString(sb.toString());
-		report.add(sb.toString());
+		switch (m.severity) {
+			case ERROR: errors++;
+			case WARNING: warnings++;
+			case INFO: infos++;
+			default:
+		}
+
+		Sys.print(getMessage(m).toString());
+
+		if (file != null) report.add(sb.toString());
 	}
 }
