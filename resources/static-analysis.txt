@@ -6,3 +6,11 @@ src/checkstyle/Report.hx:9: characters 1-14 : Info: Type not specified: BOLD
 src/checkstyle/Report.hx:10: characters 1-14 : Info: Type not specified: RED
 src/checkstyle/Report.hx:11: characters 1-15 : Info: Type not specified: BLUE
 src/checkstyle/Report.hx:12: characters 1-18 : Info: Type not specified: MAGENTA
+src/checkstyle/reporter/TextReporter.hx:11: characters 1-14 : Info: Invalid variable initialisation: BOLD (move initialisation to constructor or function)
+src/checkstyle/reporter/TextReporter.hx:12: characters 1-14 : Info: Invalid variable initialisation: RED (move initialisation to constructor or function)
+src/checkstyle/reporter/TextReporter.hx:13: characters 1-15 : Info: Invalid variable initialisation: BLUE (move initialisation to constructor or function)
+src/checkstyle/reporter/TextReporter.hx:14: characters 1-18 : Info: Invalid variable initialisation: MAGENTA (move initialisation to constructor or function)
+src/checkstyle/reporter/TextReporter.hx:11: characters 1-14 : Info: Type not specified: BOLD
+src/checkstyle/reporter/TextReporter.hx:12: characters 1-14 : Info: Type not specified: RED
+src/checkstyle/reporter/TextReporter.hx:13: characters 1-15 : Info: Type not specified: BLUE
+src/checkstyle/reporter/TextReporter.hx:14: characters 1-18 : Info: Type not specified: MAGENTA

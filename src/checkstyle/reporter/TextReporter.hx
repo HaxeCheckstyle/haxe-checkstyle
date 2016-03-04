@@ -5,6 +5,15 @@ import sys.io.File;
 import sys.io.FileOutput;
 import haxe.io.Output;
 
+@:enum
+@SuppressWarnings('checkstyle:MemberName')
+abstract Style(Int) {
+	var BOLD = 1;
+	var RED = 91;
+	var BLUE = 94;
+	var MAGENTA = 95;
+}
+
 class TextReporter implements IReporter {
 
 	var report:StringBuf;
@@ -37,7 +46,7 @@ class TextReporter implements IReporter {
 		infos = 0;
 		total = 0;
 		Sys.println("");
-		Sys.println("Running Checkstyle...");
+		Sys.println(styleText("Running Checkstyle...", Style.BOLD));
 		Sys.println("");
 	}
 
@@ -49,12 +58,14 @@ class TextReporter implements IReporter {
 		}
 
 		total = errors + warnings + infos;
-		if (Sys.systemName() == "Windows") {
-			Sys.println("Total Issues: " + total + " Errors: " + errors + " Warnings: " + warnings + " Infos: " + infos);
-		}
-		else {
-			Sys.println("\033[1m\nTotal Issues: " + total + " (\033[0m\033[91mErrors: " + errors + "\033[0m, \033[95mWarnings: " + warnings + "\033[0m, \033[94mInfos: " + infos + ")\n" + "\033[0m");
-		}
+		Sys.println(
+			styleText("\nTotal Issues: " + total + " (", Style.BOLD) +
+			styleText("Errors: " + errors, Style.RED) +
+			styleText(", ", Style.BOLD) +
+			styleText("Warnings: " + warnings, Style.MAGENTA) +
+			styleText(", ", Style.BOLD) +
+			styleText("Infos: " + infos, Style.BLUE) +
+			styleText(")", Style.BOLD));
 	}
 
 	public function fileStart(f:LintFile) {}
@@ -96,5 +107,10 @@ class TextReporter implements IReporter {
 		var line = sb.toString();
 		output.writeString(line);
 		if (file != null) report.add(line);
+	}
+
+	function styleText(s:String, style:Style):String {
+		if (Sys.systemName() == "Windows") return s;
+		return '\033[${style}m${s}\033[0m';
 	}
 }
