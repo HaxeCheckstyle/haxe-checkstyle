@@ -1,3 +1,51 @@
+import checks.AccessOrderCheckTest;
+import checks.AnonymousCheckTest;
+import checks.ArrayInstantiationCheckTest;
+import checks.AvoidInlineConditionalsCheckTest;
+import checks.AvoidStarImportCheckTest;
+import checks.CyclomaticComplexityCheckTest;
+import checks.DynamicCheckTest;
+import checks.ERegInstantiationCheckTest;
+import checks.HexadecimalLiteralsCheckTest;
+import checks.HiddenFieldCheckTest;
+import checks.InnerAssignmentCheckTest;
+import checks.MagicNumberCheckTest;
+import checks.MultipleStringLiteralsCheckTest;
+import checks.MultipleVariableDeclarationsCheckTest;
+import checks.NestedForDepthCheckTest;
+import checks.NestedIfDepthCheckTest;
+import checks.NestedTryDepthCheckTest;
+import checks.PublicPrivateCheckTest;
+import checks.ReturnCheckTest;
+import checks.SimplifyBooleanExpressionCheckTest;
+import checks.TODOCommentCheckTest;
+import checks.TypeCheckTest;
+import checks.VariableInitialisationCheckTest;
+import checks.block.EmptyBlockCheckTest;
+import checks.block.LeftCurlyCheckTest;
+import checks.block.NeedBracesCheckTest;
+import checks.block.RightCurlyCheckTest;
+import checks.naming.ConstantNameCheckTest;
+import checks.naming.ListenerNameCheckTest;
+import checks.naming.LocalVariableNameCheckTest;
+import checks.naming.MemberNameCheckTest;
+import checks.naming.MethodNameCheckTest;
+import checks.naming.ParameterNameCheckTest;
+import checks.naming.TypeNameCheckTest;
+import checks.size.FileLengthCheckTest;
+import checks.size.LineLengthCheckTest;
+import checks.size.MethodLengthCheckTest;
+import checks.size.ParameterNumberCheckTest;
+import checks.whitespace.EmptyLinesCheckTest;
+import checks.whitespace.IndentationCharacterCheckTest;
+import checks.whitespace.SeparatorWrapCheckTest;
+import checks.whitespace.SpacingCheckTest;
+import checks.whitespace.TabForAligningCheckTest;
+import checks.whitespace.TrailingWhitespaceCheckTest;
+import checks.whitespace.WhitespaceAfterCheckTest;
+import checks.whitespace.WhitespaceAroundCheckTest;
+import token.TokenTreeBuilderTest;
+
 class TestMain {
 
 	public function new() {
