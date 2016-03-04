@@ -71,6 +71,12 @@
 			}
 		},
 		{
+			"type": "EmptyBlock",
+			"props": {
+				"severity": "INFO"
+			}
+		},
+		{
 			"type": "EmptyLines",
 			"props": {
 				"severity": "INFO",

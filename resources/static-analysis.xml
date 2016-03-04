@@ -8,6 +8,8 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ArrayInstantiationCheck.hx">
 	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidInlineConditionalsCheck.hx">
+	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;AvoidStarImportCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;block&#x2F;EmptyBlockCheck.hx">
@@ -52,6 +54,8 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
 	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleVariableDeclarationsCheck.hx">
+	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
@@ -67,6 +71,8 @@
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
 	</file>
