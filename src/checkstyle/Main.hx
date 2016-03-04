@@ -118,7 +118,7 @@ class Main {
 	@SuppressWarnings('checkstyle:Dynamic', 'checkstyle:AvoidInlineConditionals')
 	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
 		var check:Check = cast info.build(checkConf.type);
-		if (check == null) return;
+		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);

@@ -55,10 +55,7 @@ class ChecksInfo {
 
 	@SuppressWarnings('checkstyle:Dynamic')
 	public function build(name:String):Dynamic {
-		if (!name2info.exists(name)) {
-			Sys.stderr().writeString('Skipping unknown check: ${name}\n');
-			return null;
-		}
+		if (!name2info.exists(name)) return null;
 		var cl = name2info[name].clazz;
 		return Type.createInstance(cl, []);
 	}
