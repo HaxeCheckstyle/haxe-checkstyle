@@ -65,6 +65,7 @@ class Report {
 	}
 
 	function styleText(s:String, style:Style):String {
+		if (Sys.systemName() == "Windows") return s;
 		return '\033[${style}m${s}\033[0m';
 	}
 }
