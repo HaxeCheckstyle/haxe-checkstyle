@@ -1,8 +1,8 @@
 -cp src
 -cp test
--lib haxeparser
--lib compiletime
--lib hxargs
+-lib haxeparser:3.2.0
+-lib compiletime:2.6.0
+-lib hxargs:3.0.0
 
 --each
 
@@ -19,4 +19,4 @@
 -x TestMain
 
 --next
--cmd neko run -s src -r text -p resources/static-analysis.txt
+-cmd neko run -s src -p resources/static-analysis.txt
