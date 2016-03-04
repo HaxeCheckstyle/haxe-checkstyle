@@ -17,9 +17,14 @@ class ProgressReporter implements IReporter {
 
 	public function fileStart(f:LintFile) {
 		clear();
-		lineLength = f.name.length;
 		var percentage = Math.floor((f.index + 1) / numFiles * 100);
-		Sys.print('${percentage}% - ${f.name}');
+		var line = '${percentage}% - ${f.name}';
+		lineLength = line.length;
+		Sys.print(line);
+
+		if (f.index == numFiles - 1) {
+			Sys.print("\n\n");
+		}
 	}
 
 	function clear() {

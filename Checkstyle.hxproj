@@ -29,9 +29,9 @@
   </build>
   <!-- haxelib libraries -->
   <haxelib>
-    <library name="haxeparser" />
-    <library name="compiletime" />
-    <library name="hxargs" />
+    <library name="haxeparser:3.2.0" />
+    <library name="compiletime:2.6.0" />
+    <library name="hxargs:3.0.0" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>
