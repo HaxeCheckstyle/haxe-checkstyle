@@ -20,4 +20,5 @@
 --next
 -cp test
 -main TestMain
---interp
+-neko test.n
+-cmd neko test.n
