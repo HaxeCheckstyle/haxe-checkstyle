@@ -15,10 +15,8 @@
 -neko run.n
 
 --next
--cmd neko run -s src -r text -p resources/static-analysis.txt -report
+-cp test
+-x TestMain
 
 --next
--cp test
--main TestMain
--neko test.n
--cmd neko test.n
+-cmd neko run -s src -r text -p resources/static-analysis.txt

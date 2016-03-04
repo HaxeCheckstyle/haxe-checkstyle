@@ -1,6 +1,16 @@
 package checkstyle;
 
+import checkstyle.Report.Style;
 import sys.io.File;
+
+@:enum
+@SuppressWarnings('checkstyle:MemberName')
+abstract Style(Int) {
+	var BOLD = 1;
+	var RED = 91;
+	var BLUE = 94;
+	var MAGENTA = 95;
+}
 
 class Report {
 
@@ -20,24 +30,42 @@ class Report {
 		for (node in staticAnalysisXML.firstElement().elementsNamed("file")) {
 			var fileNode:Xml = node;
 			fileName = fileNode.get("name").split("&#x2F;").join(".");
-			if (fileNode.elementsNamed("error").hasNext()) Sys.println("\033[1mCLASS: " + fileName + "\033[0m");
+			if (fileNode.elementsNamed("error").hasNext()) Sys.println(styleText("CLASS: " + fileName, Style.BOLD));
 			for (error in fileNode.elementsNamed("error")) {
 				var errorNode:Xml = error;
+				var line = errorNode.get("line");
+				var message = StringTools.htmlUnescape(errorNode.get("message"));
 				switch (errorNode.get("severity")) {
 					case "error":
 						errors++;
-						Sys.println("\t\033[91mError: LINE - " + errorNode.get("line") + ": " + StringTools.htmlUnescape(errorNode.get("message")) + "\033[0m");
+						printMessage(Style.RED, "Error", line, message);
 					case "warning":
 						warnings++;
-						Sys.println("\t\033[95mWarning: LINE - " + errorNode.get("line") + ": " + StringTools.htmlUnescape(errorNode.get("message")) + "\033[0m");
+						printMessage(Style.MAGENTA, "Warning", line, message);
 					case "info":
 						infos++;
-						Sys.println("\t\033[94mInfo: LINE - " + errorNode.get("line") + ": " + StringTools.htmlUnescape(errorNode.get("message")) + "\033[0m");
+						printMessage(Style.BLUE, "Info", line, message);
 				}
 				total++;
 			}
 		}
 
-		Sys.println("\033[1m\nTotal Issues: " + total + " (\033[0m\033[91mErrors: " + errors + "\033[0m, \033[95mWarnings: " + warnings + "\033[0m, \033[94mInfos: " + infos + ")\n" + "\033[0m");
+		Sys.println(
+			styleText("\nTotal Issues: " + total + " (", Style.BOLD) +
+			styleText("Errors: " + errors, Style.RED) +
+			styleText(", ", Style.BOLD) +
+			styleText("Warnings: " + warnings, Style.MAGENTA) +
+			styleText(", ", Style.BOLD) +
+			styleText("Infos: " + infos, Style.BLUE) +
+			styleText(")", Style.BOLD));
+	}
+
+	function printMessage(style:Style, type:String, line:String, message:String) {
+		Sys.println("\t" + styleText(Std.string(type + ": LINE - " + line + ": " + message), style));
+	}
+
+	function styleText(s:String, style:Style):String {
+		if (Sys.systemName() == "Windows") return s;
+		return '\033[${style}m${s}\033[0m';
 	}
 }
