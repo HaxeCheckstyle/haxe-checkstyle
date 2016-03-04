@@ -19,4 +19,4 @@
 -x TestMain
 
 --next
--cmd neko run -s src -r text -p resources/static-analysis.txt
+-cmd neko run -s src -p resources/static-analysis.txt

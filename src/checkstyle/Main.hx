@@ -32,11 +32,6 @@ class Main {
 
 			var main = new Main();
 			main.run(args);
-
-			if (REPORT && REPORT_TYPE == "xml") {
-				var reporter = new Report();
-				reporter.generateReport(XML_PATH);
-			}
 		}
 		catch (e:Dynamic) {
 			Sys.stderr().writeString(e + "\n");
@@ -49,8 +44,7 @@ class Main {
 	var info:ChecksInfo;
 	var checker:Checker;
 
-	static var REPORT:Bool = false;
-	static var REPORT_TYPE:String = "xml";
+	static var REPORT_TYPE:String = "text";
 	static var XML_PATH:String = "check-style-report.xml";
 	static var JSON_PATH:String = "check-style-report.json";
 	static var TEXT_PATH:String = null;
@@ -81,7 +75,7 @@ class Main {
 			@doc("Set config (.json) file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
 			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
-			@doc("Show report") ["-report"] => function() REPORT = true,
+			@doc("Show report [DEPRECATED]") ["-report"] => function() {},
 			@doc("Show progress") ["-progress"] => function() SHOW_PROGRESS = true,
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
 			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
@@ -164,9 +158,9 @@ class Main {
 	}
 
 	static function listReporters() {
-		Sys.println("xml - Checkstyle XML reporter (default)");
+		Sys.println("text - Text reporter (default)");
+		Sys.println("xml - Checkstyle XML reporter");
 		Sys.println("json - JSON reporter");
-		Sys.println("text - Text reporter");
 		Sys.exit(0);
 	}
 
