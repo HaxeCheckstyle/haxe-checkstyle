@@ -2,6 +2,7 @@ package checkstyle.checks.block;
 
 import checkstyle.Checker.LinePos;
 import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 

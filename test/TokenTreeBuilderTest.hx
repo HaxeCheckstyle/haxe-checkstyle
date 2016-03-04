@@ -3,9 +3,9 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
-import checkstyle.TokenTree;
-import checkstyle.TokenStream;
-import checkstyle.TokenTreeBuilder;
+import checkstyle.token.TokenTree;
+import checkstyle.token.TokenStream;
+import checkstyle.token.TokenTreeBuilder;
 
 class TokenTreeBuilderTest extends haxe.unit.TestCase {
 

@@ -1,4 +1,4 @@
-package checkstyle;
+package checkstyle.token;
 
 import sys.io.File;
 

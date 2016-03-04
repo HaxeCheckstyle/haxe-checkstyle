@@ -1,5 +1,7 @@
 package checkstyle.checks;
 
+import checkstyle.token.TokenTree;
+import checkstyle.token.TokenTreeBuilder;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 

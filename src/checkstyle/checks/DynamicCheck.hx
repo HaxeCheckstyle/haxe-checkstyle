@@ -3,7 +3,7 @@ package checkstyle.checks;
 import checkstyle.LintMessage.SeverityLevel;
 import haxe.macro.Expr;
 import haxeparser.Data;
-import checkstyle.ComplexTypeUtils;
+import checkstyle.utils.ComplexTypeUtils;
 
 @name("Dynamic")
 @desc("Checks for use of Dynamic type")

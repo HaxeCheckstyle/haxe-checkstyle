@@ -1,6 +1,7 @@
 package checkstyle.checks;
 
 import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.utils.ExprUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 

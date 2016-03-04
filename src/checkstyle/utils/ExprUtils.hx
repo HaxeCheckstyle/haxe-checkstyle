@@ -1,4 +1,4 @@
-package checkstyle;
+package checkstyle.utils;
 
 import haxeparser.Data.TypeDecl;
 import haxeparser.Data.Definition;

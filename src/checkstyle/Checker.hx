@@ -9,8 +9,8 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import sys.io.File;
 
-import checkstyle.TokenTree;
-import checkstyle.TokenTreeBuilder;
+import checkstyle.token.TokenTree;
+import checkstyle.token.TokenTreeBuilder;
 
 class Checker {
 

@@ -1,5 +1,6 @@
 package checkstyle.checks.size;
 
+import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Expr.Field;
 import haxeparser.Data.Definition;

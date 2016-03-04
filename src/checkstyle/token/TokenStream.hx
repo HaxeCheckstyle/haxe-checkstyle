@@ -1,4 +1,4 @@
-package checkstyle;
+package checkstyle.token;
 
 import haxe.macro.Expr;
 

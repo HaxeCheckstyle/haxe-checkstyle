@@ -1,6 +1,6 @@
 package checkstyle.checks.naming;
 
-import Array;
+import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Expr.Field;
 import haxeparser.Data.Definition;

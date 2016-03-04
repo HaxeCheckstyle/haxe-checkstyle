@@ -1,5 +1,6 @@
 package checkstyle.checks.whitespace;
 
+import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Expr.Binop;
