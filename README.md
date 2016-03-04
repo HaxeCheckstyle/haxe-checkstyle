@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
+[![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/) [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/adireddy/haxe-checkstyle)
 =========
 ![logo](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/logo.png)
 
