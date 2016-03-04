@@ -202,4 +202,11 @@ class ExprUtils {
 				walkExpr(e, cb);
 		}
 	}
+
+	public static function hasMeta(meta:Metadata, name:String):Bool {
+		for (entry in meta) {
+			if (entry.name == name) return true;
+		}
+		return false;
+	}
 }

@@ -12,6 +12,10 @@ class VariableInitialisationCheckTest extends CheckTestCase {
 	public function testStatic() {
 		assertMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST2, '');
 	}
+	
+	public function testEnumAbstract() {
+		assertMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST3, '');
+	}
 }
 
 class VariableInitialisationTests {
@@ -30,5 +34,11 @@ class VariableInitialisationTests {
 		static inline var TEST:Int = 1;
 
 		public function new() {}
+	}";
+	
+	public static inline var TEST3:String =
+	"@:enum
+	abstract Test(Int) {
+		var VALUE = 0;
 	}";
 }

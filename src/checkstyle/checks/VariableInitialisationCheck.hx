@@ -14,7 +14,7 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function checkField(f:Field, p:FieldParent) {
-		if (f.name == "new" || p == INTERFACE) return;
+		if (f.name == "new" || p == INTERFACE || p == ENUM_ABSTRACT) return;
 
 		var isPrivate = false;
 		var isPublic = false;
@@ -30,13 +30,13 @@ class VariableInitialisationCheck extends Check {
 			switch (f.kind) {
 				case FVar(t, e):
 					if (e == null) return;
-					warnVarinit(f.name, f.pos);
+					warnVarInit(f.name, f.pos);
 				case _:
 			}
 		}
 	}
 
-	function warnVarinit(name:String, pos:Position) {
+	function warnVarInit(name:String, pos:Position) {
 		logPos('Invalid variable initialisation: ${name} (move initialisation to constructor or function)', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

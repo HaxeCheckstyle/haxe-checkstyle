@@ -1,5 +1,6 @@
 package checkstyle.checks;
 
+import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
@@ -74,7 +75,7 @@ class Check {
 					parent = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
 				case EAbstract(a):
 					fields = a.data;
-					parent = ABSTRACT;
+					parent = ExprUtils.hasMeta(a.meta, ":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;
 				default:
 			}
 
@@ -226,4 +227,5 @@ enum FieldParent {
 	CLASS;
 	INTERFACE;
 	ABSTRACT;
+	ENUM_ABSTRACT;
 }
