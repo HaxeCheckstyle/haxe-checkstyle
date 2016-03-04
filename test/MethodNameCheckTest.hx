@@ -1,6 +1,4 @@
-package ;
-
-import checkstyle.checks.MethodNameCheck;
+import checkstyle.checks.naming.MethodNameCheck;
 
 // TODO abstract tests
 class MethodNameCheckTest extends CheckTestCase {

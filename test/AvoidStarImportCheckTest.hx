@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.AvoidStarImportCheck;
 
 class AvoidStarImportCheckTest extends CheckTestCase {

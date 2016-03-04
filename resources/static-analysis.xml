@@ -22,15 +22,11 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;Check.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ConstantNameCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;CyclomaticComplexityCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;DynamicCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ERegInstantiationCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;FileLengthCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;HexadecimalLiteralsCheck.hx">
 	</file>
@@ -38,25 +34,27 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;InnerAssignmentCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LineLengthCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ListenerNameCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;LocalVariableNameCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MagicNumberCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MemberNameCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodLengthCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MethodNameCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleStringLiteralsCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;MultipleVariableDeclarationsCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NameCheckBase.hx">
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;ConstantNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;ListenerNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;LocalVariableNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;MemberNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;MethodNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;NameCheckBase.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;ParameterNameCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;naming&#x2F;TypeNameCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedForDepthCheck.hx">
 	</file>
@@ -64,21 +62,23 @@
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;NestedTryDepthCheck.hx">
 	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNameCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ParameterNumberCheck.hx">
-	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;PublicPrivateCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;ReturnCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;SimplifyBooleanExpressionCheck.hx">
 	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;size&#x2F;FileLengthCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;size&#x2F;LineLengthCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;size&#x2F;MethodLengthCheck.hx">
+	</file>
+	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;size&#x2F;ParameterNumberCheck.hx">
+	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TODOCommentCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeCheck.hx">
-	</file>
-	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;TypeNameCheck.hx">
 	</file>
 	<file name="src&#x2F;checkstyle&#x2F;checks&#x2F;VariableInitialisationCheck.hx">
 	</file>

@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.HiddenFieldCheck;
 
 class HiddenFieldCheckTest extends CheckTestCase {

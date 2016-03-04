@@ -1,6 +1,4 @@
-package;
-
-import checkstyle.checks.ParameterNameCheck;
+import checkstyle.checks.naming.ParameterNameCheck;
 
 class ParameterNameCheckTest extends CheckTestCase {
 

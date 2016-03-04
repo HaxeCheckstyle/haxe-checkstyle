@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.ERegInstantiationCheck;
 
 class ERegInstantiationCheckTest extends CheckTestCase {

@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.InnerAssignmentCheck;
 
 class InnerAssignmentCheckTest extends CheckTestCase {

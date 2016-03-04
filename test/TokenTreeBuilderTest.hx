@@ -1,5 +1,3 @@
-package ;
-
 import haxeparser.HaxeLexer;
 
 import haxeparser.Data.Token;

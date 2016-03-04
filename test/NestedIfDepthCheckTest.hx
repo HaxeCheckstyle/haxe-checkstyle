@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.NestedIfDepthCheck;
 
 class NestedIfDepthCheckTest extends CheckTestCase {

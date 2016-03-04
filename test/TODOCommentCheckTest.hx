@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.TODOCommentCheck;
 
 class TODOCommentCheckTest extends CheckTestCase {

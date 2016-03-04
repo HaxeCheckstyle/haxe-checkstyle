@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.block.EmptyBlockCheck;
 
 class EmptyBlockCheckTest extends CheckTestCase {

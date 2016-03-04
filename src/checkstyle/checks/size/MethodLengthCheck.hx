@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.size;
 
 import haxe.macro.Expr;
 import haxe.macro.Expr.Field;

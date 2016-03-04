@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.DynamicCheck;
 
 class DynamicCheckTest extends CheckTestCase {

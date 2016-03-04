@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.TabForAligningCheck;
 
 class TabForAligningCheckTest extends CheckTestCase {

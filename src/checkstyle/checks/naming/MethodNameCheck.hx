@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.naming;
 
 import haxeparser.Data;
 import haxe.macro.Expr;

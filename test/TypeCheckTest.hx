@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.TypeCheck;
 
 class TypeCheckTest extends CheckTestCase {

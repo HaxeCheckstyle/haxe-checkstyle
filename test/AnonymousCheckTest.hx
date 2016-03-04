@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.AnonymousCheck;
 
 class AnonymousCheckTest extends CheckTestCase {

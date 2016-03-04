@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.VariableInitialisationCheck;
 
 class VariableInitialisationCheckTest extends CheckTestCase {

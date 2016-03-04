@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.AccessOrderCheck;
 
 class AccessOrderCheckTest extends CheckTestCase {

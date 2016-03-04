@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 
 class TrailingWhitespaceCheckTest extends CheckTestCase {

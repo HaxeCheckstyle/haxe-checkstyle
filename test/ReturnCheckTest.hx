@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.ReturnCheck;
 
 class ReturnCheckTest extends CheckTestCase {

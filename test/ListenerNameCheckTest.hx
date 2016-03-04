@@ -1,6 +1,4 @@
-package;
-
-import checkstyle.checks.ListenerNameCheck;
+import checkstyle.checks.naming.ListenerNameCheck;
 
 class ListenerNameCheckTest extends CheckTestCase {
 

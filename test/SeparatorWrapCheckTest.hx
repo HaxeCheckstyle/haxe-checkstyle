@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.SeparatorWrapCheck;
 
 class SeparatorWrapCheckTest extends CheckTestCase {

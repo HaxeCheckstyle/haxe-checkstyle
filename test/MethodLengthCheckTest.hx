@@ -1,6 +1,4 @@
-package;
-
-import checkstyle.checks.MethodLengthCheck;
+import checkstyle.checks.size.MethodLengthCheck;
 
 class MethodLengthCheckTest extends CheckTestCase {
 

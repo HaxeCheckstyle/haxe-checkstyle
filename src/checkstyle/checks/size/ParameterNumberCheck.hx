@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.size;
 
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;

@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.WhitespaceAfterCheck;
 
 class WhitespaceAfterCheckTest extends CheckTestCase {

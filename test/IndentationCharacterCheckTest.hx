@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class IndentationCharacterCheckTest extends CheckTestCase {

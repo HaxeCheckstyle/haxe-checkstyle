@@ -1,6 +1,4 @@
-package ;
-
-import checkstyle.checks.LocalVariableNameCheck;
+import checkstyle.checks.naming.LocalVariableNameCheck;
 
 class LocalVariableNameCheckTest extends CheckTestCase {
 

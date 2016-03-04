@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.PublicPrivateCheck;
 
 class PublicPrivateCheckTest extends CheckTestCase {

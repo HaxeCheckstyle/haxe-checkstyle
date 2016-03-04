@@ -1,6 +1,4 @@
-package ;
-
-import checkstyle.checks.ConstantNameCheck;
+import checkstyle.checks.naming.ConstantNameCheck;
 
 class ConstantNameCheckTest extends CheckTestCase {
 

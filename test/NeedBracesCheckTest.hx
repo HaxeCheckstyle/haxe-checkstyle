@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.block.NeedBracesCheck;
 
 class NeedBracesCheckTest extends CheckTestCase {

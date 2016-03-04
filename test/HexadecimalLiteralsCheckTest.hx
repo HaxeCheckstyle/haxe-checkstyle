@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.HexadecimalLiteralsCheck;
 
 class HexadecimalLiteralsCheckTest extends CheckTestCase {

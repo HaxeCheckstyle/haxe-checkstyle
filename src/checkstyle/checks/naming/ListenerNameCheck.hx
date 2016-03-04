@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.naming;
 
 import Array;
 import haxe.macro.Expr;

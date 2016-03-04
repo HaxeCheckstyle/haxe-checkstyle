@@ -1,5 +1,3 @@
-package;
-
 import checkstyle.checks.MagicNumberCheck;
 
 class MagicNumberCheckTest extends CheckTestCase {

@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.MultipleStringLiteralsCheck;
 
 class MultipleStringLiteralsCheckTest extends CheckTestCase {

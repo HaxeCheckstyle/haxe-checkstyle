@@ -1,5 +1,3 @@
-package ;
-
 import checkstyle.checks.block.RightCurlyCheck;
 
 class RightCurlyCheckTest extends CheckTestCase {

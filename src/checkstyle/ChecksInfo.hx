@@ -11,6 +11,8 @@ class ChecksInfo {
 
 		CompileTime.importPackage("checkstyle.checks"); // must be string constant
 		CompileTime.importPackage("checkstyle.checks.block");
+		CompileTime.importPackage("checkstyle.checks.naming");
+		CompileTime.importPackage("checkstyle.checks.size");
 		CompileTime.importPackage("checkstyle.checks.whitespace");
 		var checksClasses = CompileTime.getAllClasses(Check);
 

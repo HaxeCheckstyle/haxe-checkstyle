@@ -1,6 +1,4 @@
-package ;
-
-import checkstyle.checks.LineLengthCheck;
+import checkstyle.checks.size.LineLengthCheck;
 
 class LineLengthCheckTest extends CheckTestCase {
 

@@ -1,5 +1,3 @@
-package;
-
 import haxe.PosInfos;
 
 import checkstyle.LintMessage;

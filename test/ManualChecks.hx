@@ -1,5 +1,3 @@
-package ;
-
 class ManualChecks {
 
 	var _arr1:Array;

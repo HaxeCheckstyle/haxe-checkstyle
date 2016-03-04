@@ -1,6 +1,4 @@
-package ;
-
-import checkstyle.checks.FileLengthCheck;
+import checkstyle.checks.size.FileLengthCheck;
 
 class FileLengthCheckTest extends CheckTestCase {
 
