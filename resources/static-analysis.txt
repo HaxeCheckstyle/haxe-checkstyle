@@ -1,0 +1,1 @@
+src/checkstyle/Report.hx:47: characters 78-87 : Info: Multiple string literal "[0m" detected - consider using a constant
