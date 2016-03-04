@@ -110,8 +110,12 @@ class LeftCurlyCheck extends Check {
 				return {token: token, hasToken: hasToken(TRY)};
 			case Kwd(KwdCatch):
 				return {token: token, hasToken: hasToken(CATCH)};
-			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault):
+			case Kwd(KwdSwitch), Kwd(KwdDefault):
 				return {token: token, hasToken: hasToken(SWITCH)};
+			case Kwd(KwdCase):
+				return {token: token, hasToken: hasToken(OBJECT_DECL)};
+			case DblDot:
+				return findParentTokenDblDot(token.parent);
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			case Dollar(_):
@@ -128,6 +132,28 @@ class LeftCurlyCheck extends Check {
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			default:
 				return findParentToken(token.parent);
+		}
+	}
+
+	function findParentTokenDblDot(token:TokenTree):ParentToken {
+		if (token == null) return {token:token, hasToken: false};
+		switch (token.tok) {
+			case Kwd(KwdCase), Kwd(KwdDefault):
+				return {token: token, hasToken: hasToken(SWITCH)};
+			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
+				return {token: token, hasToken: hasToken(OBJECT_DECL)};
+			case Binop(OpAssign):
+				// could be OBJECT_DECL or TYPEDEF_DEF
+				if ((token.parent != null) && (token.parent.parent != null)) {
+					switch (token.parent.parent.tok) {
+						case Kwd(KwdTypedef):
+							return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+						default:
+					}
+				}
+				return {token: token, hasToken: hasToken(OBJECT_DECL)};
+			default:
+				return findParentTokenDblDot(token.parent);
 		}
 	}
 

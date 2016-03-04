@@ -14,6 +14,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST14, '');
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
 		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, '');
+		assertMsg(check, LeftCurlyTests.ISSUE_97, '');
 	}
 
 	public function testWrongBraces() {
@@ -395,5 +396,32 @@ class LeftCurlyTests {
 	public static inline var NO_FIELDS_MACRO:String = "
 	class Test {
 		var definition = macro class Font extends flash.text.Font {};
+	}";
+
+	public static inline var ISSUE_97:String = "
+	class Test {
+		function foo() {
+			switch (expr) {
+				case xxx: {
+						trace ('hello');
+					}
+				case { expr: EObjectDecl(fields) }:
+					for (field in fields) {
+						if (field.field == 'priority') {
+							switch (field.expr) {
+								case { expr: EConst(CInt(value)) }: return Std.parseInt(value);
+								case (_): {
+									return true;
+								}
+								default:
+									trace ('hello 2');
+							}
+						}
+					}
+				default: {
+					trace ('hello 2');
+				}
+			}
+		}
 	}";
 }
