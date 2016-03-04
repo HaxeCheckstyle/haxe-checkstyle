@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "more improvements and bug fixes",
-	"version": "1.2.5",
+	"releasenote": "v2 release with more checks and lot of improvements/bug fixes",
+	"version": "2.0.0",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
