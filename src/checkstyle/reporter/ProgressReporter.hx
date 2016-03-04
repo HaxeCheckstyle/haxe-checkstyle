@@ -3,8 +3,11 @@ package checkstyle.reporter;
 class ProgressReporter implements IReporter {
 
 	var lineLength:Int;
+	var numFiles:Int;
 
-	public function new() {}
+	public function new(numFiles:Int) {
+		this.numFiles = numFiles;
+	}
 
 	public function start() {}
 
@@ -15,7 +18,8 @@ class ProgressReporter implements IReporter {
 	public function fileStart(f:LintFile) {
 		clear();
 		lineLength = f.name.length;
-		Sys.print('${f.name}');
+		var percentage = Math.floor((f.index + 1) / numFiles * 100);
+		Sys.print('${percentage}% - ${f.name}');
 	}
 
 	function clear() {

@@ -95,8 +95,9 @@ class Main {
 		argHandler.parse(args);
 
 		var toProcess:Array<LintFile> = [];
+		var i:Int = 0;
 		for (file in files) {
-			toProcess.push({name:file, content:null});
+			toProcess.push({name:file, content:null, index:i++});
 		}
 
 		if (configPath == null) addAllChecks();
@@ -109,7 +110,7 @@ class Main {
 			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
 		checker.addReporter(createReporter());
-		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter());
+		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
 	}

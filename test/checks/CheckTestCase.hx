@@ -41,7 +41,7 @@ class CheckTestCase extends haxe.unit.TestCase {
 
 		_checker.addCheck(check);
 		_checker.addReporter(_reporter);
-		_checker.process([{name:FILE_NAME, content:src}]);
+		_checker.process([{name:FILE_NAME, content:src, index:0}]);
 		return _reporter.message;
 	}
 
