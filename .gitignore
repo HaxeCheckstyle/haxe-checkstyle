@@ -6,7 +6,7 @@
 *.n
 *.zip
 .haxelib/
-.out/
+out/
 
 check-style-report.json
 check-style-report.xml
