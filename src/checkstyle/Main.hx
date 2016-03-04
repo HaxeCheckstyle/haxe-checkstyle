@@ -47,7 +47,6 @@ class Main {
 		Sys.exit(exitCode);
 	}
 
-	var reporter:IReporter;
 	var info:ChecksInfo;
 	var checker:Checker;
 
@@ -55,13 +54,13 @@ class Main {
 	static var REPORT_TYPE:String = "xml";
 	static var XML_PATH:String = "check-style-report.xml";
 	static var JSON_PATH:String = "check-style-report.json";
+	static var TEXT_PATH:String = null;
 	static var STYLE:String = "";
 	static var SHOW_PROGRESS:Bool = false;
 	static var EXIT_CODE:Bool = false;
 	static var exitCode:Int;
 
 	function new() {
-		reporter = new Reporter();
 		info = new ChecksInfo();
 		checker = new Checker();
 		exitCode = 0;
@@ -76,6 +75,7 @@ class Main {
 			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) {
 				XML_PATH = loc;
 				JSON_PATH = loc;
+				TEXT_PATH = loc;
 			},
 			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
 			@doc("Set reporter (xml, json or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
@@ -158,7 +158,7 @@ class Main {
 		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(XML_PATH, STYLE);
 			case "json": new JSONReporter(JSON_PATH);
-			case "text": new Reporter();
+			case "text": new Reporter(TEXT_PATH);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}

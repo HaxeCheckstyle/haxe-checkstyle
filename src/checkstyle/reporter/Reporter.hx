@@ -1,10 +1,20 @@
 package checkstyle.reporter;
 
 import checkstyle.LintMessage.SeverityLevel;
+import sys.io.File;
+import sys.io.FileOutput;
 
 class Reporter implements IReporter {
 
-	public function new() {}
+	var report:StringBuf;
+	var file:FileOutput;
+
+	public function new(path:String) {
+		if (path != null) {
+			file = File.write(path);
+			report = new StringBuf();
+		}
+	}
 
 	static function severityString(s:SeverityLevel):String {
 		return switch (s){
@@ -17,7 +27,12 @@ class Reporter implements IReporter {
 
 	public function start() {}
 
-	public function finish() {}
+	public function finish() {
+		if (file != null) {
+			file.writeString(report.toString());
+			file.close();
+		}
+	}
 
 	public function fileStart(f:LintFile) {}
 
@@ -46,6 +61,8 @@ class Reporter implements IReporter {
 		sb.add("\n");
 
 		var output = (m.severity == ERROR || m.severity == WARNING) ? Sys.stderr() : Sys.stdout();
-		output.writeString(sb.toString());
+		var line = sb.toString();
+		output.writeString(line);
+		if (file != null) report.add(line);
 	}
 }
