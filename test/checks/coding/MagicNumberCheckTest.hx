@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.MagicNumberCheck;
+import checkstyle.checks.coding.MagicNumberCheck;
 
 class MagicNumberCheckTest extends CheckTestCase {
 

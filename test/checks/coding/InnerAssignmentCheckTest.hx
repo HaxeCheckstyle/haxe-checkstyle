@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.InnerAssignmentCheck;
+import checkstyle.checks.coding.InnerAssignmentCheck;
 
 class InnerAssignmentCheckTest extends CheckTestCase {
 
