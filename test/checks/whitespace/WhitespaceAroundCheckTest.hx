@@ -14,7 +14,9 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAroundTests.ISSUE_72, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_77, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_80, '');
+		assertMsg(check, WhitespaceAroundTests.ISSUE_81, '');
 		assertMsg(check, WhitespaceAroundTests.ISSUE_98, '');
+		assertMsg(check, WhitespaceAroundTests.MINUS_CONSTANT, '');
 	}
 
 	public function testIncorrectWhitespace() {
@@ -141,9 +143,29 @@ class WhitespaceAroundTests {
 	interface Test implements Dynamic {}
 	";
 
+	public static inline var ISSUE_81:String = "
+	class Test {
+		function foo() {
+			do a++ while (true);
+			do ++a while (true);
+		}
+	}";
+
 	public static inline var ISSUE_98:String = "
 	class Test {
 		// °öäüßÖÄÜ@łĸŋđđðſðæµ”“„¢«»Ø→↓←Ŧ¶€Ł}][{¬½¼³²
 		var test:Int = 0;
+	}";
+
+	public static inline var MINUS_CONSTANT:String = "
+	class Test {
+		function test() {
+			if (re.match(line) && line.indexOf('//') == -1) {
+				log('Tab after non-space character. Use space for aligning', i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
+				return -1;
+			}
+			a = 1 - -2;
+			return - 1;
+		}
 	}";
 }

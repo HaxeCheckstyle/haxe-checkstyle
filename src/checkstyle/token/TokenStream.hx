@@ -176,7 +176,7 @@ class TokenStream {
 		if (previous < 0) throw NO_MORE_TOKENS;
 		var prevTok:Token = tokens[previous];
 		switch (prevTok.tok) {
-			case Binop(_), Unop(_), BkOpen, POpen, Comma, DblDot, IntInterval(_), Question:
+			case Binop(_), Unop(_), BkOpen, POpen, Comma, DblDot, IntInterval(_), Question, Kwd(KwdReturn):
 			default:
 				return new TokenTree(tok.tok, tok.pos);
 		}
@@ -198,5 +198,9 @@ class TokenStream {
 			default:
 				throw NO_MORE_TOKENS;
 		}
+	}
+
+	public function getCurrentPos():Int {
+		return current;
 	}
 }

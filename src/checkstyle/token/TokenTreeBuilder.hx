@@ -121,7 +121,8 @@ class TokenTreeBuilder {
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
 
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
 					walkVar(block, tempStore);
@@ -156,7 +157,8 @@ class TokenTreeBuilder {
 		var tempStore:Array<TokenTree> = [];
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
 					walkVar(block, tempStore);
@@ -188,7 +190,8 @@ class TokenTreeBuilder {
 		if (stream.is(POpen)) walkPOpen(name);
 		var typeParent:TokenTree = name;
 		var typeChild:TokenTree;
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case BrOpen: break;
 				case Const(CIdent("from")), Const(CIdent("to")):
@@ -205,7 +208,8 @@ class TokenTreeBuilder {
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
 
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
 					walkVar(block, tempStore);
@@ -274,7 +278,8 @@ class TokenTreeBuilder {
 		var name:TokenTree = null;
 		var varTok:TokenTree = stream.consumeTokenDef(Kwd(KwdVar));
 		parent.addChild(varTok);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			name = stream.consumeConstIdent();
 			varTok.addChild(name);
 			if (stream.is(POpen)) {
@@ -341,7 +346,8 @@ class TokenTreeBuilder {
 	function walkFunctionParameters(parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
 		parent.addChild(pOpen);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			if (stream.is(PClose)) break;
 			walkFieldDef(pOpen);
 		}
@@ -352,7 +358,8 @@ class TokenTreeBuilder {
 		if (stream.is(BrOpen)) {
 			var openTok:TokenTree = stream.consumeTokenDef(BrOpen);
 			parent.addChild(openTok);
-			while (true) {
+			var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+			while (progress.streamHasChanged()) {
 				switch (stream.token()) {
 					case BrClose: break;
 					default:
@@ -368,7 +375,8 @@ class TokenTreeBuilder {
 
 	function walkFieldDef(parent:TokenTree) {
 		var tempStore:Array<TokenTree> = [];
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar), Kwd(KwdFunction):
 					var tok:TokenTree = stream.consumeToken();
@@ -444,7 +452,8 @@ class TokenTreeBuilder {
 	function walkLtGt(parent:TokenTree) {
 		var ltTok:TokenTree = stream.consumeTokenDef(Binop(OpLt));
 		parent.addChild(ltTok);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Comma:
 					var comma:TokenTree = stream.consumeTokenDef(Comma);
@@ -495,11 +504,11 @@ class TokenTreeBuilder {
 			case Binop(OpGt):
 				newChild = stream.consumeOpGt();
 				parent.addChild(newChild);
-				walkStatement(newChild);
+				walkIdentifier(newChild);
 			case Binop(OpSub):
-				newChild = stream.consumeOpSub();
-				parent.addChild(newChild);
-				walkStatement(newChild);
+				walkBinopSub(parent);
+			case Binop(_), Unop(_), Const(_), Kwd(KwdReturn):
+				walkIdentifier(parent);
 			case BrClose, BkClose, PClose:
 			default:
 				walkOtherStatement(parent);
@@ -526,10 +535,103 @@ class TokenTreeBuilder {
 		if (!stream.hasMore()) return;
 		switch (stream.token()) {
 			case Dot:
-				walkStatement(parent);
+				walkIdentifier(parent);
 			case BkOpen:
 				walkStatement(parent);
 			default:
+		}
+	}
+
+	@SuppressWarnings(["checkstyle:MethodLength", "checkstyle:CyclomaticComplexity"])
+	function walkIdentifier(parent:TokenTree) {
+		switch (stream.token()) {
+			case Binop(OpSub):
+				walkBinopSub(parent);
+				return;
+			case Binop(OpGt):
+				var opGt:TokenTree = stream.consumeOpGt();
+				parent.addChild(opGt);
+				walkIdentifier(opGt);
+				return;
+			default:
+		}
+		var newChild:TokenTree = stream.consumeToken();
+		parent.addChild(newChild);
+		switch (stream.token()) {
+			case Const(_):
+				walkIdentifier(newChild);
+			case Binop(OpLt):
+				if (stream.isTypedParam()) {
+					walkLtGt(parent);
+					return;
+				}
+				walkIdentifier(newChild);
+			case Binop(OpGt):
+				var gt:TokenTree = stream.consumeOpGt();
+				newChild.addChild(gt);
+				walkIdentifier(gt);
+			case Binop(OpSub):
+				walkBinopSub(newChild);
+			case Binop(_):
+				walkIdentifier(newChild);
+			case Unop(_):
+				walkIdentifier(newChild);
+			case Dot:
+				walkIdentifier(newChild);
+			case DblDot:
+				walkIdentifier(newChild);
+			case POpen:
+				walkPOpen(newChild);
+				walkIdentifierContinue(newChild);
+			case BrOpen:
+				walkBlock(newChild);
+			case BkOpen:
+				walkArrayAccess(newChild);
+			case Semicolon:
+				var semicolon:TokenTree = stream.consumeTokenDef(Semicolon);
+				newChild.addChild(semicolon);
+			case Kwd(KwdTrue), Kwd(KwdFalse), Kwd(KwdNull):
+				walkIdentifier(newChild);
+			case Kwd(KwdNew):
+				walkNew(parent);
+			case Kwd(KwdCast):
+				walkIdentifier(parent);
+			case Kwd(KwdThis):
+				walkIdentifier(parent);
+			case Kwd(KwdFor):
+				walkFor(parent);
+			case Kwd(KwdFunction):
+				walkFunction(parent, []);
+			case Kwd(KwdMacro):
+				walkIdentifier(parent);
+			case Kwd(KwdClass):
+				walkClass(parent, []);
+			case Dollar(_):
+				walkIdentifier(parent);
+			case Comma, PClose, BkClose, BrClose:
+			default:
+		}
+	}
+
+	function walkIdentifierContinue(parent:TokenTree) {
+		switch (stream.token()) {
+			case Dot:
+				walkIdentifier(parent);
+			case Binop(_):
+				walkIdentifier(parent);
+			case BkOpen:
+				walkArrayAccess(parent);
+			default:
+		}
+	}
+
+	function walkBinopSub(parent:TokenTree) {
+		var sub:TokenTree = stream.consumeOpSub();
+		parent.addChild(sub);
+		switch (sub.tok) {
+			case Const(_):
+			default:
+				walkIdentifier(sub);
 		}
 	}
 
@@ -566,7 +668,8 @@ class TokenTreeBuilder {
 		if (stream.is(BrOpen)) {
 			var openTok:TokenTree = stream.consumeTokenDef(BrOpen);
 			parent.addChild(openTok);
-			while (true) {
+			var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+			while (progress.streamHasChanged()) {
 				if (stream.is(BrClose)) break;
 				walkStatement(openTok);
 			}
@@ -578,7 +681,8 @@ class TokenTreeBuilder {
 	function walkObjectDecl(parent:TokenTree) {
 		var openTok:TokenTree = stream.consumeTokenDef(BrOpen);
 		parent.addChild(openTok);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			if (stream.is(BrClose)) break;
 			if (stream.is(Comma)) {
 				openTok.addChild(stream.consumeToken());
@@ -595,21 +699,20 @@ class TokenTreeBuilder {
 	function walkPOpen(parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
 		parent.addChild(pOpen);
-		while (true) {
-			if (stream.is(POpen)) {
-				walkPOpen(pOpen);
-				continue;
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
+			switch (stream.token()) {
+				case POpen:
+					walkPOpen(pOpen);
+				case BrOpen:
+					walkObjectDecl(pOpen);
+				case BkOpen:
+					walkArrayAccess(pOpen);
+				case PClose:
+					break;
+				default:
+					walkIdentifier(pOpen);
 			}
-			if (stream.is(BrOpen)) {
-				walkObjectDecl(pOpen);
-				continue;
-			}
-			if (stream.is(BkOpen)) {
-				walkArrayAccess(pOpen);
-				continue;
-			}
-			if (stream.is(PClose)) break;
-			walkStatement(pOpen);
 		}
 		pOpen.addChild(stream.consumeTokenDef(PClose));
 	}
@@ -618,7 +721,8 @@ class TokenTreeBuilder {
 		var bkOpen:TokenTree = stream.consumeTokenDef(BkOpen);
 		parent.addChild(bkOpen);
 		var tempStore:Array<TokenTree> = [];
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case POpen:
 					for (stored in tempStore) bkOpen.addChild(stored);
@@ -710,7 +814,8 @@ class TokenTreeBuilder {
 		walkComment(switchTok);
 		var brOpen:TokenTree = stream.consumeTokenDef(BrOpen);
 		switchTok.addChild(brOpen);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case BrClose:
 					break;
@@ -724,7 +829,8 @@ class TokenTreeBuilder {
 	}
 
 	function walkComment(parent:TokenTree) {
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Comment(_), CommentLine(_):
 					var comment:TokenTree = stream.consumeToken();
@@ -736,7 +842,8 @@ class TokenTreeBuilder {
 	}
 
 	function walkSwitchExpr(parent:TokenTree) {
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case POpen:
 					walkPOpen(parent);
@@ -797,7 +904,8 @@ class TokenTreeBuilder {
 		var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 		caseTok.addChild(dblDot);
 		var newChild:TokenTree = null;
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdCase), Kwd(KwdDefault), BrClose:
 					return;
@@ -810,7 +918,8 @@ class TokenTreeBuilder {
 	}
 
 	function walkCaseExpr(parent:TokenTree) {
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case POpen:
 					walkPOpen(parent);
@@ -1001,7 +1110,8 @@ class TokenTreeBuilder {
 		pOpen.addChild(iterator);
 		var inTok:TokenTree = stream.consumeTokenDef(Kwd(KwdIn));
 		iterator.addChild(inTok);
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			if (stream.is(PClose)) break;
 			walkStatement(inTok);
 		}
@@ -1055,7 +1165,8 @@ class TokenTreeBuilder {
 
 	function walkSharpIfExpr(parent:TokenTree) {
 		var childToken:TokenTree;
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Unop(OpNot):
 					childToken = stream.consumeToken();
@@ -1077,7 +1188,8 @@ class TokenTreeBuilder {
 
 	function walkSharpExpr(parent:TokenTree) {
 		var prefixes:Array<TokenTree> = [];
-		while (true) {
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdClass):
 					walkClass(parent, prefixes);
