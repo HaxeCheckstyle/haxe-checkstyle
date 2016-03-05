@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.coding;
 
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.checks.Check.FieldParent;
@@ -6,7 +6,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("VariableInitialisation")
-@desc("Checks if the normal variables are initialised at class level")
+@desc("Checks if instance variables are initialised at class level")
 class VariableInitialisationCheck extends Check {
 
 	override function actualRun() {

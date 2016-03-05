@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.VariableInitialisationCheck;
+import checkstyle.checks.coding.VariableInitialisationCheck;
 
 class VariableInitialisationCheckTest extends CheckTestCase {
 
