@@ -25,7 +25,7 @@ class Check {
 			try {
 				actualRun();
 			}
-			catch(e:String) {
+			catch (e:String) {
 				//exception
 			}
 		}

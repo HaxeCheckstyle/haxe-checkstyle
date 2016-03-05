@@ -43,7 +43,7 @@ test/checks/size/MethodLengthCheckTest.hx:18: characters 14-16 : Info: Magic num
 test/checks/whitespace/EmptyLinesCheckTest.hx:51: character 0 : Info: Too many consecutive empty lines (> 1)
 test/checks/whitespace/EmptyLinesCheckTest.hx:67: character 0 : Info: Too many consecutive empty lines (> 1)
 test/checks/whitespace/IndentationCharacterCheckTest.hx:30: character 0 : Info: Wrong indentation character (should be tab)
-test/checks/whitespace/SpacingCheckTest.hx:69: character 3 : Info: Trailing whitespace
-test/checks/whitespace/SpacingCheckTest.hx:78: character 3 : Info: Trailing whitespace
+test/checks/whitespace/SpacingCheckTest.hx:74: character 3 : Info: Trailing whitespace
+test/checks/whitespace/SpacingCheckTest.hx:83: character 3 : Info: Trailing whitespace
 test/checks/whitespace/TabForAligningCheckTest.hx:19: character 17 : Info: Tab after non-space character. Use space for aligning
 test/checks/whitespace/TrailingWhitespaceCheckTest.hx:15: character 28 : Info: Trailing whitespace

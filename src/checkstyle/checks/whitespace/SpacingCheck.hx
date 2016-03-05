@@ -18,6 +18,7 @@ class SpacingCheck extends Check {
 	public var spaceForLoop:Bool;
 	public var spaceWhileLoop:Bool;
 	public var spaceSwitchCase:Bool;
+	public var spaceCatch:Bool;
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -28,6 +29,7 @@ class SpacingCheck extends Check {
 		spaceForLoop = true;
 		spaceWhileLoop = true;
 		spaceSwitchCase = true;
+		spaceCatch = true;
 		ignoreRangeOperator = true;
 	}
 
@@ -56,11 +58,12 @@ class SpacingCheck extends Check {
 				case EWhile(econd, _, true) if (spaceWhileLoop):
 					checkSpaceBetweenExpressions('while', e, econd);
 				case ESwitch(eswitch, _, _) if (spaceSwitchCase):
-					var prevExprUntilSwitch = checker.file.content.substring(lastExpr.pos.min, eswitch.pos.min + 1);
-					var switchPos = prevExprUntilSwitch.lastIndexOf('switch(');
-					if (switchPos > -1) {
-						var fileSwitchPos = lastExpr.pos.min + switchPos;
-						logRange('No space between switch and (', fileSwitchPos, fileSwitchPos + 'switch('.length, severity);
+					checkSpaceBetweenManually('switch', lastExpr, eswitch);
+				case ETry(etry, catches) if (spaceCatch):
+					var exprBeforeCatch = lastExpr;
+					for (ctch in catches) {
+						checkSpaceBetweenManually('catch', exprBeforeCatch, ctch.expr);
+						exprBeforeCatch = ctch.expr;
 					}
 				default:
 			}
@@ -87,7 +90,16 @@ class SpacingCheck extends Check {
 
 	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr) {
 		if (e2.pos.min - e1.pos.min < '$name ('.length) {
-			logRange('No space between $name and (', e1.pos.min, e2.pos.min, severity);
+			logRange('No space between $name and (', e1.pos.max, e2.pos.min, severity);
+		}
+	}
+
+	function checkSpaceBetweenManually(name:String, before:Expr, check:Expr) {
+		var prevExprUntilChecked = checker.file.content.substring(before.pos.min, check.pos.min + 1);
+		var checkPos = prevExprUntilChecked.lastIndexOf('$name(');
+		if (checkPos > -1) {
+			var fileCheckPos = before.pos.min + checkPos;
+			logRange('No space between $name and (', fileCheckPos, fileCheckPos + '$name('.length, severity);
 		}
 	}
 }

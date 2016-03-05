@@ -31,6 +31,11 @@ class SpacingCheckTest extends CheckTestCase {
 		assertMsg(new SpacingCheck(), SpacingTests.TEST6A, 'No space between switch and (');
 		assertNoMsg(new SpacingCheck(), SpacingTests.TEST6B);
 	}
+
+	public function testCatch() {
+		assertMsg(new SpacingCheck(), SpacingTests.TEST7A, 'No space between catch and (');
+		assertNoMsg(new SpacingCheck(), SpacingTests.TEST7B);
+	}
 }
 
 class SpacingTests {
@@ -111,6 +116,22 @@ class SpacingTests {
 				case 1:
 				case _:
 			}
+		}
+	}";
+
+	public static inline var TEST7A:String =
+	"class Test {
+		public function test() {
+			try {}
+			catch(e:Dynamic) {}
+		}
+	}";
+
+	public static inline var TEST7B:String =
+	"class Test {
+		public function test() {
+			try {}
+			catch (e:Dynamic) {}
 		}
 	}";
 }

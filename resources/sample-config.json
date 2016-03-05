@@ -381,9 +381,14 @@
 			"type": "Spacing",
 			"props": {
 				"severity": "INFO",
+				"spaceAroundBinop": true,
+				"noSpaceAroundUnop": true,
 				"spaceIfCondition": true,
-				"spaceAroundBinop": true,
-				"spaceAroundBinop": true,
+				"spaceIfCondition": true,
+				"spaceForLoop": true,
+				"spaceWhileLoop": true,
+				"spaceSwitchCase": true,
+				"spaceCatch": true,
 				"ignoreRangeOperator": true
 			}
 		},
