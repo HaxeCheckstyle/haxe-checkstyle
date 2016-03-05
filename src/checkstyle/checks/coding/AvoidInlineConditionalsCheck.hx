@@ -13,7 +13,7 @@ class AvoidInlineConditionalsCheck extends Check {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
 				case ETernary(econd, eif, eelse):
-					logPos('Avoid inline conditionals', e.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Avoid inline conditionals', e.pos, severity);
 				default:
 			}
 		});

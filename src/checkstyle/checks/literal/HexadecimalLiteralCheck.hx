@@ -33,7 +33,7 @@ class HexadecimalLiteralCheck extends Check {
 			var bodyExpected = bodyActual;
 			if (option.toLowerCase() == "lowercase") bodyExpected = bodyExpected.toLowerCase();
 			else bodyExpected = bodyExpected.toUpperCase();
-			if (bodyExpected != bodyActual) logPos('Bad hexademical literal, use ' + option, p, Reflect.field(SeverityLevel, severity));
+			if (bodyExpected != bodyActual) logPos('Bad hexademical literal, use ' + option, p, severity);
 		}
 	}
 }

@@ -20,7 +20,7 @@ class LineLengthCheck extends Check {
 			var line = checker.lines[i];
 			if (line.length > max) {
 				if (isLineSuppressed(i)) continue;
-				log('Too long line (> ${max})', i + 1, 0, line.length, Reflect.field(SeverityLevel, severity));
+				log('Too long line (> ${max})', i + 1, 0, line.length, severity);
 			}
 		}
 	}

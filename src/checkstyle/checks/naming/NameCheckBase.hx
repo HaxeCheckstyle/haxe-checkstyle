@@ -80,7 +80,7 @@ class NameCheckBase extends Check {
 	}
 
 	function warn(type:String, name:String, pos:Position) {
-		logPos('Invalid ${type} signature: ${name} (name should be ~/${format}/)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Invalid ${type} signature: ${name} (name should be ~/${format}/)', pos, severity);
 	}
 }
 

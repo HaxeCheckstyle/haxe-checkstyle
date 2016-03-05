@@ -52,6 +52,6 @@ class NestedForDepthCheck extends Check {
 
 	function warnNestedForDepth(depth:Int, pos:Position) {
 		logPos('Nested for depth is $depth (max allowed is ${max})',
-		pos, Reflect.field(SeverityLevel, severity));
+		pos, severity);
 	}
 }

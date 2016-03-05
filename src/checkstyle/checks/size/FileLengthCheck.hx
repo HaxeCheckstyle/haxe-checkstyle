@@ -23,6 +23,6 @@ class FileLengthCheck extends Check {
 				default:
 			}
 		}
-		if (checker.lines.length > max) log('Too many lines in file (> ${max})', checker.lines.length, 0, null, Reflect.field(SeverityLevel, severity));
+		if (checker.lines.length > max) log('Too many lines in file (> ${max})', checker.lines.length, 0, null, severity);
 	}
 }

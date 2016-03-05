@@ -50,11 +50,11 @@ class EmptyLinesCheck extends Check {
 
 	function checkComment(i, start, regex) {
 		if (i > 0 && regex.match(StringTools.trim(checker.lines[i - 1]))) {
-			log('Empty line not allowed after comment(s)', start, 0, null, Reflect.field(SeverityLevel, severity));
+			log('Empty line not allowed after comment(s)', start, 0, null, severity);
 		}
 	}
 
 	function logInfo(pos) {
-		log('Too many consecutive empty lines (> ${max})', pos, 0, null, Reflect.field(SeverityLevel, severity));
+		log('Too many consecutive empty lines (> ${max})', pos, 0, null, severity);
 	}
 }

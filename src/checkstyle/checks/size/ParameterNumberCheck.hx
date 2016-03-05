@@ -35,6 +35,6 @@ class ParameterNumberCheck extends Check {
 	}
 
 	function warnMaxParameter(name:String, pos:Position) {
-		logPos('Too many parameters for function: ${name} (> ${max})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Too many parameters for function: ${name} (> ${max})', pos, severity);
 	}
 }

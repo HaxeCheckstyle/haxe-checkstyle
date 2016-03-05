@@ -41,6 +41,6 @@ class AnonymousCheck extends Check {
 	}
 
 	function error(name:String, pos:Position) {
-		logPos('Anonymous structure found, it is advised to use a typedef instead \"${name}\"', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Anonymous structure found, it is advised to use a typedef instead \"${name}\"', pos, severity);
 	}
 }

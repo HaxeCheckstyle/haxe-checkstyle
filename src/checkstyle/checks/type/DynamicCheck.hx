@@ -24,6 +24,6 @@ class DynamicCheck extends Check {
 	}
 
 	function error(name:String, pos:Position) {
-		logPos('Dynamic type used: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Dynamic type used: ${name}', pos, severity);
 	}
 }

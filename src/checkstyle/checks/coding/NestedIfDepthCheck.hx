@@ -50,6 +50,6 @@ class NestedIfDepthCheck extends Check {
 	}
 
 	function warnNestedIfDepth(depth:Int, pos:Position) {
-		logPos('Nested if-else depth is $depth (max allowed is ${max})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Nested if-else depth is $depth (max allowed is ${max})', pos, severity);
 	}
 }

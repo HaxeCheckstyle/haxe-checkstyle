@@ -1,11 +1,12 @@
 package checkstyle;
 
+@:enum
 @SuppressWarnings('checkstyle:MemberName')
-enum SeverityLevel {
-	INFO;
-	WARNING;
-	ERROR;
-	IGNORE;
+abstract SeverityLevel(String) from String {
+	var INFO = "INFO";
+	var WARNING = "WARNING";
+	var ERROR = "ERROR";
+	var IGNORE = "IGNORE";
 }
 
 typedef LintMessage = {

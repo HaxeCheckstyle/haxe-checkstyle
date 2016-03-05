@@ -8,20 +8,20 @@ import haxeparser.Data;
 
 class Check {
 
-	public var severity:String;
+	public var severity:SeverityLevel;
 
 	var messages:Array<LintMessage>;
 	var moduleName:String;
 	var checker:Checker;
 
 	public function new() {
-		severity = "INFO";
+		severity = SeverityLevel.INFO;
 	}
 
 	public function run(checker:Checker):Array<LintMessage> {
 		this.checker = checker;
 		messages = [];
-		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) {
+		if (severity != SeverityLevel.IGNORE) {
 			try {
 				actualRun();
 			}

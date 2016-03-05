@@ -126,14 +126,14 @@ class EmptyBlockCheck extends Check {
 
 	function checkForText(brOpen:TokenTree) {
 		if (brOpen.childs.length == 1) {
-			logPos('Empty block should contain a comment or a statement', brOpen.pos, Reflect.field(SeverityLevel, severity));
+			logPos('Empty block should contain a comment or a statement', brOpen.pos, severity);
 			return;
 		}
 	}
 
 	function checkForStatement(brOpen:TokenTree) {
 		if (brOpen.childs.length == 1) {
-			logPos('Empty block should contain a statement', brOpen.pos, Reflect.field(SeverityLevel, severity));
+			logPos('Empty block should contain a statement', brOpen.pos, severity);
 			return;
 		}
 		var onlyComments:Bool = true;
@@ -147,7 +147,7 @@ class EmptyBlockCheck extends Check {
 			}
 		}
 		if (onlyComments) {
-			logPos('Block should contain a statement', brOpen.pos, Reflect.field(SeverityLevel, severity));
+			logPos('Block should contain a statement', brOpen.pos, severity);
 		}
 	}
 
@@ -157,7 +157,7 @@ class EmptyBlockCheck extends Check {
 		}
 		var brClose:TokenTree = brOpen.childs[0];
 		if (brOpen.pos.max != brClose.pos.min) {
-			logPos("Empty block should be written as {}", brOpen.pos, Reflect.field(SeverityLevel, severity));
+			logPos("Empty block should be written as {}", brOpen.pos, severity);
 		}
 	}
 }

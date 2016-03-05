@@ -32,7 +32,7 @@ class SimplifyBooleanExpressionCheck extends Check {
 		if (parent.is(Binop(OpEq)) || parent.is(Binop(OpNotEq)) || parent.is(Unop(OpNot)) ||
 			parent.is(Binop(OpOr)) || parent.is(Binop(OpAnd)) || parent.is(Binop(OpBoolOr)) ||
 			parent.is(Binop(OpBoolAnd))) {
-			logPos('Boolean expression can be simplified', token.pos, Reflect.field(SeverityLevel, severity));
+			logPos('Boolean expression can be simplified', token.pos, severity);
 		}
 	}
 }

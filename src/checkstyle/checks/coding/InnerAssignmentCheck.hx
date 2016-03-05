@@ -32,7 +32,7 @@ class InnerAssignmentCheck extends Check {
 		for (assignToken in allAssignments) {
 			if (isPosSuppressed(assignToken.pos)) continue;
 			if (!filterAssignment(assignToken)) continue;
-			logPos('Inner assignment detected', assignToken.pos, Reflect.field(SeverityLevel, severity));
+			logPos('Inner assignment detected', assignToken.pos, severity);
 		}
 	}
 

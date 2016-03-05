@@ -46,7 +46,7 @@ class MultipleStringLiteralsCheck extends Check {
 					if (checkLiteralCount(s, allLiterals)) {
 						if (isPosSuppressed(literalToken.pos)) continue;
 						logPos('Multiple string literal "$s" detected - consider using a constant',
-						literalToken.pos, Reflect.field(SeverityLevel, severity));
+						literalToken.pos, severity);
 					}
 				default:
 			}

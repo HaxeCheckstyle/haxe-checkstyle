@@ -55,18 +55,18 @@ class RedundantModifierCheck extends Check {
 	}
 
 	function warnPrivateKeyword(name:String, pos:Position) {
-		logPos('No need of private keyword: ${name} (fields are by default private in classes)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need of private keyword: ${name} (fields are by default private in classes)', pos, severity);
 	}
 
 	function warnPublicKeyword(name:String, pos:Position) {
-		logPos('No need of public keyword: ${name} (fields are by default public in interfaces)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need of public keyword: ${name} (fields are by default public in interfaces)', pos, severity);
 	}
 
 	function warnPrivateKeywordMissing(name:String, pos:Position) {
-		logPos('Missing private keyword: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Missing private keyword: ${name}', pos, severity);
 	}
 
 	function warnPublicKeywordMissing(name:String, pos:Position) {
-		logPos('Missing public keyword: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Missing public keyword: ${name}', pos, severity);
 	}
 }

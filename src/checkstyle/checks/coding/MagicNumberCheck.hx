@@ -33,11 +33,11 @@ class MagicNumberCheck extends Check {
 				case Const(CInt(n)):
 					var number:Int = Std.parseInt(n);
 					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, severity);
 				case Const(CFloat(n)):
 					var number:Float = Std.parseFloat(n);
 					if (ignoreNumbers.indexOf(number) >= 0) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, severity);
 				default:
 			}
 		}

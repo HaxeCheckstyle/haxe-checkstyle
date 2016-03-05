@@ -114,7 +114,7 @@ class HiddenFieldCheck extends Check {
 		switch (token.tok) {
 			case Const(CIdent(name)):
 				if (memberNames.indexOf(name) >= 0) {
-					logPos('$logText of "$name" masks member of same name', token.pos, Reflect.field(SeverityLevel, severity));
+					logPos('$logText of "$name" masks member of same name', token.pos, severity);
 				}
 			default:
 		}

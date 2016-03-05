@@ -64,6 +64,6 @@ class MethodLengthCheck extends Check {
 	}
 
 	function warnFunctionLength(name:String, pos:Position) {
-		logPos('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos, severity);
 	}
 }

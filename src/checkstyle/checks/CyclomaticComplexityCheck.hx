@@ -93,7 +93,7 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	function notify(method:Target, complexity:Int, risk:Threshold) {
-		logPos('Function \"${method.name}\" is too complex (score: $complexity).', method.pos, Reflect.field(SeverityLevel, risk.severity));
+		logPos('Function \"${method.name}\" is too complex (score: $complexity).', method.pos, risk.severity);
 	}
 }
 

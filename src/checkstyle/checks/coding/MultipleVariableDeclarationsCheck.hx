@@ -14,7 +14,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
 				case EVars(vars):
-					if (vars.length > 1) logPos('Each variable declaration must be in its own statement', e.pos, Reflect.field(SeverityLevel, severity));
+					if (vars.length > 1) logPos('Each variable declaration must be in its own statement', e.pos, severity);
 				default:
 
 			}
@@ -23,7 +23,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 		for (i in 0 ... checker.lines.length) {
 			if (isLineSuppressed(i)) return;
 			var line = checker.lines[i];
-			if (~/(var ).*(var ).*;$/.match(line)) log('Only one variable definition per line allowed', i, 0, null, Reflect.field(SeverityLevel, severity));
+			if (~/(var ).*(var ).*;$/.match(line)) log('Only one variable definition per line allowed', i, 0, null, severity);
 		}
 	}
 }

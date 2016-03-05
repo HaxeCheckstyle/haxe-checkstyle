@@ -101,15 +101,15 @@ class ReturnCheck extends Check {
 	}
 
 	function warnVoid(name:String, pos:Position) {
-		logPos('No need to return Void, Default function return value type is Void: ${name}', pos, Reflect.field(SeverityLevel, severity));
+		logPos('No need to return Void, Default function return value type is Void: ${name}', pos, severity);
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
 		if (name == null) {
-			logPos('Return type not specified for anonymous function', pos, Reflect.field(SeverityLevel, severity));
+			logPos('Return type not specified for anonymous function', pos, severity);
 		}
 		else {
-			logPos('Return type not specified for function: ${name}', pos, Reflect.field(SeverityLevel, severity));
+			logPos('Return type not specified for function: ${name}', pos, severity);
 		}
 	}
 }

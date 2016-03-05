@@ -11,7 +11,7 @@ class TrailingWhitespaceCheck extends Check {
 		var re = ~/\s+$/;
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
-			if (re.match(line)) log('Trailing whitespace', i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
+			if (re.match(line)) log('Trailing whitespace', i + 1, line.length, null, severity);
 		}
 	}
 }

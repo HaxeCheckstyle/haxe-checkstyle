@@ -17,7 +17,7 @@ class AvoidStarImportCheck extends Check {
 		for (entry in importEntries) {
 			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
-			logPos("Import line uses a star (.*) import - consider using full type names", entry.pos, Reflect.field(SeverityLevel, severity));
+			logPos("Import line uses a star (.*) import - consider using full type names", entry.pos, severity);
 		}
 	}
 }

@@ -157,11 +157,11 @@ class NeedBracesCheck extends Check {
 		}
 		else {
 			if (singleLine) {
-				logPos('Body of "${TokenDefPrinter.print(parent.tok)}" on same line', child.pos, Reflect.field(SeverityLevel, severity));
+				logPos('Body of "${TokenDefPrinter.print(parent.tok)}" on same line', child.pos, severity);
 				return;
 			}
 		}
-		logPos('No braces used for body of "${TokenDefPrinter.print(parent.tok)}"', child.pos, Reflect.field(SeverityLevel, severity));
+		logPos('No braces used for body of "${TokenDefPrinter.print(parent.tok)}"', child.pos, severity);
 	}
 
 	function checkIfElseSingleline(parent:TokenTree, child:TokenTree):Bool {
