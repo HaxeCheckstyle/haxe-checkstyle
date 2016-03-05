@@ -161,7 +161,7 @@ class Checker {
 	public function run(f:LintFile) {
 		for (reporter in reporters) reporter.fileStart(file);
 
-		this.file = f;
+		file = f;
 		try {
 			findLineSeparator();
 			makeLines();
