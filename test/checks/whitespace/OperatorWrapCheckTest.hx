@@ -9,8 +9,8 @@ class OperatorWrapCheckTest extends CheckTestCase {
 
 	public function testCorrectWrap() {
 		var check = new OperatorWrapCheck();
-		assertMsg(check, OperatorWrapTests.CORRECT_EOL_WRAP, '');
-		assertMsg(check, OperatorWrapTests.TYPE_PARAM, '');
+		assertNoMsg(check, OperatorWrapTests.CORRECT_EOL_WRAP);
+		assertNoMsg(check, OperatorWrapTests.TYPE_PARAM);
 	}
 
 	public function testIncorrectWrap() {
@@ -21,9 +21,9 @@ class OperatorWrapCheckTest extends CheckTestCase {
 	public function testOptionNL() {
 		var check = new OperatorWrapCheck();
 		check.option = "nl";
-		assertMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_PLUS, '');
-		assertMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_GT, '');
-		assertMsg(check, OperatorWrapTests.TYPE_PARAM, '');
+		assertNoMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_PLUS);
+		assertNoMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_GT);
+		assertNoMsg(check, OperatorWrapTests.TYPE_PARAM);
 
 		assertMsg(check, OperatorWrapTests.CORRECT_EOL_WRAP, MSG_GT_NL);
 	}
