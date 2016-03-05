@@ -108,7 +108,7 @@ class Main {
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
-		checker.addReporter(createReporter());
+		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
@@ -157,11 +157,11 @@ class Main {
 		Sys.exit(0);
 	}
 
-	static function createReporter():IReporter {
+	static function createReporter(numFiles:Int):IReporter {
 		return switch (REPORT_TYPE) {
-			case "xml": new XMLReporter(XML_PATH, STYLE);
-			case "json": new JSONReporter(JSON_PATH);
-			case "text": new TextReporter(TEXT_PATH);
+			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE);
+			case "json": new JSONReporter(numFiles, JSON_PATH);
+			case "text": new TextReporter(numFiles, TEXT_PATH);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
