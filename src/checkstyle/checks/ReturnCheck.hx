@@ -27,6 +27,7 @@ class ReturnCheck extends Check {
 	}
 
 	function checkField(f:Field) {
+		if (isPosExtern(f.pos)) return;
 		var noReturn = false;
 		switch (f.kind) {
 			case FFun(fun):
