@@ -11,11 +11,7 @@ class ChecksInfo {
 	public function new() {
 		name2info = new Map();
 
-		CompileTime.importPackage("checkstyle.checks"); // must be string constant
-		CompileTime.importPackage("checkstyle.checks.block");
-		CompileTime.importPackage("checkstyle.checks.naming");
-		CompileTime.importPackage("checkstyle.checks.size");
-		CompileTime.importPackage("checkstyle.checks.whitespace");
+		CompileTime.importPackage("checkstyle.checks");
 		var checksClasses = CompileTime.getAllClasses(Check);
 
 		for (cl in checksClasses) {
