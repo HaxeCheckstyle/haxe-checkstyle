@@ -149,8 +149,11 @@ class Main {
 		for (check in info.checks()) checker.addCheck(info.build(check.name));
 	}
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function listChecks() {
-		for (check in info.checks()) {
+		var checks:Array<CheckInfo> = [for (check in info.checks()) check];
+		checks.sort(function(c1:CheckInfo, c2:CheckInfo):Int return (c1.name < c2.name) ? -1 : 1);
+		for (check in checks) {
 			Sys.println(check.name + ":");
 			Sys.println("  " + check.description + "\n");
 		}
