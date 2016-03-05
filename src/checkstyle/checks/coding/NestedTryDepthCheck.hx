@@ -1,12 +1,12 @@
-package checkstyle.checks;
+package checkstyle.checks.coding;
 
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("NestedForDepth")
-@desc("Max number of nested for blocks (default 1)")
-class NestedForDepthCheck extends Check {
+@name("NestedTryDepth")
+@desc("Max number of nested try blocks (default 1)")
+class NestedTryDepthCheck extends Check {
 
 	public var max:Int;
 
@@ -28,7 +28,7 @@ class NestedForDepthCheck extends Check {
 	function scanBlock(e:Expr, depth:Int) {
 		if (e == null) return;
 		if (depth > max) {
-			warnNestedForDepth(depth, e.pos);
+			warnNestedTryDepth(depth, e.pos);
 			return;
 		}
 		switch (e.expr) {
@@ -41,17 +41,21 @@ class NestedForDepthCheck extends Check {
 	function scanExprs(exprs:Array<Expr>, depth:Int) {
 		for (e in exprs) {
 			switch (e.expr) {
-				case EFor(_, expr):
+				case ETry(expr, catches):
 					scanBlock(expr, depth + 1);
-				case EWhile(_, expr, _):
-					scanBlock(expr, depth + 1);
+					scanCatches(catches, depth + 1);
 				default:
 			}
 		}
 	}
 
-	function warnNestedForDepth(depth:Int, pos:Position) {
-		logPos('Nested for depth is $depth (max allowed is ${max})',
-		pos, Reflect.field(SeverityLevel, severity));
+	function scanCatches(catches:Array<Catch>, depth:Int) {
+		for (c in catches) {
+			scanBlock(c.expr, depth);
+		}
+	}
+
+	function warnNestedTryDepth(depth:Int, pos:Position) {
+		logPos('Nested try depth is $depth (max allowed is ${max})', pos, Reflect.field(SeverityLevel, severity));
 	}
 }

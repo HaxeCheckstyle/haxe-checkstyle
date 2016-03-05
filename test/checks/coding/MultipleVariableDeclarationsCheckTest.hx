@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.MultipleVariableDeclarationsCheck;
+import checkstyle.checks.coding.MultipleVariableDeclarationsCheck;
 
 class MultipleVariableDeclarationsCheckTest extends CheckTestCase {
 

@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.NestedForDepthCheck;
+import checkstyle.checks.coding.NestedForDepthCheck;
 
 class NestedForDepthCheckTest extends CheckTestCase {
 

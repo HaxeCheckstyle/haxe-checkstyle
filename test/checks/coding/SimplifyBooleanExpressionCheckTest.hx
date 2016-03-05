@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.SimplifyBooleanExpressionCheck;
+import checkstyle.checks.coding.SimplifyBooleanExpressionCheck;
 
 class SimplifyBooleanExpressionCheckTest extends CheckTestCase {
 

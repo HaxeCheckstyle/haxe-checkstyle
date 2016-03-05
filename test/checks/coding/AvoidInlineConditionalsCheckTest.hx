@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.AvoidInlineConditionalsCheck;
+import checkstyle.checks.coding.AvoidInlineConditionalsCheck;
 
 class AvoidInlineConditionalsCheckTest extends CheckTestCase {
 

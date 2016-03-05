@@ -1,6 +1,6 @@
-package checks;
+package checks.coding;
 
-import checkstyle.checks.HiddenFieldCheck;
+import checkstyle.checks.coding.HiddenFieldCheck;
 
 class HiddenFieldCheckTest extends CheckTestCase {
 
