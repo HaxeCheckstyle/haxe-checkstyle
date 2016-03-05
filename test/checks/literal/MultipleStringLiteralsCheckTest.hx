@@ -1,6 +1,6 @@
-package checks.coding;
+package checks.literal;
 
-import checkstyle.checks.coding.MultipleStringLiteralsCheck;
+import checkstyle.checks.literal.MultipleStringLiteralsCheck;
 
 class MultipleStringLiteralsCheckTest extends CheckTestCase {
 
