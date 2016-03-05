@@ -3,7 +3,7 @@ package checkstyle.checks.whitespace;
 import checkstyle.Checker.LinePos;
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
-import checkstyle.token.TokenTreeCheckHelper;
+import checkstyle.utils.TokenTreeCheckHelper;
 import haxeparser.Data;
 import haxe.macro.Expr;
 

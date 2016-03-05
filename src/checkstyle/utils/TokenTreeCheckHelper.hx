@@ -1,4 +1,6 @@
-package checkstyle.token;
+package checkstyle.utils;
+
+import checkstyle.token.TokenTree;
 
 class TokenTreeCheckHelper {
 
