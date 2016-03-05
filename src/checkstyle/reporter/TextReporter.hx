@@ -21,7 +21,8 @@ class TextReporter extends BaseReporter {
 		}
 
 		var line = sb.toString();
-		output.writeString(applyColour(line, m.severity));
+		if (Sys.systemName() == "Windows") output.writeString(applyColour(line, m.severity));
+		else Sys.print(applyColour(line, m.severity));
 		if (file != null) report.add(line);
 	}
 }

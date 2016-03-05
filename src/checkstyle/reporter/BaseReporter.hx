@@ -33,7 +33,7 @@ class BaseReporter implements IReporter {
 		infos = 0;
 		total = 0;
 		Sys.println("");
-		Sys.println(styleText('Running Checkstyle on $numFiles source files...', Style.BOLD));
+		Sys.println(styleText('Running Checkstyle v' + CompileTime.parseJsonFile("package.json").version + ' on $numFiles source files...', Style.BOLD));
 		Sys.println("");
 	}
 

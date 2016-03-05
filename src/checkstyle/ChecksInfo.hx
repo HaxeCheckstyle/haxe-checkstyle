@@ -2,6 +2,7 @@ package checkstyle;
 
 import checkstyle.checks.Check;
 
+@SuppressWarnings("checkstyle:Dynamic")
 class ChecksInfo {
 
 	var name2info:Map<String, CheckInfo>;
@@ -18,13 +19,15 @@ class ChecksInfo {
 
 		for (cl in checksClasses) {
 			if (ignoreClass(cl)) continue;
-			var name = getCheckNameFromClass(cl);
-			var desc = getCheckDescription(cl);
-			name2info[name] = {
-				name: name,
-				description: desc,
-				clazz: cl
-			};
+			var names:Array<Dynamic> = getCheckNameFromClass(cl);
+			for (name in names) {
+				var desc = getCheckDescription(cl);
+				name2info[name] = {
+					name: name,
+					description: desc,
+					clazz: cl
+				};
+			}
 		}
 	}
 
@@ -33,15 +36,14 @@ class ChecksInfo {
 		return (meta.ignore != null);
 	}
 
-	static function getCheckNameFromClass(cl:Class<Check>):String {
+	static function getCheckNameFromClass(cl:Class<Check>):Array<Dynamic> {
 		var meta = haxe.rtti.Meta.getType(cl);
 		if (meta.name == null) throw '${Type.getClassName(cl)} have no @name meta.';
-		if (meta.name.length != 1) throw '${Type.getClassName(cl)} @name meta should have exactly one argument';
-		return meta.name[0];
+		return meta.name;
 	}
 
 	public static function getCheckName(check:Check):String {
-		return getCheckNameFromClass(Type.getClass(check));
+		return getCheckNameFromClass(Type.getClass(check))[0];
 	}
 
 	function getCheckDescription(cl:Class<Check>):String {
