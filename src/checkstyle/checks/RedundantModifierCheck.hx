@@ -4,9 +4,9 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("PublicPrivate")
-@desc("Check for explicit use of private in classes and abstracts and public in interfaces/externs")
-class PublicPrivateCheck extends Check {
+@name("RedundantModifer", "PublicPrivate")
+@desc("Checks for redundant modifiers")
+class RedundantModifierCheck extends Check {
 
 	public var enforcePublicPrivate:Bool;
 
