@@ -11,7 +11,7 @@ class TypeCheckTest extends CheckTestCase {
 	public function testStaticClassVar() {
 		assertMsg(new TypeCheck(), TypeTests.TEST2, 'Type not specified: A');
 	}
-	
+
 	public function testEnumAbstract() {
 		assertMsg(new TypeCheck(), TypeTests.TEST3, '');
 		assertMsg(new TypeCheck(), TypeTests.TEST4, 'Type not specified: VALUE');

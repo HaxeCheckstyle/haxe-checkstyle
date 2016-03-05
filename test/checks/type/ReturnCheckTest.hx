@@ -4,15 +4,20 @@ import checkstyle.checks.type.ReturnCheck;
 
 class ReturnCheckTest extends CheckTestCase {
 
+	static inline var MSG_VOID_RETURN:String = 'No need to return Void, Default function return value type is Void: test';
+	static inline var MSG_NOT_TEST1_RETURN:String = 'Return type not specified for function: test1';
+	static inline var MSG_NOT_TEST2_RETURN:String = 'Return type not specified for function: test2';
+	static inline var MSG_NO_ANON_RETURN:String = 'Return type not specified for anonymous function';
+
 	public function testVoid() {
-		assertMsg(new ReturnCheck(), ReturnTests.TEST1, 'No need to return Void, Default function return value type is Void: test');
+		assertMsg(new ReturnCheck(), ReturnTests.TEST1, MSG_VOID_RETURN);
 	}
 
 	public function testNoReturnType() {
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2, 'Return type not specified for function: test1');
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2a, 'Return type not specified for function: test1');
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2b, 'Return type not specified for function: test1');
-		assertMsg(new ReturnCheck(), ReturnTests.TEST5, 'Return type not specified for anonymous function');
+		assertMsg(new ReturnCheck(), ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), ReturnTests.TEST2A, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), ReturnTests.TEST2B, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), ReturnTests.TEST5, MSG_NO_ANON_RETURN);
 	}
 
 	public function testEmptyReturnType() {
@@ -31,15 +36,15 @@ class ReturnCheckTest extends CheckTestCase {
 		check.enforceReturnType = true;
 
 		assertMsg(check, ReturnTests.TEST1, '');
-		assertMsg(check, ReturnTests.TEST2, 'Return type not specified for function: test1');
-		assertMsg(check, ReturnTests.TEST3, 'Return type not specified for function: test2');
+		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, ReturnTests.TEST3, MSG_NOT_TEST2_RETURN);
 	}
 
 	public function testReturnTypeAllowEmptyReturnFalse() {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = false;
 
-		assertMsg(check, ReturnTests.TEST3, 'Return type not specified for function: test2');
+		assertMsg(check, ReturnTests.TEST3, MSG_NOT_TEST2_RETURN);
 	}
 
 	public function testReturnTypeAllowEmptyReturnTrue() {
@@ -47,7 +52,7 @@ class ReturnCheckTest extends CheckTestCase {
 		check.allowEmptyReturn = true;
 
 		assertMsg(check, ReturnTests.TEST3, '');
-		assertMsg(check, ReturnTests.TEST2, 'Return type not specified for function: test1');
+		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
 	}
 
 	public function testExternVoid() {
@@ -71,7 +76,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST2a:String =
+	public static inline var TEST2A:String =
 	"abstractAndClass Test {
 		public function test1() {
 			switch (true) {
@@ -81,7 +86,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST2b:String =
+	public static inline var TEST2B:String =
 	"abstractAndClass Test {
 		public function test1() {
 			try {

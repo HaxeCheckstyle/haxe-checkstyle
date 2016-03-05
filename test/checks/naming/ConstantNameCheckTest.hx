@@ -12,18 +12,20 @@ class ConstantNameCheckTest extends CheckTestCase {
 
 	public function testWrongNaming() {
 		var check = new ConstantNameCheck ();
-		assertMsg(check, ConstantNameTests.TEST1, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
-		assertMsg(check, ConstantNameTests.TEST2, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
+		var message = 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)';
+		assertMsg(check, ConstantNameTests.TEST1, message);
+		assertMsg(check, ConstantNameTests.TEST2, message);
 	}
 
 	public function testIgnoreExtern() {
 		var check = new ConstantNameCheck ();
 		check.ignoreExtern = false;
 
+		var message = 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)';
 		assertMsg(check, ConstantNameTests.TEST, '');
-		assertMsg(check, ConstantNameTests.TEST1, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
-		assertMsg(check, ConstantNameTests.TEST2, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
-		assertMsg(check, ConstantNameTests.TEST3, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
+		assertMsg(check, ConstantNameTests.TEST1, message);
+		assertMsg(check, ConstantNameTests.TEST2, message);
+		assertMsg(check, ConstantNameTests.TEST3, message);
 	}
 
 	public function testTokenINLINE() {

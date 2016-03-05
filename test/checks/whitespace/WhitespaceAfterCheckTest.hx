@@ -4,6 +4,10 @@ import checkstyle.checks.whitespace.WhitespaceAfterCheck;
 
 class WhitespaceAfterCheckTest extends CheckTestCase {
 
+	static inline var MSG_COMMA:String = 'No whitespace after ","';
+	static inline var MSG_EQUALS:String = 'No whitespace after "="';
+	static inline var MSG_GREATER:String = 'No whitespace after ">"';
+
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
 		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
@@ -19,9 +23,9 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 
 	public function testIncorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC, 'No whitespace after ","');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, 'No whitespace after ","');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, 'No whitespace after ","');
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC, MSG_COMMA);
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, MSG_COMMA);
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, MSG_COMMA);
 	}
 
 	public function testIncorrectWhitespaceToken() {
@@ -30,14 +34,14 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC, '');
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, '');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, 'No whitespace after "="');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, 'No whitespace after "="');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, 'No whitespace after "="');
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		check.tokens = [">"];
 		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, 'No whitespace after ">"');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, 'No whitespace after ">"');
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_GREATER);
+		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, MSG_GREATER);
 	}
 }
 

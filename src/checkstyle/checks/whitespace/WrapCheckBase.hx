@@ -47,7 +47,7 @@ class WrapCheckBase extends Check {
 			}
 			if (~/^\s*(\/\/.*|\/\*.*|)$/.match(after)) {
 				if (option != EOL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must on a new line', tok.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be on a new line', tok.pos, Reflect.field(SeverityLevel, severity));
 				}
 			}
 		}

@@ -2,6 +2,7 @@ package checks.size;
 
 import checkstyle.checks.size.FileLengthCheck;
 
+@SuppressWarnings('checkstyle:MagicNumber')
 class FileLengthCheckTest extends CheckTestCase {
 
 	public function testCorrectLineCount() {

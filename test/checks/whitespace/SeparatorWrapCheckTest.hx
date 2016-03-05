@@ -4,6 +4,12 @@ import checkstyle.checks.whitespace.SeparatorWrapCheck;
 
 class SeparatorWrapCheckTest extends CheckTestCase {
 
+	static inline var MSG_COMMA_EOL:String = 'Token "," must be at the end of the line';
+	static inline var MSG_DOT_EOL:String = 'Token "." must be at the end of the line';
+
+	static inline var MSG_COMMA_NL:String = 'Token "," must be on a new line';
+	static inline var MSG_DOT_NL:String = 'Token "." must be on a new line';
+
 	public function testCorrectWrap() {
 		var check = new SeparatorWrapCheck();
 		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, '');
@@ -17,11 +23,11 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 
 	public function testIncorrectWrap() {
 		var check = new SeparatorWrapCheck();
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_FUNC, 'Token "," must be at the end of the line');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_OBJECT_DECL, 'Token "," must be at the end of the line');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_ARRAY, 'Token "," must be at the end of the line');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_CALL, 'Token "." must be at the end of the line');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_IMPORT, 'Token "." must be at the end of the line');
+		assertMsg(check, SeparatorWrapTests.NL_WRAP_FUNC, MSG_COMMA_EOL);
+		assertMsg(check, SeparatorWrapTests.NL_WRAP_OBJECT_DECL, MSG_COMMA_EOL);
+		assertMsg(check, SeparatorWrapTests.NL_WRAP_ARRAY, MSG_COMMA_EOL);
+		assertMsg(check, SeparatorWrapTests.NL_WRAP_CALL, MSG_DOT_EOL);
+		assertMsg(check, SeparatorWrapTests.NL_WRAP_IMPORT, MSG_DOT_EOL);
 	}
 
 	public function testOptionNL() {
@@ -38,9 +44,9 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 		assertMsg(check, SeparatorWrapTests.NOWRAP_CALL, '');
 		assertMsg(check, SeparatorWrapTests.NOWRAP_IMPORT, '');
 
-		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, 'Token "," must on a new line');
-		assertMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY, 'Token "," must on a new line');
-		assertMsg(check, SeparatorWrapTests.EOL_WRAP_IMPORT, 'Token "." must on a new line');
+		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, MSG_COMMA_NL);
+		assertMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY, MSG_COMMA_NL);
+		assertMsg(check, SeparatorWrapTests.EOL_WRAP_IMPORT, MSG_DOT_NL);
 	}
 }
 

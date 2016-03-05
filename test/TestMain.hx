@@ -3,9 +3,10 @@ import token.TokenTreeBuilderTest;
 
 class TestMain {
 
+	@SuppressWarnings("checkstyle:AvoidInlineConditionals")
 	public function new() {
 		CompileTime.importPackage("checks");
-		
+
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new TokenTreeBuilderTest());
 

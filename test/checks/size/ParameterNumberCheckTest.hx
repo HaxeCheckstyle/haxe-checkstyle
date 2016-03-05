@@ -21,6 +21,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		assertMsg(check, ParameterNumberTests.TEST3, 'Too many parameters for function: test2 (> 7)');
 	}
 
+	@SuppressWarnings('checkstyle:MagicNumber')
 	public function testMaxParameter() {
 		var check = new ParameterNumberCheck();
 		check.max = 11;
@@ -91,7 +92,7 @@ class ParameterNumberTests {
 			return;
 		}
 	}";
-	
+
 	public static inline var TEST4:String =
 	"abstractAndClass Test {
 		public function test3(param1:Int,

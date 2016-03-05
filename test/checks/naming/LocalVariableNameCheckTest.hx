@@ -12,8 +12,9 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 
 	public function testWrongNaming() {
 		var check = new LocalVariableNameCheck ();
-		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
+		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
+		assertMsg(check, LocalVariableNameTests.TEST1, message);
+		assertMsg(check, LocalVariableNameTests.TEST3, message);
 	}
 
 	public function testIgnoreExtern() {
@@ -21,9 +22,11 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		assertMsg(check, LocalVariableNameTests.TEST, '');
-		assertMsg(check, LocalVariableNameTests.TEST1, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, LocalVariableNameTests.TEST3, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, LocalVariableNameTests.TEST4, 'Invalid local var signature: Count (name should be ~/${check.format}/)');
+
+		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
+		assertMsg(check, LocalVariableNameTests.TEST1, message);
+		assertMsg(check, LocalVariableNameTests.TEST3, message);
+		assertMsg(check, LocalVariableNameTests.TEST4, message);
 	}
 
 	public function testFormat() {

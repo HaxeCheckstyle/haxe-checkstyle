@@ -4,6 +4,17 @@ import checkstyle.checks.block.NeedBracesCheck;
 
 class NeedBracesCheckTest extends CheckTestCase {
 
+	static inline var PREFIX:String = 'No braces used for body of ';
+	static inline var MSG_IF:String = PREFIX + '"if"';
+	static inline var MSG_ELSE:String = PREFIX + '"else"';
+	static inline var MSG_FOR:String = PREFIX + '"for"';
+	static inline var MSG_WHILE:String = PREFIX + '"while"';
+
+	static inline var MSG_SAME_LINE_IF:String = 'Body of "if" on same line';
+	static inline var MSG_SAME_LINE_ELSE:String = 'Body of "else" on same line';
+	static inline var MSG_SAME_LINE_FOR:String = 'Body of "for" on same line';
+	static inline var MSG_SAME_LINE_WHILE:String = 'Body of "while" on same line';
+
 	public function testCorrectBraces() {
 		var check = new NeedBracesCheck ();
 		assertMsg(check, NeedBracesTests.TEST, '');
@@ -20,37 +31,37 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testWrongBraces() {
 		var check = new NeedBracesCheck ();
-		assertMsg(check, NeedBracesTests.TEST1, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST2, 'No braces used for body of "else"');
-		assertMsg(check, NeedBracesTests.TEST4, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST6, 'No braces used for body of "for"');
-		assertMsg(check, NeedBracesTests.TEST7, 'No braces used for body of "while"');
-		assertMsg(check, NeedBracesTests.TEST11, 'No braces used for body of "if"');
+		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
+		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
+		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
+		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
 	}
 
 	public function testNoAllowSingleLine() {
 		var check = new NeedBracesCheck ();
 		check.allowSingleLineStatement = false;
 
-		assertMsg(check, NeedBracesTests.TEST, 'Body of "while" on same line');
-		assertMsg(check, NeedBracesTests.TEST1, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST2, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_WHILE);
+		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
 		assertMsg(check, NeedBracesTests.TEST3, '');
-		assertMsg(check, NeedBracesTests.TEST4, 'No braces used for body of "if"');
+		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
 		assertMsg(check, NeedBracesTests.TEST5, '');
-		assertMsg(check, NeedBracesTests.TEST6, 'No braces used for body of "for"');
-		assertMsg(check, NeedBracesTests.TEST7, 'No braces used for body of "while"');
+		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
+		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
 		assertMsg(check, NeedBracesTests.TEST8, '');
-		assertMsg(check, NeedBracesTests.TEST9, 'Body of "for" on same line');
-		assertMsg(check, NeedBracesTests.TEST10, 'Body of "if" on same line');
-		assertMsg(check, NeedBracesTests.TEST11, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST12, 'No braces used for body of "else"');
-		assertMsg(check, NeedBracesTests.TEST13, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST14, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST9, MSG_SAME_LINE_FOR);
+		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
+		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
 		assertMsg(check, NeedBracesTests.INTERFACE_DEF, '');
 	}
 
-	public function testTokenFOR() {
+	public function testTokenFor() {
 		var check = new NeedBracesCheck ();
 		check.tokens = ["FOR"];
 
@@ -60,7 +71,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST3, '');
 		assertMsg(check, NeedBracesTests.TEST4, '');
 		assertMsg(check, NeedBracesTests.TEST5, '');
-		assertMsg(check, NeedBracesTests.TEST6, 'No braces used for body of "for"');
+		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
 		assertMsg(check, NeedBracesTests.TEST7, '');
 		assertMsg(check, NeedBracesTests.TEST8, '');
 		assertMsg(check, NeedBracesTests.TEST9, '');
@@ -71,68 +82,68 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST14, '');
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, 'Body of "for" on same line');
-		assertMsg(check, NeedBracesTests.TEST9, 'Body of "for" on same line');
+		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_FOR);
+		assertMsg(check, NeedBracesTests.TEST9, MSG_SAME_LINE_FOR);
 	}
 
-	public function testTokenIF() {
+	public function testTokenIf() {
 		var check = new NeedBracesCheck ();
 		check.tokens = ["IF"];
 
 		assertMsg(check, NeedBracesTests.TEST, '');
-		assertMsg(check, NeedBracesTests.TEST1, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST2, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
 		assertMsg(check, NeedBracesTests.TEST3, '');
-		assertMsg(check, NeedBracesTests.TEST4, 'No braces used for body of "if"');
+		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
 		assertMsg(check, NeedBracesTests.TEST5, '');
 		assertMsg(check, NeedBracesTests.TEST6, '');
 		assertMsg(check, NeedBracesTests.TEST7, '');
 		assertMsg(check, NeedBracesTests.TEST8, '');
 		assertMsg(check, NeedBracesTests.TEST9, '');
 		assertMsg(check, NeedBracesTests.TEST10, '');
-		assertMsg(check, NeedBracesTests.TEST11, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST12, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
 		assertMsg(check, NeedBracesTests.TEST13, '');
-		assertMsg(check, NeedBracesTests.TEST14, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, 'Body of "if" on same line');
-		assertMsg(check, NeedBracesTests.TEST10, 'Body of "if" on same line');
-		assertMsg(check, NeedBracesTests.TEST11, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST13, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST14, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_IF);
+		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
 	}
 
-	public function testTokenELSE_IF() {
+	public function testTokenElseIf() {
 		var check = new NeedBracesCheck ();
 		check.tokens = ["IF", "ELSE_IF"];
 
 		assertMsg(check, NeedBracesTests.TEST, '');
-		assertMsg(check, NeedBracesTests.TEST1, 'No braces used for body of "if"');
-		assertMsg(check, NeedBracesTests.TEST2, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
+		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
 		assertMsg(check, NeedBracesTests.TEST3, '');
-		assertMsg(check, NeedBracesTests.TEST4, 'No braces used for body of "if"');
+		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
 		assertMsg(check, NeedBracesTests.TEST5, '');
 		assertMsg(check, NeedBracesTests.TEST6, '');
 		assertMsg(check, NeedBracesTests.TEST7, '');
 		assertMsg(check, NeedBracesTests.TEST8, '');
 		assertMsg(check, NeedBracesTests.TEST9, '');
 		assertMsg(check, NeedBracesTests.TEST10, '');
-		assertMsg(check, NeedBracesTests.TEST11, 'No braces used for body of "if"');
+		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
 		assertMsg(check, NeedBracesTests.TEST12, '');
 		assertMsg(check, NeedBracesTests.TEST13, '');
 		assertMsg(check, NeedBracesTests.TEST14, '');
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, 'Body of "if" on same line');
-		assertMsg(check, NeedBracesTests.TEST10, 'Body of "if" on same line');
-		assertMsg(check, NeedBracesTests.TEST11, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST12, 'No braces used for body of "else"');
-		assertMsg(check, NeedBracesTests.TEST13, 'Body of "else" on same line');
-		assertMsg(check, NeedBracesTests.TEST14, 'No braces used for body of "else"');
+		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_IF);
+		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
+		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
 	}
 
-	public function testTokenWHILE() {
+	public function testTokenWhile() {
 		var check = new NeedBracesCheck ();
 		check.tokens = ["WHILE"];
 
@@ -143,7 +154,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST4, '');
 		assertMsg(check, NeedBracesTests.TEST5, '');
 		assertMsg(check, NeedBracesTests.TEST6, '');
-		assertMsg(check, NeedBracesTests.TEST7, 'No braces used for body of "while"');
+		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
 		assertMsg(check, NeedBracesTests.TEST8, '');
 		assertMsg(check, NeedBracesTests.TEST9, '');
 		assertMsg(check, NeedBracesTests.TEST10, '');
@@ -153,7 +164,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 		assertMsg(check, NeedBracesTests.TEST14, '');
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, 'Body of "while" on same line');
+		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_WHILE);
 	}
 }
 

@@ -2,6 +2,7 @@ package checks.coding;
 
 import checkstyle.checks.coding.HiddenFieldCheck;
 
+@SuppressWarnings('checkstyle:MultipleStringLiterals')
 class HiddenFieldCheckTest extends CheckTestCase {
 
 	public function testCorrectHidden() {

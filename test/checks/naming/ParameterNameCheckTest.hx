@@ -22,12 +22,13 @@ class ParameterNameCheckTest extends CheckTestCase {
 		var check = new ParameterNameCheck ();
 		check.ignoreExtern = false;
 
+		var paramNameMessage = 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)';
 		assertMsg(check, ParameterNameTests.TEST, '');
 		assertMsg(check, ParameterNameTests.TEST2, '');
 		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
+		assertMsg(check, ParameterNameTests.TEST3, paramNameMessage);
 		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
+		assertMsg(check, ParameterNameTests.TEST5, paramNameMessage);
 	}
 
 	public function testFormat() {

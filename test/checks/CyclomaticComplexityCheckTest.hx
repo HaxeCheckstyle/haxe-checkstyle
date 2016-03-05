@@ -18,7 +18,6 @@ class CyclomaticComplexityCheckTest extends CheckTestCase {
 class CyclomaticComplexityTests {
 	public static inline var TEST:String = "
 	class Test {
-	
 		function test() {
 			var a:Array<Int> = [0, 5, 20];
 			for (i in 0 ... a.length) {

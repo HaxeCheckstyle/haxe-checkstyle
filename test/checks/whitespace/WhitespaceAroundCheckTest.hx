@@ -4,6 +4,8 @@ import checkstyle.checks.whitespace.WhitespaceAroundCheck;
 
 class WhitespaceAroundCheckTest extends CheckTestCase {
 
+	static inline var MSG_EQUALS:String = 'No whitespace around "="';
+
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAroundCheck();
 		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
@@ -17,20 +19,20 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 
 	public function testIncorrectWhitespace() {
 		var check = new WhitespaceAroundCheck();
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_OBJECT_DECL, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_TYPEDEF, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_59, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_63, 'No whitespace around "="');
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.ISSUE_59, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.ISSUE_63, MSG_EQUALS);
 	}
 
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAroundCheck();
 		check.tokens = ["="];
 		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_GT, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_OBJECT_DECL, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_TYPEDEF, 'No whitespace around "="');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_VAR_INIT, 'No whitespace around "="');
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_GT, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
+		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		check.tokens = [">"];
 		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');

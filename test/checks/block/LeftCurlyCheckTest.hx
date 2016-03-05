@@ -4,6 +4,11 @@ import checkstyle.checks.block.LeftCurlyCheck;
 
 class LeftCurlyCheckTest extends CheckTestCase {
 
+	static inline var MSG_EOL:String = 'Left curly should be at EOL (only linebreak or comment after curly)';
+	static inline var MSG_NL:String = 'Left curly should be on new line (only whitespace before curly)';
+	static inline var MSG_NL_SPLIT:String = 'Left curly should be on new line (previous expression is split over muliple lines)';
+	static inline var MSG_NLOW:String = 'Left curly should be at EOL (previous expression is not split over muliple lines)';
+
 	public function testCorrectBraces() {
 		var check = new LeftCurlyCheck();
 		assertMsg(check, LeftCurlyTests.TEST, '');
@@ -19,27 +24,27 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testWrongBraces() {
 		var check = new LeftCurlyCheck();
-		assertMsg(check, LeftCurlyTests.TEST1, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST2, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST3, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST3, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST5, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST7, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.TEST10, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.TEST1, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST2, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST3, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST3, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST5, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST7, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.TEST10, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, MSG_EOL);
 	}
 
 	public function testBraceOnNL() {
 		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
 
-		assertMsg(check, LeftCurlyTests.TEST, 'Left curly should be on new line (only whitespace before curly)');
+		assertMsg(check, LeftCurlyTests.TEST, MSG_NL);
 		assertMsg(check, LeftCurlyTests.TEST13, '');
 
 		check.tokens = [LeftCurlyCheck.OBJECT_DECL];
-		assertMsg(check, LeftCurlyTests.TEST4, 'Left curly should be on new line (only whitespace before curly)');
-		assertMsg(check, LeftCurlyTests.TEST14, 'Left curly should be on new line (only whitespace before curly)');
+		assertMsg(check, LeftCurlyTests.TEST4, MSG_NL);
+		assertMsg(check, LeftCurlyTests.TEST14, MSG_NL);
 
 		check.tokens = [LeftCurlyCheck.IF];
 		assertMsg(check, LeftCurlyTests.TEST1, '');
@@ -58,8 +63,8 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.option = LeftCurlyCheck.NL;
 		assertMsg(check, LeftCurlyTests.TEST15, '');
 		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, '');
-		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
-		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, 'Left curly should be on new line (only whitespace before curly)');
+		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, MSG_NL);
+		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, MSG_NL);
 	}
 
 	public function testNLOW() {
@@ -69,22 +74,22 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.TEST12, '');
 		assertMsg(check, LeftCurlyTests.TEST16, '');
 		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, '');
-		assertMsg(check, LeftCurlyTests.TEST17, 'Left curly should be at EOL (previous expression is not split over muliple lines)');
-		assertMsg(check, LeftCurlyTests.TEST18, 'Left curly should be on new line (previous expression is split over muliple lines)');
-		assertMsg(check, LeftCurlyTests.TEST19, 'Left curly should be on new line (previous expression is split over muliple lines)');
+		assertMsg(check, LeftCurlyTests.TEST17, MSG_NLOW);
+		assertMsg(check, LeftCurlyTests.TEST18, MSG_NL_SPLIT);
+		assertMsg(check, LeftCurlyTests.TEST19, MSG_NL_SPLIT);
 	}
 
 	public function testReification() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [LeftCurlyCheck.REIFICATION];
-		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, MSG_EOL);
 	}
 
 	public function testIgnoreEmptySingleline() {
 		var check = new LeftCurlyCheck();
 		check.ignoreEmptySingleline = false;
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, 'Left curly should be at EOL (only linebreak or comment after curly)');
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, 'Left curly should be at EOL (only linebreak or comment after curly)');
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, MSG_EOL);
+		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, MSG_EOL);
 
 		check.ignoreEmptySingleline = true;
 		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, '');

@@ -4,11 +4,13 @@ import checkstyle.checks.coding.SimplifyBooleanExpressionCheck;
 
 class SimplifyBooleanExpressionCheckTest extends CheckTestCase {
 
+	static inline var MSG_SIMPLIFY:String = 'Boolean expression can be simplified';
+
 	public function testWrongExpression() {
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST1, 'Boolean expression can be simplified');
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST2, 'Boolean expression can be simplified');
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST3, 'Boolean expression can be simplified');
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST4, 'Boolean expression can be simplified');
+		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST1, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST2, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST3, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST4, MSG_SIMPLIFY);
 	}
 
 	public function testCorrectExpression() {

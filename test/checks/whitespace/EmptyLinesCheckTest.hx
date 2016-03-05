@@ -4,9 +4,12 @@ import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase {
 
+	static inline var MSG_TOO_MANY:String = 'Too many consecutive empty lines (> 1)';
+	static inline var MSG_AFTER_COMMENT:String = 'Empty line not allowed after comment(s)';
+
 	public function testDefaultEmptyLines() {
 		var msg = checkMessage(EmptyLinesTests.TEST1, new EmptyLinesCheck());
-		assertEquals(msg, 'Too many consecutive empty lines (> 1)');
+		assertEquals(msg, MSG_TOO_MANY);
 	}
 
 	public function testCorrectEmptyLines() {
@@ -27,10 +30,10 @@ class EmptyLinesCheckTest extends CheckTestCase {
 		check.allowEmptyLineAfterSingleLineComment = false;
 
 		var msg = checkMessage(EmptyLinesTests.TEST4, check);
-		assertEquals(msg, 'Empty line not allowed after comment(s)');
+		assertEquals(msg, MSG_AFTER_COMMENT);
 
 		msg = checkMessage(EmptyLinesTests.TEST5, check);
-		assertEquals(msg, 'Empty line not allowed after comment(s)');
+		assertEquals(msg, MSG_AFTER_COMMENT);
 	}
 
 	public function testEmptyLineAfterMultiLineComment() {
@@ -38,10 +41,10 @@ class EmptyLinesCheckTest extends CheckTestCase {
 		check.allowEmptyLineAfterMultiLineComment = false;
 
 		var msg = checkMessage(EmptyLinesTests.TEST6, check);
-		assertEquals(msg, 'Empty line not allowed after comment(s)');
+		assertEquals(msg, MSG_AFTER_COMMENT);
 
 		msg = checkMessage(EmptyLinesTests.TEST7, check);
-		assertEquals(msg, 'Empty line not allowed after comment(s)');
+		assertEquals(msg, MSG_AFTER_COMMENT);
 	}
 
 	public function testAllowEmptyLineAfterComment() {

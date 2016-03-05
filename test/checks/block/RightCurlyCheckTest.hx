@@ -4,6 +4,10 @@ import checkstyle.checks.block.RightCurlyCheck;
 
 class RightCurlyCheckTest extends CheckTestCase {
 
+	static inline var MSG_ALONE:String = 'Right curly should be alone on a new line';
+	static inline var MSG_NOT_SAME_LINE:String = 'Right curly should not be on same line as left curly';
+	static inline var MSG_SAME_LINE:String = 'Right curly should be on same line as following block (e.g. "} else" or "} catch")';
+
 	public function testCorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
 		assertMsg(check, RightCurlyTests.ALONE_OR_SINGLELINE_CORRECT, '');
@@ -43,9 +47,9 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testIncorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, 'Right curly should be alone on a new line');
-		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
+		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, MSG_ALONE);
+		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
 	public function testCorrectSame() {
@@ -74,22 +78,22 @@ class RightCurlyCheckTest extends CheckTestCase {
 	public function testIncorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = RightCurlyCheck.SAME;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
 
-		assertMsg(check, RightCurlyTests.ALONE_IF, 'Right curly should be on same line as following block (e.g. "} else" or "} catch")');
-		assertMsg(check, RightCurlyTests.ALONE_TRY_CATCH, 'Right curly should be on same line as following block (e.g. "} else" or "} catch")');
+		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
+		assertMsg(check, RightCurlyTests.ALONE_TRY_CATCH, MSG_SAME_LINE);
 	}
 
 	public function testCorrectAlone() {
@@ -115,24 +119,24 @@ class RightCurlyCheckTest extends CheckTestCase {
 	public function testIncorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = RightCurlyCheck.ALONE;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FUNCTION, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, 'Right curly should not be on same line as left curly');
-		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_FUNCTION, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
+		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
 
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, 'Right curly should be alone on a new line');
-		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
+		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, MSG_ALONE);
+		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
 	public function testTokenIF() {
@@ -140,23 +144,23 @@ class RightCurlyCheckTest extends CheckTestCase {
 		check.tokens = [RightCurlyCheck.IF];
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, '');
 		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
 		assertMsg(check, RightCurlyTests.ALONE_IF, '');
 		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
 
 		check.option = RightCurlyCheck.SAME;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, '');
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_IF, 'Right curly should be on same line as following block (e.g. "} else" or "} catch")');
+		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
 		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
 
 		check.option = RightCurlyCheck.ALONE;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, 'Right curly should be alone on a new line');
+		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
 		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
 		assertMsg(check, RightCurlyTests.ALONE_IF, '');
 		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
@@ -168,10 +172,10 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
 
 		check.option = RightCurlyCheck.SAME;
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 
 		check.option = RightCurlyCheck.ALONE;
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, 'Right curly should not be on same line as left curly');
+		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 	}
 }
 

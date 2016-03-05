@@ -21,6 +21,7 @@ class MagicNumberCheckTest extends CheckTestCase {
 		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_FUNCTION, 'Magic number "10" detected - consider using a constant');
 	}
 
+	@SuppressWarnings('checkstyle:MagicNumber')
 	public function testIgnoreNumbers() {
 		var check = new MagicNumberCheck();
 		check.severity = "INFO";

@@ -10,13 +10,12 @@ import checkstyle.checks.Check;
 
 class CheckTestCase extends haxe.unit.TestCase {
 
-	static inline var FILE_NAME = "Test.hx";
+	static inline var FILE_NAME:String = "Test.hx";
 
-	var _checker:Checker;
-	var _reporter:TestReporter;
+	var checker:Checker;
+	var reporter:TestReporter;
 
-	override public function setup() {
-	}
+	override public function setup() {}
 
 	function assertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
 		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
@@ -28,7 +27,6 @@ class CheckTestCase extends haxe.unit.TestCase {
 	}
 
 	function actualAssertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
-		
 		var msg = checkMessage(testCase, check);
 		assertEquals(expected, msg, pos);
 	}
@@ -36,18 +34,18 @@ class CheckTestCase extends haxe.unit.TestCase {
 	function checkMessage(src, check):String {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independant checkMessage calls in a single test
-		_checker = new Checker();
-		_reporter = new TestReporter();
+		checker = new Checker();
+		reporter = new TestReporter();
 
-		_checker.addCheck(check);
-		_checker.addReporter(_reporter);
-		_checker.process([{name:FILE_NAME, content:src, index:0}]);
-		return _reporter.message;
+		checker.addCheck(check);
+		checker.addReporter(reporter);
+		checker.process([{name:FILE_NAME, content:src, index:0}]);
+		return reporter.message;
 	}
 
 	override public function tearDown() {
-		_checker = null;
-		_reporter = null;
+		checker = null;
+		reporter = null;
 	}
 }
 

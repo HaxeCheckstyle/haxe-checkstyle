@@ -14,6 +14,7 @@ class LineLengthCheckTest extends CheckTestCase {
 		assertEquals(msg, '');
 	}
 
+	@SuppressWarnings('checkstyle:MagicNumber')
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.max = 40;

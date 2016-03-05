@@ -4,6 +4,8 @@ import checkstyle.checks.coding.InnerAssignmentCheck;
 
 class InnerAssignmentCheckTest extends CheckTestCase {
 
+	static inline var MSG_INNER_ASSIGNMENT:String = 'Inner assignment detected';
+
 	public function testCorrectAssignment() {
 		var check = new InnerAssignmentCheck();
 		assertMsg(check, InnerAssignmentCheckTests.IF_EXPR, '');
@@ -14,10 +16,10 @@ class InnerAssignmentCheckTest extends CheckTestCase {
 
 	public function testIncorrectInnerAssignment() {
 		var check = new InnerAssignmentCheck();
-		assertMsg(check, InnerAssignmentCheckTests.IF_COND, 'Inner assignment detected');
-		assertMsg(check, InnerAssignmentCheckTests.IF_RETURN_EXPR, 'Inner assignment detected');
-		assertMsg(check, InnerAssignmentCheckTests.WHILE_COND_RETURN, 'Inner assignment detected');
-		assertMsg(check, InnerAssignmentCheckTests.SWITCH, 'Inner assignment detected');
+		assertMsg(check, InnerAssignmentCheckTests.IF_COND, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, InnerAssignmentCheckTests.IF_RETURN_EXPR, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, InnerAssignmentCheckTests.WHILE_COND_RETURN, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, InnerAssignmentCheckTests.SWITCH, MSG_INNER_ASSIGNMENT);
 	}
 }
 
