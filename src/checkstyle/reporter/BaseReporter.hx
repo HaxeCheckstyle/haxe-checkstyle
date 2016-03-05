@@ -15,8 +15,10 @@ class BaseReporter implements IReporter {
 
 	var report:StringBuf;
 	var file:FileOutput;
+	var numFiles:Int;
 
-	public function new(path:String) {
+	public function new(numFiles:Int, path:String) {
+		this.numFiles = numFiles;
 		if (path != null) {
 			var folder = Path.directory(path);
 			if (folder.length > 0 && !FileSystem.exists(folder)) FileSystem.createDirectory(folder);
@@ -31,7 +33,7 @@ class BaseReporter implements IReporter {
 		infos = 0;
 		total = 0;
 		Sys.println("");
-		Sys.println(styleText("Running Checkstyle...", Style.BOLD));
+		Sys.println(styleText('Running Checkstyle v' + CompileTime.parseJsonFile("package.json").version + ' on $numFiles source files...', Style.BOLD));
 		Sys.println("");
 	}
 

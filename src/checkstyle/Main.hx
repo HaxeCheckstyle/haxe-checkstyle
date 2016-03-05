@@ -66,20 +66,20 @@ class Main {
 		var configPath:String = null;
 
 		var argHandler = Args.generate([
-			@doc("Set reporter path") ["-p", "--path"] => function(loc:String) {
-				XML_PATH = loc;
-				JSON_PATH = loc;
-				TEXT_PATH = loc;
+			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) traverse(path, files),
+			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
+			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
+			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
+				XML_PATH = path;
+				JSON_PATH = path;
+				TEXT_PATH = path;
 			},
-			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(x:String) STYLE = x,
-			@doc("Set reporter (xml, json or text)") ["-r", "--reporter"] => function(reporterName:String) REPORT_TYPE = reporterName,
-			@doc("Set config (.json) file") ["-c", "--config"] => function(cpath:String) configPath = cpath,
-			@doc("List all available checks") ["--list-checks"] => function() listChecks(),
-			@doc("List all available reporters") ["--list-reporters"] => function() listReporters(),
-			@doc("Show report [DEPRECATED]") ["-report"] => function() {},
-			@doc("Show progress") ["-progress"] => function() SHOW_PROGRESS = true,
+			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(style:String) STYLE = style,
+			@doc("Show percentage progress") ["-progress"] => function() SHOW_PROGRESS = true,
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
-			@doc("Set source folder to process") ["-s", "--source"] => function(sourcePath:String) traverse(sourcePath, files),
+			@doc("List all available checks and exit") ["--list-checks"] => function() listChecks(),
+			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
+			@doc("Show report [DEPRECATED]") ["-report"] => function() {},
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
@@ -108,7 +108,7 @@ class Main {
 			var checks:Array<Dynamic> = config.checks;
 			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
 		}
-		checker.addReporter(createReporter());
+		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
@@ -150,21 +150,25 @@ class Main {
 	}
 
 	function listChecks() {
-		for (check in info.checks()) Sys.println('${check.name}: ${check.description}');
+		for (check in info.checks()) {
+			Sys.println(check.name + ":");
+			Sys.println("  " + check.description + "\n");
+		}
+		Sys.exit(0);
 	}
 
-	static function createReporter():IReporter {
+	static function createReporter(numFiles:Int):IReporter {
 		return switch (REPORT_TYPE) {
-			case "xml": new XMLReporter(XML_PATH, STYLE);
-			case "json": new JSONReporter(JSON_PATH);
-			case "text": new TextReporter(TEXT_PATH);
+			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE);
+			case "json": new JSONReporter(numFiles, JSON_PATH);
+			case "text": new TextReporter(numFiles, TEXT_PATH);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
 
 	static function listReporters() {
 		Sys.println("text - Text reporter (default)");
-		Sys.println("xml - Checkstyle XML reporter");
+		Sys.println("xml - XML reporter");
 		Sys.println("json - JSON reporter");
 		Sys.exit(0);
 	}
