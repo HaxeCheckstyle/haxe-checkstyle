@@ -4,7 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("RedundantModifer", "PublicPrivate")
+@name("RedundantModifier", "PublicPrivate")
 @desc("Checks for redundant modifiers")
 class RedundantModifierCheck extends Check {
 
