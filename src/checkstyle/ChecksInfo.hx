@@ -25,7 +25,7 @@ class ChecksInfo {
 				var desc = getCheckDescription(cl);
 				name2info[names[i]] = {
 					name: names[i],
-					description: (i == 0) ? desc : desc + " [DEPRECATED]",
+					description: (i == 0) ? desc : desc + " [DEPRECATED, use " + names[0] + " instead]",
 					clazz: cl
 				};
 			}
