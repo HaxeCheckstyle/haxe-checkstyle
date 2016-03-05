@@ -3,6 +3,7 @@ package checkstyle.checks.whitespace;
 import checkstyle.Checker.LinePos;
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
+import checkstyle.token.TokenTreeCheckHelper;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -125,8 +126,8 @@ class WhitespaceAroundCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
-			if (isTypeParameter(tok)) continue;
-			if (isImport(tok)) continue;
+			if (TokenTreeCheckHelper.isTypeParameter(tok)) continue;
+			if (TokenTreeCheckHelper.isImportMult(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -145,41 +146,4 @@ class WhitespaceAroundCheck extends Check {
 		}
 	}
 
-	function isImport(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpMult), Dot:
-				var parent:TokenTree = token.parent;
-				while (parent != null) {
-					switch (parent.tok) {
-						case Kwd(KwdMacro):
-						case Kwd(KwdExtern):
-						case Const(CIdent(_)):
-						case Dot:
-						case Kwd(KwdImport): return true;
-						default: return false;
-					}
-					parent = parent.parent;
-				}
-				return false;
-			default:
-				return false;
-		}
-	}
-
-	function isTypeParameter(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpGt):
-				return switch (token.parent.tok) {
-					case Binop(OpLt): true;
-					default: false;
-				}
-			case Binop(OpLt):
-				return switch (token.getLastChild().tok) {
-					case Binop(OpGt): true;
-					default: false;
-				}
-			default:
-				return false;
-		}
-	}
 }

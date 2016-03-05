@@ -3,6 +3,7 @@ package checkstyle.checks.whitespace;
 import checkstyle.Checker.LinePos;
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
+import checkstyle.token.TokenTreeCheckHelper;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -32,6 +33,8 @@ class WrapCheckBase extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
+			if (TokenTreeCheckHelper.isTypeParameter(tok)) continue;
+			if (TokenTreeCheckHelper.isImportMult(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
