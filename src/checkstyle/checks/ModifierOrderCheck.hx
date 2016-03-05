@@ -4,9 +4,9 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("AccessOrder")
-@desc("Checks order of access modifiers")
-class AccessOrderCheck extends Check {
+@name("ModifierOrder", "AccessOrder")
+@desc("Checks order of modifiers")
+class ModifierOrderCheck extends Check {
 
 	public static inline var PUBLIC_PRIVATE:String = "PUBLIC_PRIVATE";
 	public static inline var INLINE:String = "INLINE";
@@ -66,6 +66,6 @@ class AccessOrderCheck extends Check {
 	}
 
 	function warnOrder(name:String, modifier:String, pos:Position) {
-		logPos('Invalid access modifier order: ${name} (modifier: ${modifier})', pos, Reflect.field(SeverityLevel, severity));
+		logPos('Invalid modifier order: ${name} (modifier: ${modifier})', pos, Reflect.field(SeverityLevel, severity));
 	}
 }
