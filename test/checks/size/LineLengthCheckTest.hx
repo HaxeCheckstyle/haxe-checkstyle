@@ -5,13 +5,11 @@ import checkstyle.checks.size.LineLengthCheck;
 class LineLengthCheckTest extends CheckTestCase {
 
 	public function testDefaultLineLength() {
-		var msg = checkMessage(LineLengthTests.TEST1, new LineLengthCheck());
-		assertEquals(msg, 'Too long line (> 160)');
+		assertMsg(new LineLengthCheck(), LineLengthTests.TEST1, 'Too long line (> 160)');
 	}
 
 	public function testCorrectLineLength() {
-		var msg = checkMessage(LineLengthTests.TEST2, new LineLengthCheck());
-		assertEquals(msg, '');
+		assertNoMsg(new LineLengthCheck(), LineLengthTests.TEST2);
 	}
 
 	@SuppressWarnings('checkstyle:MagicNumber')
@@ -19,8 +17,7 @@ class LineLengthCheckTest extends CheckTestCase {
 		var check = new LineLengthCheck();
 		check.max = 40;
 
-		var msg = checkMessage(LineLengthTests.TEST3, check);
-		assertEquals(msg, 'Too long line (> 40)');
+		assertMsg(check, LineLengthTests.TEST3, 'Too long line (> 40)');
 	}
 }
 

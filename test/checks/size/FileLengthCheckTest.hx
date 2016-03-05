@@ -6,32 +6,24 @@ import checkstyle.checks.size.FileLengthCheck;
 class FileLengthCheckTest extends CheckTestCase {
 
 	public function testCorrectLineCount() {
-		var msg = checkMessage(FileLengthTests.TEST2000, new FileLengthCheck());
-		assertEquals('', msg);
-
-		msg = checkMessage(FileLengthTests.TEST41, new FileLengthCheck());
-		assertEquals('', msg);
+		assertNoMsg(new FileLengthCheck(), FileLengthTests.TEST2000);
+		assertNoMsg(new FileLengthCheck(), FileLengthTests.TEST41);
 	}
 
 	public function testDefaultFileLength() {
-		var msg = checkMessage(FileLengthTests.TEST2001, new FileLengthCheck());
-		assertEquals('Too many lines in file (> 2000)', msg);
+		assertMsg(new FileLengthCheck(), FileLengthTests.TEST2001, 'Too many lines in file (> 2000)');
 	}
 
 	public function testConfigurableFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
-
-		var msg = checkMessage(FileLengthTests.TEST41, check);
-		assertEquals('Too many lines in file (> 40)', msg);
+		assertMsg(check, FileLengthTests.TEST41, 'Too many lines in file (> 40)');
 	}
 
 	public function testSupressFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
-
-		var msg = checkMessage(FileLengthTests.TEST42, check);
-		assertEquals('', msg);
+		assertNoMsg(check, FileLengthTests.TEST42);
 	}
 }
 

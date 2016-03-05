@@ -38,7 +38,7 @@ test/checks/naming/MethodNameCheckTest.hx:5: characters 0-22 : Info: TODO commen
 test/checks/naming/MethodNameCheckTest.hx:134: character 1 : Info: Trailing whitespace
 test/checks/naming/ParameterNameCheckTest.hx:25: characters 25-106 : Info: Multiple string literal "Invalid parameter name signature: ParamName (name should be ~/${check.format}/)" detected - consider using a constant
 test/checks/naming/TypeNameCheckTest.hx:5: characters 0-22 : Info: TODO comment: TODO abstract tests
-test/checks/size/LineLengthCheckTest.hx:33: characters 0-210 : Error: Too long line (> 160)
+test/checks/size/LineLengthCheckTest.hx:30: characters 0-210 : Error: Too long line (> 160)
 test/checks/size/MethodLengthCheckTest.hx:18: characters 14-16 : Info: Magic number "10" detected - consider using a constant
 test/checks/whitespace/EmptyLinesCheckTest.hx:51: character 0 : Info: Too many consecutive empty lines (> 1)
 test/checks/whitespace/EmptyLinesCheckTest.hx:67: character 0 : Info: Too many consecutive empty lines (> 1)

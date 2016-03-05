@@ -5,13 +5,11 @@ import checkstyle.checks.whitespace.TabForAligningCheck;
 class TabForAligningCheckTest extends CheckTestCase {
 
 	public function testTab() {
-		var msg = checkMessage(TabForAlignTests.TEST1, new TabForAligningCheck());
-		assertEquals(msg, 'Tab after non-space character. Use space for aligning');
+		assertMsg(new TabForAligningCheck(), TabForAlignTests.TEST1, 'Tab after non-space character. Use space for aligning');
 	}
 
 	public function testMultiline() {
-		var msg = checkMessage(TabForAlignTests.TEST2, new TabForAligningCheck());
-		assertEquals(msg, '');
+		assertNoMsg(new TabForAligningCheck(), TabForAlignTests.TEST2);
 	}
 }
 

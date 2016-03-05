@@ -8,59 +8,40 @@ class EmptyLinesCheckTest extends CheckTestCase {
 	static inline var MSG_AFTER_COMMENT:String = 'Empty line not allowed after comment(s)';
 
 	public function testDefaultEmptyLines() {
-		var msg = checkMessage(EmptyLinesTests.TEST1, new EmptyLinesCheck());
-		assertEquals(msg, MSG_TOO_MANY);
+		assertMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST1, MSG_TOO_MANY);
 	}
 
 	public function testCorrectEmptyLines() {
-		var msg = checkMessage(EmptyLinesTests.TEST2, new EmptyLinesCheck());
-		assertEquals(msg, '');
+		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST2);
 	}
 
 	public function testConfigurableEmptyLines() {
 		var check = new EmptyLinesCheck();
 		check.max = 2;
-
-		var msg = checkMessage(EmptyLinesTests.TEST3, check);
-		assertEquals(msg, '');
+		assertNoMsg(check, EmptyLinesTests.TEST3);
 	}
 
 	public function testEmptyLineAfterSingleLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterSingleLineComment = false;
 
-		var msg = checkMessage(EmptyLinesTests.TEST4, check);
-		assertEquals(msg, MSG_AFTER_COMMENT);
-
-		msg = checkMessage(EmptyLinesTests.TEST5, check);
-		assertEquals(msg, MSG_AFTER_COMMENT);
+		assertMsg(check, EmptyLinesTests.TEST4, MSG_AFTER_COMMENT);
+		assertMsg(check, EmptyLinesTests.TEST5, MSG_AFTER_COMMENT);
 	}
 
 	public function testEmptyLineAfterMultiLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterMultiLineComment = false;
 
-		var msg = checkMessage(EmptyLinesTests.TEST6, check);
-		assertEquals(msg, MSG_AFTER_COMMENT);
-
-		msg = checkMessage(EmptyLinesTests.TEST7, check);
-		assertEquals(msg, MSG_AFTER_COMMENT);
+		assertMsg(check, EmptyLinesTests.TEST6, MSG_AFTER_COMMENT);
+		assertMsg(check, EmptyLinesTests.TEST7, MSG_AFTER_COMMENT);
 	}
 
 	public function testAllowEmptyLineAfterComment() {
-		var check = new EmptyLinesCheck();
-
-		var msg = checkMessage(EmptyLinesTests.TEST4, check);
-		assertEquals(msg, '');
-
-		var msg = checkMessage(EmptyLinesTests.TEST5, check);
-		assertEquals(msg, '');
-
-		var msg = checkMessage(EmptyLinesTests.TEST6, check);
-		assertEquals(msg, '');
-
-		msg = checkMessage(EmptyLinesTests.TEST7, check);
-		assertEquals(msg, '');
+		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST4);
+		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST5);
+		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST6);
+		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST7);
 	}
 }
 

@@ -5,26 +5,22 @@ import checkstyle.checks.whitespace.IndentationCharacterCheck;
 class IndentationCharacterCheckTest extends CheckTestCase {
 
 	public function testWrongIndentation() {
-		var msg = checkMessage(IndentationTests.TEST1, new IndentationCharacterCheck());
-		assertEquals(msg, 'Wrong indentation character (should be tab)');
+		assertMsg(new IndentationCharacterCheck(), IndentationTests.TEST1, 'Wrong indentation character (should be tab)');
 	}
 
 	public function testCorrectIndentation() {
-		var msg = checkMessage(IndentationTests.TEST2, new IndentationCharacterCheck());
-		assertEquals(msg, '');
+		assertNoMsg(new IndentationCharacterCheck(), IndentationTests.TEST2);
 	}
 
 	public function testConfigurableIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.character = "space";
 
-		var msg = checkMessage(IndentationTests.TEST3, check);
-		assertEquals(msg, 'Wrong indentation character (should be space)');
+		assertMsg(check, IndentationTests.TEST3, 'Wrong indentation character (should be space)');
 	}
 
 	public function testMultilineIfIndentation() {
-		var msg = checkMessage(IndentationTests.TEST4, new IndentationCharacterCheck());
-		assertEquals(msg, '');
+		assertNoMsg(new IndentationCharacterCheck(), IndentationTests.TEST4);
 	}
 }
 

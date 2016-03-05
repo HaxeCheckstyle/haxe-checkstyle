@@ -5,8 +5,7 @@ import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 class TrailingWhitespaceCheckTest extends CheckTestCase {
 
 	public function test() {
-		var msg = checkMessage(TrailingWhitespaceTests.TEST1, new TrailingWhitespaceCheck());
-		assertEquals(msg, 'Trailing whitespace');
+		assertMsg(new TrailingWhitespaceCheck(), TrailingWhitespaceTests.TEST1, 'Trailing whitespace');
 	}
 }
 
