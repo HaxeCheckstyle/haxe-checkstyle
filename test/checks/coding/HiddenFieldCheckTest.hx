@@ -7,11 +7,11 @@ class HiddenFieldCheckTest extends CheckTestCase {
 
 	public function testCorrectHidden() {
 		var check = new HiddenFieldCheck();
-		assertMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN, '');
+		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
 	}
 
 	public function testDetectHiddenFields() {
@@ -23,9 +23,9 @@ class HiddenFieldCheckTest extends CheckTestCase {
 	public function testDetectHiddenFieldsInConstructor() {
 		var check = new HiddenFieldCheck();
 		check.ignoreConstructorParameter = false;
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN, '');
-		assertMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS, '');
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR, 'Variable definition of "field2" masks member of same name');
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
@@ -34,10 +34,10 @@ class HiddenFieldCheckTest extends CheckTestCase {
 	public function testDetectHiddenFieldsInSetter() {
 		var check = new HiddenFieldCheck();
 		check.ignoreSetter = false;
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN, '');
-		assertMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR, '');
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER, 'Parameter definition of "field2" masks member of same name');
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
 	}
@@ -45,11 +45,11 @@ class HiddenFieldCheckTest extends CheckTestCase {
 	public function testDetectHiddenFieldsiRegEx() {
 		var check = new HiddenFieldCheck();
 		check.ignoreFormat = "^test$";
-		assertMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER, '');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, '');
+		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC);
 		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN, 'Variable definition of "field2" masks member of same name');
 	}
 }

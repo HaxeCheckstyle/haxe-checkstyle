@@ -9,7 +9,7 @@ class HexadecimalLiteralsCheckTest extends CheckTestCase {
 	}
 
 	public function test2() {
-		assertMsg(new HexadecimalLiteralCheck(), HexadecimalLiteralTests.TEST2, '');
+		assertNoMsg(new HexadecimalLiteralCheck(), HexadecimalLiteralTests.TEST2);
 	}
 
 	public function test3() {

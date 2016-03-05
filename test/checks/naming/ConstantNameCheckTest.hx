@@ -6,8 +6,8 @@ class ConstantNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
 		var check = new ConstantNameCheck ();
-		assertMsg(check, ConstantNameTests.TEST, '');
-		assertMsg(check, ConstantNameTests.TEST3, '');
+		assertNoMsg(check, ConstantNameTests.TEST);
+		assertNoMsg(check, ConstantNameTests.TEST3);
 	}
 
 	public function testWrongNaming() {
@@ -22,7 +22,7 @@ class ConstantNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		var message = 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)';
-		assertMsg(check, ConstantNameTests.TEST, '');
+		assertNoMsg(check, ConstantNameTests.TEST);
 		assertMsg(check, ConstantNameTests.TEST1, message);
 		assertMsg(check, ConstantNameTests.TEST2, message);
 		assertMsg(check, ConstantNameTests.TEST3, message);
@@ -32,20 +32,20 @@ class ConstantNameCheckTest extends CheckTestCase {
 		var check = new ConstantNameCheck ();
 		check.tokens = [ "INLINE" ];
 
-		assertMsg(check, ConstantNameTests.TEST, '');
-		assertMsg(check, ConstantNameTests.TEST1, '');
+		assertNoMsg(check, ConstantNameTests.TEST);
+		assertNoMsg(check, ConstantNameTests.TEST1);
 		assertMsg(check, ConstantNameTests.TEST2, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
-		assertMsg(check, ConstantNameTests.TEST3, '');
+		assertNoMsg(check, ConstantNameTests.TEST3);
 	}
 
 	public function testTokenNOTINLINE() {
 		var check = new ConstantNameCheck ();
 		check.tokens = [ "NOTINLINE" ];
 
-		assertMsg(check, ConstantNameTests.TEST, '');
+		assertNoMsg(check, ConstantNameTests.TEST);
 		assertMsg(check, ConstantNameTests.TEST1, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
-		assertMsg(check, ConstantNameTests.TEST2, '');
-		assertMsg(check, ConstantNameTests.TEST3, '');
+		assertNoMsg(check, ConstantNameTests.TEST2);
+		assertNoMsg(check, ConstantNameTests.TEST3);
 	}
 
 	public function testFormat() {
@@ -53,12 +53,12 @@ class ConstantNameCheckTest extends CheckTestCase {
 		check.format = "^[A-Z][a-z]*$";
 
 		assertMsg(check, ConstantNameTests.TEST, 'Invalid const signature: COUNT2 (name should be ~/^[A-Z][a-z]*$/)');
-		assertMsg(check, ConstantNameTests.TEST1, '');
-		assertMsg(check, ConstantNameTests.TEST2, '');
-		assertMsg(check, ConstantNameTests.TEST3, '');
+		assertNoMsg(check, ConstantNameTests.TEST1);
+		assertNoMsg(check, ConstantNameTests.TEST2);
+		assertNoMsg(check, ConstantNameTests.TEST3);
 
 		check.ignoreExtern = false;
-		assertMsg(check, ConstantNameTests.TEST3, '');
+		assertNoMsg(check, ConstantNameTests.TEST3);
 	}
 }
 

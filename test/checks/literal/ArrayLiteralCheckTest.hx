@@ -9,7 +9,7 @@ class ArrayLiteralCheckTest extends CheckTestCase {
 	}
 
 	public function testCorrectArrayInstantiation() {
-		assertMsg(new ArrayLiteralCheck(), ArrayLiteralTests.TEST2, '');
+		assertNoMsg(new ArrayLiteralCheck(), ArrayLiteralTests.TEST2);
 	}
 }
 

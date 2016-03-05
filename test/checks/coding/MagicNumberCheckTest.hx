@@ -7,8 +7,8 @@ class MagicNumberCheckTest extends CheckTestCase {
 	public function testNoMagicNumber() {
 		var check = new MagicNumberCheck();
 		check.severity = "INFO";
-		assertMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS, '');
-		assertMsg(check, MagicNumberCheckTests.ALLOWED_MAGIC_NUMBER, '');
+		assertNoMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS);
+		assertNoMsg(check, MagicNumberCheckTests.ALLOWED_MAGIC_NUMBER);
 	}
 
 	public function testMagicNumber() {
@@ -32,11 +32,11 @@ class MagicNumberCheckTest extends CheckTestCase {
 		assertMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS, 'Magic number "-1" detected - consider using a constant');
 
 		check.ignoreNumbers = [-1, 0, 1, 2, 5];
-		assertMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS, '');
-		assertMsg(check, MagicNumberCheckTests.ALLOWED_MAGIC_NUMBER, '');
-		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_ASSIGN, '');
-		assertMsg(check, MagicNumberCheckTests.FLOAT_NUMBER_ASSIGN, '');
-		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_IF, '');
+		assertNoMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS);
+		assertNoMsg(check, MagicNumberCheckTests.ALLOWED_MAGIC_NUMBER);
+		assertNoMsg(check, MagicNumberCheckTests.INT_NUMBER_ASSIGN);
+		assertNoMsg(check, MagicNumberCheckTests.FLOAT_NUMBER_ASSIGN);
+		assertNoMsg(check, MagicNumberCheckTests.INT_NUMBER_IF);
 		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_FUNCTION, 'Magic number "10" detected - consider using a constant');
 	}
 }

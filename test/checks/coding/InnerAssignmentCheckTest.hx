@@ -8,10 +8,10 @@ class InnerAssignmentCheckTest extends CheckTestCase {
 
 	public function testCorrectAssignment() {
 		var check = new InnerAssignmentCheck();
-		assertMsg(check, InnerAssignmentCheckTests.IF_EXPR, '');
-		assertMsg(check, InnerAssignmentCheckTests.WHILE_COND, '');
-		assertMsg(check, InnerAssignmentCheckTests.MEMBER_DEF, '');
-		assertMsg(check, InnerAssignmentCheckTests.METHOD_DEF, '');
+		assertNoMsg(check, InnerAssignmentCheckTests.IF_EXPR);
+		assertNoMsg(check, InnerAssignmentCheckTests.WHILE_COND);
+		assertNoMsg(check, InnerAssignmentCheckTests.MEMBER_DEF);
+		assertNoMsg(check, InnerAssignmentCheckTests.METHOD_DEF);
 	}
 
 	public function testIncorrectInnerAssignment() {

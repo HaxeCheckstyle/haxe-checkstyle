@@ -5,8 +5,8 @@ import checkstyle.checks.modifier.RedundantModifierCheck;
 class RedundantModifierCheckTest extends CheckTestCase {
 
 	public function testCorrectUsage() {
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST, '');
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST3, '');
+		assertNoMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST);
+		assertNoMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST3);
 	}
 
 	public function testNormalClass() {
@@ -20,7 +20,7 @@ class RedundantModifierCheckTest extends CheckTestCase {
 	public function testClassWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST1, '');
+		assertNoMsg(check, RedundantModifierTests.TEST1);
 	}
 
 	public function testClassWithEnforceMissing() {
@@ -32,7 +32,7 @@ class RedundantModifierCheckTest extends CheckTestCase {
 	public function testInterfaceWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST2, '');
+		assertNoMsg(check, RedundantModifierTests.TEST2);
 	}
 
 	public function testInterfaceWithEnforceMissing() {

@@ -6,7 +6,7 @@ class AvoidStarImportCheckTest extends CheckTestCase {
 
 	public function testNoStarImport() {
 		var check = new AvoidStarImportCheck();
-		assertMsg(check, AvoidStarImportCheckTests.IMPORT, '');
+		assertNoMsg(check, AvoidStarImportCheckTests.IMPORT);
 	}
 
 	public function testStarImport() {

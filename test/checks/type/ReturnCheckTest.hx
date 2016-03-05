@@ -21,21 +21,21 @@ class ReturnCheckTest extends CheckTestCase {
 	}
 
 	public function testEmptyReturnType() {
-		assertMsg(new ReturnCheck(), ReturnTests.TEST3, '');
+		assertNoMsg(new ReturnCheck(), ReturnTests.TEST3);
 	}
 
 	public function testEnforceReturnType() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
-		assertMsg(check, ReturnTests.TEST1, '');
-		assertMsg(check, ReturnTests.TEST4, '');
+		assertNoMsg(check, ReturnTests.TEST1);
+		assertNoMsg(check, ReturnTests.TEST4);
 	}
 
 	public function testEnforceReturnTypeMissing() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
 
-		assertMsg(check, ReturnTests.TEST1, '');
+		assertNoMsg(check, ReturnTests.TEST1);
 		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
 		assertMsg(check, ReturnTests.TEST3, MSG_NOT_TEST2_RETURN);
 	}
@@ -51,13 +51,13 @@ class ReturnCheckTest extends CheckTestCase {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = true;
 
-		assertMsg(check, ReturnTests.TEST3, '');
+		assertNoMsg(check, ReturnTests.TEST3);
 		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
 	}
 
 	public function testExternVoid() {
 		var check = new ReturnCheck();
-		assertMsg(check, ReturnTests.TEST6, '');
+		assertNoMsg(check, ReturnTests.TEST6);
 	}
 }
 

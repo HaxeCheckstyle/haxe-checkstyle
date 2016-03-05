@@ -14,8 +14,8 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase {
 	}
 
 	public function testCorrectExpression() {
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST5, '');
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST6, '');
+		assertNoMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST5);
+		assertNoMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST6);
 	}
 }
 

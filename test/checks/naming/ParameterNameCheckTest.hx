@@ -6,9 +6,9 @@ class ParameterNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
 		var check = new ParameterNameCheck ();
-		assertMsg(check, ParameterNameTests.TEST, '');
-		assertMsg(check, ParameterNameTests.TEST2, '');
-		assertMsg(check, ParameterNameTests.TEST4, '');
+		assertNoMsg(check, ParameterNameTests.TEST);
+		assertNoMsg(check, ParameterNameTests.TEST2);
+		assertNoMsg(check, ParameterNameTests.TEST4);
 	}
 
 	public function testWrongNaming() {
@@ -23,8 +23,8 @@ class ParameterNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		var paramNameMessage = 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)';
-		assertMsg(check, ParameterNameTests.TEST, '');
-		assertMsg(check, ParameterNameTests.TEST2, '');
+		assertNoMsg(check, ParameterNameTests.TEST);
+		assertNoMsg(check, ParameterNameTests.TEST2);
 		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, ParameterNameTests.TEST3, paramNameMessage);
 		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/${check.format}/)');
@@ -36,11 +36,11 @@ class ParameterNameCheckTest extends CheckTestCase {
 		check.format = "^[A-Z][a-zA-Z]*$";
 
 		assertMsg(check, ParameterNameTests.TEST, 'Invalid parameter name signature: paramName (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST2, '');
-		assertMsg(check, ParameterNameTests.TEST1, '');
+		assertNoMsg(check, ParameterNameTests.TEST2);
+		assertNoMsg(check, ParameterNameTests.TEST1);
 		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: param1 (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST4, '');
-		assertMsg(check, ParameterNameTests.TEST5, '');
+		assertNoMsg(check, ParameterNameTests.TEST4);
+		assertNoMsg(check, ParameterNameTests.TEST5);
 	}
 }
 

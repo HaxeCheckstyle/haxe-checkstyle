@@ -5,7 +5,7 @@ import checkstyle.checks.naming.ListenerNameCheck;
 class ListenerNameCheckTest extends CheckTestCase {
 
 	public function testCorrectListenerName() {
-		assertMsg(new ListenerNameCheck(), ListernerTests.TEST, '');
+		assertNoMsg(new ListenerNameCheck(), ListernerTests.TEST);
 	}
 
 	public function testListenerName1() {

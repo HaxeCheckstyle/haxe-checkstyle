@@ -10,39 +10,39 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
-		assertMsg(check, RightCurlyTests.ALONE_OR_SINGLELINE_CORRECT, '');
+		assertNoMsg(check, RightCurlyTests.ALONE_OR_SINGLELINE_CORRECT);
 
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FUNCTION, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, '');
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_IF);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_FUNCTION);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_WHILE);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_INTERFACE);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_CLASS);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_SWITCH);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_CASE);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_OBJECT);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_ENUM);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT);
 
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
+		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
 
-		assertMsg(check, RightCurlyTests.ALONE_IF, '');
-		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
-		assertMsg(check, RightCurlyTests.ALONE_WHILE, '');
-		assertMsg(check, RightCurlyTests.ALONE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_INTERFACE, '');
-		assertMsg(check, RightCurlyTests.ALONE_CLASS, '');
-		assertMsg(check, RightCurlyTests.ALONE_TYPEDEF, '');
-		assertMsg(check, RightCurlyTests.ALONE_SWITCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_CASE, '');
-		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
-		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
+		assertNoMsg(check, RightCurlyTests.ALONE_IF);
+		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
+		assertNoMsg(check, RightCurlyTests.ALONE_TRY_CATCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
+		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
+		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
+		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
+		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
+		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
 	}
 
 	public function testIncorrectAloneOrSingleLine() {
@@ -55,24 +55,24 @@ class RightCurlyCheckTest extends CheckTestCase {
 	public function testCorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = RightCurlyCheck.SAME;
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, '');
+		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
+		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
+		assertNoMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT);
 
-		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
-		assertMsg(check, RightCurlyTests.ALONE_WHILE, '');
-		assertMsg(check, RightCurlyTests.ALONE_INTERFACE, '');
-		assertMsg(check, RightCurlyTests.ALONE_CLASS, '');
-		assertMsg(check, RightCurlyTests.ALONE_TYPEDEF, '');
-		assertMsg(check, RightCurlyTests.ALONE_SWITCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_CASE, '');
-		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
-		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
+		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
+		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
+		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
+		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
+		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
+		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
+		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
 
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
+		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
 	}
 
 	public function testIncorrectSame() {
@@ -99,21 +99,21 @@ class RightCurlyCheckTest extends CheckTestCase {
 	public function testCorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = RightCurlyCheck.ALONE;
-		assertMsg(check, RightCurlyTests.ALONE_IF, '');
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
-		assertMsg(check, RightCurlyTests.ALONE_WHILE, '');
-		assertMsg(check, RightCurlyTests.ALONE_FUNCTION, '');
-		assertMsg(check, RightCurlyTests.ALONE_INTERFACE, '');
-		assertMsg(check, RightCurlyTests.ALONE_CLASS, '');
-		assertMsg(check, RightCurlyTests.ALONE_TYPEDEF, '');
-		assertMsg(check, RightCurlyTests.ALONE_SWITCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_CASE, '');
-		assertMsg(check, RightCurlyTests.ALONE_OBJECT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ABSTRACT, '');
-		assertMsg(check, RightCurlyTests.ALONE_ENUM, '');
-		assertMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT, '');
+		assertNoMsg(check, RightCurlyTests.ALONE_IF);
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
+		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
+		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
+		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
+		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
+		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
+		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
+		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
+		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
 
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
+		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
 	}
 
 	public function testIncorrectAlone() {
@@ -142,34 +142,34 @@ class RightCurlyCheckTest extends CheckTestCase {
 	public function testTokenIF() {
 		var check = new RightCurlyCheck();
 		check.tokens = [RightCurlyCheck.IF];
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, '');
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_IF);
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_IF, '');
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
+		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_IF);
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 
 		check.option = RightCurlyCheck.SAME;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, '');
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
+		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
+		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
 		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 
 		check.option = RightCurlyCheck.ALONE;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, '');
+		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, '');
-		assertMsg(check, RightCurlyTests.ALONE_IF, '');
-		assertMsg(check, RightCurlyTests.ALONE_FOR, '');
+		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
+		assertNoMsg(check, RightCurlyTests.ALONE_IF);
+		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 	}
 
 	public function testTokenMacroReification() {
 		var check = new RightCurlyCheck();
 		check.tokens = [RightCurlyCheck.REIFICATION];
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, '');
+		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
 
 		check.option = RightCurlyCheck.SAME;
 		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);

@@ -6,8 +6,8 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
 		var check = new LocalVariableNameCheck ();
-		assertMsg(check, LocalVariableNameTests.TEST, '');
-		assertMsg(check, LocalVariableNameTests.TEST4, '');
+		assertNoMsg(check, LocalVariableNameTests.TEST);
+		assertNoMsg(check, LocalVariableNameTests.TEST4);
 	}
 
 	public function testWrongNaming() {
@@ -21,7 +21,7 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 		var check = new LocalVariableNameCheck ();
 		check.ignoreExtern = false;
 
-		assertMsg(check, LocalVariableNameTests.TEST, '');
+		assertNoMsg(check, LocalVariableNameTests.TEST);
 
 		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
 		assertMsg(check, LocalVariableNameTests.TEST1, message);
@@ -34,9 +34,9 @@ class LocalVariableNameCheckTest extends CheckTestCase {
 		check.format = "^[A-Za-z_]*$";
 
 		assertMsg(check, LocalVariableNameTests.TEST, 'Invalid local var signature: count2 (name should be ~/${check.format}/)');
-		assertMsg(check, LocalVariableNameTests.TEST1, '');
-		assertMsg(check, LocalVariableNameTests.TEST3, '');
-		assertMsg(check, LocalVariableNameTests.TEST4, '');
+		assertNoMsg(check, LocalVariableNameTests.TEST1);
+		assertNoMsg(check, LocalVariableNameTests.TEST3);
+		assertNoMsg(check, LocalVariableNameTests.TEST4);
 	}
 }
 

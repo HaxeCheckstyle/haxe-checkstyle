@@ -6,10 +6,10 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase {
 
 	public function testAllowedMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
-		assertMsg(check, MultipleStringLiteralsCheckTests.LESS_THAN_THREE, '');
-		assertMsg(check, MultipleStringLiteralsCheckTests.CONSTANT_NOT_COUNTED, '');
-		assertMsg(check, MultipleStringLiteralsCheckTests.SINGLE_CHARS, '');
-		assertMsg(check, MultipleStringLiteralsCheckTests.THREE_SPACE, '');
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.LESS_THAN_THREE);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.CONSTANT_NOT_COUNTED);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.SINGLE_CHARS);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.THREE_SPACE);
 	}
 
 	public function testMultipleStringLiterals() {
@@ -21,8 +21,8 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase {
 	public function testIgnoreRegEx() {
 		var check = new MultipleStringLiteralsCheck();
 		check.ignore = "^(\\s+|xml)$";
-		assertMsg(check, MultipleStringLiteralsCheckTests.THREE_XML, '');
-		assertMsg(check, MultipleStringLiteralsCheckTests.THREE_XML_SWITCH, '');
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.THREE_XML);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.THREE_XML_SWITCH);
 	}
 }
 

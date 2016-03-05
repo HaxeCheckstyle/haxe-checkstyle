@@ -7,8 +7,8 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
 		var check = new MethodNameCheck ();
-		assertMsg(check, MethodNameTests.TEST, '');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST);
+		assertNoMsg(check, MethodNameTests.TEST4);
 	}
 
 	public function testWrongNaming() {
@@ -26,7 +26,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 		var testMessage = 'Invalid method name signature: Test (name should be ~/${check.format}/)';
 		var test3Message = 'Invalid method name signature: Test3 (name should be ~/${check.format}/)';
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, test3Message);
 		assertMsg(check, MethodNameTests.TEST2, test3Message);
 		assertMsg(check, MethodNameTests.TEST3, testMessage);
@@ -38,23 +38,23 @@ class MethodNameCheckTest extends CheckTestCase {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.PUBLIC];
 
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test2 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST3, 'Invalid method name signature: Test (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST4, '');
-		assertMsg(check, MethodNameTests.TEST5, '');
+		assertNoMsg(check, MethodNameTests.TEST4);
+		assertNoMsg(check, MethodNameTests.TEST5);
 	}
 
 	public function testTokenPRIVATE() {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.PRIVATE];
 
-		assertMsg(check, MethodNameTests.TEST, '');
-		assertMsg(check, MethodNameTests.TEST1, '');
+		assertNoMsg(check, MethodNameTests.TEST);
+		assertNoMsg(check, MethodNameTests.TEST1);
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST3, '');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST3);
+		assertNoMsg(check, MethodNameTests.TEST4);
 		assertMsg(check, MethodNameTests.TEST5, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 	}
 
@@ -62,11 +62,11 @@ class MethodNameCheckTest extends CheckTestCase {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.STATIC];
 
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test1 (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST3, '');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST3);
+		assertNoMsg(check, MethodNameTests.TEST4);
 		assertMsg(check, MethodNameTests.TEST5, 'Invalid method name signature: Test1 (name should be ~/${check.format}/)');
 	}
 
@@ -74,11 +74,11 @@ class MethodNameCheckTest extends CheckTestCase {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.NOTSTATIC];
 
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test2 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST3, 'Invalid method name signature: Test (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST4);
 		assertMsg(check, MethodNameTests.TEST5, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 	}
 
@@ -86,11 +86,11 @@ class MethodNameCheckTest extends CheckTestCase {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.INLINE];
 
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test1 (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST3, '');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST3);
+		assertNoMsg(check, MethodNameTests.TEST4);
 		assertMsg(check, MethodNameTests.TEST5, 'Invalid method name signature: Test1 (name should be ~/${check.format}/)');
 	}
 
@@ -98,11 +98,11 @@ class MethodNameCheckTest extends CheckTestCase {
 		var check = new MethodNameCheck ();
 		check.tokens = [MethodNameCheck.NOTINLINE];
 
-		assertMsg(check, MethodNameTests.TEST, '');
+		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test2 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST2, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 		assertMsg(check, MethodNameTests.TEST3, 'Invalid method name signature: Test (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST4, '');
+		assertNoMsg(check, MethodNameTests.TEST4);
 		assertMsg(check, MethodNameTests.TEST5, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
 	}
 
@@ -111,11 +111,11 @@ class MethodNameCheckTest extends CheckTestCase {
 		check.format = "^[A-Z][a-z0-9]*$";
 
 		assertMsg(check, MethodNameTests.TEST, 'Invalid method name signature: testName (name should be ~/${check.format}/)');
-		assertMsg(check, MethodNameTests.TEST1, '');
-		assertMsg(check, MethodNameTests.TEST2, '');
-		assertMsg(check, MethodNameTests.TEST3, '');
-		assertMsg(check, MethodNameTests.TEST4, '');
-		assertMsg(check, MethodNameTests.TEST5, '');
+		assertNoMsg(check, MethodNameTests.TEST1);
+		assertNoMsg(check, MethodNameTests.TEST2);
+		assertNoMsg(check, MethodNameTests.TEST3);
+		assertNoMsg(check, MethodNameTests.TEST4);
+		assertNoMsg(check, MethodNameTests.TEST5);
 	}
 }
 

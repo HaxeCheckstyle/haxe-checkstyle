@@ -9,7 +9,7 @@ class MethodLengthCheckTest extends CheckTestCase {
 	}
 
 	public function testCorrectMethodLength() {
-		assertMsg(new MethodLengthCheck(), MethodLengthTests.TEST2, '');
+		assertNoMsg(new MethodLengthCheck(), MethodLengthTests.TEST2);
 	}
 
 	@SupressWarnings('checkstyle:MagicNumber')

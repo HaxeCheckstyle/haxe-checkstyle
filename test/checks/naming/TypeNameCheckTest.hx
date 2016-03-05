@@ -9,8 +9,8 @@ class TypeNameCheckTest extends CheckTestCase {
 
 	public function testCorrectNaming() {
 		var check = new TypeNameCheck ();
-		assertMsg(check, TypeNameTests.TEST, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
+		assertNoMsg(check, TypeNameTests.TEST);
+		assertNoMsg(check, TypeNameTests.TEST4);
 	}
 
 	public function testIncorrectNaming() {
@@ -23,10 +23,10 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.format = FORMAT_CLASS;
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid typedef signature: Test3 (name should be ~/^C[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST1, '');
+		assertNoMsg(check, TypeNameTests.TEST1);
 		assertMsg(check, TypeNameTests.TEST2, 'Invalid interface signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
 		assertMsg(check, TypeNameTests.TEST3, 'Invalid typedef signature: TTest (name should be ~/^C[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST4, '');
+		assertNoMsg(check, TypeNameTests.TEST4);
 		assertMsg(check, TypeNameTests.TEST5, 'Invalid enum signature: EnumTest (name should be ~/^C[A-Z][a-z]*$/)');
 	}
 
@@ -34,8 +34,8 @@ class TypeNameCheckTest extends CheckTestCase {
 		var check = new TypeNameCheck ();
 		check.ignoreExtern = false;
 
-		assertMsg(check, TypeNameTests.TEST, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
+		assertNoMsg(check, TypeNameTests.TEST);
+		assertNoMsg(check, TypeNameTests.TEST4);
 
 		check.format = FORMAT_CLASS;
 		assertMsg(check, TypeNameTests.TEST4, 'Invalid class signature: TEST1 (name should be ~/^C[A-Z][a-z]*$/)');
@@ -47,11 +47,11 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.format = FORMAT_CLASS;
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid class signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST1, '');
-		assertMsg(check, TypeNameTests.TEST2, '');
-		assertMsg(check, TypeNameTests.TEST3, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
-		assertMsg(check, TypeNameTests.TEST5, '');
+		assertNoMsg(check, TypeNameTests.TEST1);
+		assertNoMsg(check, TypeNameTests.TEST2);
+		assertNoMsg(check, TypeNameTests.TEST3);
+		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TypeNameTests.TEST5);
 	}
 
 	public function testTokenINTERFACE() {
@@ -59,12 +59,12 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.tokens = [TypeNameCheck.INTERFACE];
 		check.format = "^I[A-Z][a-z]*$";
 
-		assertMsg(check, TypeNameTests.TEST, '');
-		assertMsg(check, TypeNameTests.TEST1, '');
+		assertNoMsg(check, TypeNameTests.TEST);
+		assertNoMsg(check, TypeNameTests.TEST1);
 		assertMsg(check, TypeNameTests.TEST2, 'Invalid interface signature: Test (name should be ~/^I[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST3, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
-		assertMsg(check, TypeNameTests.TEST5, '');
+		assertNoMsg(check, TypeNameTests.TEST3);
+		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TypeNameTests.TEST5);
 	}
 
 	public function testTokenENUM() {
@@ -73,11 +73,11 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.format = "^Enum[A-Z][a-z]*$";
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid enum signature: Test2 (name should be ~/^Enum[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST1, '');
-		assertMsg(check, TypeNameTests.TEST2, '');
-		assertMsg(check, TypeNameTests.TEST3, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
-		assertMsg(check, TypeNameTests.TEST5, '');
+		assertNoMsg(check, TypeNameTests.TEST1);
+		assertNoMsg(check, TypeNameTests.TEST2);
+		assertNoMsg(check, TypeNameTests.TEST3);
+		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TypeNameTests.TEST5);
 	}
 
 	public function testTokenTYPEDEF() {
@@ -86,11 +86,11 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.format = "^T[A-Z][a-z]*$";
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid typedef signature: Test3 (name should be ~/^T[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST1, '');
-		assertMsg(check, TypeNameTests.TEST2, '');
-		assertMsg(check, TypeNameTests.TEST3, '');
-		assertMsg(check, TypeNameTests.TEST4, '');
-		assertMsg(check, TypeNameTests.TEST5, '');
+		assertNoMsg(check, TypeNameTests.TEST1);
+		assertNoMsg(check, TypeNameTests.TEST2);
+		assertNoMsg(check, TypeNameTests.TEST3);
+		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TypeNameTests.TEST5);
 	}
 }
 

@@ -6,7 +6,7 @@ class DynamicCheckTest extends CheckTestCase {
 
 	public function testNoDynamic() {
 		var check = new DynamicCheck ();
-		assertMsg(check, DynamicTests.TEST, '');
+		assertNoMsg(check, DynamicTests.TEST);
 	}
 
 	public function testDetectDynamic() {
@@ -18,7 +18,7 @@ class DynamicCheckTest extends CheckTestCase {
 		assertMsg(check, DynamicTests.TEST5, 'Dynamic type used: test');
 		assertMsg(check, DynamicTests.TEST6, 'Dynamic type used: Test');
 
-		assertMsg(check, DynamicTests.ISSUE_43, '');
+		assertNoMsg(check, DynamicTests.ISSUE_43);
 	}
 }
 

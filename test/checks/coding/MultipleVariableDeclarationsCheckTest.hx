@@ -14,12 +14,12 @@ class MultipleVariableDeclarationsCheckTest extends CheckTestCase {
 	}
 
 	public function testCorrectVariables() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST4, '');
+		assertNoMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST4);
 	}
 
 	public function testSuppressWarnings() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST5, '');
-		assertMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST6, '');
+		assertNoMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST5);
+		assertNoMsg(new MultipleVariableDeclarationsCheck(), MultipleVariableDeclarationsCheckTests.TEST6);
 	}
 }
 

@@ -6,7 +6,7 @@ class SpacingCheckTest extends CheckTestCase {
 
 	public function testIf() {
 		assertMsg(new SpacingCheck(), SpacingTests.TEST1A, 'No space between if and (');
-		assertMsg(new SpacingCheck(), SpacingTests.TEST1B, '');
+		assertNoMsg(new SpacingCheck(), SpacingTests.TEST1B);
 	}
 
 	public function testBinaryOperator() {
@@ -19,17 +19,17 @@ class SpacingCheckTest extends CheckTestCase {
 
 	public function testFor() {
 		assertMsg(new SpacingCheck(), SpacingTests.TEST4A, 'No space between for and (');
-		assertMsg(new SpacingCheck(), SpacingTests.TEST4B, '');
+		assertNoMsg(new SpacingCheck(), SpacingTests.TEST4B);
 	}
 
 	public function testWhile() {
 		assertMsg(new SpacingCheck(), SpacingTests.TEST5A, 'No space between while and (');
-		assertMsg(new SpacingCheck(), SpacingTests.TEST5B, '');
+		assertNoMsg(new SpacingCheck(), SpacingTests.TEST5B);
 	}
 
 	public function testSwitch() {
 		assertMsg(new SpacingCheck(), SpacingTests.TEST6A, 'No space between switch and (');
-		assertMsg(new SpacingCheck(), SpacingTests.TEST6B, '');
+		assertNoMsg(new SpacingCheck(), SpacingTests.TEST6B);
 	}
 }
 

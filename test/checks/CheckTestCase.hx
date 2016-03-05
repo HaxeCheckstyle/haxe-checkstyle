@@ -26,6 +26,10 @@ class CheckTestCase extends haxe.unit.TestCase {
 		else actualAssertMsg(check, testCase, expected, pos);
 	}
 
+	function assertNoMsg(check:Check, testCase:String, ?pos:PosInfos) {
+		assertMsg(check, testCase, '', pos);
+	}
+
 	function actualAssertMsg(check:Check, testCase:String, expected:String, ?pos:PosInfos) {
 		var msg = checkMessage(testCase, check);
 		assertEquals(expected, msg, pos);

@@ -12,13 +12,13 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 
 	public function testCorrectWrap() {
 		var check = new SeparatorWrapCheck();
-		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, '');
-		assertMsg(check, SeparatorWrapTests.CORRECT_NOWRAP, '');
-		assertMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY, '');
-		assertMsg(check, SeparatorWrapTests.EOL_WRAP_IMPORT, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_ARRAY, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_CALL, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_IMPORT, '');
+		assertNoMsg(check, SeparatorWrapTests.CORRECT_WRAP);
+		assertNoMsg(check, SeparatorWrapTests.CORRECT_NOWRAP);
+		assertNoMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY);
+		assertNoMsg(check, SeparatorWrapTests.EOL_WRAP_IMPORT);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_ARRAY);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_CALL);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_IMPORT);
 	}
 
 	public function testIncorrectWrap() {
@@ -33,16 +33,16 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 	public function testOptionNL() {
 		var check = new SeparatorWrapCheck();
 		check.option = "nl";
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_FUNC, '');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_OBJECT_DECL, '');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_ARRAY, '');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_CALL, '');
-		assertMsg(check, SeparatorWrapTests.NL_WRAP_IMPORT, '');
+		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_FUNC);
+		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_OBJECT_DECL);
+		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_ARRAY);
+		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_CALL);
+		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_IMPORT);
 
-		assertMsg(check, SeparatorWrapTests.CORRECT_NOWRAP, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_ARRAY, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_CALL, '');
-		assertMsg(check, SeparatorWrapTests.NOWRAP_IMPORT, '');
+		assertNoMsg(check, SeparatorWrapTests.CORRECT_NOWRAP);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_ARRAY);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_CALL);
+		assertNoMsg(check, SeparatorWrapTests.NOWRAP_IMPORT);
 
 		assertMsg(check, SeparatorWrapTests.CORRECT_WRAP, MSG_COMMA_NL);
 		assertMsg(check, SeparatorWrapTests.EOL_WRAP_ARRAY, MSG_COMMA_NL);

@@ -11,15 +11,15 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectBraces() {
 		var check = new LeftCurlyCheck();
-		assertMsg(check, LeftCurlyTests.TEST, '');
-		assertMsg(check, LeftCurlyTests.TEST4, '');
-		assertMsg(check, LeftCurlyTests.TEST6, '');
-		assertMsg(check, LeftCurlyTests.TEST8, '');
-		assertMsg(check, LeftCurlyTests.TEST9, '');
-		assertMsg(check, LeftCurlyTests.TEST14, '');
-		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, '');
-		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, '');
-		assertMsg(check, LeftCurlyTests.ISSUE_97, '');
+		assertNoMsg(check, LeftCurlyTests.TEST);
+		assertNoMsg(check, LeftCurlyTests.TEST4);
+		assertNoMsg(check, LeftCurlyTests.TEST6);
+		assertNoMsg(check, LeftCurlyTests.TEST8);
+		assertNoMsg(check, LeftCurlyTests.TEST9);
+		assertNoMsg(check, LeftCurlyTests.TEST14);
+		assertNoMsg(check, LeftCurlyTests.EOL_CASEBLOCK);
+		assertNoMsg(check, LeftCurlyTests.MACRO_REIFICATION);
+		assertNoMsg(check, LeftCurlyTests.ISSUE_97);
 	}
 
 	public function testWrongBraces() {
@@ -40,29 +40,29 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.option = LeftCurlyCheck.NL;
 
 		assertMsg(check, LeftCurlyTests.TEST, MSG_NL);
-		assertMsg(check, LeftCurlyTests.TEST13, '');
+		assertNoMsg(check, LeftCurlyTests.TEST13);
 
 		check.tokens = [LeftCurlyCheck.OBJECT_DECL];
 		assertMsg(check, LeftCurlyTests.TEST4, MSG_NL);
 		assertMsg(check, LeftCurlyTests.TEST14, MSG_NL);
 
 		check.tokens = [LeftCurlyCheck.IF];
-		assertMsg(check, LeftCurlyTests.TEST1, '');
-		assertMsg(check, LeftCurlyTests.TEST13, '');
+		assertNoMsg(check, LeftCurlyTests.TEST1);
+		assertNoMsg(check, LeftCurlyTests.TEST13);
 
 		check.tokens = [LeftCurlyCheck.FOR];
-		assertMsg(check, LeftCurlyTests.TEST5, '');
-		assertMsg(check, LeftCurlyTests.TEST13, '');
+		assertNoMsg(check, LeftCurlyTests.TEST5);
+		assertNoMsg(check, LeftCurlyTests.TEST13);
 
 		check.tokens = [LeftCurlyCheck.FUNCTION];
-		assertMsg(check, LeftCurlyTests.TEST13, '');
+		assertNoMsg(check, LeftCurlyTests.TEST13);
 	}
 
 	public function testSwitch() {
 		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NL;
-		assertMsg(check, LeftCurlyTests.TEST15, '');
-		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, '');
+		assertNoMsg(check, LeftCurlyTests.TEST15);
+		assertNoMsg(check, LeftCurlyTests.NL_CASEBLOCK);
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, MSG_NL);
 		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, MSG_NL);
 	}
@@ -70,10 +70,10 @@ class LeftCurlyCheckTest extends CheckTestCase {
 	public function testNLOW() {
 		var check = new LeftCurlyCheck();
 		check.option = LeftCurlyCheck.NLOW;
-		assertMsg(check, LeftCurlyTests.TEST, '');
-		assertMsg(check, LeftCurlyTests.TEST12, '');
-		assertMsg(check, LeftCurlyTests.TEST16, '');
-		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, '');
+		assertNoMsg(check, LeftCurlyTests.TEST);
+		assertNoMsg(check, LeftCurlyTests.TEST12);
+		assertNoMsg(check, LeftCurlyTests.TEST16);
+		assertNoMsg(check, LeftCurlyTests.NLOW_CASEBLOCK);
 		assertMsg(check, LeftCurlyTests.TEST17, MSG_NLOW);
 		assertMsg(check, LeftCurlyTests.TEST18, MSG_NL_SPLIT);
 		assertMsg(check, LeftCurlyTests.TEST19, MSG_NL_SPLIT);
@@ -92,8 +92,8 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, MSG_EOL);
 
 		check.ignoreEmptySingleline = true;
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, '');
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, '');
+		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_CLASS);
+		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_MACRO);
 	}
 }
 

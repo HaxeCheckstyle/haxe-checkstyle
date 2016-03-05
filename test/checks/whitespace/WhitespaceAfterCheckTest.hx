@@ -10,15 +10,15 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
-		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_57, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_58, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_59, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_63, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_64, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_65, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_66, '');
-		assertMsg(check, WhitespaceAfterTests.ISSUE_67, '');
+		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_57);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_58);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_59);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_63);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_64);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_65);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_66);
+		assertNoMsg(check, WhitespaceAfterTests.ISSUE_67);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -31,15 +31,15 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAfterCheck();
 		check.tokens = ["="];
-		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC, '');
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, '');
+		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
+		assertNoMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC);
+		assertNoMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT);
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		check.tokens = [">"];
-		assertMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER, '');
+		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_GREATER);
 		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, MSG_GREATER);
 	}

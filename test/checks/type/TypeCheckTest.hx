@@ -13,7 +13,7 @@ class TypeCheckTest extends CheckTestCase {
 	}
 
 	public function testEnumAbstract() {
-		assertMsg(new TypeCheck(), TypeTests.TEST3, '');
+		assertNoMsg(new TypeCheck(), TypeTests.TEST3);
 		assertMsg(new TypeCheck(), TypeTests.TEST4, 'Type not specified: VALUE');
 
 		var check = new TypeCheck();

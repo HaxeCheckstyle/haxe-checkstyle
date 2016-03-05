@@ -6,7 +6,7 @@ class NestedForDepthCheckTest extends CheckTestCase {
 
 	public function testDefault() {
 		var check = new NestedForDepthCheck();
-		assertMsg(check, NestedForDepthTests.TEST1, '');
+		assertNoMsg(check, NestedForDepthTests.TEST1);
 	}
 
 	public function testDefaultTooMany() {
@@ -18,11 +18,11 @@ class NestedForDepthCheckTest extends CheckTestCase {
 		var check = new NestedForDepthCheck();
 		check.max = 2;
 
-		assertMsg(check, NestedForDepthTests.TEST1, '');
-		assertMsg(check, NestedForDepthTests.TEST2, '');
+		assertNoMsg(check, NestedForDepthTests.TEST1);
+		assertNoMsg(check, NestedForDepthTests.TEST2);
 
 		check.max = 0;
-		assertMsg(check, NestedForDepthTests.TEST1, '');
+		assertNoMsg(check, NestedForDepthTests.TEST1);
 		assertMsg(check, NestedForDepthTests.TEST2, 'Nested for depth is 1 (max allowed is 0)');
 	}
 }

@@ -8,15 +8,15 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAroundCheck();
-		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_70, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_71, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_72, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_77, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_80, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_81, '');
-		assertMsg(check, WhitespaceAroundTests.ISSUE_98, '');
-		assertMsg(check, WhitespaceAroundTests.MINUS_CONSTANT, '');
+		assertNoMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_70);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_71);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_72);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_77);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_80);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_81);
+		assertNoMsg(check, WhitespaceAroundTests.ISSUE_98);
+		assertNoMsg(check, WhitespaceAroundTests.MINUS_CONSTANT);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -30,16 +30,16 @@ class WhitespaceAroundCheckTest extends CheckTestCase {
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAroundCheck();
 		check.tokens = ["="];
-		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
+		assertNoMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND);
 		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_GT, MSG_EQUALS);
 		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
 		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
 		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		check.tokens = [">"];
-		assertMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND, '');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_VAR_INIT, '');
-		assertMsg(check, WhitespaceAroundTests.NO_WHITESPACE_GT, '');
+		assertNoMsg(check, WhitespaceAroundTests.CORRECT_WHITESPACE_AROUND);
+		assertNoMsg(check, WhitespaceAroundTests.NO_WHITESPACE_VAR_INIT);
+		assertNoMsg(check, WhitespaceAroundTests.NO_WHITESPACE_GT);
 	}
 }
 

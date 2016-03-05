@@ -8,12 +8,12 @@ class ParameterNumberCheckTest extends CheckTestCase {
 
 	public function testNoParams() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, ParameterNumberTests.TEST1, '');
+		assertNoMsg(check, ParameterNumberTests.TEST1);
 	}
 
 	public function test10Parameters() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, ParameterNumberTests.TEST2, '');
+		assertNoMsg(check, ParameterNumberTests.TEST2);
 	}
 
 	public function test11Parameters() {
@@ -26,11 +26,11 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		var check = new ParameterNumberCheck();
 		check.max = 11;
 
-		assertMsg(check, ParameterNumberTests.TEST3, '');
-		assertMsg(check, ParameterNumberTests.TEST4, '');
+		assertNoMsg(check, ParameterNumberTests.TEST3);
+		assertNoMsg(check, ParameterNumberTests.TEST4);
 
 		check.max = 3;
-		assertMsg(check, ParameterNumberTests.TEST4, '');
+		assertNoMsg(check, ParameterNumberTests.TEST4);
 		assertMsg(check, ParameterNumberTests.TEST3, 'Too many parameters for function: test2 (> 3)');
 	}
 
@@ -43,7 +43,7 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		var check = new ParameterNumberCheck();
 		check.ignoreOverriddenMethods = true;
 
-		assertMsg(check, ParameterNumberTests.TEST3, '');
+		assertNoMsg(check, ParameterNumberTests.TEST3);
 	}
 }
 

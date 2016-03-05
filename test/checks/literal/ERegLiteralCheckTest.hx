@@ -5,7 +5,7 @@ import checkstyle.checks.literal.ERegLiteralCheck;
 class ERegLiteralCheckTest extends CheckTestCase {
 
 	public function testCorrectEReg() {
-		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.TEST2, '');
+		assertNoMsg(new ERegLiteralCheck(), ERegLiteralTests.TEST2);
 	}
 
 	public function testWrongEReg() {
@@ -13,11 +13,11 @@ class ERegLiteralCheckTest extends CheckTestCase {
 	}
 
 	public function testIssue43() {
-		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.ISSUE_43, '');
+		assertNoMsg(new ERegLiteralCheck(), ERegLiteralTests.ISSUE_43);
 	}
 
 	public function testIssue99() {
-		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.REGEX_WITH_STRING_INTERPOLATION, '');
+		assertNoMsg(new ERegLiteralCheck(), ERegLiteralTests.REGEX_WITH_STRING_INTERPOLATION);
 	}
 }
 

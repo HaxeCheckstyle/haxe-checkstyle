@@ -6,7 +6,7 @@ class ModifierOrderCheckTest extends CheckTestCase {
 
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
-		assertMsg(check, ModifierOrderTests.TEST1, '');
+		assertNoMsg(check, ModifierOrderTests.TEST1);
 	}
 
 	public function testWrongOrder() {
@@ -21,16 +21,16 @@ class ModifierOrderCheckTest extends CheckTestCase {
 		var check = new ModifierOrderCheck();
 		check.modifiers = ["DYNAMIC", "PUBLIC_PRIVATE", "OVERRIDE", "INLINE", "STATIC", "MACRO"];
 		assertMsg(check, ModifierOrderTests.TEST1, 'Invalid modifier order: test6 (modifier: INLINE)');
-		assertMsg(check, ModifierOrderTests.TEST2, '');
-		assertMsg(check, ModifierOrderTests.TEST3, '');
-		assertMsg(check, ModifierOrderTests.TEST4, '');
-		assertMsg(check, ModifierOrderTests.TEST5, '');
+		assertNoMsg(check, ModifierOrderTests.TEST2);
+		assertNoMsg(check, ModifierOrderTests.TEST3);
+		assertNoMsg(check, ModifierOrderTests.TEST4);
+		assertNoMsg(check, ModifierOrderTests.TEST5);
 	}
 
 	public function testIgnore() {
 		var check = new ModifierOrderCheck();
 		check.severity = "ignore";
-		assertMsg(check, ModifierOrderTests.TEST1, '');
+		assertNoMsg(check, ModifierOrderTests.TEST1);
 	}
 
 }

@@ -11,12 +11,12 @@ class EmptyBlockCheckTest extends CheckTestCase {
 
 	public function testCorrectEmptyBlock() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
-		assertMsg(check, EmptyBlockTests.EMPTY_BLOCK, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT, '');
-		assertMsg(check, EmptyBlockTests.EMPTY_OBJECT_DECL, '');
-		assertMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT, '');
+		assertNoMsg(check, EmptyBlockTests.EMPTY_BLOCK);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT);
+		assertNoMsg(check, EmptyBlockTests.EMPTY_OBJECT_DECL);
+		assertNoMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT);
 	}
 
 	public function testWrongEmptyBlock() {
@@ -29,10 +29,10 @@ class EmptyBlockCheckTest extends CheckTestCase {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = EmptyBlockCheck.TEXT;
 
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT, '');
-		assertMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT, '');
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT);
+		assertNoMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT);
 
 		assertMsg(check, EmptyBlockTests.EMPTY_BLOCK, MSG_EMPTY_BLOCK_SHOULD_CONTAIN);
 		assertMsg(check, EmptyBlockTests.EMPTY_OBJECT_DECL, MSG_EMPTY_BLOCK_SHOULD_CONTAIN);
@@ -44,8 +44,8 @@ class EmptyBlockCheckTest extends CheckTestCase {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = EmptyBlockCheck.STATEMENT;
 
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
 
 		assertMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT, MSG_BLOCK_SHOULD_CONTAIN);
 		assertMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT, MSG_BLOCK_SHOULD_CONTAIN);
@@ -60,11 +60,11 @@ class EmptyBlockCheckTest extends CheckTestCase {
 		check.option = EmptyBlockCheck.STATEMENT;
 		check.tokens = ["OBJECT_DECL"];
 
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2, '');
-		assertMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT, '');
-		assertMsg(check, EmptyBlockTests.EMPTY_BLOCK, '');
-		assertMsg(check, EmptyBlockTests.EMPTY_BLOCK_WHITESPACE, '');
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
+		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_COMMENT);
+		assertNoMsg(check, EmptyBlockTests.EMPTY_BLOCK);
+		assertNoMsg(check, EmptyBlockTests.EMPTY_BLOCK_WHITESPACE);
 
 		assertMsg(check, EmptyBlockTests.OBJECT_DECL_WITH_COMMENT, MSG_BLOCK_SHOULD_CONTAIN);
 		assertMsg(check, EmptyBlockTests.EMPTY_OBJECT_DECL, MSG_EMPTY_BLOCK_CONTAIN_STATEMENT);

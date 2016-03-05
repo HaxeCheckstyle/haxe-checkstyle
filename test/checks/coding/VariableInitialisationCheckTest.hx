@@ -10,11 +10,11 @@ class VariableInitialisationCheckTest extends CheckTestCase {
 	}
 
 	public function testStatic() {
-		assertMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST2, '');
+		assertNoMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST2);
 	}
 
 	public function testEnumAbstract() {
-		assertMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST3, '');
+		assertNoMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST3);
 	}
 }
 
