@@ -95,7 +95,7 @@
 				"severity": "INFO",
 				"ignoreConstructorParameter": true,
 				"ignoreSetter": true,
-				"ignoreFormat": "^(main)$"
+				"ignoreFormat": "^(main|run)$"
 			}
 		},
 		{
