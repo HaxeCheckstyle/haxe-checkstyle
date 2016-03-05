@@ -154,6 +154,7 @@ class Main {
 			Sys.println(check.name + ":");
 			Sys.println("  " + check.description + "\n");
 		}
+		Sys.exit(0);
 	}
 
 	static function createReporter():IReporter {
