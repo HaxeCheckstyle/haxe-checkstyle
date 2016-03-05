@@ -1,6 +1,6 @@
-package checks;
+package checks.literal;
 
-import checkstyle.checks.HexadecimalLiteralsCheck;
+import checkstyle.checks.literal.HexadecimalLiteralsCheck;
 
 class HexadecimalLiteralsCheckTest extends CheckTestCase {
 
