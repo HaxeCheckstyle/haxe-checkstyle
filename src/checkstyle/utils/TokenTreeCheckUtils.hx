@@ -28,15 +28,9 @@ class TokenTreeCheckUtils {
 	public static function isTypeParameter(token:TokenTree):Bool {
 		switch (token.tok) {
 			case Binop(OpGt):
-				return switch (token.parent.tok) {
-					case Binop(OpLt): true;
-					default: false;
-				}
+				return token.parent.tok.match(Binop(OpLt));
 			case Binop(OpLt):
-				return switch (token.getLastChild().tok) {
-					case Binop(OpGt): true;
-					default: false;
-				}
+				return token.getLastChild().tok.match(Binop(OpGt));
 			default:
 				return false;
 		}
