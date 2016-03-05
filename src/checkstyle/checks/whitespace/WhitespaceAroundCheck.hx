@@ -3,7 +3,7 @@ package checkstyle.checks.whitespace;
 import checkstyle.Checker.LinePos;
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
-import checkstyle.utils.TokenTreeCheckHelper;
+import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -126,8 +126,8 @@ class WhitespaceAroundCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
-			if (TokenTreeCheckHelper.isTypeParameter(tok)) continue;
-			if (TokenTreeCheckHelper.isImportMult(tok)) continue;
+			if (TokenTreeCheckUtils.isTypeParameter(tok)) continue;
+			if (TokenTreeCheckUtils.isImportMult(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];

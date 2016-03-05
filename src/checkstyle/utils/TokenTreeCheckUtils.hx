@@ -2,7 +2,7 @@ package checkstyle.utils;
 
 import checkstyle.token.TokenTree;
 
-class TokenTreeCheckHelper {
+class TokenTreeCheckUtils {
 
 	public static function isImportMult(token:TokenTree):Bool {
 		switch (token.tok) {
