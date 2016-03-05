@@ -4,7 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
-@name("ModifierOrder")
+@name("ModifierOrder", "AccessOrder")
 @desc("Checks order of modifiers")
 class ModifierOrderCheck extends Check {
 
