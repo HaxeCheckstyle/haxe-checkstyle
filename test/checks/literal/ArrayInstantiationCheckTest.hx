@@ -1,6 +1,6 @@
-package checks;
+package checks.literal;
 
-import checkstyle.checks.ArrayInstantiationCheck;
+import checkstyle.checks.literal.ArrayInstantiationCheck;
 
 class ArrayInstantiationCheckTest extends CheckTestCase {
 

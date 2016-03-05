@@ -1,6 +1,6 @@
-package checks;
+package checks.literal;
 
-import checkstyle.checks.ERegInstantiationCheck;
+import checkstyle.checks.literal.ERegInstantiationCheck;
 
 class ERegInstantiationCheckTest extends CheckTestCase {
 

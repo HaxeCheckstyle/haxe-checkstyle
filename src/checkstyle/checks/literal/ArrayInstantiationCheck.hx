@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.literal;
 
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
