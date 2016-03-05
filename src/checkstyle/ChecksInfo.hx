@@ -7,6 +7,7 @@ class ChecksInfo {
 
 	var name2info:Map<String, CheckInfo>;
 
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	public function new() {
 		name2info = new Map();
 
@@ -20,11 +21,11 @@ class ChecksInfo {
 		for (cl in checksClasses) {
 			if (ignoreClass(cl)) continue;
 			var names:Array<Dynamic> = getCheckNameFromClass(cl);
-			for (name in names) {
+			for (i in 0 ... names.length) {
 				var desc = getCheckDescription(cl);
-				name2info[name] = {
-					name: name,
-					description: desc,
+				name2info[names[i]] = {
+					name: names[i],
+					description: (i == 0) ? desc : desc + " [DEPRECATED]",
 					clazz: cl
 				};
 			}
