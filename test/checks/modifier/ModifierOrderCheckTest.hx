@@ -1,6 +1,6 @@
-package checks;
+package checks.modifier;
 
-import checkstyle.checks.ModifierOrderCheck;
+import checkstyle.checks.modifier.ModifierOrderCheck;
 
 class ModifierOrderCheckTest extends CheckTestCase {
 

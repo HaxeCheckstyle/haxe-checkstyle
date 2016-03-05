@@ -1,6 +1,6 @@
-package checks;
+package checks.modifier;
 
-import checkstyle.checks.RedundantModifierCheck;
+import checkstyle.checks.modifier.RedundantModifierCheck;
 
 class RedundantModifierCheckTest extends CheckTestCase {
 
