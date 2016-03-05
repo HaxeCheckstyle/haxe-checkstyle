@@ -101,7 +101,7 @@ class ReturnCheck extends Check {
 	}
 
 	function warnVoid(name:String, pos:Position) {
-		logPos('No need to return Void, Default function return value type is Void: ${name}', pos, severity);
+		logPos('Void return should not explicitly be specified for function $name', pos, severity);
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
