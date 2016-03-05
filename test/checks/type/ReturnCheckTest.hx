@@ -49,6 +49,11 @@ class ReturnCheckTest extends CheckTestCase {
 		assertMsg(check, ReturnTests.TEST3, '');
 		assertMsg(check, ReturnTests.TEST2, 'Return type not specified for function: test1');
 	}
+
+	public function testExternVoid() {
+		var check = new ReturnCheck();
+		assertMsg(check, ReturnTests.TEST6, '');
+	}
 }
 
 class ReturnTests {
@@ -111,5 +116,10 @@ class ReturnTests {
 			}
 			return;
 		}
+	}";
+
+	public static inline var TEST6:String = "
+	extern class Test {
+		function test4():Void;
 	}";
 }
