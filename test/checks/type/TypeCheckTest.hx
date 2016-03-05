@@ -1,6 +1,6 @@
-package checks;
+package checks.type;
 
-import checkstyle.checks.TypeCheck;
+import checkstyle.checks.type.TypeCheck;
 
 class TypeCheckTest extends CheckTestCase {
 

@@ -1,6 +1,6 @@
-package checks;
+package checks.type;
 
-import checkstyle.checks.DynamicCheck;
+import checkstyle.checks.type.DynamicCheck;
 
 class DynamicCheckTest extends CheckTestCase {
 

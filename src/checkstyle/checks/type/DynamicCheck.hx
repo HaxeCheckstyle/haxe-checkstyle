@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.type;
 
 import checkstyle.LintMessage.SeverityLevel;
 import haxe.macro.Expr;

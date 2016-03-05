@@ -1,6 +1,6 @@
-package checks;
+package checks.type;
 
-import checkstyle.checks.AnonymousCheck;
+import checkstyle.checks.type.AnonymousCheck;
 
 class AnonymousCheckTest extends CheckTestCase {
 

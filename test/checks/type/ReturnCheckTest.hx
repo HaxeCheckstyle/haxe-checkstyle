@@ -1,6 +1,6 @@
-package checks;
+package checks.type;
 
-import checkstyle.checks.ReturnCheck;
+import checkstyle.checks.type.ReturnCheck;
 
 class ReturnCheckTest extends CheckTestCase {
 

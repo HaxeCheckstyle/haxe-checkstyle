@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.type;
 
 import String;
 import checkstyle.LintMessage.SeverityLevel;
