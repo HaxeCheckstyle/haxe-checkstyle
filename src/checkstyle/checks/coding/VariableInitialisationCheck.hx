@@ -1,7 +1,7 @@
 package checkstyle.checks.coding;
 
 import checkstyle.LintMessage.SeverityLevel;
-import checkstyle.checks.Check.FieldParent;
+import checkstyle.checks.Check.ParentType;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -13,8 +13,8 @@ class VariableInitialisationCheck extends Check {
 		forEachField(checkField);
 	}
 
-	function checkField(f:Field, p:FieldParent) {
-		if (f.name == "new" || p == INTERFACE || p == ENUM_ABSTRACT) return;
+	function checkField(f:Field, p:ParentType) {
+		if (f.name == "new" || p.kind == INTERFACE || p.kind == ENUM_ABSTRACT) return;
 
 		var isPrivate = false;
 		var isPublic = false;

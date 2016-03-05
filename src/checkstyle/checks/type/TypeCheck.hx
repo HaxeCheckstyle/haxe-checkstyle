@@ -18,7 +18,7 @@ class TypeCheck extends Check {
 	override function actualRun() {
 		forEachField(function(f, p) {
 			if (f.name == "new") return;
-			if (ignoreEnumAbstractValues && p == ENUM_ABSTRACT && f.access.indexOf(AStatic) == -1) return;
+			if (ignoreEnumAbstractValues && p.kind == ENUM_ABSTRACT && f.access.indexOf(AStatic) == -1) return;
 			switch (f.kind) {
 				case FVar(t, e):
 					if (t == null) error(f.name, f.pos);

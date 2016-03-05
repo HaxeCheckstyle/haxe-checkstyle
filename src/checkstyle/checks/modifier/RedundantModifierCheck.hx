@@ -18,7 +18,7 @@ class RedundantModifierCheck extends Check {
 	override function actualRun() {
 		forEachField(function(field, parent) {
 			if (field.name != "new") {
-				if (parent == INTERFACE) checkInterfaceField(field);
+				if (parent.kind == INTERFACE) checkInterfaceField(field);
 				else checkField(field);
 			}
 		});
@@ -27,14 +27,12 @@ class RedundantModifierCheck extends Check {
 	function checkInterfaceField(f:Field) {
 		if (enforcePublicPrivate) {
 			if (f.access.indexOf(APublic) < 0) {
-				warnPublicKeywordMissing(f.name, f.pos);
-				return;
+				logPos('Missing public keyword: ${f.name}', f.pos, severity);
 			}
 		}
 		else {
 			if (f.access.indexOf(APublic) > -1) {
-				warnPublicKeyword(f.name, f.pos);
-				return;
+				logPos('No need of public keyword: ${f.name} (fields are by default public in interfaces)', f.pos, severity);
 			}
 		}
 	}
@@ -42,31 +40,13 @@ class RedundantModifierCheck extends Check {
 	function checkField(f:Field) {
 		if (enforcePublicPrivate) {
 			if ((f.access.indexOf(APublic) < 0) && (f.access.indexOf(APrivate) < 0)) {
-				warnPrivateKeywordMissing(f.name, f.pos);
-				return;
+				logPos('Missing private keyword: ${f.name}', f.pos, severity);
 			}
 		}
 		else {
 			if (f.access.indexOf(APrivate) > -1) {
-				warnPrivateKeyword(f.name, f.pos);
-				return;
+				logPos('No need of private keyword: ${f.name} (fields are by default private in classes)', f.pos, severity);
 			}
 		}
-	}
-
-	function warnPrivateKeyword(name:String, pos:Position) {
-		logPos('No need of private keyword: ${name} (fields are by default private in classes)', pos, severity);
-	}
-
-	function warnPublicKeyword(name:String, pos:Position) {
-		logPos('No need of public keyword: ${name} (fields are by default public in interfaces)', pos, severity);
-	}
-
-	function warnPrivateKeywordMissing(name:String, pos:Position) {
-		logPos('Missing private keyword: ${name}', pos, severity);
-	}
-
-	function warnPublicKeywordMissing(name:String, pos:Position) {
-		logPos('Missing public keyword: ${name}', pos, severity);
 	}
 }

@@ -21,7 +21,7 @@ class ReturnCheck extends Check {
 
 	override function actualRun() {
 		forEachField(function(field, parent) {
-			if (field.name != "new" && parent != INTERFACE) checkField(field);
+			if (field.name != "new" && parent.kind != INTERFACE) checkField(field);
 		});
 		checkInlineFunctions();
 	}

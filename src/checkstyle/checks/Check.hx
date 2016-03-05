@@ -65,23 +65,23 @@ class Check {
 	}
 
 	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
-	function forEachField(cb:Field -> FieldParent -> Void) {
+	function forEachField(cb:Field -> ParentType -> Void) {
 		for (td in checker.ast.decls) {
 			var fields:Array<Field> = null;
-			var parent:FieldParent = null;
+			var kind:FieldParentKind = null;
 			switch (td.decl) {
 				case EClass(d):
 					fields = d.data;
-					parent = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
+					kind = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
 				case EAbstract(a):
 					fields = a.data;
-					parent = ExprUtils.hasMeta(a.meta, ":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;
+					kind = ExprUtils.hasMeta(a.meta, ":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;
 				default:
 			}
 
 			if (fields == null) continue;
 			for (field in fields) {
-				if (!isCheckSuppressed(field)) cb(field, parent);
+				if (!isCheckSuppressed(field)) cb(field, {decl:td.decl, kind:kind});
 			}
 		}
 	}
@@ -223,9 +223,14 @@ class Check {
 }
 
 @SuppressWarnings('checkstyle:MemberName')
-enum FieldParent {
+enum FieldParentKind {
 	CLASS;
 	INTERFACE;
 	ABSTRACT;
 	ENUM_ABSTRACT;
+}
+
+typedef ParentType = {
+	var decl:TypeDef;
+	var kind:FieldParentKind;
 }
