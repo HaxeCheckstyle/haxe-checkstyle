@@ -5,9 +5,9 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
-@name("HexadecimalLiterals")
-@desc("Checks Hexadecimal Literals")
-class HexadecimalLiteralsCheck extends Check {
+@name("HexadecimalLiteral", "HexadecimalLiterals")
+@desc("Checks the letter case of hexadecimal literals")
+class HexadecimalLiteralCheck extends Check {
 
 	public var option:String;
 

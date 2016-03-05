@@ -5,9 +5,9 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
-@name("ArrayInstantiation")
+@name("ArrayLiteral", "ArrayInstantiation")
 @desc("Checks if the array is instantiated using [], not with new")
-class ArrayInstantiationCheck extends Check {
+class ArrayLiteralCheck extends Check {
 
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {

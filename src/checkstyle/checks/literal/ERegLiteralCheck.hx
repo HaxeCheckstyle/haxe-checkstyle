@@ -5,9 +5,9 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
-@name("ERegInstantiation")
-@desc("Checks instantiation of regular expressions is in between ~/ and /, not with new")
-class ERegInstantiationCheck extends Check {
+@name("ERegLiteral", "ERegInstantiation")
+@desc("Checks for usage of EReg literals (between ~/ and /) instead of new")
+class ERegLiteralCheck extends Check {
 
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {

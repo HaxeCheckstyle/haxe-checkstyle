@@ -1,27 +1,27 @@
 package checks.literal;
 
-import checkstyle.checks.literal.ERegInstantiationCheck;
+import checkstyle.checks.literal.ERegLiteralCheck;
 
-class ERegInstantiationCheckTest extends CheckTestCase {
+class ERegLiteralCheckTest extends CheckTestCase {
 
 	public function testCorrectEReg() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST2, '');
+		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.TEST2, '');
 	}
 
 	public function testWrongEReg() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.TEST1, 'Bad EReg instantiation, define expression between ~/ and /');
+		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.TEST1, 'Bad EReg instantiation, define expression between ~/ and /');
 	}
 
 	public function testIssue43() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.ISSUE_43, '');
+		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.ISSUE_43, '');
 	}
 
 	public function testIssue99() {
-		assertMsg(new ERegInstantiationCheck(), ERegInstantiationTests.REGEX_WITH_STRING_INTERPOLATION, '');
+		assertMsg(new ERegLiteralCheck(), ERegLiteralTests.REGEX_WITH_STRING_INTERPOLATION, '');
 	}
 }
 
-class ERegInstantiationTests {
+class ERegLiteralTests {
 	public static inline var TEST1:String = "
 	abstractAndClass Test {
 		var _reg:EReg = new EReg('test', 'i');
