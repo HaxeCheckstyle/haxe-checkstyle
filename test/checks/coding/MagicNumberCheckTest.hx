@@ -6,14 +6,12 @@ class MagicNumberCheckTest extends CheckTestCase {
 
 	public function testNoMagicNumber() {
 		var check = new MagicNumberCheck();
-		check.severity = "INFO";
 		assertNoMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS);
 		assertNoMsg(check, MagicNumberCheckTests.ALLOWED_MAGIC_NUMBER);
 	}
 
 	public function testMagicNumber() {
 		var check = new MagicNumberCheck();
-		check.severity = "INFO";
 		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_ASSIGN, 'Magic number "5" detected - consider using a constant');
 		assertMsg(check, MagicNumberCheckTests.NEGATIVE_INT_NUMBER_ASSIGN, 'Magic number "-2" detected - consider using a constant');
 		assertMsg(check, MagicNumberCheckTests.FLOAT_NUMBER_ASSIGN, 'Magic number "5.0" detected - consider using a constant');
@@ -24,7 +22,6 @@ class MagicNumberCheckTest extends CheckTestCase {
 	@SuppressWarnings('checkstyle:MagicNumber')
 	public function testIgnoreNumbers() {
 		var check = new MagicNumberCheck();
-		check.severity = "INFO";
 		check.ignoreNumbers = [-1, 0, 2];
 		assertMsg(check, MagicNumberCheckTests.STANDARD_MAGIC_NUMBERS, 'Magic number "1" detected - consider using a constant');
 

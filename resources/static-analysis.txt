@@ -1,7 +1,6 @@
 src/checkstyle/reporter/BaseReporter.hx:119: characters 11-13 : Info: Magic number "91" detected - consider using a constant
 src/checkstyle/reporter/BaseReporter.hx:120: characters 12-14 : Info: Magic number "94" detected - consider using a constant
 src/checkstyle/reporter/BaseReporter.hx:121: characters 15-17 : Info: Magic number "95" detected - consider using a constant
-test/checks/coding/MagicNumberCheckTest.hx:27: characters 19-25 : Info: Multiple string literal "INFO" detected - consider using a constant
 test/checks/coding/MultipleVariableDeclarationsCheckTest.hx:43: character 0 : Info: Only one variable definition per line allowed
 test/checks/coding/MultipleVariableDeclarationsCheckTest.hx:59: character 0 : Info: Only one variable definition per line allowed
 test/checks/naming/ConstantNameCheckTest.hx:37: characters 44-127 : Info: Multiple string literal "Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)" detected - consider using a constant
@@ -41,10 +40,10 @@ test/checks/naming/ParameterNameCheckTest.hx:25: characters 25-106 : Info: Multi
 test/checks/naming/TypeNameCheckTest.hx:5: characters 0-22 : Info: TODO comment: TODO abstract tests
 test/checks/size/LineLengthCheckTest.hx:33: characters 0-210 : Error: Too long line (> 160)
 test/checks/size/MethodLengthCheckTest.hx:18: characters 14-16 : Info: Magic number "10" detected - consider using a constant
-test/checks/whitespace/EmptyLinesCheckTest.hx:70: character 0 : Info: Too many consecutive empty lines (> 1)
-test/checks/whitespace/EmptyLinesCheckTest.hx:86: character 0 : Info: Too many consecutive empty lines (> 1)
-test/checks/whitespace/IndentationCharacterCheckTest.hx:34: character 0 : Info: Wrong indentation character (should be tab)
+test/checks/whitespace/EmptyLinesCheckTest.hx:51: character 0 : Info: Too many consecutive empty lines (> 1)
+test/checks/whitespace/EmptyLinesCheckTest.hx:67: character 0 : Info: Too many consecutive empty lines (> 1)
+test/checks/whitespace/IndentationCharacterCheckTest.hx:30: character 0 : Info: Wrong indentation character (should be tab)
 test/checks/whitespace/SpacingCheckTest.hx:69: character 3 : Info: Trailing whitespace
 test/checks/whitespace/SpacingCheckTest.hx:78: character 3 : Info: Trailing whitespace
-test/checks/whitespace/TabForAligningCheckTest.hx:21: character 17 : Info: Tab after non-space character. Use space for aligning
-test/checks/whitespace/TrailingWhitespaceCheckTest.hx:16: character 28 : Info: Trailing whitespace
+test/checks/whitespace/TabForAligningCheckTest.hx:19: character 17 : Info: Tab after non-space character. Use space for aligning
+test/checks/whitespace/TrailingWhitespaceCheckTest.hx:15: character 28 : Info: Trailing whitespace
