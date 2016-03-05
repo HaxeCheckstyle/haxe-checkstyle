@@ -1,4 +1,4 @@
-package checkstyle.checks.coding;
+package checkstyle.checks.literal;
 
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
