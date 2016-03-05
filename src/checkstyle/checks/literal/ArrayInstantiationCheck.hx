@@ -13,7 +13,7 @@ class ArrayInstantiationCheck extends Check {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			switch (e.expr){
 				case ENew({pack:[], name:"Array"}, _):
-					logPos('Bad array instantiation, use the array literal notation [] which is faster', e.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Bad array instantiation, use the array literal notation [] which is shorter and cleaner', e.pos, Reflect.field(SeverityLevel, severity));
 				default:
 			}
 		});
