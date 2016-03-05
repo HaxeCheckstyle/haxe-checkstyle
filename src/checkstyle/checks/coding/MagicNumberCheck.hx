@@ -12,7 +12,6 @@ class MagicNumberCheck extends Check {
 	public function new() {
 		super();
 		ignoreNumbers = [-1, 0, 1, 2];
-		severity = "IGNORE";
 	}
 
 	override function actualRun() {

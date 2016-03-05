@@ -1,4 +1,3 @@
-src/checkstyle/checks/Check.hx:21: characters 21-28 : Info: Parameter definition of "checker" masks member of same name
 src/checkstyle/reporter/BaseReporter.hx:119: characters 11-13 : Info: Magic number "91" detected - consider using a constant
 src/checkstyle/reporter/BaseReporter.hx:120: characters 12-14 : Info: Magic number "94" detected - consider using a constant
 src/checkstyle/reporter/BaseReporter.hx:121: characters 15-17 : Info: Magic number "95" detected - consider using a constant

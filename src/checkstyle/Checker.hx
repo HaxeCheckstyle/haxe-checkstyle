@@ -158,10 +158,10 @@ class Checker {
 	}
 
 	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
-	public function run(f:LintFile) {
+	public function run(file:LintFile) {
 		for (reporter in reporters) reporter.fileStart(file);
 
-		this.file = f;
+		this.file = file;
 		try {
 			findLineSeparator();
 			makeLines();
