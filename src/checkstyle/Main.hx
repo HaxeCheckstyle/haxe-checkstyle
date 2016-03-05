@@ -150,7 +150,10 @@ class Main {
 	}
 
 	function listChecks() {
-		for (check in info.checks()) Sys.println('${check.name}: ${check.description}');
+		for (check in info.checks()) {
+			Sys.println(check.name + ":");
+			Sys.println("  " + check.description + "\n");
+		}
 	}
 
 	static function createReporter():IReporter {
@@ -164,7 +167,7 @@ class Main {
 
 	static function listReporters() {
 		Sys.println("text - Text reporter (default)");
-		Sys.println("xml - Checkstyle XML reporter");
+		Sys.println("xml - XML reporter");
 		Sys.println("json - JSON reporter");
 		Sys.exit(0);
 	}
