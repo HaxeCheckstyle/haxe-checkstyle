@@ -21,7 +21,6 @@ class RedundantModifierCheck extends Check {
 		forEachField(checkField);
 	}
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function checkField(f:Field, p:ParentType) {
 		var isDefaultPrivate = f.isDefaultPrivate(p);
 		var implicitAccess = isDefaultPrivate ? "private" : "public";

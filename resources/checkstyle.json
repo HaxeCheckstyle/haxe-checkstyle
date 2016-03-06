@@ -1,0 +1,10 @@
+{
+	"checks": [
+		{
+			"type": "AvoidInlineConditionals",
+			"props": {
+				"severity": "IGNORE"
+			}
+		}
+	]
+}

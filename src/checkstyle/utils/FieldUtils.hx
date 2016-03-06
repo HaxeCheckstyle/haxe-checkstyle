@@ -75,7 +75,6 @@ class FieldUtils {
 		return f.name == "new";
 	}
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	public static function toParentType(decl:TypeDef):ParentType {
 		switch (decl) {
 			case EClass(d):

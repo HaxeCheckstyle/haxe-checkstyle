@@ -130,7 +130,7 @@ class Main {
 		return check;
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic', 'checkstyle:AvoidInlineConditionals')
+	@SuppressWarnings('checkstyle:Dynamic')
 	function setCheckProperties(check:Check, checkConf:Dynamic, defaultSeverity:String) {
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
@@ -162,7 +162,6 @@ class Main {
 		for (check in info.checks()) checker.addCheck(info.build(check.name));
 	}
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function getSortedCheckInfos():Array<CheckInfo> {
 		var checks:Array<CheckInfo> = [for (check in info.checks()) check];
 		checks.sort(function(c1:CheckInfo, c2:CheckInfo):Int return (c1.name < c2.name) ? -1 : 1);

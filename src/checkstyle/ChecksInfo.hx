@@ -5,11 +5,10 @@ import checkstyle.checks.Check;
 @SuppressWarnings("checkstyle:Dynamic")
 class ChecksInfo {
 
-	var name2info:Map<String, CheckInfo>;
+	var checkInfos:Map<String, CheckInfo>;
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	public function new() {
-		name2info = new Map();
+		checkInfos = new Map();
 
 		CompileTime.importPackage("checkstyle.checks");
 		var checksClasses = CompileTime.getAllClasses(Check);
@@ -19,7 +18,7 @@ class ChecksInfo {
 			var names:Array<Dynamic> = getCheckNameFromClass(cl);
 			for (i in 0 ... names.length) {
 				var desc = getCheckDescription(cl);
-				name2info[names[i]] = {
+				checkInfos[names[i]] = {
 					name: names[i],
 					description: (i == 0) ? desc : desc + " [DEPRECATED, use " + names[0] + " instead]",
 					clazz: cl
@@ -35,7 +34,7 @@ class ChecksInfo {
 
 	static function getCheckNameFromClass(cl:Class<Check>):Array<Dynamic> {
 		var meta = haxe.rtti.Meta.getType(cl);
-		if (meta.name == null) throw '${Type.getClassName(cl)} have no @name meta.';
+		if (meta.name == null) throw '${Type.getClassName(cl)} has no @name meta.';
 		return meta.name;
 	}
 
@@ -49,13 +48,13 @@ class ChecksInfo {
 
 	@SuppressWarnings('checkstyle:Dynamic')
 	public function checks():Iterator<Dynamic> {
-		return name2info.iterator();
+		return checkInfos.iterator();
 	}
 
 	@SuppressWarnings('checkstyle:Dynamic')
 	public function build(name:String):Dynamic {
-		if (!name2info.exists(name)) return null;
-		var cl = name2info[name].clazz;
+		if (!checkInfos.exists(name)) return null;
+		var cl = checkInfos[name].clazz;
 		return Type.createInstance(cl, []);
 	}
 }
