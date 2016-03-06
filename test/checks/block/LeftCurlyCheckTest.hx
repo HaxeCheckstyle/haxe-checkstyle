@@ -103,6 +103,15 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.tokens = [LeftCurlyCheck.ARRAY_COMPREHENSION];
 		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
+
+		check.option = LeftCurlyCheck.NLOW;
+		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_NLOW_ISSUE_114);
+		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
+
+		check.option = LeftCurlyCheck.NL;
+		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114, MSG_NL);
+		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
 	}
 }
 
@@ -455,6 +464,19 @@ class LeftCurlyTests {
 			}];
 			[for (x in 0...10)
 				for (y in 0...10) {
+					x:x,
+					y:y
+				}];
+		}
+	}";
+
+	public static inline var ARRAY_COMPREHENSION_NLOW_ISSUE_114:String = "
+	class Test {
+		public function foo() {
+			[for (x in 0...10)
+				for
+					(y in 0...10)
+				{
 					x:x,
 					y:y
 				}];
