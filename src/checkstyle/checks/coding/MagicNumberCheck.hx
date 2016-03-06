@@ -15,6 +15,14 @@ class MagicNumberCheck extends Check {
 	}
 
 	override function actualRun() {
+		var ignore = false;
+		forEachField(function(field, parent) {
+			ignore = (parent == ENUM_ABSTRACT);
+			return;
+		});
+
+		if (ignore) return;
+
 		var root:TokenTree = checker.getTokenTree();
 		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
 			if (token.tok == null) return false;
