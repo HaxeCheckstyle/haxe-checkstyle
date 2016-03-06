@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)  [![Version](https://badge.fury.io/gh/adireddy%2Fhaxe-checkstyle.svg)](http://lib.haxe.org/p/checkstyle) [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
 =========
-![logo](https://raw.githubusercontent.com/adireddy/haxe-checkstyle/master/logo.png)
+![logo](logo/haxe-checkstyle.png)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
@@ -8,17 +8,17 @@ Code conventions improve readability, allowing team members to understand each o
 
 Please note that this project was derived from [haxelint](https://github.com/mcheshkov/haxelint) created by [@mcheshkov](https://github.com/mcheshkov).
 
-###Installation
+### Installation
 
 ```haxe
 haxelib install checkstyle
 ```
 
-###Reference
+### Reference
 
 [More information and reference](https://adireddy.gitbooks.io/haxe-checkstyle/content/).
 
-###Issues
+### Issues
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
 
