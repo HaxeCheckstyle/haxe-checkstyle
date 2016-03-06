@@ -35,43 +35,25 @@ class NameCheckBase extends Check {
 		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass (d):
-					checkClassType (d, td.pos);
+					checkClassType (td.decl, d, td.pos);
 				case EEnum (d):
-					checkEnumType (d, td.pos);
+					checkEnumType (td.decl, d, td.pos);
 				case EAbstract (d):
-					checkAbstractType (d, td.pos);
+					checkAbstractType (td.decl, d, td.pos);
 				case ETypedef (d):
-					checkTypedefType (d, td.pos);
+					checkTypedefType (td.decl, d, td.pos);
 				default:
 			}
 		}
 	}
 
-	function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {}
+	function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {}
 
-	function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {}
+	function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {}
 
-	function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {}
+	function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {}
 
-	function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {}
-
-	function getFieldAccess(f:Field):NameFieldAccess {
-		var isPrivate = false;
-		var isPublic = false;
-		var isInline = false;
-		var isStatic = false;
-
-		if (f.access.indexOf(AInline) > -1) isInline = true;
-		if (f.access.indexOf(AStatic) > -1) isStatic = true;
-		if (f.access.indexOf(APublic) > -1) isPublic = true;
-		else isPrivate = true;
-		return {
-			isPrivate: isPrivate,
-			isPublic: isPublic,
-			isInline: isInline,
-			isStatic: isStatic
-		};
-	}
+	function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {}
 
 	function matchTypeName(type:String, name:String, pos:Position) {
 		if (!formatRE.match (name)) {
@@ -83,10 +65,3 @@ class NameCheckBase extends Check {
 		logPos('Invalid ${type} signature: ${name} (name should be ~/${format}/)', pos, severity);
 	}
 }
-
-typedef NameFieldAccess = {
-	var isPrivate:Bool;
-	var isPublic:Bool;
-	var isInline:Bool;
-	var isStatic:Bool;
-};

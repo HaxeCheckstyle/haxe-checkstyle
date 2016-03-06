@@ -112,10 +112,10 @@ class MemberNameCheckTest extends CheckTestCase {
 		assertNoMsg(check, MemberNameTests.TEST);
 		assertMsg(check, MemberNameTests.ABSTRACT_FIELDS, 'Invalid member signature: EnumConstructor3 (name should be ~/${check.format}/)');
 
-		check.tokens = [MemberNameCheck.ABSTRACT, MemberNameCheck.PUBLIC];
+		check.tokens = [MemberNameCheck.ABSTRACT, MemberNameCheck.PRIVATE];
 		assertNoMsg(check, MemberNameTests.ABSTRACT_FIELDS);
 
-		check.tokens = [MemberNameCheck.ABSTRACT, MemberNameCheck.PRIVATE];
+		check.tokens = [MemberNameCheck.ABSTRACT, MemberNameCheck.PUBLIC];
 		assertMsg(check, MemberNameTests.ABSTRACT_FIELDS, 'Invalid member signature: EnumConstructor3 (name should be ~/${check.format}/)');
 	}
 }

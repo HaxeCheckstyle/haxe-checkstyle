@@ -3,6 +3,8 @@ package checkstyle.checks.naming;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.FieldUtils;
+
 @name("MemberName")
 @desc("Checks on naming conventions of non-static fields")
 class MemberNameCheck extends NameCheckBase {
@@ -19,24 +21,24 @@ class MemberNameCheck extends NameCheckBase {
 		format = "^[a-z][a-zA-Z0-9]*$";
 	}
 
-	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
+	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(CLASS)) return;
 		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
-		checkFields(d.data);
+		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
+	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 		if (!hasSuppressWarningsMeta(d.meta)) checkEnumFields(d.data);
 	}
 
-	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
+	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(ABSTRACT)) return;
-		checkFields(d.data);
+		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
+	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
@@ -47,14 +49,14 @@ class MemberNameCheck extends NameCheckBase {
 		}
 	}
 
-	function checkFields(d:Array<Field>) {
+	function checkFields(d:Array<Field>, p:ParentType) {
 		for (field in d) {
 			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
 				case FVar(t, e):
-					checkField(field, t, e);
+					checkField(field, t, e, p);
 				case FProp(_, _, t, e):
-					checkField(field, t, e);
+					checkField(field, t, e, p);
 				default:
 			}
 		}
@@ -75,12 +77,10 @@ class MemberNameCheck extends NameCheckBase {
 		for (field in d) matchTypeName("enum member", field.name, field.pos);
 	}
 
-	function checkField(f:Field, t:ComplexType, e:Expr) {
-		var access = getFieldAccess(f);
-
-		if (access.isStatic) return;
-		if (!hasToken(PUBLIC) && access.isPublic) return;
-		if (!hasToken(PRIVATE) && access.isPrivate) return;
+	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
+		if (f.isStatic(p)) return;
+		if (!hasToken(PUBLIC) && f.isPublic(p)) return;
+		if (!hasToken(PRIVATE) && f.isPrivate(p)) return;
 
 		matchTypeName("member", f.name, f.pos);
 	}

@@ -12,21 +12,21 @@ class ParameterNameCheck extends NameCheckBase {
 		format = "^(_|[a-z][a-zA-Z0-9]*$)";
 	}
 
-	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
+	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
 		checkFields(d.data);
 	}
 
-	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
+	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 		checkEnumFields(d.data);
 	}
 
-	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
+	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		checkFields(d.data);
 	}
 
-	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
+	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
 		switch (d.data) {

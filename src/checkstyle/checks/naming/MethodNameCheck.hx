@@ -1,7 +1,10 @@
 package checkstyle.checks.naming;
 
+import haxe.rtti.CType.Typedef;
 import haxeparser.Data;
 import haxe.macro.Expr;
+
+using checkstyle.utils.FieldUtils;
 
 @name("MethodName")
 @desc("Checks the method names")
@@ -19,53 +22,47 @@ class MethodNameCheck extends NameCheckBase {
 		format = "^[a-z][a-zA-Z0-9]*$";
 	}
 
-	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
+	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
 		if (d.flags.indexOf(HInterface) > -1) return;
-		checkFields(d.data);
+		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {}
-
-	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
-		checkFields(d.data);
+	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
+		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
+	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
+		var p = decl.toParentType();
 		switch (d.data) {
 			case TAnonymous(f):
-				checkFields(f);
+				checkFields(f, p);
 			default:
 		}
 	}
 
-	function checkFields(d:Array<Field>) {
+	function checkFields(d:Array<Field>, p:ParentType) {
 		for (field in d) {
 			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
 				case FFun(f):
-					checkField(field);
+					checkField(field, p);
 				default:
 			}
 		}
 	}
 
 	@SuppressWarnings('checkstyle:CyclomaticComplexity')
-	function checkField(f:Field) {
-		var getter = StringTools.startsWith(f.name, "get_");
-		var setter = StringTools.startsWith(f.name, "set_");
-
-		if (getter || setter) return;
-
-		var access = getFieldAccess(f);
-		if (hasToken(NOTINLINE) && !hasToken(INLINE) && access.isInline) return;
-		if (hasToken(INLINE) && !hasToken(NOTINLINE) && !access.isInline) return;
-		if (hasToken(NOTSTATIC) && !hasToken(STATIC) && access.isStatic) return;
-		if (hasToken(STATIC) && !hasToken(NOTSTATIC) && !access.isStatic) return;
-		if (hasToken(PUBLIC) && !hasToken(PRIVATE) && !access.isPublic) return;
-		if (hasToken(PRIVATE) && !hasToken(PUBLIC) && !access.isPrivate) return;
+	function checkField(f:Field, p:ParentType) {
+		if (f.isGetter() || f.isSetter()) return;
+		if (hasToken(NOTINLINE) && !hasToken(INLINE) && f.isInline(p)) return;
+		if (hasToken(INLINE) && !hasToken(NOTINLINE) && !f.isInline(p)) return;
+		if (hasToken(NOTSTATIC) && !hasToken(STATIC) && f.isStatic(p)) return;
+		if (hasToken(STATIC) && !hasToken(NOTSTATIC) && !f.isStatic(p)) return;
+		if (hasToken(PUBLIC) && !hasToken(PRIVATE) && !f.isPublic(p)) return;
+		if (hasToken(PRIVATE) && !hasToken(PUBLIC) && !f.isPrivate(p)) return;
 
 		matchTypeName("method name", f.name, f.pos);
 	}

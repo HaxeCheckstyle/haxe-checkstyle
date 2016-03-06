@@ -17,7 +17,7 @@ class MagicNumberCheck extends Check {
 	override function actualRun() {
 		var ignore = false;
 		forEachField(function(field, parent) {
-			ignore = (parent == ENUM_ABSTRACT);
+			ignore = (parent.kind == ENUM_ABSTRACT);
 			return;
 		});
 

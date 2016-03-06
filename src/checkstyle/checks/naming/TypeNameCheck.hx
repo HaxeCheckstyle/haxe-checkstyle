@@ -19,7 +19,7 @@ class TypeNameCheck extends NameCheckBase {
 		format = "^[A-Z]+[a-zA-Z0-9]*$";
 	}
 
-	override function checkClassType(d:Definition<ClassFlag, Array<Field>>, pos:Position) {
+	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
 
 		var isInterface:Bool = (d.flags.indexOf(HInterface) > -1);
@@ -34,19 +34,19 @@ class TypeNameCheck extends NameCheckBase {
 		}
 	}
 
-	override function checkEnumType(d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
+	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 
 		matchTypeName("enum", d.name, pos);
 	}
 
-	override function checkAbstractType(d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
+	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(ABSTRACT)) return;
 		matchTypeName("abstract", d.name, pos);
 	}
 
-	override function checkTypedefType(d:Definition<EnumFlag, ComplexType>, pos:Position) {
+	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
 		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
 

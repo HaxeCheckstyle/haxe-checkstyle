@@ -6,6 +6,8 @@ import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxeparser.Data;
 
+using checkstyle.utils.FieldUtils;
+
 @name("Return")
 @desc("Warns if Void is used for return or if return type is not specified when returning")
 class ReturnCheck extends Check {
@@ -21,7 +23,7 @@ class ReturnCheck extends Check {
 
 	override function actualRun() {
 		forEachField(function(field, parent) {
-			if (field.name != "new" && parent.kind != INTERFACE) checkField(field);
+			if (!field.isConstructor() && parent.kind != INTERFACE) checkField(field);
 		});
 		checkInlineFunctions();
 	}

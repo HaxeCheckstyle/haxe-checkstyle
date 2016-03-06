@@ -5,6 +5,8 @@ import checkstyle.utils.ExprUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.FieldUtils;
+
 @name("Anonymous")
 @desc("Anonymous type structures check")
 class AnonymousCheck extends Check {
@@ -15,7 +17,7 @@ class AnonymousCheck extends Check {
 	}
 
 	function checkField(f:Field, _) {
-		if (f.name == "new") return;
+		if (f.isConstructor()) return;
 		switch (f.kind) {
 			case FVar(TAnonymous(fields), val):
 				error(f.name, f.pos);

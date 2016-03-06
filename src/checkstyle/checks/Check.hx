@@ -1,10 +1,13 @@
 package checkstyle.checks;
 
 import checkstyle.utils.ExprUtils;
+import checkstyle.utils.FieldUtils;
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
+
+using checkstyle.utils.FieldUtils;
 
 class Check {
 
@@ -64,24 +67,17 @@ class Check {
 		return moduleName;
 	}
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function forEachField(cb:Field -> ParentType -> Void) {
 		for (td in checker.ast.decls) {
-			var fields:Array<Field> = null;
-			var kind:FieldParentKind = null;
-			switch (td.decl) {
-				case EClass(d):
-					fields = d.data;
-					kind = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
-				case EAbstract(a):
-					fields = a.data;
-					kind = ExprUtils.hasMeta(a.meta, ":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;
-				default:
+			var fields:Array<Field> = switch (td.decl) {
+				case EClass(d): d.data;
+				case EAbstract(a): a.data;
+				default: null;
 			}
 
 			if (fields == null) continue;
 			for (field in fields) {
-				if (!isCheckSuppressed(field)) cb(field, {decl:td.decl, kind:kind});
+				if (!isCheckSuppressed(field)) cb(field, td.decl.toParentType());
 			}
 		}
 	}
@@ -220,17 +216,4 @@ class Check {
 		}
 		return false;
 	}
-}
-
-@SuppressWarnings('checkstyle:MemberName')
-enum FieldParentKind {
-	CLASS;
-	INTERFACE;
-	ABSTRACT;
-	ENUM_ABSTRACT;
-}
-
-typedef ParentType = {
-	var decl:TypeDef;
-	var kind:FieldParentKind;
 }

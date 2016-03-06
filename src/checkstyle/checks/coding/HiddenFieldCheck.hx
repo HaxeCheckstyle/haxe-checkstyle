@@ -5,6 +5,8 @@ import haxe.macro.Expr;
 import haxeparser.Data.TokenDef;
 import checkstyle.LintMessage.SeverityLevel;
 
+using checkstyle.utils.FieldUtils;
+
 @name("HiddenField")
 @desc("Checks that a local variable or parameter does not shadow a field")
 class HiddenFieldCheck extends Check {

@@ -1,9 +1,10 @@
 package checkstyle.checks.coding;
 
 import checkstyle.LintMessage.SeverityLevel;
-import checkstyle.checks.Check.ParentType;
 import haxeparser.Data;
 import haxe.macro.Expr;
+
+using checkstyle.utils.FieldUtils;
 
 @name("VariableInitialisation")
 @desc("Checks if instance variables are initialised at class level")
@@ -14,7 +15,7 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function checkField(f:Field, p:ParentType) {
-		if (f.name == "new" || p.kind == INTERFACE || p.kind == ENUM_ABSTRACT) return;
+		if (f.isConstructor() || p.kind == INTERFACE || p.kind == ENUM_ABSTRACT) return;
 
 		var isPrivate = false;
 		var isPublic = false;

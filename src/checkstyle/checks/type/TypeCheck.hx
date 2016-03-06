@@ -4,6 +4,8 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.FieldUtils;
+
 @name("Type")
 @desc("Type check for member variables")
 class TypeCheck extends Check {
@@ -17,7 +19,7 @@ class TypeCheck extends Check {
 
 	override function actualRun() {
 		forEachField(function(f, p) {
-			if (f.name == "new") return;
+			if (f.isConstructor()) return;
 			if (ignoreEnumAbstractValues && p.kind == ENUM_ABSTRACT && f.access.indexOf(AStatic) == -1) return;
 			switch (f.kind) {
 				case FVar(t, e):
