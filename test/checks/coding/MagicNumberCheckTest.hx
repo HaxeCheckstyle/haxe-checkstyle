@@ -36,6 +36,11 @@ class MagicNumberCheckTest extends CheckTestCase {
 		assertNoMsg(check, MagicNumberCheckTests.INT_NUMBER_IF);
 		assertMsg(check, MagicNumberCheckTests.INT_NUMBER_FUNCTION, 'Magic number "10" detected - consider using a constant');
 	}
+
+	public function testEnumAbstract() {
+		var check = new MagicNumberCheck();
+		assertNoMsg(check, MagicNumberCheckTests.ENUM_ABSTRACT);
+	}
 }
 
 class MagicNumberCheckTests {
@@ -89,5 +94,13 @@ class MagicNumberCheckTests {
 		public function new() {
 			a = VAL;
 		}
+	}";
+
+	public static inline var ENUM_ABSTRACT:String = "
+	@:enum abstract Style(Int) {
+		var BOLD = 1;
+		var RED = 91;
+		var BLUE = 94;
+		var MAGENTA = 95;
 	}";
 }
