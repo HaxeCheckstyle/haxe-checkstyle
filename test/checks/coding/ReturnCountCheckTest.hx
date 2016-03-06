@@ -11,6 +11,10 @@ class ReturnCountCheckTest extends CheckTestCase {
 	public function testCorrectReturnCount() {
 		assertNoMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST2);
 	}
+
+	public function testSuppressedReturnCount() {
+		assertNoMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST3);
+	}
 }
 
 class ReturnCountCheckTests {
@@ -30,6 +34,18 @@ class ReturnCountCheckTests {
 			if (true) {
 				return 2;
 			}
+		}
+	}";
+
+	public static inline var TEST3:String = "
+	abstractAndClass Test {
+		@SuppressWarnings('checkstyle:ReturnCount')
+		function a() {
+			return 1;
+			if (true) {
+				return 2;
+			}
+			else return 3;
 		}
 	}";
 }
