@@ -6,10 +6,8 @@ root = true
 indent_style = tab
 indent_size = 4
 insert_final_newline = false
-trim_trailing_whitespace = false
+trim_trailing_whitespace = true
 
 [*.hx]
 end_of_line = lf
-
-[*.json]
-indent_size = 4
+charset = utf-8

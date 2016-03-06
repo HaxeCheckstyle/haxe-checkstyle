@@ -16,7 +16,6 @@ class MultipleVariableDeclarationsCheck extends Check {
 				case EVars(vars):
 					if (vars.length > 1) logPos('Each variable declaration must be in its own statement', e.pos, severity);
 				default:
-
 			}
 		});
 
