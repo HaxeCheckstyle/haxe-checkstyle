@@ -1,0 +1,21 @@
+package checks.coding;
+
+import checkstyle.checks.coding.ReturnCountCheck;
+
+class ReturnCountCheckTest extends CheckTestCase {
+
+	public function testReturnCount() {
+		assertMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST1, 'Return count is 3 (max allowed is 2)');
+	}
+}
+
+class ReturnCountCheckTests {
+	public static inline var TEST1:String = "
+	abstractAndClass Test {
+		function a() {
+			return 1;
+			return 2;
+			return 3;
+		}
+	}";
+}
