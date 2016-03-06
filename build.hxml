@@ -19,4 +19,4 @@
 -x TestMain
 
 --next
--cmd neko run -s src -s test -p resources/static-analysis.txt -c resources/sample-config.json
+-cmd neko run -s src -p resources/static-analysis.txt -c resources/sample-config.json
