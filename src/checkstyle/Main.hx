@@ -64,10 +64,12 @@ class Main {
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var configPath:String = null;
+		var enableAll:Bool = false;
 
 		var argHandler = Args.generate([
 			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) traverse(path, files),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
+			@doc("Enable all checks (config becomes a delta to that)") ["--enable-all"] => function() enableAll = true,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
 			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
 				XML_PATH = path;
@@ -90,35 +92,46 @@ class Main {
 		}
 		argHandler.parse(args);
 
-		var toProcess:Array<LintFile> = [];
 		var i:Int = 0;
-		for (file in files) {
-			toProcess.push({name:file, content:null, index:i++});
-		}
+		var toProcess:Array<LintFile> = [for (file in files) {name:file, content:null, index:i++}];
 
 		if (configPath == null && FileSystem.exists(DEFAULT_CONFIG) && !FileSystem.isDirectory(DEFAULT_CONFIG)) {
 			configPath = DEFAULT_CONFIG;
 		}
 
-		if (configPath == null) addAllChecks();
-		else {
-			var configText = File.getContent(configPath);
-			var config = Json.parse(configText);
-			verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
-			var defaultSeverity = config.defaultSeverity;
-			var checks:Array<Dynamic> = config.checks;
-			for (checkConf in checks) createCheck(checkConf, defaultSeverity);
-		}
+		if (configPath == null || enableAll) addAllChecks();
+		if (configPath != null) loadConfig(configPath);
 		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
 		checker.process(toProcess);
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic', 'checkstyle:AvoidInlineConditionals')
-	function createCheck(checkConf:Dynamic, defaultSeverity:String) {
+	@SuppressWarnings('checkstyle:Dynamic')
+	function loadConfig(configPath:String) {
+		var config = Json.parse(File.getContent(configPath));
+		verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
+
+		var configChecks:Array<Dynamic> = config.checks;
+		for (checkConf in configChecks) {
+			var check = getCheck(checkConf);
+			setCheckProperties(check, checkConf, config.defaultSeverity);
+		}
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic')
+	function getCheck(checkConf:Dynamic):Check {
+		for (check in checker.checks) {
+			if (checkConf.type == check.getModuleName()) return check;
+		}
 		var check:Check = cast info.build(checkConf.type);
 		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
+		checker.addCheck(check);
+		return check;
+	}
+
+	@SuppressWarnings('checkstyle:Dynamic', 'checkstyle:AvoidInlineConditionals')
+	function setCheckProperties(check:Check, checkConf:Dynamic, defaultSeverity:String) {
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
@@ -134,7 +147,6 @@ class Main {
 		if (defaultSeverity != null && props.indexOf("severity") < 0) {
 			check.severity = defaultSeverity;
 		}
-		checker.addCheck(check);
 	}
 
 	@SuppressWarnings('checkstyle:Dynamic')

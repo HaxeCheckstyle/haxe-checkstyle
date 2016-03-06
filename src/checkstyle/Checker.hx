@@ -18,8 +18,8 @@ class Checker {
 	public var lines:Array<String>;
 	public var tokens:Array<Token>;
 	public var ast:Ast;
+	public var checks:Array<Check>;
 
-	var checks:Array<Check>;
 	var reporters:Array<IReporter>;
 	var linesIdx:Array<LineIds>;
 	var lineSeparator:String;
