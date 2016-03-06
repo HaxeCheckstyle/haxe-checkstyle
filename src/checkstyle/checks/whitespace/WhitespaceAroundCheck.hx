@@ -47,7 +47,7 @@ class WhitespaceAroundCheck extends Check {
 			"|=",
 			"&=",
 			"^=",
-			"=>",
+			"=>"
 		];
 	}
 
