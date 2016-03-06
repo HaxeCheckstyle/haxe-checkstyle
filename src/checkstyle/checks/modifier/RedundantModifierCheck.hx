@@ -35,7 +35,6 @@ class RedundantModifierCheck extends Check {
 			}
 		}
 		else {
-			var redundantKeyword = isDefaultPrivate ? "private" : "public";
 			if ((isDefaultPrivate && f.hasPrivate()) || (!isDefaultPrivate && f.hasPublic())) {
 				logPos('No need of $implicitKeyword keyword: ${f.name}', f.pos, severity);
 			}
