@@ -61,7 +61,7 @@ class Main {
 		exitCode = 0;
 	}
 
-	@SuppressWarnings(['checkstyle:Dynamic', 'checkstyle:MethodLength'])
+	@SuppressWarnings('checkstyle:Dynamic')
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var configPath:String = null;
