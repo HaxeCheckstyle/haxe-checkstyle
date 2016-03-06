@@ -1,4 +1,5 @@
 *.iml
+.idea
 *.iws
 *.log
 *.cache
@@ -7,6 +8,7 @@
 *.zip
 .haxelib/
 out/
+node_modules
 
 check-style-report.json
 check-style-report.xml
