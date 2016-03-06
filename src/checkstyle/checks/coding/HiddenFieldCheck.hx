@@ -8,6 +8,7 @@ import checkstyle.LintMessage.SeverityLevel;
 @name("HiddenField")
 @desc("Checks that a local variable or parameter does not shadow a field")
 class HiddenFieldCheck extends Check {
+	
 	static inline var MAX_FIELD_LEVEL:Int = 3;
 
 	public var ignoreConstructorParameter:Bool;

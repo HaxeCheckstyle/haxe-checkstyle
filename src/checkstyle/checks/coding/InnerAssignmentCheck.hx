@@ -9,10 +9,6 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for assignments in subexpressions")
 class InnerAssignmentCheck extends Check {
 
-	public function new() {
-		super();
-	}
-
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		var allAssignments:Array<TokenTree> = root.filter([
