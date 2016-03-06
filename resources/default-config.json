@@ -247,7 +247,7 @@
 		{
 			"type": "MultipleVariableDeclarations",
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			}
 		},
 		{
@@ -255,7 +255,13 @@
 			"props": {
 				"severity": "IGNORE",
 				"allowSingleLineStatement": true,
-				"tokens": ["IF", "ELSE_IF", "FOR", "WHILE", "TRY", "CATCH"]
+				"tokens": [
+					"IF",
+					"ELSE_IF",
+					"FOR",
+					"WHILE",
+					"DO_WHILE"
+				]
 			}
 		},
 		{
