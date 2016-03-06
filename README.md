@@ -1,6 +1,6 @@
 [![License](http://img.shields.io/:license-mit-blue.svg)](http://opensource.org/licenses/MIT)  [![Version](https://badge.fury.io/gh/adireddy%2Fhaxe-checkstyle.svg)](http://lib.haxe.org/p/checkstyle) [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
 =========
-![logo](logo/haxe-checkstyle.png)
+![logo](resources/logo/haxe-checkstyle.png)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
