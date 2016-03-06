@@ -49,6 +49,14 @@ class RedundantModifierCheckTest extends CheckTestCase {
 		check.enforcePublicPrivate = true;
 		assertMsg(check, RedundantModifierTests.TEST6, 'Missing public keyword: foo');
 	}
+
+	public function testEnumAbstractValues() {
+		var check = new RedundantModifierCheck();
+		assertMsg(check, RedundantModifierTests.TEST7, 'No need of public keyword: value');
+		
+		check.enforcePublicPrivate = true;
+		assertMsg(check, RedundantModifierTests.TEST8, 'Missing public keyword: value');
+	}
 }
 
 class RedundantModifierTests {
@@ -95,5 +103,17 @@ class RedundantModifierTests {
 	@:publicFields
 	class Test {
 		function foo() {}
+	}";
+
+	public static inline var TEST7:String = "
+	@:enum
+	abstract Test(Int) {
+		public var value = 0;
+	}";
+
+	public static inline var TEST8:String = "
+	@:enum
+	abstract Test(Int) {
+		var value = 0;
 	}";
 }
