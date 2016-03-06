@@ -67,13 +67,24 @@ class RedundantModifierCheckTest extends CheckTestCase {
 		assertNoMsg(check, RedundantModifierTests.TEST11);
 		assertMsg(check, RedundantModifierTests.TEST12, 'Missing private keyword: foo');
 	}
+
+	public function testConstructor() {
+		var check = new RedundantModifierCheck();
+		assertNoMsg(check, RedundantModifierTests.TEST13);
+		assertMsg(check, RedundantModifierTests.TEST14, 'No need of private keyword: new');
+		assertNoMsg(check, RedundantModifierTests.TEST15);
+
+		check.enforcePublicPrivate = true;
+		assertMsg(check, RedundantModifierTests.TEST13, 'Missing private keyword: new');
+		assertNoMsg(check, RedundantModifierTests.TEST14);
+		assertNoMsg(check, RedundantModifierTests.TEST15);
+	}
 }
 
 class RedundantModifierTests {
 	public static inline var TEST:String = "
 	abstractAndClass Test {
 		var a:Int;
-		public function new() {}
 
 		function _onUpdate() {}
 
@@ -83,8 +94,6 @@ class RedundantModifierTests {
 	public static inline var TEST1:String = "
 	abstractAndClass Test {
 		private var a:Int;
-
-		public function new() {}
 	}";
 
 	public static inline var TEST2:String = "
@@ -149,5 +158,20 @@ class RedundantModifierTests {
 	@:enum
 	abstract Test(Int) {
 		function foo() {}
+	}";
+
+	public static inline var TEST13:String = "
+	abstractAndClass Test {
+		function new() {}
+	}";
+
+	public static inline var TEST14:String = "
+	abstractAndClass Test {
+		private function new() {}
+	}";
+
+	public static inline var TEST15:String = "
+	abstractAndClass Test {
+		public function new() {}
 	}";
 }

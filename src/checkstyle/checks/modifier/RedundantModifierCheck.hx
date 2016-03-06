@@ -18,26 +18,20 @@ class RedundantModifierCheck extends Check {
 	}
 
 	override function actualRun() {
-		forEachField(function(field, parent) {
-			if (!field.isConstructor()) {
-				checkField(field, parent);
-			}
-		});
+		forEachField(checkField);
 	}
 
 	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function checkField(f:Field, p:ParentType) {
 		var isDefaultPrivate = f.isDefaultPrivate(p);
-		var implicitKeyword = isDefaultPrivate ? "private" : "public";
+		var implicitAccess = isDefaultPrivate ? "private" : "public";
 		if (enforcePublicPrivate) {
 			if (!f.hasPublic() && !f.hasPrivate()) {
-				logPos('Missing $implicitKeyword keyword: ${f.name}', f.pos, severity);
+				logPos('Missing $implicitAccess keyword: ${f.name}', f.pos, severity);
 			}
 		}
-		else {
-			if ((isDefaultPrivate && f.hasPrivate()) || (!isDefaultPrivate && f.hasPublic())) {
-				logPos('No need of $implicitKeyword keyword: ${f.name}', f.pos, severity);
-			}
+		else if ((isDefaultPrivate && f.hasPrivate()) || (!isDefaultPrivate && f.hasPublic())) {
+			logPos('No need of $implicitAccess keyword: ${f.name}', f.pos, severity);
 		}
 	}
 }
