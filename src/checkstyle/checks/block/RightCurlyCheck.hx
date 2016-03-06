@@ -30,8 +30,6 @@ class RightCurlyCheck extends Check {
 	public static inline var ALONE:String = "alone";
 	public static inline var ALONE_OR_SINGLELINE:String = "aloneorsingle";
 
-	var sameRegex:EReg;
-
 	public var tokens:Array<String>;
 	public var option:String;
 
@@ -53,9 +51,6 @@ class RightCurlyCheck extends Check {
 			CATCH
 		];
 		option = ALONE_OR_SINGLELINE;
-
-		// only else and catch allowed on same line after a right curly
-		sameRegex = ~/^\s*(else|catch)/;
 	}
 
 	function hasToken(token:String):Bool {
@@ -149,6 +144,8 @@ class RightCurlyCheck extends Check {
 				var afterLine:String = checker.lines[linePos.line];
 				if (linePos.ofs < afterLine.length) afterCurly = afterLine.substr(linePos.ofs);
 			}
+			// only else and catch allowed on same line after a right curly
+			var sameRegex = ~/^\s*(else|catch)/;
 			var needsSameOption:Bool = sameRegex.match(afterCurly);
 			var shouldHaveSameOption:Bool = false;
 			if (checker.lines.length > linePos.line + 1) {

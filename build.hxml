@@ -14,4 +14,5 @@
 
 --next
 -cmd neko run -s src -p resources/static-analysis.txt
+-cmd neko run --default-config resources/default-config.json
 -cmd neko run -c resources/default-config.json

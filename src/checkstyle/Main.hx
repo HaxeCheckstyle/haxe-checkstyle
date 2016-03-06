@@ -79,6 +79,7 @@ class Main {
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
 			@doc("List all available checks and exit") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
+			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("Show report [DEPRECATED]") ["-report"] => function() {},
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -150,17 +151,21 @@ class Main {
 	}
 
 	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
-	function listChecks() {
+	function getSortedCheckInfos():Array<CheckInfo> {
 		var checks:Array<CheckInfo> = [for (check in info.checks()) check];
 		checks.sort(function(c1:CheckInfo, c2:CheckInfo):Int return (c1.name < c2.name) ? -1 : 1);
-		for (check in checks) {
+		return checks;
+	}
+
+	function listChecks() {
+		for (check in getSortedCheckInfos()) {
 			Sys.println(check.name + ":");
 			Sys.println("  " + check.description + "\n");
 		}
 		Sys.exit(0);
 	}
 
-	static function createReporter(numFiles:Int):IReporter {
+	function createReporter(numFiles:Int):IReporter {
 		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE);
 			case "json": new JSONReporter(numFiles, JSON_PATH);
@@ -169,18 +174,44 @@ class Main {
 		}
 	}
 
-	static function listReporters() {
+	function listReporters() {
 		Sys.println("text - Text reporter (default)");
 		Sys.println("xml - XML reporter");
 		Sys.println("json - JSON reporter");
 		Sys.exit(0);
 	}
 
-	static function pathJoin(s:String, t:String):String {
+	function generateDefaultConfig(path) {
+		addAllChecks();
+
+		var checks:Array<Check> = [for (check in getSortedCheckInfos()) info.build(check.name)];
+		var config = {
+			defaultSeverity: "INFO",
+			checks: []
+		};
+		for (check in checks) {
+			var checkConfig = {
+				type: check.getModuleName(),
+				props: {}
+			};
+			for (prop in Reflect.fields(check)) {
+				if (prop == "moduleName") continue;
+				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
+			}
+			config.checks.push(checkConfig);
+		}
+
+		var file = File.write(path, false);
+		file.writeString(Json.stringify(config, null, "\t"));
+		file.close();
+		Sys.exit(0);
+	}
+
+	function pathJoin(s:String, t:String):String {
 		return s + "/" + t;
 	}
 
-	static function traverse(node:String, files:Array<String>) {
+	function traverse(node:String, files:Array<String>) {
 		if (FileSystem.isDirectory(node)) {
 			var nodes = FileSystem.readDirectory(node);
 			for (child in nodes) traverse(pathJoin(node, child), files);
@@ -188,7 +219,7 @@ class Main {
 		else if (~/(.hx)$/i.match(node)) files.push(node);
 	}
 
-	static function failWith(message:String) {
+	function failWith(message:String) {
 		Sys.stderr().writeString(message + "\n");
 		Sys.exit(1);
 	}
