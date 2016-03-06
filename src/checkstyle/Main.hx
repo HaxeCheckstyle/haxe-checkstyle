@@ -124,7 +124,7 @@ class Main {
 		for (check in checker.checks) {
 			if (checkConf.type == check.getModuleName()) return check;
 		}
-		var check:Check = cast info.build(checkConf.type);
+		var check:Check = info.build(checkConf.type);
 		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
 		checker.addCheck(check);
 		return check;

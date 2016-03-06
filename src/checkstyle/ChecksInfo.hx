@@ -47,16 +47,14 @@ class ChecksInfo {
 		return haxe.rtti.Meta.getType(cl).desc[0];
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	public function checks():Iterator<Dynamic> {
+	public function checks():Iterator<CheckInfo> {
 		return checkInfos.iterator();
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	public function build(name:String):Dynamic {
+	public function build(name:String):Check {
 		if (!checkInfos.exists(name)) return null;
 		var cl = checkInfos[name].clazz;
-		return Type.createInstance(cl, []);
+		return cast Type.createInstance(cl, []);
 	}
 }
 
@@ -64,4 +62,5 @@ typedef CheckInfo = {
 	var name:String;
 	var description:String;
 	var clazz:Class<Check>;
+	var isAlias:Bool;
 }
