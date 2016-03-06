@@ -23,7 +23,7 @@ class NeedBracesCheck extends Check {
 
 	public function new() {
 		super();
-		tokens = [];
+		tokens = [FOR, IF, ELSE_IF, WHILE, DO_WHILE];
 		allowSingleLineStatement = true;
 	}
 
