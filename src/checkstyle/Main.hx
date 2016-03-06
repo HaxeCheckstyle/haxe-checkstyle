@@ -192,10 +192,12 @@ class Main {
 		for (check in checks) {
 			var checkConfig = {
 				type: check.getModuleName(),
-				props: {}
+				props: {
+					severity: "IGNORE"
+				}
 			};
 			for (prop in Reflect.fields(check)) {
-				if (prop == "moduleName") continue;
+				if (prop == "moduleName" || prop == "severity") continue;
 				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
 			}
 			config.checks.push(checkConfig);

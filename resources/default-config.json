@@ -11,37 +11,37 @@
 					"INLINE",
 					"DYNAMIC"
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ModifierOrder"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "Anonymous"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ArrayLiteral"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ArrayLiteral"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "AvoidInlineConditionals"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "AvoidStarImport"
 		},
@@ -50,7 +50,7 @@
 				"ignoreExtern": true,
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ConstantName"
 		},
@@ -66,25 +66,25 @@
 						"severity": "ERROR"
 					}
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "CyclomaticComplexity"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "Dynamic"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ERegLiteral"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ERegLiteral"
 		},
@@ -106,7 +106,7 @@
 					"CATCH"
 				],
 				"option": "empty",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "EmptyBlock"
 		},
@@ -115,28 +115,28 @@
 				"allowEmptyLineAfterSingleLineComment": true,
 				"max": 1,
 				"allowEmptyLineAfterMultiLineComment": true,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "EmptyLines"
 		},
 		{
 			"props": {
 				"max": 2000,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "FileLength"
 		},
 		{
 			"props": {
 				"option": "upperCase",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "HexadecimalLiteral"
 		},
 		{
 			"props": {
 				"option": "upperCase",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "HexadecimalLiteral"
 		},
@@ -146,20 +146,20 @@
 				"ignoreFormat": "^(main|run)$",
 				"ignoreConstructorParameter": true,
 				"ignoreFormatRE": null,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "HiddenField"
 		},
 		{
 			"props": {
 				"character": "tab",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "IndentationCharacter"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "InnerAssignment"
 		},
@@ -181,14 +181,14 @@
 				],
 				"ignoreEmptySingleline": true,
 				"option": "eol",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "LeftCurly"
 		},
 		{
 			"props": {
 				"max": 160,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "LineLength"
 		},
@@ -201,7 +201,7 @@
 					"once"
 				],
 				"format": "^_?[a-z][a-zA-Z0-9]*$",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ListenerName"
 		},
@@ -210,7 +210,7 @@
 				"ignoreExtern": true,
 				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "LocalVariableName"
 		},
@@ -222,7 +222,7 @@
 					1,
 					2
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MagicNumber"
 		},
@@ -231,14 +231,14 @@
 				"ignoreExtern": true,
 				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MemberName"
 		},
 		{
 			"props": {
 				"max": 50,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MethodLength"
 		},
@@ -247,7 +247,7 @@
 				"ignoreExtern": true,
 				"format": "^[a-z][a-zA-Z0-9]*$",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MethodName"
 		},
@@ -261,7 +261,7 @@
 					"INLINE",
 					"DYNAMIC"
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ModifierOrder"
 		},
@@ -270,13 +270,13 @@
 				"minLength": 2,
 				"ignore": "^\\s+$",
 				"allowDuplicates": 2,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MultipleStringLiterals"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "MultipleVariableDeclarations"
 		},
@@ -290,28 +290,28 @@
 					"WHILE",
 					"DO_WHILE"
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "NeedBraces"
 		},
 		{
 			"props": {
 				"max": 1,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "NestedForDepth"
 		},
 		{
 			"props": {
 				"max": 1,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "NestedIfDepth"
 		},
 		{
 			"props": {
 				"max": 1,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "NestedTryDepth"
 		},
@@ -356,7 +356,7 @@
 					"--"
 				],
 				"option": "eol",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "OperatorWrap"
 		},
@@ -365,14 +365,14 @@
 				"ignoreExtern": true,
 				"format": "^(_|[a-z][a-zA-Z0-9]*$)",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "ParameterName"
 		},
 		{
 			"props": {
 				"max": 7,
-				"severity": "INFO",
+				"severity": "IGNORE",
 				"ignoreOverriddenMethods": false
 			},
 			"type": "ParameterNumber"
@@ -380,14 +380,14 @@
 		{
 			"props": {
 				"enforcePublicPrivate": false,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "RedundantModifier"
 		},
 		{
 			"props": {
 				"enforcePublicPrivate": false,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "RedundantModifier"
 		},
@@ -395,7 +395,7 @@
 			"props": {
 				"allowEmptyReturn": true,
 				"enforceReturnType": false,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "Return"
 		},
@@ -417,7 +417,7 @@
 					"CATCH"
 				],
 				"option": "aloneorsingle",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "RightCurly"
 		},
@@ -428,13 +428,13 @@
 					"."
 				],
 				"option": "eol",
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "SeparatorWrap"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "SimplifyBooleanExpression"
 		},
@@ -448,32 +448,32 @@
 				"spaceCatch": true,
 				"spaceSwitchCase": true,
 				"noSpaceAroundUnop": true,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "Spacing"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "TODOComment"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "TabForAligning"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "TrailingWhitespace"
 		},
 		{
 			"props": {
 				"ignoreEnumAbstractValues": true,
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "Type"
 		},
@@ -482,13 +482,13 @@
 				"ignoreExtern": true,
 				"format": "^[A-Z]+[a-zA-Z0-9]*$",
 				"tokens": [],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "TypeName"
 		},
 		{
 			"props": {
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "VariableInitialisation"
 		},
@@ -498,7 +498,7 @@
 					",",
 					";"
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "WhitespaceAfter"
 		},
@@ -538,7 +538,7 @@
 					"^=",
 					"=>"
 				],
-				"severity": "INFO"
+				"severity": "IGNORE"
 			},
 			"type": "WhitespaceAround"
 		}
