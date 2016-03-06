@@ -159,7 +159,9 @@ class Main {
 	}
 
 	function addAllChecks() {
-		for (check in info.checks()) checker.addCheck(info.build(check.name));
+		for (check in info.checks()) {
+			if (!check.isAlias) checker.addCheck(info.build(check.name));
+		}
 	}
 
 	function getSortedCheckInfos():Array<CheckInfo> {
