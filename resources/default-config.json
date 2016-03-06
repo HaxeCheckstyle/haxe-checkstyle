@@ -291,21 +291,10 @@
 				"severity": "IGNORE",
 				"option": "eol",
 				"tokens": [
-						  "=", "+", "-", "*", "/", "%", ">", "<",
-						  ">=", "<=", "==", "!=", "&", "|", "^", "&&",
-						  "||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=",
-						  "%=", "<<=", ">>=", ">>>=", "|=", "&=", "^=", "...",
-						  "=>", "++", "--"
-				]
-			}
-		},
-		{
-			"type": "OperatorWrap",
-			"props": {
-				"severity": "IGNORE",
-				"option": "nl",
-				"tokens": [
-							"!"
+					"=", "+", "-", "*", "/", "%", ">", "<", ">=", "<=",
+					"==", "!=", "&", "|", "^", "&&", "||", "<<", ">>", 
+					">>>", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", 
+					">>>=", "|=", "&=", "^=", "...", "=>", "!", "++", "--"
 				]
 			}
 		},
@@ -313,7 +302,7 @@
 			"type": "ParameterName",
 			"props": {
 				"severity": "IGNORE",
-				"format": "(_|^[a-z][a-zA-Z0-9]*)$"
+				"format": "^(_|[a-z][a-zA-Z0-9]*$)"
 			}
 		},
 		{
@@ -327,14 +316,16 @@
 		{
 			"type": "RedundantModifier",
 			"props": {
-				"severity": "IGNORE"
+				"severity": "IGNORE",
+				"enforcePublicPrivate": false
 			}
 		},
 		{
 			"type": "Return",
 			"props": {
 				"severity": "IGNORE",
-				"allowEmptyReturn": true
+				"allowEmptyReturn": true,
+				"enforceReturnType": false
 			}
 		},
 		{
@@ -365,21 +356,9 @@
 			"props": {
 				"severity": "IGNORE",
 				"option": "eol",
-				"tokens": [
-							","
-				]
+				"tokens": [",", "."]
 			}
 		},
-		{
-			"type": "SeparatorWrap",
-			"props": {
-				"severity": "IGNORE",
-				"option": "nl",
-				"tokens": [
-							"."
-				]
-			}
-        },
 		{
 			"type": "SimplifyBooleanExpression",
 			"props": {
@@ -465,11 +444,11 @@
 			"type": "WhitespaceAround",
 			"props": {
 				"severity": "IGNORE",
-				"tokens": [ 
-					"=", "+", "-", "*", "/", "%", ">", "<",
-					">=", "<=", "==", "!=", "&", "|", "^", "&&",
-					"||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=",
-					"%=", "<<=", ">>=", ">>>=", "|=", "&=", "^="
+				"tokens": [
+					"=", "+", "-", "*", "/", "%", ">", "<", ">=",
+					"<=", "==", "!=", "&", "|", "^", "&&", "||", 
+					"<<", ">>", ">>>", "+=", "-=", "*=", "/=", 
+					"%=", "<<=", ">>=", ">>>=", "|=", "&=", "^=", "=>"
 				]
 			}
 		}
