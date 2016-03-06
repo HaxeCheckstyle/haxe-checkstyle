@@ -54,7 +54,7 @@ class FieldUtils {
 
 	public static function isDefaultPrivate(f:Field, p:ParentType):Bool {
 		if (p.kind == INTERFACE) return false;
-		if (p.kind == ENUM_ABSTRACT) return false;
+		if (p.kind == ENUM_ABSTRACT && !hasStatic(f) && f.kind.match(FVar(_, _))) return false;
 		switch (p.decl) {
 			case EClass(d):
 				if (d.meta.hasMeta(":publicFields")) return false;

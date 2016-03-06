@@ -50,12 +50,22 @@ class RedundantModifierCheckTest extends CheckTestCase {
 		assertMsg(check, RedundantModifierTests.TEST6, 'Missing public keyword: foo');
 	}
 
-	public function testEnumAbstractValues() {
+	public function testEnumAbstract() {
 		var check = new RedundantModifierCheck();
 		assertMsg(check, RedundantModifierTests.TEST7, 'No need of public keyword: value');
+		assertNoMsg(check, RedundantModifierTests.TEST8);
+		assertMsg(check, RedundantModifierTests.TEST9, 'No need of private keyword: CONSTANT');
+		assertNoMsg(check, RedundantModifierTests.TEST10);
+		assertMsg(check, RedundantModifierTests.TEST11, 'No need of private keyword: foo');
+		assertNoMsg(check, RedundantModifierTests.TEST12);
 		
 		check.enforcePublicPrivate = true;
+		assertNoMsg(check, RedundantModifierTests.TEST7);
 		assertMsg(check, RedundantModifierTests.TEST8, 'Missing public keyword: value');
+		assertNoMsg(check, RedundantModifierTests.TEST9);
+		assertMsg(check, RedundantModifierTests.TEST10, 'Missing private keyword: CONSTANT');
+		assertNoMsg(check, RedundantModifierTests.TEST11);
+		assertMsg(check, RedundantModifierTests.TEST12, 'Missing private keyword: foo');
 	}
 }
 
@@ -115,5 +125,29 @@ class RedundantModifierTests {
 	@:enum
 	abstract Test(Int) {
 		var value = 0;
+	}";
+
+	public static inline var TEST9:String = "
+	@:enum
+	abstract Test(Int) {
+		private static inline var CONSTANT = 0;
+	}";
+
+	public static inline var TEST10:String = "
+	@:enum
+	abstract Test(Int) {
+		static inline var CONSTANT = 0;
+	}";
+
+	public static inline var TEST11:String = "
+	@:enum
+	abstract Test(Int) {
+		private function foo() {}
+	}";
+
+	public static inline var TEST12:String = "
+	@:enum
+	abstract Test(Int) {
+		function foo() {}
 	}";
 }
