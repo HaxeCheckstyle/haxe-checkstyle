@@ -1,6 +1,7 @@
 package checkstyle;
 
 import checkstyle.ChecksInfo;
+import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.checks.Check;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
@@ -159,7 +160,7 @@ class Main {
 	}
 
 	function addAllChecks() {
-		for (check in info.checks()) {
+		for (check in getSortedCheckInfos()) {
 			if (!check.isAlias) checker.addCheck(info.build(check.name));
 		}
 	}
@@ -197,16 +198,15 @@ class Main {
 	function generateDefaultConfig(path) {
 		addAllChecks();
 
-		var checks:Array<Check> = [for (check in getSortedCheckInfos()) info.build(check.name)];
 		var config = {
-			defaultSeverity: "INFO",
+			defaultSeverity: SeverityLevel.INFO,
 			checks: []
 		};
-		for (check in checks) {
+		for (check in checker.checks) {
 			var checkConfig = {
 				type: check.getModuleName(),
 				props: {
-					severity: "IGNORE"
+					severity: SeverityLevel.IGNORE
 				}
 			};
 			for (prop in Reflect.fields(check)) {

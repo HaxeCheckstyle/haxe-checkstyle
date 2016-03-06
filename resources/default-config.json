@@ -3,29 +3,9 @@
 	"checks": [
 		{
 			"props": {
-				"modifiers": [
-					"MACRO",
-					"OVERRIDE",
-					"PUBLIC_PRIVATE",
-					"STATIC",
-					"INLINE",
-					"DYNAMIC"
-				],
-				"severity": "IGNORE"
-			},
-			"type": "ModifierOrder"
-		},
-		{
-			"props": {
 				"severity": "IGNORE"
 			},
 			"type": "Anonymous"
-		},
-		{
-			"props": {
-				"severity": "IGNORE"
-			},
-			"type": "ArrayLiteral"
 		},
 		{
 			"props": {
@@ -84,12 +64,6 @@
 		},
 		{
 			"props": {
-				"severity": "IGNORE"
-			},
-			"type": "ERegLiteral"
-		},
-		{
-			"props": {
 				"tokens": [
 					"CLASS_DEF",
 					"ENUM_DEF",
@@ -125,13 +99,6 @@
 				"severity": "IGNORE"
 			},
 			"type": "FileLength"
-		},
-		{
-			"props": {
-				"option": "upperCase",
-				"severity": "IGNORE"
-			},
-			"type": "HexadecimalLiteral"
 		},
 		{
 			"props": {
@@ -376,13 +343,6 @@
 				"ignoreOverriddenMethods": false
 			},
 			"type": "ParameterNumber"
-		},
-		{
-			"props": {
-				"enforcePublicPrivate": false,
-				"severity": "IGNORE"
-			},
-			"type": "RedundantModifier"
 		},
 		{
 			"props": {

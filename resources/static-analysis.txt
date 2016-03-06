@@ -1,1 +1,1 @@
-src/checkstyle/Main.hx:96: characters 55-56 : Info: Left curly should be at EOL (only linebreak or comment after curly)
+src/checkstyle/Main.hx:97: characters 55-56 : Info: Left curly should be at EOL (only linebreak or comment after curly)
