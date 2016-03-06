@@ -10,11 +10,11 @@ class RedundantModifierCheckTest extends CheckTestCase {
 	}
 
 	public function testNormalClass() {
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST1, 'No need of private keyword: a (fields are by default private in classes)');
+		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST1, 'No need of private keyword: a');
 	}
 
 	public function testInterface() {
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST2, 'No need of public keyword: a (fields are by default public in interfaces)');
+		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST2, 'No need of public keyword: a');
 	}
 
 	public function testClassWithEnforce() {
@@ -39,6 +39,15 @@ class RedundantModifierCheckTest extends CheckTestCase {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
 		assertMsg(check, RedundantModifierTests.TEST3, 'Missing public keyword: a');
+	}
+
+	public function testClassWithPublicFields() {
+		var check = new RedundantModifierCheck();
+		assertNoMsg(check, RedundantModifierTests.TEST4);
+		assertMsg(check, RedundantModifierTests.TEST5, 'No need of public keyword: foo');
+
+		check.enforcePublicPrivate = true;
+		assertMsg(check, RedundantModifierTests.TEST6, 'Missing public keyword: foo');
 	}
 }
 
@@ -68,5 +77,23 @@ class RedundantModifierTests {
 	public static inline var TEST3:String = "
 	interface Test {
 		var a:Int;
+	}";
+	
+	public static inline var TEST4:String = "
+	@:publicFields
+	class Test {
+		private function foo() {}
+	}";
+	
+	public static inline var TEST5:String = "
+	@:publicFields
+	class Test {
+		public function foo() {}
+	}";
+
+	public static inline var TEST6:String = "
+	@:publicFields
+	class Test {
+		function foo() {}
 	}";
 }

@@ -20,34 +20,24 @@ class RedundantModifierCheck extends Check {
 	override function actualRun() {
 		forEachField(function(field, parent) {
 			if (!field.isConstructor()) {
-				if (parent.kind == INTERFACE) checkInterfaceField(field, parent);
-				else checkField(field, parent);
+				checkField(field, parent);
 			}
 		});
 	}
 
-	function checkInterfaceField(f:Field, p:ParentType) {
-		if (enforcePublicPrivate) {
-			if (!f.hasPublic()) {
-				logPos('Missing public keyword: ${f.name}', f.pos, severity);
-			}
-		}
-		else {
-			if (f.hasPublic()) {
-				logPos('No need of public keyword: ${f.name} (fields are by default public in interfaces)', f.pos, severity);
-			}
-		}
-	}
-
+	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
 	function checkField(f:Field, p:ParentType) {
+		var isDefaultPrivate = f.isDefaultPrivate(p);
+		var implicitKeyword = isDefaultPrivate ? "private" : "public";
 		if (enforcePublicPrivate) {
 			if (!f.hasPublic() && !f.hasPrivate()) {
-				logPos('Missing private keyword: ${f.name}', f.pos, severity);
+				logPos('Missing $implicitKeyword keyword: ${f.name}', f.pos, severity);
 			}
 		}
 		else {
-			if (f.hasPrivate()) {
-				logPos('No need of private keyword: ${f.name} (fields are by default private in classes)', f.pos, severity);
+			var redundantKeyword = isDefaultPrivate ? "private" : "public";
+			if ((isDefaultPrivate && f.hasPrivate()) || (!isDefaultPrivate && f.hasPublic())) {
+				logPos('No need of $implicitKeyword keyword: ${f.name}', f.pos, severity);
 			}
 		}
 	}
