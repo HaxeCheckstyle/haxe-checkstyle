@@ -25,6 +25,7 @@ class LeftCurlyCheck extends Check {
 	public static inline var TRY:String = "TRY";
 	public static inline var CATCH:String = "CATCH";
 	public static inline var REIFICATION:String = "REIFICATION";
+	public static inline var ARRAY_COMPREHENSION:String = "ARRAY_COMPREHENSION";
 
 	public static inline var EOL:String = "eol";
 	public static inline var NL:String = "nl";
@@ -103,6 +104,9 @@ class LeftCurlyCheck extends Check {
 			case Kwd(KwdIf), Kwd(KwdElse):
 				return {token: token, hasToken: hasToken(IF)};
 			case Kwd(KwdFor):
+				if (isArrayComprehension(token.parent)) {
+					return {token: token, hasToken: hasToken(ARRAY_COMPREHENSION)};
+				}
 				return {token: token, hasToken: hasToken(FOR)};
 			case Kwd(KwdWhile):
 				return {token: token, hasToken: hasToken(WHILE)};
@@ -123,10 +127,8 @@ class LeftCurlyCheck extends Check {
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
-					switch (token.parent.parent.tok) {
-						case Kwd(KwdTypedef):
-							return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
-						default:
+					if (token.parent.parent.tok.match(Kwd(KwdTypedef))) {
+						return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
 					}
 				}
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
@@ -176,6 +178,15 @@ class LeftCurlyCheck extends Check {
 			lineNumEnd = checker.getLinePos(previous.getPos().max).line;
 		}
 		return (lineNumStart != lineNumEnd);
+	}
+
+	function isArrayComprehension(token:TokenTree):Bool {
+		return switch (token.tok) {
+			case BkOpen: true;
+			case Kwd(KwdFunction): false;
+			case Kwd(KwdVar): false;
+			default: isArrayComprehension(token.parent);
+		}
 	}
 
 	function check(token:TokenTree, wrapped:Bool) {

@@ -20,6 +20,8 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		assertNoMsg(check, LeftCurlyTests.EOL_CASEBLOCK);
 		assertNoMsg(check, LeftCurlyTests.MACRO_REIFICATION);
 		assertNoMsg(check, LeftCurlyTests.ISSUE_97);
+		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 
 	public function testWrongBraces() {
@@ -94,6 +96,13 @@ class LeftCurlyCheckTest extends CheckTestCase {
 		check.ignoreEmptySingleline = true;
 		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_CLASS);
 		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_MACRO);
+	}
+
+	public function testArrayComprehension() {
+		var check = new LeftCurlyCheck();
+		check.tokens = [LeftCurlyCheck.ARRAY_COMPREHENSION];
+		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
 	}
 }
 
@@ -427,6 +436,28 @@ class LeftCurlyTests {
 					trace ('hello 2');
 				}
 			}
+		}
+	}";
+
+	public static inline var ARRAY_COMPREHENSION_ISSUE_114:String = "
+	class Test {
+		public function foo() {
+			[for (i in 0...10) {index:i}];
+			[for (x in 0...10) for (y in 0...10) {x:x, y:y}];
+		}
+	}";
+
+	public static inline var ARRAY_COMPREHENSION_2_ISSUE_114:String = "
+	class Test {
+		public function foo() {
+			[for (i in 0...10) {
+				index:i
+			}];
+			[for (x in 0...10)
+				for (y in 0...10) {
+					x:x,
+					y:y
+				}];
 		}
 	}";
 }

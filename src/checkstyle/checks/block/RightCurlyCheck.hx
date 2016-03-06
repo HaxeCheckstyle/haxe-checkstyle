@@ -25,6 +25,7 @@ class RightCurlyCheck extends Check {
 	public static inline var TRY:String = "TRY";
 	public static inline var CATCH:String = "CATCH";
 	public static inline var REIFICATION:String = "REIFICATION";
+	public static inline var ARRAY_COMPREHENSION:String = "ARRAY_COMPREHENSION";
 
 	public static inline var SAME:String = "same";
 	public static inline var ALONE:String = "alone";
@@ -90,6 +91,9 @@ class RightCurlyCheck extends Check {
 			case Kwd(KwdIf), Kwd(KwdElse):
 				return !hasToken(IF);
 			case Kwd(KwdFor):
+				if (isArrayComprehension(token.parent)) {
+					return !hasToken(ARRAY_COMPREHENSION);
+				}
 				return !hasToken(FOR);
 			case Kwd(KwdWhile):
 				return !hasToken(WHILE);
@@ -115,6 +119,15 @@ class RightCurlyCheck extends Check {
 				return !hasToken(OBJECT_DECL);
 			default:
 				return filterParentToken(token.parent);
+		}
+	}
+
+	function isArrayComprehension(token:TokenTree):Bool {
+		return switch (token.tok) {
+			case BkOpen: true;
+			case Kwd(KwdFunction): false;
+			case Kwd(KwdVar): false;
+			default: isArrayComprehension(token.parent);
 		}
 	}
 

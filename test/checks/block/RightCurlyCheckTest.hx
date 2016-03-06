@@ -43,6 +43,9 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
 		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
 		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
+
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 
 	public function testIncorrectAloneOrSingleLine() {
@@ -176,6 +179,21 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 		check.option = RightCurlyCheck.ALONE;
 		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
+	}
+
+	public function testArrayComprehension() {
+		var check = new RightCurlyCheck();
+		check.tokens = [RightCurlyCheck.ARRAY_COMPREHENSION];
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		check.option = RightCurlyCheck.SAME;
+		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		check.option = RightCurlyCheck.ALONE;
+		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 }
 
@@ -526,6 +544,28 @@ class RightCurlyTests {
 			var str = 'Hello, world';
 			var expr = macro for (i in 0...10) trace($v{str});
 			var e = macro ${str}.toLowerCase();
+		}
+	}";
+
+	public static inline var ARRAY_COMPREHENSION_ISSUE_114:String = "
+	class Test {
+		public function foo() {
+			[for (i in 0...10) {index:i}];
+			[for (x in 0...10) for (y in 0...10) {x:x, y:y}];
+		}
+	}";
+
+	public static inline var ARRAY_COMPREHENSION_2_ISSUE_114:String = "
+	class Test {
+		public function foo() {
+			[for (i in 0...10) {
+				index:i
+			}];
+			[for (x in 0...10)
+				for (y in 0...10) {
+					x:x,
+					y:y
+				}];
 		}
 	}";
 }
