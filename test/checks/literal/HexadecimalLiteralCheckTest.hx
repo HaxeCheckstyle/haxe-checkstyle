@@ -2,7 +2,7 @@ package checks.literal;
 
 import checkstyle.checks.literal.HexadecimalLiteralCheck;
 
-class HexadecimalLiteralsCheckTest extends CheckTestCase {
+class HexadecimalLiteralCheckTest extends CheckTestCase {
 
 	public function test1() {
 		assertMsg(new HexadecimalLiteralCheck(), HexadecimalLiteralTests.TEST1, 'Bad hexademical literal, use upperCase');
