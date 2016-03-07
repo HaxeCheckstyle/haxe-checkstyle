@@ -114,7 +114,7 @@ class Main {
 			setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
 
-		if (config.defines != null) checker.defines = config.defines;
+		if (config.baseDefines != null) checker.baseDefines = config.baseDefines;
 		if (config.defineCombinations != null) checker.defineCombinations = config.defineCombinations;
 	}
 
@@ -190,7 +190,7 @@ class Main {
 	function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
-			defines: [],
+			baseDefines: [],
 			defineCombinations: [],
 			checks: []
 		};

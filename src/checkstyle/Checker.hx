@@ -19,7 +19,7 @@ class Checker {
 	public var tokens:Array<Token>;
 	public var ast:Ast;
 	public var checks:Array<Check>;
-	public var defines:Array<String>;
+	public var baseDefines:Array<String>;
 	public var defineCombinations:Array<Array<String>>;
 
 	var reporters:Array<IReporter>;
@@ -31,7 +31,7 @@ class Checker {
 	public function new() {
 		checks = [];
 		reporters = [];
-		defines = [];
+		baseDefines = [];
 		defineCombinations = [];
 	}
 
@@ -116,9 +116,9 @@ class Checker {
 	}
 
 	function makeASTs() {
-		asts = [makeAST(defines)];
+		asts = [makeAST(baseDefines)];
 		for (combination in defineCombinations) {
-			asts.push(makeAST(combination.concat(defines)));
+			asts.push(makeAST(combination.concat(baseDefines)));
 		}
 	}
 
