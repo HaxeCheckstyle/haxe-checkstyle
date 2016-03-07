@@ -10,15 +10,7 @@ import haxe.macro.Expr;
 @desc("Checks for braces on function, if, for and while statements")
 class NeedBracesCheck extends Check {
 
-	public static inline var FUNCTION:String = "FUNCTION";
-	public static inline var FOR:String = "FOR";
-	public static inline var IF:String = "IF";
-	public static inline var ELSE_IF:String = "ELSE_IF";
-	public static inline var WHILE:String = "WHILE";
-	public static inline var DO_WHILE:String = "DO_WHILE";
-	public static inline var CATCH:String = "CATCH";
-
-	public var tokens:Array<String>;
+	public var tokens:Array<NeedBracesCheckToken>;
 	public var allowSingleLineStatement:Bool;
 
 	public function new() {
@@ -27,7 +19,7 @@ class NeedBracesCheck extends Check {
 		allowSingleLineStatement = true;
 	}
 
-	function hasToken(token:String):Bool {
+	function hasToken(token:NeedBracesCheckToken):Bool {
 		if (tokens.length == 0) return true;
 		if (tokens.indexOf(token) > -1) return true;
 		return false;
@@ -180,4 +172,15 @@ class NeedBracesCheck extends Check {
 		var maxLine:LinePos = checker.getLinePos(child.getFirstChild().getPos().max);
 		return (minLine.line == maxLine.line);
 	}
+}
+
+@:enum
+abstract NeedBracesCheckToken(String) {
+	var FUNCTION = "FUNCTION";
+	var FOR = "FOR";
+	var IF = "IF";
+	var ELSE_IF = "ELSE_IF";
+	var WHILE = "WHILE";
+	var DO_WHILE = "DO_WHILE";
+	var CATCH = "CATCH";
 }

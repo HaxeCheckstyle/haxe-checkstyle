@@ -63,7 +63,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testTokenFor() {
 		var check = new NeedBracesCheck ();
-		check.tokens = ["FOR"];
+		check.tokens = [FOR];
 
 		assertNoMsg(check, NeedBracesTests.TEST);
 		assertNoMsg(check, NeedBracesTests.TEST1);
@@ -88,7 +88,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testTokenIf() {
 		var check = new NeedBracesCheck ();
-		check.tokens = ["IF"];
+		check.tokens = [IF];
 
 		assertNoMsg(check, NeedBracesTests.TEST);
 		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
@@ -116,7 +116,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testTokenElseIf() {
 		var check = new NeedBracesCheck ();
-		check.tokens = ["IF", "ELSE_IF"];
+		check.tokens = [IF, ELSE_IF];
 
 		assertNoMsg(check, NeedBracesTests.TEST);
 		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
@@ -145,7 +145,7 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testTokenWhile() {
 		var check = new NeedBracesCheck ();
-		check.tokens = ["WHILE"];
+		check.tokens = [WHILE];
 
 		assertNoMsg(check, NeedBracesTests.TEST);
 		assertNoMsg(check, NeedBracesTests.TEST1);

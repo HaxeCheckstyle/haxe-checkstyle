@@ -20,7 +20,7 @@ class OperatorWrapCheckTest extends CheckTestCase {
 
 	public function testOptionNL() {
 		var check = new OperatorWrapCheck();
-		check.option = "nl";
+		check.option = NL;
 		assertNoMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_PLUS);
 		assertNoMsg(check, OperatorWrapTests.CORRECT_NL_WRAP_GT);
 		assertNoMsg(check, OperatorWrapTests.TYPE_PARAM);

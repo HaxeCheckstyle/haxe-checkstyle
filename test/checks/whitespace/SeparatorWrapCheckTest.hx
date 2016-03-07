@@ -32,7 +32,7 @@ class SeparatorWrapCheckTest extends CheckTestCase {
 
 	public function testOptionNL() {
 		var check = new SeparatorWrapCheck();
-		check.option = "nl";
+		check.option = NL;
 		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_FUNC);
 		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_OBJECT_DECL);
 		assertNoMsg(check, SeparatorWrapTests.NL_WRAP_ARRAY);

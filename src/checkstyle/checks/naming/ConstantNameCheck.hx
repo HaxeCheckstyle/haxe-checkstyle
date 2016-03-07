@@ -8,10 +8,7 @@ using checkstyle.utils.FieldUtils;
 
 @name("ConstantName")
 @desc("Checks on naming conventions of constants (static / static inline with initialisation)")
-class ConstantNameCheck extends NameCheckBase {
-
-	public static inline var INLINE:String = "INLINE";
-	public static inline var NOTINLINE:String = "NOTINLINE";
+class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	public function new() {
 		super();
@@ -52,4 +49,10 @@ class ConstantNameCheck extends NameCheckBase {
 
 		matchTypeName ("const", f.name, f.pos);
 	}
+}
+
+@:enum
+abstract ConstantNameCheckToken(String) {
+	var INLINE = "INLINE";
+	var NOTINLINE = "NOTINLINE";
 }

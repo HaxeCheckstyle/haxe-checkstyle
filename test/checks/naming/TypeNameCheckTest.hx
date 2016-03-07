@@ -43,7 +43,7 @@ class TypeNameCheckTest extends CheckTestCase {
 
 	public function testTokenCLASS() {
 		var check = new TypeNameCheck ();
-		check.tokens = [TypeNameCheck.CLAZZ];
+		check.tokens = [CLASS];
 		check.format = FORMAT_CLASS;
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid class signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
@@ -56,7 +56,7 @@ class TypeNameCheckTest extends CheckTestCase {
 
 	public function testTokenINTERFACE() {
 		var check = new TypeNameCheck ();
-		check.tokens = [TypeNameCheck.INTERFACE];
+		check.tokens = [INTERFACE];
 		check.format = "^I[A-Z][a-z]*$";
 
 		assertNoMsg(check, TypeNameTests.TEST);
@@ -69,7 +69,7 @@ class TypeNameCheckTest extends CheckTestCase {
 
 	public function testTokenENUM() {
 		var check = new TypeNameCheck ();
-		check.tokens = [TypeNameCheck.ENUM];
+		check.tokens = [ENUM];
 		check.format = "^Enum[A-Z][a-z]*$";
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid enum signature: Test2 (name should be ~/^Enum[A-Z][a-z]*$/)');
@@ -82,7 +82,7 @@ class TypeNameCheckTest extends CheckTestCase {
 
 	public function testTokenTYPEDEF() {
 		var check = new TypeNameCheck ();
-		check.tokens = [TypeNameCheck.TYPEDEF];
+		check.tokens = [TYPEDEF];
 		check.format = "^T[A-Z][a-z]*$";
 
 		assertMsg(check, TypeNameTests.TEST, 'Invalid typedef signature: Test3 (name should be ~/^T[A-Z][a-z]*$/)');

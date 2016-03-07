@@ -5,7 +5,7 @@ import haxeparser.Data;
 
 @name("ParameterName")
 @desc("Checks that parameter names")
-class ParameterNameCheck extends NameCheckBase {
+class ParameterNameCheck extends NameCheckBase<String> {
 
 	public function new() {
 		super();

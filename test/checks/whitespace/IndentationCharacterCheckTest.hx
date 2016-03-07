@@ -14,7 +14,7 @@ class IndentationCharacterCheckTest extends CheckTestCase {
 
 	public function testConfigurableIndentation() {
 		var check = new IndentationCharacterCheck();
-		check.character = "space";
+		check.character = SPACE;
 
 		assertMsg(check, IndentationTests.TEST3, 'Wrong indentation character (should be space)');
 	}

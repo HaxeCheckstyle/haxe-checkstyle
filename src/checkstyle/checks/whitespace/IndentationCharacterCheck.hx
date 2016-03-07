@@ -7,16 +7,16 @@ import haxeparser.Data.Token;
 @desc("Checks indentation character (tab/space, default is tab)")
 class IndentationCharacterCheck extends Check {
 
-	public var character:String;
+	public var character:IndentationCharacterCheckCharacter;
 
 	public function new() {
 		super();
-		character = "tab";
+		character = TAB;
 	}
 
 	override function actualRun() {
 		var re;
-		var tab = (character == "tab");
+		var tab = (character == TAB);
 		if (tab) {
 			re = ~/^\t*(\S.*| \*.*)?$/;
 		}
@@ -28,4 +28,10 @@ class IndentationCharacterCheck extends Check {
 			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (should be ${character})', i + 1, 0, null, severity);
 		}
 	}
+}
+
+@:enum
+abstract IndentationCharacterCheckCharacter(String) {
+	var TAB = "tab";
+	var SPACE = "space";
 }

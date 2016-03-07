@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 
 @name("LocalVariableName")
 @desc("Checks the local variable names")
-class LocalVariableNameCheck extends NameCheckBase {
+class LocalVariableNameCheck extends NameCheckBase<String> {
 
 	public function new() {
 		super();

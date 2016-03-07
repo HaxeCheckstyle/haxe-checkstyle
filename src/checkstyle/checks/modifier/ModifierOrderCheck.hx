@@ -8,14 +8,7 @@ import haxe.macro.Expr;
 @desc("Checks order of modifiers")
 class ModifierOrderCheck extends Check {
 
-	public static inline var PUBLIC_PRIVATE:String = "PUBLIC_PRIVATE";
-	public static inline var INLINE:String = "INLINE";
-	public static inline var STATIC:String = "STATIC";
-	public static inline var OVERRIDE:String = "OVERRIDE";
-	public static inline var MACRO:String = "MACRO";
-	public static inline var DYNAMIC:String = "DYNAMIC";
-
-	public var modifiers:Array<String>;
+	public var modifiers:Array<ModifierOrderCheckModifier>;
 
 	public function new() {
 		super();
@@ -38,7 +31,7 @@ class ModifierOrderCheck extends Check {
 		var index:Int;
 
 		for (access in f.access) {
-			var modifier:String = mapAccessModifier(access);
+			var modifier:ModifierOrderCheckModifier = access;
 			index = modifiers.indexOf(modifier);
 			if (index < lastIndex) {
 				warnOrder(f.name, modifier, f.pos);
@@ -48,7 +41,22 @@ class ModifierOrderCheck extends Check {
 		}
 	}
 
-	function mapAccessModifier(access:Access):String {
+	function warnOrder(name:String, modifier:ModifierOrderCheckModifier, pos:Position) {
+		logPos('Invalid modifier order: ${name} (modifier: ${modifier})', pos, severity);
+	}
+}
+
+@:enum
+abstract ModifierOrderCheckModifier(String) {
+	var PUBLIC_PRIVATE = "PUBLIC_PRIVATE";
+	var INLINE = "INLINE";
+	var STATIC = "STATIC";
+	var OVERRIDE = "OVERRIDE";
+	var MACRO = "MACRO";
+	var DYNAMIC = "DYNAMIC";
+
+	@:from
+	public static function fromAccess(access:Access):ModifierOrderCheckModifier {
 		return switch (access) {
 			case APublic, APrivate:
 				PUBLIC_PRIVATE;
@@ -63,9 +71,5 @@ class ModifierOrderCheck extends Check {
 			case ADynamic:
 				DYNAMIC;
 		}
-	}
-
-	function warnOrder(name:String, modifier:String, pos:Position) {
-		logPos('Invalid modifier order: ${name} (modifier: ${modifier})', pos, severity);
 	}
 }

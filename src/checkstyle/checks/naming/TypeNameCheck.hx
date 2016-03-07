@@ -6,13 +6,7 @@ import haxe.macro.Expr;
 
 @name("TypeName")
 @desc("Checks on naming conventions of types (classes, interfaces, enums, typedefs)")
-class TypeNameCheck extends NameCheckBase {
-
-	public static inline var INTERFACE:String = "INTERFACE";
-	public static inline var CLAZZ:String = "CLASS";
-	public static inline var ENUM:String = "ENUM";
-	public static inline var ABSTRACT:String = "ABSTRACT";
-	public static inline var TYPEDEF:String = "TYPEDEF";
+class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 
 	public function new() {
 		super();
@@ -25,7 +19,7 @@ class TypeNameCheck extends NameCheckBase {
 		var isInterface:Bool = (d.flags.indexOf(HInterface) > -1);
 
 		if (!hasToken(INTERFACE) && isInterface) return;
-		if (!hasToken(CLAZZ) && !isInterface) return;
+		if (!hasToken(CLASS) && !isInterface) return;
 		if (isInterface) {
 			matchTypeName("interface", d.name, pos);
 		}
@@ -52,4 +46,13 @@ class TypeNameCheck extends NameCheckBase {
 
 		matchTypeName("typedef", d.name, pos);
 	}
+}
+
+@:enum
+abstract TypeNameCheckToken(String) {
+	var INTERFACE = "INTERFACE";
+	var CLASS = "CLASS";
+	var ENUM = "ENUM";
+	var ABSTRACT = "ABSTRACT";
+	var TYPEDEF = "TYPEDEF";
 }

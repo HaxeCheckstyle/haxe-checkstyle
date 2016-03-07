@@ -39,30 +39,30 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testBraceOnNL() {
 		var check = new LeftCurlyCheck();
-		check.option = LeftCurlyCheck.NL;
+		check.option = NL;
 
 		assertMsg(check, LeftCurlyTests.TEST, MSG_NL);
 		assertNoMsg(check, LeftCurlyTests.TEST13);
 
-		check.tokens = [LeftCurlyCheck.OBJECT_DECL];
+		check.tokens = [OBJECT_DECL];
 		assertMsg(check, LeftCurlyTests.TEST4, MSG_NL);
 		assertMsg(check, LeftCurlyTests.TEST14, MSG_NL);
 
-		check.tokens = [LeftCurlyCheck.IF];
+		check.tokens = [IF];
 		assertNoMsg(check, LeftCurlyTests.TEST1);
 		assertNoMsg(check, LeftCurlyTests.TEST13);
 
-		check.tokens = [LeftCurlyCheck.FOR];
+		check.tokens = [FOR];
 		assertNoMsg(check, LeftCurlyTests.TEST5);
 		assertNoMsg(check, LeftCurlyTests.TEST13);
 
-		check.tokens = [LeftCurlyCheck.FUNCTION];
+		check.tokens = [FUNCTION];
 		assertNoMsg(check, LeftCurlyTests.TEST13);
 	}
 
 	public function testSwitch() {
 		var check = new LeftCurlyCheck();
-		check.option = LeftCurlyCheck.NL;
+		check.option = NL;
 		assertNoMsg(check, LeftCurlyTests.TEST15);
 		assertNoMsg(check, LeftCurlyTests.NL_CASEBLOCK);
 		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, MSG_NL);
@@ -71,7 +71,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testNLOW() {
 		var check = new LeftCurlyCheck();
-		check.option = LeftCurlyCheck.NLOW;
+		check.option = NLOW;
 		assertNoMsg(check, LeftCurlyTests.TEST);
 		assertNoMsg(check, LeftCurlyTests.TEST12);
 		assertNoMsg(check, LeftCurlyTests.TEST16);
@@ -83,7 +83,7 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testReification() {
 		var check = new LeftCurlyCheck();
-		check.tokens = [LeftCurlyCheck.REIFICATION];
+		check.tokens = [REIFICATION];
 		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, MSG_EOL);
 	}
 
@@ -100,16 +100,16 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testArrayComprehension() {
 		var check = new LeftCurlyCheck();
-		check.tokens = [LeftCurlyCheck.ARRAY_COMPREHENSION];
+		check.tokens = [ARRAY_COMPREHENSION];
 		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
 
-		check.option = LeftCurlyCheck.NLOW;
+		check.option = NLOW;
 		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_NLOW_ISSUE_114);
 		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
 
-		check.option = LeftCurlyCheck.NL;
+		check.option = NL;
 		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114, MSG_NL);
 		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
 	}

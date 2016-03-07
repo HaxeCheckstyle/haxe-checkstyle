@@ -27,7 +27,7 @@ class EmptyBlockCheckTest extends CheckTestCase {
 
 	public function testEmptyBlockComment() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
-		check.option = EmptyBlockCheck.TEXT;
+		check.option = TEXT;
 
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
@@ -42,7 +42,7 @@ class EmptyBlockCheckTest extends CheckTestCase {
 
 	public function testEmptyBlockStatement() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
-		check.option = EmptyBlockCheck.STATEMENT;
+		check.option = STATEMENT;
 
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);
@@ -57,8 +57,8 @@ class EmptyBlockCheckTest extends CheckTestCase {
 
 	public function testEmptyBlockStatementObjectDecl() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
-		check.option = EmptyBlockCheck.STATEMENT;
-		check.tokens = ["OBJECT_DECL"];
+		check.option = STATEMENT;
+		check.tokens = [OBJECT_DECL];
 
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT);
 		assertNoMsg(check, EmptyBlockTests.BLOCK_WITH_STATEMENT2);

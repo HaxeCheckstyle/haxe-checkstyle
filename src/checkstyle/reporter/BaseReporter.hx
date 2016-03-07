@@ -113,7 +113,6 @@ class BaseReporter implements IReporter {
 }
 
 @:enum
-@SuppressWarnings("checkstyle:MemberName")
 abstract Style(Int) {
 	var BOLD = 1;
 	var RED = 91;

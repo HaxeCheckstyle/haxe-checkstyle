@@ -36,7 +36,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenPUBLIC() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.PUBLIC];
+		check.tokens = [PUBLIC];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
@@ -48,7 +48,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenPRIVATE() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.PRIVATE];
+		check.tokens = [PRIVATE];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertNoMsg(check, MethodNameTests.TEST1);
@@ -60,7 +60,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenSTATIC() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.STATIC];
+		check.tokens = [STATIC];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
@@ -72,7 +72,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenNOTSTATIC() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.NOTSTATIC];
+		check.tokens = [NOTSTATIC];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test2 (name should be ~/${check.format}/)');
@@ -84,7 +84,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenINLINE() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.INLINE];
+		check.tokens = [INLINE];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test3 (name should be ~/${check.format}/)');
@@ -96,7 +96,7 @@ class MethodNameCheckTest extends CheckTestCase {
 
 	public function testTokenNOTINLINE() {
 		var check = new MethodNameCheck ();
-		check.tokens = [MethodNameCheck.NOTINLINE];
+		check.tokens = [NOTINLINE];
 
 		assertNoMsg(check, MethodNameTests.TEST);
 		assertMsg(check, MethodNameTests.TEST1, 'Invalid method name signature: Test2 (name should be ~/${check.format}/)');

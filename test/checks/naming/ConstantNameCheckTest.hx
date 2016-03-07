@@ -30,7 +30,7 @@ class ConstantNameCheckTest extends CheckTestCase {
 
 	public function testTokenINLINE() {
 		var check = new ConstantNameCheck ();
-		check.tokens = [ConstantNameCheck.INLINE];
+		check.tokens = [INLINE];
 
 		assertNoMsg(check, ConstantNameTests.TEST);
 		assertNoMsg(check, ConstantNameTests.TEST1);
@@ -40,7 +40,7 @@ class ConstantNameCheckTest extends CheckTestCase {
 
 	public function testTokenNOTINLINE() {
 		var check = new ConstantNameCheck ();
-		check.tokens = [ConstantNameCheck.NOTINLINE];
+		check.tokens = [NOTINLINE];
 
 		assertNoMsg(check, ConstantNameTests.TEST);
 		assertMsg(check, ConstantNameTests.TEST1, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');

@@ -201,7 +201,6 @@
 					"CLASS",
 					"PUBLIC",
 					"PRIVATE",
-					"ABSTRACT",
 					"TYPEDEF"
 				],
 				"severity": "INFO"
