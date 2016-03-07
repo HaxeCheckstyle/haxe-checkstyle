@@ -6,6 +6,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks if there are any tabs in the middle of a line")
 class TabForAligningCheck extends Check {
 
+	public function new() {
+		super(LINE);
+	}
+
 	override function actualRun() {
 		var re = ~/^\s*\S[^\t]*\t/;
 		for (i in 0 ... checker.lines.length) {

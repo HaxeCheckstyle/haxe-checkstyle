@@ -14,7 +14,7 @@ class EmptyBlockCheck extends Check {
 	public var option:EmptyBlockCheckOption;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			CLASS_DEF,
 			ENUM_DEF,

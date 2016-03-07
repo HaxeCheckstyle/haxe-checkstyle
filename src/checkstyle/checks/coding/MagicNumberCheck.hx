@@ -7,10 +7,11 @@ import checkstyle.LintMessage.SeverityLevel;
 @name("MagicNumber")
 @desc("Checks that there are no magic numbers")
 class MagicNumberCheck extends Check {
+
 	public var ignoreNumbers:Array<Float>;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		ignoreNumbers = [-1, 0, 1, 2];
 	}
 

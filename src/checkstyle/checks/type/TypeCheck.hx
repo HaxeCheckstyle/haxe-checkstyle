@@ -13,7 +13,7 @@ class TypeCheck extends Check {
 	public var ignoreEnumAbstractValues:Bool;
 
 	public function new() {
-		super();
+		super(AST);
 		ignoreEnumAbstractValues = true;
 	}
 

@@ -8,6 +8,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for .* import and using directives")
 class AvoidStarImportCheck extends Check {
 
+	public function new() {
+		super(TOKEN);
+	}
+
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		checkImports(root.filter([Kwd(KwdImport)], ALL));

@@ -10,7 +10,7 @@ class IndentationCharacterCheck extends Check {
 	public var character:IndentationCharacterCheckCharacter;
 
 	public function new() {
-		super();
+		super(LINE);
 		character = TAB;
 	}
 

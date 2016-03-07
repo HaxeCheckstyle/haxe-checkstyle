@@ -7,6 +7,10 @@ import haxeparser.Data.Token;
 @desc("Checks if there are any TODO's left")
 class TODOCommentCheck extends Check {
 
+	public function new() {
+		super(LINE);
+	}
+
 	override function actualRun() {
 		var re = ~/TODO|FIXME/;
 		for (tk in checker.tokens) {

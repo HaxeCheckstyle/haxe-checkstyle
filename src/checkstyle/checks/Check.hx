@@ -15,9 +15,11 @@ class Check {
 
 	var messages:Array<LintMessage>;
 	var moduleName:String;
+	var type:CheckType;
 	var checker:Checker;
 
-	public function new() {
+	public function new(type:CheckType) {
+		this.type = type;
 		severity = SeverityLevel.INFO;
 	}
 
@@ -216,4 +218,10 @@ class Check {
 		}
 		return false;
 	}
+}
+
+enum CheckType {
+	AST;
+	TOKEN;
+	LINE;
 }

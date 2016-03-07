@@ -13,7 +13,7 @@ class RedundantModifierCheck extends Check {
 	public var enforcePublicPrivate:Bool;
 
 	public function new() {
-		super();
+		super(AST);
 		enforcePublicPrivate = false;
 	}
 

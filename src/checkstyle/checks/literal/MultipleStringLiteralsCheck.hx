@@ -16,7 +16,7 @@ class MultipleStringLiteralsCheck extends Check {
 	var ignoreRE:EReg;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		ignore = "^\\s+$";
 		allowDuplicates = 2;
 		minLength = 2;

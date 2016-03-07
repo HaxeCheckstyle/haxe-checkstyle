@@ -11,6 +11,10 @@ using checkstyle.utils.FieldUtils;
 @desc("Anonymous type structures check")
 class AnonymousCheck extends Check {
 
+	public function new() {
+		super(AST);
+	}
+
 	override function actualRun() {
 		forEachField(checkField);
 		checkLocalVars();

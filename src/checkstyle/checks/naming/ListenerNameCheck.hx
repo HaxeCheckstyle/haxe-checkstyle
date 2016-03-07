@@ -18,7 +18,7 @@ class ListenerNameCheck extends Check {
 	var formatRE:EReg;
 
 	public function new() {
-		super();
+		super(AST);
 		listeners = ["addEventListener", "addListener", "on", "once"];
 		format = "^_?[a-z][a-zA-Z0-9]*$";
 	}

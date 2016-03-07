@@ -8,6 +8,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for over-complicated boolean expressions")
 class SimplifyBooleanExpressionCheck extends Check {
 
+	public function new() {
+		super(TOKEN);
+	}
+
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		var acceptableTokens:Array<TokenTree> = root.filter([

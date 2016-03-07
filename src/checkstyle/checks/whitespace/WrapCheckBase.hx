@@ -14,7 +14,7 @@ class WrapCheckBase extends Check {
 	public var option:WrapCheckBaseOption;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		option = EOL;
 	}
 

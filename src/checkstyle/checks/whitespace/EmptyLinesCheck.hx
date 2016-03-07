@@ -12,7 +12,7 @@ class EmptyLinesCheck extends Check {
 	public var allowEmptyLineAfterMultiLineComment:Bool;
 
 	public function new() {
-		super();
+		super(LINE);
 		max = 1;
 		allowEmptyLineAfterSingleLineComment = true;
 		allowEmptyLineAfterMultiLineComment = true;

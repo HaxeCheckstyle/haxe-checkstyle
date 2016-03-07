@@ -11,7 +11,7 @@ class NestedIfDepthCheck extends Check {
 	public var max:Int;
 
 	public function new() {
-		super();
+		super(AST);
 		max = 1;
 	}
 

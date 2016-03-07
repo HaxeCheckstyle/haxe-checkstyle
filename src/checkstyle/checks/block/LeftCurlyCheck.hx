@@ -15,7 +15,7 @@ class LeftCurlyCheck extends Check {
 	public var ignoreEmptySingleline:Bool;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			CLASS_DEF,
 			ENUM_DEF,

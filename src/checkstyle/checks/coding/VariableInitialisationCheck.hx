@@ -10,6 +10,10 @@ using checkstyle.utils.FieldUtils;
 @desc("Checks if instance variables are initialised at class level")
 class VariableInitialisationCheck extends Check {
 
+	public function new() {
+		super(AST);
+	}
+
 	override function actualRun() {
 		forEachField(checkField);
 	}

@@ -22,7 +22,7 @@ class SpacingCheck extends Check {
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
-		super();
+		super(AST);
 		spaceAroundBinop = true;
 		noSpaceAroundUnop = true;
 		spaceIfCondition = true;

@@ -9,6 +9,10 @@ import haxeparser.Data.Token;
 @desc("Checks for usage of EReg literals (between ~/ and /) instead of new")
 class ERegLiteralCheck extends Check {
 
+	public function new() {
+		super(AST);
+	}
+
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;

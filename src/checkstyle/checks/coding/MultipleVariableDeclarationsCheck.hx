@@ -8,6 +8,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks that each variable declaration is in its own statement and on its own line")
 class MultipleVariableDeclarationsCheck extends Check {
 
+	public function new() {
+		super(AST);
+	}
+
 	@SuppressWarnings('checkstyle:MultipleVariableDeclarations')
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {

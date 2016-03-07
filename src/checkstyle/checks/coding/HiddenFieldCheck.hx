@@ -18,7 +18,7 @@ class HiddenFieldCheck extends Check {
 	public var ignoreFormat:String;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		ignoreConstructorParameter = true;
 		ignoreSetter = true;
 		ignoreFormat = "^(main|run)$";

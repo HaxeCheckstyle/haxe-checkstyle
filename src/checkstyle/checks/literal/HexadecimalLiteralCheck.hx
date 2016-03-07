@@ -12,7 +12,7 @@ class HexadecimalLiteralCheck extends Check {
 	public var option:String;
 
 	public function new() {
-		super();
+		super(AST);
 		option = "upperCase";
 	}
 

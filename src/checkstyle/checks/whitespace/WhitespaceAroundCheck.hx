@@ -14,7 +14,7 @@ class WhitespaceAroundCheck extends Check {
 	public var tokens:Array<String>;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			"=",
 			"+",

@@ -14,7 +14,7 @@ class NeedBracesCheck extends Check {
 	public var allowSingleLineStatement:Bool;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [FOR, IF, ELSE_IF, WHILE, DO_WHILE];
 		allowSingleLineStatement = true;
 	}

@@ -15,7 +15,7 @@ class ReturnCheck extends Check {
 	public var enforceReturnType:Bool;
 
 	public function new() {
-		super();
+		super(AST);
 		allowEmptyReturn = true;
 		enforceReturnType = false;
 	}

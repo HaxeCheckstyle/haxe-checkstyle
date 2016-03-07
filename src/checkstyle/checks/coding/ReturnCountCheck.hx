@@ -13,7 +13,7 @@ class ReturnCountCheck extends Check {
 	public var ignoreFormat:String;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		max = 2;
 		ignoreFormat = "^$";
 	}

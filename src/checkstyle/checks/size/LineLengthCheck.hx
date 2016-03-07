@@ -11,7 +11,7 @@ class LineLengthCheck extends Check {
 	public var max:Int;
 
 	public function new() {
-		super();
+		super(LINE);
 		max = DEFAULT_MAX_LENGTH;
 	}
 

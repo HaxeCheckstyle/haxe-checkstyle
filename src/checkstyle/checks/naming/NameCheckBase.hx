@@ -14,7 +14,7 @@ class NameCheckBase<T> extends Check {
 	var formatRE:EReg;
 
 	public function new() {
-		super();
+		super(AST);
 		format = "^.*$";
 		tokens = [];
 		ignoreExtern = true;

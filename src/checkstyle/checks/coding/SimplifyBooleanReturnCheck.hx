@@ -6,6 +6,10 @@ import checkstyle.token.TokenTree;
 @desc("Checks for over-complicated boolean return statements")
 class SimplifyBooleanReturnCheck extends Check {
 
+	public function new() {
+		super(TOKEN);
+	}
+
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf)], ALL);

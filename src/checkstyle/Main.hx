@@ -200,7 +200,7 @@ class Main {
 				}
 			};
 			for (prop in Reflect.fields(check)) {
-				if (prop == "moduleName" || prop == "severity") continue;
+				if (prop == "moduleName" || prop == "severity" || prop == "type") continue;
 				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
 			}
 			config.checks.push(checkConfig);

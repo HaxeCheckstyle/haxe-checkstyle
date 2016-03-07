@@ -8,6 +8,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Detects inline conditionals")
 class AvoidInlineConditionalsCheck extends Check {
 
+	public function new() {
+		super(AST);
+	}
+
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;

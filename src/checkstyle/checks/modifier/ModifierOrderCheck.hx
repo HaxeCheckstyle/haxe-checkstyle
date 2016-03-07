@@ -11,7 +11,7 @@ class ModifierOrderCheck extends Check {
 	public var modifiers:Array<ModifierOrderCheckModifier>;
 
 	public function new() {
-		super();
+		super(AST);
 		modifiers = [
 			MACRO,
 			OVERRIDE,

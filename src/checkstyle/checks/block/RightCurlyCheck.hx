@@ -14,7 +14,7 @@ class RightCurlyCheck extends Check {
 	public var option:RightCurlyCheckOption;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			CLASS_DEF,
 			ENUM_DEF,

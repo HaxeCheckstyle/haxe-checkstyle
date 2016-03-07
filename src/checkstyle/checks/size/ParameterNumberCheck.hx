@@ -14,7 +14,7 @@ class ParameterNumberCheck extends Check {
 	public var ignoreOverriddenMethods:Bool;
 
 	public function new() {
-		super();
+		super(AST);
 		max = DEFAULT_MAX_PARAMS;
 		ignoreOverriddenMethods = false;
 	}

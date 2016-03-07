@@ -7,6 +7,10 @@ import haxeparser.Data.Token;
 @desc("Checks if there are any trailing white spaces")
 class TrailingWhitespaceCheck extends Check {
 
+	public function new() {
+		super(LINE);
+	}
+
 	override function actualRun() {
 		var re = ~/\s+$/;
 		for (i in 0 ... checker.lines.length) {

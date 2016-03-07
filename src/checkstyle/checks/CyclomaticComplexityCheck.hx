@@ -20,7 +20,7 @@ class CyclomaticComplexityCheck extends Check {
 	public var thresholds:Array<Threshold>;
 
 	public function new() {
-		super();
+		super(AST);
 		thresholds = [
 			{ severity : "WARNING", complexity : DEFAULT_COMPLEXITY_WARNING },
 			{ severity : "ERROR", complexity : DEFAULT_COMPLEXITY_ERROR }
