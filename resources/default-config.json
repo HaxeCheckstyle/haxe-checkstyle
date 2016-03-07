@@ -1,5 +1,7 @@
 {
+	"defineCombinations": [],
 	"defaultSeverity": "INFO",
+	"baseDefines": [],
 	"checks": [
 		{
 			"props": {

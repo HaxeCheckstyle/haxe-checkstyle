@@ -118,6 +118,12 @@ class MemberNameCheckTest extends CheckTestCase {
 		check.tokens = [ABSTRACT, PUBLIC];
 		assertMsg(check, MemberNameTests.ABSTRACT_FIELDS, 'Invalid member signature: EnumConstructor3 (name should be ~/${check.format}/)');
 	}
+
+	public function testDefineCombinations() {
+		var check = new MemberNameCheck();
+		assertNoMsg(check, MemberNameTests.DEFINE_COMBINATIONS);
+		assertMsg(check, MemberNameTests.DEFINE_COMBINATIONS, 'Invalid member signature: Violation (name should be ~/${check.format}/)', [["flash"]]);
+	}
 }
 
 class MemberNameTests {
@@ -201,4 +207,12 @@ class MemberNameTests {
 		public var Example(default, null):Int;
 	}";
 
+	public static inline var DEFINE_COMBINATIONS:String = "
+	class Test {
+		#if flash
+		public var Violation:Int;
+		#else
+		public var okName:Int;
+		#end
+	}";
 }

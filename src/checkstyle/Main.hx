@@ -32,8 +32,7 @@ class Main {
 			}
 			if (oldCwd != null) Sys.setCwd(cwd);
 
-			var main = new Main();
-			main.run(args);
+			new Main().run(args);
 		}
 		catch (e:Dynamic) {
 			Sys.stderr().writeString(e + "\n");
@@ -111,12 +110,15 @@ class Main {
 		verifyAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
 		for (checkConf in config.checks) {
-			var check = getCheck(checkConf);
+			var check = createCheck(checkConf);
 			setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
+
+		if (config.baseDefines != null) checker.baseDefines = config.baseDefines;
+		if (config.defineCombinations != null) checker.defineCombinations = config.defineCombinations;
 	}
 
-	function getCheck(checkConf:CheckConfig):Check {
+	function createCheck(checkConf:CheckConfig):Check {
 		var check:Check = info.build(checkConf.type);
 		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
 		checker.addCheck(check);
@@ -188,6 +190,8 @@ class Main {
 	function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
+			baseDefines: [],
+			defineCombinations: [],
 			checks: []
 		};
 	}

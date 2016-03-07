@@ -12,10 +12,10 @@ using checkstyle.utils.FieldUtils;
 class Check {
 
 	public var severity:SeverityLevel;
+	public var type(default, null):CheckType;
 
 	var messages:Array<LintMessage>;
 	var moduleName:String;
-	var type:CheckType;
 	var checker:Checker;
 
 	public function new(type:CheckType) {
