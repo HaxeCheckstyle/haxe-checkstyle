@@ -37,7 +37,7 @@ class HideUtilityClassConstructorCheck extends Check {
 				}
 			}
 
-			if (haveConstructor && acceptableTokens.length == staticTokens + 1) {
+			if (haveConstructor && acceptableTokens.length > 1 && acceptableTokens.length == staticTokens + 1) {
 				logPos("Utility classes should not have a constructor", constructorPos, severity);
 			}
 		}
