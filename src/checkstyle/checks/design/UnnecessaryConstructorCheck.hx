@@ -4,9 +4,9 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
-@name("HideUtilityClassConstructor")
-@desc("Makes sure that utility classes (classes that contain only static methods or fields in their API) do not have a constructor")
-class HideUtilityClassConstructorCheck extends Check {
+@name("UnnecessaryConstructor")
+@desc("Makes sure that utility classes (classes that contain only static methods or fields) do not have a constructor")
+class UnnecessaryConstructorCheck extends Check {
 
 	public function new() {
 		super(TOKEN);

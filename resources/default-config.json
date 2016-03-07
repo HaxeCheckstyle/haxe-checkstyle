@@ -124,12 +124,6 @@
 		},
 		{
 			"props": {
-				"severity": "IGNORE"
-			},
-			"type": "HideUtilityClassConstructor"
-		},
-		{
-			"props": {
 				"character": "tab",
 				"severity": "IGNORE"
 			},
@@ -470,6 +464,12 @@
 				"severity": "IGNORE"
 			},
 			"type": "TypeName"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "UnnecessaryConstructor"
 		},
 		{
 			"props": {

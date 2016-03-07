@@ -1,35 +1,35 @@
 package checks.design;
 
-import checkstyle.checks.design.HideUtilityClassConstructorCheck;
+import checkstyle.checks.design.UnnecessaryConstructorCheck;
 
-class HideUtilityClassConstructorCheckTest extends CheckTestCase {
+class UnnecessaryConstructorCheckTest extends CheckTestCase {
 
 	public function testWithConstructor() {
-		assertMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST1, "Utility classes should not have a constructor");
+		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST1, "Utility classes should not have a constructor");
 	}
 
 	public function testWithoutConstructor() {
-		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST2);
+		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST2);
 	}
 
 	public function testWithConstructorAndInstanceVar() {
-		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST3);
+		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST3);
 	}
 
 	public function testWithConstructorAndInstanceFunction() {
-		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST4);
+		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST4);
 	}
 
 	public function testJustVarsWithConstructor() {
-		assertMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST5, "Utility classes should not have a constructor");
+		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST5, "Utility classes should not have a constructor");
 	}
 
 	public function testJustWithConstructor() {
-		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST6);
+		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST6);
 	}
 }
 
-class HideUtilityClassConstructorCheckTests {
+class UnnecessaryConstructorCheckTests {
 	public static inline var TEST1:String = "
 	class Test {
 		public function new() {}

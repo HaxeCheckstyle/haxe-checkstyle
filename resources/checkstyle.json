@@ -126,7 +126,7 @@
 			"props": {
 				"severity": "INFO"
 			},
-			"type": "HideUtilityClassConstructor"
+			"type": "UnnecessaryConstructor"
 		},
 		{
 			"props": {
