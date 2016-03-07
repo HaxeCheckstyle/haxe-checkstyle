@@ -21,6 +21,12 @@ class ReturnCountCheckTest extends CheckTestCase {
 		chk.max = 1;
 		assertMsg(chk, ReturnCountCheckTests.TEST4, 'Return count is 2 (max allowed is 1)');
 	}
+
+	public function testIgnoreRE() {
+		var chk = new ReturnCountCheck();
+		chk.ignoreFormat = "^equals$";
+		assertMsg(chk, ReturnCountCheckTests.TEST5, '');
+	}
 }
 
 class ReturnCountCheckTests {
@@ -62,6 +68,15 @@ class ReturnCountCheckTests {
 			if (true) {
 				return 2;
 			}
+		}
+	}";
+
+	public static inline var TEST5:String = "
+	abstractAndClass Test {
+		function equals() {
+			return 1;
+			return 2;
+			return 3;
 		}
 	}";
 }
