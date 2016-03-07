@@ -17,35 +17,32 @@ class HiddenFieldCheck extends Check {
 	public var ignoreSetter:Bool;
 	public var ignoreFormat:String;
 
-	var ignoreFormatRE:EReg;
-
 	public function new() {
 		super();
 		ignoreConstructorParameter = true;
 		ignoreSetter = true;
 		ignoreFormat = "^(main|run)$";
-		ignoreFormatRE = null;
 	}
 
 	override function actualRun() {
-		if (ignoreFormat != null) ignoreFormatRE = new EReg (ignoreFormat, "");
+		var ignoreFormatRE:EReg = new EReg(ignoreFormat, "");
 		var root:TokenTree = checker.getTokenTree();
-		checkClasses(root.filter([Kwd(KwdClass)], ALL));
+		checkClasses(root.filter([Kwd(KwdClass)], ALL), ignoreFormatRE);
 	}
 
-	function checkClasses(classes:Array<TokenTree>) {
+	function checkClasses(classes:Array<TokenTree>, ignoreFormatRE:EReg) {
 		for (clazz in classes) {
 			if (isPosSuppressed(clazz.pos)) continue;
 			var memberNames:Array<String> = collectMemberNames(clazz);
 			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], FIRST);
 			for (method in methods) {
 				if (isPosSuppressed(method.pos)) continue;
-				checkMethod(method, memberNames);
+				checkMethod(method, memberNames, ignoreFormatRE);
 			}
 		}
 	}
 
-	function checkMethod(method:TokenTree, memberNames:Array<String>) {
+	function checkMethod(method:TokenTree, memberNames:Array<String>, ignoreFormatRE:EReg) {
 		if (!method.hasChilds()) throw "function has invalid structure!";
 
 		// handle constructor and setters

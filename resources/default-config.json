@@ -112,7 +112,6 @@
 				"ignoreSetter": true,
 				"ignoreFormat": "^(main|run)$",
 				"ignoreConstructorParameter": true,
-				"ignoreFormatRE": null,
 				"severity": "IGNORE"
 			},
 			"type": "HiddenField"
