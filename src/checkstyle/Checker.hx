@@ -19,15 +19,20 @@ class Checker {
 	public var tokens:Array<Token>;
 	public var ast:Ast;
 	public var checks:Array<Check>;
+	public var defines:Array<String>;
+	public var defineCombinations:Array<Array<String>>;
 
 	var reporters:Array<IReporter>;
 	var linesIdx:Array<LineIds>;
 	var lineSeparator:String;
 	var tokenTree:TokenTree;
+	var asts:Array<Ast>;
 
 	public function new() {
 		checks = [];
 		reporters = [];
+		defines = [];
+		defineCombinations = [];
 	}
 
 	public function addCheck(check:Check) {
@@ -110,13 +115,26 @@ class Checker {
 		}
 	}
 
-	function makeAST() {
+	function makeASTs() {
+		asts = [makeAST(defines)];
+		for (combination in defineCombinations) {
+			asts.push(makeAST(combination.concat(defines)));
+		}
+	}
+
+	@SuppressWarnings("checkstyle:HiddenField")
+	function makeAST(defines:Array<String>):Ast {
 		var code = file.content;
 		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
 		parser.define("cross");
 		parser.define("scriptable");
 		parser.define("unsafe");
-		ast = parser.parse();
+		for (define in defines) {
+			var flagValue = define.split("=");
+			if (flagValue.length > 2) throw "Define may only contain = sign / value";
+			parser.define(flagValue[0], flagValue[1]);
+		}
+		return parser.parse();
 	}
 
 #if hxtelemetry
@@ -125,7 +143,7 @@ class Checker {
 		for (reporter in reporters) reporter.start();
 		for (lintFile in files) {
 			loadFileContent(lintFile);
-			run(lintFile);
+			if (createContext(lintFile)) run();
 			unloadFileContent(lintFile);
 			hxt.advance_frame();
 		}
@@ -138,7 +156,7 @@ class Checker {
 		for (reporter in reporters) reporter.start();
 		for (lintFile in files) {
 			loadFileContent(lintFile);
-			run(lintFile);
+			if (createContext(lintFile)) run();
 			unloadFileContent(lintFile);
 		}
 		for (reporter in reporters) reporter.finish();
@@ -157,16 +175,16 @@ class Checker {
 		lintFile.content = null;
 	}
 
-	@SuppressWarnings(["checkstyle:Dynamic", "checkstyle:MethodLength"])
-	public function run(f:LintFile) {
-		file = f;
+	@SuppressWarnings("checkstyle:Dynamic")
+	function createContext(lintFile:LintFile):Bool {
+		this.file = lintFile;
 		for (reporter in reporters) reporter.fileStart(file);
 		try {
 			findLineSeparator();
 			makeLines();
 			makePosIndices();
 			makeTokens();
-			makeAST();
+			makeASTs();
 		}
 		catch (e:Dynamic) {
 			for (reporter in reporters) {
@@ -182,32 +200,49 @@ class Checker {
 				});
 			}
 			for (reporter in reporters) reporter.fileFinish(file);
-			return;
+			return false;
 		}
+		return true;
+	}
 
+	function run() {
 		for (check in checks) {
-			var messages;
-			try {
-				messages = check.run(this);
-				for (reporter in reporters) for (m in messages) reporter.addMessage(m);
-			}
-			catch (e:Dynamic) {
-				for (reporter in reporters) {
-					reporter.addMessage({
-						fileName:file.name,
-						message:"Check " + check.getModuleName() + " failed: " +
-									e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
-						line:1,
-						startColumn:0,
-						endColumn:0,
-						severity:ERROR,
-						moduleName:"Checker"
-					});
+			if (check.type == AST) {
+				for (ast in asts) {
+					this.ast = ast;
+					runCheck(check);
 				}
 			}
+			else {
+				// non AST-based checks still need the AST for suppression checking
+				ast = asts[0];
+				runCheck(check);
+			}
 		}
-
 		for (reporter in reporters) reporter.fileFinish(file);
+	}
+
+	@SuppressWarnings("checkstyle:Dynamic")
+	function runCheck(check:Check) {
+		var messages;
+		try {
+			messages = check.run(this);
+			for (reporter in reporters) for (m in messages) reporter.addMessage(m);
+		}
+		catch (e:Dynamic) {
+			for (reporter in reporters) {
+				reporter.addMessage({
+					fileName:file.name,
+					message:"Check " + check.getModuleName() + " failed: " +
+								e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
+					line:1,
+					startColumn:0,
+					endColumn:0,
+					severity:ERROR,
+					moduleName:"Checker"
+				});
+			}
+		}
 	}
 }
 
