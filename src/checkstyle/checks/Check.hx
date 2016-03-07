@@ -117,7 +117,7 @@ class Check {
 		return isCharPosSuppressed(pos.min);
 	}
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
+	@SuppressWarnings('checkstyle:CyclomaticComplexity', 'checkstyle:ReturnCount')
 	function isCharPosSuppressed(pos:Int):Bool {
 		for (td in checker.ast.decls) {
 			switch (td.decl){

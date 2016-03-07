@@ -72,7 +72,7 @@ class RightCurlyCheck extends Check {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:CyclomaticComplexity")
+	@SuppressWarnings("checkstyle:CyclomaticComplexity", "checkstyle:ReturnCount")
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
 		switch (token.tok) {

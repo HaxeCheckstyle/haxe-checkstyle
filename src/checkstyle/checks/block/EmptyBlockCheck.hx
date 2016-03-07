@@ -55,9 +55,7 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
 	override function actualRun() {
@@ -80,6 +78,7 @@ class EmptyBlockCheck extends Check {
 		}
 	}
 
+	@SuppressWarnings("checkstyle:ReturnCount")
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
 		switch (token.tok) {
