@@ -58,7 +58,7 @@ class RedundantModifierCheckTest extends CheckTestCase {
 		assertNoMsg(check, RedundantModifierTests.TEST10);
 		assertMsg(check, RedundantModifierTests.TEST11, 'No need of private keyword: foo');
 		assertNoMsg(check, RedundantModifierTests.TEST12);
-		
+
 		check.enforcePublicPrivate = true;
 		assertNoMsg(check, RedundantModifierTests.TEST7);
 		assertMsg(check, RedundantModifierTests.TEST8, 'Missing public keyword: value');
@@ -105,13 +105,13 @@ class RedundantModifierTests {
 	interface Test {
 		var a:Int;
 	}";
-	
+
 	public static inline var TEST4:String = "
 	@:publicFields
 	class Test {
 		private function foo() {}
 	}";
-	
+
 	public static inline var TEST5:String = "
 	@:publicFields
 	class Test {
