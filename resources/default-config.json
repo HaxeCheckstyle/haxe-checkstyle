@@ -124,6 +124,12 @@
 		},
 		{
 			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "HideUtilityClassConstructor"
+		},
+		{
+			"props": {
 				"character": "tab",
 				"severity": "IGNORE"
 			},

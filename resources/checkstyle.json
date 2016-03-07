@@ -124,6 +124,12 @@
 		},
 		{
 			"props": {
+				"severity": "INFO"
+			},
+			"type": "HideUtilityClassConstructor"
+		},
+		{
+			"props": {
 				"character": "tab",
 				"severity": "INFO"
 			},
