@@ -1,6 +1,7 @@
 package checkstyle;
 
 import checkstyle.ChecksInfo;
+import checkstyle.Config;
 import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.checks.Check;
 import checkstyle.reporter.ExitCodeReporter;
@@ -61,7 +62,6 @@ class Main {
 		exitCode = 0;
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var configPath:String = null;
@@ -106,28 +106,24 @@ class Main {
 		checker.process(toProcess);
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
 	function loadConfig(configPath:String) {
-		var config = Json.parse(File.getContent(configPath));
+		var config:Config = Json.parse(File.getContent(configPath));
 		verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
 
-		var configChecks:Array<Dynamic> = config.checks;
-		for (checkConf in configChecks) {
+		for (checkConf in config.checks) {
 			var check = getCheck(checkConf);
 			setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	function getCheck(checkConf:Dynamic):Check {
+	function getCheck(checkConf:CheckConfig):Check {
 		var check:Check = info.build(checkConf.type);
 		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
 		checker.addCheck(check);
 		return check;
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	function setCheckProperties(check:Check, checkConf:Dynamic, defaultSeverity:String) {
+	function setCheckProperties(check:Check, checkConf:CheckConfig, defaultSeverity:SeverityLevel) {
 		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
@@ -193,12 +189,12 @@ class Main {
 	function generateDefaultConfig(path) {
 		addAllChecks();
 
-		var config = {
+		var config:Config = {
 			defaultSeverity: SeverityLevel.INFO,
 			checks: []
 		};
 		for (check in checker.checks) {
-			var checkConfig = {
+			var checkConfig:CheckConfig = {
 				type: check.getModuleName(),
 				props: {
 					severity: SeverityLevel.IGNORE
