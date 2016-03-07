@@ -122,7 +122,6 @@ class Checker {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:HiddenField")
 	function makeAST(defines:Array<String>):Ast {
 		var code = file.content;
 		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
