@@ -131,7 +131,7 @@ class Checker {
 		parser.define("unsafe");
 		for (define in defines) {
 			var flagValue = define.split("=");
-			if (flagValue.length > 2) throw "Define may only contain = sign / value";
+			if (flagValue.length > 2) throw "Found a define with more than one = sign: '" + define + "'";
 			parser.define(flagValue[0], flagValue[1]);
 		}
 		return parser.parse();
