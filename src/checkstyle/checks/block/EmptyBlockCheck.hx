@@ -78,7 +78,6 @@ class EmptyBlockCheck extends Check {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:ReturnCount")
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
 		switch (token.tok) {

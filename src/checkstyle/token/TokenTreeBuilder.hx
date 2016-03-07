@@ -411,7 +411,6 @@ class TokenTreeBuilder {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:ReturnCount")
 	function walkTypeNameDef(parent:TokenTree):TokenTree {
 		if (stream.is(BrOpen)) {
 			walkTypedefBody(parent);

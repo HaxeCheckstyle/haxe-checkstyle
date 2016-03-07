@@ -50,7 +50,6 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
-	@SuppressWarnings("checkstyle:ReturnCount")
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch (e.expr) {
