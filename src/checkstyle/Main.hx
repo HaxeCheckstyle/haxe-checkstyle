@@ -108,7 +108,7 @@ class Main {
 
 	function loadConfig(configPath:String) {
 		var config:Config = Json.parse(File.getContent(configPath));
-		verifyAllowedFields(config, ["checks", "defaultSeverity"], "Config");
+		verifyAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
 		for (checkConf in config.checks) {
 			var check = getCheck(checkConf);
@@ -185,13 +185,17 @@ class Main {
 		Sys.exit(0);
 	}
 
-	function generateDefaultConfig(path) {
-		addAllChecks();
-
-		var config:Config = {
+	function getEmptyConfig():Config {
+		return {
 			defaultSeverity: SeverityLevel.INFO,
 			checks: []
 		};
+	}
+
+	function generateDefaultConfig(path) {
+		addAllChecks();
+
+		var config = getEmptyConfig();
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
 				type: check.getModuleName(),
