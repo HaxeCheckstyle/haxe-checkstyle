@@ -19,6 +19,10 @@ class HideUtilityClassConstructorCheckTest extends CheckTestCase {
 	public function testWithConstructorAndInstanceFunction() {
 		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST4);
 	}
+
+	public function testJustVarsWithConstructor() {
+		assertMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST5, "Utility classes should not have a constructor");
+	}
 }
 
 class HideUtilityClassConstructorCheckTests {
@@ -66,5 +70,13 @@ class HideUtilityClassConstructorCheckTests {
 		static function test() {}
 
 		public function test2(){}
+	}";
+
+	public static inline var TEST5:String = "
+	class Test {
+		public function new() {}
+
+		static var a:Int = 1;
+		static inline var b:Int = 1;
 	}";
 }
