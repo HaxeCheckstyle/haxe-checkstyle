@@ -10,32 +10,32 @@ import haxe.macro.Expr;
 
 class ExprUtils {
 
-	public static function walkFile(file:{ pack: Array<String>, decls: Array<TypeDecl> }, cb:Expr -> Void) {
+	public static function walkFile(file:{ pack:Array<String>, decls:Array<TypeDecl> }, cb:Expr -> Void) {
 		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
 
 	public static function walkTypeDecl(td:TypeDecl, cb:Expr -> Void) {
 		switch (td.decl){
-		case EClass(d):
-			walkClass(d, cb);
-		case EEnum(d):
-			walkEnum(d, cb);
-		case EAbstract(a):
-			walkAbstract(a, cb);
-		case EImport(sl, mode):
-			walkImport(sl, mode, cb);
-		case ETypedef(d):
-			walkTypedef(d, cb);
-		case EUsing(path):
-			walkTypePath(path, cb);
+			case EClass(d):
+				walkClass(d, cb);
+			case EEnum(d):
+				walkEnum(d, cb);
+			case EAbstract(a):
+				walkAbstract(a, cb);
+			case EImport(sl, mode):
+				walkImport(sl, mode, cb);
+			case ETypedef(d):
+				walkTypedef(d, cb);
+			case EUsing(path):
+				walkTypePath(path, cb);
 		}
 	}
 
-	static function walkMeta(meta:Metadata, cb:Expr -> Void){
+	static function walkMeta(meta:Metadata, cb:Expr -> Void) {
 		for (m in meta) for (p in m.params) walkExpr(p, cb);
 	}
 
-	static function walkCommonDefinition<A, B> (d:Definition<A, B>, cb:Expr -> Void) {
+	static function walkCommonDefinition<A, B>(d:Definition<A, B>, cb:Expr -> Void) {
 		for (p in d.params) walkTypeParamDecl(p, cb);
 		walkMeta(d.meta, cb);
 	}

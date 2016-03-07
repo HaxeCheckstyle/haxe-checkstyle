@@ -469,6 +469,12 @@
 			"props": {
 				"severity": "IGNORE"
 			},
+			"type": "UnnecessaryConstructor"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
 			"type": "VariableInitialisation"
 		},
 		{

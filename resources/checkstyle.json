@@ -124,6 +124,12 @@
 		},
 		{
 			"props": {
+				"severity": "INFO"
+			},
+			"type": "UnnecessaryConstructor"
+		},
+		{
+			"props": {
 				"character": "tab",
 				"severity": "INFO"
 			},
