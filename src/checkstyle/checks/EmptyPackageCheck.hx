@@ -8,6 +8,10 @@ import checkstyle.LintMessage.SeverityLevel;
 @desc("Checks for empty package names")
 class EmptyPackageCheck extends Check {
 
+	public function new() {
+		super(TOKEN);
+	}
+
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		checkPackageNames(root.filter([Kwd(KwdPackage)], ALL));
@@ -15,7 +19,7 @@ class EmptyPackageCheck extends Check {
 
 	function checkPackageNames(entries:Array<TokenTree>) {
 		for (entry in entries) {
-			if (entry.getFirstChild().is(Semicolon)) logPos("Remove empty package statement", entry.pos, severity);
+			if (entry.getFirstChild().is(Semicolon)) logPos("Found empty package", entry.pos, severity);
 		}
 	}
 }
