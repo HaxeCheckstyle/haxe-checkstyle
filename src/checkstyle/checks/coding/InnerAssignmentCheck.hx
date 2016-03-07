@@ -26,8 +26,7 @@ class InnerAssignmentCheck extends Check {
 				], ALL);
 		var x:Int = 0;
 		for (assignToken in allAssignments) {
-			if (isPosSuppressed(assignToken.pos)) continue;
-			if (!filterAssignment(assignToken)) continue;
+			if (isPosSuppressed(assignToken.pos) || !filterAssignment(assignToken)) continue;
 			logPos('Inner assignment detected', assignToken.pos, severity);
 		}
 	}
