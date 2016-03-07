@@ -10,11 +10,8 @@ import haxe.macro.Expr;
 @ignore("base class for OperatorWrap and SeparatorWrap")
 class WrapCheckBase extends Check {
 
-	public static inline var EOL:String = "eol";
-	public static inline var NL:String = "nl";
-
 	public var tokens:Array<String>;
-	public var option:String;
+	public var option:WrapCheckBaseOption;
 
 	public function new() {
 		super();
@@ -53,4 +50,10 @@ class WrapCheckBase extends Check {
 			}
 		}
 	}
+}
+
+@:enum
+abstract WrapCheckBaseOption(String) {
+	var EOL = "eol";
+	var NL = "nl";
 }

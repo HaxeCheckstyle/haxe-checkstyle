@@ -10,29 +10,8 @@ import haxe.macro.Expr;
 @desc("Checks for placement of right curly braces")
 class RightCurlyCheck extends Check {
 
-	public static inline var CLASS_DEF:String = "CLASS_DEF";
-	public static inline var ENUM_DEF:String = "ENUM_DEF";
-	public static inline var ABSTRACT_DEF:String = "ABSTRACT_DEF";
-	public static inline var TYPEDEF_DEF:String = "TYPEDEF_DEF";
-	public static inline var INTERFACE_DEF:String = "INTERFACE_DEF";
-
-	public static inline var OBJECT_DECL:String = "OBJECT_DECL";
-	public static inline var FUNCTION:String = "FUNCTION";
-	public static inline var FOR:String = "FOR";
-	public static inline var IF:String = "IF";
-	public static inline var WHILE:String = "WHILE";
-	public static inline var SWITCH:String = "SWITCH";
-	public static inline var TRY:String = "TRY";
-	public static inline var CATCH:String = "CATCH";
-	public static inline var REIFICATION:String = "REIFICATION";
-	public static inline var ARRAY_COMPREHENSION:String = "ARRAY_COMPREHENSION";
-
-	public static inline var SAME:String = "same";
-	public static inline var ALONE:String = "alone";
-	public static inline var ALONE_OR_SINGLELINE:String = "aloneorsingle";
-
-	public var tokens:Array<String>;
-	public var option:String;
+	public var tokens:Array<RightCurlyCheckToken>;
+	public var option:RightCurlyCheckOption;
 
 	public function new() {
 		super();
@@ -54,7 +33,7 @@ class RightCurlyCheck extends Check {
 		option = ALONE_OR_SINGLELINE;
 	}
 
-	function hasToken(token:String):Bool {
+	function hasToken(token:RightCurlyCheckToken):Bool {
 		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
@@ -186,4 +165,31 @@ class RightCurlyCheck extends Check {
 			throw "exit";
 		}
 	}
+}
+
+@:enum
+abstract RightCurlyCheckToken(String) {
+	var CLASS_DEF = "CLASS_DEF";
+	var ENUM_DEF = "ENUM_DEF";
+	var ABSTRACT_DEF = "ABSTRACT_DEF";
+	var TYPEDEF_DEF = "TYPEDEF_DEF";
+	var INTERFACE_DEF = "INTERFACE_DEF";
+
+	var OBJECT_DECL = "OBJECT_DECL";
+	var FUNCTION = "FUNCTION";
+	var FOR = "FOR";
+	var IF = "IF";
+	var WHILE = "WHILE";
+	var SWITCH = "SWITCH";
+	var TRY = "TRY";
+	var CATCH = "CATCH";
+	var REIFICATION = "REIFICATION";
+	var ARRAY_COMPREHENSION = "ARRAY_COMPREHENSION";
+}
+
+@:enum
+abstract RightCurlyCheckOption(String) {
+	var SAME = "same";
+	var ALONE = "alone";
+	var ALONE_OR_SINGLELINE = "aloneorsingle";
 }

@@ -19,7 +19,7 @@ class ModifierOrderCheckTest extends CheckTestCase {
 
 	public function testModifiers() {
 		var check = new ModifierOrderCheck();
-		check.modifiers = ["DYNAMIC", "PUBLIC_PRIVATE", "OVERRIDE", "INLINE", "STATIC", "MACRO"];
+		check.modifiers = [DYNAMIC, PUBLIC_PRIVATE, OVERRIDE, INLINE, STATIC, MACRO];
 		assertMsg(check, ModifierOrderTests.TEST1, 'Invalid modifier order: test6 (modifier: INLINE)');
 		assertNoMsg(check, ModifierOrderTests.TEST2);
 		assertNoMsg(check, ModifierOrderTests.TEST3);

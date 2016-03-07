@@ -57,7 +57,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectSame() {
 		var check = new RightCurlyCheck();
-		check.option = RightCurlyCheck.SAME;
+		check.option = SAME;
 		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
 		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
 		assertNoMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT);
@@ -80,7 +80,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testIncorrectSame() {
 		var check = new RightCurlyCheck();
-		check.option = RightCurlyCheck.SAME;
+		check.option = SAME;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
@@ -101,7 +101,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectAlone() {
 		var check = new RightCurlyCheck();
-		check.option = RightCurlyCheck.ALONE;
+		check.option = ALONE;
 		assertNoMsg(check, RightCurlyTests.ALONE_IF);
 		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
@@ -121,7 +121,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testIncorrectAlone() {
 		var check = new RightCurlyCheck();
-		check.option = RightCurlyCheck.ALONE;
+		check.option = ALONE;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_FUNCTION, MSG_NOT_SAME_LINE);
 		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
@@ -144,7 +144,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testTokenIF() {
 		var check = new RightCurlyCheck();
-		check.tokens = [RightCurlyCheck.IF];
+		check.tokens = [IF];
 		assertNoMsg(check, RightCurlyTests.SINGLELINE_IF);
 		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
@@ -152,7 +152,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertNoMsg(check, RightCurlyTests.ALONE_IF);
 		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 
-		check.option = RightCurlyCheck.SAME;
+		check.option = SAME;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
 		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
@@ -160,7 +160,7 @@ class RightCurlyCheckTest extends CheckTestCase {
 		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
 		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
 
-		check.option = RightCurlyCheck.ALONE;
+		check.option = ALONE;
 		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
 		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
 		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
@@ -171,27 +171,27 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testTokenMacroReification() {
 		var check = new RightCurlyCheck();
-		check.tokens = [RightCurlyCheck.REIFICATION];
+		check.tokens = [REIFICATION];
 		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
 
-		check.option = RightCurlyCheck.SAME;
+		check.option = SAME;
 		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 
-		check.option = RightCurlyCheck.ALONE;
+		check.option = ALONE;
 		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 	}
 
 	public function testArrayComprehension() {
 		var check = new RightCurlyCheck();
-		check.tokens = [RightCurlyCheck.ARRAY_COMPREHENSION];
+		check.tokens = [ARRAY_COMPREHENSION];
 		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
 		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 
-		check.option = RightCurlyCheck.SAME;
+		check.option = SAME;
 		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
 		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 
-		check.option = RightCurlyCheck.ALONE;
+		check.option = ALONE;
 		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
 		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
 	}

@@ -5,10 +5,10 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @ignore("Base class for name checks")
-class NameCheckBase extends Check {
+class NameCheckBase<T> extends Check {
 
 	public var format:String;
-	public var tokens:Array<String>;
+	public var tokens:Array<T>;
 	public var ignoreExtern:Bool;
 
 	var formatRE:EReg;
@@ -20,7 +20,7 @@ class NameCheckBase extends Check {
 		ignoreExtern = true;
 	}
 
-	function hasToken(token:String):Bool {
+	function hasToken(token:T):Bool {
 		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 

@@ -8,14 +8,7 @@ using checkstyle.utils.FieldUtils;
 
 @name("MethodName")
 @desc("Checks the method names")
-class MethodNameCheck extends NameCheckBase {
-
-	public static inline var PUBLIC:String = "PUBLIC";
-	public static inline var PRIVATE:String = "PRIVATE";
-	public static inline var STATIC:String = "STATIC";
-	public static inline var NOTSTATIC:String = "NOTSTATIC";
-	public static inline var INLINE:String = "INLINE";
-	public static inline var NOTINLINE:String = "NOTINLINE";
+class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 
 	public function new() {
 		super();
@@ -66,4 +59,14 @@ class MethodNameCheck extends NameCheckBase {
 
 		matchTypeName("method name", f.name, f.pos);
 	}
+}
+
+@:enum
+abstract MethodNameCheckToken(String) {
+	var PUBLIC = "PUBLIC";
+	var PRIVATE = "PRIVATE";
+	var STATIC = "STATIC";
+	var NOTSTATIC = "NOTSTATIC";
+	var INLINE = "INLINE";
+	var NOTINLINE = "NOTINLINE";
 }

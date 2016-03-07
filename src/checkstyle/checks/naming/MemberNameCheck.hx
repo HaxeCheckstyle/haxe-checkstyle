@@ -7,14 +7,7 @@ using checkstyle.utils.FieldUtils;
 
 @name("MemberName")
 @desc("Checks on naming conventions of non-static fields")
-class MemberNameCheck extends NameCheckBase {
-
-	public static inline var PUBLIC:String = "PUBLIC";
-	public static inline var PRIVATE:String = "PRIVATE";
-	public static inline var ENUM:String = "ENUM";
-	public static inline var CLASS:String = "CLASS";
-	public static inline var ABSTRACT:String = "ABSTRACT";
-	public static inline var TYPEDEF:String = "TYPEDEF";
+class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	public function new() {
 		super();
@@ -88,4 +81,14 @@ class MemberNameCheck extends NameCheckBase {
 	function checkTypedefField(f:Field, t:ComplexType, e:Expr) {
 		matchTypeName("typedef member", f.name, f.pos);
 	}
+}
+
+@:enum
+abstract MemberNameCheckToken(String) {
+	var PUBLIC = "PUBLIC";
+	var PRIVATE = "PRIVATE";
+	var ENUM = "ENUM";
+	var CLASS = "CLASS";
+	var ABSTRACT = "ABSTRACT";
+	var TYPEDEF = "TYPEDEF";
 }

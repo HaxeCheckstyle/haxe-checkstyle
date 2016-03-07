@@ -10,29 +10,8 @@ import haxe.macro.Expr;
 @desc("Checks for empty blocks")
 class EmptyBlockCheck extends Check {
 
-	public static inline var CLASS_DEF:String = "CLASS_DEF";
-	public static inline var ENUM_DEF:String = "ENUM_DEF";
-	public static inline var ABSTRACT_DEF:String = "ABSTRACT_DEF";
-	public static inline var TYPEDEF_DEF:String = "TYPEDEF_DEF";
-	public static inline var INTERFACE_DEF:String = "INTERFACE_DEF";
-	public static inline var OBJECT_DECL:String = "OBJECT_DECL";
-	public static inline var FUNCTION:String = "FUNCTION";
-	public static inline var FOR:String = "FOR";
-	public static inline var IF:String = "IF";
-	public static inline var WHILE:String = "WHILE";
-	public static inline var SWITCH:String = "SWITCH";
-	public static inline var TRY:String = "TRY";
-	public static inline var CATCH:String = "CATCH";
-
-	// allow empty blocks but enforce "{}" notation
-	public static inline var EMPTY:String = "empty";
-	// empty blocks must contain something apart from whitespace (comment or statement)
-	public static inline var TEXT:String = "text";
-	// all blocks must contain at least one statement
-	public static inline var STATEMENT:String = "stmt";
-
-	public var tokens:Array<String>;
-	public var option:String;
+	public var tokens:Array<EmptyBlockCheckToken>;
+	public var option:EmptyBlockCheckOption;
 
 	public function new() {
 		super();
@@ -54,7 +33,7 @@ class EmptyBlockCheck extends Check {
 		option = EMPTY;
 	}
 
-	function hasToken(token:String):Bool {
+	function hasToken(token:EmptyBlockCheckToken):Bool {
 		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
@@ -158,4 +137,31 @@ class EmptyBlockCheck extends Check {
 			logPos("Empty block should be written as {}", brOpen.pos, severity);
 		}
 	}
+}
+
+@:enum
+abstract EmptyBlockCheckToken(String) {
+	var CLASS_DEF = "CLASS_DEF";
+	var ENUM_DEF = "ENUM_DEF";
+	var ABSTRACT_DEF = "ABSTRACT_DEF";
+	var TYPEDEF_DEF = "TYPEDEF_DEF";
+	var INTERFACE_DEF = "INTERFACE_DEF";
+	var OBJECT_DECL = "OBJECT_DECL";
+	var FUNCTION = "FUNCTION";
+	var FOR = "FOR";
+	var IF = "IF";
+	var WHILE = "WHILE";
+	var SWITCH = "SWITCH";
+	var TRY = "TRY";
+	var CATCH = "CATCH";
+}
+
+@:enum
+abstract EmptyBlockCheckOption(String) {
+	// allow empty blocks but enforce "{}" notation
+	var EMPTY = "empty";
+	// empty blocks must contain something apart from whitespace (comment or statement)
+	var TEXT = "text";
+	// all blocks must contain at least one statement
+	var STATEMENT = "stmt";
 }

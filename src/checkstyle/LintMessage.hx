@@ -1,7 +1,6 @@
 package checkstyle;
 
 @:enum
-@SuppressWarnings('checkstyle:MemberName')
 abstract SeverityLevel(String) from String {
 	var INFO = "INFO";
 	var WARNING = "WARNING";
