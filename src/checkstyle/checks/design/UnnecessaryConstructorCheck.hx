@@ -5,7 +5,7 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
 @name("UnnecessaryConstructor")
-@desc("Makes sure that utility classes (classes that contain only static methods or fields) do not have a constructor")
+@desc("Checks for unnecessary constructor in classes that contain only static methods or fields")
 class UnnecessaryConstructorCheck extends Check {
 
 	public function new() {
@@ -38,7 +38,7 @@ class UnnecessaryConstructorCheck extends Check {
 			}
 
 			if (haveConstructor && acceptableTokens.length > 1 && acceptableTokens.length == staticTokens + 1) {
-				logPos("Utility classes should not have a constructor", constructorPos, severity);
+				logPos("Unnecessary constructor found", constructorPos, severity);
 			}
 		}
 	}

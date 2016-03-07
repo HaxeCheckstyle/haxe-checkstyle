@@ -5,7 +5,7 @@ import checkstyle.checks.design.UnnecessaryConstructorCheck;
 class UnnecessaryConstructorCheckTest extends CheckTestCase {
 
 	public function testWithConstructor() {
-		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST1, "Utility classes should not have a constructor");
+		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST1, "Unnecessary constructor found");
 	}
 
 	public function testWithoutConstructor() {
@@ -21,7 +21,7 @@ class UnnecessaryConstructorCheckTest extends CheckTestCase {
 	}
 
 	public function testJustVarsWithConstructor() {
-		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST5, "Utility classes should not have a constructor");
+		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST5, "Unnecessary constructor found");
 	}
 
 	public function testJustWithConstructor() {
