@@ -122,7 +122,6 @@ class Checker {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:HiddenField")
 	function makeAST(defines:Array<String>):Ast {
 		var code = file.content;
 		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
@@ -131,37 +130,29 @@ class Checker {
 		parser.define("unsafe");
 		for (define in defines) {
 			var flagValue = define.split("=");
-			if (flagValue.length > 2) throw "Found a define with more than one = sign: '" + define + "'";
 			parser.define(flagValue[0], flagValue[1]);
 		}
 		return parser.parse();
 	}
 
-#if hxtelemetry
 	public function process(files:Array<LintFile>) {
+		var advanceFrame = function() {};
+		#if hxtelemetry
 		var hxt = new hxtelemetry.HxTelemetry();
+		advanceFrame = function() hxt.advance_frame();
+		#end
+
 		for (reporter in reporters) reporter.start();
 		for (lintFile in files) {
 			loadFileContent(lintFile);
 			if (createContext(lintFile)) run();
 			unloadFileContent(lintFile);
-			hxt.advance_frame();
+			advanceFrame();
 		}
-		hxt.advance_frame();
+		advanceFrame();
 		for (reporter in reporters) reporter.finish();
-		hxt.advance_frame();
+		advanceFrame();
 	}
-#else
-	public function process(files:Array<LintFile>) {
-		for (reporter in reporters) reporter.start();
-		for (lintFile in files) {
-			loadFileContent(lintFile);
-			if (createContext(lintFile)) run();
-			unloadFileContent(lintFile);
-		}
-		for (reporter in reporters) reporter.finish();
-	}
-#end
 
 	function loadFileContent(lintFile:LintFile) {
 		// unittests set content before running Checker

@@ -107,15 +107,21 @@ class Main {
 
 	function loadConfig(configPath:String) {
 		var config:Config = Json.parse(File.getContent(configPath));
-		verifyAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
+		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
 		for (checkConf in config.checks) {
 			var check = createCheck(checkConf);
 			setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
 
-		if (config.baseDefines != null) checker.baseDefines = config.baseDefines;
-		if (config.defineCombinations != null) checker.defineCombinations = config.defineCombinations;
+		if (config.baseDefines != null) {
+			validateDefines(config.baseDefines);
+			checker.baseDefines = config.baseDefines;
+		}
+		if (config.defineCombinations != null) {
+			for (combination in config.defineCombinations) validateDefines(combination);
+			checker.defineCombinations = config.defineCombinations;
+		}
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {
@@ -126,7 +132,7 @@ class Main {
 	}
 
 	function setCheckProperties(check:Check, checkConf:CheckConfig, defaultSeverity:SeverityLevel) {
-		verifyAllowedFields(checkConf, ["type", "props"], check.getModuleName());
+		validateAllowedFields(checkConf, ["type", "props"], check.getModuleName());
 
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
 		// use Type.getInstanceFields to make it work in c++ / profiler
@@ -143,11 +149,17 @@ class Main {
 		}
 	}
 
-	function verifyAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
+	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
 		for (field in Reflect.fields(object)) {
 			if (allowedFields.indexOf(field) < 0) {
 				failWith(messagePrefix + " has unknown field '" + field + "'");
 			}
+		}
+	}
+
+	function validateDefines(defines:Array<String>) {
+		for (define in defines) {
+			if (define.split("=").length > 2) throw "Found a define with more than one = sign: '" + define + "'";
 		}
 	}
 
