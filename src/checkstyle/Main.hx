@@ -141,8 +141,7 @@ class Main {
 		}
 	}
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	function verifyAllowedFields(object:Dynamic, allowedFields:Array<String>, messagePrefix:String) {
+	function verifyAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
 		for (field in Reflect.fields(object)) {
 			if (allowedFields.indexOf(field) < 0) {
 				failWith(messagePrefix + " has unknown field '" + field + "'");
