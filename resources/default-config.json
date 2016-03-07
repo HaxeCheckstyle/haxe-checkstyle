@@ -95,6 +95,12 @@
 		},
 		{
 			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "EmptyPackage"
+		},
+		{
+			"props": {
 				"max": 2000,
 				"severity": "IGNORE"
 			},
