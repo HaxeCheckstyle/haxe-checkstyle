@@ -197,7 +197,24 @@
 			"props": {
 				"ignoreExtern": true,
 				"format": "^[a-z][a-zA-Z0-9]*$",
-				"tokens": [],
+				"tokens": [
+					"CLASS",
+					"PUBLIC",
+					"PRIVATE",
+					"ABSTRACT",
+					"TYPEDEF"
+				],
+				"severity": "INFO"
+			},
+			"type": "MemberName"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[A-Z0-9_]*$",
+				"tokens": [
+					"ENUM"
+				],
 				"severity": "INFO"
 			},
 			"type": "MemberName"

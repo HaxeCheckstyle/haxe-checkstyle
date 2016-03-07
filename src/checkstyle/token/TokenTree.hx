@@ -114,7 +114,6 @@ class TokenTree extends Token {
 	}
 }
 
-@SuppressWarnings('checkstyle:MemberName')
 enum TokenFilterMode {
 	ALL;
 	FIRST;

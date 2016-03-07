@@ -91,7 +91,6 @@ class FieldUtils {
 	}
 }
 
-@SuppressWarnings('checkstyle:MemberName')
 enum FieldParentKind {
 	CLASS;
 	INTERFACE;
