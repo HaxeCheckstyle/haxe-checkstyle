@@ -1,5 +1,6 @@
 package checkstyle.checks.coding;
 
+import checkstyle.token.TokenTree;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
@@ -16,37 +17,15 @@ class ReturnCountCheck extends Check {
 	}
 
 	override function actualRun() {
-		forEachField(function(f, _) {
-			switch (f.kind) {
-				case FFun(fun):
-					scanBlock(fun.expr);
-				default:
+		var root:TokenTree = checker.getTokenTree();
+		var functions = root.filter([Kwd(KwdFunction)], ALL);
+		for (fn in functions) {
+			if (isPosSuppressed(fn.pos)) continue;
+			if (!fn.hasChilds()) throw "function has invalid structure!";
+			var returns = fn.filter([Kwd(KwdReturn)], ALL);
+			if (returns.length > max) {
+				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos, severity);
 			}
-		});
-	}
-
-	function scanBlock(e:Expr) {
-		if (e == null) return;
-		var cnt = 0;
-
-		switch (e.expr) {
-			case EBlock(exprs):
-				for (e in exprs) {
-					switch (e.expr) {
-						case EReturn(_):
-							cnt++;
-							if (cnt > max) {
-								warnReturnCount(cnt, e.pos);
-								return;
-							}
-						default:
-					}
-				}
-			default:
 		}
-	}
-
-	function warnReturnCount(cnt:Int, pos:Position) {
-		logPos('Return count is $cnt (max allowed is ${max})', pos, severity);
 	}
 }
