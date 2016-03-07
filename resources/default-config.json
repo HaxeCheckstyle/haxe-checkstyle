@@ -361,6 +361,13 @@
 		},
 		{
 			"props": {
+				"max": 2,
+				"severity": "IGNORE"
+			},
+			"type": "ReturnCount"
+		},
+		{
+			"props": {
 				"tokens": [
 					"CLASS_DEF",
 					"ENUM_DEF",
