@@ -207,27 +207,56 @@ class Checker {
 
 	function run() {
 		for (check in checks) {
+			var messages = [];
+
 			if (check.type == AST) {
 				for (ast in asts) {
 					this.ast = ast;
-					runCheck(check);
+					messages = messages.concat(runCheck(check));
 				}
 			}
 			else {
 				// non AST-based checks still need the AST for suppression checking
 				ast = asts[0];
-				runCheck(check);
+				messages = messages.concat(runCheck(check));
 			}
+
+			messages = filterDuplicateMessages(messages);
+			for (reporter in reporters) for (m in messages) reporter.addMessage(m);
 		}
 		for (reporter in reporters) reporter.fileFinish(file);
 	}
 
+	function filterDuplicateMessages(messages:Array<LintMessage>):Array<LintMessage> {
+		var filteredMessages = [];
+		for (message in messages) {
+			var anyDuplicates = false;
+			for (filteredMessage in filteredMessages) {
+				if (areMessagesSame(message, filteredMessage)) {
+					anyDuplicates = true;
+					break;
+				}
+			}
+			if (!anyDuplicates) filteredMessages.push(message);
+		}
+		return filteredMessages;
+	}
+
+	function areMessagesSame(message1:LintMessage, message2:LintMessage):Bool {
+		return
+			message1.fileName == message2.fileName &&
+			message1.message == message2.message &&
+			message1.line == message2.line &&
+			message1.startColumn == message2.startColumn &&
+			message1.endColumn == message2.endColumn &&
+			message1.severity == message2.severity &&
+			message1.moduleName == message2.moduleName;
+	}
+
 	@SuppressWarnings("checkstyle:Dynamic")
-	function runCheck(check:Check) {
-		var messages;
+	function runCheck(check:Check):Array<LintMessage> {
 		try {
-			messages = check.run(this);
-			for (reporter in reporters) for (m in messages) reporter.addMessage(m);
+			return check.run(this);
 		}
 		catch (e:Dynamic) {
 			for (reporter in reporters) {
@@ -242,6 +271,7 @@ class Checker {
 					moduleName:"Checker"
 				});
 			}
+			return [];
 		}
 	}
 }
