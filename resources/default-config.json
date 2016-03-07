@@ -407,6 +407,12 @@
 		},
 		{
 			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "SimplifyBooleanReturn"
+		},
+		{
+			"props": {
 				"spaceIfCondition": true,
 				"spaceAroundBinop": true,
 				"spaceForLoop": true,
