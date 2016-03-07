@@ -55,9 +55,7 @@ class RightCurlyCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
 	override function actualRun() {

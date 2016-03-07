@@ -28,9 +28,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
 	override function actualRun() {
@@ -69,8 +67,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkIfChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		if (Type.enumEq(lastChild.tok, Kwd(KwdElse))) {
@@ -85,8 +82,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkFunctionChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
@@ -106,8 +102,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkDoWhileChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		var expr:TokenTree = lastChild.previousSibling;
@@ -120,10 +115,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkWhileChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
-		if (Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
-
+		if (token == null || !token.hasChilds() || Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
 			case BrOpen:
@@ -134,8 +126,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkLastChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {

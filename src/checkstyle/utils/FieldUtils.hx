@@ -43,9 +43,7 @@ class FieldUtils {
 	}
 
 	public static function isInline(f:Field, p:ParentType):Bool {
-		if (hasInline(f)) return true;
-		if (p.kind == ENUM_ABSTRACT) return true;
-		return false;
+		return (hasInline(f) || p.kind == ENUM_ABSTRACT);
 	}
 
 	public static function isStatic(f:Field, p:ParentType):Bool {

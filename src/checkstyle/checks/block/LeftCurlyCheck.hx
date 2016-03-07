@@ -57,9 +57,7 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.indexOf(token) > -1);
 	}
 
 	override function actualRun() {
@@ -77,9 +75,7 @@ class LeftCurlyCheck extends Check {
 
 	function isSingleLine(brOpen:TokenTree):Bool {
 		var brClose:TokenTree = brOpen.getLastChild();
-		if (brClose == null) return false;
-		if (brOpen.pos.max == brClose.pos.min) return true;
-		return false;
+		return (brClose != null && brOpen.pos.max == brClose.pos.min);
 	}
 
 	/**
