@@ -43,10 +43,7 @@ class ConstantNameCheck extends NameCheckBase {
 	}
 
 	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
-
-		if (e == null || e.expr == null) return;
-
-		if (!f.isStatic(p)) return;
+		if (e == null || e.expr == null || !f.isStatic(p)) return;
 		if (!hasToken (INLINE) && f.isInline(p)) return;
 		if (!hasToken (NOTINLINE) && !f.isInline(p)) return;
 

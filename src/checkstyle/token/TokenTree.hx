@@ -89,8 +89,7 @@ class TokenTree extends Token {
 	}
 
 	function matchesAny(searchFor:Array<TokenDef>):Bool {
-		if (searchFor == null) return false;
-		if (tok == null) return false;
+		if (searchFor == null || tok == null) return false;
 		for (search in searchFor) {
 			if (Type.enumEq(tok, search)) {
 				return true;

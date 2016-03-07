@@ -70,8 +70,7 @@ class HiddenFieldCheck extends Check {
 			case Const(CIdent(name)):
 				for (member in memberNames) {
 					// allow set_fieldName and setFieldName notation
-					if ('set_${member.toLowerCase()}' == name.toLowerCase()) return true;
-					if ('set${member.toLowerCase()}' == name.toLowerCase()) return true;
+					if ('set_${member.toLowerCase()}' == name.toLowerCase() || 'set${member.toLowerCase()}' == name.toLowerCase()) return true;
 				}
 			default:
 		}
