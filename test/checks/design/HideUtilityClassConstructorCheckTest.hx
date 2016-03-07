@@ -11,6 +11,14 @@ class HideUtilityClassConstructorCheckTest extends CheckTestCase {
 	public function testWithoutConstructor() {
 		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST2);
 	}
+
+	public function testWithConstructorAndInstanceVar() {
+		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST3);
+	}
+
+	public function testWithConstructorAndInstanceFunction() {
+		assertNoMsg(new HideUtilityClassConstructorCheck(), HideUtilityClassConstructorCheckTests.TEST4);
+	}
 }
 
 class HideUtilityClassConstructorCheckTests {
@@ -30,5 +38,33 @@ class HideUtilityClassConstructorCheckTests {
 		static inline var b:Int = 1;
 		public static function walkFile() {}
 		static function test() {}
+	}";
+
+	public static inline var TEST3:String = "
+	class Test {
+		var loc:Float;
+		static var a:Int = 1;
+		static inline var b:Int = 1;
+
+		public function new() {}
+
+		public static function walkFile() {}
+
+		static function test() {}
+	}";
+
+	public static inline var TEST4:String = "
+	class Test {
+		var loc:Float;
+		static var a:Int = 1;
+		static inline var b:Int = 1;
+
+		public function new() {}
+
+		public static function walkFile() {}
+
+		static function test() {}
+
+		public function test2(){}
 	}";
 }
