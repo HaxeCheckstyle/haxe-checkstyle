@@ -1,10 +1,513 @@
 {
+	"defaultSeverity": "INFO",
 	"checks": [
 		{
-			"type": "AvoidInlineConditionals",
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "Anonymous"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "ArrayLiteral"
+		},
+		{
 			"props": {
 				"severity": "IGNORE"
-			}
+			},
+			"type": "AvoidInlineConditionals"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "AvoidStarImport"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "ConstantName"
+		},
+		{
+			"props": {
+				"thresholds": [
+					{
+						"complexity": 20,
+						"severity": "WARNING"
+					},
+					{
+						"complexity": 25,
+						"severity": "ERROR"
+					}
+				],
+				"severity": "INFO"
+			},
+			"type": "CyclomaticComplexity"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "Dynamic"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "ERegLiteral"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"option": "empty",
+				"severity": "INFO"
+			},
+			"type": "EmptyBlock"
+		},
+		{
+			"props": {
+				"allowEmptyLineAfterSingleLineComment": true,
+				"max": 1,
+				"allowEmptyLineAfterMultiLineComment": true,
+				"severity": "INFO"
+			},
+			"type": "EmptyLines"
+		},
+		{
+			"props": {
+				"max": 2000,
+				"severity": "INFO"
+			},
+			"type": "FileLength"
+		},
+		{
+			"props": {
+				"option": "upperCase",
+				"severity": "INFO"
+			},
+			"type": "HexadecimalLiteral"
+		},
+		{
+			"props": {
+				"ignoreSetter": true,
+				"ignoreFormat": "^(main|run)$",
+				"ignoreConstructorParameter": true,
+				"ignoreFormatRE": null,
+				"severity": "INFO"
+			},
+			"type": "HiddenField"
+		},
+		{
+			"props": {
+				"character": "tab",
+				"severity": "INFO"
+			},
+			"type": "IndentationCharacter"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "InnerAssignment"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"ignoreEmptySingleline": true,
+				"option": "eol",
+				"severity": "INFO"
+			},
+			"type": "LeftCurly"
+		},
+		{
+			"props": {
+				"max": 160,
+				"severity": "INFO"
+			},
+			"type": "LineLength"
+		},
+		{
+			"props": {
+				"listeners": [
+					"addEventListener",
+					"addListener",
+					"on",
+					"once"
+				],
+				"format": "^_?[a-z][a-zA-Z0-9]*$",
+				"severity": "INFO"
+			},
+			"type": "ListenerName"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "LocalVariableName"
+		},
+		{
+			"props": {
+				"ignoreNumbers": [
+					-1,
+					0,
+					1,
+					2
+				],
+				"severity": "INFO"
+			},
+			"type": "MagicNumber"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "MemberName"
+		},
+		{
+			"props": {
+				"max": 50,
+				"severity": "INFO"
+			},
+			"type": "MethodLength"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "MethodName"
+		},
+		{
+			"props": {
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				],
+				"severity": "INFO"
+			},
+			"type": "ModifierOrder"
+		},
+		{
+			"props": {
+				"minLength": 2,
+				"ignore": "^\\s+$",
+				"allowDuplicates": 2,
+				"severity": "INFO"
+			},
+			"type": "MultipleStringLiterals"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "MultipleVariableDeclarations"
+		},
+		{
+			"props": {
+				"allowSingleLineStatement": true,
+				"tokens": [
+					"FOR",
+					"IF",
+					"ELSE_IF",
+					"WHILE",
+					"DO_WHILE"
+				],
+				"severity": "INFO"
+			},
+			"type": "NeedBraces"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "INFO"
+			},
+			"type": "NestedForDepth"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "INFO"
+			},
+			"type": "NestedIfDepth"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "INFO"
+			},
+			"type": "NestedTryDepth"
+		},
+		{
+			"props": {
+				"tokens": [
+					"=",
+					"+",
+					"-",
+					"*",
+					"/",
+					"%",
+					">",
+					"<",
+					">=",
+					"<=",
+					"==",
+					"!=",
+					"&",
+					"|",
+					"^",
+					"&&",
+					"||",
+					"<<",
+					">>",
+					">>>",
+					"+=",
+					"-=",
+					"*=",
+					"/=",
+					"%=",
+					"<<=",
+					">>=",
+					">>>=",
+					"|=",
+					"&=",
+					"^=",
+					"...",
+					"=>",
+					"!",
+					"++",
+					"--"
+				],
+				"option": "eol",
+				"severity": "INFO"
+			},
+			"type": "OperatorWrap"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^(_|[a-z][a-zA-Z0-9]*$)",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "ParameterName"
+		},
+		{
+			"props": {
+				"max": 7,
+				"severity": "INFO",
+				"ignoreOverriddenMethods": false
+			},
+			"type": "ParameterNumber"
+		},
+		{
+			"props": {
+				"enforcePublicPrivate": false,
+				"severity": "INFO"
+			},
+			"type": "RedundantModifier"
+		},
+		{
+			"props": {
+				"allowEmptyReturn": true,
+				"enforceReturnType": false,
+				"severity": "INFO"
+			},
+			"type": "Return"
+		},
+		{
+			"props": {
+				"max": 2,
+				"severity": "INFO"
+			},
+			"type": "ReturnCount"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"option": "aloneorsingle",
+				"severity": "INFO"
+			},
+			"type": "RightCurly"
+		},
+		{
+			"props": {
+				"tokens": [
+					",",
+					"."
+				],
+				"option": "eol",
+				"severity": "INFO"
+			},
+			"type": "SeparatorWrap"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "SimplifyBooleanExpression"
+		},
+		{
+			"props": {
+				"spaceIfCondition": true,
+				"spaceAroundBinop": true,
+				"spaceForLoop": true,
+				"ignoreRangeOperator": true,
+				"spaceWhileLoop": true,
+				"spaceCatch": true,
+				"spaceSwitchCase": true,
+				"noSpaceAroundUnop": true,
+				"severity": "INFO"
+			},
+			"type": "Spacing"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "TODOComment"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "TabForAligning"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "TrailingWhitespace"
+		},
+		{
+			"props": {
+				"ignoreEnumAbstractValues": true,
+				"severity": "INFO"
+			},
+			"type": "Type"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "INFO"
+			},
+			"type": "TypeName"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "VariableInitialisation"
+		},
+		{
+			"props": {
+				"tokens": [
+					",",
+					";"
+				],
+				"severity": "INFO"
+			},
+			"type": "WhitespaceAfter"
+		},
+		{
+			"props": {
+				"tokens": [
+					"=",
+					"+",
+					"-",
+					"*",
+					"/",
+					"%",
+					">",
+					"<",
+					">=",
+					"<=",
+					"==",
+					"!=",
+					"&",
+					"|",
+					"^",
+					"&&",
+					"||",
+					"<<",
+					">>",
+					">>>",
+					"+=",
+					"-=",
+					"*=",
+					"/=",
+					"%=",
+					"<<=",
+					">>=",
+					">>>=",
+					"|=",
+					"&=",
+					"^=",
+					"=>"
+				],
+				"severity": "INFO"
+			},
+			"type": "WhitespaceAround"
 		}
 	]
 }

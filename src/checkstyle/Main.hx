@@ -65,12 +65,10 @@ class Main {
 	function run(args:Array<String>) {
 		var files:Array<String> = [];
 		var configPath:String = null;
-		var enableAll:Bool = false;
 
 		var argHandler = Args.generate([
 			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) traverse(path, files),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
-			@doc("Enable all checks (config becomes a delta to that)") ["--enable-all"] => function() enableAll = true,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
 			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
 				XML_PATH = path;
@@ -100,8 +98,8 @@ class Main {
 			configPath = DEFAULT_CONFIG;
 		}
 
-		if (configPath == null || enableAll) addAllChecks();
-		if (configPath != null) loadConfig(configPath);
+		if (configPath == null) addAllChecks();
+		else loadConfig(configPath);
 		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
@@ -122,9 +120,6 @@ class Main {
 
 	@SuppressWarnings('checkstyle:Dynamic')
 	function getCheck(checkConf:Dynamic):Check {
-		for (check in checker.checks) {
-			if (checkConf.type == check.getModuleName()) return check;
-		}
 		var check:Check = info.build(checkConf.type);
 		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
 		checker.addCheck(check);
