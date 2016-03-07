@@ -15,6 +15,12 @@ class ReturnCountCheckTest extends CheckTestCase {
 	public function testSuppressedReturnCount() {
 		assertNoMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST3);
 	}
+
+	public function testCustomReturnCount() {
+		var chk = new ReturnCountCheck();
+		chk.max = 1;
+		assertMsg(chk, ReturnCountCheckTests.TEST4, 'Return count is 2 (max allowed is 1)');
+	}
 }
 
 class ReturnCountCheckTests {
@@ -46,6 +52,16 @@ class ReturnCountCheckTests {
 				return 2;
 			}
 			else return 3;
+		}
+	}";
+
+	public static inline var TEST4:String = "
+	abstractAndClass Test {
+		function a() {
+			return 1;
+			if (true) {
+				return 2;
+			}
 		}
 	}";
 }
