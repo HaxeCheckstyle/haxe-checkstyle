@@ -6,6 +6,7 @@ import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
 class TokenStream {
+
 	public static inline var NO_MORE_TOKENS:String = "no more tokens";
 
 	var tokens:Array<Token>;

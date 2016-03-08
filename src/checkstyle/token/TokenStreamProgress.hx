@@ -1,6 +1,7 @@
 package checkstyle.token;
 
 class TokenStreamProgress {
+
 	var stream:TokenStream;
 	var pos:Int;
 

@@ -19,6 +19,7 @@ import sys.io.File;
 using checkstyle.utils.ArrayUtils;
 
 class Main {
+
 	@SuppressWarnings('checkstyle:Dynamic')
 	public static function main() {
 		var args;
