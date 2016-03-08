@@ -43,6 +43,11 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertNoMsg(new EmptyLinesCheck(), TEST6);
 		assertNoMsg(new EmptyLinesCheck(), TEST7);
 	}
+
+	public function testRequireEmptyLineAfterPackage() {
+		assertMsg(new EmptyLinesCheck(), TEST8, "Empty line required after package declaration");
+		assertNoMsg(new EmptyLinesCheck(), TEST9);
+	}
 }
 
 @:enum
@@ -110,4 +115,19 @@ abstract EmptyLinesCheckTests(String) to String {
 			var b:Int;
 		}
 	}";
+
+	var TEST8 = "
+	package pack;
+	import Array;
+	using StringTools;
+
+	class Test {}";
+
+	var TEST9 = "
+	package pack;
+
+	import Array;
+	using StringTools;
+
+	class Test {}";
 }

@@ -26,10 +26,10 @@ class InterfaceCheck extends Check {
 
 			if (functions.length == 0 && vars.length == 0) {
 				if (allowMarkerInterfaces) continue;
-				else logPos("Marker interfaces are not allowed", intr.pos, severity);
+				else logPos("Marker interfaces are not allowed", intr.pos);
 			}
 
-			if (!allowProperties && vars.length > 0) logPos("Properties are not allowed in interfaces", intr.pos, severity);
+			if (!allowProperties && vars.length > 0) logPos("Properties are not allowed in interfaces", intr.pos);
 		}
 	}
 }
