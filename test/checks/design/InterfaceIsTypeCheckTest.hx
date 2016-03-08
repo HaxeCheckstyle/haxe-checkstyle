@@ -2,7 +2,7 @@ package checks.design;
 
 import checkstyle.checks.design.InterfaceIsTypeCheck;
 
-class InterfaceIsTypeCheckTest extends CheckTestCase {
+class InterfaceIsTypeCheckTest extends CheckTestCase<InterfaceIsTypeCheckTests> {
 
 	public function testWithJustVars() {
 		assertMsg(new InterfaceIsTypeCheck(), InterfaceIsTypeCheckTests.TEST1, "Interfaces should describe a type and hence have methods");
@@ -23,16 +23,17 @@ class InterfaceIsTypeCheckTest extends CheckTestCase {
 	}
 }
 
-class InterfaceIsTypeCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract InterfaceIsTypeCheckTests(String) to String {
+	var TEST1 = "
 	interface IComponentController {
 		var a:Int = 1;
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	interface IComponentController {}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	interface IComponentController {
 		function init():Void;
 	}";
