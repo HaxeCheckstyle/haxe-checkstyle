@@ -59,6 +59,6 @@ class ListenerNameCheck extends Check {
 	function checkListenerName(name:String, pos:Position) {
 		formatRE = new EReg (format, "");
 		var match = formatRE.match(name);
-		if (!match) logPos('Wrong listener name: ' + name + ' (should be ~/${format}/)', pos, severity);
+		if (!match) logPos('Wrong listener name: ' + name + ' (should be ~/${format}/)', pos);
 	}
 }

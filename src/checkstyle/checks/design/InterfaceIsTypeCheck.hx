@@ -24,7 +24,7 @@ class InterfaceIsTypeCheck extends Check {
 
 			if (allowMarkerInterfaces && functions.length == 0 && vars.length == 0) continue;
 
-			if (functions.length == 0) logPos("Interfaces should describe a type and hence have methods", intr.pos, severity);
+			if (functions.length == 0) logPos("Interfaces should describe a type and hence have methods", intr.pos);
 		}
 	}
 }

@@ -38,7 +38,7 @@ class UnnecessaryConstructorCheck extends Check {
 			}
 
 			if (haveConstructor && acceptableTokens.length > 1 && acceptableTokens.length == staticTokens + 1) {
-				logPos("Unnecessary constructor found", constructorPos, severity);
+				logPos("Unnecessary constructor found", constructorPos);
 			}
 		}
 	}

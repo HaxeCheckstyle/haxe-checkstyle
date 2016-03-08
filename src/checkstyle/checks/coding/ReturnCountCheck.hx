@@ -32,7 +32,7 @@ class ReturnCountCheck extends Check {
 			if (!fn.hasChilds()) throw "function has invalid structure!";
 			var returns = fn.filterCallback(filterReturns);
 			if (returns.length > max) {
-				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos, severity);
+				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos);
 			}
 		}
 	}

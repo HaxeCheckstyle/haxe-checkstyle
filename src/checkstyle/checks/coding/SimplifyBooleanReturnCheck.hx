@@ -22,7 +22,7 @@ class SimplifyBooleanReturnCheck extends Check {
 			var thenStatement = token.childs[1];
 
 			if (canReturnOnlyBooleanLiteral(thenStatement) && canReturnOnlyBooleanLiteral(elseStatement)) {
-				logPos('Conditional logic can be removed', token.pos, severity);
+				logPos('Conditional logic can be removed', token.pos);
 			}
 		}
 	}

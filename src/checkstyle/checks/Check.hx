@@ -42,18 +42,19 @@ class Check {
 		throw "Unimplemented";
 	}
 
-	public function logPos(msg:String, pos:Position, sev:SeverityLevel) {
+	public function logPos(msg:String, pos:Position, ?sev:SeverityLevel) {
 		logRange(msg, pos.min, pos.max, sev);
 	}
 
-	public function logRange(msg:String, startPos:Int, endPos:Int, sev:SeverityLevel) {
+	public function logRange(msg:String, startPos:Int, endPos:Int, ?sev:SeverityLevel) {
 		var lp = checker.getLinePos(startPos);
 		var length = endPos - startPos;
 		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
 	}
 
-	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, sev:SeverityLevel) {
+	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, ?sev:SeverityLevel) {
 		if (endColumn == null) endColumn = startColumn;
+		if (sev == null) sev = severity;
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,

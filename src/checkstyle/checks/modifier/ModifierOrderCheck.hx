@@ -42,7 +42,7 @@ class ModifierOrderCheck extends Check {
 	}
 
 	function warnOrder(name:String, modifier:ModifierOrderCheckModifier, pos:Position) {
-		logPos('Invalid modifier order: ${name} (modifier: ${modifier})', pos, severity);
+		logPos('Invalid modifier order: ${name} (modifier: ${modifier})', pos);
 	}
 }
 

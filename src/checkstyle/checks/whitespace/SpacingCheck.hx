@@ -45,12 +45,12 @@ class SpacingCheck extends Check {
 			switch (e.expr) {
 				case EBinop(bo, l, r) if (spaceAroundBinop):
 					if (ignoreRangeOperator && binopString(bo) == "...") return;
-					if (r.pos.min - l.pos.max < binopSize(bo) + 2) logPos('No space around ${binopString(bo)}', e.pos, severity);
+					if (r.pos.min - l.pos.max < binopSize(bo) + 2) logPos('No space around ${binopString(bo)}', e.pos);
 				case EUnop(uo, post, e2) if (noSpaceAroundUnop):
 					var dist = 0;
 					if (post) dist = e.pos.max - e2.pos.max;
 					else dist = e2.pos.min - e.pos.min;
-					if (dist > unopSize(uo)) logPos('Space around ${unopString(uo)}', e.pos, severity);
+					if (dist > unopSize(uo)) logPos('Space around ${unopString(uo)}', e.pos);
 				case EIf(econd, _, _) if (spaceIfCondition):
 					checkSpaceBetweenExpressions('if', e, econd);
 				case EFor(it, _) if (spaceForLoop):
@@ -90,7 +90,7 @@ class SpacingCheck extends Check {
 
 	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr) {
 		if (e2.pos.min - e1.pos.min < '$name ('.length) {
-			logRange('No space between $name and (', e1.pos.max, e2.pos.min, severity);
+			logRange('No space between $name and (', e1.pos.max, e2.pos.min);
 		}
 	}
 
@@ -99,7 +99,7 @@ class SpacingCheck extends Check {
 		var checkPos = prevExprUntilChecked.lastIndexOf('$name(');
 		if (checkPos > -1) {
 			var fileCheckPos = before.pos.min + checkPos;
-			logRange('No space between $name and (', fileCheckPos, fileCheckPos + '$name('.length, severity);
+			logRange('No space between $name and (', fileCheckPos, fileCheckPos + '$name('.length);
 		}
 	}
 }
