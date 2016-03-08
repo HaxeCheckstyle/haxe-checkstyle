@@ -10,6 +10,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase {
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.CONSTANT_NOT_COUNTED);
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.SINGLE_CHARS);
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.THREE_SPACE);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.OBJECT_FIELDS_ISSUE_116);
 	}
 
 	public function testMultipleStringLiterals() {
@@ -78,6 +79,23 @@ class MultipleStringLiteralsCheckTests {
 		public function new() {
 			a = 'a' + 'a' + 'a' + 'a' + 'a';
 			b = 'b' + 'b' + 'a' + 'b' + 'b';
+		}
+	}";
+
+	public static inline var OBJECT_FIELDS_ISSUE_116:String = "
+	class Test {
+		function foo() {
+			var array = [
+				{ 'field': 1 },
+				{ 'field': 2 },
+				{ 'field': 3 },
+				{ 'field': 4 },
+			];
+			var array = [
+				{ 'field1': 1, 'field2': 2 },
+				{ 'field1': 3, 'field2': 4 },
+				{ 'field1': 5, 'field2': 6 }
+			];
 		}
 	}";
 }
