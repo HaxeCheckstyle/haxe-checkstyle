@@ -37,7 +37,9 @@ class MultipleStringLiteralsCheck extends Check {
 		ALL);
 
 		for (literalToken in allStringLiterals) {
-			if (!filterLiteral(literalToken)) continue;
+			if (!filterLiteral(literalToken.parent)) continue;
+			// skip string object keys issue #116
+			if (literalToken.parent.tok.match(BrOpen)) continue;
 
 			switch (literalToken.tok) {
 				case Const(CString(s)):
