@@ -4,15 +4,17 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
-@name("InterfaceIsType")
-@desc("Checks for interfaces that does not contain any methods but only constants")
-class InterfaceIsTypeCheck extends Check {
+@name("Interface")
+@desc("Checks and enforces interface style (allow properties and methods or just methods")
+class InterfaceCheck extends Check {
 
 	public var allowMarkerInterfaces:Bool;
+	public var allowProperties:Bool;
 
 	public function new() {
 		super(TOKEN);
 		allowMarkerInterfaces = true;
+		allowProperties = false;
 	}
 
 	override function actualRun() {
@@ -22,9 +24,12 @@ class InterfaceIsTypeCheck extends Check {
 			var functions:Array<TokenTree> = intr.filter([Kwd(KwdFunction)], ALL);
 			var vars:Array<TokenTree> = intr.filter([Kwd(KwdVar)], ALL);
 
-			if (allowMarkerInterfaces && functions.length == 0 && vars.length == 0) continue;
+			if (functions.length == 0 && vars.length == 0) {
+				if (allowMarkerInterfaces) continue;
+				else logPos("Marker interfaces are not allowed", intr.pos, severity);
+			}
 
-			if (functions.length == 0) logPos("Interfaces should describe a type and hence have methods", intr.pos, severity);
+			if (!allowProperties && vars.length > 0) logPos("Properties are not allowed in interfaces", intr.pos, severity);
 		}
 	}
 }
