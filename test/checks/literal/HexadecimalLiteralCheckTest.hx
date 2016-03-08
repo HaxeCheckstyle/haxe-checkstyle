@@ -2,35 +2,36 @@ package checks.literal;
 
 import checkstyle.checks.literal.HexadecimalLiteralCheck;
 
-class HexadecimalLiteralCheckTest extends CheckTestCase {
+class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckTests> {
 
 	public function test1() {
-		assertMsg(new HexadecimalLiteralCheck(), HexadecimalLiteralTests.TEST1, 'Bad hexademical literal, use upperCase');
+		assertMsg(new HexadecimalLiteralCheck(), TEST1, 'Bad hexademical literal, use upperCase');
 	}
 
 	public function test2() {
-		assertNoMsg(new HexadecimalLiteralCheck(), HexadecimalLiteralTests.TEST2);
+		assertNoMsg(new HexadecimalLiteralCheck(), TEST2);
 	}
 
 	public function test3() {
 		var check = new HexadecimalLiteralCheck();
 		check.option = "lowerCase";
-		assertMsg(check, HexadecimalLiteralTests.TEST3, 'Bad hexademical literal, use lowerCase');
+		assertMsg(check, TEST3, 'Bad hexademical literal, use lowerCase');
 	}
 }
 
-class HexadecimalLiteralTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract HexadecimalLiteralCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		var clr = 0xffffff;
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		var clr = 0x0033FF;
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"abstractAndClass Test {
 		var clr = 0x0033FF;
 	}";

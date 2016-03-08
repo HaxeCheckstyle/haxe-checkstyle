@@ -2,25 +2,26 @@ package checks.coding;
 
 import checkstyle.checks.coding.SimplifyBooleanExpressionCheck;
 
-class SimplifyBooleanExpressionCheckTest extends CheckTestCase {
+class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanExpressionCheckTests> {
 
 	static inline var MSG_SIMPLIFY:String = 'Boolean expression can be simplified';
 
 	public function testWrongExpression() {
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST1, MSG_SIMPLIFY);
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST2, MSG_SIMPLIFY);
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST3, MSG_SIMPLIFY);
-		assertMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST4, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), TEST1, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), TEST2, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), TEST3, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanExpressionCheck(), TEST4, MSG_SIMPLIFY);
 	}
 
 	public function testCorrectExpression() {
-		assertNoMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST5);
-		assertNoMsg(new SimplifyBooleanExpressionCheck(), SimplifyBooleanExpressionCheckTests.TEST6);
+		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST5);
+		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST6);
 	}
 }
 
-class SimplifyBooleanExpressionCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract SimplifyBooleanExpressionCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;
@@ -28,7 +29,7 @@ class SimplifyBooleanExpressionCheckTests {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;
@@ -36,7 +37,7 @@ class SimplifyBooleanExpressionCheckTests {
 		}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;
@@ -44,7 +45,7 @@ class SimplifyBooleanExpressionCheckTests {
 		}
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;
@@ -52,7 +53,7 @@ class SimplifyBooleanExpressionCheckTests {
 		}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;
@@ -60,7 +61,7 @@ class SimplifyBooleanExpressionCheckTests {
 		}
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	abstractAndClass Test {
 		function test() {
 			var bvar:Bool;

@@ -4,6 +4,7 @@ import haxe.rtti.CType.Typedef;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("MethodName")
@@ -16,8 +17,8 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
-		if (d.flags.indexOf(HInterface) > -1) return;
+		if (ignoreExtern && d.flags.contains(HExtern)) return;
+		if (d.flags.contains(HInterface)) return;
 		checkFields(d.data, decl.toParentType());
 	}
 
@@ -26,7 +27,7 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 	}
 
 	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 
 		var p = decl.toParentType();
 		switch (d.data) {

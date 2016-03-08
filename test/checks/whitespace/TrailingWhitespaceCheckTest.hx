@@ -2,15 +2,16 @@ package checks.whitespace;
 
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 
-class TrailingWhitespaceCheckTest extends CheckTestCase {
+class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckTests> {
 
 	public function test() {
-		assertMsg(new TrailingWhitespaceCheck(), TrailingWhitespaceTests.TEST1, 'Trailing whitespace');
+		assertMsg(new TrailingWhitespaceCheck(), TEST1, 'Trailing whitespace');
 	}
 }
 
-class TrailingWhitespaceTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract TrailingWhitespaceCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		public function test() {} 
 	}";

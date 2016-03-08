@@ -1,5 +1,6 @@
 package token;
 
+import haxe.PosInfos;
 import haxeparser.HaxeLexer;
 
 import haxeparser.Data.Token;
@@ -11,6 +12,10 @@ import checkstyle.token.TokenTreeBuilder;
 
 class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
+	function assertTokenEquals(testCase:TokenTreeBuilderTests, actual:String, ?pos:PosInfos) {
+		assertEquals((testCase : String), actual, pos);
+	}
+	
 	public function testImports() {
 		var builder:TestTokenTreeBuilder = newBuilder (TokenTreeBuilderTests.IMPORT);
 		var root:TokenTree = new TokenTree(null, null);
@@ -21,7 +26,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		builder.testWalkPackageImport(root);
 		checkStreamEmpty(builder);
 
-		assertEquals(TokenTreeBuilderTests.IMPORT_GOLD, treeToString(root));
+		assertTokenEquals(IMPORT_GOLD, treeToString(root));
 	}
 
 	public function testAt() {
@@ -34,7 +39,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		builder.getTokenStream().consumeToken(); // remove comment line
 		checkStreamEmpty(builder);
 
-		assertEquals(TokenTreeBuilderTests.AT_ANNOTATION_GOLD, treeToString(root));
+		assertTokenEquals(AT_ANNOTATION_GOLD, treeToString(root));
 	}
 
 	public function testIf() {
@@ -46,7 +51,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		builder.testWalkIf(root);
 		checkStreamEmpty(builder);
 
-		assertEquals(TokenTreeBuilderTests.IF_GOLD, treeToString(root));
+		assertTokenEquals(IF_GOLD, treeToString(root));
 	}
 
 	function newBuilder(code:String):TestTokenTreeBuilder {
@@ -82,15 +87,16 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 }
 
-class TokenTreeBuilderTests {
-	public static inline var IMPORT:String = "
+@:enum
+abstract TokenTreeBuilderTests(String) to String {
+	var IMPORT = "
 		package checkstyle.checks;
 		import haxeparser.*;
 		import checkstyle.TokenTree;
 		import checkstyle.TokenStream;
 		import checkstyle.TokenTreeBuilder;
 	";
-	public static inline var IMPORT_GOLD:String =
+	var IMPORT_GOLD =
 		'  Kwd(KwdPackage)\n' +
 		'    Const(CIdent(checkstyle))\n' +
 		'      Dot\n' +
@@ -117,14 +123,14 @@ class TokenTreeBuilderTests {
 		'        Const(CIdent(TokenTreeBuilder))\n' +
 		'          Semicolon\n';
 
-	public static inline var AT_ANNOTATION:String = '
+	var AT_ANNOTATION = '
 		@SuppressWarnings("checkstyle:MagicNumber")
 		@SuppressWarnings(["checkstyle:MagicNumber", "checkstyle:AvoidStarImport"])
 		@:from
 		@Before
 		// EOF
 	';
-	public static inline var AT_ANNOTATION_GOLD:String =
+	var AT_ANNOTATION_GOLD =
 		'  At\n' +
 		'    Const(CIdent(SuppressWarnings))\n' +
 		'      POpen\n' +
@@ -145,7 +151,7 @@ class TokenTreeBuilderTests {
 		'  At\n' +
 		'    Const(CIdent(Before))\n';
 
-	public static inline var IF:String = '
+	var IF = '
 		if (tokDef != null) return;
 		if (tokDef != null)
 			return;
@@ -161,7 +167,7 @@ class TokenTreeBuilderTests {
 			return [];
 		}
 	';
-	public static inline var IF_GOLD:String =
+	var IF_GOLD =
 		'  Kwd(KwdIf)\n' +
 		'    POpen\n' +
 		'      Const(CIdent(tokDef))\n' +

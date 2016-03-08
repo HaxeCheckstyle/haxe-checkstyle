@@ -2,24 +2,25 @@ package checks.coding;
 
 import checkstyle.checks.coding.VariableInitialisationCheck;
 
-class VariableInitialisationCheckTest extends CheckTestCase {
+class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisationCheckTests> {
 
 	public function testVar() {
-		assertMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST1,
+		assertMsg(new VariableInitialisationCheck(), TEST1,
 			'Invalid variable initialisation: _a (move initialisation to constructor or function)');
 	}
 
 	public function testStatic() {
-		assertNoMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST2);
+		assertNoMsg(new VariableInitialisationCheck(), TEST2);
 	}
 
 	public function testEnumAbstract() {
-		assertNoMsg(new VariableInitialisationCheck(), VariableInitialisationTests.TEST3);
+		assertNoMsg(new VariableInitialisationCheck(), TEST3);
 	}
 }
 
-class VariableInitialisationTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract VariableInitialisationCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		var _a:Int = 1;
 
@@ -29,14 +30,14 @@ class VariableInitialisationTests {
 		public function new() {}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		static inline var TEST:Int = 1;
 
 		public function new() {}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"@:enum
 	abstract Test(Int) {
 		var VALUE = 0;

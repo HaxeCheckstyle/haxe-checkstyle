@@ -3,42 +3,42 @@ package checks.naming;
 import checkstyle.checks.naming.TypeNameCheck;
 
 // TODO abstract tests
-class TypeNameCheckTest extends CheckTestCase {
+class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 
 	static inline var FORMAT_CLASS:String = "^C[A-Z][a-z]*$";
 
 	public function testCorrectNaming() {
 		var check = new TypeNameCheck ();
-		assertNoMsg(check, TypeNameTests.TEST);
-		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST4);
 	}
 
 	public function testIncorrectNaming() {
 		var check = new TypeNameCheck ();
-		assertMsg(check, TypeNameTests.TEST6, 'Invalid class signature: Test_ (name should be ~/^[A-Z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, TEST6, 'Invalid class signature: Test_ (name should be ~/^[A-Z]+[a-zA-Z0-9]*$/)');
 	}
 
 	public function testFormat() {
 		var check = new TypeNameCheck ();
 		check.format = FORMAT_CLASS;
 
-		assertMsg(check, TypeNameTests.TEST, 'Invalid typedef signature: Test3 (name should be ~/^C[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST1);
-		assertMsg(check, TypeNameTests.TEST2, 'Invalid interface signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
-		assertMsg(check, TypeNameTests.TEST3, 'Invalid typedef signature: TTest (name should be ~/^C[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST4);
-		assertMsg(check, TypeNameTests.TEST5, 'Invalid enum signature: EnumTest (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid typedef signature: Test3 (name should be ~/^C[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Invalid interface signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST3, 'Invalid typedef signature: TTest (name should be ~/^C[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST4);
+		assertMsg(check, TEST5, 'Invalid enum signature: EnumTest (name should be ~/^C[A-Z][a-z]*$/)');
 	}
 
 	public function testIgnoreExtern() {
 		var check = new TypeNameCheck ();
 		check.ignoreExtern = false;
 
-		assertNoMsg(check, TypeNameTests.TEST);
-		assertNoMsg(check, TypeNameTests.TEST4);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST4);
 
 		check.format = FORMAT_CLASS;
-		assertMsg(check, TypeNameTests.TEST4, 'Invalid class signature: TEST1 (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST4, 'Invalid class signature: TEST1 (name should be ~/^C[A-Z][a-z]*$/)');
 	}
 
 	public function testTokenCLASS() {
@@ -46,12 +46,12 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.tokens = [CLASS];
 		check.format = FORMAT_CLASS;
 
-		assertMsg(check, TypeNameTests.TEST, 'Invalid class signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST1);
-		assertNoMsg(check, TypeNameTests.TEST2);
-		assertNoMsg(check, TypeNameTests.TEST3);
-		assertNoMsg(check, TypeNameTests.TEST4);
-		assertNoMsg(check, TypeNameTests.TEST5);
+		assertMsg(check, TEST, 'Invalid class signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 
 	public function testTokenINTERFACE() {
@@ -59,12 +59,12 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.tokens = [INTERFACE];
 		check.format = "^I[A-Z][a-z]*$";
 
-		assertNoMsg(check, TypeNameTests.TEST);
-		assertNoMsg(check, TypeNameTests.TEST1);
-		assertMsg(check, TypeNameTests.TEST2, 'Invalid interface signature: Test (name should be ~/^I[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST3);
-		assertNoMsg(check, TypeNameTests.TEST4);
-		assertNoMsg(check, TypeNameTests.TEST5);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Invalid interface signature: Test (name should be ~/^I[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 
 	public function testTokenENUM() {
@@ -72,12 +72,12 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.tokens = [ENUM];
 		check.format = "^Enum[A-Z][a-z]*$";
 
-		assertMsg(check, TypeNameTests.TEST, 'Invalid enum signature: Test2 (name should be ~/^Enum[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST1);
-		assertNoMsg(check, TypeNameTests.TEST2);
-		assertNoMsg(check, TypeNameTests.TEST3);
-		assertNoMsg(check, TypeNameTests.TEST4);
-		assertNoMsg(check, TypeNameTests.TEST5);
+		assertMsg(check, TEST, 'Invalid enum signature: Test2 (name should be ~/^Enum[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 
 	public function testTokenTYPEDEF() {
@@ -85,17 +85,18 @@ class TypeNameCheckTest extends CheckTestCase {
 		check.tokens = [TYPEDEF];
 		check.format = "^T[A-Z][a-z]*$";
 
-		assertMsg(check, TypeNameTests.TEST, 'Invalid typedef signature: Test3 (name should be ~/^T[A-Z][a-z]*$/)');
-		assertNoMsg(check, TypeNameTests.TEST1);
-		assertNoMsg(check, TypeNameTests.TEST2);
-		assertNoMsg(check, TypeNameTests.TEST3);
-		assertNoMsg(check, TypeNameTests.TEST4);
-		assertNoMsg(check, TypeNameTests.TEST5);
+		assertMsg(check, TEST, 'Invalid typedef signature: Test3 (name should be ~/^T[A-Z][a-z]*$/)');
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 }
 
-class TypeNameTests {
-	public static inline var TEST:String = "
+@:enum
+abstract TypeNameCheckTests(String) to String {
+	var TEST = "
 	class Test {
 		public var a:Int;
 		private var b:Int;
@@ -117,20 +118,20 @@ class TypeNameTests {
 		var count2:String;
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	class CTest {
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	interface Test {
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"typedef TTest = {
 		var Count:Int;
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"extern class TEST1 {
 		var Count:Int = 1;
 		static inline var Count:Int = 1;
@@ -138,12 +139,12 @@ class TypeNameTests {
 		}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"enum EnumTest {
 		VALUE;
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	class Test_ {
 	}";
 }

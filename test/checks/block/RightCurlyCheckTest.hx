@@ -2,7 +2,7 @@ package checks.block;
 
 import checkstyle.checks.block.RightCurlyCheck;
 
-class RightCurlyCheckTest extends CheckTestCase {
+class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 
 	static inline var MSG_ALONE:String = 'Right curly should be alone on a new line';
 	static inline var MSG_NOT_SAME_LINE:String = 'Right curly should not be on same line as left curly';
@@ -10,195 +10,196 @@ class RightCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
-		assertNoMsg(check, RightCurlyTests.ALONE_OR_SINGLELINE_CORRECT);
+		assertNoMsg(check, ALONE_OR_SINGLELINE_CORRECT);
 
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_IF);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_FUNCTION);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_WHILE);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_INTERFACE);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_CLASS);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_SWITCH);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_CASE);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_OBJECT);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_ENUM);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT);
+		assertNoMsg(check, SINGLELINE_IF);
+		assertNoMsg(check, SINGLELINE_FUNCTION);
+		assertNoMsg(check, SINGLELINE_FOR);
+		assertNoMsg(check, SINGLELINE_WHILE);
+		assertNoMsg(check, SINGLELINE_TRY_CATCH);
+		assertNoMsg(check, SINGLELINE_INTERFACE);
+		assertNoMsg(check, SINGLELINE_CLASS);
+		assertNoMsg(check, SINGLELINE_TYPEDEF);
+		assertNoMsg(check, SINGLELINE_SWITCH);
+		assertNoMsg(check, SINGLELINE_CASE);
+		assertNoMsg(check, SINGLELINE_OBJECT);
+		assertNoMsg(check, SINGLELINE_ABSTRACT);
+		assertNoMsg(check, SINGLELINE_ENUM);
+		assertNoMsg(check, SINGLELINE_NESTED_OBJECT);
 
-		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
+		assertNoMsg(check, MACRO_REIFICATION);
 
-		assertNoMsg(check, RightCurlyTests.ALONE_IF);
-		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
-		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
-		assertNoMsg(check, RightCurlyTests.ALONE_TRY_CATCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
-		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
-		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
-		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
-		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
-		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
+		assertNoMsg(check, ALONE_IF);
+		assertNoMsg(check, ALONE_FUNCTION);
+		assertNoMsg(check, ALONE_FOR);
+		assertNoMsg(check, ALONE_WHILE);
+		assertNoMsg(check, ALONE_TRY_CATCH);
+		assertNoMsg(check, ALONE_INTERFACE);
+		assertNoMsg(check, ALONE_CLASS);
+		assertNoMsg(check, ALONE_TYPEDEF);
+		assertNoMsg(check, ALONE_SWITCH);
+		assertNoMsg(check, ALONE_CASE);
+		assertNoMsg(check, ALONE_OBJECT);
+		assertNoMsg(check, ALONE_ABSTRACT);
+		assertNoMsg(check, ALONE_ENUM);
+		assertNoMsg(check, ALONE_NESTED_OBJECT);
 
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 
 	public function testIncorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, MSG_ALONE);
+		assertMsg(check, SAMELINE_IF, MSG_ALONE);
+		assertMsg(check, SAMELINE_TRY_CATCH, MSG_ALONE);
+		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
 	public function testCorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = SAME;
-		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT);
+		assertNoMsg(check, SAMELINE_IF);
+		assertNoMsg(check, SAMELINE_TRY_CATCH);
+		assertNoMsg(check, SAMELINE_NESTED_OBJECT);
 
-		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
-		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
-		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
-		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
-		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
-		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
-		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
-		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
+		assertNoMsg(check, ALONE_FUNCTION);
+		assertNoMsg(check, ALONE_FOR);
+		assertNoMsg(check, ALONE_WHILE);
+		assertNoMsg(check, ALONE_INTERFACE);
+		assertNoMsg(check, ALONE_CLASS);
+		assertNoMsg(check, ALONE_TYPEDEF);
+		assertNoMsg(check, ALONE_SWITCH);
+		assertNoMsg(check, ALONE_CASE);
+		assertNoMsg(check, ALONE_OBJECT);
+		assertNoMsg(check, ALONE_ABSTRACT);
+		assertNoMsg(check, ALONE_ENUM);
+		assertNoMsg(check, ALONE_NESTED_OBJECT);
 
-		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
+		assertNoMsg(check, MACRO_REIFICATION);
 	}
 
 	public function testIncorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = SAME;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_FOR, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
 
-		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
-		assertMsg(check, RightCurlyTests.ALONE_TRY_CATCH, MSG_SAME_LINE);
+		assertMsg(check, ALONE_IF, MSG_SAME_LINE);
+		assertMsg(check, ALONE_TRY_CATCH, MSG_SAME_LINE);
 	}
 
 	public function testCorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = ALONE;
-		assertNoMsg(check, RightCurlyTests.ALONE_IF);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
-		assertNoMsg(check, RightCurlyTests.ALONE_WHILE);
-		assertNoMsg(check, RightCurlyTests.ALONE_FUNCTION);
-		assertNoMsg(check, RightCurlyTests.ALONE_INTERFACE);
-		assertNoMsg(check, RightCurlyTests.ALONE_CLASS);
-		assertNoMsg(check, RightCurlyTests.ALONE_TYPEDEF);
-		assertNoMsg(check, RightCurlyTests.ALONE_SWITCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_CASE);
-		assertNoMsg(check, RightCurlyTests.ALONE_OBJECT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ABSTRACT);
-		assertNoMsg(check, RightCurlyTests.ALONE_ENUM);
-		assertNoMsg(check, RightCurlyTests.ALONE_NESTED_OBJECT);
+		assertNoMsg(check, ALONE_IF);
+		assertNoMsg(check, ALONE_FOR);
+		assertNoMsg(check, ALONE_WHILE);
+		assertNoMsg(check, ALONE_FUNCTION);
+		assertNoMsg(check, ALONE_INTERFACE);
+		assertNoMsg(check, ALONE_CLASS);
+		assertNoMsg(check, ALONE_TYPEDEF);
+		assertNoMsg(check, ALONE_SWITCH);
+		assertNoMsg(check, ALONE_CASE);
+		assertNoMsg(check, ALONE_OBJECT);
+		assertNoMsg(check, ALONE_ABSTRACT);
+		assertNoMsg(check, ALONE_ENUM);
+		assertNoMsg(check, ALONE_NESTED_OBJECT);
 
-		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
+		assertNoMsg(check, MACRO_REIFICATION);
 	}
 
 	public function testIncorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = ALONE;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_FUNCTION, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_FOR, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_CASE, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
-		assertMsg(check, RightCurlyTests.SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_FUNCTION, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_FOR, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
+		assertMsg(check, SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
 
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH, MSG_ALONE);
-		assertMsg(check, RightCurlyTests.SAMELINE_NESTED_OBJECT, MSG_ALONE);
+		assertMsg(check, SAMELINE_IF, MSG_ALONE);
+		assertMsg(check, SAMELINE_TRY_CATCH, MSG_ALONE);
+		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
 	public function testTokenIF() {
 		var check = new RightCurlyCheck();
 		check.tokens = [IF];
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_IF);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_IF);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertNoMsg(check, SINGLELINE_IF);
+		assertNoMsg(check, SINGLELINE_FOR);
+		assertMsg(check, SAMELINE_IF, MSG_ALONE);
+		assertNoMsg(check, SAMELINE_TRY_CATCH);
+		assertNoMsg(check, ALONE_IF);
+		assertNoMsg(check, ALONE_FOR);
 
 		check.option = SAME;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_IF);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
-		assertMsg(check, RightCurlyTests.ALONE_IF, MSG_SAME_LINE);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, SINGLELINE_FOR);
+		assertNoMsg(check, SAMELINE_IF);
+		assertNoMsg(check, SAMELINE_TRY_CATCH);
+		assertMsg(check, ALONE_IF, MSG_SAME_LINE);
+		assertNoMsg(check, ALONE_FOR);
 
 		check.option = ALONE;
-		assertMsg(check, RightCurlyTests.SINGLELINE_IF, MSG_NOT_SAME_LINE);
-		assertNoMsg(check, RightCurlyTests.SINGLELINE_FOR);
-		assertMsg(check, RightCurlyTests.SAMELINE_IF, MSG_ALONE);
-		assertNoMsg(check, RightCurlyTests.SAMELINE_TRY_CATCH);
-		assertNoMsg(check, RightCurlyTests.ALONE_IF);
-		assertNoMsg(check, RightCurlyTests.ALONE_FOR);
+		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, SINGLELINE_FOR);
+		assertMsg(check, SAMELINE_IF, MSG_ALONE);
+		assertNoMsg(check, SAMELINE_TRY_CATCH);
+		assertNoMsg(check, ALONE_IF);
+		assertNoMsg(check, ALONE_FOR);
 	}
 
 	public function testTokenMacroReification() {
 		var check = new RightCurlyCheck();
 		check.tokens = [REIFICATION];
-		assertNoMsg(check, RightCurlyTests.MACRO_REIFICATION);
+		assertNoMsg(check, MACRO_REIFICATION);
 
 		check.option = SAME;
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
+		assertMsg(check, MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 
 		check.option = ALONE;
-		assertMsg(check, RightCurlyTests.MACRO_REIFICATION, MSG_NOT_SAME_LINE);
+		assertMsg(check, MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 	}
 
 	public function testArrayComprehension() {
 		var check = new RightCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION];
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
 		check.option = SAME;
-		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
 		check.option = ALONE;
-		assertMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
-		assertNoMsg(check, RightCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 }
 
-class RightCurlyTests {
-	public static inline var ALONE_OR_SINGLELINE_CORRECT:String = "
+@:enum
+abstract RightCurlyCheckTests(String) to String {
+	var ALONE_OR_SINGLELINE_CORRECT = "
 	class Test {
 		function test() {
 			if (true) { return; }
@@ -249,14 +250,14 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_IF:String = "
+	var SINGLELINE_IF = "
 	class Test {
 		function test() {
 			if (true) { return; } else { return; }
 		}
 	}";
 
-	public static inline var SAMELINE_IF:String = "
+	var SAMELINE_IF = "
 	class Test {
 		function test() {
 			if (true) {
@@ -267,7 +268,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ALONE_IF:String = "
+	var ALONE_IF = "
 	class Test {
 		function test() {
 			if (true) {
@@ -279,26 +280,26 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_FUNCTION:String = "
+	var SINGLELINE_FUNCTION = "
 	class Test {
 		function test() { trace ('test'); }
 	}";
 
-	public static inline var ALONE_FUNCTION:String = "
+	var ALONE_FUNCTION = "
 	class Test {
 		function test() {
 			trace ('test');
 		}
 	}";
 
-	public static inline var SINGLELINE_FOR:String = "
+	var SINGLELINE_FOR = "
 	class Test {
 		function test() {
 			for (i in 0...100) { trace ('$i'); }
 		}
 	}";
 
-	public static inline var ALONE_FOR:String = "
+	var ALONE_FOR = "
 	class Test {
 		function test() {
 			for (i in 0...100) {
@@ -307,14 +308,14 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_WHILE:String = "
+	var SINGLELINE_WHILE = "
 	class Test {
 		function test() {
 			while (true) { trace ('test'); }
 		}
 	}";
 
-	public static inline var ALONE_WHILE:String = "
+	var ALONE_WHILE = "
 	class Test {
 		function test() {
 			while (true) {
@@ -323,14 +324,14 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_TRY_CATCH:String = "
+	var SINGLELINE_TRY_CATCH = "
 	class Test {
 		function test() {
 			try { trace ('test'); } catch (e:Dynamic) {}
 		}
 	}";
 
-	public static inline var SAMELINE_TRY_CATCH:String = "
+	var SAMELINE_TRY_CATCH = "
 	class Test {
 		function test() {
 			try {
@@ -340,7 +341,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ALONE_TRY_CATCH:String = "
+	var ALONE_TRY_CATCH = "
 	class Test {
 		function test() {
 			try {
@@ -351,41 +352,41 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_INTERFACE:String = "
+	var SINGLELINE_INTERFACE = "
 	interface Test { function test(); }";
 
-	public static inline var ALONE_INTERFACE:String = "
+	var ALONE_INTERFACE = "
 	interface Test {
 		function test();
 	}";
 
-	public static inline var SINGLELINE_CLASS:String = "
+	var SINGLELINE_CLASS = "
 	class Test { function test() {}; }";
 
-	public static inline var ALONE_CLASS:String = "
+	var ALONE_CLASS = "
 	class Test {
 		function test() {
 		};
 	}";
 
-	public static inline var SINGLELINE_TYPEDEF:String = "
+	var SINGLELINE_TYPEDEF = "
 	typedef Test = { x:Int, y:Int, z:Int }";
 
-	public static inline var ALONE_TYPEDEF:String = "
+	var ALONE_TYPEDEF = "
 	typedef Test = {
 		x:Int,
 		y:Int,
 		z:Int
 	}";
 
-	public static inline var SINGLELINE_SWITCH:String = "
+	var SINGLELINE_SWITCH = "
 	class Test {
 		function test(val:Bool) {
 			switch (val) { case true: return; default: trace(val); }
 		}
 	}";
 
-	public static inline var ALONE_SWITCH:String = "
+	var ALONE_SWITCH = "
 	class Test {
 		function test() {
 			switch (val) {
@@ -397,7 +398,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_CASE:String = "
+	var SINGLELINE_CASE = "
 	class Test {
 		function test(val:Bool) {
 			switch (val) {
@@ -408,7 +409,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ALONE_CASE:String = "
+	var ALONE_CASE = "
 	class Test {
 		function test() {
 			switch (val) {
@@ -425,14 +426,14 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_OBJECT:String = "
+	var SINGLELINE_OBJECT = "
 	class Test {
 		function test(val:Bool) {
 			var p = { x:100, y: 10, z: 2 };
 		}
 	}";
 
-	public static inline var ALONE_OBJECT:String = "
+	var ALONE_OBJECT = "
 	class Test {
 		function test() {
 			var p = {
@@ -443,10 +444,10 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_ABSTRACT:String = "
+	var SINGLELINE_ABSTRACT = "
 	abstract Test(String) { @:from public static function fromString(value:String) { return new Test('Hello $value'); } }";
 
-	public static inline var ALONE_ABSTRACT:String = "
+	var ALONE_ABSTRACT = "
 	abstract Test(String) {
 		@:from
 		public static function fromString(value:String) {
@@ -454,10 +455,10 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SINGLELINE_ENUM:String = "
+	var SINGLELINE_ENUM = "
 	enum Test { Monday; Tuesday; Wednesday; Thursday; Friday; Weekend(day:String); }";
 
-	public static inline var ALONE_ENUM:String = "
+	var ALONE_ENUM = "
 	enum Test {
 		Monday;
 		Tuesday;
@@ -467,7 +468,7 @@ class RightCurlyTests {
 		Weekend(day:String);
 	}";
 
-	public static inline var SINGLELINE_NESTED_OBJECT:String = "
+	var SINGLELINE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
 			var l = {
@@ -480,7 +481,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var SAMELINE_NESTED_OBJECT:String = "
+	var SAMELINE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
 			var l = {
@@ -508,7 +509,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ALONE_NESTED_OBJECT:String = "
+	var ALONE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
 			var l = {
@@ -538,7 +539,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var MACRO_REIFICATION:String = "
+	var MACRO_REIFICATION = "
 	class Test {
 		public function test(val:Int) {
 			var str = 'Hello, world';
@@ -547,7 +548,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ARRAY_COMPREHENSION_ISSUE_114:String = "
+	var ARRAY_COMPREHENSION_ISSUE_114 = "
 	class Test {
 		public function foo() {
 			[for (i in 0...10) {index:i}];
@@ -555,7 +556,7 @@ class RightCurlyTests {
 		}
 	}";
 
-	public static inline var ARRAY_COMPREHENSION_2_ISSUE_114:String = "
+	var ARRAY_COMPREHENSION_2_ISSUE_114 = "
 	class Test {
 		public function foo() {
 			[for (i in 0...10) {

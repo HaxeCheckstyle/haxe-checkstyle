@@ -4,6 +4,8 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("TypeName")
 @desc("Checks on naming conventions of types (classes, interfaces, enums, typedefs)")
 class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
@@ -14,9 +16,9 @@ class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(HExtern)) return;
 
-		var isInterface:Bool = (d.flags.indexOf(HInterface) > -1);
+		var isInterface:Bool = (d.flags.contains(HInterface));
 
 		if (!hasToken(INTERFACE) && isInterface) return;
 		if (!hasToken(CLASS) && !isInterface) return;
@@ -30,7 +32,7 @@ class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 
 	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 
 		matchTypeName("enum", d.name, pos);
 	}
@@ -42,7 +44,7 @@ class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 
 	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 
 		matchTypeName("typedef", d.name, pos);
 	}

@@ -6,6 +6,8 @@ import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("EmptyBlock")
 @desc("Checks for empty blocks")
 class EmptyBlockCheck extends Check {
@@ -34,7 +36,7 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function hasToken(token:EmptyBlockCheckToken):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {

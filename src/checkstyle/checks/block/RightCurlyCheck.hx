@@ -6,6 +6,8 @@ import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("RightCurly")
 @desc("Checks for placement of right curly braces")
 class RightCurlyCheck extends Check {
@@ -34,7 +36,7 @@ class RightCurlyCheck extends Check {
 	}
 
 	function hasToken(token:RightCurlyCheckToken):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {

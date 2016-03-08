@@ -6,6 +6,8 @@ import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("WhitespaceAfter")
 @desc("Checks for whitespace after a token")
 class WhitespaceAfterCheck extends Check {
@@ -21,7 +23,7 @@ class WhitespaceAfterCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	@SuppressWarnings(["checkstyle:CyclomaticComplexity", "checkstyle:MethodLength"])

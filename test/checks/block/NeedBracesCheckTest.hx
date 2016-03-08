@@ -2,7 +2,7 @@ package checks.block;
 
 import checkstyle.checks.block.NeedBracesCheck;
 
-class NeedBracesCheckTest extends CheckTestCase {
+class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 
 	static inline var PREFIX:String = 'No braces used for body of ';
 	static inline var MSG_IF:String = PREFIX + '"if"';
@@ -17,159 +17,160 @@ class NeedBracesCheckTest extends CheckTestCase {
 
 	public function testCorrectBraces() {
 		var check = new NeedBracesCheck ();
-		assertNoMsg(check, NeedBracesTests.TEST);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertNoMsg(check, NeedBracesTests.TEST9);
-		assertNoMsg(check, NeedBracesTests.TEST10);
-		assertNoMsg(check, NeedBracesTests.TEST12);
-		assertNoMsg(check, NeedBracesTests.TEST13);
-		assertNoMsg(check, NeedBracesTests.TEST14);
-		assertNoMsg(check, NeedBracesTests.INTERFACE_DEF);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, INTERFACE_DEF);
 	}
 
 	public function testWrongBraces() {
 		var check = new NeedBracesCheck ();
-		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
-		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
-		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
+		assertMsg(check, TEST1, MSG_IF);
+		assertMsg(check, TEST2, MSG_ELSE);
+		assertMsg(check, TEST4, MSG_IF);
+		assertMsg(check, TEST6, MSG_FOR);
+		assertMsg(check, TEST7, MSG_WHILE);
+		assertMsg(check, TEST11, MSG_IF);
 	}
 
 	public function testNoAllowSingleLine() {
 		var check = new NeedBracesCheck ();
 		check.allowSingleLineStatement = false;
 
-		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_WHILE);
-		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
-		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertMsg(check, NeedBracesTests.TEST9, MSG_SAME_LINE_FOR);
-		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
-		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
-		assertNoMsg(check, NeedBracesTests.INTERFACE_DEF);
+		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
+		assertMsg(check, TEST1, MSG_IF);
+		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST3);
+		assertMsg(check, TEST4, MSG_IF);
+		assertNoMsg(check, TEST5);
+		assertMsg(check, TEST6, MSG_FOR);
+		assertMsg(check, TEST7, MSG_WHILE);
+		assertNoMsg(check, TEST8);
+		assertMsg(check, TEST9, MSG_SAME_LINE_FOR);
+		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST12, MSG_ELSE);
+		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST14, MSG_ELSE);
+		assertNoMsg(check, INTERFACE_DEF);
 	}
 
 	public function testTokenFor() {
 		var check = new NeedBracesCheck ();
 		check.tokens = [FOR];
 
-		assertNoMsg(check, NeedBracesTests.TEST);
-		assertNoMsg(check, NeedBracesTests.TEST1);
-		assertNoMsg(check, NeedBracesTests.TEST2);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertNoMsg(check, NeedBracesTests.TEST4);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertMsg(check, NeedBracesTests.TEST6, MSG_FOR);
-		assertNoMsg(check, NeedBracesTests.TEST7);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertNoMsg(check, NeedBracesTests.TEST9);
-		assertNoMsg(check, NeedBracesTests.TEST10);
-		assertNoMsg(check, NeedBracesTests.TEST11);
-		assertNoMsg(check, NeedBracesTests.TEST12);
-		assertNoMsg(check, NeedBracesTests.TEST13);
-		assertNoMsg(check, NeedBracesTests.TEST14);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertMsg(check, TEST6, MSG_FOR);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST11);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_FOR);
-		assertMsg(check, NeedBracesTests.TEST9, MSG_SAME_LINE_FOR);
+		assertMsg(check, TEST, MSG_SAME_LINE_FOR);
+		assertMsg(check, TEST9, MSG_SAME_LINE_FOR);
 	}
 
 	public function testTokenIf() {
 		var check = new NeedBracesCheck ();
 		check.tokens = [IF];
 
-		assertNoMsg(check, NeedBracesTests.TEST);
-		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertNoMsg(check, NeedBracesTests.TEST6);
-		assertNoMsg(check, NeedBracesTests.TEST7);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertNoMsg(check, NeedBracesTests.TEST9);
-		assertNoMsg(check, NeedBracesTests.TEST10);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
-		assertNoMsg(check, NeedBracesTests.TEST13);
-		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
+		assertNoMsg(check, TEST);
+		assertMsg(check, TEST1, MSG_IF);
+		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST3);
+		assertMsg(check, TEST4, MSG_IF);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertMsg(check, TEST11, MSG_IF);
+		assertMsg(check, TEST12, MSG_ELSE);
+		assertNoMsg(check, TEST13);
+		assertMsg(check, TEST14, MSG_ELSE);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_IF);
-		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
+		assertMsg(check, TEST, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST14, MSG_ELSE);
 	}
 
 	public function testTokenElseIf() {
 		var check = new NeedBracesCheck ();
 		check.tokens = [IF, ELSE_IF];
 
-		assertNoMsg(check, NeedBracesTests.TEST);
-		assertMsg(check, NeedBracesTests.TEST1, MSG_IF);
-		assertMsg(check, NeedBracesTests.TEST2, MSG_ELSE);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertMsg(check, NeedBracesTests.TEST4, MSG_IF);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertNoMsg(check, NeedBracesTests.TEST6);
-		assertNoMsg(check, NeedBracesTests.TEST7);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertNoMsg(check, NeedBracesTests.TEST9);
-		assertNoMsg(check, NeedBracesTests.TEST10);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_IF);
-		assertNoMsg(check, NeedBracesTests.TEST12);
-		assertNoMsg(check, NeedBracesTests.TEST13);
-		assertNoMsg(check, NeedBracesTests.TEST14);
+		assertNoMsg(check, TEST);
+		assertMsg(check, TEST1, MSG_IF);
+		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST3);
+		assertMsg(check, TEST4, MSG_IF);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertMsg(check, TEST11, MSG_IF);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_IF);
-		assertMsg(check, NeedBracesTests.TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, NeedBracesTests.TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST12, MSG_ELSE);
-		assertMsg(check, NeedBracesTests.TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, NeedBracesTests.TEST14, MSG_ELSE);
+		assertMsg(check, TEST, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST12, MSG_ELSE);
+		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
+		assertMsg(check, TEST14, MSG_ELSE);
 	}
 
 	public function testTokenWhile() {
 		var check = new NeedBracesCheck ();
 		check.tokens = [WHILE];
 
-		assertNoMsg(check, NeedBracesTests.TEST);
-		assertNoMsg(check, NeedBracesTests.TEST1);
-		assertNoMsg(check, NeedBracesTests.TEST2);
-		assertNoMsg(check, NeedBracesTests.TEST3);
-		assertNoMsg(check, NeedBracesTests.TEST4);
-		assertNoMsg(check, NeedBracesTests.TEST5);
-		assertNoMsg(check, NeedBracesTests.TEST6);
-		assertMsg(check, NeedBracesTests.TEST7, MSG_WHILE);
-		assertNoMsg(check, NeedBracesTests.TEST8);
-		assertNoMsg(check, NeedBracesTests.TEST9);
-		assertNoMsg(check, NeedBracesTests.TEST10);
-		assertNoMsg(check, NeedBracesTests.TEST11);
-		assertNoMsg(check, NeedBracesTests.TEST12);
-		assertNoMsg(check, NeedBracesTests.TEST13);
-		assertNoMsg(check, NeedBracesTests.TEST14);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertMsg(check, TEST7, MSG_WHILE);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST11);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, NeedBracesTests.TEST, MSG_SAME_LINE_WHILE);
+		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
 	}
 }
 
-class NeedBracesTests {
-	public static inline var TEST:String = "
+@:enum
+abstract NeedBracesCheckTests(String) to String {
+	var TEST = "
 	class Test {
 		function test() {
 			if (true) return;
@@ -206,7 +207,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	class Test {
 		function test() {
 			if (true)
@@ -214,7 +215,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	class Test {
 		function test() {
 			if (true) return;
@@ -223,7 +224,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	class Test {
 		function test() {
 			if (true) {
@@ -235,7 +236,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	class Test {
 		function test() {
 			if (true) return { x:1,
@@ -244,7 +245,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	class Test {
 		function test() {
 			for (i in 0...10) {
@@ -253,7 +254,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	class Test {
 		function test() {
 			for (i in 0...10) if (i < 5) {
@@ -262,7 +263,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST7:String = "
+	var TEST7 = "
 	class Test {
 		function test() {
 			while (true)
@@ -270,7 +271,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST8:String = "
+	var TEST8 = "
 	class Test {
 		function test() {
 			while (true) {
@@ -279,21 +280,21 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST9:String = "
+	var TEST9 = "
 	class Test {
 		function test() {
 			for (i in 0....10) return i;
 		}
 	}";
 
-	public static inline var TEST10:String = "
+	var TEST10 = "
 	class Test {
 		function test() {
 			if (true) return;
 		}
 	}";
 
-	public static inline var TEST11:String = "
+	var TEST11 = "
 	class Test {
 		function test() {
 			if (true)
@@ -302,7 +303,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST12:String = "
+	var TEST12 = "
 	class Test {
 		function test() {
 			if (true) return;
@@ -312,7 +313,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST13:String = "
+	var TEST13 = "
 	class Test {
 		function test() {
 			if (true) return;
@@ -320,7 +321,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var TEST14:String = "
+	var TEST14 = "
 	class Test {
 		function test() {
 			if (condition) {
@@ -331,7 +332,7 @@ class NeedBracesTests {
 		}
 	}";
 
-	public static inline var INTERFACE_DEF:String = "
+	var INTERFACE_DEF = "
 	interface Test {
 		function test();
 	}";

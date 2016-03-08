@@ -3,6 +3,7 @@ package checkstyle.checks.naming;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("MemberName")
@@ -16,13 +17,13 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(CLASS)) return;
-		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(HExtern)) return;
 		checkFields(d.data, decl.toParentType());
 	}
 
 	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 		if (!hasSuppressWarningsMeta(d.meta)) checkEnumFields(d.data);
 	}
 
@@ -33,7 +34,7 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 
 		switch (d.data) {
 			case TAnonymous(f):

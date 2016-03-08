@@ -2,47 +2,48 @@ package checks.whitespace;
 
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
-class IndentationCharacterCheckTest extends CheckTestCase {
+class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests> {
 
 	public function testWrongIndentation() {
-		assertMsg(new IndentationCharacterCheck(), IndentationTests.TEST1, 'Wrong indentation character (should be tab)');
+		assertMsg(new IndentationCharacterCheck(), TEST1, 'Wrong indentation character (should be tab)');
 	}
 
 	public function testCorrectIndentation() {
-		assertNoMsg(new IndentationCharacterCheck(), IndentationTests.TEST2);
+		assertNoMsg(new IndentationCharacterCheck(), TEST2);
 	}
 
 	public function testConfigurableIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.character = SPACE;
 
-		assertMsg(check, IndentationTests.TEST3, 'Wrong indentation character (should be space)');
+		assertMsg(check, TEST3, 'Wrong indentation character (should be space)');
 	}
 
 	public function testMultilineIfIndentation() {
-		assertNoMsg(new IndentationCharacterCheck(), IndentationTests.TEST4);
+		assertNoMsg(new IndentationCharacterCheck(), TEST4);
 	}
 }
 
-class IndentationTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract IndentationCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		 var _a:Int;
 		public function new() {}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"class Test {
 		var _a:Int;
 		public function new() {}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"class Test {
 		public function new() {}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"class Test {
 		public function new() {
 			if (actionType == 'STREET' ||

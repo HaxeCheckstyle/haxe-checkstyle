@@ -2,33 +2,34 @@ package checks.coding;
 
 import checkstyle.checks.coding.NestedTryDepthCheck;
 
-class NestedTryDepthCheckTest extends CheckTestCase {
+class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 
 	public function testDefault() {
 		var check = new NestedTryDepthCheck();
-		assertNoMsg(check, NestedTryDepthTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
 
 	public function testDefaultTooMany() {
 		var check = new NestedTryDepthCheck();
-		assertMsg(check, NestedTryDepthTests.TEST2, 'Nested try depth is 2 (max allowed is 1)');
+		assertMsg(check, TEST2, 'Nested try depth is 2 (max allowed is 1)');
 	}
 
 	public function testMaxParameter() {
 		var check = new NestedTryDepthCheck();
 		check.max = 2;
 
-		assertNoMsg(check, NestedTryDepthTests.TEST1);
-		assertNoMsg(check, NestedTryDepthTests.TEST2);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
 
 		check.max = 0;
-		assertNoMsg(check, NestedTryDepthTests.TEST1);
-		assertMsg(check, NestedTryDepthTests.TEST2, 'Nested try depth is 1 (max allowed is 0)');
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Nested try depth is 1 (max allowed is 0)');
 	}
 }
 
-class NestedTryDepthTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract NestedTryDepthCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		public function test() {
 			try { } catch(e:String) { }    // level 0
@@ -61,7 +62,7 @@ class NestedTryDepthTests {
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function test1() {
 			try {                           // level 0

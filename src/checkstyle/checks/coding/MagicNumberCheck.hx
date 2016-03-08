@@ -4,6 +4,8 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("MagicNumber")
 @desc("Checks that there are no magic numbers")
 class MagicNumberCheck extends Check {
@@ -41,11 +43,11 @@ class MagicNumberCheck extends Check {
 			switch (numberToken.tok) {
 				case Const(CInt(n)):
 					var number:Int = Std.parseInt(n);
-					if (ignoreNumbers.indexOf(number) >= 0) continue;
+					if (ignoreNumbers.contains(number)) continue;
 					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, severity);
 				case Const(CFloat(n)):
 					var number:Float = Std.parseFloat(n);
-					if (ignoreNumbers.indexOf(number) >= 0) continue;
+					if (ignoreNumbers.contains(number)) continue;
 					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos, severity);
 				default:
 			}

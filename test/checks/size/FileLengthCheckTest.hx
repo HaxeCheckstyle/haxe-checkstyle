@@ -3,32 +3,33 @@ package checks.size;
 import checkstyle.checks.size.FileLengthCheck;
 
 @SuppressWarnings('checkstyle:MagicNumber')
-class FileLengthCheckTest extends CheckTestCase {
+class FileLengthCheckTest extends CheckTestCase<FileLengthCheckTests> {
 
 	public function testCorrectLineCount() {
-		assertNoMsg(new FileLengthCheck(), FileLengthTests.TEST2000);
-		assertNoMsg(new FileLengthCheck(), FileLengthTests.TEST41);
+		assertNoMsg(new FileLengthCheck(), TEST2000);
+		assertNoMsg(new FileLengthCheck(), TEST41);
 	}
 
 	public function testDefaultFileLength() {
-		assertMsg(new FileLengthCheck(), FileLengthTests.TEST2001, 'Too many lines in file (> 2000)');
+		assertMsg(new FileLengthCheck(), TEST2001, 'Too many lines in file (> 2000)');
 	}
 
 	public function testConfigurableFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
-		assertMsg(check, FileLengthTests.TEST41, 'Too many lines in file (> 40)');
+		assertMsg(check, TEST41, 'Too many lines in file (> 40)');
 	}
 
 	public function testSupressFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
-		assertNoMsg(check, FileLengthTests.TEST42);
+		assertNoMsg(check, TEST42);
 	}
 }
 
-class FileLengthTests {
-	public static inline var TEST2001:String = "\n
+@:enum
+abstract FileLengthCheckTests(String) to String {
+	var TEST2001 = "\n
 	class Test {
 		public function new() {
 		}
@@ -75,7 +76,7 @@ class FileLengthTests {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n             // 2000
 	}";                                                                                                        // 2001
 
-	public static inline var TEST2000:String = "\n
+	var TEST2000 = "\n
 	class Test {
 		public function new() {
 		}
@@ -122,7 +123,7 @@ class FileLengthTests {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n               // 1999
 	}";                                                                                                        // 2000
 
-	public static inline var TEST41:String = "\n
+	var TEST41 = "\n
 	class Test {
 		public function new() {
 		}
@@ -130,7 +131,7 @@ class FileLengthTests {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n                                // 40
 	}";
 
-	public static inline var TEST42:String = "\n
+	var TEST42 = "\n
 	@SuppressWarnings('checkstyle:FileLength')
 	class Test {
 		public function new() {

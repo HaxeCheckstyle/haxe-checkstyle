@@ -2,33 +2,34 @@ package checks.coding;
 
 import checkstyle.checks.coding.NestedIfDepthCheck;
 
-class NestedIfDepthCheckTest extends CheckTestCase {
+class NestedIfDepthCheckTest extends CheckTestCase<NestedIfDepthCheckTests> {
 
 	public function testDefault() {
 		var check = new NestedIfDepthCheck();
-		assertNoMsg(check, NestedIfDepthTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
 
 	public function testDefaultTooMany() {
 		var check = new NestedIfDepthCheck();
-		assertMsg(check, NestedIfDepthTests.TEST2, 'Nested if-else depth is 2 (max allowed is 1)');
+		assertMsg(check, TEST2, 'Nested if-else depth is 2 (max allowed is 1)');
 	}
 
 	public function testMaxParameter() {
 		var check = new NestedIfDepthCheck();
 		check.max = 2;
 
-		assertNoMsg(check, NestedIfDepthTests.TEST1);
-		assertNoMsg(check, NestedIfDepthTests.TEST2);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
 
 		check.max = 0;
-		assertNoMsg(check, NestedIfDepthTests.TEST1);
-		assertMsg(check, NestedIfDepthTests.TEST2, 'Nested if-else depth is 1 (max allowed is 0)');
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Nested if-else depth is 1 (max allowed is 0)');
 	}
 }
 
-class NestedIfDepthTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract NestedIfDepthCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		public function test(param:Int):Void {
 			if (param == 0) return 0;                   // level 0
@@ -55,7 +56,7 @@ class NestedIfDepthTests {
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function test1(param:Int) {
 			if (param == 1) {                           // level 0

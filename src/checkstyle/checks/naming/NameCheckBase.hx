@@ -4,6 +4,8 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @ignore("Base class for name checks")
 class NameCheckBase<T> extends Check {
 
@@ -21,7 +23,7 @@ class NameCheckBase<T> extends Check {
 	}
 
 	function hasToken(token:T):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {

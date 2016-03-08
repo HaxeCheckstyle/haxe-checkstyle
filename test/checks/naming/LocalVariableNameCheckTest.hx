@@ -2,46 +2,47 @@ package checks.naming;
 
 import checkstyle.checks.naming.LocalVariableNameCheck;
 
-class LocalVariableNameCheckTest extends CheckTestCase {
+class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTests> {
 
 	public function testCorrectNaming() {
 		var check = new LocalVariableNameCheck ();
-		assertNoMsg(check, LocalVariableNameTests.TEST);
-		assertNoMsg(check, LocalVariableNameTests.TEST4);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
 		var check = new LocalVariableNameCheck ();
 		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
-		assertMsg(check, LocalVariableNameTests.TEST1, message);
-		assertMsg(check, LocalVariableNameTests.TEST3, message);
+		assertMsg(check, TEST1, message);
+		assertMsg(check, TEST3, message);
 	}
 
 	public function testIgnoreExtern() {
 		var check = new LocalVariableNameCheck ();
 		check.ignoreExtern = false;
 
-		assertNoMsg(check, LocalVariableNameTests.TEST);
+		assertNoMsg(check, TEST);
 
 		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
-		assertMsg(check, LocalVariableNameTests.TEST1, message);
-		assertMsg(check, LocalVariableNameTests.TEST3, message);
-		assertMsg(check, LocalVariableNameTests.TEST4, message);
+		assertMsg(check, TEST1, message);
+		assertMsg(check, TEST3, message);
+		assertMsg(check, TEST4, message);
 	}
 
 	public function testFormat() {
 		var check = new LocalVariableNameCheck ();
 		check.format = "^[A-Za-z_]*$";
 
-		assertMsg(check, LocalVariableNameTests.TEST, 'Invalid local var signature: count2 (name should be ~/${check.format}/)');
-		assertNoMsg(check, LocalVariableNameTests.TEST1);
-		assertNoMsg(check, LocalVariableNameTests.TEST3);
-		assertNoMsg(check, LocalVariableNameTests.TEST4);
+		assertMsg(check, TEST, 'Invalid local var signature: count2 (name should be ~/${check.format}/)');
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
 	}
 }
 
-class LocalVariableNameTests {
-	public static inline var TEST:String = "
+@:enum
+abstract LocalVariableNameCheckTests(String) to String {
+	var TEST = "
 	class Test {
 		public function test() {
 			var a:Int;
@@ -74,21 +75,21 @@ class LocalVariableNameTests {
 		};
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	class Test {
 		public function test() {
 			var Count:Int = 1;
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"typedef Test = {
 		public function test() {
 			var Count:Int;
 		}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"extern class Test {
 		public function test() {
 			var Count:Int = 1;

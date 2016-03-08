@@ -2,20 +2,20 @@ package checks.naming;
 
 import checkstyle.checks.naming.ParameterNameCheck;
 
-class ParameterNameCheckTest extends CheckTestCase {
+class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 
 	public function testCorrectNaming() {
 		var check = new ParameterNameCheck ();
-		assertNoMsg(check, ParameterNameTests.TEST);
-		assertNoMsg(check, ParameterNameTests.TEST2);
-		assertNoMsg(check, ParameterNameTests.TEST4);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
 		var check = new ParameterNameCheck ();
-		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST5, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
+		assertMsg(check, TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, TEST3, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
+		assertMsg(check, TEST5, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
 	}
 
 	public function testIgnoreExtern() {
@@ -23,29 +23,30 @@ class ParameterNameCheckTest extends CheckTestCase {
 		check.ignoreExtern = false;
 
 		var paramNameMessage = 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)';
-		assertNoMsg(check, ParameterNameTests.TEST);
-		assertNoMsg(check, ParameterNameTests.TEST2);
-		assertMsg(check, ParameterNameTests.TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST3, paramNameMessage);
-		assertMsg(check, ParameterNameTests.TEST4, 'Invalid parameter name signature: Param1 (name should be ~/${check.format}/)');
-		assertMsg(check, ParameterNameTests.TEST5, paramNameMessage);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST2);
+		assertMsg(check, TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, TEST3, paramNameMessage);
+		assertMsg(check, TEST4, 'Invalid parameter name signature: Param1 (name should be ~/${check.format}/)');
+		assertMsg(check, TEST5, paramNameMessage);
 	}
 
 	public function testFormat() {
 		var check = new ParameterNameCheck ();
 		check.format = "^[A-Z][a-zA-Z]*$";
 
-		assertMsg(check, ParameterNameTests.TEST, 'Invalid parameter name signature: paramName (name should be ~/${check.format}/)');
-		assertNoMsg(check, ParameterNameTests.TEST2);
-		assertNoMsg(check, ParameterNameTests.TEST1);
-		assertMsg(check, ParameterNameTests.TEST3, 'Invalid parameter name signature: param1 (name should be ~/${check.format}/)');
-		assertNoMsg(check, ParameterNameTests.TEST4);
-		assertNoMsg(check, ParameterNameTests.TEST5);
+		assertMsg(check, TEST, 'Invalid parameter name signature: paramName (name should be ~/${check.format}/)');
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST3, 'Invalid parameter name signature: param1 (name should be ~/${check.format}/)');
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 }
 
-class ParameterNameTests {
-	public static inline var TEST:String = "
+@:enum
+abstract ParameterNameCheckTests(String) to String {
+	var TEST = "
 	abstractAndClass Test {
 		function test(param1:Int, paramName:String) {
 		}
@@ -66,31 +67,31 @@ class ParameterNameTests {
 		}
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	abstractAndClass Test {
 		public function test(Count:Int) {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	abstractAndClass Test {
 		public function test() {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"typedef Test = {
 		function test(param1:Int, ParamName:String) {
 		}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"extern class Test {
 		public function test(Param1:Int) {
 		}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"enum Test {
 		VALUE(ParamName:String);
 	}";

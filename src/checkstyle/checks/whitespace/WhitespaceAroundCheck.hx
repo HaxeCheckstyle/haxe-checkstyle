@@ -7,6 +7,8 @@ import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("WhitespaceAround")
 @desc("Checks that a token is surrounded by whitespace")
 class WhitespaceAroundCheck extends Check {
@@ -52,7 +54,7 @@ class WhitespaceAroundCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	@SuppressWarnings(["checkstyle:CyclomaticComplexity", "checkstyle:MethodLength"])

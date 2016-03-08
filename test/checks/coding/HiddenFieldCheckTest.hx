@@ -3,59 +3,60 @@ package checks.coding;
 import checkstyle.checks.coding.HiddenFieldCheck;
 
 @SuppressWarnings('checkstyle:MultipleStringLiterals')
-class HiddenFieldCheckTest extends CheckTestCase {
+class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 
 	public function testCorrectHidden() {
 		var check = new HiddenFieldCheck();
-		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HIDDEN_FIELDS_MAIN);
 	}
 
 	public function testDetectHiddenFields() {
 		var check = new HiddenFieldCheck();
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsInConstructor() {
 		var check = new HiddenFieldCheck();
 		check.ignoreConstructorParameter = false;
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
-		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR, 'Parameter definition of "field1" masks member of same name');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR, 'Variable definition of "field2" masks member of same name');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertNoMsg(check, HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, NO_HIDDEN_FIELDS);
+		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR, 'Variable definition of "field2" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsInSetter() {
 		var check = new HiddenFieldCheck();
 		check.ignoreSetter = false;
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN);
-		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER, 'Parameter definition of "field2" masks member of same name');
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertNoMsg(check, HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertMsg(check, HIDDEN_FIELDS_SETTER, 'Parameter definition of "field2" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsiRegEx() {
 		var check = new HiddenFieldCheck();
 		check.ignoreFormat = "^test$";
-		assertNoMsg(check, HiddenFieldCheckTests.NO_HIDDEN_FIELDS);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_CONSTRUCTOR_VAR);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_SETTER);
-		assertNoMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_FUNC);
-		assertMsg(check, HiddenFieldCheckTests.HIDDEN_FIELDS_MAIN, 'Variable definition of "field2" masks member of same name');
+		assertNoMsg(check, NO_HIDDEN_FIELDS);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HIDDEN_FIELDS_SETTER);
+		assertNoMsg(check, HIDDEN_FIELDS_FUNC);
+		assertMsg(check, HIDDEN_FIELDS_MAIN, 'Variable definition of "field2" masks member of same name');
 	}
 }
 
-class HiddenFieldCheckTests {
-	public static inline var NO_HIDDEN_FIELDS:String = "
+@:enum
+abstract HiddenFieldCheckTests(String) to String {
+	var NO_HIDDEN_FIELDS = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -77,7 +78,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_CONSTRUCTOR:String = "
+	var HIDDEN_FIELDS_CONSTRUCTOR = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -86,7 +87,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_CONSTRUCTOR_VAR:String = "
+	var HIDDEN_FIELDS_CONSTRUCTOR_VAR = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -96,7 +97,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_SETTER:String = "
+	var HIDDEN_FIELDS_SETTER = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -108,7 +109,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_FUNC:String = "
+	var HIDDEN_FIELDS_FUNC = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -117,7 +118,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_MAIN:String = "
+	var HIDDEN_FIELDS_MAIN = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
@@ -126,7 +127,7 @@ class HiddenFieldCheckTests {
 		}
 	}";
 
-	public static inline var HIDDEN_FIELDS_FOR:String = "
+	var HIDDEN_FIELDS_FOR = "
 	class Test {
 		var field1:Int;
 		var field2:Int = 1;
