@@ -20,7 +20,7 @@ class EmptyPackageCheck extends Check {
 		var packageTokens = root.filter([Kwd(KwdPackage)], ALL);
 		if (enforceEmptyPackage) {
 			if (packageTokens.length == 0) {
-				log("Missing package declaration", 1, 0, 0, severity);
+				log("Missing package declaration", 1, 0, 0);
 			}
 		}
 		else {
@@ -31,7 +31,7 @@ class EmptyPackageCheck extends Check {
 	function checkPackageNames(entries:Array<TokenTree>) {
 		for (entry in entries) {
 			var firstChild = entry.getFirstChild();
-			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max, severity);
+			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max);
 		}
 	}
 }

@@ -136,11 +136,11 @@ class WhitespaceAroundCheck extends Check {
 			var after:String = line.substr(linePos.ofs + tokLen);
 
 			if (!(~/^.*\s$/.match(before))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, severity);
+				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 				continue;
 			}
 			if (!(~/^(\s.*|)$/.match(after))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, severity);
+				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 				continue;
 			}
 		}

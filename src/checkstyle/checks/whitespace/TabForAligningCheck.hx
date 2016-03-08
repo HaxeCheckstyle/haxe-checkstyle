@@ -17,7 +17,7 @@ class TabForAligningCheck extends Check {
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
 			if (re.match(line) && !line.contains("//")) {
-				log("Tab after non-space character. Use space for aligning", i + 1, line.length, null, severity);
+				log("Tab after non-space character. Use space for aligning", i + 1, line.length);
 			}
 		}
 	}

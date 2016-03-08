@@ -43,6 +43,6 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function warnVarInit(name:String, pos:Position) {
-		logPos('Invalid variable initialisation: ${name} (move initialisation to constructor or function)', pos, severity);
+		logPos('Invalid variable initialisation: ${name} (move initialisation to constructor or function)', pos);
 	}
 }

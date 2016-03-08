@@ -41,13 +41,13 @@ class WrapCheckBase extends Check {
 
 			if (~/^\s*$/.match(before)) {
 				if (option != NL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be at the end of the line', tok.pos, severity);
+					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be at the end of the line', tok.pos);
 					continue;
 				}
 			}
 			if (~/^\s*(\/\/.*|\/\*.*|)$/.match(after)) {
 				if (option != EOL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be on a new line', tok.pos, severity);
+					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be on a new line', tok.pos);
 				}
 			}
 		}
