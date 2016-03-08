@@ -10,13 +10,14 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase {
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.CONSTANT_NOT_COUNTED);
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.SINGLE_CHARS);
 		assertNoMsg(check, MultipleStringLiteralsCheckTests.THREE_SPACE);
-		assertNoMsg(check, MultipleStringLiteralsCheckTests.OBJECT_FIELDS_ISSUE_116);
+		assertNoMsg(check, MultipleStringLiteralsCheckTests.OBJECT_FIELD_KEYS_ISSUE_116);
 	}
 
 	public function testMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
 		assertMsg(check, MultipleStringLiteralsCheckTests.THREE_XML, 'Multiple string literal "xml" detected - consider using a constant');
 		assertMsg(check, MultipleStringLiteralsCheckTests.THREE_XML_SWITCH, 'Multiple string literal "xml" detected - consider using a constant');
+		assertMsg(check, MultipleStringLiteralsCheckTests.OBJECT_FIELD_VALUES_ISSUE_116, 'Multiple string literal "duplicate" detected - consider using a constant');
 	}
 
 	public function testIgnoreRegEx() {
@@ -82,7 +83,7 @@ class MultipleStringLiteralsCheckTests {
 		}
 	}";
 
-	public static inline var OBJECT_FIELDS_ISSUE_116:String = "
+	public static inline var OBJECT_FIELD_KEYS_ISSUE_116:String = "
 	class Test {
 		function foo() {
 			var array = [
@@ -95,6 +96,18 @@ class MultipleStringLiteralsCheckTests {
 				{ 'field1': 1, 'field2': 2 },
 				{ 'field1': 3, 'field2': 4 },
 				{ 'field1': 5, 'field2': 6 }
+			];
+		}
+	}";
+
+	public static inline var OBJECT_FIELD_VALUES_ISSUE_116:String = "
+	class Test {
+		function foo() {
+			var array = [
+				{ 'field': 'duplicate' },
+				{ 'field': 'duplicate' },
+				{ 'field': 'duplicate' },
+				{ 'field': 'duplicate' },
 			];
 		}
 	}";
