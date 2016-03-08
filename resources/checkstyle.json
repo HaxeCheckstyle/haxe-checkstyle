@@ -124,12 +124,6 @@
 		},
 		{
 			"props": {
-				"severity": "INFO"
-			},
-			"type": "UnnecessaryConstructor"
-		},
-		{
-			"props": {
 				"character": "tab",
 				"severity": "INFO"
 			},
@@ -140,6 +134,13 @@
 				"severity": "INFO"
 			},
 			"type": "InnerAssignment"
+		},
+		{
+			"props": {
+				"allowMarkerInterfaces": true,
+				"severity": "INFO"
+			},
+			"type": "InterfaceIsType"
 		},
 		{
 			"props": {
@@ -485,6 +486,12 @@
 				"severity": "INFO"
 			},
 			"type": "TypeName"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
+			"type": "UnnecessaryConstructor"
 		},
 		{
 			"props": {
