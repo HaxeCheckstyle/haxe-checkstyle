@@ -138,9 +138,10 @@
 		{
 			"props": {
 				"allowMarkerInterfaces": true,
+				"allowProperties": false,
 				"severity": "INFO"
 			},
-			"type": "InterfaceIsType"
+			"type": "Interface"
 		},
 		{
 			"props": {
