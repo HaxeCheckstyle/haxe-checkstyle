@@ -27,14 +27,13 @@ class MultipleStringLiteralsCheck extends Check {
 		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
-		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
-			if (token.tok == null) return false;
+		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Const(CString(_)): true;
-				default: false;
+				case Const(CString(_)): FOUND_GO_DEEPER;
+				default: GO_DEEPER;
 			}
-		},
-		ALL);
+		});
 
 		for (literalToken in allStringLiterals) {
 			if (!filterLiteral(literalToken.parent)) continue;
