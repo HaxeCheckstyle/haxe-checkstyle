@@ -1,10 +1,5 @@
 package checkstyle.checks;
 
-import haxeparser.Data.TypeDecl;
-import haxeparser.Data.TypeDef;
-import haxeparser.Data.Definition;
-import haxeparser.Data.ClassFlag;
-import checkstyle.LintMessage.SeverityLevel;
 import haxe.macro.Expr;
 
 using Lambda;
@@ -50,6 +45,7 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
+
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch (e.expr) {

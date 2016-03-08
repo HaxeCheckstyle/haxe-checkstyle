@@ -11,6 +11,7 @@ class EmptyLinesCheck extends Check {
 	public var allowEmptyLineAfterSingleLineComment:Bool;
 	public var allowEmptyLineAfterMultiLineComment:Bool;
 	public var requireEmptyLineAfterPackage:Bool;
+	public var requireEmptyLineAfterClass:Bool;
 
 	public function new() {
 		super(LINE);
@@ -18,14 +19,16 @@ class EmptyLinesCheck extends Check {
 		allowEmptyLineAfterSingleLineComment = true;
 		allowEmptyLineAfterMultiLineComment = true;
 		requireEmptyLineAfterPackage = true;
+		requireEmptyLineAfterClass = true;
 	}
 
 	override function actualRun() {
 		var inGroup = false;
 		var isLastLinePackage = false;
+		var isLastLineClass = false;
 		var start = 0;
 		var end = 0;
-		for (i in 0...checker.lines.length) {
+		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
 			if (~/^\s*$/.match(line)) {
 				if (!inGroup) {
@@ -45,9 +48,13 @@ class EmptyLinesCheck extends Check {
 				if (requireEmptyLineAfterPackage && isLastLinePackage) {
 					log('Empty line required after package declaration', i + 1, 0);
 				}
+				if (requireEmptyLineAfterClass && isLastLineClass) {
+					log('Empty line required after class declaration', i + 1, 0);
+				}
 			}
 
 			isLastLinePackage = ~/^\s*package.*?;/.match(line);
+			isLastLineClass = ~/^\s*class.*?\{/.match(line);
 		}
 
 		if (inGroup) {

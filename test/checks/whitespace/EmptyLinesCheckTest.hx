@@ -48,12 +48,19 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertMsg(new EmptyLinesCheck(), TEST8, "Empty line required after package declaration");
 		assertNoMsg(new EmptyLinesCheck(), TEST9);
 	}
+
+	public function testRequireEmptyLineAfterClass() {
+		assertMsg(new EmptyLinesCheck(), TEST10, "Empty line required after class declaration");
+		assertNoMsg(new EmptyLinesCheck(), TEST11);
+		assertNoMsg(new EmptyLinesCheck(), TEST12);
+	}
 }
 
 @:enum
 abstract EmptyLinesCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
+
 		var _a:Int;
 
 
@@ -61,7 +68,9 @@ abstract EmptyLinesCheckTests(String) to String {
 
 	var TEST2 =
 	"class Test {
+
 		public function new() {
+
 			var b:Int;
 
 		}
@@ -69,7 +78,9 @@ abstract EmptyLinesCheckTests(String) to String {
 
 	var TEST3 =
 	"class Test {
+
 		public function new() {
+
 			var b:Int;
 
 
@@ -130,4 +141,28 @@ abstract EmptyLinesCheckTests(String) to String {
 	using StringTools;
 
 	class Test {}";
+
+	var TEST10 =
+	"class Test {
+		public function new() {
+			var b:Int;
+		}
+	}";
+
+	var TEST11 =
+	"class Test {
+
+		public function new() {
+			var b:Int;
+		}
+	}";
+
+	var TEST12 =
+	"class Test
+	{
+
+		public function new() {
+			var b:Int;
+		}
+	}";
 }

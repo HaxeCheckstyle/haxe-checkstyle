@@ -1,6 +1,5 @@
 package checkstyle.checks;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("TODOComment")

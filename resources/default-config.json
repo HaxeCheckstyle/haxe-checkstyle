@@ -91,6 +91,7 @@
 				"requireEmptyLineAfterPackage": true,
 				"allowEmptyLineAfterSingleLineComment": true,
 				"max": 1,
+				"requireEmptyLineAfterClass": true,
 				"allowEmptyLineAfterMultiLineComment": true,
 				"severity": "IGNORE"
 			},
