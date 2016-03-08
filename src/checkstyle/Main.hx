@@ -16,6 +16,8 @@ import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
 
+using checkstyle.utils.ArrayUtils;
+
 class Main {
 	@SuppressWarnings('checkstyle:Dynamic')
 	public static function main() {
@@ -139,19 +141,19 @@ class Main {
 		var checkFields:Array<String> = Type.getInstanceFields(Type.getClass(check));
 		for (prop in props) {
 			var val = Reflect.field(checkConf.props, prop);
-			if (checkFields.indexOf(prop) < 0) {
+			if (!checkFields.contains(prop)) {
 				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
 			}
 			Reflect.setField(check, prop, val);
 		}
-		if (defaultSeverity != null && props.indexOf("severity") < 0) {
+		if (defaultSeverity != null && !props.contains("severity")) {
 			check.severity = defaultSeverity;
 		}
 	}
 
 	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
 		for (field in Reflect.fields(object)) {
-			if (allowedFields.indexOf(field) < 0) {
+			if (!allowedFields.contains(field)) {
 				failWith(messagePrefix + " has unknown field '" + field + "'");
 			}
 		}

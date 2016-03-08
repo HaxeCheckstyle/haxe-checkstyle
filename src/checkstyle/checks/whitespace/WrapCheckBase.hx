@@ -7,6 +7,8 @@ import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @ignore("base class for OperatorWrap and SeparatorWrap")
 class WrapCheckBase extends Check {
 
@@ -19,7 +21,7 @@ class WrapCheckBase extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	function checkTokens(tokenList:Array<TokenDef>) {

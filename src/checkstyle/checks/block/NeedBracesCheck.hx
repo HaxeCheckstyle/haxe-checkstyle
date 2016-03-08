@@ -6,6 +6,8 @@ import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("NeedBraces")
 @desc("Checks for braces on function, if, for and while statements")
 class NeedBracesCheck extends Check {
@@ -20,7 +22,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function hasToken(token:NeedBracesCheckToken):Bool {
-		return (tokens.length == 0 || tokens.indexOf(token) > -1);
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {

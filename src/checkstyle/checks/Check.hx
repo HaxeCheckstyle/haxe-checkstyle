@@ -7,6 +7,7 @@ import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 class Check {
@@ -177,22 +178,22 @@ class Check {
 				case EAbstract(d):
 				case EClass(d):
 					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(HExtern) > -1;
+						return d.flags.contains(HExtern);
 					}
 				case EEnum(d):
 					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(EExtern) > -1;
+						return d.flags.contains(EExtern);
 					}
 				case ETypedef(d):
 					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(EExtern) > -1;
+						return d.flags.contains(EExtern);
 					}
 					switch (d.data) {
 						case TAnonymous(fields):
 							for (field in fields) {
 								if (pos > field.pos.max) continue;
 								if (pos < field.pos.min) continue;
-								return d.flags.indexOf(EExtern) > -1;
+								return d.flags.contains(EExtern);
 							}
 						default:
 					}

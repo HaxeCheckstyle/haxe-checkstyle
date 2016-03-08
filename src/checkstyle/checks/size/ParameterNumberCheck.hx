@@ -4,6 +4,8 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("ParameterNumber")
 @desc("Max number of parameters per method (default 7)")
 class ParameterNumberCheck extends Check {
@@ -24,7 +26,7 @@ class ParameterNumberCheck extends Check {
 	}
 
 	function checkField(f:Field, _) {
-		if (ignoreOverriddenMethods && f.access.indexOf(AOverride) >= 0) return;
+		if (ignoreOverriddenMethods && f.access.contains(AOverride)) return;
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {

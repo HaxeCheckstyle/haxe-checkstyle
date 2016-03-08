@@ -4,6 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("ConstantName")
@@ -16,7 +17,7 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf (HExtern) > -1)) return;
+		if (ignoreExtern && (d.flags.contains(HExtern))) return;
 		checkFields(d.data, decl.toParentType());
 	}
 

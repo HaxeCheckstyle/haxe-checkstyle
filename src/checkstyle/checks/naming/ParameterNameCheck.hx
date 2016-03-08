@@ -3,6 +3,8 @@ package checkstyle.checks.naming;
 import haxe.macro.Expr;
 import haxeparser.Data;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("ParameterName")
 @desc("Checks that parameter names")
 class ParameterNameCheck extends NameCheckBase<String> {
@@ -13,12 +15,12 @@ class ParameterNameCheck extends NameCheckBase<String> {
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(HExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(HExtern)) return;
 		checkFields(d.data);
 	}
 
 	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 		checkEnumFields(d.data);
 	}
 
@@ -27,7 +29,7 @@ class ParameterNameCheck extends NameCheckBase<String> {
 	}
 
 	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (ignoreExtern && (d.flags.indexOf(EExtern) > -1)) return;
+		if (ignoreExtern && d.flags.contains(EExtern)) return;
 
 		switch (d.data) {
 			case TAnonymous(f):
