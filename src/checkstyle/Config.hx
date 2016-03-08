@@ -11,8 +11,7 @@ typedef Config = {
 	var checks:Array<CheckConfig>;
 }
 
-@SuppressWarnings("checkstyle:Dynamic")
 typedef CheckConfig = {
 	var type:String;
-	var props:Dynamic;
+	var props:{};
 }
