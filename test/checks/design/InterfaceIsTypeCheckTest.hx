@@ -15,7 +15,7 @@ class InterfaceIsTypeCheckTest extends CheckTestCase<InterfaceIsTypeCheckTests> 
 	public function testNoMarkerInterface() {
 		var check = new InterfaceIsTypeCheck();
 		check.allowMarkerInterfaces = false;
-		assertMsg(chk, TEST2, "Interfaces should describe a type and hence have methods");
+		assertMsg(check, TEST2, "Interfaces should describe a type and hence have methods");
 	}
 
 	public function testCorrectInterface() {
