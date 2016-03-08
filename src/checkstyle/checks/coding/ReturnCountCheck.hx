@@ -30,10 +30,21 @@ class ReturnCountCheck extends Check {
 			}
 			if (isPosSuppressed(fn.pos)) continue;
 			if (!fn.hasChilds()) throw "function has invalid structure!";
-			var returns = fn.filter([Kwd(KwdReturn)], ALL);
+			var returns = fn.filterCallback(filterReturns);
 			if (returns.length > max) {
 				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos, severity);
 			}
+		}
+	}
+
+	function filterReturns(token:TokenTree, depth:Int):FilterResult {
+		return switch (token.tok) {
+			case Kwd(KwdFunction):
+				// top node is always a function node
+				if (depth == 0) GO_DEEPER;
+				else SKIP_SUBTREE;
+			case Kwd(KwdReturn): FOUND_SKIP_SUBTREE;
+			default: GO_DEEPER;
 		}
 	}
 }
