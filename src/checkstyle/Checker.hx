@@ -179,18 +179,9 @@ class Checker {
 		}
 		catch (e:Dynamic) {
 			for (reporter in reporters) {
-				reporter.addMessage({
-					fileName:file.name,
-					message: "Parsing failed: " + e + "\nStacktrace: " +
-								CallStack.toString(CallStack.exceptionStack()),
-					line:1,
-					startColumn:0,
-					endColumn:0,
-					severity:ERROR,
-					moduleName:"Checker"
-				});
+				reporter.addMessage(getErrorMessage(e, file.name, "Parsing"));
+				reporter.fileFinish(file);
 			}
-			for (reporter in reporters) reporter.fileFinish(file);
 			return false;
 		}
 		return true;
@@ -250,20 +241,23 @@ class Checker {
 			return check.run(this);
 		}
 		catch (e:Dynamic) {
-			for (reporter in reporters) {
-				reporter.addMessage({
-					fileName:file.name,
-					message:"Check " + check.getModuleName() + " failed: " +
-								e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
-					line:1,
-					startColumn:0,
-					endColumn:0,
-					severity:ERROR,
-					moduleName:"Checker"
-				});
-			}
+			for (reporter in reporters) reporter.addMessage(getErrorMessage(e, file.name, "Check " + check.getModuleName()));
 			return [];
 		}
+	}
+
+	@SuppressWarnings("checkstyle:Dynamic")
+	function getErrorMessage(e:Dynamic, fileName:String, step:String):LintMessage {
+		return {
+			fileName:fileName,
+			message:step + " failed: " +
+						e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
+			line:1,
+			startColumn:0,
+			endColumn:0,
+			severity:ERROR,
+			moduleName:"Checker"
+		};
 	}
 }
 
