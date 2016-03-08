@@ -30,7 +30,8 @@ class EmptyPackageCheck extends Check {
 
 	function checkPackageNames(entries:Array<TokenTree>) {
 		for (entry in entries) {
-			if (entry.getFirstChild().is(Semicolon)) logPos("Found empty package", entry.pos, severity);
+			var firstChild = entry.getFirstChild();
+			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max, severity);
 		}
 	}
 }
