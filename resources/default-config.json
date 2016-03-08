@@ -140,6 +140,13 @@
 		},
 		{
 			"props": {
+				"allowMarkerInterfaces": true,
+				"severity": "IGNORE"
+			},
+			"type": "InterfaceIsType"
+		},
+		{
+			"props": {
 				"tokens": [
 					"CLASS_DEF",
 					"ENUM_DEF",
