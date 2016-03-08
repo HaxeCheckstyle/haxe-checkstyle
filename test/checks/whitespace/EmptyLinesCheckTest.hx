@@ -2,58 +2,59 @@ package checks.whitespace;
 
 import checkstyle.checks.whitespace.EmptyLinesCheck;
 
-class EmptyLinesCheckTest extends CheckTestCase {
+class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 
 	static inline var MSG_TOO_MANY:String = 'Too many consecutive empty lines (> 1)';
 	static inline var MSG_AFTER_COMMENT:String = 'Empty line not allowed after comment(s)';
 
 	public function testDefaultEmptyLines() {
-		assertMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST1, MSG_TOO_MANY);
+		assertMsg(new EmptyLinesCheck(), TEST1, MSG_TOO_MANY);
 	}
 
 	public function testCorrectEmptyLines() {
-		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST2);
+		assertNoMsg(new EmptyLinesCheck(), TEST2);
 	}
 
 	public function testConfigurableEmptyLines() {
 		var check = new EmptyLinesCheck();
 		check.max = 2;
-		assertNoMsg(check, EmptyLinesTests.TEST3);
+		assertNoMsg(check, TEST3);
 	}
 
 	public function testEmptyLineAfterSingleLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterSingleLineComment = false;
 
-		assertMsg(check, EmptyLinesTests.TEST4, MSG_AFTER_COMMENT);
-		assertMsg(check, EmptyLinesTests.TEST5, MSG_AFTER_COMMENT);
+		assertMsg(check, TEST4, MSG_AFTER_COMMENT);
+		assertMsg(check, TEST5, MSG_AFTER_COMMENT);
 	}
 
 	public function testEmptyLineAfterMultiLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterMultiLineComment = false;
 
-		assertMsg(check, EmptyLinesTests.TEST6, MSG_AFTER_COMMENT);
-		assertMsg(check, EmptyLinesTests.TEST7, MSG_AFTER_COMMENT);
+		assertMsg(check, TEST6, MSG_AFTER_COMMENT);
+		assertMsg(check, TEST7, MSG_AFTER_COMMENT);
 	}
 
 	public function testAllowEmptyLineAfterComment() {
-		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST4);
-		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST5);
-		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST6);
-		assertNoMsg(new EmptyLinesCheck(), EmptyLinesTests.TEST7);
+		assertNoMsg(new EmptyLinesCheck(), TEST4);
+		assertNoMsg(new EmptyLinesCheck(), TEST5);
+		assertNoMsg(new EmptyLinesCheck(), TEST6);
+		assertNoMsg(new EmptyLinesCheck(), TEST7);
 	}
 }
 
-class EmptyLinesTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract EmptyLinesCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		var _a:Int;
 
 
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"class Test {
 		public function new() {
 			var b:Int;
@@ -61,7 +62,7 @@ class EmptyLinesTests {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"class Test {
 		public function new() {
 			var b:Int;
@@ -70,7 +71,7 @@ class EmptyLinesTests {
 		}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"class Test {
 
 		// comments
@@ -80,7 +81,7 @@ class EmptyLinesTests {
 		}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"class Test {
 
 		// comments
@@ -88,7 +89,7 @@ class EmptyLinesTests {
 		var a:Int;
 	}";
 
-	public static inline var TEST6:String =
+	var TEST6 =
 	"class Test {
 
 		/**
@@ -98,7 +99,7 @@ class EmptyLinesTests {
 		var a:Int;
 	}";
 
-	public static inline var TEST7:String =
+	var TEST7 =
 	"class Test {
 
 		/**

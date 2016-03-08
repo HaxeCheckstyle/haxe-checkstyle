@@ -8,7 +8,7 @@ import checkstyle.reporter.IReporter;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 
-class CheckTestCase extends haxe.unit.TestCase {
+class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 	static inline var FILE_NAME:String = "Test.hx";
 
@@ -17,7 +17,7 @@ class CheckTestCase extends haxe.unit.TestCase {
 
 	override public function setup() {}
 
-	function assertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?pos:PosInfos) {
+	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?pos:PosInfos) {
 		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
 		if (re.match(testCase)) {
 			actualAssertMsg(check, re.replace(testCase, "class $1"), expected, pos);
@@ -26,7 +26,7 @@ class CheckTestCase extends haxe.unit.TestCase {
 		else actualAssertMsg(check, testCase, expected, defines, pos);
 	}
 
-	function assertNoMsg(check:Check, testCase:String, ?pos:PosInfos) {
+	function assertNoMsg(check:Check, testCase:T, ?pos:PosInfos) {
 		assertMsg(check, testCase, '', null, pos);
 	}
 

@@ -2,41 +2,41 @@ package checks.modifier;
 
 import checkstyle.checks.modifier.ModifierOrderCheck;
 
-class ModifierOrderCheckTest extends CheckTestCase {
+class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
-		assertNoMsg(check, ModifierOrderTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
 
 	public function testWrongOrder() {
 		var check = new ModifierOrderCheck();
-		assertMsg(check, ModifierOrderTests.TEST2, 'Invalid modifier order: test (modifier: OVERRIDE)');
-		assertMsg(check, ModifierOrderTests.TEST3, 'Invalid modifier order: test (modifier: STATIC)');
-		assertMsg(check, ModifierOrderTests.TEST4, 'Invalid modifier order: test (modifier: MACRO)');
-		assertMsg(check, ModifierOrderTests.TEST5, 'Invalid modifier order: test (modifier: PUBLIC_PRIVATE)');
+		assertMsg(check, TEST2, 'Invalid modifier order: test (modifier: OVERRIDE)');
+		assertMsg(check, TEST3, 'Invalid modifier order: test (modifier: STATIC)');
+		assertMsg(check, TEST4, 'Invalid modifier order: test (modifier: MACRO)');
+		assertMsg(check, TEST5, 'Invalid modifier order: test (modifier: PUBLIC_PRIVATE)');
 	}
 
 	public function testModifiers() {
 		var check = new ModifierOrderCheck();
 		check.modifiers = [DYNAMIC, PUBLIC_PRIVATE, OVERRIDE, INLINE, STATIC, MACRO];
-		assertMsg(check, ModifierOrderTests.TEST1, 'Invalid modifier order: test6 (modifier: INLINE)');
-		assertNoMsg(check, ModifierOrderTests.TEST2);
-		assertNoMsg(check, ModifierOrderTests.TEST3);
-		assertNoMsg(check, ModifierOrderTests.TEST4);
-		assertNoMsg(check, ModifierOrderTests.TEST5);
+		assertMsg(check, TEST1, 'Invalid modifier order: test6 (modifier: INLINE)');
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
 	}
 
 	public function testIgnore() {
 		var check = new ModifierOrderCheck();
 		check.severity = "ignore";
-		assertNoMsg(check, ModifierOrderTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
-
 }
 
-class ModifierOrderTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract ModifierOrderCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		override public function test1() {}
 		override private function test2() {}
@@ -46,22 +46,22 @@ class ModifierOrderTests {
 		public static inline function test6() {}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public override function test() {}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"abstractAndClass Test {
 		public inline static function test() {}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"abstractAndClass Test {
 		public macro function test() {}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"abstractAndClass Test {
 		dynamic public function test() {}
 	}";

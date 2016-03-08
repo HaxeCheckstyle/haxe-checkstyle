@@ -2,14 +2,14 @@ package checks.size;
 
 import checkstyle.checks.size.LineLengthCheck;
 
-class LineLengthCheckTest extends CheckTestCase {
+class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 
 	public function testDefaultLineLength() {
-		assertMsg(new LineLengthCheck(), LineLengthTests.TEST1, 'Too long line (> 160)');
+		assertMsg(new LineLengthCheck(), TEST1, 'Too long line (> 160)');
 	}
 
 	public function testCorrectLineLength() {
-		assertNoMsg(new LineLengthCheck(), LineLengthTests.TEST2);
+		assertNoMsg(new LineLengthCheck(), TEST2);
 	}
 
 	@SuppressWarnings('checkstyle:MagicNumber')
@@ -17,12 +17,13 @@ class LineLengthCheckTest extends CheckTestCase {
 		var check = new LineLengthCheck();
 		check.max = 40;
 
-		assertMsg(check, LineLengthTests.TEST3, 'Too long line (> 40)');
+		assertMsg(check, TEST3, 'Too long line (> 40)');
 	}
 }
 
-class LineLengthTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract LineLengthCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		var _a:Int;
 		public function new() {
@@ -33,7 +34,7 @@ class LineLengthTests {
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"class Test {
 		public function new() {
 			var b:Int;
@@ -48,7 +49,7 @@ class LineLengthTests {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"class Test {
 		public function new() {
 			_a = 10;

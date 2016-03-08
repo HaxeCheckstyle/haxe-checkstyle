@@ -2,50 +2,51 @@ package checks.coding;
 
 import checkstyle.checks.coding.InnerAssignmentCheck;
 
-class InnerAssignmentCheckTest extends CheckTestCase {
+class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> {
 
 	static inline var MSG_INNER_ASSIGNMENT:String = 'Inner assignment detected';
 
 	public function testCorrectAssignment() {
 		var check = new InnerAssignmentCheck();
-		assertNoMsg(check, InnerAssignmentCheckTests.IF_EXPR);
-		assertNoMsg(check, InnerAssignmentCheckTests.WHILE_COND);
-		assertNoMsg(check, InnerAssignmentCheckTests.MEMBER_DEF);
-		assertNoMsg(check, InnerAssignmentCheckTests.METHOD_DEF);
+		assertNoMsg(check, IF_EXPR);
+		assertNoMsg(check, WHILE_COND);
+		assertNoMsg(check, MEMBER_DEF);
+		assertNoMsg(check, METHOD_DEF);
 	}
 
 	public function testIncorrectInnerAssignment() {
 		var check = new InnerAssignmentCheck();
-		assertMsg(check, InnerAssignmentCheckTests.IF_COND, MSG_INNER_ASSIGNMENT);
-		assertMsg(check, InnerAssignmentCheckTests.IF_RETURN_EXPR, MSG_INNER_ASSIGNMENT);
-		assertMsg(check, InnerAssignmentCheckTests.WHILE_COND_RETURN, MSG_INNER_ASSIGNMENT);
-		assertMsg(check, InnerAssignmentCheckTests.SWITCH, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, IF_COND, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, IF_RETURN_EXPR, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, WHILE_COND_RETURN, MSG_INNER_ASSIGNMENT);
+		assertMsg(check, SWITCH, MSG_INNER_ASSIGNMENT);
 	}
 }
 
-class InnerAssignmentCheckTests {
-	public static inline var IF_COND:String = "
+@:enum
+abstract InnerAssignmentCheckTests(String) to String {
+	var IF_COND = "
 	abstractAndClass Test {
 		public function new() {
 			if ((a=b) > 0) return;
 		}
 	}";
 
-	public static inline var IF_EXPR:String = "
+	var IF_EXPR = "
 	abstractAndClass Test {
 		public function new() {
 			if (a==b) a=b;
 		}
 	}";
 
-	public static inline var IF_RETURN_EXPR:String = "
+	var IF_RETURN_EXPR = "
 	abstractAndClass Test {
 		public function new() {
 			if (a==b) return a=b;
 		}
 	}";
 
-	public static inline var WHILE_COND:String = "
+	var WHILE_COND = "
 	abstractAndClass Test {
 		public function new() {
 			while ((a=b) > 0) {
@@ -54,7 +55,7 @@ class InnerAssignmentCheckTests {
 		}
 	}";
 
-	public static inline var WHILE_COND_RETURN:String = "
+	var WHILE_COND_RETURN = "
 	abstractAndClass Test {
 		public function new() {
 			while ((a=b) > 0) {
@@ -63,13 +64,13 @@ class InnerAssignmentCheckTests {
 		}
 	}";
 
-	public static inline var METHOD_DEF:String = "
+	var METHOD_DEF = "
 	abstractAndClass Test {
 		public function new(a:Null<Int> = 1, b:String = 'test', c = []) {
 		}
 	}";
 
-	public static inline var MEMBER_DEF:String = "
+	var MEMBER_DEF = "
 	abstractAndClass Test {
 		var a:Null<Int> = 1;
 		var a(default, null):Null<Int> = 1;
@@ -79,7 +80,7 @@ class InnerAssignmentCheckTests {
 		}
 	}";
 
-	public static inline var SWITCH:String = "
+	var SWITCH = "
 	class Test {
 		public function new() {
 			var p = 1;

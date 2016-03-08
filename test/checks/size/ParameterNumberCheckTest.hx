@@ -4,21 +4,21 @@ import checkstyle.checks.Check;
 import checkstyle.checks.size.ParameterNumberCheck;
 import haxe.PosInfos;
 
-class ParameterNumberCheckTest extends CheckTestCase {
+class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> {
 
 	public function testNoParams() {
 		var check = new ParameterNumberCheck();
-		assertNoMsg(check, ParameterNumberTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
 
 	public function test10Parameters() {
 		var check = new ParameterNumberCheck();
-		assertNoMsg(check, ParameterNumberTests.TEST2);
+		assertNoMsg(check, TEST2);
 	}
 
 	public function test11Parameters() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, ParameterNumberTests.TEST3, 'Too many parameters for function: test2 (> 7)');
+		assertMsg(check, TEST3, 'Too many parameters for function: test2 (> 7)');
 	}
 
 	@SuppressWarnings('checkstyle:MagicNumber')
@@ -26,29 +26,30 @@ class ParameterNumberCheckTest extends CheckTestCase {
 		var check = new ParameterNumberCheck();
 		check.max = 11;
 
-		assertNoMsg(check, ParameterNumberTests.TEST3);
-		assertNoMsg(check, ParameterNumberTests.TEST4);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
 
 		check.max = 3;
-		assertNoMsg(check, ParameterNumberTests.TEST4);
-		assertMsg(check, ParameterNumberTests.TEST3, 'Too many parameters for function: test2 (> 3)');
+		assertNoMsg(check, TEST4);
+		assertMsg(check, TEST3, 'Too many parameters for function: test2 (> 3)');
 	}
 
 	public function testInterface() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, ParameterNumberTests.TEST5, 'Too many parameters for function: test4 (> 7)');
+		assertMsg(check, TEST5, 'Too many parameters for function: test4 (> 7)');
 	}
 
 	public function testIgnoreOverridenMethods() {
 		var check = new ParameterNumberCheck();
 		check.ignoreOverriddenMethods = true;
 
-		assertNoMsg(check, ParameterNumberTests.TEST3);
+		assertNoMsg(check, TEST3);
 	}
 }
 
-class ParameterNumberTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract ParameterNumberCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		var testVar1:Int;
 		public function test():Void {}
@@ -66,7 +67,7 @@ class ParameterNumberTests {
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function test1(param1:Int,
 								param2:Int,
@@ -79,7 +80,7 @@ class ParameterNumberTests {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"abstractAndClass Test {
 		override public function test2(param1:Int,
 								param2:Int,
@@ -93,7 +94,7 @@ class ParameterNumberTests {
 		}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"abstractAndClass Test {
 		public function test3(param1:Int,
 								param2:Int,
@@ -102,7 +103,7 @@ class ParameterNumberTests {
 		}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"interface ITest {
 		public function test4(param1:Int,
 								param2:Int,

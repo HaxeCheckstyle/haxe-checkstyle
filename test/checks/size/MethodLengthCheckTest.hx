@@ -2,14 +2,14 @@ package checks.size;
 
 import checkstyle.checks.size.MethodLengthCheck;
 
-class MethodLengthCheckTest extends CheckTestCase {
+class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 
 	public function testWrongMethodLength() {
-		assertMsg(new MethodLengthCheck(), MethodLengthTests.TEST1, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
+		assertMsg(new MethodLengthCheck(), TEST1, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
 	}
 
 	public function testCorrectMethodLength() {
-		assertNoMsg(new MethodLengthCheck(), MethodLengthTests.TEST2);
+		assertNoMsg(new MethodLengthCheck(), TEST2);
 	}
 
 	@SupressWarnings('checkstyle:MagicNumber')
@@ -17,12 +17,13 @@ class MethodLengthCheckTest extends CheckTestCase {
 		var check = new MethodLengthCheck();
 		check.max = 10;
 
-		assertMsg(check, MethodLengthTests.TEST3, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
+		assertMsg(check, TEST3, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
 	}
 }
 
-class MethodLengthTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract MethodLengthCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		public function test() {
 			tarce('TEST');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
@@ -38,7 +39,7 @@ class MethodLengthTests {
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function test() {
 			tarce('TEST');
@@ -49,7 +50,7 @@ class MethodLengthTests {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"abstractAndClass Test {
 		public function test() {
 			tarce('TEST');

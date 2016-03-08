@@ -2,26 +2,27 @@ package checks;
 
 import checkstyle.checks.EmptyPackageCheck;
 
-class EmptyPackageCheckTest extends CheckTestCase {
+class EmptyPackageCheckTest extends CheckTestCase<EmptyPackageCheckTests> {
 
 	public function testEmptyPackage() {
-		assertMsg(new EmptyPackageCheck(), EmptyPackageCheckTests.TEST1, "Found empty package");
+		assertMsg(new EmptyPackageCheck(), TEST1, "Found empty package");
 	}
 
 	public function testCorrectPackage() {
-		assertNoMsg(new EmptyPackageCheck(), EmptyPackageCheckTests.TEST2);
+		assertNoMsg(new EmptyPackageCheck(), TEST2);
 	}
 }
 
-class EmptyPackageCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract EmptyPackageCheckTests(String) to String {
+	var TEST1 = "
 	package;
 
 	class Test {
 		public function new() {}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	package checks.test;
 
 	class Test {

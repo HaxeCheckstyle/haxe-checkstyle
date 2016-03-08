@@ -2,25 +2,26 @@ package checks.coding;
 
 import checkstyle.checks.coding.SimplifyBooleanReturnCheck;
 
-class SimplifyBooleanReturnCheckTest extends CheckTestCase {
+class SimplifyBooleanReturnCheckTest extends CheckTestCase<SimplifyBooleanReturnCheckTests> {
 
 	static inline var MSG_SIMPLIFY:String = "Conditional logic can be removed";
 
 	public function testWrongExpression() {
-		assertMsg(new SimplifyBooleanReturnCheck(), SimplifyBooleanReturnCheckTests.TEST1, MSG_SIMPLIFY);
+		assertMsg(new SimplifyBooleanReturnCheck(), TEST1, MSG_SIMPLIFY);
 	}
 
 	public function testCorrectExpression() {
-		assertNoMsg(new SimplifyBooleanReturnCheck(), SimplifyBooleanReturnCheckTests.TEST2);
+		assertNoMsg(new SimplifyBooleanReturnCheck(), TEST2);
 	}
 
 	public function testOnlyIfExpression() {
-		assertNoMsg(new SimplifyBooleanReturnCheck(), SimplifyBooleanReturnCheckTests.TEST3);
+		assertNoMsg(new SimplifyBooleanReturnCheck(), TEST3);
 	}
 }
 
-class SimplifyBooleanReturnCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract SimplifyBooleanReturnCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		function test() {
 			var a = (10 / 5 == 2);
@@ -29,7 +30,7 @@ class SimplifyBooleanReturnCheckTests {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	abstractAndClass Test {
 		function test() {
 			var a = (10 / 5 == 2);
@@ -37,7 +38,7 @@ class SimplifyBooleanReturnCheckTests {
 		}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	abstractAndClass Test {
 		function test() {
 			var a = (10 / 5 == 2);
