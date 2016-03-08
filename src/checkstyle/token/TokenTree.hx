@@ -58,31 +58,41 @@ class TokenTree extends Token {
 	}
 
 	public function filter(searchFor:Array<TokenDef>, mode:TokenFilterMode, maxLevel:Int = MAX_LEVEL):Array<TokenTree> {
-		return filterCallback(function(token:TokenTree):Bool {
-				return token.matchesAny(searchFor);
-			},
-			mode, maxLevel);
-	}
-
-	public function filterCallback(callback:FilterCallback, mode:TokenFilterMode, maxLevel:Int = MAX_LEVEL):Array<TokenTree> {
-		var results:Array<TokenTree> = [];
-
-		if (maxLevel < 0) return [];
-		if (callback(this)) {
-			if (mode == ALL) {
-				results.push (this);
+		return filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (depth > maxLevel) {
+				return SKIP_SUBTREE;
+			}
+			if (token.matchesAny(searchFor)) {
+				if (mode == ALL) {
+					return FOUND_GO_DEEPER;
+				}
+				return FOUND_SKIP_SUBTREE;
 			}
 			else {
-				return [this];
+				return GO_DEEPER;
 			}
+		});
+	}
+
+	public function filterCallback(callback:FilterCallback, depth:Int = 0):Array<TokenTree> {
+		var results:Array<TokenTree> = [];
+
+		switch (callback(this, depth)) {
+			case FOUND_GO_DEEPER:
+				results.push (this);
+			case FOUND_SKIP_SUBTREE:
+				return [this];
+			case GO_DEEPER:
+			case SKIP_SUBTREE:
+				return [];
 		}
 		if (childs == null) return results;
 		for (child in childs) {
 			switch (child.tok) {
 				case Sharp(_):
-					results = results.concat(child.filterCallback(callback, mode, maxLevel));
+					results = results.concat(child.filterCallback(callback, depth));
 				default:
-					results = results.concat(child.filterCallback(callback, mode, maxLevel - 1));
+					results = results.concat(child.filterCallback(callback, depth + 1));
 			}
 		}
 		return results;
@@ -118,4 +128,11 @@ enum TokenFilterMode {
 	FIRST;
 }
 
-typedef FilterCallback = TokenTree -> Bool;
+typedef FilterCallback = TokenTree -> Int -> FilterResult;
+
+enum FilterResult {
+	FOUND_SKIP_SUBTREE;
+	FOUND_GO_DEEPER;
+	SKIP_SUBTREE;
+	GO_DEEPER;
+}
