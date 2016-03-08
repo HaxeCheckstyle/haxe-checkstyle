@@ -292,6 +292,13 @@
 		},
 		{
 			"props": {
+				"option": "questionMark",
+				"severity": "IGNORE"
+			},
+			"type": "NullableParameter"
+		},
+		{
+			"props": {
 				"tokens": [
 					"=",
 					"+",
