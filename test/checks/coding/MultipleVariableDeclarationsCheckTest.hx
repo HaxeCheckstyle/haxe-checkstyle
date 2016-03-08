@@ -4,22 +4,21 @@ import checkstyle.checks.coding.MultipleVariableDeclarationsCheck;
 
 class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariableDeclarationsCheckTests> {
 
+	static inline var MSG_MULTI_VAR_COMMA:String = "Each variable declaration must be in its own statement";
+	static inline var MSG_MULTI_VAR:String = "Only one variable definition per line allowed";
+
 	public function testMulitiVarsStatement() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), TEST1, 'Each variable declaration must be in its own statement');
-		assertMsg(new MultipleVariableDeclarationsCheck(), TEST2, 'Each variable declaration must be in its own statement');
+		assertMsg(new MultipleVariableDeclarationsCheck(), TEST1, MSG_MULTI_VAR_COMMA);
+		assertMsg(new MultipleVariableDeclarationsCheck(), TEST2, MSG_MULTI_VAR_COMMA);
 	}
 
 	public function testMulitiVarsInOneLine() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), TEST3, 'Only one variable definition per line allowed');
+		assertMsg(new MultipleVariableDeclarationsCheck(), TEST3, MSG_MULTI_VAR);
 	}
 
 	public function testCorrectVariables() {
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST4);
-	}
-
-	public function testSuppressWarnings() {
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST5);
-		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST6);
 	}
 }
 
@@ -42,7 +41,10 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 	var TEST3 = "
 	abstractAndClass Test {
 		function a() {
-			var d; var e;
+			var d = 10; var e;
+			var d;var e;
+			var d;       var e;
+			var d;	var e;
 		}
 	}";
 
@@ -56,17 +58,8 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 
 	var TEST5 = "
 	abstractAndClass Test {
-		@SuppressWarnings('checkstyle:MultipleVariableDeclarations')
-		function a() {
-			var d; var e;
-		}
-	}";
-
-	var TEST6 = "
-	abstractAndClass Test {
-		@SuppressWarnings('checkstyle:MultipleVariableDeclarations')
-		function a() {
-			var d,e,f;
-		}
+    	function foo() {
+        	var s = 'var f';
+    	}
 	}";
 }

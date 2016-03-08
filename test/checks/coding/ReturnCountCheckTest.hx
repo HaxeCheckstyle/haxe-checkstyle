@@ -17,15 +17,15 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 	}
 
 	public function testCustomReturnCount() {
-		var chk = new ReturnCountCheck();
-		chk.max = 1;
-		assertMsg(chk, TEST4, 'Return count is 2 (max allowed is 1)');
+		var check = new ReturnCountCheck();
+		check.max = 1;
+		assertMsg(check, TEST4, 'Return count is 2 (max allowed is 1)');
 	}
 
 	public function testIgnoreRE() {
-		var chk = new ReturnCountCheck();
-		chk.ignoreFormat = "^equals$";
-		assertMsg(chk, TEST5, '');
+		var check = new ReturnCountCheck();
+		check.ignoreFormat = "^equals$";
+		assertMsg(check, TEST5, '');
 	}
 
 	public function testClosure() {

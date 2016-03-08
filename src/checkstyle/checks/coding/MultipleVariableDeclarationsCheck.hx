@@ -1,5 +1,6 @@
 package checkstyle.checks.coding;
 
+import checkstyle.token.TokenTree;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;
@@ -9,24 +10,31 @@ import checkstyle.LintMessage.SeverityLevel;
 class MultipleVariableDeclarationsCheck extends Check {
 
 	public function new() {
-		super(AST);
+		super(TOKEN);
 	}
 
 	@SuppressWarnings('checkstyle:MultipleVariableDeclarations')
 	override function actualRun() {
-		ExprUtils.walkFile(checker.ast, function(e:Expr) {
-			if (isPosSuppressed(e.pos)) return;
-			switch (e.expr){
-				case EVars(vars):
-					if (vars.length > 1) logPos('Each variable declaration must be in its own statement', e.pos, severity);
-				default:
-			}
-		});
+		var root:TokenTree = checker.getTokenTree();
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], ALL);
 
+		for (v in acceptableTokens) {
+			var count = 0;
+			for (c in v.childs) {
+				switch (c.tok) {
+					case Const(CIdent(name)):
+						count++;
+					default:
+				}
+			}
+			if (count > 1) logPos('Each variable declaration must be in its own statement', v.pos, severity);
+		}
+
+		// Need line no of each token to remove line based check
 		for (i in 0 ... checker.lines.length) {
 			if (isLineSuppressed(i)) return;
 			var line = checker.lines[i];
-			if (~/(var ).*(var ).*;$/.match(line)) log('Only one variable definition per line allowed', i + 1, 0, null, severity);
+			if (~/(var ).*;.*(var ).*;$/.match(line)) log('Only one variable definition per line allowed', i + 1, 0, null, severity);
 		}
 	}
 }
