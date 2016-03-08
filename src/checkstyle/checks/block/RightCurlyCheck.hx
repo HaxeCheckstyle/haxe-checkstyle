@@ -163,7 +163,7 @@ class RightCurlyCheck extends Check {
 
 	function logErrorIf(condition:Bool, msg:String, pos:Position) {
 		if (condition) {
-			logPos(msg, pos, severity);
+			logPos(msg, pos);
 			throw "exit";
 		}
 	}
