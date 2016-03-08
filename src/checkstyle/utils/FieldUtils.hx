@@ -5,54 +5,35 @@ import haxe.macro.Expr.Field;
 import haxeparser.Data.TypeDecl;
 import haxeparser.Data.TypeDef;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.ExprUtils;
 using StringTools;
 
 class FieldUtils {
 
-	public static inline function hasPublic(f:Field):Bool {
-		return has(f, APublic);
-	}
-
-	public static inline function hasPrivate(f:Field):Bool {
-		return has(f, APrivate);
-	}
-
-	public static inline function hasStatic(f:Field):Bool {
-		return has(f, AStatic);
-	}
-
-	public static inline function hasInline(f:Field):Bool {
-		return has(f, AInline);
-	}
-
-	static inline function has(f:Field, a:Access):Bool {
-		return f.access.indexOf(a) != -1;
-	}
-
 	public static function isPublic(f:Field, p:ParentType):Bool {
-		if (hasPublic(f)) return true;
-		if (hasPrivate(f)) return false;
+		if (f.access.contains(APublic)) return true;
+		if (f.access.contains(APrivate)) return false;
 		return !isDefaultPrivate(f, p);
 	}
 
 	public static function isPrivate(f:Field, p:ParentType):Bool {
-		if (hasPrivate(f)) return true;
-		if (hasPublic(f)) return false;
+		if (f.access.contains(APrivate)) return true;
+		if (f.access.contains(APublic)) return false;
 		return isDefaultPrivate(f, p);
 	}
 
 	public static function isInline(f:Field, p:ParentType):Bool {
-		return (hasInline(f) || p.kind == ENUM_ABSTRACT);
+		return f.access.contains(AInline) || p.kind == ENUM_ABSTRACT;
 	}
 
 	public static function isStatic(f:Field, p:ParentType):Bool {
-		return hasStatic(f);
+		return f.access.contains(AStatic);
 	}
 
 	public static function isDefaultPrivate(f:Field, p:ParentType):Bool {
 		if (p.kind == INTERFACE) return false;
-		if (p.kind == ENUM_ABSTRACT && !hasStatic(f) && f.kind.match(FVar(_, _))) return false;
+		if (p.kind == ENUM_ABSTRACT && !f.access.contains(AStatic) && f.kind.match(FVar(_, _))) return false;
 		switch (p.decl) {
 			case EClass(d):
 				if (d.meta.hasMeta(":publicFields")) return false;
@@ -76,7 +57,7 @@ class FieldUtils {
 	public static function toParentType(decl:TypeDef):ParentType {
 		switch (decl) {
 			case EClass(d):
-				var kind = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
+				var kind = d.flags.contains(HInterface) ? INTERFACE : CLASS;
 				return {decl:decl, kind:kind};
 			case EAbstract(a):
 				var kind = a.meta.hasMeta(":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;

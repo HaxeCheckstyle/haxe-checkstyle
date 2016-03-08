@@ -4,6 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("VariableInitialisation")
@@ -26,9 +27,9 @@ class VariableInitialisationCheck extends Check {
 		var isInline = false;
 		var isStatic = false;
 
-		if (f.access.indexOf(AInline) > -1) isInline = true;
-		else if (f.access.indexOf(AStatic) > -1) isStatic = true;
-		else if (f.access.indexOf(APublic) > -1) isPublic = true;
+		if (f.access.contains(AInline)) isInline = true;
+		else if (f.access.contains(AStatic)) isStatic = true;
+		else if (f.access.contains(APublic)) isPublic = true;
 		else isPrivate = true;
 
 		if (isPrivate || isPublic) {

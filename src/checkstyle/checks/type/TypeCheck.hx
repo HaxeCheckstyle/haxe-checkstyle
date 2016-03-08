@@ -4,6 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("Type")
@@ -20,7 +21,7 @@ class TypeCheck extends Check {
 	override function actualRun() {
 		forEachField(function(f, p) {
 			if (f.isConstructor()) return;
-			if (ignoreEnumAbstractValues && p.kind == ENUM_ABSTRACT && f.access.indexOf(AStatic) == -1) return;
+			if (ignoreEnumAbstractValues && p.kind == ENUM_ABSTRACT && !f.access.contains(AStatic)) return;
 			switch (f.kind) {
 				case FVar(t, e):
 					if (t == null) error(f.name, f.pos);

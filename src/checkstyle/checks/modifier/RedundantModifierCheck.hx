@@ -4,6 +4,7 @@ import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("RedundantModifier", "PublicPrivate")
@@ -25,11 +26,11 @@ class RedundantModifierCheck extends Check {
 		var isDefaultPrivate = f.isDefaultPrivate(p);
 		var implicitAccess = isDefaultPrivate ? "private" : "public";
 		if (enforcePublicPrivate) {
-			if (!f.hasPublic() && !f.hasPrivate()) {
+			if (!f.access.contains(APublic) && !f.access.contains(APrivate)) {
 				logPos('Missing $implicitAccess keyword: ${f.name}', f.pos, severity);
 			}
 		}
-		else if ((isDefaultPrivate && f.hasPrivate()) || (!isDefaultPrivate && f.hasPublic())) {
+		else if ((isDefaultPrivate && f.access.contains(APrivate)) || (!isDefaultPrivate && f.access.contains(APublic))) {
 			logPos('No need of $implicitAccess keyword: ${f.name}', f.pos, severity);
 		}
 	}

@@ -5,6 +5,7 @@ import haxe.macro.Expr;
 import haxeparser.Data.TokenDef;
 import checkstyle.LintMessage.SeverityLevel;
 
+using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("HiddenField")
@@ -112,7 +113,7 @@ class HiddenFieldCheck extends Check {
 	function checkName(token:TokenTree, memberNames:Array<String>, logText:String) {
 		switch (token.tok) {
 			case Const(CIdent(name)):
-				if (memberNames.indexOf(name) >= 0) {
+				if (memberNames.contains(name)) {
 					logPos('$logText of "$name" masks member of same name', token.pos, severity);
 				}
 			default:
