@@ -27,15 +27,14 @@ class MagicNumberCheck extends Check {
 		if (ignore) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree):Bool {
-			if (token.tok == null) return false;
+		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Const(CInt(_)): true;
-				case Const(CFloat(_)): true;
-				default: false;
+				case Const(CInt(_)): FOUND_GO_DEEPER;
+				case Const(CFloat(_)): FOUND_GO_DEEPER;
+				default: GO_DEEPER;
 			}
-		},
-		ALL);
+		});
 
 		for (numberToken in allNumbers) {
 			if (isPosSuppressed(numberToken.pos)) continue;

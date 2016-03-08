@@ -27,6 +27,11 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 		chk.ignoreFormat = "^equals$";
 		assertMsg(chk, TEST5, '');
 	}
+
+	public function testClosure() {
+		assertNoMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE);
+		assertMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE_2, 'Return count is 3 (max allowed is 2)');
+	}
 }
 
 @:enum
@@ -78,6 +83,28 @@ abstract ReturnCountCheckTests(String) to String {
 			return 1;
 			return 2;
 			return 3;
+		}
+	}";
+
+	var RETURN_IN_CLOSURE = "
+	abstractAndClass Test {
+		function equals() {
+			var a = function() { return 1; };
+			var b = function() { return 2; };
+			return a() + b();
+		}
+	}";
+
+	var RETURN_IN_CLOSURE_2 = "
+	abstractAndClass Test {
+		function equals() {
+			var a = function() {
+				return 1;
+				return 2;
+				return 3;
+			}
+			var b = function() { return 2; };
+			return a() + b();
 		}
 	}";
 }
