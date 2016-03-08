@@ -2,28 +2,29 @@ package checks.type;
 
 import checkstyle.checks.type.TypeCheck;
 
-class TypeCheckTest extends CheckTestCase {
+class TypeCheckTest extends CheckTestCase<TypeCheckTests> {
 
 	public function testClassVar() {
-		assertMsg(new TypeCheck(), TypeTests.TEST1, 'Type not specified: _a');
+		assertMsg(new TypeCheck(), TEST1, 'Type not specified: _a');
 	}
 
 	public function testStaticClassVar() {
-		assertMsg(new TypeCheck(), TypeTests.TEST2, 'Type not specified: A');
+		assertMsg(new TypeCheck(), TEST2, 'Type not specified: A');
 	}
 
 	public function testEnumAbstract() {
-		assertNoMsg(new TypeCheck(), TypeTests.TEST3);
-		assertMsg(new TypeCheck(), TypeTests.TEST4, 'Type not specified: VALUE');
+		assertNoMsg(new TypeCheck(), TEST3);
+		assertMsg(new TypeCheck(), TEST4, 'Type not specified: VALUE');
 
 		var check = new TypeCheck();
 		check.ignoreEnumAbstractValues = false;
-		assertMsg(check, TypeTests.TEST3, 'Type not specified: VALUE');
+		assertMsg(check, TEST3, 'Type not specified: VALUE');
 	}
 }
 
-class TypeTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract TypeCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		var _a;
 
@@ -31,18 +32,18 @@ class TypeTests {
 		var _b;
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	class Test {
 		static inline var A = 1;
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"@:enum
 	abstract Test(Int) {
 		var VALUE = 0;
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"@:enum
 	abstract Test(Int) {
 		static inline var VALUE = 0;

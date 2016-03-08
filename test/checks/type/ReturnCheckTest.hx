@@ -2,7 +2,7 @@ package checks.type;
 
 import checkstyle.checks.type.ReturnCheck;
 
-class ReturnCheckTest extends CheckTestCase {
+class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 
 	static inline var MSG_VOID_RETURN:String = 'Void return should not explicitly be specified for function test';
 	static inline var MSG_NOT_TEST1_RETURN:String = 'Return type not specified for function: test1';
@@ -10,64 +10,65 @@ class ReturnCheckTest extends CheckTestCase {
 	static inline var MSG_NO_ANON_RETURN:String = 'Return type not specified for anonymous function';
 
 	public function testVoid() {
-		assertMsg(new ReturnCheck(), ReturnTests.TEST1, MSG_VOID_RETURN);
+		assertMsg(new ReturnCheck(), TEST1, MSG_VOID_RETURN);
 	}
 
 	public function testNoReturnType() {
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2A, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), ReturnTests.TEST2B, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), ReturnTests.TEST5, MSG_NO_ANON_RETURN);
+		assertMsg(new ReturnCheck(), TEST2, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), TEST2A, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), TEST2B, MSG_NOT_TEST1_RETURN);
+		assertMsg(new ReturnCheck(), TEST5, MSG_NO_ANON_RETURN);
 	}
 
 	public function testEmptyReturnType() {
-		assertNoMsg(new ReturnCheck(), ReturnTests.TEST3);
+		assertNoMsg(new ReturnCheck(), TEST3);
 	}
 
 	public function testEnforceReturnType() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
-		assertNoMsg(check, ReturnTests.TEST1);
-		assertNoMsg(check, ReturnTests.TEST4);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST4);
 	}
 
 	public function testEnforceReturnTypeMissing() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
 
-		assertNoMsg(check, ReturnTests.TEST1);
-		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
-		assertMsg(check, ReturnTests.TEST3, MSG_NOT_TEST2_RETURN);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST3, MSG_NOT_TEST2_RETURN);
 	}
 
 	public function testReturnTypeAllowEmptyReturnFalse() {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = false;
 
-		assertMsg(check, ReturnTests.TEST3, MSG_NOT_TEST2_RETURN);
+		assertMsg(check, TEST3, MSG_NOT_TEST2_RETURN);
 	}
 
 	public function testReturnTypeAllowEmptyReturnTrue() {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = true;
 
-		assertNoMsg(check, ReturnTests.TEST3);
-		assertMsg(check, ReturnTests.TEST2, MSG_NOT_TEST1_RETURN);
+		assertNoMsg(check, TEST3);
+		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
 	}
 
 	public function testExternVoid() {
 		var check = new ReturnCheck();
-		assertNoMsg(check, ReturnTests.TEST6);
+		assertNoMsg(check, TEST6);
 	}
 }
 
-class ReturnTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract ReturnCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		public function test():Void {}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function test1() {
 			if (true) {
@@ -76,7 +77,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST2A:String =
+	var TEST2A =
 	"abstractAndClass Test {
 		public function test1() {
 			switch (true) {
@@ -86,7 +87,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST2B:String =
+	var TEST2B =
 	"abstractAndClass Test {
 		public function test1() {
 			try {
@@ -98,7 +99,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"abstractAndClass Test {
 		public function test2() {
 			var x = 1;
@@ -106,14 +107,14 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"abstractAndClass Test {
 		public function test3():Void {
 			return;
 		}
 	}";
 
-	public static inline var TEST5:String =
+	var TEST5 =
 	"abstractAndClass Test {
 		public function test4() {
 			var x = function(i){
@@ -123,7 +124,7 @@ class ReturnTests {
 		}
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	extern class Test {
 		function test4():Void;
 	}";

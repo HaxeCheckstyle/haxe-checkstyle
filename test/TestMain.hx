@@ -9,7 +9,7 @@ class TestMain {
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new TokenTreeBuilderTest());
 
-		var tests:List<Class<CheckTestCase>> = CompileTime.getAllClasses(CheckTestCase);
+		var tests = CompileTime.getAllClasses(CheckTestCase);
 		for (testClass in tests) runner.add(Type.createInstance(testClass, []));
 
 		var success = runner.run();

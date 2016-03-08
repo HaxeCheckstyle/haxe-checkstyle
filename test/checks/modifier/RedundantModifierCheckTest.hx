@@ -2,87 +2,88 @@ package checks.modifier;
 
 import checkstyle.checks.modifier.RedundantModifierCheck;
 
-class RedundantModifierCheckTest extends CheckTestCase {
+class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTests> {
 
 	public function testCorrectUsage() {
-		assertNoMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST);
-		assertNoMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST3);
+		assertNoMsg(new RedundantModifierCheck(), TEST);
+		assertNoMsg(new RedundantModifierCheck(), TEST3);
 	}
 
 	public function testNormalClass() {
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST1, 'No need of private keyword: a');
+		assertMsg(new RedundantModifierCheck(), TEST1, 'No need of private keyword: a');
 	}
 
 	public function testInterface() {
-		assertMsg(new RedundantModifierCheck(), RedundantModifierTests.TEST2, 'No need of public keyword: a');
+		assertMsg(new RedundantModifierCheck(), TEST2, 'No need of public keyword: a');
 	}
 
 	public function testClassWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertNoMsg(check, RedundantModifierTests.TEST1);
+		assertNoMsg(check, TEST1);
 	}
 
 	public function testClassWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST, 'Missing private keyword: _onUpdate');
+		assertMsg(check, TEST, 'Missing private keyword: _onUpdate');
 	}
 
 	public function testInterfaceWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertNoMsg(check, RedundantModifierTests.TEST2);
+		assertNoMsg(check, TEST2);
 	}
 
 	public function testInterfaceWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST3, 'Missing public keyword: a');
+		assertMsg(check, TEST3, 'Missing public keyword: a');
 	}
 
 	public function testClassWithPublicFields() {
 		var check = new RedundantModifierCheck();
-		assertNoMsg(check, RedundantModifierTests.TEST4);
-		assertMsg(check, RedundantModifierTests.TEST5, 'No need of public keyword: foo');
+		assertNoMsg(check, TEST4);
+		assertMsg(check, TEST5, 'No need of public keyword: foo');
 
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST6, 'Missing public keyword: foo');
+		assertMsg(check, TEST6, 'Missing public keyword: foo');
 	}
 
 	public function testEnumAbstract() {
 		var check = new RedundantModifierCheck();
-		assertMsg(check, RedundantModifierTests.TEST7, 'No need of public keyword: value');
-		assertNoMsg(check, RedundantModifierTests.TEST8);
-		assertMsg(check, RedundantModifierTests.TEST9, 'No need of private keyword: CONSTANT');
-		assertNoMsg(check, RedundantModifierTests.TEST10);
-		assertMsg(check, RedundantModifierTests.TEST11, 'No need of private keyword: foo');
-		assertNoMsg(check, RedundantModifierTests.TEST12);
+		assertMsg(check, TEST7, 'No need of public keyword: value');
+		assertNoMsg(check, TEST8);
+		assertMsg(check, TEST9, 'No need of private keyword: CONSTANT');
+		assertNoMsg(check, TEST10);
+		assertMsg(check, TEST11, 'No need of private keyword: foo');
+		assertNoMsg(check, TEST12);
 
 		check.enforcePublicPrivate = true;
-		assertNoMsg(check, RedundantModifierTests.TEST7);
-		assertMsg(check, RedundantModifierTests.TEST8, 'Missing public keyword: value');
-		assertNoMsg(check, RedundantModifierTests.TEST9);
-		assertMsg(check, RedundantModifierTests.TEST10, 'Missing private keyword: CONSTANT');
-		assertNoMsg(check, RedundantModifierTests.TEST11);
-		assertMsg(check, RedundantModifierTests.TEST12, 'Missing private keyword: foo');
+		assertNoMsg(check, TEST7);
+		assertMsg(check, TEST8, 'Missing public keyword: value');
+		assertNoMsg(check, TEST9);
+		assertMsg(check, TEST10, 'Missing private keyword: CONSTANT');
+		assertNoMsg(check, TEST11);
+		assertMsg(check, TEST12, 'Missing private keyword: foo');
 	}
 
 	public function testConstructor() {
 		var check = new RedundantModifierCheck();
-		assertNoMsg(check, RedundantModifierTests.TEST13);
-		assertMsg(check, RedundantModifierTests.TEST14, 'No need of private keyword: new');
-		assertNoMsg(check, RedundantModifierTests.TEST15);
+		assertNoMsg(check, TEST13);
+		assertMsg(check, TEST14, 'No need of private keyword: new');
+		assertNoMsg(check, TEST15);
 
 		check.enforcePublicPrivate = true;
-		assertMsg(check, RedundantModifierTests.TEST13, 'Missing private keyword: new');
-		assertNoMsg(check, RedundantModifierTests.TEST14);
-		assertNoMsg(check, RedundantModifierTests.TEST15);
+		assertMsg(check, TEST13, 'Missing private keyword: new');
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
 	}
 }
 
-class RedundantModifierTests {
-	public static inline var TEST:String = "
+@:enum
+abstract RedundantModifierCheckTests(String) to String {
+	var TEST = "
 	abstractAndClass Test {
 		var a:Int;
 
@@ -91,86 +92,86 @@ class RedundantModifierTests {
 		public function test(){}
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	abstractAndClass Test {
 		private var a:Int;
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	interface Test {
 		public var a:Int;
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	interface Test {
 		var a:Int;
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	@:publicFields
 	class Test {
 		private function foo() {}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	@:publicFields
 	class Test {
 		public function foo() {}
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	@:publicFields
 	class Test {
 		function foo() {}
 	}";
 
-	public static inline var TEST7:String = "
+	var TEST7 = "
 	@:enum
 	abstract Test(Int) {
 		public var value = 0;
 	}";
 
-	public static inline var TEST8:String = "
+	var TEST8 = "
 	@:enum
 	abstract Test(Int) {
 		var value = 0;
 	}";
 
-	public static inline var TEST9:String = "
+	var TEST9 = "
 	@:enum
 	abstract Test(Int) {
 		private static inline var CONSTANT = 0;
 	}";
 
-	public static inline var TEST10:String = "
+	var TEST10 = "
 	@:enum
 	abstract Test(Int) {
 		static inline var CONSTANT = 0;
 	}";
 
-	public static inline var TEST11:String = "
+	var TEST11 = "
 	@:enum
 	abstract Test(Int) {
 		private function foo() {}
 	}";
 
-	public static inline var TEST12:String = "
+	var TEST12 = "
 	@:enum
 	abstract Test(Int) {
 		function foo() {}
 	}";
 
-	public static inline var TEST13:String = "
+	var TEST13 = "
 	abstractAndClass Test {
 		function new() {}
 	}";
 
-	public static inline var TEST14:String = "
+	var TEST14 = "
 	abstractAndClass Test {
 		private function new() {}
 	}";
 
-	public static inline var TEST15:String = "
+	var TEST15 = "
 	abstractAndClass Test {
 		public function new() {}
 	}";

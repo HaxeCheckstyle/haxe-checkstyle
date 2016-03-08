@@ -2,7 +2,7 @@ package checks.block;
 
 import checkstyle.checks.block.LeftCurlyCheck;
 
-class LeftCurlyCheckTest extends CheckTestCase {
+class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 
 	static inline var MSG_EOL:String = 'Left curly should be at EOL (only linebreak or comment after curly)';
 	static inline var MSG_NL:String = 'Left curly should be on new line (only whitespace before curly)';
@@ -11,112 +11,113 @@ class LeftCurlyCheckTest extends CheckTestCase {
 
 	public function testCorrectBraces() {
 		var check = new LeftCurlyCheck();
-		assertNoMsg(check, LeftCurlyTests.TEST);
-		assertNoMsg(check, LeftCurlyTests.TEST4);
-		assertNoMsg(check, LeftCurlyTests.TEST6);
-		assertNoMsg(check, LeftCurlyTests.TEST8);
-		assertNoMsg(check, LeftCurlyTests.TEST9);
-		assertNoMsg(check, LeftCurlyTests.TEST14);
-		assertNoMsg(check, LeftCurlyTests.EOL_CASEBLOCK);
-		assertNoMsg(check, LeftCurlyTests.MACRO_REIFICATION);
-		assertNoMsg(check, LeftCurlyTests.ISSUE_97);
-		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114);
-		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, EOL_CASEBLOCK);
+		assertNoMsg(check, MACRO_REIFICATION);
+		assertNoMsg(check, ISSUE_97);
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 	}
 
 	public function testWrongBraces() {
 		var check = new LeftCurlyCheck();
-		assertMsg(check, LeftCurlyTests.TEST1, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST2, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST3, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST3, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST5, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST7, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.TEST10, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.NL_CASEBLOCK, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, MSG_EOL);
+		assertMsg(check, TEST1, MSG_EOL);
+		assertMsg(check, TEST2, MSG_EOL);
+		assertMsg(check, TEST3, MSG_EOL);
+		assertMsg(check, TEST3, MSG_EOL);
+		assertMsg(check, TEST5, MSG_EOL);
+		assertMsg(check, TEST7, MSG_EOL);
+		assertMsg(check, TEST10, MSG_EOL);
+		assertMsg(check, NL_CASEBLOCK, MSG_EOL);
+		assertMsg(check, NLOW_CASEBLOCK, MSG_EOL);
 	}
 
 	public function testBraceOnNL() {
 		var check = new LeftCurlyCheck();
 		check.option = NL;
 
-		assertMsg(check, LeftCurlyTests.TEST, MSG_NL);
-		assertNoMsg(check, LeftCurlyTests.TEST13);
+		assertMsg(check, TEST, MSG_NL);
+		assertNoMsg(check, TEST13);
 
 		check.tokens = [OBJECT_DECL];
-		assertMsg(check, LeftCurlyTests.TEST4, MSG_NL);
-		assertMsg(check, LeftCurlyTests.TEST14, MSG_NL);
+		assertMsg(check, TEST4, MSG_NL);
+		assertMsg(check, TEST14, MSG_NL);
 
 		check.tokens = [IF];
-		assertNoMsg(check, LeftCurlyTests.TEST1);
-		assertNoMsg(check, LeftCurlyTests.TEST13);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST13);
 
 		check.tokens = [FOR];
-		assertNoMsg(check, LeftCurlyTests.TEST5);
-		assertNoMsg(check, LeftCurlyTests.TEST13);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST13);
 
 		check.tokens = [FUNCTION];
-		assertNoMsg(check, LeftCurlyTests.TEST13);
+		assertNoMsg(check, TEST13);
 	}
 
 	public function testSwitch() {
 		var check = new LeftCurlyCheck();
 		check.option = NL;
-		assertNoMsg(check, LeftCurlyTests.TEST15);
-		assertNoMsg(check, LeftCurlyTests.NL_CASEBLOCK);
-		assertMsg(check, LeftCurlyTests.EOL_CASEBLOCK, MSG_NL);
-		assertMsg(check, LeftCurlyTests.NLOW_CASEBLOCK, MSG_NL);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, NL_CASEBLOCK);
+		assertMsg(check, EOL_CASEBLOCK, MSG_NL);
+		assertMsg(check, NLOW_CASEBLOCK, MSG_NL);
 	}
 
 	public function testNLOW() {
 		var check = new LeftCurlyCheck();
 		check.option = NLOW;
-		assertNoMsg(check, LeftCurlyTests.TEST);
-		assertNoMsg(check, LeftCurlyTests.TEST12);
-		assertNoMsg(check, LeftCurlyTests.TEST16);
-		assertNoMsg(check, LeftCurlyTests.NLOW_CASEBLOCK);
-		assertMsg(check, LeftCurlyTests.TEST17, MSG_NLOW);
-		assertMsg(check, LeftCurlyTests.TEST18, MSG_NL_SPLIT);
-		assertMsg(check, LeftCurlyTests.TEST19, MSG_NL_SPLIT);
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST16);
+		assertNoMsg(check, NLOW_CASEBLOCK);
+		assertMsg(check, TEST17, MSG_NLOW);
+		assertMsg(check, TEST18, MSG_NL_SPLIT);
+		assertMsg(check, TEST19, MSG_NL_SPLIT);
 	}
 
 	public function testReification() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [REIFICATION];
-		assertMsg(check, LeftCurlyTests.MACRO_REIFICATION, MSG_EOL);
+		assertMsg(check, MACRO_REIFICATION, MSG_EOL);
 	}
 
 	public function testIgnoreEmptySingleline() {
 		var check = new LeftCurlyCheck();
 		check.ignoreEmptySingleline = false;
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_CLASS, MSG_EOL);
-		assertMsg(check, LeftCurlyTests.NO_FIELDS_MACRO, MSG_EOL);
+		assertMsg(check, NO_FIELDS_CLASS, MSG_EOL);
+		assertMsg(check, NO_FIELDS_MACRO, MSG_EOL);
 
 		check.ignoreEmptySingleline = true;
-		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_CLASS);
-		assertNoMsg(check, LeftCurlyTests.NO_FIELDS_MACRO);
+		assertNoMsg(check, NO_FIELDS_CLASS);
+		assertNoMsg(check, NO_FIELDS_MACRO);
 	}
 
 	public function testArrayComprehension() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION];
-		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
-		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
 
 		check.option = NLOW;
-		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114);
-		assertNoMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_NLOW_ISSUE_114);
-		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_NLOW_ISSUE_114);
+		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
 
 		check.option = NL;
-		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_2_ISSUE_114, MSG_NL);
-		assertMsg(check, LeftCurlyTests.ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
+		assertMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114, MSG_NL);
+		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
 	}
 }
 
-class LeftCurlyTests {
-	public static inline var TEST:String = "
+@:enum
+abstract LeftCurlyCheckTests(String) to String {
+	var TEST = "
 	class Test {
 		function test() {
 			if (true) {
@@ -163,7 +164,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	class Test {
 		function test() {
 			if (true)
@@ -173,7 +174,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	class Test {
 		function test() {
 			if (true)
@@ -185,7 +186,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	class Test {
 		function test()
 		{
@@ -198,7 +199,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	class Test {
 		function test() {
 			if (true) return { x:1,
@@ -207,7 +208,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	class Test {
 		function test() {
 			for (i in 0...10)
@@ -217,7 +218,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	class Test {
 		function test() {
 			for (i in 0...10) if (i < 5) {
@@ -226,14 +227,14 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST7:String = "
+	var TEST7 = "
 	class Test {
 		function test() {
 			while (true) { return i; }
 		}
 	}";
 
-	public static inline var TEST8:String = "
+	var TEST8 = "
 	class Test {
 		function test() {
 			while (true) {
@@ -242,14 +243,14 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST9:String = "
+	var TEST9 = "
 	class Test {
 		function test() {
 			for (i in 0....10) return i;
 		}
 	}";
 
-	public static inline var TEST10:String = "
+	var TEST10 = "
 	class Test
 	{
 		function test() {
@@ -257,14 +258,14 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST12:String = "
+	var TEST12 = "
 	class Test {
 		function test() {
 			var struct = {x:10, y:10, z:20};
 		}
 	}";
 
-	public static inline var TEST13:String = "
+	var TEST13 = "
 	class Test
 	{
 		function test()
@@ -283,7 +284,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST14:String = "
+	var TEST14 = "
 	typedef Test = {
 		x:Int,
 		y:Int,
@@ -291,7 +292,7 @@ class LeftCurlyTests {
 		point:{x:Int, y:Int, z:Int}
 	}";
 
-	public static inline var TEST15:String = "
+	var TEST15 = "
 	class Test
 	{
 		public function test(val:Bool):String
@@ -305,7 +306,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST16:String = "
+	var TEST16 = "
 	class Test {
 		public function test(val:Int,
 				val2:Int):String
@@ -319,7 +320,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST17:String = "
+	var TEST17 = "
 	class Test {
 		public function test(val:Int, val2:Int):String
 		{
@@ -331,7 +332,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST18:String = "
+	var TEST18 = "
 	class Test {
 		public function test(val:Int,
 				val2:Int):String {
@@ -344,7 +345,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var TEST19:String = "
+	var TEST19 = "
 	class Test {
 		public function test(val:Int,
 				val2:Int):String
@@ -357,7 +358,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var NL_CASEBLOCK:String = "
+	var NL_CASEBLOCK = "
 	class Test
 	{
 		public function test(val:Int,
@@ -374,7 +375,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var EOL_CASEBLOCK:String = "
+	var EOL_CASEBLOCK = "
 	class Test {
 		public function test(val:Int,
 				val2:Int):String {
@@ -387,7 +388,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var NLOW_CASEBLOCK:String = "
+	var NLOW_CASEBLOCK = "
 	class Test {
 		public function test(val:Int,
 				val2:Int):String
@@ -403,7 +404,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var MACRO_REIFICATION:String = "
+	var MACRO_REIFICATION = "
 	class Test {
 		public function test(val:Int) {
 			var str = 'Hello, world';
@@ -412,16 +413,16 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var NO_FIELDS_CLASS:String = "
+	var NO_FIELDS_CLASS = "
 	class Test {}
 	";
 
-	public static inline var NO_FIELDS_MACRO:String = "
+	var NO_FIELDS_MACRO = "
 	class Test {
 		var definition = macro class Font extends flash.text.Font {};
 	}";
 
-	public static inline var ISSUE_97:String = "
+	var ISSUE_97 = "
 	class Test {
 		function foo() {
 			switch (expr) {
@@ -448,7 +449,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var ARRAY_COMPREHENSION_ISSUE_114:String = "
+	var ARRAY_COMPREHENSION_ISSUE_114 = "
 	class Test {
 		public function foo() {
 			[for (i in 0...10) {index:i}];
@@ -456,7 +457,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var ARRAY_COMPREHENSION_2_ISSUE_114:String = "
+	var ARRAY_COMPREHENSION_2_ISSUE_114 = "
 	class Test {
 		public function foo() {
 			[for (i in 0...10) {
@@ -470,7 +471,7 @@ class LeftCurlyTests {
 		}
 	}";
 
-	public static inline var ARRAY_COMPREHENSION_NLOW_ISSUE_114:String = "
+	var ARRAY_COMPREHENSION_NLOW_ISSUE_114 = "
 	class Test {
 		public function foo() {
 			[for (x in 0...10)

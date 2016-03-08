@@ -2,72 +2,73 @@ package checks.whitespace;
 
 import checkstyle.checks.whitespace.SpacingCheck;
 
-class SpacingCheckTest extends CheckTestCase {
+class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 
 	public function testIf() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST1A, 'No space between if and (');
-		assertNoMsg(new SpacingCheck(), SpacingTests.TEST1B);
+		assertMsg(new SpacingCheck(), TEST1A, 'No space between if and (');
+		assertNoMsg(new SpacingCheck(), TEST1B);
 	}
 
 	public function testBinaryOperator() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST2, 'No space around +');
+		assertMsg(new SpacingCheck(), TEST2, 'No space around +');
 	}
 
 	public function testUnaryOperator() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST3, 'Space around ++');
+		assertMsg(new SpacingCheck(), TEST3, 'Space around ++');
 	}
 
 	public function testFor() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST4A, 'No space between for and (');
-		assertNoMsg(new SpacingCheck(), SpacingTests.TEST4B);
+		assertMsg(new SpacingCheck(), TEST4A, 'No space between for and (');
+		assertNoMsg(new SpacingCheck(), TEST4B);
 	}
 
 	public function testWhile() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST5A, 'No space between while and (');
-		assertNoMsg(new SpacingCheck(), SpacingTests.TEST5B);
+		assertMsg(new SpacingCheck(), TEST5A, 'No space between while and (');
+		assertNoMsg(new SpacingCheck(), TEST5B);
 	}
 
 	public function testSwitch() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST6A, 'No space between switch and (');
-		assertNoMsg(new SpacingCheck(), SpacingTests.TEST6B);
+		assertMsg(new SpacingCheck(), TEST6A, 'No space between switch and (');
+		assertNoMsg(new SpacingCheck(), TEST6B);
 	}
 
 	public function testCatch() {
-		assertMsg(new SpacingCheck(), SpacingTests.TEST7A, 'No space between catch and (');
-		assertNoMsg(new SpacingCheck(), SpacingTests.TEST7B);
+		assertMsg(new SpacingCheck(), TEST7A, 'No space between catch and (');
+		assertNoMsg(new SpacingCheck(), TEST7B);
 	}
 }
 
-class SpacingTests {
-	public static inline var TEST1A:String = "
+@:enum
+abstract SpacingCheckTests(String) to String {
+	var TEST1A = "
 	class Test {
 		public function test() {
 			if(true) {}
 		}
 	}";
 
-	public static inline var TEST1B:String = "
+	var TEST1B = "
 	class Test {
 		public function test() {
 			if (true) {}
 		}
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"class Test {
 		public function test() {
 			var a = a+1;
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"class Test {
 		public function test() {
 			var a = a ++;
 		}
 	}";
 
-	public static inline var TEST4A:String =
+	var TEST4A =
 	"class Test {
 		public function test() {
 			for(i in 0...10) {
@@ -76,7 +77,7 @@ class SpacingTests {
 		}
 	}";
 
-	public static inline var TEST4B:String =
+	var TEST4B =
 	"class Test {
 		public function test() {
 			for (i in 0...10) {
@@ -85,21 +86,21 @@ class SpacingTests {
 		}
 	}";
 
-	public static inline var TEST5A:String =
+	var TEST5A =
 	"class Test {
 		public function test() {
 			while(true) {}
 		}
 	}";
 
-	public static inline var TEST5B:String =
+	var TEST5B =
 	"class Test {
 		public function test() {
 			while (true) {}
 		}
 	}";
 
-	public static inline var TEST6A:String =
+	var TEST6A =
 	"class Test {
 		public function test() {
 			switch(0) {
@@ -109,7 +110,7 @@ class SpacingTests {
 		}
 	}";
 
-	public static inline var TEST6B:String =
+	var TEST6B =
 	"class Test {
 		public function test() {
 			switch (0) {
@@ -119,7 +120,7 @@ class SpacingTests {
 		}
 	}";
 
-	public static inline var TEST7A:String =
+	var TEST7A =
 	"class Test {
 		public function test() {
 			try {}
@@ -127,7 +128,7 @@ class SpacingTests {
 		}
 	}";
 
-	public static inline var TEST7B:String =
+	var TEST7B =
 	"class Test {
 		public function test() {
 			try {}

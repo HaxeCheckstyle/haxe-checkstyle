@@ -2,35 +2,36 @@ package checks.design;
 
 import checkstyle.checks.design.UnnecessaryConstructorCheck;
 
-class UnnecessaryConstructorCheckTest extends CheckTestCase {
+class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstructorCheckTests> {
 
 	public function testWithConstructor() {
-		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST1, "Unnecessary constructor found");
+		assertMsg(new UnnecessaryConstructorCheck(), TEST1, "Unnecessary constructor found");
 	}
 
 	public function testWithoutConstructor() {
-		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST2);
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST2);
 	}
 
 	public function testWithConstructorAndInstanceVar() {
-		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST3);
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST3);
 	}
 
 	public function testWithConstructorAndInstanceFunction() {
-		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST4);
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST4);
 	}
 
 	public function testJustVarsWithConstructor() {
-		assertMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST5, "Unnecessary constructor found");
+		assertMsg(new UnnecessaryConstructorCheck(), TEST5, "Unnecessary constructor found");
 	}
 
 	public function testJustWithConstructor() {
-		assertNoMsg(new UnnecessaryConstructorCheck(), UnnecessaryConstructorCheckTests.TEST6);
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST6);
 	}
 }
 
-class UnnecessaryConstructorCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract UnnecessaryConstructorCheckTests(String) to String {
+	var TEST1 = "
 	class Test {
 		public function new() {}
 
@@ -40,7 +41,7 @@ class UnnecessaryConstructorCheckTests {
 		static function test() {}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	class Test {
 		static var a:Int = 1;
 		static inline var b:Int = 1;
@@ -48,7 +49,7 @@ class UnnecessaryConstructorCheckTests {
 		static function test() {}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	class Test {
 		var loc:Float;
 		static var a:Int = 1;
@@ -61,7 +62,7 @@ class UnnecessaryConstructorCheckTests {
 		static function test() {}
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	class Test {
 		var loc:Float;
 		static var a:Int = 1;
@@ -76,7 +77,7 @@ class UnnecessaryConstructorCheckTests {
 		public function test2(){}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	class Test {
 		public function new() {}
 
@@ -84,7 +85,7 @@ class UnnecessaryConstructorCheckTests {
 		static inline var b:Int = 1;
 	}";
 
-	public static inline var TEST6:String = "
+	var TEST6 = "
 	class Test {
 		public function new() {}
 	}";

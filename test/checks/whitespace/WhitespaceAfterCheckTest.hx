@@ -2,7 +2,7 @@ package checks.whitespace;
 
 import checkstyle.checks.whitespace.WhitespaceAfterCheck;
 
-class WhitespaceAfterCheckTest extends CheckTestCase {
+class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> {
 
 	static inline var MSG_COMMA:String = 'No whitespace after ","';
 	static inline var MSG_EQUALS:String = 'No whitespace after "="';
@@ -10,43 +10,44 @@ class WhitespaceAfterCheckTest extends CheckTestCase {
 
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
-		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_57);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_58);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_59);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_63);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_64);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_65);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_66);
-		assertNoMsg(check, WhitespaceAfterTests.ISSUE_67);
+		assertNoMsg(check, CORRECT_WHITESPACE_AFTER);
+		assertNoMsg(check, ISSUE_57);
+		assertNoMsg(check, ISSUE_58);
+		assertNoMsg(check, ISSUE_59);
+		assertNoMsg(check, ISSUE_63);
+		assertNoMsg(check, ISSUE_64);
+		assertNoMsg(check, ISSUE_65);
+		assertNoMsg(check, ISSUE_66);
+		assertNoMsg(check, ISSUE_67);
 	}
 
 	public function testIncorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC, MSG_COMMA);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, MSG_COMMA);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, MSG_COMMA);
+		assertMsg(check, NO_WHITESPACE_FUNC, MSG_COMMA);
+		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_COMMA);
+		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_COMMA);
 	}
 
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAfterCheck();
 		check.tokens = ["="];
-		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
-		assertNoMsg(check, WhitespaceAfterTests.NO_WHITESPACE_FUNC);
-		assertNoMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
+		assertNoMsg(check, CORRECT_WHITESPACE_AFTER);
+		assertNoMsg(check, NO_WHITESPACE_FUNC);
+		assertNoMsg(check, NO_WHITESPACE_GT);
+		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
+		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
+		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		check.tokens = [">"];
-		assertNoMsg(check, WhitespaceAfterTests.CORRECT_WHITESPACE_AFTER);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_VAR_INIT, MSG_GREATER);
-		assertMsg(check, WhitespaceAfterTests.NO_WHITESPACE_GT, MSG_GREATER);
+		assertNoMsg(check, CORRECT_WHITESPACE_AFTER);
+		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_GREATER);
+		assertMsg(check, NO_WHITESPACE_GT, MSG_GREATER);
 	}
 }
 
-class WhitespaceAfterTests {
-	public static inline var CORRECT_WHITESPACE_AFTER:String = "
+@:enum
+abstract WhitespaceAfterCheckTests(String) to String {
+	var CORRECT_WHITESPACE_AFTER = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var x = { x: 100, y: 100,
@@ -69,66 +70,66 @@ class WhitespaceAfterTests {
 		Friday; Weekend(day:String);
 	}";
 
-	public static inline var NO_WHITESPACE_FUNC:String = "
+	var NO_WHITESPACE_FUNC = "
 	class Test {
 		function test(param1:String,param2:String) {
 		}
 	}";
 
-	public static inline var NO_WHITESPACE_OBJECT_DECL:String = "
+	var NO_WHITESPACE_OBJECT_DECL = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var x={ x: 100, y: 100,z: 20 };
 		}
 	}";
 
-	public static inline var NO_WHITESPACE_TYPEDEF:String = "
+	var NO_WHITESPACE_TYPEDEF = "
 	typedef Test ={
 		x:Int,
 		y:Int,z:Int
 	}";
 
-	public static inline var NO_WHITESPACE_VAR_INIT:String = "
+	var NO_WHITESPACE_VAR_INIT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>=[];
 		}
 	}";
 
-	public static inline var NO_WHITESPACE_GT:String = "
+	var NO_WHITESPACE_GT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>= [];
 		}
 	}";
 
-	public static inline var ISSUE_57:String = "
+	var ISSUE_57 = "
 	class Test {
 		public function new() {
 			trace(#if true cast #end 'text');
 		}
 	}";
 
-	public static inline var ISSUE_58:String = "
+	var ISSUE_58 = "
 	class Test {
 		public function new() {
 			var x:Int, y:Int;
 		}
 	}";
 
-	public static inline var ISSUE_59:String = "
+	var ISSUE_59 = "
 	typedef Test = Int
 	";
 
-	public static inline var ISSUE_63:String = "
+	var ISSUE_63 = "
 	typedef Test = #if true Int #else String #end
 	";
 
-	public static inline var ISSUE_64:String = "
+	var ISSUE_64 = "
 	class Test #if true extends Base #end {}
 	";
 
-	public static inline var ISSUE_65:String = "
+	var ISSUE_65 = "
 	class Test {
 		function foo() {
 			switch (0) {
@@ -138,12 +139,12 @@ class WhitespaceAfterTests {
 		}
 	}";
 
-	public static inline var ISSUE_66:String = "
+	var ISSUE_66 = "
 	class Test {
 		public inline function new<T>() {}
 	}";
 
-	public static inline var ISSUE_67:String = "
+	var ISSUE_67 = "
 	extern class Promise<T>
 	{
 		@:overload(function<T>(promise : Promise<T>) : Promise<T> {})

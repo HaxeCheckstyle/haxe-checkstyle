@@ -2,21 +2,22 @@ package checks;
 
 import checkstyle.checks.AvoidStarImportCheck;
 
-class AvoidStarImportCheckTest extends CheckTestCase {
+class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> {
 
 	public function testNoStarImport() {
 		var check = new AvoidStarImportCheck();
-		assertNoMsg(check, AvoidStarImportCheckTests.IMPORT);
+		assertNoMsg(check, IMPORT);
 	}
 
 	public function testStarImport() {
 		var check = new AvoidStarImportCheck();
-		assertMsg(check, AvoidStarImportCheckTests.STAR_IMPORT, 'Import line uses a star (.*) import - consider using full type names');
+		assertMsg(check, STAR_IMPORT, 'Import line uses a star (.*) import - consider using full type names');
 	}
 }
 
-class AvoidStarImportCheckTests {
-	public static inline var IMPORT:String = "
+@:enum
+abstract AvoidStarImportCheckTests(String) to String {
+	var IMPORT = "
 	package haxe.checkstyle;
 
 	import haxe.checkstyle.Check;
@@ -29,7 +30,7 @@ class AvoidStarImportCheckTests {
 		public function new() {}
 	}";
 
-	public static inline var STAR_IMPORT:String = "
+	var STAR_IMPORT = "
 	package haxe.checkstyle;
 
 	import haxe.checkstyle.*;

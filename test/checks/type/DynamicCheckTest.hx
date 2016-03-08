@@ -2,28 +2,29 @@ package checks.type;
 
 import checkstyle.checks.type.DynamicCheck;
 
-class DynamicCheckTest extends CheckTestCase {
+class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 
 	public function testNoDynamic() {
 		var check = new DynamicCheck ();
-		assertNoMsg(check, DynamicTests.TEST);
+		assertNoMsg(check, TEST);
 	}
 
 	public function testDetectDynamic() {
 		var check = new DynamicCheck ();
-		assertMsg(check, DynamicTests.TEST1, 'Dynamic type used: Count');
-		assertMsg(check, DynamicTests.TEST2, 'Dynamic type used: test');
-		assertMsg(check, DynamicTests.TEST3, 'Dynamic type used: Count');
-		assertMsg(check, DynamicTests.TEST4, 'Dynamic type used: param');
-		assertMsg(check, DynamicTests.TEST5, 'Dynamic type used: test');
-		assertMsg(check, DynamicTests.TEST6, 'Dynamic type used: Test');
+		assertMsg(check, TEST1, 'Dynamic type used: Count');
+		assertMsg(check, TEST2, 'Dynamic type used: test');
+		assertMsg(check, TEST3, 'Dynamic type used: Count');
+		assertMsg(check, TEST4, 'Dynamic type used: param');
+		assertMsg(check, TEST5, 'Dynamic type used: test');
+		assertMsg(check, TEST6, 'Dynamic type used: Test');
 
-		assertNoMsg(check, DynamicTests.ISSUE_43);
+		assertNoMsg(check, ISSUE_43);
 	}
 }
 
-class DynamicTests {
-	public static inline var TEST:String = "
+@:enum
+abstract DynamicCheckTests(String) to String {
+	var TEST = "
 	class Test {
 		public var a:Int;
 		private var b:Int;
@@ -79,26 +80,26 @@ class DynamicTests {
 	@SuppressWarnings('checkstyle:Dynamic')
 	typedef Test3b = Array<Dynamic>;";
 
-	public static inline var TEST1:String = "
+	var TEST1 = "
 	class Test {
 		public var Count:Dynamic = 1;
 		public function test() {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	class Test {
 		var Count:Int = 1;
 		public function test():Dynamic {
 		}
 	}";
 
-	public static inline var TEST3:String =
+	var TEST3 =
 	"typedef Test = {
 		var Count:Dynamic;
 	}";
 
-	public static inline var TEST4:String =
+	var TEST4 =
 	"extern class Test {
 		var Count:Int = 1;
 		static inline var Count:Int = 1;
@@ -106,7 +107,7 @@ class DynamicTests {
 		}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	class Test {
 		var Count:Int = 1;
 		public function test() {
@@ -114,14 +115,13 @@ class DynamicTests {
 		}
 	}";
 
-	public static inline var TEST6:String =
+	var TEST6 =
 	"typedef Test = String -> Dynamic;";
 
-	public static inline var ISSUE_43:String =
+	var ISSUE_43 =
 	"class Test {
 		function test() {
 			cast (Type.createInstance(Array, []));
 		}
 	}";
-
 }

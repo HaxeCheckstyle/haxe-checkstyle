@@ -2,35 +2,36 @@ package checks.coding;
 
 import checkstyle.checks.coding.ReturnCountCheck;
 
-class ReturnCountCheckTest extends CheckTestCase {
+class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 
 	public function testReturnCount() {
-		assertMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST1, 'Return count is 3 (max allowed is 2)');
+		assertMsg(new ReturnCountCheck(), TEST1, 'Return count is 3 (max allowed is 2)');
 	}
 
 	public function testCorrectReturnCount() {
-		assertNoMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST2);
+		assertNoMsg(new ReturnCountCheck(), TEST2);
 	}
 
 	public function testSuppressedReturnCount() {
-		assertNoMsg(new ReturnCountCheck(), ReturnCountCheckTests.TEST3);
+		assertNoMsg(new ReturnCountCheck(), TEST3);
 	}
 
 	public function testCustomReturnCount() {
 		var chk = new ReturnCountCheck();
 		chk.max = 1;
-		assertMsg(chk, ReturnCountCheckTests.TEST4, 'Return count is 2 (max allowed is 1)');
+		assertMsg(chk, TEST4, 'Return count is 2 (max allowed is 1)');
 	}
 
 	public function testIgnoreRE() {
 		var chk = new ReturnCountCheck();
 		chk.ignoreFormat = "^equals$";
-		assertMsg(chk, ReturnCountCheckTests.TEST5, '');
+		assertMsg(chk, TEST5, '');
 	}
 }
 
-class ReturnCountCheckTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract ReturnCountCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		function a() {
 			return 1;
@@ -39,7 +40,7 @@ class ReturnCountCheckTests {
 		}
 	}";
 
-	public static inline var TEST2:String = "
+	var TEST2 = "
 	abstractAndClass Test {
 		function a() {
 			return 1;
@@ -49,7 +50,7 @@ class ReturnCountCheckTests {
 		}
 	}";
 
-	public static inline var TEST3:String = "
+	var TEST3 = "
 	abstractAndClass Test {
 		@SuppressWarnings('checkstyle:ReturnCount')
 		function a() {
@@ -61,7 +62,7 @@ class ReturnCountCheckTests {
 		}
 	}";
 
-	public static inline var TEST4:String = "
+	var TEST4 = "
 	abstractAndClass Test {
 		function a() {
 			return 1;
@@ -71,7 +72,7 @@ class ReturnCountCheckTests {
 		}
 	}";
 
-	public static inline var TEST5:String = "
+	var TEST5 = "
 	abstractAndClass Test {
 		function equals() {
 			return 1;

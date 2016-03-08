@@ -2,24 +2,25 @@ package checks.type;
 
 import checkstyle.checks.type.AnonymousCheck;
 
-class AnonymousCheckTest extends CheckTestCase {
+class AnonymousCheckTest extends CheckTestCase<AnonymousCheckTests> {
 
 	public function testAnonymousStructureClassVar() {
-		assertMsg(new AnonymousCheck(), AnonymousTests.TEST1, 'Anonymous structure found, it is advised to use a typedef instead "anonymous"');
+		assertMsg(new AnonymousCheck(), TEST1, 'Anonymous structure found, it is advised to use a typedef instead "anonymous"');
 	}
 
 	public function testAnonymousStructureLocalVar() {
-		assertMsg(new AnonymousCheck(), AnonymousTests.TEST2, 'Anonymous structure found, it is advised to use a typedef instead "b"');
+		assertMsg(new AnonymousCheck(), TEST2, 'Anonymous structure found, it is advised to use a typedef instead "b"');
 	}
 }
 
-class AnonymousTests {
-	public static inline var TEST1:String = "
+@:enum
+abstract AnonymousCheckTests(String) to String {
+	var TEST1 = "
 	abstractAndClass Test {
 		var anonymous:{a:Int, b:Int};
 	}";
 
-	public static inline var TEST2:String =
+	var TEST2 =
 	"abstractAndClass Test {
 		public function new() {
 			var b:{a:Int, b:Int};
