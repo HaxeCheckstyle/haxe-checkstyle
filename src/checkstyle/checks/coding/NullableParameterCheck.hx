@@ -33,9 +33,9 @@ class NullableParameterCheck extends Check {
 
 		switch (option) {
 			case QUESTION_MARK:
-				if (hasNullDefault) logPos('Function parameter $formatted should be ${formatArguments(true, arg.name, false)}', pos, severity);
+				if (hasNullDefault) logRange('Function parameter $formatted should be ${formatArguments(true, arg.name, false)}', pos.min, pos.min, severity);
 			case NULL_DEFAULT:
-				if (arg.opt) logPos('Function parameter $formatted should be ${formatArguments(false, arg.name, true)}', pos, severity);
+				if (arg.opt) logRange('Function parameter $formatted should be ${formatArguments(false, arg.name, true)}', pos.min, pos.min, severity);
 		}
 	}
 
