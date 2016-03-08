@@ -97,6 +97,7 @@
 		},
 		{
 			"props": {
+				"enforceEmptyPackage": false,
 				"severity": "IGNORE"
 			},
 			"type": "EmptyPackage"
