@@ -2,7 +2,6 @@ package checkstyle.checks;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("AvoidStarImport")
 @desc("Checks for .* import and using directives")

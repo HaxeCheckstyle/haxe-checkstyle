@@ -2,7 +2,6 @@ package checkstyle.checks;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("EmptyPackage")
 @desc("Checks for empty package names")
