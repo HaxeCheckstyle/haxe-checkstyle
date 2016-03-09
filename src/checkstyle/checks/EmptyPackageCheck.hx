@@ -18,13 +18,9 @@ class EmptyPackageCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var packageTokens = root.filter([Kwd(KwdPackage)], ALL);
 		if (enforceEmptyPackage) {
-			if (packageTokens.length == 0) {
-				log("Missing package declaration", 1, 0, 0);
-			}
+			if (packageTokens.length == 0) log("Missing package declaration", 1, 0, 0);
 		}
-		else {
-			checkPackageNames(packageTokens);
-		}
+		else checkPackageNames(packageTokens);
 	}
 
 	function checkPackageNames(entries:Array<TokenTree>) {

@@ -5,7 +5,7 @@ import checkstyle.checks.whitespace.TabForAligningCheck;
 class TabForAligningCheckTest extends CheckTestCase<TabForAligningCheckTests> {
 
 	public function testTab() {
-		assertMsg(new TabForAligningCheck(), TEST1, 'Tab after non-space character, Use space for aligning');
+		assertMsg(new TabForAligningCheck(), TEST1, 'Tab after non-space character, use space for aligning');
 	}
 
 	public function testMultiline() {

@@ -1,8 +1,8 @@
 package checkstyle.reporter;
 
 import checkstyle.reporter.BaseReporter;
-import haxe.Json;
 import checkstyle.LintMessage.SeverityLevel;
+import haxe.Json;
 
 class JSONReporter extends BaseReporter {
 
