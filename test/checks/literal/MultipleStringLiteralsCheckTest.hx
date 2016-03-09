@@ -29,6 +29,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 
 	public function testStringInterpolation() {
 		var check = new MultipleStringLiteralsCheck();
+		check.allowDuplicates = 1;
 		assertNoMsg(check, INTERPOLATION_ISSUE_109);
 		assertMsg(check, NO_INTERPOLATION_ISSUE_109, 'Multiple string literal "value $$$$is i" detected - consider using a constant');
 		assertMsg(check, NO_INTERPOLATION_AT_START_ISSUE_109, 'Multiple string literal "$$$$is i" detected - consider using a constant');
@@ -125,23 +126,16 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 		function foo() {
 			trace('Value is $i');
 			trace('Value is $i');
-			trace('Value is $i');
-			trace('$value is i');
 			trace('$value is i');
 			trace('$value is i');
 			trace('$value');
 			trace('$value');
-			trace('$value');
-			trace('Value is ${i++}');
 			trace('Value is ${i++}');
 			trace('Value is ${i++}');
 			trace('Value is ${i++}$$');
 			trace('Value is ${i++}$$');
-			trace('Value is ${i++}$$');
 			trace('Value is ${i++} $i');
 			trace('Value is ${i++} $i');
-			trace('Value is ${i++} $i');
-			trace('$value is ${i++} $i');
 			trace('$value is ${i++} $i');
 			trace('$value is ${i++} $i');
 		}
@@ -152,14 +146,12 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 		function foo() {
 			trace('value $$is i');
 			trace('value $$is i');
-			trace('value $$is i');
 		}
 	}";
 
 	var NO_INTERPOLATION_AT_START_ISSUE_109 = "
 	class Test {
 		function foo() {
-			trace('$$is i');
 			trace('$$is i');
 			trace('$$is i');
 		}
