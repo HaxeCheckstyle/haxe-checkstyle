@@ -49,7 +49,6 @@ class OperatorWrapCheck extends WrapCheckBase {
 		];
 	}
 
-	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	override function actualRun() {
 		var tokenList:Array<TokenDef> = [];
 

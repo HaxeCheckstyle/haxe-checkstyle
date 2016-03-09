@@ -6,7 +6,6 @@ using Lambda;
 
 @name("CyclomaticComplexity")
 @desc("McCabe simplified cyclomatic complexity check")
-@SuppressWarnings(['checkstyle:CyclomaticComplexity', 'checkstyle:LeftCurly', 'checkstyle:RightCurly'])
 class CyclomaticComplexityCheck extends Check {
 
 	static var DEFAULT_COMPLEXITY_WARNING:Int = 20;

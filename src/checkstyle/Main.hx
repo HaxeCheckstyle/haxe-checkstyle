@@ -17,38 +17,12 @@ import sys.FileSystem;
 import sys.io.File;
 
 using checkstyle.utils.ArrayUtils;
+using checkstyle.utils.StringUtils;
 
 class Main {
 
-	@SuppressWarnings('checkstyle:Dynamic')
-	public static function main() {
-		var args;
-		var cwd;
-		var oldCwd = null;
-
-		try {
-			args = Sys.args();
-			cwd = Sys.getCwd();
-			if (Sys.getEnv("HAXELIB_RUN") != null) {
-				cwd = args.pop();
-				oldCwd = Sys.getCwd();
-			}
-			if (oldCwd != null) Sys.setCwd(cwd);
-
-			new Main().run(args);
-		}
-		catch (e:Dynamic) {
-			Sys.stderr().writeString(e + "\n");
-			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
-		}
-		if (oldCwd != null) Sys.setCwd(oldCwd);
-		Sys.exit(exitCode);
-	}
-
-	var info:ChecksInfo;
-	var checker:Checker;
-
 	static var DEFAULT_CONFIG:String = "checkstyle.json";
+	static var DEFAULT_EXCLUDE_CONFIG:String = "checkstyle-exclude.json";
 	static var REPORT_TYPE:String = "text";
 	static var XML_PATH:String = "check-style-report.xml";
 	static var JSON_PATH:String = "check-style-report.json";
@@ -58,19 +32,29 @@ class Main {
 	static var EXIT_CODE:Bool = false;
 	static var exitCode:Int;
 
+	var info:ChecksInfo;
+	var checker:Checker;
+	var paths:Array<String>;
+	var allExcludes:Array<String>;
+	var excludesMap:Map<String, Array<String>>;
+
 	function new() {
 		info = new ChecksInfo();
 		checker = new Checker();
+		paths = [];
+		allExcludes = [];
+		excludesMap = new Map();
 		exitCode = 0;
 	}
 
 	function run(args:Array<String>) {
-		var files:Array<String> = [];
 		var configPath:String = null;
+		var excludePath:String = null;
 
 		var argHandler = Args.generate([
-			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) traverse(path, files),
+			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
+			@doc("Set exclude config file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
 			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
 				XML_PATH = path;
@@ -93,19 +77,19 @@ class Main {
 		}
 		argHandler.parse(args);
 
-		var i:Int = 0;
-		var toProcess:Array<LintFile> = [for (file in files) {name:file, content:null, index:i++}];
-
 		if (configPath == null && FileSystem.exists(DEFAULT_CONFIG) && !FileSystem.isDirectory(DEFAULT_CONFIG)) {
 			configPath = DEFAULT_CONFIG;
 		}
 
+		if (excludePath == null && FileSystem.exists(DEFAULT_EXCLUDE_CONFIG) && !FileSystem.isDirectory(DEFAULT_EXCLUDE_CONFIG)) {
+			excludePath = DEFAULT_EXCLUDE_CONFIG;
+		}
+
 		if (configPath == null) addAllChecks();
 		else loadConfig(configPath);
-		checker.addReporter(createReporter(files.length));
-		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
-		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
-		checker.process(toProcess);
+
+		if (excludePath != null) loadExcludeConfig(excludePath);
+		else start();
 	}
 
 	function loadConfig(configPath:String) {
@@ -125,6 +109,32 @@ class Main {
 			for (combination in config.defineCombinations) validateDefines(combination);
 			checker.defineCombinations = config.defineCombinations;
 		}
+	}
+
+	function loadExcludeConfig(excludeConfigPath:String) {
+		var config:Config = Json.parse(File.getContent(excludeConfigPath));
+		var excludes = Reflect.fields(config);
+		for (e in excludes) {
+			createExcludeMapElement(e);
+			var excludeValues:Array<String> = Reflect.field(config, e);
+			if (excludeValues != null && excludeValues.length > 0) {
+				for (val in excludeValues) {
+					for (p in paths) {
+						var path = p + "/" + val.split(".").join("/");
+						if (e == "all") allExcludes.push(path);
+						else {
+							if (!p.contains(":")) excludesMap.get(e).push(path);
+						}
+					}
+				}
+			}
+		}
+
+		start();
+	}
+
+	function createExcludeMapElement(name:String) {
+		if (excludesMap.get(name) == null) excludesMap.set(name, []);
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {
@@ -239,12 +249,27 @@ class Main {
 		return s + "/" + t;
 	}
 
-	function traverse(node:String, files:Array<String>) {
-		if (FileSystem.isDirectory(node)) {
-			var nodes = FileSystem.readDirectory(node);
-			for (child in nodes) traverse(pathJoin(node, child), files);
+	function start() {
+		var files:Array<String> = [];
+		for (path in paths) traverse(path, files);
+
+		var i:Int = 0;
+		var toProcess:Array<LintFile> = [for (file in files) {name:file, content:null, index:i++}];
+
+		checker.addReporter(createReporter(files.length));
+		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
+		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
+		checker.process(toProcess, excludesMap);
+	}
+
+	function traverse(path:String, files:Array<String>) {
+		if (FileSystem.isDirectory(path) && !allExcludes.contains(path)) {
+			var nodes = FileSystem.readDirectory(path);
+			for (child in nodes) traverse(pathJoin(path, child), files);
 		}
-		else if (~/(.hx)$/i.match(node)) files.push(node);
+		else if (~/(.hx)$/i.match(path) && !allExcludes.contains(path.substring(0, path.indexOf(".hx")))) {
+			files.push(path);
+		}
 	}
 
 	function failWith(message:String) {
@@ -254,5 +279,29 @@ class Main {
 
 	public static function setExitCode(newExitCode:Int) {
 		exitCode = newExitCode;
+	}
+
+	public static function main() {
+		var args;
+		var cwd;
+		var oldCwd = null;
+
+		try {
+			args = Sys.args();
+			cwd = Sys.getCwd();
+			if (Sys.getEnv("HAXELIB_RUN") != null) {
+				cwd = args.pop();
+				oldCwd = Sys.getCwd();
+			}
+			if (oldCwd != null) Sys.setCwd(cwd);
+
+			new Main().run(args);
+		}
+		catch (e:Dynamic) {
+			Sys.stderr().writeString(e + "\n");
+			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
+		}
+		if (oldCwd != null) Sys.setCwd(oldCwd);
+		Sys.exit(exitCode);
 	}
 }

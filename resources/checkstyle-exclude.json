@@ -1,0 +1,62 @@
+{
+	"all": [],
+	"Dynamic": [
+		"checkstyle.Main",
+		"checkstyle.Checker",
+		"checkstyle.ChecksInfo"
+	],
+	"EmptyLines": [
+		"checks"
+	],
+	"MultipleStringLiterals": [
+		"checks",
+		"token"
+	],
+	"MultipleVariableDeclarations": [
+		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck",
+		"checks.coding.MultipleVariableDeclarationsCheckTest"
+	],
+	"TrailingWhitespace": [
+		"checks.whitespace.SpacingCheckTest",
+		"checks.whitespace.TrailingWhitespaceCheckTest",
+		"checks.naming.MemberNameCheckTest"
+	],
+	"TabForAligning": [
+		"checks.whitespace.IndentationCharacterCheckTest",
+		"checks.whitespace.TabForAligningCheckTest"
+	],
+	"LineLength": [
+		"checks.size.LineLengthCheckTest"
+	],
+	"IndentationCharacter": [
+		"checks.whitespace.IndentationCharacterCheckTest"
+	],
+	"CyclomaticComplexity": [
+		"checkstyle.checks.Check",
+		"checkstyle.utils.ExprUtils",
+		"checkstyle.utils.ComplexTypeUtils",
+		"checkstyle.checks.CyclomaticComplexityCheck",
+		"checkstyle.checks.block.LeftCurlyCheck",
+		"checkstyle.checks.block.RightCurlyCheck",
+		"checkstyle.checks.naming.MethodNameCheck",
+		"checkstyle.checks.type.ReturnCheck",
+		"checkstyle.checks.whitespace.OperatorWrapCheck",
+		"checkstyle.checks.whitespace.WhitespaceAfterCheck",
+		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
+		"checkstyle.token.TokenTreeBuilder"
+	],
+	"LeftCurly": [
+		"checkstyle.checks.CyclomaticComplexityCheck"
+	],
+	"RightCurly": [
+		"checkstyle.checks.CyclomaticComplexityCheck"
+	],
+	"MethodLength": [
+		"checkstyle.checks.whitespace.WhitespaceAfterCheck",
+		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
+		"checkstyle.token.TokenTreeBuilder"
+	],
+	"MagicNumber": [
+		"checkstyle.reporter.ProgressReporter"
+	]
+}

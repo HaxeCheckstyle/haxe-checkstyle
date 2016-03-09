@@ -91,6 +91,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 abstract TokenTreeBuilderTests(String) to String {
 	var IMPORT = "
 		package checkstyle.checks;
+
 		import haxeparser.*;
 		import checkstyle.TokenTree;
 		import checkstyle.TokenStream;

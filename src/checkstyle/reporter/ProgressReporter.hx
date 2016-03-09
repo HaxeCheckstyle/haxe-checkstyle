@@ -15,7 +15,6 @@ class ProgressReporter implements IReporter {
 		clear();
 	}
 
-	@SuppressWarnings("checkstyle:MagicNumber")
 	public function fileStart(f:LintFile) {
 		clear();
 		var percentage = Math.floor((f.index + 1) / numFiles * 100);

@@ -13,6 +13,6 @@
 -x TestMain
 
 --next
--cmd neko run -s src -p resources/static-analysis.txt -c resources/checkstyle.json
+-cmd neko run -s src -s test -p resources/static-analysis.txt -c resources/checkstyle.json -e resources/checkstyle-exclude.json
 -cmd neko run --default-config resources/default-config.json
 -cmd neko run -c resources/default-config.json

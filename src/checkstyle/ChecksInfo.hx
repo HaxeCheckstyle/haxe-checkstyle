@@ -2,7 +2,6 @@ package checkstyle;
 
 import checkstyle.checks.Check;
 
-@SuppressWarnings("checkstyle:Dynamic")
 class ChecksInfo {
 
 	var checkInfos:Map<String, CheckInfo>;

@@ -25,7 +25,6 @@ class WhitespaceAfterCheck extends Check {
 		return (tokens.length == 0 || tokens.contains(token));
 	}
 
-	@SuppressWarnings(["checkstyle:CyclomaticComplexity", "checkstyle:MethodLength"])
 	override function actualRun() {
 		var tokenList:Array<TokenDef> = [];
 

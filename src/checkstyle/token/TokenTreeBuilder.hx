@@ -1,7 +1,6 @@
 package checkstyle.token;
 
 import haxe.macro.Expr;
-
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
@@ -539,7 +538,6 @@ class TokenTreeBuilder {
 		}
 	}
 
-	@SuppressWarnings(["checkstyle:MethodLength", "checkstyle:CyclomaticComplexity"])
 	function walkIdentifier(parent:TokenTree) {
 		switch (stream.token()) {
 			case Binop(OpSub):

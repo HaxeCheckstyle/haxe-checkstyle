@@ -154,7 +154,6 @@ class ComplexTypeUtils {
 		}
 	}
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	public static function walkExpr(e:Expr, cb:ComplexTypeCallback) {
 		switch (e.expr){
 			case EConst(c):

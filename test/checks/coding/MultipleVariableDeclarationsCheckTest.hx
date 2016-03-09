@@ -43,8 +43,7 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 		function a() {
 			var d = 10; var e;
 			var d;var e;
-			var d;       var e;
-			var d;	var e;
+			var f; var g;
 		}
 	}";
 
@@ -58,8 +57,8 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 
 	var TEST5 = "
 	abstractAndClass Test {
-    	function foo() {
-        	var s = 'var f';
-    	}
+		function foo() {
+			var s = 'var f';
+		}
 	}";
 }
