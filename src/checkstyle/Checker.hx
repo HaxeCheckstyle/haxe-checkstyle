@@ -78,6 +78,10 @@ class Checker {
 		throw "Bad offset";
 	}
 
+	public function getString(off:Int, off2:Int):String {
+		return file.content.substr(off, off2 - off);
+	}
+
 	function findLineSeparator() {
 		var code = file.content;
 		for (i in 0 ... code.length) {
