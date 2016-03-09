@@ -49,9 +49,7 @@ class Checker {
 
 	public function getTokenTree():TokenTree {
 		if (tokens == null) return null;
-		if (tokenTree == null) {
-			tokenTree = TokenTreeBuilder.buildTokenTree(tokens);
-		}
+		if (tokenTree == null) tokenTree = TokenTreeBuilder.buildTokenTree(tokens);
 		return tokenTree;
 	}
 
@@ -75,9 +73,7 @@ class Checker {
 
 	public function getLinePos(off:Int):LinePos {
 		for (i in 0...linesIdx.length) {
-			if (linesIdx[i].l <= off && linesIdx[i].r >= off) {
-				return { line:i, ofs: off - linesIdx[i].l };
-			}
+			if (linesIdx[i].l <= off && linesIdx[i].r >= off) return { line:i, ofs: off - linesIdx[i].l };
 		}
 		throw "Bad offset";
 	}
@@ -121,9 +117,7 @@ class Checker {
 
 	function makeASTs() {
 		asts = [makeAST(baseDefines)];
-		for (combination in defineCombinations) {
-			asts.push(makeAST(combination.concat(baseDefines)));
-		}
+		for (combination in defineCombinations) asts.push(makeAST(combination.concat(baseDefines)));
 	}
 
 	function makeAST(defines:Array<String>):Ast {
@@ -162,9 +156,7 @@ class Checker {
 	function loadFileContent(lintFile:LintFile) {
 		// unittests set content before running Checker
 		// real checks load content here
-		if (lintFile.content == null) {
-			lintFile.content = File.getContent(lintFile.name);
-		}
+		if (lintFile.content == null) lintFile.content = File.getContent(lintFile.name);
 	}
 
 	function unloadFileContent(lintFile:LintFile) {
@@ -270,13 +262,12 @@ class Checker {
 	function getErrorMessage(e:Dynamic, fileName:String, step:String):LintMessage {
 		return {
 			fileName:fileName,
-			message:step + " failed: " +
-						e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack()),
 			line:1,
 			startColumn:0,
 			endColumn:0,
 			severity:ERROR,
-			moduleName:"Checker"
+			moduleName:"Checker",
+			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())
 		};
 	}
 }

@@ -22,9 +22,7 @@ class ProgressReporter implements IReporter {
 		lineLength = line.length;
 		Sys.print(line);
 
-		if (f.index == numFiles - 1) {
-			Sys.print("\n");
-		}
+		if (f.index == numFiles - 1) Sys.print("\n");
 	}
 
 	function clear() {

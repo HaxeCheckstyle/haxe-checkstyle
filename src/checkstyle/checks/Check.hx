@@ -176,17 +176,11 @@ class Check {
 			switch (td.decl){
 				case EAbstract(d):
 				case EClass(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.contains(HExtern);
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(HExtern);
 				case EEnum(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.contains(EExtern);
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
 				case ETypedef(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.contains(EExtern);
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
 					switch (d.data) {
 						case TAnonymous(fields):
 							for (field in fields) {
