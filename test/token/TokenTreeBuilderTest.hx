@@ -13,11 +13,11 @@ import checkstyle.token.TokenTreeBuilder;
 class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
 	function assertTokenEquals(testCase:TokenTreeBuilderTests, actual:String, ?pos:PosInfos) {
-		assertEquals((testCase : String), actual, pos);
+		assertEquals((testCase:String), actual, pos);
 	}
-	
+
 	public function testImports() {
-		var builder:TestTokenTreeBuilder = newBuilder (TokenTreeBuilderTests.IMPORT);
+		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IMPORT);
 		var root:TokenTree = new TokenTree(null, null);
 		builder.testWalkPackageImport(root);
 		builder.testWalkPackageImport(root);
@@ -30,7 +30,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 
 	public function testAt() {
-		var builder:TestTokenTreeBuilder = newBuilder (TokenTreeBuilderTests.AT_ANNOTATION);
+		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.AT_ANNOTATION);
 		var root:TokenTree = new TokenTree(null, null);
 		root.addChild(builder.testWalkAt());
 		root.addChild(builder.testWalkAt());
@@ -43,7 +43,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 
 	public function testIf() {
-		var builder:TestTokenTreeBuilder = newBuilder (TokenTreeBuilderTests.IF);
+		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IF);
 		var root:TokenTree = new TokenTree(null, null);
 		builder.testWalkIf(root);
 		builder.testWalkIf(root);
@@ -97,31 +97,31 @@ abstract TokenTreeBuilderTests(String) to String {
 		import checkstyle.TokenTreeBuilder;
 	";
 	var IMPORT_GOLD =
-		'  Kwd(KwdPackage)\n' +
-		'    Const(CIdent(checkstyle))\n' +
-		'      Dot\n' +
-		'        Const(CIdent(checks))\n' +
-		'          Semicolon\n' +
-		'  Kwd(KwdImport)\n' +
-		'    Const(CIdent(haxeparser))\n' +
-		'      Dot\n' +
-		'        Binop(OpMult)\n' +
-		'          Semicolon\n' +
-		'  Kwd(KwdImport)\n' +
-		'    Const(CIdent(checkstyle))\n' +
-		'      Dot\n' +
-		'        Const(CIdent(TokenTree))\n' +
-		'          Semicolon\n' +
-		'  Kwd(KwdImport)\n' +
-		'    Const(CIdent(checkstyle))\n' +
-		'      Dot\n' +
-		'        Const(CIdent(TokenStream))\n' +
-		'          Semicolon\n' +
-		'  Kwd(KwdImport)\n' +
-		'    Const(CIdent(checkstyle))\n' +
-		'      Dot\n' +
-		'        Const(CIdent(TokenTreeBuilder))\n' +
-		'          Semicolon\n';
+	'  Kwd(KwdPackage)\n' +
+	'    Const(CIdent(checkstyle))\n' +
+	'      Dot\n' +
+	'        Const(CIdent(checks))\n' +
+	'          Semicolon\n' +
+	'  Kwd(KwdImport)\n' +
+	'    Const(CIdent(haxeparser))\n' +
+	'      Dot\n' +
+	'        Binop(OpMult)\n' +
+	'          Semicolon\n' +
+	'  Kwd(KwdImport)\n' +
+	'    Const(CIdent(checkstyle))\n' +
+	'      Dot\n' +
+	'        Const(CIdent(TokenTree))\n' +
+	'          Semicolon\n' +
+	'  Kwd(KwdImport)\n' +
+	'    Const(CIdent(checkstyle))\n' +
+	'      Dot\n' +
+	'        Const(CIdent(TokenStream))\n' +
+	'          Semicolon\n' +
+	'  Kwd(KwdImport)\n' +
+	'    Const(CIdent(checkstyle))\n' +
+	'      Dot\n' +
+	'        Const(CIdent(TokenTreeBuilder))\n' +
+	'          Semicolon\n';
 
 	var AT_ANNOTATION = '
 		@SuppressWarnings("checkstyle:MagicNumber")
@@ -131,25 +131,25 @@ abstract TokenTreeBuilderTests(String) to String {
 		// EOF
 	';
 	var AT_ANNOTATION_GOLD =
-		'  At\n' +
-		'    Const(CIdent(SuppressWarnings))\n' +
-		'      POpen\n' +
-		'        Const(CString(checkstyle:MagicNumber))\n' +
-		'        PClose\n' +
-		'  At\n' +
-		'    Const(CIdent(SuppressWarnings))\n' +
-		'      POpen\n' +
-		'        BkOpen\n' +
-		'          Const(CString(checkstyle:MagicNumber))\n' +
-		'          Comma\n' +
-		'          Const(CString(checkstyle:AvoidStarImport))\n' +
-		'          BkClose\n' +
-		'        PClose\n' +
-		'  At\n' +
-		'    DblDot\n' +
-		'      Const(CIdent(from))\n' +
-		'  At\n' +
-		'    Const(CIdent(Before))\n';
+	'  At\n' +
+	'    Const(CIdent(SuppressWarnings))\n' +
+	'      POpen\n' +
+	'        Const(CString(checkstyle:MagicNumber))\n' +
+	'        PClose\n' +
+	'  At\n' +
+	'    Const(CIdent(SuppressWarnings))\n' +
+	'      POpen\n' +
+	'        BkOpen\n' +
+	'          Const(CString(checkstyle:MagicNumber))\n' +
+	'          Comma\n' +
+	'          Const(CString(checkstyle:AvoidStarImport))\n' +
+	'          BkClose\n' +
+	'        PClose\n' +
+	'  At\n' +
+	'    DblDot\n' +
+	'      Const(CIdent(from))\n' +
+	'  At\n' +
+	'    Const(CIdent(Before))\n';
 
 	var IF = '
 		if (tokDef != null) return;
@@ -168,63 +168,63 @@ abstract TokenTreeBuilderTests(String) to String {
 		}
 	';
 	var IF_GOLD =
-		'  Kwd(KwdIf)\n' +
-		'    POpen\n' +
-		'      Const(CIdent(tokDef))\n' +
-		'        Binop(OpNotEq)\n' +
-		'          Kwd(KwdNull)\n' +
-		'      PClose\n' +
-		'    Kwd(KwdReturn)\n' +
-		'      Semicolon\n' +
-		'  Kwd(KwdIf)\n' +
-		'    POpen\n' +
-		'      Const(CIdent(tokDef))\n' +
-		'        Binop(OpNotEq)\n' +
-		'          Kwd(KwdNull)\n' +
-		'      PClose\n' +
-		'    Kwd(KwdReturn)\n' +
-		'      Semicolon\n' +
-		'    Kwd(KwdElse)\n' +
-		'      Kwd(KwdThrow)\n' +
-		'        Const(CString(error))\n' +
-		'          Semicolon\n' +
-		'  Kwd(KwdIf)\n' +
-		'    POpen\n' +
-		'      Const(CIdent(token))\n' +
-		'        Dot\n' +
-		'          Const(CIdent(hasChilds))\n' +
-		'            POpen\n' +
-		'              PClose\n' +
-		'      PClose\n' +
-		'    BrOpen\n' +
-		'      Kwd(KwdReturn)\n' +
-		'        Const(CIdent(token))\n' +
-		'          Dot\n' +
-		'            Const(CIdent(childs))\n' +
-		'              Semicolon\n' +
-		'      BrClose\n' +
-		'  Kwd(KwdIf)\n' +
-		'    POpen\n' +
-		'      Const(CIdent(token))\n' +
-		'        Dot\n' +
-		'          Const(CIdent(hasChilds))\n' +
-		'            POpen\n' +
-		'              PClose\n' +
-		'      PClose\n' +
-		'    BrOpen\n' +
-		'      Kwd(KwdReturn)\n' +
-		'        Const(CIdent(token))\n' +
-		'          Dot\n' +
-		'            Const(CIdent(childs))\n' +
-		'              Semicolon\n' +
-		'      BrClose\n' +
-		'    Kwd(KwdElse)\n' +
-		'      BrOpen\n' +
-		'        Kwd(KwdReturn)\n' +
-		'          BkOpen\n' +
-		'            BkClose\n' +
-		'        Semicolon\n' +
-		'        BrClose\n';
+	'  Kwd(KwdIf)\n' +
+	'    POpen\n' +
+	'      Const(CIdent(tokDef))\n' +
+	'        Binop(OpNotEq)\n' +
+	'          Kwd(KwdNull)\n' +
+	'      PClose\n' +
+	'    Kwd(KwdReturn)\n' +
+	'      Semicolon\n' +
+	'  Kwd(KwdIf)\n' +
+	'    POpen\n' +
+	'      Const(CIdent(tokDef))\n' +
+	'        Binop(OpNotEq)\n' +
+	'          Kwd(KwdNull)\n' +
+	'      PClose\n' +
+	'    Kwd(KwdReturn)\n' +
+	'      Semicolon\n' +
+	'    Kwd(KwdElse)\n' +
+	'      Kwd(KwdThrow)\n' +
+	'        Const(CString(error))\n' +
+	'          Semicolon\n' +
+	'  Kwd(KwdIf)\n' +
+	'    POpen\n' +
+	'      Const(CIdent(token))\n' +
+	'        Dot\n' +
+	'          Const(CIdent(hasChilds))\n' +
+	'            POpen\n' +
+	'              PClose\n' +
+	'      PClose\n' +
+	'    BrOpen\n' +
+	'      Kwd(KwdReturn)\n' +
+	'        Const(CIdent(token))\n' +
+	'          Dot\n' +
+	'            Const(CIdent(childs))\n' +
+	'              Semicolon\n' +
+	'      BrClose\n' +
+	'  Kwd(KwdIf)\n' +
+	'    POpen\n' +
+	'      Const(CIdent(token))\n' +
+	'        Dot\n' +
+	'          Const(CIdent(hasChilds))\n' +
+	'            POpen\n' +
+	'              PClose\n' +
+	'      PClose\n' +
+	'    BrOpen\n' +
+	'      Kwd(KwdReturn)\n' +
+	'        Const(CIdent(token))\n' +
+	'          Dot\n' +
+	'            Const(CIdent(childs))\n' +
+	'              Semicolon\n' +
+	'      BrClose\n' +
+	'    Kwd(KwdElse)\n' +
+	'      BrOpen\n' +
+	'        Kwd(KwdReturn)\n' +
+	'          BkOpen\n' +
+	'            BkClose\n' +
+	'        Semicolon\n' +
+	'        BrClose\n';
 }
 
 class TestTokenTreeBuilder extends TokenTreeBuilder {

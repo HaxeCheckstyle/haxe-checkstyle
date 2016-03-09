@@ -6,7 +6,7 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 
 	public function testVar() {
 		assertMsg(new VariableInitialisationCheck(), TEST1,
-			'Invalid variable initialisation: _a (move initialisation to constructor or function)');
+		'Invalid variable initialisation: _a (move initialisation to constructor or function)');
 	}
 
 	public function testStatic() {
