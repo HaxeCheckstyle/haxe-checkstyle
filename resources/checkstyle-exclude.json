@@ -13,6 +13,7 @@
 		"token"
 	],
 	"MultipleVariableDeclarations": [
+		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck",
 		"checks.coding.MultipleVariableDeclarationsCheckTest"
 	],
 	"TrailingWhitespace": [
@@ -57,8 +58,5 @@
 	],
 	"MagicNumber": [
 		"checkstyle.reporter.ProgressReporter"
-	],
-	"MultipleVariableDeclarations": [
-		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck"
 	]
 }
