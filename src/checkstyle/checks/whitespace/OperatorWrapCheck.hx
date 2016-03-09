@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 

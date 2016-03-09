@@ -1,9 +1,7 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("MultipleVariableDeclarations")
 @desc("Checks that each variable declaration is in its own statement and on its own line")

@@ -2,7 +2,6 @@ package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("SimplifyBooleanExpression")
 @desc("Checks for over-complicated boolean expressions")
@@ -34,8 +33,8 @@ class SimplifyBooleanExpressionCheck extends Check {
 	function checkToken(token:TokenTree) {
 		var parent = token.parent;
 		if (parent.is(Binop(OpEq)) || parent.is(Binop(OpNotEq)) || parent.is(Unop(OpNot)) ||
-			parent.is(Binop(OpOr)) || parent.is(Binop(OpAnd)) || parent.is(Binop(OpBoolOr)) ||
-			parent.is(Binop(OpBoolAnd))) {
+		parent.is(Binop(OpOr)) || parent.is(Binop(OpAnd)) || parent.is(Binop(OpBoolOr)) ||
+		parent.is(Binop(OpBoolAnd))) {
 			logPos('Boolean expression can be simplified', token.pos);
 		}
 	}

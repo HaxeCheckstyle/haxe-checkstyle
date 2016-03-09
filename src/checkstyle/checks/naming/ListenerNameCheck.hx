@@ -3,11 +3,7 @@ package checkstyle.checks.naming;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Expr.Field;
-import haxeparser.Data.Definition;
 import haxe.macro.Expr.Function;
-import haxeparser.Data.ClassFlag;
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("ListenerName")
 @desc("Checks on naming conventions of event listener methods")

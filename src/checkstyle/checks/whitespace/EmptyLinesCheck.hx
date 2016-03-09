@@ -1,7 +1,6 @@
 package checkstyle.checks.whitespace;
 
 import StringTools;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("EmptyLines")
 @desc("Checks for consecutive empty lines")

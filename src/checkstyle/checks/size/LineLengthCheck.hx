@@ -1,7 +1,5 @@
 package checkstyle.checks.size;
 
-import checkstyle.LintMessage.SeverityLevel;
-
 @name("LineLength")
 @desc("Max line length (default 160)")
 class LineLengthCheck extends Check {

@@ -2,7 +2,6 @@ package checkstyle.checks.coding;
 
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("AvoidInlineConditionals")
 @desc("Detects inline conditionals")

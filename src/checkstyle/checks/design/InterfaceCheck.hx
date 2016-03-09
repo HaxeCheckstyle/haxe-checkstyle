@@ -2,7 +2,6 @@ package checkstyle.checks.design;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("Interface")
 @desc("Checks and enforces interface style (allow properties and methods or just methods")

@@ -1,6 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxe.macro.Expr.FunctionArg;
 import haxe.macro.Expr.Position;
 using haxe.macro.ExprTools;

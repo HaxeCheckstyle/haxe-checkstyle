@@ -3,7 +3,6 @@ package checkstyle.checks.coding;
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 import haxeparser.Data.TokenDef;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("InnerAssignment")
 @desc("Checks for assignments in subexpressions")
@@ -16,18 +15,18 @@ class InnerAssignmentCheck extends Check {
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		var allAssignments:Array<TokenTree> = root.filter([
-				Binop(OpAssign),
-				Binop(OpAssignOp(OpAdd)),
-				Binop(OpAssignOp(OpSub)),
-				Binop(OpAssignOp(OpDiv)),
-				Binop(OpAssignOp(OpMult)),
-				Binop(OpAssignOp(OpShl)),
-				Binop(OpAssignOp(OpShr)),
-				Binop(OpAssignOp(OpUShr)),
-				Binop(OpAssignOp(OpAnd)),
-				Binop(OpAssignOp(OpOr)),
-				Binop(OpAssignOp(OpXor))
-				], ALL);
+			Binop(OpAssign),
+			Binop(OpAssignOp(OpAdd)),
+			Binop(OpAssignOp(OpSub)),
+			Binop(OpAssignOp(OpDiv)),
+			Binop(OpAssignOp(OpMult)),
+			Binop(OpAssignOp(OpShl)),
+			Binop(OpAssignOp(OpShr)),
+			Binop(OpAssignOp(OpUShr)),
+			Binop(OpAssignOp(OpAnd)),
+			Binop(OpAssignOp(OpOr)),
+			Binop(OpAssignOp(OpXor))
+		], ALL);
 		var x:Int = 0;
 		for (assignToken in allAssignments) {
 			if (isPosSuppressed(assignToken.pos) || !filterAssignment(assignToken)) continue;
@@ -58,6 +57,7 @@ class InnerAssignmentCheck extends Check {
 			default: filterAssignment(token.parent);
 		}
 	}
+
 	function filterPOpen(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {

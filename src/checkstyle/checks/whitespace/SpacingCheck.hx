@@ -5,8 +5,6 @@ import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("Spacing")
 @desc("Spacing check on if statement and around operators")

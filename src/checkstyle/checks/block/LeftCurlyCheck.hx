@@ -1,7 +1,6 @@
 package checkstyle.checks.block;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
@@ -62,6 +61,7 @@ class LeftCurlyCheck extends Check {
 	/**
 	 * find effective parent token and check against configured tokens
 	 */
+
 	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function findParentToken(token:TokenTree):ParentToken {
 		if (token == null) return {token:token, hasToken: false};
@@ -183,15 +183,15 @@ class LeftCurlyCheck extends Check {
 
 		try {
 			if (curlyAtEOL) {
-				logErrorIf ((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
-				logErrorIf ((option == NLOW) && wrapped, 'Left curly should be on new line (previous expression is split over muliple lines)', pos);
-				logErrorIf ((option != EOL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
+				logErrorIf((option == NL), 'Left curly should be on new line (only whitespace before curly)', pos);
+				logErrorIf((option == NLOW) && wrapped, 'Left curly should be on new line (previous expression is split over muliple lines)', pos);
+				logErrorIf((option != EOL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
 				return;
 			}
-			logErrorIf ((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
-			logErrorIf ((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
-			logErrorIf ((option == NLOW) && !wrapped, 'Left curly should be at EOL (previous expression is not split over muliple lines)', pos);
-			logErrorIf ((option != NL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
+			logErrorIf((option == EOL), 'Left curly should be at EOL (only linebreak or comment after curly)', pos);
+			logErrorIf((!curlyOnNL), 'Left curly should be on new line (only whitespace before curly)', pos);
+			logErrorIf((option == NLOW) && !wrapped, 'Left curly should be at EOL (previous expression is not split over muliple lines)', pos);
+			logErrorIf((option != NL) && (option != NLOW), 'Left curly unknown option ${option}', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
@@ -207,8 +207,8 @@ class LeftCurlyCheck extends Check {
 }
 
 typedef ParentToken = {
-	token:TokenTree,
-	hasToken:Bool
+token:TokenTree,
+hasToken:Bool
 }
 
 @:enum

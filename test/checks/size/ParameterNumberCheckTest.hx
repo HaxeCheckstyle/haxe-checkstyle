@@ -1,8 +1,6 @@
 package checks.size;
 
-import checkstyle.checks.Check;
 import checkstyle.checks.size.ParameterNumberCheck;
-import haxe.PosInfos;
 
 class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> {
 

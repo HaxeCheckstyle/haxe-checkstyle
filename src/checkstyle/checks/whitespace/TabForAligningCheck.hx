@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.LintMessage.SeverityLevel;
-
 using checkstyle.utils.StringUtils;
 
 @name("TabForAligning")

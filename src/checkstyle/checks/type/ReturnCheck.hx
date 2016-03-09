@@ -1,6 +1,5 @@
 package checkstyle.checks.type;
 
-import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxeparser.Data;
@@ -56,7 +55,7 @@ class ReturnCheck extends Check {
 			switch (e.expr) {
 				case EFunction(fname, f):
 					var funNoReturn:Bool = (f.ret == null);
-					walkExpr (f.expr, funNoReturn, fname, e.pos);
+					walkExpr(f.expr, funNoReturn, fname, e.pos);
 				default:
 			}
 		});
