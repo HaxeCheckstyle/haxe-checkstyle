@@ -25,7 +25,7 @@ class TokenTree extends Token {
 	public function addChild(child:TokenTree) {
 		if (childs == null) childs = [];
 		if (childs.length > 0) child.previousSibling = childs[childs.length - 1];
-		childs.push (child);
+		childs.push(child);
 		child.parent = this;
 	}
 
@@ -79,7 +79,7 @@ class TokenTree extends Token {
 
 		switch (callback(this, depth)) {
 			case FOUND_GO_DEEPER:
-				results.push (this);
+				results.push(this);
 			case FOUND_SKIP_SUBTREE:
 				return [this];
 			case GO_DEEPER:

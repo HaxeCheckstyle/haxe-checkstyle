@@ -108,6 +108,7 @@ class TokenStream {
 	 * '>>>=' -> Binop(OpAssignOp(OpUShr))
 	 *
 	 */
+
 	public function consumeOpGt():TokenTree {
 		var tok:TokenTree = consumeTokenDef(Binop(OpGt));
 		switch (token()) {
@@ -116,10 +117,10 @@ class TokenStream {
 			case Binop(OpAssign):
 				var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
 				return new TokenTree(Binop(OpGte), {
-						file:tok.pos.file,
-						min:tok.pos.min,
-						max:assignTok.pos.max
-					});
+					file:tok.pos.file,
+					min:tok.pos.min,
+					max:assignTok.pos.max
+				});
 			default:
 				return tok;
 		}
@@ -133,29 +134,29 @@ class TokenStream {
 				if (is(Binop(OpAssign))) {
 					var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
 					return new TokenTree(Binop(OpAssignOp(OpUShr)), {
-							file:parent.pos.file,
-							min:parent.pos.min,
-							max:assignTok.pos.max
-						});
-				}
-				return new TokenTree(Binop(OpUShr), {
-						file:parent.pos.file,
-						min:parent.pos.min,
-						max:innerGt.pos.max
-					});
-			case Binop(OpAssign):
-				var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
-				return new TokenTree(Binop(OpAssignOp(OpShr)), {
 						file:parent.pos.file,
 						min:parent.pos.min,
 						max:assignTok.pos.max
 					});
+				}
+				return new TokenTree(Binop(OpUShr), {
+					file:parent.pos.file,
+					min:parent.pos.min,
+					max:innerGt.pos.max
+				});
+			case Binop(OpAssign):
+				var assignTok:TokenTree = consumeTokenDef(Binop(OpAssign));
+				return new TokenTree(Binop(OpAssignOp(OpShr)), {
+					file:parent.pos.file,
+					min:parent.pos.min,
+					max:assignTok.pos.max
+				});
 			default:
 				return new TokenTree(Binop(OpShr), {
-						file:parent.pos.file,
-						min:parent.pos.min,
-						max:tok.pos.max
-					});
+					file:parent.pos.file,
+					min:parent.pos.min,
+					max:tok.pos.max
+				});
 		}
 	}
 
@@ -166,6 +167,7 @@ class TokenStream {
 	 * value and returns a proper Const(CInt(-x)) or Const(CFloat(-x)) token
 	 *
 	 */
+
 	public function consumeOpSub():TokenTree {
 		var tok:Token = consumeTokenDef(Binop(OpSub));
 		switch (token()) {
@@ -185,17 +187,17 @@ class TokenStream {
 			case Const(CInt(n)):
 				var const:TokenTree = consumeConst();
 				return new TokenTree(Const(CInt('-$n')), {
-						file:tok.pos.file,
-						min:tok.pos.min,
-						max:const.pos.max
-					});
+					file:tok.pos.file,
+					min:tok.pos.min,
+					max:const.pos.max
+				});
 			case Const(CFloat(n)):
 				var const:TokenTree = consumeConst();
 				return new TokenTree(Const(CFloat('-$n')), {
-						file:tok.pos.file,
-						min:tok.pos.min,
-						max:const.pos.max
-					});
+					file:tok.pos.file,
+					min:tok.pos.min,
+					max:const.pos.max
+				});
 			default:
 				throw NO_MORE_TOKENS;
 		}
