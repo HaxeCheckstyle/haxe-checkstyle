@@ -12,7 +12,6 @@ class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 		assertNoMsg(new LineLengthCheck(), TEST2);
 	}
 
-	@SuppressWarnings('checkstyle:MagicNumber')
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.max = 40;
