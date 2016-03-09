@@ -44,7 +44,7 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 		if (defines != null) checker.defineCombinations = defines;
 		checker.addCheck(check);
 		checker.addReporter(reporter);
-		checker.process([{name:FILE_NAME, content:src, index:0}]);
+		checker.process([{name:FILE_NAME, content:src, index:0}], null);
 		return reporter.message;
 	}
 
