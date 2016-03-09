@@ -41,6 +41,7 @@ class MultipleStringLiteralsCheck extends Check {
 
 			switch (literalToken.tok) {
 				case Const(CString(s)):
+					if (isStringInterpolation(s, literalToken.pos)) continue;
 					if (ignoreRE.match(s)) continue;
 					if (s.length < minLength) continue;
 					if (checkLiteralCount(s, allLiterals)) {
@@ -71,5 +72,12 @@ class MultipleStringLiteralsCheck extends Check {
 				else true;
 			default: filterLiteral(token.parent);
 		}
+	}
+
+	function isStringInterpolation(s:String, pos:Position):Bool {
+		var quote:String = checker.file.content.substr(pos.min, 1);
+		if (quote != "'") return false;
+		var regex:EReg = ~/(^|[^$])\$(\{|[a-zA-Z0-9_]+)/;
+		return regex.match(s);
 	}
 }
