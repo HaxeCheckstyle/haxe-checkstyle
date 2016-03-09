@@ -153,7 +153,6 @@ class ExprUtils {
 		}
 	}
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	public static function walkExpr(e:Expr, cb:Expr -> Void) {
 		cb(e);
 		switch (e.expr){
