@@ -12,6 +12,8 @@ import sys.io.File;
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 
+using checkstyle.utils.ArrayUtils;
+
 class Checker {
 
 	public var file:LintFile;
@@ -27,6 +29,7 @@ class Checker {
 	var lineSeparator:String;
 	var tokenTree:TokenTree;
 	var asts:Array<Ast>;
+	var excludes:Map<String, Array<String>>;
 
 	public function new() {
 		checks = [];
@@ -135,7 +138,8 @@ class Checker {
 		return parser.parse();
 	}
 
-	public function process(files:Array<LintFile>) {
+	public function process(files:Array<LintFile>, excludesMap:Map<String, Array<String>>) {
+		excludes = excludesMap;
 		var advanceFrame = function() {};
 		#if hxtelemetry
 		var hxt = new hxtelemetry.HxTelemetry();
@@ -235,9 +239,9 @@ class Checker {
 			message1.moduleName == message2.moduleName;
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
 	function runCheck(check:Check):Array<LintMessage> {
 		try {
+			if (checkForExclude(check.getModuleName())) return [];
 			return check.run(this);
 		}
 		catch (e:Dynamic) {
@@ -246,7 +250,13 @@ class Checker {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
+	function checkForExclude(moduleName:String):Bool {
+		if (excludes == null) return false;
+		var excludesForCheck:Array<String> = excludes.get(moduleName);
+		if (excludesForCheck == null || excludesForCheck.length == 0) return false;
+		return excludesForCheck.contains(file.name.substring(0, file.name.indexOf(".hx")));
+	}
+
 	function getErrorMessage(e:Dynamic, fileName:String, step:String):LintMessage {
 		return {
 			fileName:fileName,
