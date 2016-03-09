@@ -2,7 +2,6 @@ package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 using checkstyle.utils.ArrayUtils;
 

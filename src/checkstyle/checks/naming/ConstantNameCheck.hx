@@ -1,6 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -31,9 +30,9 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	function checkFields(d:Array<Field>, p:ParentType) {
 		for (field in d) {
-			if (isCheckSuppressed (field)) continue;
+			if (isCheckSuppressed(field)) continue;
 			switch (field.kind) {
-				case FVar (t, e):
+				case FVar(t, e):
 					checkField(field, t, e, p);
 				default:
 			}
@@ -42,10 +41,10 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
 		if (e == null || e.expr == null || !f.isStatic(p)) return;
-		if (!hasToken (INLINE) && f.isInline(p)) return;
-		if (!hasToken (NOTINLINE) && !f.isInline(p)) return;
+		if (!hasToken(INLINE) && f.isInline(p)) return;
+		if (!hasToken(NOTINLINE) && !f.isInline(p)) return;
 
-		matchTypeName ("const", f.name, f.pos);
+		matchTypeName("const", f.name, f.pos);
 	}
 }
 

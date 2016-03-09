@@ -2,7 +2,6 @@ package checkstyle.checks.design;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
 
 @name("UnnecessaryConstructor")
 @desc("Checks for unnecessary constructor in classes that contain only static methods or fields")

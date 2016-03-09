@@ -2,8 +2,6 @@ package checkstyle.checks.literal;
 
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("HexadecimalLiteral", "HexadecimalLiterals")
 @desc("Checks the letter case of hexadecimal literals")

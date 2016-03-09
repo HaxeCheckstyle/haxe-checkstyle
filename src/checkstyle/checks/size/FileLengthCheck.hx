@@ -1,6 +1,5 @@
 package checkstyle.checks.size;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("FileLength")
@@ -19,7 +18,7 @@ class FileLengthCheck extends Check {
 	override function actualRun() {
 		for (td in checker.ast.decls) {
 			switch (td.decl){
-				case EClass(d): for (field in d.data) if (isCheckSuppressed (field)) return;
+				case EClass(d): for (field in d.data) if (isCheckSuppressed(field)) return;
 				default:
 			}
 		}

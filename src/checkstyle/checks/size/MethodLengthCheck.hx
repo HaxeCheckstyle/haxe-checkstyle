@@ -3,11 +3,7 @@ package checkstyle.checks.size;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Expr.Field;
-import haxeparser.Data.Definition;
 import haxe.macro.Expr.Function;
-import haxeparser.Data.ClassFlag;
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("MethodLength")
 @desc("Checks for long methods (default 50 lines)")

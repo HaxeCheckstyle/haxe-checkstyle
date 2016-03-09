@@ -1,6 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxe.rtti.CType.Typedef;
 import haxeparser.Data;
 import haxe.macro.Expr;
 

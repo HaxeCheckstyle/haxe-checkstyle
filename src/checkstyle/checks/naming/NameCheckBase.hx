@@ -1,6 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -34,14 +33,14 @@ class NameCheckBase<T> extends Check {
 	function checkClassFields() {
 		for (td in checker.ast.decls) {
 			switch (td.decl) {
-				case EClass (d):
-					checkClassType (td.decl, d, td.pos);
-				case EEnum (d):
-					checkEnumType (td.decl, d, td.pos);
-				case EAbstract (d):
-					checkAbstractType (td.decl, d, td.pos);
-				case ETypedef (d):
-					checkTypedefType (td.decl, d, td.pos);
+				case EClass(d):
+					checkClassType(td.decl, d, td.pos);
+				case EEnum(d):
+					checkEnumType(td.decl, d, td.pos);
+				case EAbstract(d):
+					checkAbstractType(td.decl, d, td.pos);
+				case ETypedef(d):
+					checkTypedefType(td.decl, d, td.pos);
 				default:
 			}
 		}
@@ -56,7 +55,7 @@ class NameCheckBase<T> extends Check {
 	function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {}
 
 	function matchTypeName(type:String, name:String, pos:Position) {
-		if (!formatRE.match (name)) {
+		if (!formatRE.match(name)) {
 			warn(type, name, pos);
 		}
 	}

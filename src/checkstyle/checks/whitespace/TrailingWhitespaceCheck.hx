@@ -1,8 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
-
 @name("TrailingWhitespace")
 @desc("Checks if there are any trailing white spaces")
 class TrailingWhitespaceCheck extends Check {

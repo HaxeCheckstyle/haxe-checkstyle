@@ -1,7 +1,6 @@
 package checkstyle.checks.block;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
@@ -147,14 +146,14 @@ class RightCurlyCheck extends Check {
 			// adjust to show correct line number in log message
 			pos.min = pos.max;
 
-			logErrorIf (singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
+			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
 			if (singleLine) return;
 
 			var curlyAlone:Bool = ~/^\s*\}[\)\],;\s]*(|\/\/.*)$/.match(line);
-			logErrorIf (!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
-			logErrorIf (curlyAlone && needsSameOption, 'Right curly should be alone on a new line', pos);
-			logErrorIf (needsSameOption && (option != SAME), 'Right curly must not be on same line as following block', pos);
-			logErrorIf (shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', pos);
+			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
+			logErrorIf(curlyAlone && needsSameOption, 'Right curly should be alone on a new line', pos);
+			logErrorIf(needsSameOption && (option != SAME), 'Right curly must not be on same line as following block', pos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing

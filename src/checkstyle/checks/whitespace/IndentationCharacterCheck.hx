@@ -1,8 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
-
 @name("IndentationCharacter")
 @desc("Checks indentation character (tab/space, default is tab)")
 class IndentationCharacterCheck extends Check {

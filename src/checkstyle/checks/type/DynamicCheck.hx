@@ -1,6 +1,5 @@
 package checkstyle.checks.type;
 
-import checkstyle.LintMessage.SeverityLevel;
 import haxe.macro.Expr;
 import haxeparser.Data;
 import checkstyle.utils.ComplexTypeUtils;
@@ -14,15 +13,15 @@ class DynamicCheck extends Check {
 	}
 
 	override function actualRun() {
-		ComplexTypeUtils.walkFile (checker.ast, callbackComplexType);
+		ComplexTypeUtils.walkFile(checker.ast, callbackComplexType);
 	}
 
 	function callbackComplexType(t:ComplexType, name:String, pos:Position) {
 		if (t == null) return;
-		if (isPosSuppressed (pos)) return;
+		if (isPosSuppressed(pos)) return;
 		switch (t) {
 			case TPath(p):
-				if (p.name == "Dynamic") error (name, pos);
+				if (p.name == "Dynamic") error(name, pos);
 			default:
 		}
 	}
