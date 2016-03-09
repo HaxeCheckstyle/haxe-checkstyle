@@ -86,8 +86,10 @@
 		},
 		{
 			"props": {
-				"allowEmptyLineAfterSingleLineComment": true,
 				"max": 1,
+				"requireEmptyLineAfterAbstract": false,
+				"allowEmptyLineAfterSingleLineComment": true,
+				"requireEmptyLineAfterClass": true,
 				"allowEmptyLineAfterMultiLineComment": true,
 				"severity": "INFO"
 			},

@@ -12,6 +12,8 @@ class EmptyLinesCheck extends Check {
 	public var allowEmptyLineAfterMultiLineComment:Bool;
 	public var requireEmptyLineAfterPackage:Bool;
 	public var requireEmptyLineAfterClass:Bool;
+	public var requireEmptyLineAfterInterface:Bool;
+	public var requireEmptyLineAfterAbstract:Bool;
 
 	public function new() {
 		super(LINE);
@@ -20,12 +22,16 @@ class EmptyLinesCheck extends Check {
 		allowEmptyLineAfterMultiLineComment = true;
 		requireEmptyLineAfterPackage = true;
 		requireEmptyLineAfterClass = true;
+		requireEmptyLineAfterInterface = true;
+		requireEmptyLineAfterAbstract = true;
 	}
 
 	override function actualRun() {
 		var inGroup = false;
 		var isLastLinePackage = false;
 		var isLastLineClass = false;
+		var isLastLineInterface = false;
+		var isLastLineAbstract = false;
 		var start = 0;
 		var end = 0;
 		for (i in 0 ... checker.lines.length) {
@@ -51,10 +57,18 @@ class EmptyLinesCheck extends Check {
 				if (requireEmptyLineAfterClass && isLastLineClass) {
 					log('Empty line required after class declaration', i + 1, 0);
 				}
+				if (requireEmptyLineAfterInterface && isLastLineInterface) {
+					log('Empty line required after interface declaration', i + 1, 0);
+				}
+				if (requireEmptyLineAfterAbstract && isLastLineAbstract) {
+					log('Empty line required after abstract declaration', i + 1, 0);
+				}
 			}
 
 			isLastLinePackage = ~/^\s*package.*?;/.match(line);
 			isLastLineClass = ~/^\s*class.*?\{/.match(line);
+			isLastLineInterface = ~/^\s*interface.*?\{/.match(line);
+			isLastLineAbstract = ~/^\s*abstract.*?\{/.match(line);
 		}
 
 		if (inGroup) {
