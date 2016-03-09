@@ -207,8 +207,8 @@ class LeftCurlyCheck extends Check {
 }
 
 typedef ParentToken = {
-token:TokenTree,
-hasToken:Bool
+	var token:TokenTree;
+	var hasToken:Bool;
 }
 
 @:enum
