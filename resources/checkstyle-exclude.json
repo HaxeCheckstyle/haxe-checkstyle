@@ -1,0 +1,11 @@
+{
+	"all": [
+		"checkstyle.utils", "checkstyle.reporter.IReporter"
+	],
+	"Dynamic": [
+		"checkstyle.Main", "checkstyle.Checker"
+	],
+	"CyclomaticComplexity": [
+		"checkstyle.utils.ExprUtils:walkExpr"
+	]
+}
