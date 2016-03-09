@@ -54,6 +54,18 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertNoMsg(new EmptyLinesCheck(), TEST11);
 		assertNoMsg(new EmptyLinesCheck(), TEST12);
 	}
+
+	public function testRequireEmptyLineAfterInterface() {
+		assertMsg(new EmptyLinesCheck(), TEST13, "Empty line required after interface declaration");
+		assertNoMsg(new EmptyLinesCheck(), TEST14);
+		assertNoMsg(new EmptyLinesCheck(), TEST15);
+	}
+
+	public function testRequireEmptyLineAfterAbstract() {
+		assertMsg(new EmptyLinesCheck(), TEST16, "Empty line required after abstract declaration");
+		assertNoMsg(new EmptyLinesCheck(), TEST17);
+		assertNoMsg(new EmptyLinesCheck(), TEST18);
+	}
 }
 
 @:enum
@@ -164,5 +176,42 @@ abstract EmptyLinesCheckTests(String) to String {
 		public function new() {
 			var b:Int;
 		}
+	}";
+
+	var TEST13 =
+	"interface Test {
+		var b:Int;
+	}";
+
+	var TEST14 =
+	"interface Test {
+
+		function test():Void;
+
+	}";
+
+	var TEST15 =
+	"interface Test
+	{
+
+		function test():Void;
+	}";
+
+	var TEST16 =
+	"abstract Test(Int) {
+		var A = 10;
+	}";
+
+	var TEST17 =
+	"abstract Test(Int) {
+
+		var A = 10;
+
+	}";
+
+	var TEST18 =
+	"abstract Test(Int)
+	{
+		var A = 10;
 	}";
 }
