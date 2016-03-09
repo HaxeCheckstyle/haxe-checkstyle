@@ -11,6 +11,12 @@
 			"props": {
 				"severity": "INFO"
 			},
+			"type": "ArrayAccess"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
 			"type": "ArrayLiteral"
 		},
 		{

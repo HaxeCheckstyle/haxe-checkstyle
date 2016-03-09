@@ -11,6 +11,14 @@
 		},
 		{
 			"props": {
+				"spaceBefore": false,
+				"spaceInside": false,
+				"severity": "IGNORE"
+			},
+			"type": "ArrayAccess"
+		},
+		{
+			"props": {
 				"severity": "IGNORE"
 			},
 			"type": "ArrayLiteral"
