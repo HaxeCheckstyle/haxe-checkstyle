@@ -47,7 +47,6 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 		}
 	}
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	function checkField(f:Field, p:ParentType) {
 		if (f.isGetter() || f.isSetter()) return;
 		if (hasToken(NOTINLINE) && !hasToken(INLINE) && f.isInline(p)) return;

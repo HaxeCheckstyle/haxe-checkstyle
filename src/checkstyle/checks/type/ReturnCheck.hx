@@ -61,7 +61,6 @@ class ReturnCheck extends Check {
 		});
 	}
 
-	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function walkExpr(e:Expr, noReturn:Bool, name:String, pos:Position) {
 		if ((e == null) || (e.expr == null)) {
 			return;
