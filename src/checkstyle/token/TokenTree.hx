@@ -1,7 +1,6 @@
 package checkstyle.token;
 
 import haxe.macro.Expr;
-
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
@@ -12,10 +11,6 @@ class TokenTree extends Token {
 	public var parent:TokenTree;
 	public var previousSibling:TokenTree;
 	public var childs:Array<TokenTree>;
-
-	public function new(tok:TokenDef, pos:Position) {
-		super(tok, pos);
-	}
 
 	public function is(tokenDef:TokenDef):Bool {
 		if (tok == null) return false;
@@ -59,18 +54,12 @@ class TokenTree extends Token {
 
 	public function filter(searchFor:Array<TokenDef>, mode:TokenFilterMode, maxLevel:Int = MAX_LEVEL):Array<TokenTree> {
 		return filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (depth > maxLevel) {
-				return SKIP_SUBTREE;
-			}
+			if (depth > maxLevel) return SKIP_SUBTREE;
 			if (token.matchesAny(searchFor)) {
-				if (mode == ALL) {
-					return FOUND_GO_DEEPER;
-				}
+				if (mode == ALL) return FOUND_GO_DEEPER;
 				return FOUND_SKIP_SUBTREE;
 			}
-			else {
-				return GO_DEEPER;
-			}
+			else return GO_DEEPER;
 		});
 	}
 
@@ -101,9 +90,7 @@ class TokenTree extends Token {
 	function matchesAny(searchFor:Array<TokenDef>):Bool {
 		if (searchFor == null || tok == null) return false;
 		for (search in searchFor) {
-			if (Type.enumEq(tok, search)) {
-				return true;
-			}
+			if (Type.enumEq(tok, search)) return true;
 		}
 		return false;
 	}
@@ -116,9 +103,7 @@ class TokenTree extends Token {
 		var buf:StringBuf = new StringBuf();
 		if (tok != null) buf.add('$prefix${tok}\t\t\t\t${getPos()}');
 		if (childs == null) return buf.toString();
-		for (child in childs) {
-			buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');
-		}
+		for (child in childs) buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');
 		return buf.toString();
 	}
 }
