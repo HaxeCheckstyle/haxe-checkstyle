@@ -82,6 +82,7 @@ class TokenStream {
 				default: return false;
 			}
 		}
+		return false;
 	}
 
 	public function token():TokenDef {
