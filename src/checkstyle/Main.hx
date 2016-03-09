@@ -1,6 +1,5 @@
 package checkstyle;
 
-import String;
 import checkstyle.ChecksInfo;
 import checkstyle.Config;
 import checkstyle.LintMessage.SeverityLevel;

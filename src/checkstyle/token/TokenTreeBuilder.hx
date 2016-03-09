@@ -81,7 +81,6 @@ class TokenTreeBuilder {
 	 *  |- Const(CIdent)
 	 *
 	 */
-
 	function walkAt():TokenTree {
 		var atTok:TokenTree = stream.consumeTokenDef(At);
 		var parent:TokenTree = atTok;
@@ -893,7 +892,6 @@ class TokenTreeBuilder {
 	 *          |- BrClose
 	 *
 	 */
-
 	function walkCase(parent:TokenTree) {
 		if (!stream.is(Kwd(KwdCase)) && !stream.is(Kwd(KwdDefault))) {
 			throw 'bad token ${stream.token()} != case/default';
@@ -978,7 +976,6 @@ class TokenTreeBuilder {
 	 *          |- BrClose
 	 *
 	 */
-
 	function walkTry(parent:TokenTree) {
 		var tryTok:TokenTree = stream.consumeTokenDef(Kwd(KwdTry));
 		parent.addChild(tryTok);
@@ -996,7 +993,6 @@ class TokenTreeBuilder {
 	 *      |- BrClose
 	 *
 	 */
-
 	function walkCatch(parent:TokenTree) {
 		var catchTok:TokenTree = stream.consumeTokenDef(Kwd(KwdCatch));
 		parent.addChild(catchTok);
@@ -1016,7 +1012,6 @@ class TokenTreeBuilder {
 	 *      |- BrClose
 	 *
 	 */
-
 	function walkWhile(parent:TokenTree) {
 		var whileTok:TokenTree = stream.consumeTokenDef(Kwd(KwdWhile));
 		parent.addChild(whileTok);
@@ -1039,7 +1034,6 @@ class TokenTreeBuilder {
 	 *      |- Semicolon
 	 *
 	 */
-
 	function walkDoWhile(parent:TokenTree) {
 		var doTok:TokenTree = stream.consumeTokenDef(Kwd(KwdDo));
 		parent.addChild(doTok);
@@ -1077,7 +1071,6 @@ class TokenTreeBuilder {
 	 *      |- BrClose
 	 *
 	 */
-
 	function walkFor(parent:TokenTree) {
 		var forTok:TokenTree = stream.consumeTokenDef(Kwd(KwdFor));
 		parent.addChild(forTok);
@@ -1102,7 +1095,6 @@ class TokenTreeBuilder {
 	 *  |- PClose
 	 *
 	 */
-
 	function walkForPOpen(parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
 		var iterator:TokenTree = stream.consumeConstIdent();
@@ -1142,7 +1134,6 @@ class TokenTreeBuilder {
 	 * Sharp(_)
 	 *
 	 */
-
 	function walkSharp(parent:TokenTree) {
 		switch (stream.token()) {
 			case Sharp("if"), Sharp("elseif"):

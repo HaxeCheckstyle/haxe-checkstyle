@@ -8,7 +8,6 @@ class TextReporter extends BaseReporter {
 
 	override public function addMessage(m:LintMessage) {
 		var sb:StringBuf = getMessage(m);
-
 		var output:Output = Sys.stderr();
 
 		switch (m.severity) {

@@ -1,7 +1,6 @@
 package checkstyle.token;
 
 import haxe.macro.Expr;
-
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
@@ -108,7 +107,6 @@ class TokenStream {
 	 * '>>>=' -> Binop(OpAssignOp(OpUShr))
 	 *
 	 */
-
 	public function consumeOpGt():TokenTree {
 		var tok:TokenTree = consumeTokenDef(Binop(OpGt));
 		switch (token()) {
@@ -165,9 +163,7 @@ class TokenStream {
 	 * This function provides a workaround, which scans the tokens around
 	 * Binop(OpSub) to see if the token stream should contain a negative const
 	 * value and returns a proper Const(CInt(-x)) or Const(CFloat(-x)) token
-	 *
 	 */
-
 	public function consumeOpSub():TokenTree {
 		var tok:Token = consumeTokenDef(Binop(OpSub));
 		switch (token()) {
