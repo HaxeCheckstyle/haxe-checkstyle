@@ -1,11 +1,36 @@
 {
-	"all": [
-		"checkstyle.utils", "checkstyle.reporter.IReporter"
-	],
+	"all": [],
 	"Dynamic": [
-		"checkstyle.Main", "checkstyle.Checker"
+		"checkstyle.Main",
+		"checkstyle.Checker",
+		"checkstyle.ChecksInfo"
+	],
+	"EmptyLines": [
+		"checks"
+	],
+	"MultipleStringLiterals": [
+		"checks",
+		"token"
+	],
+	"MultipleVariableDeclarations": [
+		"checks.coding.MultipleVariableDeclarationsCheckTest"
+	],
+	"TrailingWhitespace": [
+		"checks.whitespace.SpacingCheckTest",
+		"checks.whitespace.TrailingWhitespaceCheckTest",
+		"checks.naming.MemberNameCheckTest"
+	],
+	"TabForAligning": [
+		"checks.whitespace.IndentationCharacterCheckTest",
+		"checks.whitespace.TabForAligningCheckTest"
+	],
+	"LineLength": [
+		"checks.size.LineLengthCheckTest"
+	],
+	"IndentationCharacter": [
+		"checks.whitespace.IndentationCharacterCheckTest"
 	],
 	"CyclomaticComplexity": [
-		"checkstyle.utils.ExprUtils:walkExpr"
+		"checkstyle.utils.ExprUtils"
 	]
 }
