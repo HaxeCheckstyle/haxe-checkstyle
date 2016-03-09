@@ -13,6 +13,7 @@ import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 
 using checkstyle.utils.ArrayUtils;
+using StringTools;
 
 class Checker {
 
@@ -170,7 +171,6 @@ class Checker {
 		lintFile.content = null;
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
 	function createContext(lintFile:LintFile):Bool {
 		this.file = lintFile;
 		for (reporter in reporters) reporter.fileStart(file);
@@ -254,7 +254,17 @@ class Checker {
 		if (excludes == null) return false;
 		var excludesForCheck:Array<String> = excludes.get(moduleName);
 		if (excludesForCheck == null || excludesForCheck.length == 0) return false;
-		return excludesForCheck.contains(file.name.substring(0, file.name.indexOf(".hx")));
+
+		var cls = file.name.substring(0, file.name.indexOf(".hx"));
+		if (excludesForCheck.contains(cls)) return true;
+
+		cls = cls.replace("/", ":");
+		for (exclude in excludesForCheck) {
+			var regStr:String = exclude + ":.*?" + cls.substring(cls.lastIndexOf(":") + 1, cls.length) + "$";
+			var r = new EReg(regStr.replace("/", ":"), "i");
+			if (r.match(cls)) return true;
+		}
+		return false;
 	}
 
 	function getErrorMessage(e:Dynamic, fileName:String, step:String):LintMessage {
