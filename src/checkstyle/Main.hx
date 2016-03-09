@@ -1,5 +1,6 @@
 package checkstyle;
 
+import String;
 import checkstyle.ChecksInfo;
 import checkstyle.Config;
 import checkstyle.LintMessage.SeverityLevel;
@@ -114,24 +115,26 @@ class Main {
 	function loadExcludeConfig(excludeConfigPath:String) {
 		var config:Config = Json.parse(File.getContent(excludeConfigPath));
 		var excludes = Reflect.fields(config);
-		for (e in excludes) {
-			createExcludeMapElement(e);
-			var excludeValues:Array<String> = Reflect.field(config, e);
+		for (exclude in excludes) {
+			createExcludeMapElement(exclude);
+			var excludeValues:Array<String> = Reflect.field(config, exclude);
 			if (excludeValues == null || excludeValues.length == 0) continue;
-			for (val in excludeValues) {
-				for (p in paths) {
-					var path = p + "/" + val.split(".").join("/");
-					if (e == "all") allExcludes.push(path);
-					else excludesMap.get(e).push(path);
-				}
-			}
+			for (val in excludeValues) updateExcludes(exclude, val);
 		}
 
 		start();
 	}
 
-	function createExcludeMapElement(name:String) {
-		if (excludesMap.get(name) == null) excludesMap.set(name, []);
+	function createExcludeMapElement(exclude:String) {
+		if (excludesMap.get(exclude) == null) excludesMap.set(exclude, []);
+	}
+
+	function updateExcludes(exclude:String, val:String) {
+		for (p in paths) {
+			var path = p + "/" + val.split(".").join("/");
+			if (exclude == "all") allExcludes.push(path);
+			else excludesMap.get(exclude).push(path);
+		}
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {
