@@ -31,6 +31,34 @@
 		"checks.whitespace.IndentationCharacterCheckTest"
 	],
 	"CyclomaticComplexity": [
-		"checkstyle.utils.ExprUtils"
+		"checkstyle.checks.Check",
+		"checkstyle.utils.ExprUtils",
+		"checkstyle.utils.ComplexTypeUtils",
+		"checkstyle.checks.CyclomaticComplexityCheck",
+		"checkstyle.checks.block.LeftCurlyCheck",
+		"checkstyle.checks.block.RightCurlyCheck",
+		"checkstyle.checks.naming.MethodNameCheck",
+		"checkstyle.checks.type.ReturnCheck",
+		"checkstyle.checks.whitespace.OperatorWrapCheck",
+		"checkstyle.checks.whitespace.WhitespaceAfterCheck",
+		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
+		"checkstyle.token.TokenTreeBuilder"
+	],
+	"LeftCurly": [
+		"checkstyle.checks.CyclomaticComplexityCheck"
+	],
+	"RightCurly": [
+		"checkstyle.checks.CyclomaticComplexityCheck"
+	],
+	"MethodLength": [
+		"checkstyle.checks.whitespace.WhitespaceAfterCheck",
+		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
+		"checkstyle.token.TokenTreeBuilder"
+	],
+	"MagicNumber": [
+		"checkstyle.reporter.ProgressReporter"
+	],
+	"MultipleVariableDeclarations": [
+		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck"
 	]
 }
