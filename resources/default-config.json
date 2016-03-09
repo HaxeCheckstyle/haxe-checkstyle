@@ -467,6 +467,12 @@
 			"props": {
 				"severity": "IGNORE"
 			},
+			"type": "Trace"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
 			"type": "TrailingWhitespace"
 		},
 		{
