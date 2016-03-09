@@ -2,7 +2,6 @@ package checks.naming;
 
 import checkstyle.checks.naming.MethodNameCheck;
 
-// TODO abstract tests
 class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 
 	public function testCorrectNaming() {
@@ -122,7 +121,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 @:enum
 abstract MethodNameCheckTests(String) to String {
 	var TEST = "
-	class Test {
+	abstractAndClass Test {
 		function test() {}
 		function testName() {}
 		public function testValue() {}
@@ -132,21 +131,21 @@ abstract MethodNameCheckTests(String) to String {
 		@SuppressWarnings('checkstyle:MethodName')
 		function TEST2() {}
 	}
-	
+
 	typedef Test3 = {
 		function test() {};
 		function testName() {};
 	}";
 
 	var TEST1 = "
-	class Test {
+	abstractAndClass Test {
 		static public function Test() {}
 		public function Test2() {}
 		static inline public function Test3() {}
 	}";
 
 	var TEST2 = "
-	class Test {
+	abstractAndClass Test {
 		static public function Test() {}
 		static inline public function Test1() {}
 		public function Test2() {}
@@ -164,7 +163,7 @@ abstract MethodNameCheckTests(String) to String {
 	}";
 
 	var TEST5 = "
-	class Test {
+	abstractAndClass Test {
 		static function Test() {}
 		static inline function Test1() {}
 		function Test3() {}

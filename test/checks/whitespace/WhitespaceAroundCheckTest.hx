@@ -162,7 +162,7 @@ abstract WhitespaceAroundCheckTests(String) to String {
 	class Test {
 		function test() {
 			if (re.match(line) && line.indexOf('//') == -1) {
-				log('Tab after non-space character. Use space for aligning', i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
+				log('Tab after non-space character, Use space for aligning', i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
 				return -1;
 			}
 			a = 1 - -2;

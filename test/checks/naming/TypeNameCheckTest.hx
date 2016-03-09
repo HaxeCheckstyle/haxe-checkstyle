@@ -2,7 +2,6 @@ package checks.naming;
 
 import checkstyle.checks.naming.TypeNameCheck;
 
-// TODO abstract tests
 class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 
 	static inline var FORMAT_CLASS:String = "^C[A-Z][a-z]*$";
@@ -119,7 +118,7 @@ abstract TypeNameCheckTests(String) to String {
 	}";
 
 	var TEST1 = "
-	class CTest {
+	abstractAndClass CTest {
 	}";
 
 	var TEST2 = "
