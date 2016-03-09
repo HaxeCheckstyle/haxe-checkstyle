@@ -281,7 +281,6 @@ class Main {
 		exitCode = newExitCode;
 	}
 
-	@SuppressWarnings("checkstyle:Dynamic")
 	public static function main() {
 		var args;
 		var cwd;
