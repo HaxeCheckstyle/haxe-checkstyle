@@ -117,15 +117,12 @@ class Main {
 		for (e in excludes) {
 			createExcludeMapElement(e);
 			var excludeValues:Array<String> = Reflect.field(config, e);
-			if (excludeValues != null && excludeValues.length > 0) {
-				for (val in excludeValues) {
-					for (p in paths) {
-						var path = p + "/" + val.split(".").join("/");
-						if (e == "all") allExcludes.push(path);
-						else {
-							if (!p.contains(":")) excludesMap.get(e).push(path);
-						}
-					}
+			if (excludeValues == null || excludeValues.length == 0) continue;
+			for (val in excludeValues) {
+				for (p in paths) {
+					var path = p + "/" + val.split(".").join("/");
+					if (e == "all") allExcludes.push(path);
+					else excludesMap.get(e).push(path);
 				}
 			}
 		}
