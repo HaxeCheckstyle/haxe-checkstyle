@@ -11,7 +11,6 @@ class MultipleVariableDeclarationsCheck extends Check {
 		super(TOKEN);
 	}
 
-	@SuppressWarnings('checkstyle:MultipleVariableDeclarations')
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
 		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], ALL);
