@@ -89,6 +89,8 @@
 		{
 			"props": {
 				"requireEmptyLineAfterPackage": true,
+				"requireEmptyLineAfterInterface": true,
+				"requireEmptyLineAfterAbstract": true,
 				"allowEmptyLineAfterSingleLineComment": true,
 				"max": 1,
 				"requireEmptyLineAfterClass": true,
