@@ -470,6 +470,12 @@
 			"props": {
 				"severity": "INFO"
 			},
+			"type": "Trace"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
 			"type": "TrailingWhitespace"
 		},
 		{
