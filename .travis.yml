@@ -9,6 +9,7 @@ intall:
   - haxelib install haxeparser 3.2.0
   - haxelib install compiletime 2.6.0
   - haxelib install hxargs 3.0.0
+  - haxelib install mcover 2.1.1
 hxml:
   - build.hxml
 sudo: false
