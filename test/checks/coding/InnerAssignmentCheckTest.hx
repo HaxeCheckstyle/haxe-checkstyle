@@ -12,6 +12,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertNoMsg(check, WHILE_COND);
 		assertNoMsg(check, MEMBER_DEF);
 		assertNoMsg(check, METHOD_DEF);
+		assertNoMsg(check, BRACELESS_ANON_FUNC_ISSUE_113);
 	}
 
 	public function testIncorrectInnerAssignment() {
@@ -52,6 +53,7 @@ abstract InnerAssignmentCheckTests(String) to String {
 			while ((a=b) > 0) {
 				b=c;
 			}
+			while ((a=b) > 0) b = c;
 		}
 	}";
 
@@ -90,4 +92,13 @@ abstract InnerAssignmentCheckTests(String) to String {
 			}
 		}
 	}";
+
+	var BRACELESS_ANON_FUNC_ISSUE_113 = "
+	class Test {
+		public function foo() {
+			var b = false;
+			trace(function() b = true);
+		}
+	}
+	";
 }
