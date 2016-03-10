@@ -37,7 +37,7 @@ class TestMain {
 			var results:CoverageResult = cls.getResults();
 			//trace(results);
 			var c = cls.name.replace(".", "/") + ".hx";
-			Reflect.setField(report.coverage, c, [null, results.s, results.sc, (results.s - results.sc), results.lp, results.b, results.m, cls.getPercentage()]);
+			Reflect.setField(report.coverage, c, [null, results.l, results.lc, (results.l - results.lc), results.lp, results.b, results.m, cls.getPercentage()]);
 			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
 		}
 
