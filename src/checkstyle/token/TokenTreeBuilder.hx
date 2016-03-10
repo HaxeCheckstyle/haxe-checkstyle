@@ -543,15 +543,23 @@ class TokenTreeBuilder {
 			case Binop(OpSub):
 				walkBinopSub(parent);
 				return;
+			case Binop(OpLt):
+				if (stream.isTypedParam()) {
+					walkLtGt(parent);
+					return;
+				}
+				wantMore = true;
 			case Binop(OpGt):
-				var opGt:TokenTree = stream.consumeOpGt();
-				parent.addChild(opGt);
-				walkIdentifier(opGt);
+				var gtTok:TokenTree = stream.consumeOpGt();
+				parent.addChild(gtTok);
+				walkIdentifier(gtTok);
 				return;
 			case Binop(_):
-				var opGt:TokenTree = stream.consumeToken();
-				parent.addChild(opGt);
-				walkIdentifier(opGt);
+				wantMore = true;
+			case Unop(_):
+				if (parent.tok.match(Const(_))) wantMore = false;
+			case Kwd(KwdVar):
+				walkVar(parent, []);
 				return;
 			case Kwd(KwdNew):
 				walkNew(parent);
@@ -562,16 +570,19 @@ class TokenTreeBuilder {
 			case Kwd(KwdFunction):
 				walkFunction(parent, []);
 				return;
+			case Kwd(KwdExtends):
+				walkExtends(parent);
+				return;
+			case Kwd(KwdImplements):
+				walkImplements(parent);
+				return;
 			case Kwd(KwdClass):
 				walkClass(parent, []);
 				return;
 			case Kwd(KwdMacro), Kwd(KwdReturn):
-				var macroTok:TokenTree = stream.consumeToken();
-				parent.addChild(macroTok);
-				walkIdentifier(macroTok);
-				return;
+				wantMore = true;
 			case BrOpen:
-				walkBlock(parent);
+				walkObjectDecl(parent);
 				return;
 			case BkOpen:
 				walkArrayAccess(parent);
@@ -585,22 +596,28 @@ class TokenTreeBuilder {
 				walkPOpen(parent);
 				walkIdentifierContinue(parent);
 				return;
-			case Dot, Unop(_):
+			case PClose, BrClose, BkClose:
+				return;
+			case Comma:
+				return;
+			case Sharp(_):
+				return;
+			case Dot, DblDot:
 				wantMore = true;
 			default:
 				wantMore = false;
 		}
 		var newChild:TokenTree = stream.consumeToken();
 		parent.addChild(newChild);
-		walkIdentifierContinue(newChild);
 		if (wantMore) walkIdentifier(newChild);
+		walkIdentifierContinue(newChild);
 	}
 
 	function walkIdentifierContinue(parent:TokenTree) {
 		switch (stream.token()) {
-			case Dot:
+			case Dot, DblDot:
 				walkIdentifier(parent);
-			case Binop(_):
+			case Binop(_), Unop(_):
 				walkIdentifier(parent);
 			case Semicolon:
 				walkIdentifier(parent);
@@ -699,6 +716,11 @@ class TokenTreeBuilder {
 					walkArrayAccess(pOpen);
 				case PClose:
 					break;
+				case Sharp(_):
+					walkSharp(pOpen);
+				case Comma:
+					var comma:TokenTree = stream.consumeToken();
+					pOpen.addChild(comma);
 				default:
 					walkIdentifier(pOpen);
 			}
@@ -1130,16 +1152,11 @@ class TokenTreeBuilder {
 	function walkSharp(parent:TokenTree) {
 		switch (stream.token()) {
 			case Sharp("if"), Sharp("elseif"):
-				var ifToken:TokenTree = stream.consumeToken();
-				parent.addChild(ifToken);
-				walkSharpIfExpr(ifToken);
-				walkSharpExpr(ifToken);
+				walkSharpIf(parent);
 			case Sharp("else"):
 				var elseToken:TokenTree = stream.consumeToken();
 				parent.addChild(elseToken);
 				walkSharpExpr(elseToken);
-			case Sharp("end"):
-				parent.addChild(stream.consumeToken());
 			case Sharp("error"):
 				var errorToken:TokenTree = stream.consumeToken();
 				parent.addChild(errorToken);
@@ -1152,6 +1169,25 @@ class TokenTreeBuilder {
 				parent.addChild(stream.consumeToken());
 			default:
 		}
+	}
+
+	function walkSharpIf(parent:TokenTree) {
+		var ifToken:TokenTree = stream.consumeToken();
+		parent.addChild(ifToken);
+		walkSharpIfExpr(ifToken);
+		walkSharpExpr(ifToken);
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
+			switch (stream.token()) {
+				case Sharp("else"), Sharp("elseif"):
+					walkSharp(ifToken);
+				case Sharp("end"):
+					break;
+				default:
+					throw 'bad token ${stream.token()} != #elseif/#end';
+			}
+		}
+		ifToken.addChild(stream.consumeTokenDef(Sharp("end")));
 	}
 
 	function walkSharpIfExpr(parent:TokenTree) {
@@ -1199,16 +1235,17 @@ class TokenTreeBuilder {
 					prefixes = [];
 				case BrOpen:
 					walkBlock(parent);
-				case Sharp(_):
+				case Sharp("if"):
 					walkSharp(parent);
+					return;
+				case Sharp(_):
 					return;
 				case At:
 					prefixes.push(walkAt());
 				case Comment(_), CommentLine(_):
 					prefixes.push(stream.consumeToken());
 				default:
-					walkStatement(parent);
-					return;
+					walkIdentifier(parent);
 			}
 		}
 	}
