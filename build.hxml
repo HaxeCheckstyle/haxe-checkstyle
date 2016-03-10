@@ -10,7 +10,9 @@
 -neko run.n
 
 --next
+-lib mcover:2.1.1
 -x TestMain
+--macro mcover.MCover.coverage(['checkstyle.checks'], ['src'], null)
 
 --next
 -cmd neko run -s src -s test -p resources/static-analysis.txt
