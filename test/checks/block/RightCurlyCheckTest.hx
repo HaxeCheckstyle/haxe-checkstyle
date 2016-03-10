@@ -46,6 +46,8 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 
 		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		assertNoMsg(check, CONSTRUCTOR_OBJECT_DECL_ISSUE_152);
 	}
 
 	public function testIncorrectAloneOrSingleLine() {
@@ -569,4 +571,10 @@ abstract RightCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
+
+	var CONSTRUCTOR_OBJECT_DECL_ISSUE_152 = "
+	class Test {
+		var field = new Object({x:0});
+	}";
+
 }
