@@ -42,8 +42,7 @@ class TestMain {
 		}
 
 		//To test ci integration
-		var file:FileOutput;
-		file = File.write("coverage.json");
+		var file:FileOutput = File.write("coverage.json");
 		file.writeString(Json.stringify(report));
 		file.close();
 	}
