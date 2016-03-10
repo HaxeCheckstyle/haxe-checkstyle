@@ -70,6 +70,12 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertMsg(check, EMPTY_OBJECT_DECL, MSG_EMPTY_BLOCK_CONTAIN_STATEMENT);
 		assertMsg(check, EMPTY_OBJECT_DECL_WHITESPACE, MSG_EMPTY_BLOCK_CONTAIN_STATEMENT);
 	}
+
+	public function testMacroReificationIssue149() {
+		var check:EmptyBlockCheck = new EmptyBlockCheck();
+		check.tokens = [REIFICATION];
+		assertNoMsg(check, MACRO_REIFICATION_ISSUE_149);
+	}
 }
 
 @:enum
@@ -139,6 +145,18 @@ abstract EmptyBlockCheckTests(String) to String {
 								 */
 			var a = { // comment
 			};
+		}
+	}";
+
+	var MACRO_REIFICATION_ISSUE_149 = "
+	class Macro
+	{
+		function build()
+		{
+			return macro
+			{
+				$a{exprs};
+			}
 		}
 	}";
 }

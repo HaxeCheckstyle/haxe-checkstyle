@@ -87,6 +87,8 @@ class EmptyBlockCheck extends Check {
 				return !hasToken(SWITCH);
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
 				return !hasToken(OBJECT_DECL);
+			case Dollar(_):
+				return !hasToken(REIFICATION);
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
@@ -155,6 +157,7 @@ abstract EmptyBlockCheckToken(String) {
 	var SWITCH = "SWITCH";
 	var TRY = "TRY";
 	var CATCH = "CATCH";
+	var REIFICATION = "REIFICATION";
 }
 
 @:enum

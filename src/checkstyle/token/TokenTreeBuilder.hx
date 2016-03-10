@@ -538,12 +538,18 @@ class TokenTreeBuilder {
 	}
 
 	function walkIdentifier(parent:TokenTree) {
+		var wantMore:Bool = true;
 		switch (stream.token()) {
 			case Binop(OpSub):
 				walkBinopSub(parent);
 				return;
 			case Binop(OpGt):
 				var opGt:TokenTree = stream.consumeOpGt();
+				parent.addChild(opGt);
+				walkIdentifier(opGt);
+				return;
+			case Binop(_):
+				var opGt:TokenTree = stream.consumeToken();
 				parent.addChild(opGt);
 				walkIdentifier(opGt);
 				return;
@@ -559,61 +565,35 @@ class TokenTreeBuilder {
 			case Kwd(KwdClass):
 				walkClass(parent, []);
 				return;
-			case Kwd(KwdMacro):
+			case Kwd(KwdMacro), Kwd(KwdReturn):
 				var macroTok:TokenTree = stream.consumeToken();
 				parent.addChild(macroTok);
 				walkIdentifier(macroTok);
 				return;
+			case BrOpen:
+				walkBlock(parent);
+				return;
+			case BkOpen:
+				walkArrayAccess(parent);
+				return;
+			case Dollar(_):
+				var dollarTok:TokenTree = stream.consumeToken();
+				parent.addChild(dollarTok);
+				walkBlock(dollarTok);
+				return;
+			case POpen:
+				walkPOpen(parent);
+				walkIdentifierContinue(parent);
+				return;
+			case Dot, Unop(_):
+				wantMore = true;
 			default:
+				wantMore = false;
 		}
 		var newChild:TokenTree = stream.consumeToken();
 		parent.addChild(newChild);
-		switch (stream.token()) {
-			case Const(_):
-				walkIdentifier(newChild);
-			case Binop(OpLt):
-				if (stream.isTypedParam()) {
-					walkLtGt(parent);
-					return;
-				}
-				walkIdentifier(newChild);
-			case Binop(OpGt):
-				var gt:TokenTree = stream.consumeOpGt();
-				newChild.addChild(gt);
-				walkIdentifier(gt);
-			case Binop(OpSub):
-				walkBinopSub(newChild);
-			case Binop(_):
-				walkIdentifier(newChild);
-			case Unop(_):
-				walkIdentifier(newChild);
-			case Dot:
-				walkIdentifier(newChild);
-			case DblDot:
-				walkIdentifier(newChild);
-			case POpen:
-				walkPOpen(newChild);
-				walkIdentifierContinue(newChild);
-			case BrOpen:
-				walkBlock(newChild);
-			case BkOpen:
-				walkArrayAccess(newChild);
-			case Semicolon:
-				var semicolon:TokenTree = stream.consumeTokenDef(Semicolon);
-				newChild.addChild(semicolon);
-			case Kwd(KwdTrue), Kwd(KwdFalse), Kwd(KwdNull):
-				walkIdentifier(newChild);
-			case Kwd(KwdCast):
-				walkIdentifier(newChild);
-			case Kwd(KwdThis):
-				walkIdentifier(newChild);
-			case Kwd(KwdMacro):
-				walkIdentifier(newChild);
-			case Dollar(_):
-				walkIdentifier(newChild);
-			case Comma, PClose, BkClose, BrClose:
-			default:
-		}
+		walkIdentifierContinue(newChild);
+		if (wantMore) walkIdentifier(newChild);
 	}
 
 	function walkIdentifierContinue(parent:TokenTree) {
@@ -622,8 +602,12 @@ class TokenTreeBuilder {
 				walkIdentifier(parent);
 			case Binop(_):
 				walkIdentifier(parent);
+			case Semicolon:
+				walkIdentifier(parent);
 			case BkOpen:
-				walkArrayAccess(parent);
+				walkIdentifier(parent);
+			case POpen:
+				walkIdentifier(parent);
 			default:
 		}
 	}
