@@ -1,3 +1,5 @@
+import mcover.coverage.data.CoverageResult;
+import haxe.Json;
 import mcover.coverage.client.EMMAPrintClient;
 import sys.io.File;
 import sys.io.FileOutput;
@@ -31,14 +33,19 @@ class TestMain {
 
 		Sys.println("\nTest Coverage: " + logger.coverage.getPercentage() + "%\n");
 
+		var report = {coverage: {}};
 		var classes = logger.coverage.getClasses();
-		for (cls in classes) Sys.println(cls.name + ": " + cls.getPercentage() + "%");
+		for (cls in classes) {
+			var results:CoverageResult = cls.getResults();
+			Reflect.setField(report.coverage, cls.name, [null, results.s, results.sc, (results.s - results.sc), results.lp, results.b, results.m, cls.getPercentage()]);
+			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
+		}
 
 		//To test ci integration
-		/*var file:FileOutput;
-		file = File.write("coverage.xml");
-		file.writeString(client.xml.toString());
-		file.close();*/
+		var file:FileOutput;
+		file = File.write("coverage.json");
+		file.writeString(Json.stringify(report));
+		file.close();
 	}
 
 	static function main() {
