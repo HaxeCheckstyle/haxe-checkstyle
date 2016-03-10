@@ -1,11 +1,10 @@
-import mcover.coverage.data.CoverageResult;
 import haxe.Json;
-import mcover.coverage.client.EMMAPrintClient;
 import sys.io.File;
 import sys.io.FileOutput;
 import checks.CheckTestCase;
 import token.TokenTreeBuilderTest;
-
+import mcover.coverage.client.PrintClient;
+import mcover.coverage.data.CoverageResult;
 import mcover.coverage.MCoverage;
 
 using StringTools;
@@ -27,18 +26,16 @@ class TestMain {
 	}
 
 	static function setupCoverageReport() {
-		var client:EMMAPrintClient = new EMMAPrintClient();
+		var client:PrintClient = new PrintClient();
 		var logger = MCoverage.getLogger();
 		logger.addClient(client);
 		logger.report();
-		client.report(logger.coverage);
-
-		Sys.println("\nTest Coverage: " + logger.coverage.getPercentage() + "%\n");
 
 		var report = {coverage: {}};
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
 			var results:CoverageResult = cls.getResults();
+			//trace(results);
 			var c = cls.name.replace(".", "/") + ".hx";
 			Reflect.setField(report.coverage, c, [null, results.s, results.sc, (results.s - results.sc), results.lp, results.b, results.m, cls.getPercentage()]);
 			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
