@@ -35,10 +35,18 @@ class TestMain {
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
 			var results:CoverageResult = cls.getResults();
-			//trace(results);
+			var coverageData = [null];
+			var ms = cls.getMissingStatements();
+			for (s in ms) {
+				if (s.lines != null && s.lines.length > 0) coverageData[s.lines[s.lines.length - 1]] = 0;
+			}
+			for (i in 1 ... results.l) {
+				if (coverageData[i] == null) coverageData[i] = 1;
+			}
+
+			//trace(cls.name + ": " + cls.itemCount + " : " + cls.getMissingStatements());
 			var c = cls.name.replace(".", "/") + ".hx";
-			Reflect.setField(report.coverage, c, [null, results.l, results.lc, (results.l - results.lc), results.lp, results.b, results.m, cls.getPercentage()]);
-			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
+			Reflect.setField(report.coverage, c, coverageData);
 		}
 
 		//To test ci integration
