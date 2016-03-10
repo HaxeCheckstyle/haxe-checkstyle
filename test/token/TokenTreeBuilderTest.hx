@@ -224,7 +224,7 @@ abstract TokenTreeBuilderTests(String) to String {
 	'        Kwd(KwdReturn)\n' +
 	'          BkOpen\n' +
 	'            BkClose\n' +
-	'        Semicolon\n' +
+	'          Semicolon\n' +
 	'        BrClose\n';
 }
 
