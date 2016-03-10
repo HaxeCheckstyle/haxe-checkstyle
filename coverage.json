@@ -1,0 +1,11 @@
+{
+	"coverage": {
+		"path/to/file.py": [null, 1, 0, null, true, 0, 0, 1, 1],
+		"path/to/other.py": [null, 0, 1, 1, "1/3", null]
+	},
+	"messages": {
+		"path/to/other.py": {
+			"1": "custom message for line 1"
+		}
+	}
+}

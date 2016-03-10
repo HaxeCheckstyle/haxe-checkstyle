@@ -35,10 +35,10 @@ class TestMain {
 		for (cls in classes) Sys.println(cls.name + ": " + cls.getPercentage() + "%");
 
 		//To test ci integration
-		var file:FileOutput;
+		/*var file:FileOutput;
 		file = File.write("coverage.xml");
 		file.writeString(client.xml.toString());
-		file.close();
+		file.close();*/
 	}
 
 	static function main() {
