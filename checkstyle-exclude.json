@@ -43,6 +43,7 @@
 		"checkstyle.checks.whitespace.OperatorWrapCheck",
 		"checkstyle.checks.whitespace.WhitespaceAfterCheck",
 		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
+		"checkstyle.checks.block.EmptyBlockCheck",
 		"checkstyle.token.TokenTreeBuilder"
 	],
 	"LeftCurly": [
