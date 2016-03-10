@@ -8,6 +8,8 @@ import token.TokenTreeBuilderTest;
 
 import mcover.coverage.MCoverage;
 
+using StringTools;
+
 class TestMain {
 
 	public function new() {
@@ -37,7 +39,8 @@ class TestMain {
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
 			var results:CoverageResult = cls.getResults();
-			Reflect.setField(report.coverage, cls.name, [null, results.s, results.sc, (results.s - results.sc), results.lp, results.b, results.m, cls.getPercentage()]);
+			var c = cls.name.replace(".", "/") + ".hx";
+			Reflect.setField(report.coverage, c, [null, results.s, results.sc, (results.s - results.sc), results.lp, results.b, results.m, cls.getPercentage()]);
 			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
 		}
 
