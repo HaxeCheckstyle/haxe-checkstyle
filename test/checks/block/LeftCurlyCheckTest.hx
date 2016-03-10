@@ -96,6 +96,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		check.ignoreEmptySingleline = true;
 		assertNoMsg(check, NO_FIELDS_CLASS);
 		assertNoMsg(check, NO_FIELDS_MACRO);
+		assertNoMsg(check, SINGLELINE_ISSUE_153);
 	}
 
 	public function testArrayComprehension() {
@@ -483,4 +484,12 @@ abstract LeftCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
+
+	var SINGLELINE_ISSUE_153 = "
+	class Test {
+		var positionMap = new Map<Int, {x:Bool, y:Bool}>();
+		function foo():Void {}
+	}
+
+	class Empty {}";
 }
