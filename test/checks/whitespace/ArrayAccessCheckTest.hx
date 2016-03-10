@@ -1,6 +1,6 @@
-package checks.coding;
+package checks.whitespace;
 
-import checkstyle.checks.coding.ArrayAccessCheck;
+import checkstyle.checks.whitespace.ArrayAccessCheck;
 
 class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 
