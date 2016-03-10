@@ -1,4 +1,4 @@
-package checkstyle.checks.coding;
+package checkstyle.checks.whitespace;
 
 import haxe.macro.Expr;
 import checkstyle.utils.ExprUtils;
