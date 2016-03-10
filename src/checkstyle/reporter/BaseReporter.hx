@@ -16,9 +16,11 @@ class BaseReporter implements IReporter {
 	var report:StringBuf;
 	var file:FileOutput;
 	var numFiles:Int;
+	var noStyle:Bool;
 
-	public function new(numFiles:Int, path:String) {
-		this.numFiles = numFiles;
+	public function new(fileCount:Int, path:String, ns:Bool) {
+		numFiles = fileCount;
+		noStyle = ns;
 		if (path != null) {
 			var folder = Path.directory(path);
 			if (folder.length > 0 && !FileSystem.exists(folder)) FileSystem.createDirectory(folder);
@@ -65,7 +67,7 @@ class BaseReporter implements IReporter {
 	public function addMessage(m:LintMessage) {}
 
 	function styleText(s:String, style:Style):String {
-		if (Sys.systemName() == "Windows") return s;
+		if (Sys.systemName() == "Windows" || noStyle) return s;
 		return '\033[${style}m${s}\033[0m';
 	}
 

@@ -30,6 +30,7 @@ class Main {
 	static var STYLE:String = "";
 	static var SHOW_PROGRESS:Bool = false;
 	static var EXIT_CODE:Bool = false;
+	static var NO_STYLE:Bool = false;
 	static var exitCode:Int;
 
 	var info:ChecksInfo;
@@ -67,7 +68,8 @@ class Main {
 			@doc("List all available checks and exit") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
-			@doc("Show report [DEPRECATED]") ["-report"] => function() {},
+			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
+			@doc("Show report [DEPRECATED]") ["-report"] => function() trace("-report is no longer needed"),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
@@ -197,9 +199,9 @@ class Main {
 
 	function createReporter(numFiles:Int):IReporter {
 		return switch (REPORT_TYPE) {
-			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE);
-			case "json": new JSONReporter(numFiles, JSON_PATH);
-			case "text": new TextReporter(numFiles, TEXT_PATH);
+			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE, NO_STYLE);
+			case "json": new JSONReporter(numFiles, JSON_PATH, NO_STYLE);
+			case "text": new TextReporter(numFiles, TEXT_PATH, NO_STYLE);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
