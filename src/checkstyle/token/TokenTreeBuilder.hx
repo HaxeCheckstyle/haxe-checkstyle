@@ -547,6 +547,23 @@ class TokenTreeBuilder {
 				parent.addChild(opGt);
 				walkIdentifier(opGt);
 				return;
+			case Kwd(KwdNew):
+				walkNew(parent);
+				return;
+			case Kwd(KwdFor):
+				walkFor(parent);
+				return;
+			case Kwd(KwdFunction):
+				walkFunction(parent, []);
+				return;
+			case Kwd(KwdClass):
+				walkClass(parent, []);
+				return;
+			case Kwd(KwdMacro):
+				var macroTok:TokenTree = stream.consumeToken();
+				parent.addChild(macroTok);
+				walkIdentifier(macroTok);
+				return;
 			default:
 		}
 		var newChild:TokenTree = stream.consumeToken();
@@ -586,22 +603,14 @@ class TokenTreeBuilder {
 				newChild.addChild(semicolon);
 			case Kwd(KwdTrue), Kwd(KwdFalse), Kwd(KwdNull):
 				walkIdentifier(newChild);
-			case Kwd(KwdNew):
-				walkNew(parent);
 			case Kwd(KwdCast):
-				walkIdentifier(parent);
+				walkIdentifier(newChild);
 			case Kwd(KwdThis):
-				walkIdentifier(parent);
-			case Kwd(KwdFor):
-				walkFor(parent);
-			case Kwd(KwdFunction):
-				walkFunction(parent, []);
+				walkIdentifier(newChild);
 			case Kwd(KwdMacro):
-				walkIdentifier(parent);
-			case Kwd(KwdClass):
-				walkClass(parent, []);
+				walkIdentifier(newChild);
 			case Dollar(_):
-				walkIdentifier(parent);
+				walkIdentifier(newChild);
 			case Comma, PClose, BkClose, BrClose:
 			default:
 		}
