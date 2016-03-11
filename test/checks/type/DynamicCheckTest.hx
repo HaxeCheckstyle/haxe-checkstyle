@@ -5,12 +5,12 @@ import checkstyle.checks.type.DynamicCheck;
 class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 
 	public function testNoDynamic() {
-		var check = new DynamicCheck ();
+		var check = new DynamicCheck();
 		assertNoMsg(check, TEST);
 	}
 
 	public function testDetectDynamic() {
-		var check = new DynamicCheck ();
+		var check = new DynamicCheck();
 		assertMsg(check, TEST1, 'Dynamic type used: Count');
 		assertMsg(check, TEST2, 'Dynamic type used: test');
 		assertMsg(check, TEST3, 'Dynamic type used: Count');

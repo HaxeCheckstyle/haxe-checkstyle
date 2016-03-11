@@ -5,21 +5,21 @@ import checkstyle.checks.naming.ParameterNameCheck;
 class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 
 	public function testCorrectNaming() {
-		var check = new ParameterNameCheck ();
+		var check = new ParameterNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
-		var check = new ParameterNameCheck ();
+		var check = new ParameterNameCheck();
 		assertMsg(check, TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, TEST3, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
 		assertMsg(check, TEST5, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
 	}
 
 	public function testIgnoreExtern() {
-		var check = new ParameterNameCheck ();
+		var check = new ParameterNameCheck();
 		check.ignoreExtern = false;
 
 		var paramNameMessage = 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)';
@@ -32,7 +32,7 @@ class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 	}
 
 	public function testFormat() {
-		var check = new ParameterNameCheck ();
+		var check = new ParameterNameCheck();
 		check.format = "^[A-Z][a-zA-Z]*$";
 
 		assertMsg(check, TEST, 'Invalid parameter name signature: paramName (name should be ~/${check.format}/)');

@@ -5,13 +5,13 @@ import checkstyle.checks.naming.MethodNameCheck;
 class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 
 	public function testCorrectNaming() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		var test3Message = 'Invalid method name signature: Test3 (name should be ~/${check.format}/)';
 		assertMsg(check, TEST1, test3Message);
 		assertMsg(check, TEST2, test3Message);
@@ -20,7 +20,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testIgnoreExtern() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.ignoreExtern = false;
 
 		var testMessage = 'Invalid method name signature: Test (name should be ~/${check.format}/)';
@@ -34,7 +34,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenPUBLIC() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [PUBLIC];
 
 		assertNoMsg(check, TEST);
@@ -46,7 +46,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenPRIVATE() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [PRIVATE];
 
 		assertNoMsg(check, TEST);
@@ -58,7 +58,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenSTATIC() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [STATIC];
 
 		assertNoMsg(check, TEST);
@@ -70,7 +70,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenNOTSTATIC() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [NOTSTATIC];
 
 		assertNoMsg(check, TEST);
@@ -82,7 +82,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenINLINE() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [INLINE];
 
 		assertNoMsg(check, TEST);
@@ -94,7 +94,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testTokenNOTINLINE() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.tokens = [NOTINLINE];
 
 		assertNoMsg(check, TEST);
@@ -106,7 +106,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 
 	public function testFormat() {
-		var check = new MethodNameCheck ();
+		var check = new MethodNameCheck();
 		check.format = "^[A-Z][a-z0-9]*$";
 
 		assertMsg(check, TEST, 'Invalid method name signature: testName (name should be ~/${check.format}/)');

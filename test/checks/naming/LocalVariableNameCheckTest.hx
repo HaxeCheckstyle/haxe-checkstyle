@@ -5,20 +5,20 @@ import checkstyle.checks.naming.LocalVariableNameCheck;
 class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTests> {
 
 	public function testCorrectNaming() {
-		var check = new LocalVariableNameCheck ();
+		var check = new LocalVariableNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
-		var check = new LocalVariableNameCheck ();
+		var check = new LocalVariableNameCheck();
 		var message = 'Invalid local var signature: Count (name should be ~/${check.format}/)';
 		assertMsg(check, TEST1, message);
 		assertMsg(check, TEST3, message);
 	}
 
 	public function testIgnoreExtern() {
-		var check = new LocalVariableNameCheck ();
+		var check = new LocalVariableNameCheck();
 		check.ignoreExtern = false;
 
 		assertNoMsg(check, TEST);
@@ -30,7 +30,7 @@ class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTes
 	}
 
 	public function testFormat() {
-		var check = new LocalVariableNameCheck ();
+		var check = new LocalVariableNameCheck();
 		check.format = "^[A-Za-z_]*$";
 
 		assertMsg(check, TEST, 'Invalid local var signature: count2 (name should be ~/${check.format}/)');

@@ -5,13 +5,13 @@ import checkstyle.checks.naming.MemberNameCheck;
 class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 
 	public function testCorrectNaming() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
 	public function testWrongNaming() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		assertMsg(check, TEST1, 'Invalid member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, TEST2, 'Invalid member signature: Count (name should be ~/${check.format}/)');
 		assertMsg(check, TEST3, 'Invalid typedef member signature: Count (name should be ~/${check.format}/)');
@@ -20,7 +20,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testIgnoreExtern() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.ignoreExtern = false;
 
 		var memberMessage = 'Invalid member signature: Count (name should be ~/${check.format}/)';
@@ -33,7 +33,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testTokenPublic() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.tokens = [CLASS, PUBLIC];
 
 		var memberMessage = 'Invalid member signature: Count (name should be ~/${check.format}/)';
@@ -49,7 +49,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testTokenPrivate() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.tokens = [CLASS, PRIVATE];
 
 		assertNoMsg(check, TEST);
@@ -64,7 +64,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testTokenEnum() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.tokens = [ENUM];
 
 		assertNoMsg(check, TEST);
@@ -76,7 +76,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testTokenTypedef() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.tokens = [TYPEDEF];
 
 		assertNoMsg(check, TEST);
@@ -87,7 +87,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testFormat() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.format = "^[A-Z_]*$";
 
 		assertMsg(check, TEST, 'Invalid typedef member signature: count2 (name should be ~/${check.format}/)');
@@ -105,7 +105,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 
 	public function testTokenAbstract() {
-		var check = new MemberNameCheck ();
+		var check = new MemberNameCheck();
 		check.tokens = [ABSTRACT, PUBLIC, PRIVATE];
 		check.format = "^[A-Z_]*$";
 
@@ -144,7 +144,7 @@ abstract MemberNameCheckTests(String) to String {
 		count;
 		a;
 	}
-	
+
 	typedef Test3 = {
 		var count1:Int;
 		var count2:String;

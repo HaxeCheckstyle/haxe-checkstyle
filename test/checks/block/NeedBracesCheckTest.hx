@@ -16,7 +16,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	static inline var MSG_SAME_LINE_WHILE:String = 'Body of "while" on same line';
 
 	public function testCorrectBraces() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST5);
@@ -30,7 +30,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testWrongBraces() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		assertMsg(check, TEST1, MSG_IF);
 		assertMsg(check, TEST2, MSG_ELSE);
 		assertMsg(check, TEST4, MSG_IF);
@@ -40,7 +40,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testNoAllowSingleLine() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		check.allowSingleLineStatement = false;
 
 		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
@@ -62,7 +62,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testTokenFor() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		check.tokens = [FOR];
 
 		assertNoMsg(check, TEST);
@@ -87,7 +87,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testTokenIf() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		check.tokens = [IF];
 
 		assertNoMsg(check, TEST);
@@ -115,7 +115,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testTokenElseIf() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		check.tokens = [IF, ELSE_IF];
 
 		assertNoMsg(check, TEST);
@@ -144,7 +144,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 
 	public function testTokenWhile() {
-		var check = new NeedBracesCheck ();
+		var check = new NeedBracesCheck();
 		check.tokens = [WHILE];
 
 		assertNoMsg(check, TEST);

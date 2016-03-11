@@ -7,18 +7,18 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	static inline var FORMAT_CLASS:String = "^C[A-Z][a-z]*$";
 
 	public function testCorrectNaming() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
 	public function testIncorrectNaming() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		assertMsg(check, TEST6, 'Invalid class signature: Test_ (name should be ~/^[A-Z]+[a-zA-Z0-9]*$/)');
 	}
 
 	public function testFormat() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.format = FORMAT_CLASS;
 
 		assertMsg(check, TEST, 'Invalid typedef signature: Test3 (name should be ~/^C[A-Z][a-z]*$/)');
@@ -30,7 +30,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 
 	public function testIgnoreExtern() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.ignoreExtern = false;
 
 		assertNoMsg(check, TEST);
@@ -41,7 +41,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 
 	public function testTokenCLASS() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.tokens = [CLASS];
 		check.format = FORMAT_CLASS;
 
@@ -54,7 +54,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 
 	public function testTokenINTERFACE() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.tokens = [INTERFACE];
 		check.format = "^I[A-Z][a-z]*$";
 
@@ -67,7 +67,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 
 	public function testTokenENUM() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.tokens = [ENUM];
 		check.format = "^Enum[A-Z][a-z]*$";
 
@@ -80,7 +80,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 
 	public function testTokenTYPEDEF() {
-		var check = new TypeNameCheck ();
+		var check = new TypeNameCheck();
 		check.tokens = [TYPEDEF];
 		check.format = "^T[A-Z][a-z]*$";
 
