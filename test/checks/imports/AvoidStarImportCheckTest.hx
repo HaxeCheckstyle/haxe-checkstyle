@@ -58,8 +58,14 @@ abstract AvoidStarImportCheckTests(String) to String {
 		import haxe.macro.Type;
 	#elseif neko
 		import haxe.macro.*;
-	#else
+	#elseif neko
 		import haxe.macro.*;
+	#else
+		#if linux
+			import haxe.macro.Type;
+		#else
+			import haxe.macro.*;
+		#end
 	#end
 	import haxe.macro.Type;";
 
