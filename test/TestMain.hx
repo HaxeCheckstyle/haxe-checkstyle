@@ -34,7 +34,6 @@ class TestMain {
 
 		var report = {coverage: {}};
 		var classes = logger.coverage.getClasses();
-		//trace(logger.coverage.getStatementById(454).);
 		for (cls in classes) {
 			var coverageData = [null];
 			var results:CoverageResult = cls.getResults();
@@ -50,7 +49,7 @@ class TestMain {
 			var data:Array<Int> = Reflect.field(report.coverage, node);
 			var isCovered = stmt.isCovered();
 			for (line in stmt.lines) {
-				if (isCovered) data[line] = stmt.count;
+				if (isCovered) data[line + 1] = stmt.count;
 			}
 			Reflect.setField(report.coverage, node, data);
 		}
