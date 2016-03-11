@@ -1,4 +1,3 @@
-import mcover.coverage.data.Clazz;
 import mcover.coverage.data.Statement;
 import haxe.Json;
 import sys.io.File;
