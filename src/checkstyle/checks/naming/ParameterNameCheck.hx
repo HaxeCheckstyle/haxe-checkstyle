@@ -6,7 +6,7 @@ import haxeparser.Data;
 using checkstyle.utils.ArrayUtils;
 
 @name("ParameterName")
-@desc("Checks that parameter names")
+@desc("Checks that method parameter names conform to a format specified by the format property")
 class ParameterNameCheck extends NameCheckBase<String> {
 
 	public function new() {
@@ -30,7 +30,6 @@ class ParameterNameCheck extends NameCheckBase<String> {
 
 	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
 		if (ignoreExtern && d.flags.contains(EExtern)) return;
-
 		switch (d.data) {
 			case TAnonymous(f):
 				checkFields(f);
@@ -51,17 +50,12 @@ class ParameterNameCheck extends NameCheckBase<String> {
 
 	function checkEnumFields(d:Array<EnumConstructor>) {
 		for (field in d) {
-			for (arg in field.args) {
-				matchTypeName("parameter name", arg.name, field.pos);
-			}
+			for (arg in field.args) matchTypeName("parameter name", arg.name, field.pos);
 		}
 	}
 
 	function checkField(args:Array<FunctionArg>, pos:Position) {
 		if (args == null || args.length <= 0) return;
-
-		for (arg in args) {
-			matchTypeName("parameter name", arg.name, pos);
-		}
+		for (arg in args) matchTypeName("parameter name", arg.name, pos);
 	}
 }
