@@ -15,6 +15,8 @@ class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> 
 		var check = new AvoidStarImportCheck();
 		assertMsg(check, STAR_IMPORT, MSG_STAR_IMPORT);
 		assertMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160, MSG_STAR_IMPORT);
+		assertMsg(check, CONDITIONAL_ELSE_STAR_IMPORT, MSG_STAR_IMPORT);
+		assertMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT, MSG_STAR_IMPORT);
 	}
 }
 
@@ -50,4 +52,22 @@ abstract AvoidStarImportCheckTests(String) to String {
 	#if macro
 		import haxe.macro.*;
 	#end";
+
+	var CONDITIONAL_ELSEIF_STAR_IMPORT = "
+	#if macro
+		import haxe.macro.Type;
+	#elseif neko
+		import haxe.macro.*;
+	#else
+		import haxe.macro.*;
+	#end
+	import haxe.macro.Type;";
+
+	var CONDITIONAL_ELSE_STAR_IMPORT = "
+	#if macro
+		import haxe.macro.Type;
+	#else
+		import haxe.macro.*;
+	#end
+	import haxe.macro.Type;";
 }

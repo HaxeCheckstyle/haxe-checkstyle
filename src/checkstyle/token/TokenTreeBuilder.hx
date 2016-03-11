@@ -1182,7 +1182,10 @@ class TokenTreeBuilder {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
-				case Sharp("else"), Sharp("elseif"):
+				case Sharp("elseif"):
+					walkSharp(ifToken);
+					return;
+				case Sharp("else"):
 					walkSharp(ifToken);
 				case Sharp("end"):
 					break;
@@ -1238,7 +1241,7 @@ class TokenTreeBuilder {
 					prefixes = [];
 				case BrOpen:
 					walkBlock(parent);
-				case Sharp("if"):
+				case Sharp("if"), Sharp("error"):
 					walkSharp(parent);
 					return;
 				case Sharp(_):
