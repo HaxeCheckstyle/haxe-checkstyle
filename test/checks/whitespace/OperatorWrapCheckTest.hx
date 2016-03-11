@@ -11,6 +11,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 		var check = new OperatorWrapCheck();
 		assertNoMsg(check, CORRECT_EOL_WRAP);
 		assertNoMsg(check, TYPE_PARAM);
+		assertNoMsg(check, NEGATIVE_VARS);
 	}
 
 	public function testIncorrectWrap() {
@@ -70,6 +71,21 @@ abstract OperatorWrapCheckTests(String) to String {
 		function foo():Array<Int>
 		{
 			trace('test');
+		}
+	}";
+
+	var NEGATIVE_VARS = "
+	class Test {
+		function test() {
+			var rest = if (neg) {
+				-noFractions;
+			}
+			else {
+				noFractions;
+			}
+			do
+				-a
+			while(true);
 		}
 	}";
 }

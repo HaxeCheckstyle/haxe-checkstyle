@@ -126,6 +126,7 @@ class WhitespaceAroundCheck extends Check {
 			if (isPosSuppressed(tok.pos)) continue;
 			if (TokenTreeCheckUtils.isTypeParameter(tok)) continue;
 			if (TokenTreeCheckUtils.isImportMult(tok)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -143,5 +144,4 @@ class WhitespaceAroundCheck extends Check {
 			}
 		}
 	}
-
 }

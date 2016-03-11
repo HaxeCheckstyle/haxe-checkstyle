@@ -20,6 +20,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160);
 		assertNoMsg(check, CONDITIONAL_ELSE_STAR_IMPORT);
 		assertNoMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT);
+		assertNoMsg(check, NEGATIVE_VARS);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -192,8 +193,14 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		import haxe.macro.Type;
 	#elseif neko
 		import haxe.macro.*;
-	#else
+	#elseif neko
 		import haxe.macro.*;
+	#else
+		#if linux
+			import haxe.macro.Type;
+		#else
+			import haxe.macro.*;
+		#end
 	#end
 	import haxe.macro.Type;";
 
@@ -204,4 +211,20 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		import haxe.macro.*;
 	#end
 	import haxe.macro.Type;";
+
+	var NEGATIVE_VARS = "
+	class Test {
+		function test() {
+			var rest = if (neg) { -noFractions; }
+			else { -noFractions; }
+			var rest = if (neg) -noFractions;
+			else -noFractions;
+			var x = neg ? -frag : frag;
+			calc ([-width, -node.right, root], -node.left, {x : -x, y: -y});
+			(-a);
+			(1 * -a);
+			do -a * 2 while(true);
+			for (a in [-1, -2]) -a + 2;
+		}
+	}";
 }
