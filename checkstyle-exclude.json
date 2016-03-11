@@ -35,7 +35,7 @@
 		"checkstyle.checks.Check",
 		"checkstyle.utils.ExprUtils",
 		"checkstyle.utils.ComplexTypeUtils",
-		"checkstyle.checks.CyclomaticComplexityCheck",
+		"checkstyle.checks.metrics.CyclomaticComplexityCheck",
 		"checkstyle.checks.block.LeftCurlyCheck",
 		"checkstyle.checks.block.RightCurlyCheck",
 		"checkstyle.checks.naming.MethodNameCheck",
@@ -47,10 +47,10 @@
 		"checkstyle.token.TokenTreeBuilder"
 	],
 	"LeftCurly": [
-		"checkstyle.checks.CyclomaticComplexityCheck"
+		"checkstyle.checks.metrics.CyclomaticComplexityCheck"
 	],
 	"RightCurly": [
-		"checkstyle.checks.CyclomaticComplexityCheck"
+		"checkstyle.checks.metrics.CyclomaticComplexityCheck"
 	],
 	"MethodLength": [
 		"checkstyle.checks.whitespace.WhitespaceAfterCheck",

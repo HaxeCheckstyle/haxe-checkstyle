@@ -1,4 +1,4 @@
-package checkstyle.checks;
+package checkstyle.checks.imports;
 
 import checkstyle.token.TokenTree;
 import haxe.macro.Expr;

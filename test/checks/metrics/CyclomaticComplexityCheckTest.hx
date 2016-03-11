@@ -1,6 +1,6 @@
-package checks;
+package checks.metrics;
 
-import checkstyle.checks.CyclomaticComplexityCheck;
+import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 
 class CyclomaticComplexityCheckTest extends CheckTestCase<CyclomaticComplexityCheckTests> {
 
