@@ -1,6 +1,6 @@
-package checks;
+package checks.design;
 
-import checkstyle.checks.EmptyPackageCheck;
+import checkstyle.checks.design.EmptyPackageCheck;
 
 class EmptyPackageCheckTest extends CheckTestCase<EmptyPackageCheckTests> {
 
