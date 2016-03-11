@@ -21,6 +21,8 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, CONDITIONAL_ELSE_STAR_IMPORT);
 		assertNoMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT);
 		assertNoMsg(check, NEGATIVE_VARS);
+		assertNoMsg(check, NEGATIVE_NUMS);
+		assertNoMsg(check, OPGT);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -179,7 +181,8 @@ abstract WhitespaceAroundCheckTests(String) to String {
 				return -1;
 			}
 			a = 1 - -2;
-			return - 1;
+			b = 1.2 - -2.1;
+			return -1;
 		}
 	}";
 
@@ -219,12 +222,38 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			else { -noFractions; }
 			var rest = if (neg) -noFractions;
 			else -noFractions;
-			var x = neg ? -frag : frag;
+			var x = neg ? -frag : -frag;
 			calc ([-width, -node.right, root], -node.left, {x : -x, y: -y});
 			(-a);
 			(1 * -a);
 			do -a * 2 while(true);
 			for (a in [-1, -2]) -a + 2;
+			return -a;
+		}
+	}";
+
+	var NEGATIVE_NUMS = "
+	class Test {
+		function test() {
+			var rest = if (neg) { -8; }
+			else { -9; }
+			var rest = if (neg) -10;
+			else -11;
+			var x = neg ? -12 : -13;
+			calc ([-14, -node.right, root], -node.left, {x : -xi15x, y: -16});
+			(-16);
+			(1 * -17);
+			do -18 * 2 while(true);
+			for (a in [-1, -2]) -18 + 2;
+		}
+	}";
+
+	var OPGT = "
+	class Test {
+		function test() {
+			if (a > b) return a >= b;
+			if (a >> b > c) return a >>= b;
+			if (a >>> b > c) return a >>>= b;
 		}
 	}";
 }
