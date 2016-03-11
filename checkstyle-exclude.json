@@ -59,5 +59,8 @@
 	],
 	"MagicNumber": [
 		"checkstyle.reporter.ProgressReporter"
+	],
+	"NestedForDepth": [
+		"TestMain"
 	]
 }
