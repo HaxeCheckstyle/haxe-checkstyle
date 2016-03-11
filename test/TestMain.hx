@@ -37,12 +37,12 @@ class TestMain {
 		for (cls in classes) {
 			var coverageData = [null];
 			var results:CoverageResult = cls.getResults();
-			for (i in 1 ... results.l) coverageData[i] = true;
+			for (i in 1 ... results.l) coverageData[i] = 1;
 			var c = cls.name.replace(".", "/") + ".hx";
 
 			var missingStatements:Array<Statement> = cls.getMissingStatements();
 			for (stmt in missingStatements) {
-				for (line in stmt.lines) coverageData[line] = false;
+				for (line in stmt.lines) coverageData[line] = 0;
 			}
 
 			Reflect.setField(report.coverage, c, coverageData);
