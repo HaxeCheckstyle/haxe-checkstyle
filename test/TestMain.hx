@@ -1,4 +1,3 @@
-import mcover.coverage.data.Statement;
 import haxe.Json;
 import sys.io.File;
 import sys.io.FileOutput;
@@ -6,6 +5,7 @@ import checks.CheckTestCase;
 import token.TokenTreeBuilderTest;
 import mcover.coverage.client.PrintClient;
 import mcover.coverage.data.CoverageResult;
+import mcover.coverage.data.Statement;
 import mcover.coverage.MCoverage;
 
 using StringTools;
@@ -32,7 +32,7 @@ class TestMain {
 		logger.addClient(client);
 		logger.report();
 
-		var report = {coverage: {}};
+		var report = { coverage: {} };
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
 			var coverageData = [null];
@@ -48,7 +48,6 @@ class TestMain {
 			Reflect.setField(report.coverage, c, coverageData);
 		}
 
-		//To test ci integration
 		var file:FileOutput = File.write("coverage.json");
 		file.writeString(Json.stringify(report));
 		file.close();
