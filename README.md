@@ -24,6 +24,10 @@ haxelib install checkstyle
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
 
+### Coverage
+
+![codecov.io](https://codecov.io/github/adireddy/haxe-checkstyle/branch.svg?branch=dev)
+
 ### Licensing Information ###
 
 <a rel="license" href="http://opensource.org/licenses/MIT">
