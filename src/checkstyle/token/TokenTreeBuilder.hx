@@ -476,8 +476,10 @@ class TokenTreeBuilder {
 				walkObjectDecl(parent);
 			case BkOpen:
 				walkArrayAccess(parent);
-			case Sharp(_):
+			case Sharp(IF):
 				walkSharp(parent);
+			case Sharp(_):
+				return;
 			case Kwd(KwdFunction):
 				walkFunction(parent, []);
 			case Kwd(KwdIf):
@@ -603,6 +605,8 @@ class TokenTreeBuilder {
 				return;
 			case Comma:
 				return;
+			case Sharp(IF):
+				walkSharp(parent);
 			case Sharp(_):
 				return;
 			case Dot, DblDot:
@@ -637,6 +641,7 @@ class TokenTreeBuilder {
 		parent.addChild(sub);
 		switch (sub.tok) {
 			case Const(_):
+				walkIdentifierContinue(sub);
 			default:
 				walkIdentifier(sub);
 		}

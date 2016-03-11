@@ -40,6 +40,7 @@ class TokenTreeCheckUtils {
 		if (!token.tok.match(Binop(OpSub))) return false;
 		return switch (token.parent.tok) {
 			case Binop(_): true;
+			case IntInterval(_): true;
 			case BkOpen: true;
 			case BrOpen: true;
 			case POpen: true;
@@ -50,6 +51,7 @@ class TokenTreeCheckUtils {
 			case Kwd(KwdWhile): true;
 			case Kwd(KwdDo): true;
 			case Kwd(KwdFor): true;
+			case Kwd(KwdReturn): true;
 			default: false;
 		}
 	}
