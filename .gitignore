@@ -1,5 +1,6 @@
 *.iml
 .idea
+.temp
 *.iws
 *.log
 *.cache
@@ -9,8 +10,10 @@
 .haxelib/
 out/
 node_modules
+.DS_Store
+log/
+target/
 
 check-style-report.json
 check-style-report.xml
 coverage.json
-.temp/mcover/
