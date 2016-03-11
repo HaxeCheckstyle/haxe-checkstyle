@@ -1,3 +1,4 @@
+import mcover.coverage.data.Statement;
 import haxe.Json;
 import sys.io.File;
 import sys.io.FileOutput;
@@ -33,20 +34,25 @@ class TestMain {
 
 		var report = {coverage: {}};
 		var classes = logger.coverage.getClasses();
+		//trace(logger.coverage.getStatementById(454).);
 		for (cls in classes) {
-			var results:CoverageResult = cls.getResults();
 			var coverageData = [null];
-			var ms = cls.getMissingStatements();
-			for (s in ms) {
-				if (s.lines != null && s.lines.length > 0) coverageData[s.lines[s.lines.length - 1]] = 0;
-			}
-			for (i in 1 ... results.l) {
-				if (coverageData[i] == null) coverageData[i] = 1;
-			}
-
-			//trace(cls.name + ": " + cls.itemCount + " : " + cls.getMissingStatements());
+			var results:CoverageResult = cls.getResults();
+			for (i in 1 ... results.l) coverageData[i] = 0;
 			var c = cls.name.replace(".", "/") + ".hx";
 			Reflect.setField(report.coverage, c, coverageData);
+		}
+
+		for (stmtId in logger.coverage.statementResultsById.keys()) {
+			var stmt:Statement = logger.coverage.getStatementById(stmtId);
+			var node = stmt.file;
+
+			var data:Array<Int> = Reflect.field(report.coverage, node);
+			var isCovered = stmt.isCovered();
+			for (line in stmt.lines) {
+				if (isCovered) data[line] = stmt.count;
+			}
+			Reflect.setField(report.coverage, node, data);
 		}
 
 		//To test ci integration
