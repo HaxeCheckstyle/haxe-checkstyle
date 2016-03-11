@@ -14,10 +14,13 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	}
 
 	public function testNoReturnType() {
-		assertMsg(new ReturnCheck(), TEST2, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), TEST2A, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), TEST2B, MSG_NOT_TEST1_RETURN);
-		assertMsg(new ReturnCheck(), TEST5, MSG_NO_ANON_RETURN);
+		var check = new ReturnCheck();
+		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST2A, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST2B, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST_FOR, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST_WHILE, MSG_NOT_TEST1_RETURN);
+		assertMsg(check, TEST5, MSG_NO_ANON_RETURN);
 	}
 
 	public function testEmptyReturnType() {
@@ -127,5 +130,23 @@ abstract ReturnCheckTests(String) to String {
 	var TEST6 = "
 	extern class Test {
 		function test4():Void;
+	}";
+
+	var TEST_FOR =
+	"abstractAndClass Test {
+		public function test1() {
+			for (i in 0 ... 10) {
+				return 5;
+			}
+		}
+	}";
+
+	var TEST_WHILE =
+	"abstractAndClass Test {
+		public function test1() {
+			while (true) {
+				return 5;
+			}
+		}
 	}";
 }
