@@ -5,8 +5,6 @@
 [![codecov.io](https://codecov.io/github/adireddy/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/adireddy/haxe-checkstyle?branch=dev) 
 [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle)
 
-[![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
-
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
 Code conventions improve readability, allowing team members to understand each other's code better.
@@ -23,7 +21,7 @@ haxelib install checkstyle
 
 [More information and reference](https://adireddy.gitbooks.io/haxe-checkstyle/content/).
 
-### Issues
+### Issues [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
 
 Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
 
