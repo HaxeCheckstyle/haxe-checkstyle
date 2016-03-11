@@ -17,6 +17,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, ISSUE_81);
 		assertNoMsg(check, ISSUE_98);
 		assertNoMsg(check, MINUS_CONSTANT);
+		assertNoMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -40,6 +41,13 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
 		assertNoMsg(check, NO_WHITESPACE_VAR_INIT);
 		assertNoMsg(check, NO_WHITESPACE_GT);
+	}
+
+	public function testStarImport() {
+		var check = new WhitespaceAroundCheck();
+		check.tokens = ["*"];
+		assertNoMsg(check, ISSUE_70);
+		assertNoMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160);
 	}
 }
 
@@ -169,4 +177,9 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			return - 1;
 		}
 	}";
+
+	var CONDITIONAL_STAR_IMPORT_ISSUE_160 = "
+	#if macro
+		import haxe.macro.*;
+	#end";
 }

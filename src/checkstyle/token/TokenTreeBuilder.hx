@@ -570,6 +570,9 @@ class TokenTreeBuilder {
 			case Kwd(KwdFunction):
 				walkFunction(parent, []);
 				return;
+			case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdUsing):
+				walkPackageImport(parent);
+				return;
 			case Kwd(KwdExtends):
 				walkExtends(parent);
 				return;
