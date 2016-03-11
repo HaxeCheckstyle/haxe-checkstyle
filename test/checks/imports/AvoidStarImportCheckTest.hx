@@ -1,6 +1,6 @@
-package checks;
+package checks.imports;
 
-import checkstyle.checks.AvoidStarImportCheck;
+import checkstyle.checks.imports.AvoidStarImportCheck;
 
 class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> {
 
