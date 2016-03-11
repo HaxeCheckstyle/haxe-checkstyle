@@ -1,3 +1,5 @@
+import mcover.coverage.data.Clazz;
+import mcover.coverage.data.Statement;
 import haxe.Json;
 import sys.io.File;
 import sys.io.FileOutput;
@@ -34,11 +36,17 @@ class TestMain {
 		var report = {coverage: {}};
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
+			var coverageData = [null];
 			var results:CoverageResult = cls.getResults();
-			//trace(results);
+			for (i in 1 ... results.l) coverageData[i] = 1;
 			var c = cls.name.replace(".", "/") + ".hx";
-			Reflect.setField(report.coverage, c, [null, results.l, results.lc, (results.l - results.lc), results.lp, results.b, results.m, cls.getPercentage()]);
-			Sys.println(cls.name + ": " + cls.getPercentage() + "%");
+
+			var missingStatements:Array<Statement> = cls.getMissingStatements();
+			for (stmt in missingStatements) {
+				for (line in stmt.lines) coverageData[line] = 0;
+			}
+
+			Reflect.setField(report.coverage, c, coverageData);
 		}
 
 		//To test ci integration
