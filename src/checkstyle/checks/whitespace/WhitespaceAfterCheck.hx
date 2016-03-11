@@ -2,6 +2,7 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
+import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -90,6 +91,7 @@ class WhitespaceAfterCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var contentAfter:String = checker.file.content.substr(tok.pos.max, 1);
 			if (~/^(\s|)$/.match(contentAfter)) continue;

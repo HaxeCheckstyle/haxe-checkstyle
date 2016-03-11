@@ -35,4 +35,22 @@ class TokenTreeCheckUtils {
 				return false;
 		}
 	}
+
+	public static function filterOpSub(token:TokenTree):Bool {
+		if (!token.tok.match(Binop(OpSub))) return false;
+		return switch (token.parent.tok) {
+			case Binop(_): true;
+			case BkOpen: true;
+			case BrOpen: true;
+			case POpen: true;
+			case Question: true;
+			case DblDot: true;
+			case Kwd(KwdIf): true;
+			case Kwd(KwdElse): true;
+			case Kwd(KwdWhile): true;
+			case Kwd(KwdDo): true;
+			case Kwd(KwdFor): true;
+			default: false;
+		}
+	}
 }

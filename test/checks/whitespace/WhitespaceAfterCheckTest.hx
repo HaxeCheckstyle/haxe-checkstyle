@@ -43,6 +43,12 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_GREATER);
 		assertMsg(check, NO_WHITESPACE_GT, MSG_GREATER);
 	}
+
+	public function testNegativeVars() {
+		var check = new WhitespaceAfterCheck();
+		check.tokens = ["-"];
+		assertNoMsg(check, NEGATIVE_VARS);
+	}
 }
 
 @:enum
@@ -150,5 +156,21 @@ abstract WhitespaceAfterCheckTests(String) to String {
 		@:overload(function<T>(promise : Promise<T>) : Promise<T> {})
 		@:overload(function<T>(thenable : Thenable<T>) : Promise<T> {})
 		static function resolve<T>( value : T ) : Promise<T>;
+	}";
+
+	var NEGATIVE_VARS = "
+	class Test {
+		function test() {
+			var rest = if (neg) { -noFractions; }
+			else { -noFractions; }
+			var rest = if (neg) -noFractions;
+			else -noFractions;
+			var x = neg ? -frag : frag;
+			calc ([-width, -node.right, root], -node.left, {x : -x, y: -y});
+			(-a);
+			(1 * -a);
+			do -a * 2 while(true);
+			for (a in [-1, -2]) -a + 2;
+		}
 	}";
 }

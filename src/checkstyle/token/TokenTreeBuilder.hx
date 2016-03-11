@@ -1154,13 +1154,9 @@ class TokenTreeBuilder {
 	 */
 	function walkSharp(parent:TokenTree) {
 		switch (stream.token()) {
-			case Sharp("if"), Sharp("elseif"):
+			case Sharp(IF):
 				walkSharpIf(parent);
-			case Sharp("else"):
-				var elseToken:TokenTree = stream.consumeToken();
-				parent.addChild(elseToken);
-				walkSharpExpr(elseToken);
-			case Sharp("error"):
+			case Sharp(ERROR):
 				var errorToken:TokenTree = stream.consumeToken();
 				parent.addChild(errorToken);
 				switch (stream.token()) {
@@ -1168,6 +1164,8 @@ class TokenTreeBuilder {
 						errorToken.addChild(stream.consumeToken());
 					default:
 				}
+			case Sharp(ELSEIF), Sharp(ELSE), Sharp(END):
+				throw 'unexpected token ${stream.token()}';
 			case Sharp(_):
 				parent.addChild(stream.consumeToken());
 			default:
@@ -1182,18 +1180,29 @@ class TokenTreeBuilder {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
-				case Sharp("elseif"):
-					walkSharp(ifToken);
-					return;
-				case Sharp("else"):
-					walkSharp(ifToken);
-				case Sharp("end"):
+				case Sharp(ELSEIF):
+					walkSharpElseIf(ifToken);
+				case Sharp(ELSE):
+					var elseToken:TokenTree = stream.consumeToken();
+					ifToken.addChild(elseToken);
+					walkSharpExpr(elseToken);
+					break;
+				case Sharp(END):
 					break;
 				default:
 					throw 'bad token ${stream.token()} != #elseif/#end';
 			}
 		}
 		ifToken.addChild(stream.consumeTokenDef(Sharp("end")));
+	}
+
+	function walkSharpElseIf(parent:TokenTree) {
+		var ifToken:TokenTree = stream.consumeToken();
+		parent.addChild(ifToken);
+		walkSharpIfExpr(ifToken);
+		walkSharpExpr(ifToken);
+		if (stream.token().match(Sharp(_))) return;
+		throw 'bad token ${stream.token()} != #elseif/#end';
 	}
 
 	function walkSharpIfExpr(parent:TokenTree) {
@@ -1241,7 +1250,7 @@ class TokenTreeBuilder {
 					prefixes = [];
 				case BrOpen:
 					walkBlock(parent);
-				case Sharp("if"), Sharp("error"):
+				case Sharp(IF), Sharp(ERROR):
 					walkSharp(parent);
 					return;
 				case Sharp(_):
@@ -1255,4 +1264,13 @@ class TokenTreeBuilder {
 			}
 		}
 	}
+}
+
+@:enum
+abstract TokenTreeBuilderSharpConsts(String) to String {
+	var IF = "if";
+	var ELSEIF = "elseif";
+	var ELSE = "else";
+	var END = "end";
+	var ERROR = "error";
 }
