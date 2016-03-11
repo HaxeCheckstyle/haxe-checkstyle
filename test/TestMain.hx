@@ -37,7 +37,7 @@ class TestMain {
 		for (cls in classes) {
 			var coverageData = [null];
 			var results:CoverageResult = cls.getResults();
-			for (i in 1 ... results.l) coverageData[i] = 0;
+			for (i in 1 ... results.l + 1) coverageData[i] = 0;
 			var c = cls.name.replace(".", "/") + ".hx";
 			Reflect.setField(report.coverage, c, coverageData);
 		}
@@ -49,7 +49,7 @@ class TestMain {
 			var data:Array<Int> = Reflect.field(report.coverage, node);
 			var isCovered = stmt.isCovered();
 			for (line in stmt.lines) {
-				if (isCovered) data[line + 1] = stmt.count;
+				if (isCovered) data[line + 2] = stmt.count;
 			}
 			Reflect.setField(report.coverage, node, data);
 		}
