@@ -1,6 +1,8 @@
 ![logo](resources/logo/haxe-checkstyle.png)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)  [![Version](https://img.shields.io/github/tag/adireddy/haxe-checkstyle.svg?style=flat&label=haxelib)](http://lib.haxe.org/p/checkstyle) [![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT) 
+[![codecov.io](https://codecov.io/github/adireddy/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/adireddy/haxe-checkstyle?branch=dev) 
+[![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle) [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
