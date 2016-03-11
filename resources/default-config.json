@@ -37,6 +37,13 @@
 		},
 		{
 			"props": {
+				"format": "^(e|t|ex|[a-z][a-z][a-zA-Z]+)$",
+				"severity": "IGNORE"
+			},
+			"type": "CatchParameterName"
+		},
+		{
+			"props": {
 				"ignoreExtern": true,
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
 				"tokens": [],
