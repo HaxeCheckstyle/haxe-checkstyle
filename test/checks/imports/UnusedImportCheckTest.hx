@@ -95,6 +95,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}
 
 	interface Check {
+
 		function test();
 	}
 

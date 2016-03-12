@@ -105,6 +105,7 @@ abstract TypeNameCheckTests(String) to String {
 	}
 
 	interface ITest {
+
 	}
 
 	enum Test2 {

@@ -86,6 +86,7 @@ abstract SeparatorWrapCheckTests(String) to String {
 
 	var CORRECT_NOWRAP = "
 	package checkstyle.tests;
+
 	import haxe.macro.Expr;
 
 	class Test {
@@ -167,6 +168,7 @@ abstract SeparatorWrapCheckTests(String) to String {
 
 	var NOWRAP_IMPORT = "
 	package checkstyle.tests;
+
 	import haxe.macro.Expr;
 	";
 

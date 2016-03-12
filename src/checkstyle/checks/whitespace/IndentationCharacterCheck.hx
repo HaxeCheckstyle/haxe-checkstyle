@@ -14,12 +14,8 @@ class IndentationCharacterCheck extends Check {
 	override function actualRun() {
 		var re;
 		var tab = (character == TAB);
-		if (tab) {
-			re = ~/^\t*(\S.*| \*.*)?$/;
-		}
-		else {
-			re = ~/^ *(\S.*)?$/;
-		}
+		if (tab) re = ~/^\t*(\S.*| \*.*)?$/;
+		else re = ~/^ *(\S.*)?$/;
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
 			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (should be ${character})', i + 1, 0);
