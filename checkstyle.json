@@ -362,7 +362,6 @@
 					"^=",
 					"...",
 					"=>",
-					"!",
 					"++",
 					"--"
 				],
@@ -518,7 +517,7 @@
 		{
 			"props": {
 				"severity": "INFO",
-				"ignorePackages": [
+				"ignoreModules": [
 					"haxeparser.Data",
 					"haxeparser.Data.Token",
 					"haxeparser.Data.TokenDef",

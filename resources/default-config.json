@@ -360,7 +360,6 @@
 					"^=",
 					"...",
 					"=>",
-					"!",
 					"++",
 					"--"
 				],
@@ -517,7 +516,7 @@
 		},
 		{
 			"props": {
-				"ignorePackages": [],
+				"ignoreModules": [],
 				"severity": "IGNORE"
 			},
 			"type": "UnusedImport"
