@@ -39,7 +39,7 @@ class UnusedImportCheck extends Check {
 			if (ignorePackages.contains(packageName)) continue;
 
 			if (!~/\./.match(packageName)) {
-				logPos('TopLevel import $packageName detected', imp.pos);
+				logPos('Top level import $packageName detected', imp.pos);
 				continue;
 			}
 
@@ -88,7 +88,7 @@ class UnusedImportCheck extends Check {
 			var name:String = TokenDefPrinter.print(ident.tok);
 			if (typeName != name) continue;
 			switch (ident.parent.tok) {
-				case Kwd(KwdClass):
+				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef):
 					continue;
 				case Dot:
 					continue;
