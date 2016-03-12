@@ -517,6 +517,13 @@
 		},
 		{
 			"props": {
+				"ignorePackages": [],
+				"severity": "IGNORE"
+			},
+			"type": "UnusedImport"
+		},
+		{
+			"props": {
 				"severity": "IGNORE"
 			},
 			"type": "VariableInitialisation"

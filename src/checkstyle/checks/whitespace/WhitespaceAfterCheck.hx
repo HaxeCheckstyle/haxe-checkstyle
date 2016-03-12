@@ -1,6 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;

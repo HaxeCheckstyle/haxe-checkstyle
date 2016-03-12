@@ -66,14 +66,16 @@ class TokenTree extends Token {
 	public function filterCallback(callback:FilterCallback, depth:Int = 0):Array<TokenTree> {
 		var results:Array<TokenTree> = [];
 
-		switch (callback(this, depth)) {
-			case FOUND_GO_DEEPER:
-				results.push(this);
-			case FOUND_SKIP_SUBTREE:
-				return [this];
-			case GO_DEEPER:
-			case SKIP_SUBTREE:
-				return [];
+		if (tok != null) {
+			switch (callback(this, depth)) {
+				case FOUND_GO_DEEPER:
+					results.push(this);
+				case FOUND_SKIP_SUBTREE:
+					return [this];
+				case GO_DEEPER:
+				case SKIP_SUBTREE:
+					return [];
+			}
 		}
 		if (childs == null) return results;
 		for (child in childs) {

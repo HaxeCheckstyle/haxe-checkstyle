@@ -1,8 +1,5 @@
 package checkstyle.reporter;
 
-import sys.io.FileOutput;
-import checkstyle.LintMessage.SeverityLevel;
-
 class XMLReporter extends BaseReporter {
 
 	var style:String;
