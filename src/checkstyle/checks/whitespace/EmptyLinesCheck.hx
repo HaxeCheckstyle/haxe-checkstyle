@@ -1,5 +1,7 @@
 package checkstyle.checks.whitespace;
 
+using StringTools;
+
 @name("EmptyLines")
 @desc("Checks for consecutive empty lines")
 class EmptyLinesCheck extends Check {
@@ -24,6 +26,7 @@ class EmptyLinesCheck extends Check {
 	}
 
 	override function actualRun() {
+		var quotesRE = ~/('|")/;
 		var inGroup = false;
 		var isLastLinePackage = false;
 		var isLastLineClass = false;
@@ -31,8 +34,12 @@ class EmptyLinesCheck extends Check {
 		var isLastLineAbstract = false;
 		var start = 0;
 		var end = 0;
+		var multilineStringStart = false;
+		var multilineStartRE:EReg = null;
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
+			if (multilineStringStart && (multilineStartRE.match(line) || ~/.*;$/.match(line))) multilineStringStart = false;
+			if (multilineStringStart) continue;
 			if (~/^\s*$/.match(line)) {
 				if (!inGroup) {
 					inGroup = true;
@@ -49,16 +56,16 @@ class EmptyLinesCheck extends Check {
 					if (end - start + 1 > max) logInfo(start);
 				}
 				if (requireEmptyLineAfterPackage && isLastLinePackage) {
-					log('Empty line required after package declaration', i + 1, 0);
+					log("Empty line required after package declaration", i + 1, 0);
 				}
 				if (requireEmptyLineAfterClass && isLastLineClass) {
-					log('Empty line required after class declaration', i + 1, 0);
+					log("Empty line required after class declaration", i + 1, 0);
 				}
 				if (requireEmptyLineAfterInterface && isLastLineInterface) {
-					log('Empty line required after interface declaration', i + 1, 0);
+					log("Empty line required after interface declaration", i + 1, 0);
 				}
 				if (requireEmptyLineAfterAbstract && isLastLineAbstract) {
-					log('Empty line required after abstract declaration', i + 1, 0);
+					log("Empty line required after abstract declaration", i + 1, 0);
 				}
 			}
 
@@ -66,6 +73,8 @@ class EmptyLinesCheck extends Check {
 			isLastLineClass = ~/^\s*class\s.*?\{/.match(line);
 			isLastLineInterface = ~/^\s*interface\s.*?\{/.match(line);
 			isLastLineAbstract = ~/^\s*abstract\s.*?\{/.match(line);
+			multilineStringStart = quotesRE.match(line) && !~/.*;$/.match(line);
+			if (multilineStringStart) multilineStartRE = new EReg(quotesRE.matched(0), "");
 		}
 
 		if (inGroup) {
@@ -75,8 +84,8 @@ class EmptyLinesCheck extends Check {
 	}
 
 	function checkComment(i, start, regex) {
-		if (i > 0 && regex.match(StringTools.trim(checker.lines[i - 1]))) {
-			log('Empty line not allowed after comment(s)', start, 0);
+		if (i > 0 && regex.match(checker.lines[i - 1].trim())) {
+			log("Empty line not allowed after comment(s)", start, 0);
 		}
 	}
 

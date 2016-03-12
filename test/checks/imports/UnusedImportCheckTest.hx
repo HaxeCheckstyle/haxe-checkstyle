@@ -4,13 +4,13 @@ import checkstyle.checks.imports.UnusedImportCheck;
 
 class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 
-	static inline var MSG_UNUSED:String = 'Unused import haxe.checkstyle.Check3 detected';
-	static inline var MSG_NAME_REUSED:String = 'Unused import haxe.checkstyle.Check detected';
-	static inline var MSG_DUPLICATE:String = 'Duplicate import haxe.checkstyle.Check2 detected';
-	static inline var MSG_TOP_LEVEL:String = 'Unnecessary toplevel import String detected';
-	static inline var MSG_UNUSED_AS:String = 'Unused import haxe.checkstyle.Check as Base detected';
-	static inline var MSG_UNUSED_IN:String = 'Unused import haxe.checkstyle.Check in Base detected';
-	static inline var MSG_UNUSED_IN_STATIC:String = 'Unused import String.fromCharCode in f detected';
+	static inline var MSG_UNUSED:String = "Unused import haxe.checkstyle.Check3 detected";
+	static inline var MSG_NAME_REUSED:String = "Unused import haxe.checkstyle.Check detected";
+	static inline var MSG_DUPLICATE:String = "Duplicate import haxe.checkstyle.Check2 detected";
+	static inline var MSG_TOP_LEVEL:String = "Unnecessary toplevel import String detected";
+	static inline var MSG_UNUSED_AS:String = "Unused import haxe.checkstyle.Check as Base detected";
+	static inline var MSG_UNUSED_IN:String = "Unused import haxe.checkstyle.Check in Base detected";
+	static inline var MSG_UNUSED_IN_STATIC:String = "Unused import String.fromCharCode in f detected";
 
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();
@@ -43,6 +43,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.sub.*;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			new Check2();
@@ -59,6 +60,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check3;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			Check2.test();
@@ -73,6 +75,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check2;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			Check2.test();
@@ -85,6 +88,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check;
 
 	abstractAndClass Check {
+
 		public function new() {
 			otherpackge.Check.test();
 		}
@@ -107,7 +111,9 @@ abstract UnusedImportCheckTests(String) to String {
 	import String;
 
 	abstractAndClass Check {
-		public function new() {}
+
+		public function new() {
+		}
 	}";
 
 	var IMPORT_BASE_CLASS = "
@@ -117,6 +123,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import checkstyle.Interface;
 
 	class Check extends Base implements Interface {
+
 		public function new() {}
 	}";
 
@@ -146,6 +153,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import String.fromCharCode in f;
 
 	abstractAndClass Main {
+
 		static function main() {
 			var c1 = f(65);
 		}
@@ -155,7 +163,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import String.fromCharCode in f;
 
 	abstractAndClass Main {
-		static function main() {
-		}
+
+		static function main() {}
 	}";
 }
