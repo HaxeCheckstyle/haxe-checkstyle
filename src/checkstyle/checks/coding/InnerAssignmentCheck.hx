@@ -42,18 +42,12 @@ class InnerAssignmentCheck extends Check {
 			if (token.previousSibling.is(Binop(OpGt))) return false;
 		}
 		return switch (token.tok) {
-			case Kwd(KwdVar):
-				false;
-			case Kwd(KwdFunction):
-				false;
-			case Kwd(KwdSwitch):
-				true;
-			case Kwd(KwdReturn):
-				true;
-			case BrOpen, DblDot:
-				false;
-			case POpen:
-				filterPOpen(token.parent);
+			case Kwd(KwdVar): false;
+			case Kwd(KwdFunction): false;
+			case Kwd(KwdSwitch): true;
+			case Kwd(KwdReturn): true;
+			case BrOpen, DblDot: false;
+			case POpen: filterPOpen(token.parent);
 			default: filterAssignment(token.parent);
 		}
 	}
@@ -61,19 +55,12 @@ class InnerAssignmentCheck extends Check {
 	function filterPOpen(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
-			case Kwd(KwdFunction):
-				false;
-			case Kwd(KwdVar):
-				false;
-			case Kwd(KwdNew):
-				if (Type.enumEq(Kwd(KwdFunction), token.parent.tok)) false;
-				else true;
-			case Kwd(KwdReturn):
-				true;
-			case Kwd(KwdWhile):
-				false;
-			case POpen, Const(_):
-				filterPOpen(token.parent);
+			case Kwd(KwdFunction): false;
+			case Kwd(KwdVar): false;
+			case Kwd(KwdNew): !Type.enumEq(Kwd(KwdFunction), token.parent.tok);
+			case Kwd(KwdReturn): true;
+			case Kwd(KwdWhile): false;
+			case POpen, Const(_): filterPOpen(token.parent);
 			default: true;
 		}
 	}

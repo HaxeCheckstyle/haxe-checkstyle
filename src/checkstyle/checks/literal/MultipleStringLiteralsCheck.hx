@@ -54,12 +54,8 @@ class MultipleStringLiteralsCheck extends Check {
 	}
 
 	function checkLiteralCount(literal:String, map:Map<String, Int>):Bool {
-		if (!map.exists(literal)) {
-			map.set(literal, 1);
-		}
-		else {
-			map.set(literal, map.get(literal) + 1);
-		}
+		if (!map.exists(literal)) map.set(literal, 1);
+		else map.set(literal, map.get(literal) + 1);
 		return (map.get(literal) > allowDuplicates);
 	}
 
@@ -67,9 +63,7 @@ class MultipleStringLiteralsCheck extends Check {
 		if ((token == null) || (token.tok == null)) return true;
 		return switch (token.tok) {
 			case At: false;
-			case Kwd(KwdVar):
-				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false;
-				else true;
+			case Kwd(KwdVar): !(token.filter([Kwd(KwdStatic)], FIRST).length > 0);
 			default: filterLiteral(token.parent);
 		}
 	}

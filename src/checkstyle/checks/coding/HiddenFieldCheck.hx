@@ -50,10 +50,8 @@ class HiddenFieldCheck extends Check {
 		if (methodName.is(Kwd(KwdNew)) && ignoreConstructorParameter) return;
 		if (ignoreSetter && isSetterFunction(methodName, memberNames)) return;
 		switch (methodName.tok) {
-			case Const(CIdent(name)):
-				if (ignoreFormatRE.match(name)) return;
-			case Kwd(KwdNew):
-				if (ignoreFormatRE.match("new")) return;
+			case Const(CIdent(name)): if (ignoreFormatRE.match(name)) return;
+			case Kwd(KwdNew): if (ignoreFormatRE.match("new")) return;
 			default:
 		}
 
@@ -85,9 +83,7 @@ class HiddenFieldCheck extends Check {
 			throw "function parameters have invalid structure!";
 		}
 		var paramList:Array<TokenTree> = paramDef[0].childs;
-		for (param in paramList) {
-			checkName(param, memberNames, "Parameter definition");
-		}
+		for (param in paramList) checkName(param, memberNames, "Parameter definition");
 	}
 
 	function checkVars(method:TokenTree, memberNames:Array<String>) {
@@ -131,8 +127,7 @@ class HiddenFieldCheck extends Check {
 		for (member in varFields) {
 			if (!member.hasChilds()) continue;
 			switch (member.childs[0].tok) {
-				case Const(CIdent(name)):
-					memberNames.push(name);
+				case Const(CIdent(name)): memberNames.push(name);
 				default:
 			}
 		}

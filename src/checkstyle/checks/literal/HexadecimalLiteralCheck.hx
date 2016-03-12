@@ -17,8 +17,7 @@ class HexadecimalLiteralCheck extends Check {
 	override function actualRun() {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			switch (e.expr){
-				case EConst(CInt(s)):
-					checkString(s, e.pos);
+				case EConst(CInt(s)): checkString(s, e.pos);
 				default:
 			}
 		});

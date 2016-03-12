@@ -5,11 +5,9 @@ import checkstyle.token.TokenTree;
 class TokenTreeCheckUtils {
 
 	public static function isImportMult(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpMult), Dot:
-				return isImport(token.parent);
-			default:
-				return false;
+		return switch (token.tok) {
+			case Binop(OpMult), Dot: isImport(token.parent);
+			default: false;
 		}
 	}
 
@@ -31,13 +29,10 @@ class TokenTreeCheckUtils {
 	}
 
 	public static function isTypeParameter(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpGt):
-				return token.parent.tok.match(Binop(OpLt));
-			case Binop(OpLt):
-				return token.getLastChild().tok.match(Binop(OpGt));
-			default:
-				return false;
+		return switch (token.tok) {
+			case Binop(OpGt): token.parent.tok.match(Binop(OpLt));
+			case Binop(OpLt): token.getLastChild().tok.match(Binop(OpGt));
+			default: false;
 		}
 	}
 

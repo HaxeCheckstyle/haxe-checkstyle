@@ -15,8 +15,7 @@ class AvoidInlineConditionalsCheck extends Check {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
-				case ETernary(econd, eif, eelse):
-					logPos('Avoid inline conditionals', e.pos);
+				case ETernary(econd, eif, eelse): logPos('Avoid inline conditionals', e.pos);
 				default:
 			}
 		});

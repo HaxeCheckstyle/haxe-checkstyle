@@ -45,14 +45,10 @@ class EmptyBlockCheck extends Check {
 			if (isPosSuppressed(brOpen.pos)) continue;
 			if (filterParentToken(brOpen.parent)) continue;
 			switch (option) {
-				case TEXT:
-					checkForText(brOpen);
-				case STATEMENT:
-					checkForStatement(brOpen);
-				case EMPTY:
-					checkForEmpty(brOpen);
-				default:
-					checkForText(brOpen);
+				case TEXT: checkForText(brOpen);
+				case STATEMENT: checkForStatement(brOpen);
+				case EMPTY: checkForEmpty(brOpen);
+				default: checkForText(brOpen);
 			}
 		}
 	}
@@ -60,40 +56,25 @@ class EmptyBlockCheck extends Check {
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
 		switch (token.tok) {
-			case Kwd(KwdClass):
-				return !hasToken(CLASS_DEF);
-			case Kwd(KwdInterface):
-				return !hasToken(INTERFACE_DEF);
-			case Kwd(KwdAbstract):
-				return !hasToken(ABSTRACT_DEF);
-			case Kwd(KwdTypedef):
-				return !hasToken(TYPEDEF_DEF);
-			case Kwd(KwdEnum):
-				return !hasToken(ENUM_DEF);
-			case Kwd(KwdFunction):
-				return !hasToken(FUNCTION);
-			case Kwd(KwdIf), Kwd(KwdElse):
-				return !hasToken(IF);
-			case Kwd(KwdFor):
-				return !hasToken(FOR);
-			case Kwd(KwdWhile):
-				return !hasToken(WHILE);
-			case Kwd(KwdTry):
-				return !hasToken(TRY);
-			case Kwd(KwdCatch):
-				return !hasToken(CATCH);
-			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault):
-				return !hasToken(SWITCH);
-			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
-				return !hasToken(OBJECT_DECL);
-			case Dollar(_):
-				return !hasToken(REIFICATION);
+			case Kwd(KwdClass): return !hasToken(CLASS_DEF);
+			case Kwd(KwdInterface): return !hasToken(INTERFACE_DEF);
+			case Kwd(KwdAbstract): return !hasToken(ABSTRACT_DEF);
+			case Kwd(KwdTypedef): return !hasToken(TYPEDEF_DEF);
+			case Kwd(KwdEnum): return !hasToken(ENUM_DEF);
+			case Kwd(KwdFunction): return !hasToken(FUNCTION);
+			case Kwd(KwdIf), Kwd(KwdElse): return !hasToken(IF);
+			case Kwd(KwdFor): return !hasToken(FOR);
+			case Kwd(KwdWhile): return !hasToken(WHILE);
+			case Kwd(KwdTry): return !hasToken(TRY);
+			case Kwd(KwdCatch): return !hasToken(CATCH);
+			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault): return !hasToken(SWITCH);
+			case POpen, BkOpen, BrOpen, Kwd(KwdReturn): return !hasToken(OBJECT_DECL);
+			case Dollar(_): return !hasToken(REIFICATION);
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
 					switch (token.parent.parent.tok) {
-						case Kwd(KwdTypedef):
-							return !hasToken(TYPEDEF_DEF);
+						case Kwd(KwdTypedef): return !hasToken(TYPEDEF_DEF);
 						default:
 					}
 				}
@@ -125,19 +106,13 @@ class EmptyBlockCheck extends Check {
 					break;
 			}
 		}
-		if (onlyComments) {
-			logPos('Block should contain a statement', brOpen.pos);
-		}
+		if (onlyComments) logPos("Block should contain a statement", brOpen.pos);
 	}
 
 	function checkForEmpty(brOpen:TokenTree) {
-		if (brOpen.childs.length > 1) {
-			return;
-		}
+		if (brOpen.childs.length > 1) return;
 		var brClose:TokenTree = brOpen.childs[0];
-		if (brOpen.pos.max != brClose.pos.min) {
-			logPos("Empty block should be written as {}", brOpen.pos);
-		}
+		if (brOpen.pos.max != brClose.pos.min) logPos("Empty block should be written as {}", brOpen.pos);
 	}
 }
 

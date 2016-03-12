@@ -1,7 +1,5 @@
 package checkstyle.reporter;
 
-import checkstyle.LintMessage;
-
 interface IReporter {
 
 	// Before any file checked
