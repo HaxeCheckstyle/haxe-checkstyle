@@ -4,10 +4,10 @@ import checkstyle.checks.imports.UnusedImportCheck;
 
 class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 
-	static inline var MSG_UNUSED:String = 'Unused import haxe.checkstyle.Check3 detected';
-	static inline var MSG_NAME_REUSED:String = 'Unused import haxe.checkstyle.Check detected';
-	static inline var MSG_DUPLICATE:String = 'Duplicate import haxe.checkstyle.Check2 detected';
-	static inline var MSG_TOP_LEVEL:String = 'Top level import String detected';
+	static inline var MSG_UNUSED:String = "Unused import haxe.checkstyle.Check3 detected";
+	static inline var MSG_NAME_REUSED:String = "Unused import haxe.checkstyle.Check detected";
+	static inline var MSG_DUPLICATE:String = "Duplicate import haxe.checkstyle.Check2 detected";
+	static inline var MSG_TOP_LEVEL:String = "Top level import String detected";
 
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();
@@ -35,6 +35,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.sub.*;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			new Check2();
@@ -51,6 +52,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check3;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			Check2.test();
@@ -65,6 +67,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check2;
 
 	abstractAndClass Test {
+
 		public function new() {
 			new Check();
 			Check2.test();
@@ -77,6 +80,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check;
 
 	abstractAndClass Check {
+
 		public function new() {
 			otherpackge.Check.test();
 		}
@@ -99,6 +103,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import String;
 
 	abstractAndClass Check {
+
 		public function new() {
 		}
 	}";
@@ -110,6 +115,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import checkstyle.Interface;
 
 	class Check extends Base implements Interface {
+
 		public function new() {
 		}
 	}";
