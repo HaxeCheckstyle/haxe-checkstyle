@@ -4,8 +4,8 @@ import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 
-	static inline var MSG_TOO_MANY:String = 'Too many consecutive empty lines (> 1)';
-	static inline var MSG_AFTER_COMMENT:String = 'Empty line not allowed after comment(s)';
+	static inline var MSG_TOO_MANY:String = "Too many consecutive empty lines (> 1)";
+	static inline var MSG_AFTER_COMMENT:String = "Empty line not allowed after comment(s)";
 
 	public function testDefaultEmptyLines() {
 		assertMsg(new EmptyLinesCheck(), TEST1, MSG_TOO_MANY);
@@ -73,7 +73,7 @@ abstract EmptyLinesCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 
-		var _a:Int;
+		var a:Int;
 
 
 	}";
@@ -84,6 +84,12 @@ abstract EmptyLinesCheckTests(String) to String {
 		public function new() {
 
 			var b:Int;
+
+			var b:String = ' multistring
+
+
+
+			';
 
 		}
 	}";
@@ -141,7 +147,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 	var TEST8 = "
 	package pack;
-	import Array;
 	using StringTools;
 
 	class Test {}";
@@ -149,7 +154,6 @@ abstract EmptyLinesCheckTests(String) to String {
 	var TEST9 = "
 	package pack;
 
-	import Array;
 	using StringTools;
 
 	class Test {}";
