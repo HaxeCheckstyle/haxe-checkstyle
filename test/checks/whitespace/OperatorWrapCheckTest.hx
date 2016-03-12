@@ -12,6 +12,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 		assertNoMsg(check, CORRECT_EOL_WRAP);
 		assertNoMsg(check, TYPE_PARAM);
 		assertNoMsg(check, NEGATIVE_VARS);
+		assertNoMsg(check, NEG_OPERATOR);
 	}
 
 	public function testIncorrectWrap() {
@@ -86,6 +87,14 @@ abstract OperatorWrapCheckTests(String) to String {
 			do
 				-a
 			while(true);
+		}
+	}";
+
+	var NEG_OPERATOR = "
+	class Test {
+		function test() {
+			var x =
+				!x;
 		}
 	}";
 }

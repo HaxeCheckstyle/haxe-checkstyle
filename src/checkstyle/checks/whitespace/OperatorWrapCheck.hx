@@ -43,7 +43,6 @@ class OperatorWrapCheck extends WrapCheckBase {
 			"^=",
 			"...",
 			"=>",
-			"!",
 			"++",
 			"--"
 		];

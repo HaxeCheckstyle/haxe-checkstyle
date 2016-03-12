@@ -12,11 +12,11 @@ using checkstyle.utils.ArrayUtils;
 @desc("Checks for unused or duplicate imports")
 class UnusedImportCheck extends Check {
 
-	public var ignorePackages:Array<String>;
+	public var ignoreModules:Array<String>;
 
 	public function new() {
 		super(TOKEN);
-		ignorePackages = [];
+		ignoreModules = [];
 	}
 
 	override function actualRun() {
@@ -27,7 +27,7 @@ class UnusedImportCheck extends Check {
 			switch (token.tok) {
 				case Const(CIdent(name)):
 					if (TokenTreeCheckUtils.isImport(token)) return GO_DEEPER;
-					if (~/^[A-Z]/.match(name)) return FOUND_GO_DEEPER;
+					return FOUND_GO_DEEPER;
 				default:
 			}
 			return GO_DEEPER;
@@ -36,10 +36,10 @@ class UnusedImportCheck extends Check {
 			var typeName:String = detectTypeName(imp);
 			var packageName:String = detectPackageName(imp);
 			if ((typeName == null) || (packageName == null)) continue;
-			if (ignorePackages.contains(packageName)) continue;
+			if (ignoreModules.contains(packageName)) continue;
 
 			if (!~/\./.match(packageName)) {
-				logPos('Top level import $packageName detected', imp.pos);
+				logPos('Unnecessary toplevel import $packageName detected', imp.pos);
 				continue;
 			}
 
@@ -55,13 +55,19 @@ class UnusedImportCheck extends Check {
 	function detectPackageName(token:TokenTree):String {
 		var packageName:StringBuf = new StringBuf();
 
+		var copy:Bool = false;
 		while (true) {
 			switch (token.tok) {
 				case Binop(OpMult): return null;
 				case Kwd(KwdImport):
 				case Semicolon: return packageName.toString();
-				default:
-					packageName.add(TokenDefPrinter.print(token.tok));
+				case Kwd(KwdIn):
+					if (token.parent.tok.match(Dot)) packageName.add(TokenDefPrinter.print(token.tok));
+					else packageName.add(" in ");
+				case Const(CIdent("as")):
+					if (token.parent.tok.match(Dot)) packageName.add(TokenDefPrinter.print(token.tok));
+					else packageName.add(" as ");
+				default: packageName.add(TokenDefPrinter.print(token.tok));
 			}
 			token = token.getFirstChild();
 		}
@@ -74,7 +80,7 @@ class UnusedImportCheck extends Check {
 			switch (token.tok) {
 				case Binop(OpMult): return null;
 				case Const(CIdent(name)):
-					if (~/^[A-Z]/.match(name)) lastName = name;
+					lastName = name;
 				case Semicolon: return lastName;
 				default:
 			}
@@ -88,12 +94,9 @@ class UnusedImportCheck extends Check {
 			var name:String = TokenDefPrinter.print(ident.tok);
 			if (typeName != name) continue;
 			switch (ident.parent.tok) {
-				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef):
-					continue;
-				case Dot:
-					continue;
-				default:
-					return;
+				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef): continue;
+				case Dot: continue;
+				default: return;
 			}
 		}
 		logPos('Unused import $packageName detected', importTok.pos);

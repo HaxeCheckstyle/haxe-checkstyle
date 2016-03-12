@@ -20,6 +20,7 @@ class TokenTreeCheckUtils {
 				case Kwd(KwdExtern):
 				case Const(CIdent(_)):
 				case Dot:
+				case Kwd(KwdIn):
 				case Kwd(KwdImport): return true;
 				default: return false;
 			}
