@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import StringTools;
-
 @name("EmptyLines")
 @desc("Checks for consecutive empty lines")
 class EmptyLinesCheck extends Check {
@@ -64,10 +62,10 @@ class EmptyLinesCheck extends Check {
 				}
 			}
 
-			isLastLinePackage = ~/^\s*package.*?;/.match(line);
-			isLastLineClass = ~/^\s*class.*?\{/.match(line);
-			isLastLineInterface = ~/^\s*interface.*?\{/.match(line);
-			isLastLineAbstract = ~/^\s*abstract.*?\{/.match(line);
+			isLastLinePackage = ~/^\s*package\s.*?;/.match(line);
+			isLastLineClass = ~/^\s*class\s.*?\{/.match(line);
+			isLastLineInterface = ~/^\s*interface\s.*?\{/.match(line);
+			isLastLineAbstract = ~/^\s*abstract\s.*?\{/.match(line);
 		}
 
 		if (inGroup) {

@@ -517,6 +517,22 @@
 		},
 		{
 			"props": {
+				"severity": "INFO",
+				"ignorePackages": [
+					"haxeparser.Data",
+					"haxeparser.Data.Token",
+					"haxeparser.Data.TokenDef",
+					"haxeparser.Data.TypeDecl",
+					"haxe.macro.Expr",
+					"haxe.macro.Expr.Access",
+					"haxe.macro.Expr.Field",
+					"haxe.macro.Expr.Function"
+				]
+			},
+			"type": "UnusedImport"
+		},
+		{
+			"props": {
 				"severity": "INFO"
 			},
 			"type": "VariableInitialisation"

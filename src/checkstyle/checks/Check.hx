@@ -1,6 +1,5 @@
 package checkstyle.checks;
 
-import checkstyle.utils.FieldUtils;
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
 import checkstyle.LintMessage.SeverityLevel;

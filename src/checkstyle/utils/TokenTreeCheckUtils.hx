@@ -7,22 +7,27 @@ class TokenTreeCheckUtils {
 	public static function isImportMult(token:TokenTree):Bool {
 		switch (token.tok) {
 			case Binop(OpMult), Dot:
-				var parent:TokenTree = token.parent;
-				while (parent != null) {
-					switch (parent.tok) {
-						case Kwd(KwdMacro):
-						case Kwd(KwdExtern):
-						case Const(CIdent(_)):
-						case Dot:
-						case Kwd(KwdImport): return true;
-						default: return false;
-					}
-					parent = parent.parent;
-				}
-				return false;
+				return isImport(token.parent);
 			default:
 				return false;
 		}
+	}
+
+	public static function isImport(token:TokenTree):Bool {
+		var parent:TokenTree = token;
+		while (parent != null) {
+			if (parent.tok == null) return false;
+			switch (parent.tok) {
+				case Kwd(KwdMacro):
+				case Kwd(KwdExtern):
+				case Const(CIdent(_)):
+				case Dot:
+				case Kwd(KwdImport): return true;
+				default: return false;
+			}
+			parent = parent.parent;
+		}
+		return false;
 	}
 
 	public static function isTypeParameter(token:TokenTree):Bool {

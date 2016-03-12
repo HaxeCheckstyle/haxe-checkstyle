@@ -1,7 +1,5 @@
 package checkstyle.reporter;
 
-import checkstyle.LintMessage.SeverityLevel;
-import sys.io.FileOutput;
 import haxe.io.Output;
 
 class TextReporter extends BaseReporter {
