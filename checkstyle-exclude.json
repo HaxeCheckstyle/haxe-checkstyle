@@ -6,7 +6,7 @@
 		"checkstyle.ChecksInfo"
 	],
 	"EmptyLines": [
-		"checks"
+		"checks.whitespace.EmptyLinesCheckTest"
 	],
 	"MultipleStringLiterals": [
 		"checks",

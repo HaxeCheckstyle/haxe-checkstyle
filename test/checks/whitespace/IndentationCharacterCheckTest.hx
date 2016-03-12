@@ -5,7 +5,7 @@ import checkstyle.checks.whitespace.IndentationCharacterCheck;
 class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests> {
 
 	public function testWrongIndentation() {
-		assertMsg(new IndentationCharacterCheck(), TEST1, 'Wrong indentation character (should be tab)');
+		assertMsg(new IndentationCharacterCheck(), TEST1, "Wrong indentation character (should be tab)");
 	}
 
 	public function testCorrectIndentation() {
@@ -16,7 +16,7 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 		var check = new IndentationCharacterCheck();
 		check.character = SPACE;
 
-		assertMsg(check, TEST3, 'Wrong indentation character (should be space)');
+		assertMsg(check, TEST3, "Wrong indentation character (should be space)");
 	}
 
 	public function testMultilineIfIndentation() {

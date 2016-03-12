@@ -101,9 +101,7 @@
 			"props": {
 				"max": 1,
 				"requireEmptyLineAfterAbstract": false,
-				"allowEmptyLineAfterSingleLineComment": true,
-				"requireEmptyLineAfterClass": true,
-				"allowEmptyLineAfterMultiLineComment": true,
+				"requireEmptyLineAfterClass": false,
 				"severity": "INFO"
 			},
 			"type": "EmptyLines"
