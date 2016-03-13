@@ -253,6 +253,7 @@ class Main {
 	function start() {
 		var files:Array<String> = [];
 		for (path in paths) traverse(path, files);
+		files.sortStrings();
 
 		var i:Int = 0;
 		var toProcess:Array<LintFile> = [for (file in files) {name:file, content:null, index:i++}];
