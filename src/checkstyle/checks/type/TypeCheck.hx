@@ -15,6 +15,8 @@ class TypeCheck extends Check {
 	public function new() {
 		super(AST);
 		ignoreEnumAbstractValues = true;
+		categories = ["Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

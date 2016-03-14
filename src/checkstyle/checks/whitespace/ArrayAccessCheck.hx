@@ -14,6 +14,8 @@ class ArrayAccessCheck extends Check {
 		super(AST);
 		spaceBefore = false;
 		spaceInside = false;
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

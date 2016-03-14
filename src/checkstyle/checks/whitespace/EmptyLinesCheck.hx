@@ -23,6 +23,8 @@ class EmptyLinesCheck extends Check {
 		requireEmptyLineAfterClass = true;
 		requireEmptyLineAfterInterface = true;
 		requireEmptyLineAfterAbstract = true;
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

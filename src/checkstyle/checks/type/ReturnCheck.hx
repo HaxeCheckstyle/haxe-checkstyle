@@ -17,6 +17,8 @@ class ReturnCheck extends Check {
 		super(AST);
 		allowEmptyReturn = true;
 		enforceReturnType = false;
+		categories = ["Clarity"];
+		points = 2;
 	}
 
 	override function actualRun() {

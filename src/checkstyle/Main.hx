@@ -1,16 +1,16 @@
 package checkstyle;
 
-import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.ChecksInfo;
 import checkstyle.Config;
 import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.Check;
-import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
 import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
+import checkstyle.reporter.CodeClimateReporter;
+import checkstyle.reporter.ExitCodeReporter;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;

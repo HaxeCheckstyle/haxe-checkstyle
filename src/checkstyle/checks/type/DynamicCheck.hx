@@ -10,6 +10,8 @@ class DynamicCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Clarity", "Bug Risk", "Complexity"];
+		points = 3;
 	}
 
 	override function actualRun() {
