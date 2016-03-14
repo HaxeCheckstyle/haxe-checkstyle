@@ -15,6 +15,8 @@ class CodeClimateReporter extends BaseReporter {
 	override public function finish() {}
 
 	override public function addMessage(m:CheckMessage) {
+		var file = ~/^\/code\//.replace(m.fileName, "");
+		file = ~/\/\//.replace(file, "/");
 		var issue = {
 			type: "issue",
 			check_name: m.moduleName,
@@ -23,7 +25,7 @@ class CodeClimateReporter extends BaseReporter {
 			categories: m.categories,
 			remediation_points: m.points * REMEDIATION_BASE,
 			location:{
-				path: ~/^\/code\//.replace(m.fileName, ""),
+				path: file,
 				positions: {
 					begin: {
 						line: m.line,
