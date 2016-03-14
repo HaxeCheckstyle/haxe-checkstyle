@@ -12,14 +12,20 @@ class Check {
 
 	public var severity:SeverityLevel;
 	public var type(default, null):CheckType;
+	public var categories:Array<String>;
+	public var points:Int;
 
 	var messages:Array<LintMessage>;
 	var moduleName:String;
 	var checker:Checker;
 
+	// Categories: Bug Risk, Clarity, Compatibility, Complexity, Duplication, Performance, Security, Style
+	// Points: Fibonacci - 1, 2, 3, 5, 8, 13, 21, 34, 55
 	public function new(type:CheckType) {
 		this.type = type;
 		severity = SeverityLevel.INFO;
+		categories = ["Style"];
+		points = 1;
 	}
 
 	public function run(checker:Checker):Array<LintMessage> {
@@ -60,7 +66,9 @@ class Check {
 			startColumn:startColumn,
 			endColumn:endColumn,
 			severity:sev,
-			moduleName:getModuleName()
+			moduleName:getModuleName(),
+			categories:categories,
+			points:points
 		});
 	}
 

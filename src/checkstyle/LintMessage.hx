@@ -16,4 +16,6 @@ typedef LintMessage = {
 	var endColumn:Int;
 	var severity:SeverityLevel;
 	var moduleName:String;
+	var categories:Array<String>;
+	var points:Int;
 }
