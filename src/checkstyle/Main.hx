@@ -177,9 +177,7 @@ class Main {
 			}
 			Reflect.setField(check, prop, val);
 		}
-		if (defaultSeverity != null && !props.contains("severity")) {
-			check.severity = defaultSeverity;
-		}
+		if (defaultSeverity != null && !props.contains("severity")) check.severity = defaultSeverity;
 	}
 
 	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
@@ -245,6 +243,7 @@ class Main {
 	function generateDefaultConfig(path) {
 		addAllChecks();
 
+		var propsNotAllowed:Array<String> = ["moduleName", "severity", "type", "categories", "points"];
 		var config = getEmptyConfig();
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
@@ -254,7 +253,7 @@ class Main {
 				}
 			};
 			for (prop in Reflect.fields(check)) {
-				if (prop == "moduleName" || prop == "severity" || prop == "type") continue;
+				if (propsNotAllowed.contains(prop)) continue;
 				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
 			}
 			config.checks.push(checkConfig);
