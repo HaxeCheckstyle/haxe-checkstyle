@@ -1,6 +1,5 @@
 package checkstyle.reporter;
 
-import checkstyle.reporter.BaseReporter;
 import haxe.Json;
 
 class JSONReporter extends BaseReporter {

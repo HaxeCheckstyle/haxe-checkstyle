@@ -11,6 +11,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 	static inline var MSG_UNUSED_AS:String = "Unused import haxe.checkstyle.Check as Base detected";
 	static inline var MSG_UNUSED_IN:String = "Unused import haxe.checkstyle.Check in Base detected";
 	static inline var MSG_UNUSED_IN_STATIC:String = "Unused import String.fromCharCode in f detected";
+	static inline var MSG_SAME_PACKAGE_IMPORT:String = "Detected import checkstyle.checks.Checker from same package checkstyle.checks";
 
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();
@@ -30,12 +31,17 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertMsg(check, UNUSED_IMPORT_IN, MSG_UNUSED_IN);
 		assertMsg(check, UNUSED_IMPORT_IN_STATIC_FUNC, MSG_UNUSED_IN_STATIC);
 	}
+
+	public function testSamePackageImport() {
+		var check = new UnusedImportCheck();
+		assertMsg(check, SAME_PACKAGE_IMPORT, MSG_SAME_PACKAGE_IMPORT);
+	}
 }
 
 @:enum
 abstract UnusedImportCheckTests(String) to String {
 	var ALL_IMPORTS_USED = "
-	package haxe.checkstyle;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check;
 	import haxe.checkstyle.Check2;
@@ -53,7 +59,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}";
 
 	var IMPORT_NOT_USED = "
-	package haxe.checkstyle;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check;
 	import haxe.checkstyle.Check2;
@@ -68,7 +74,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}";
 
 	var DUPLICATE_IMPORT = "
-	package haxe.checkstyle;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check;
 	import haxe.checkstyle.Check2;
@@ -83,7 +89,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}";
 
 	var IMPORT_NAME_REUSED = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check;
 
@@ -107,7 +113,7 @@ abstract UnusedImportCheckTests(String) to String {
 	typedef Check = Dynamic; ";
 
 	var TOP_LEVEL_IMPORT = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import String;
 
@@ -118,7 +124,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}";
 
 	var IMPORT_BASE_CLASS = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Base;
 	import checkstyle.Interface;
@@ -129,7 +135,7 @@ abstract UnusedImportCheckTests(String) to String {
 	}";
 
 	var IMPORT_AS = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check as Base;
 	import haxe.checkstyle.Check2 in Base2;
@@ -137,14 +143,14 @@ abstract UnusedImportCheckTests(String) to String {
 	class Test extends Base implements Base2 {}";
 
 	var UNUSED_IMPORT_AS = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check as Base;
 
 	class Test {}";
 
 	var UNUSED_IMPORT_IN = "
-	package haxe.test;
+	package checkstyle.test;
 
 	import haxe.checkstyle.Check in Base;
 
@@ -166,5 +172,18 @@ abstract UnusedImportCheckTests(String) to String {
 	abstractAndClass Main {
 
 		static function main() {}
+	}";
+
+	var SAME_PACKAGE_IMPORT = "
+	package checkstyle.checks;
+
+	import checkstyle.checks.Checker;
+	import checkstyle.checks.imports.UnusedImportCheck;
+
+	abstractAndClass Main {
+
+		static function main():Checker {
+			return new UnusedImportCheck ();
+		}
 	}";
 }
