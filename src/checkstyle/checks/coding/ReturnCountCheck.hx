@@ -14,6 +14,8 @@ class ReturnCountCheck extends Check {
 		super(TOKEN);
 		max = 2;
 		ignoreFormat = "^$";
+		categories = ["Complexity"];
+		points = 5;
 	}
 
 	override function actualRun() {

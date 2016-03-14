@@ -14,6 +14,8 @@ class MagicNumberCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		ignoreNumbers = [-1, 0, 1, 2];
+		categories = ["Clarity", "Complexity"];
+		points = 2;
 	}
 
 	override function actualRun() {

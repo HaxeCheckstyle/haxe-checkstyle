@@ -12,6 +12,8 @@ class HexadecimalLiteralCheck extends Check {
 	public function new() {
 		super(AST);
 		option = "upperCase";
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

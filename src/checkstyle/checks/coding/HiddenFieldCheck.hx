@@ -22,6 +22,8 @@ class HiddenFieldCheck extends Check {
 		ignoreConstructorParameter = true;
 		ignoreSetter = true;
 		ignoreFormat = "^(main|run)$";
+		categories = ["Complexity", "Clarity", "Bug Risk"];
+		points = 3;
 	}
 
 	override function actualRun() {

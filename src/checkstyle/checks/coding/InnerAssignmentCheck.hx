@@ -10,6 +10,8 @@ class InnerAssignmentCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Complexity", "Clarity", "Bug Risk"];
+		points = 3;
 	}
 
 	override function actualRun() {

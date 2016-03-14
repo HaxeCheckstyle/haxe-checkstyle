@@ -9,6 +9,8 @@ class AvoidStarImportCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

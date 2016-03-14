@@ -16,6 +16,8 @@ class MethodLengthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = DEFAULT_MAX_LENGTH;
+		categories = ["Complexity", "Clarity"];
+		points = 8;
 	}
 
 	override public function actualRun() {

@@ -12,6 +12,8 @@ class NestedIfDepthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = 1;
+		categories = ["Complexity"];
+		points = 5;
 	}
 
 	override function actualRun() {

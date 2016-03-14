@@ -9,6 +9,8 @@ class UnnecessaryConstructorCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Bug Risk"];
+		points = 1;
 	}
 
 	override function actualRun() {

@@ -11,6 +11,8 @@ class LineLengthCheck extends Check {
 	public function new() {
 		super(LINE);
 		max = DEFAULT_MAX_LENGTH;
+		categories = ["Complexity", "Clarity"];
+		points = 2;
 	}
 
 	override function actualRun() {

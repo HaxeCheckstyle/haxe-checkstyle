@@ -8,6 +8,8 @@ class SimplifyBooleanReturnCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Complexity"];
+		points = 2;
 	}
 
 	override function actualRun() {

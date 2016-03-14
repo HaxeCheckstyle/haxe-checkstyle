@@ -19,6 +19,8 @@ class CyclomaticComplexityCheck extends Check {
 			{ severity : "WARNING", complexity : DEFAULT_COMPLEXITY_WARNING },
 			{ severity : "ERROR", complexity : DEFAULT_COMPLEXITY_ERROR }
 		];
+		categories = ["Complexity"];
+		points = 13;
 	}
 
 	override function actualRun() {

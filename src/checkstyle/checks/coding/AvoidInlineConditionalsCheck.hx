@@ -9,6 +9,8 @@ class AvoidInlineConditionalsCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Complexity"];
+		points = 2;
 	}
 
 	override function actualRun() {

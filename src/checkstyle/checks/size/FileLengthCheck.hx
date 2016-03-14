@@ -13,6 +13,8 @@ class FileLengthCheck extends Check {
 	public function new() {
 		super(LINE);
 		max = DEFAULT_MAX_LENGTH;
+		categories = ["Complexity", "Clarity"];
+		points = 21;
 	}
 
 	override function actualRun() {

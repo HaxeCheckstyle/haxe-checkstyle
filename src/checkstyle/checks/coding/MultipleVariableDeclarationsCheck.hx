@@ -9,6 +9,8 @@ class MultipleVariableDeclarationsCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Style", "Clarity", "Complexity"];
+		points = 1;
 	}
 
 	override function actualRun() {

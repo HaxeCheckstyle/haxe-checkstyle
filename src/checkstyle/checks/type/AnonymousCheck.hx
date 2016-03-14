@@ -12,6 +12,8 @@ class AnonymousCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Style", "Clarity", "Bug Risk", "Complexity"];
+		points = 8;
 	}
 
 	override function actualRun() {

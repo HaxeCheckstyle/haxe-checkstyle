@@ -18,6 +18,8 @@ class ParameterNumberCheck extends Check {
 		super(AST);
 		max = DEFAULT_MAX_PARAMS;
 		ignoreOverriddenMethods = false;
+		categories = ["Complexity", "Clarity"];
+		points = 5;
 	}
 
 	override function actualRun() {

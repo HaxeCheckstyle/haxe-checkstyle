@@ -17,6 +17,8 @@ class UnusedImportCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		ignoreModules = [];
+		categories = ["Style", "Clarity", "Duplication"];
+		points = 1;
 	}
 
 	override function actualRun() {

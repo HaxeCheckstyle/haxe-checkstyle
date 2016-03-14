@@ -12,6 +12,8 @@ class VariableInitialisationCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Style", "Clarity"];
+		points = 2;
 	}
 
 	override function actualRun() {

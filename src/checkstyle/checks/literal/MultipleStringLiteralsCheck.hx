@@ -19,6 +19,8 @@ class MultipleStringLiteralsCheck extends Check {
 		ignore = "^\\s+$";
 		allowDuplicates = 2;
 		minLength = 2;
+		categories = ["Style", "Clarity"];
+		points = 2;
 	}
 
 	override function actualRun() {

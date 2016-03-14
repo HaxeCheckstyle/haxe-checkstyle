@@ -15,6 +15,8 @@ class RedundantModifierCheck extends Check {
 	public function new() {
 		super(AST);
 		enforcePublicPrivate = false;
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {
