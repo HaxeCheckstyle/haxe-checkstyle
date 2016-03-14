@@ -1,14 +1,19 @@
 package checkstyle.reporter;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import haxe.Json;
 
 class CodeClimateReporter extends BaseReporter {
+
+	static var INFO:String = "info";
+	static var NORMAL:String = "normal";
+	static var CRITICAL:String = "critical";
 
 	override public function start() {}
 
 	override public function finish() {}
 
-	override public function addMessage(m:LintMessage) {
+	override public function addMessage(m:CheckMessage) {
 		var issue = {
 			type: "issue",
 			check_name: m.moduleName,
@@ -34,12 +39,12 @@ class CodeClimateReporter extends BaseReporter {
 		Sys.print(Json.stringify(issue) + "\u0000");
 	}
 
-	function getSeverity(severity:String):String {
+	function getSeverity(severity:SeverityLevel):String {
 		return switch (severity) {
-			case "INFO": "info";
-			case "WARNING": "normal";
-			case "ERROR": "critical";
-			case "INFO": "info";
+			case "INFO": INFO;
+			case "WARNING": NORMAL;
+			case "ERROR": CRITICAL;
+			default: INFO;
 		}
 	}
 }
