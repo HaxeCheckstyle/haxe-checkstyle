@@ -20,8 +20,9 @@ class UnusedImportCheck extends Check {
 	}
 
 	override function actualRun() {
-		var seenPackages:Array<String> = [];
+		var seenModules:Array<String> = [];
 		var root:TokenTree = checker.getTokenTree();
+		var packageName:String = detectPackageName(root);
 		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], ALL);
 		var idents:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
@@ -34,40 +35,58 @@ class UnusedImportCheck extends Check {
 		});
 		for (imp in imports) {
 			var typeName:String = detectTypeName(imp);
-			var packageName:String = detectPackageName(imp);
-			if ((typeName == null) || (packageName == null)) continue;
-			if (ignoreModules.contains(packageName)) continue;
+			var moduleName:String = detectModuleName(imp);
+			if ((typeName == null) || (moduleName == null)) continue;
+			if (ignoreModules.contains(moduleName)) continue;
 
-			if (!~/\./.match(packageName)) {
-				logPos('Unnecessary toplevel import $packageName detected', imp.pos);
+			if ((packageName != null) && ('$packageName.$typeName' == moduleName)) {
+				logPos('Detected import $moduleName from same package $packageName', imp.pos);
 				continue;
 			}
 
-			if (seenPackages.contains(packageName)) {
-				logPos('Duplicate import $packageName detected', imp.pos);
+			if (!~/\./.match(moduleName)) {
+				logPos('Unnecessary toplevel import $moduleName detected', imp.pos);
 				continue;
 			}
-			seenPackages.push(packageName);
-			checkUsage(typeName, packageName, imp, idents);
+
+			if (seenModules.contains(moduleName)) {
+				logPos('Duplicate import $moduleName detected', imp.pos);
+				continue;
+			}
+			seenModules.push(moduleName);
+			checkUsage(typeName, moduleName, imp, idents);
 		}
 	}
 
-	function detectPackageName(token:TokenTree):String {
-		var packageName:StringBuf = new StringBuf();
+	function detectPackageName(root:TokenTree):String {
+		var packageToken:Array<TokenTree> = root.filter([Kwd(KwdPackage)], ALL);
+		if ((packageToken == null) || (packageToken.length <= 0)) return null;
+
+		var packageName:String = detectModuleName(packageToken[0]);
+		if (packageName == "") packageName = null;
+		if (packageToken.length > 1) {
+			logPos('Multiple package declarations found', packageToken[1].pos);
+		}
+		return packageName;
+	}
+
+	function detectModuleName(token:TokenTree):String {
+		var moduleName:StringBuf = new StringBuf();
 
 		var copy:Bool = false;
 		while (true) {
 			switch (token.tok) {
 				case Binop(OpMult): return null;
 				case Kwd(KwdImport):
-				case Semicolon: return packageName.toString();
+				case Kwd(KwdPackage):
+				case Semicolon: return moduleName.toString();
 				case Kwd(KwdIn):
-					if (token.parent.tok.match(Dot)) packageName.add(TokenDefPrinter.print(token.tok));
-					else packageName.add(" in ");
+					if (token.parent.tok.match(Dot)) moduleName.add(TokenDefPrinter.print(token.tok));
+					else moduleName.add(" in ");
 				case Const(CIdent("as")):
-					if (token.parent.tok.match(Dot)) packageName.add(TokenDefPrinter.print(token.tok));
-					else packageName.add(" as ");
-				default: packageName.add(TokenDefPrinter.print(token.tok));
+					if (token.parent.tok.match(Dot)) moduleName.add(TokenDefPrinter.print(token.tok));
+					else moduleName.add(" as ");
+				default: moduleName.add(TokenDefPrinter.print(token.tok));
 			}
 			token = token.getFirstChild();
 		}
@@ -89,7 +108,7 @@ class UnusedImportCheck extends Check {
 		return null;
 	}
 
-	function checkUsage(typeName:String, packageName:String, importTok:TokenTree, idents:Array<TokenTree>) {
+	function checkUsage(typeName:String, moduleName:String, importTok:TokenTree, idents:Array<TokenTree>) {
 		for (ident in idents) {
 			var name:String = TokenDefPrinter.print(ident.tok);
 			if (typeName != name) continue;
@@ -99,6 +118,6 @@ class UnusedImportCheck extends Check {
 				default: return;
 			}
 		}
-		logPos('Unused import $packageName detected', importTok.pos);
+		logPos('Unused import $moduleName detected', importTok.pos);
 	}
 }
