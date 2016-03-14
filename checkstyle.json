@@ -523,7 +523,9 @@
 					"haxe.macro.Expr",
 					"haxe.macro.Expr.Access",
 					"haxe.macro.Expr.Field",
-					"haxe.macro.Expr.Function"
+					"haxe.macro.Expr.Function",
+					"checkstyle.ChecksInfo",
+					"checkstyle.Config"
 				]
 			},
 			"type": "UnusedImport"
