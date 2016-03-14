@@ -2,7 +2,7 @@ package checkstyle.checks;
 
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 import haxeparser.Data;
 
 using checkstyle.utils.ArrayUtils;
@@ -15,7 +15,7 @@ class Check {
 	public var categories:Array<String>;
 	public var points:Int;
 
-	var messages:Array<LintMessage>;
+	var messages:Array<CheckMessage>;
 	var moduleName:String;
 	var checker:Checker;
 
@@ -28,7 +28,7 @@ class Check {
 		points = 1;
 	}
 
-	public function run(checker:Checker):Array<LintMessage> {
+	public function run(checker:Checker):Array<CheckMessage> {
 		this.checker = checker;
 		messages = [];
 		if (severity != SeverityLevel.IGNORE) {

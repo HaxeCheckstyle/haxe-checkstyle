@@ -1,6 +1,6 @@
 package checkstyle;
 
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 
 typedef Config = {
 	var defaultSeverity:SeverityLevel;
