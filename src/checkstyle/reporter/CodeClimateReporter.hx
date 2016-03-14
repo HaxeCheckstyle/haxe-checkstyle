@@ -8,6 +8,7 @@ class CodeClimateReporter extends BaseReporter {
 	static var INFO:String = "info";
 	static var NORMAL:String = "normal";
 	static var CRITICAL:String = "critical";
+	static var REMEDIATION_BASE:Int = 50000;
 
 	override public function start() {}
 
@@ -20,9 +21,9 @@ class CodeClimateReporter extends BaseReporter {
 			description: m.message,
 			severity: getSeverity(m.severity),
 			categories: m.categories,
-			points: m.points,
+			remediation_points: m.points * REMEDIATION_BASE,
 			location:{
-				path: m.fileName,
+				path: ~/^\/code\//.replace(m.fileName, ""),
 				positions: {
 					begin: {
 						line: m.line,

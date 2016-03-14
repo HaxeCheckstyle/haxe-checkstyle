@@ -274,7 +274,7 @@ class Main {
 		for (path in paths) traverse(path, files);
 
 		var i:Int = 0;
-		var toProcess:Array<CheckFile> = [for (file in files) {name:file, content:null, index:i++}];
+		var toProcess:Array<CheckFile> = [for (file in files) { name:file, content:null, index:i++ }];
 
 		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));

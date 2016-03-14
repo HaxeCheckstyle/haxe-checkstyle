@@ -1,0 +1,6 @@
+engines:
+  haxe-checkstyle:
+    enabled: true
+    config: 'checkstyle.json'
+    exclude: 'checkstyle-exclude.json'
+include_paths: ["src"]
