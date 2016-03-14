@@ -13,7 +13,7 @@ class JSONReporter extends BaseReporter {
 		super.start();
 	}
 
-	override public function fileStart(f:LintFile) {
+	override public function fileStart(f:CheckFile) {
 		fileReport = {
 			fileName: f.name,
 			messages: []
@@ -26,7 +26,7 @@ class JSONReporter extends BaseReporter {
 		super.finish();
 	}
 
-	override public function addMessage(m:LintMessage) {
+	override public function addMessage(m:CheckMessage) {
 		var reportMessage:ReportMessage = {
 			line: m.line,
 			column: m.startColumn,
