@@ -1,6 +1,6 @@
 package checkstyle;
 
-typedef LintFile = {
+typedef CheckFile = {
 	var name:String;
 	var content:String;
 	var index:Int;

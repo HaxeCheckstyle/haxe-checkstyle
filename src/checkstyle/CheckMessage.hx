@@ -8,7 +8,7 @@ abstract SeverityLevel(String) from String {
 	var IGNORE = "IGNORE";
 }
 
-typedef LintMessage = {
+typedef CheckMessage = {
 	var fileName:String;
 	var message:String;
 	var line:Int;
