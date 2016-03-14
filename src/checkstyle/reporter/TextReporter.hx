@@ -4,7 +4,7 @@ import haxe.io.Output;
 
 class TextReporter extends BaseReporter {
 
-	override public function addMessage(m:LintMessage) {
+	override public function addMessage(m:CheckMessage) {
 		var sb:StringBuf = getMessage(m);
 		var output:Output = Sys.stderr();
 
