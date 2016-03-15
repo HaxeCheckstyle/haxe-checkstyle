@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("Type")
-@desc("Type check for member variables")
+@desc("Checks of type is specified or not for member variables.")
 class TypeCheck extends Check {
 
 	public var ignoreEnumAbstractValues:Bool;

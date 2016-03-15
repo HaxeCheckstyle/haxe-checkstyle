@@ -1,7 +1,7 @@
 package checkstyle.checks.size;
 
 @name("LineLength")
-@desc("Max line length (default 160)")
+@desc("Checks for long lines. Long lines are hard to read.")
 class LineLengthCheck extends Check {
 
 	static var DEFAULT_MAX_LENGTH:Int = 160;

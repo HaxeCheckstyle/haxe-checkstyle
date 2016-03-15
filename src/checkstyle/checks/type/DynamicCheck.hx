@@ -5,7 +5,7 @@ import haxeparser.Data;
 import checkstyle.utils.ComplexTypeUtils;
 
 @name("Dynamic")
-@desc("Checks for use of Dynamic type")
+@desc("Checks for use of Dynamic type anywhere in the code.")
 class DynamicCheck extends Check {
 
 	public function new() {

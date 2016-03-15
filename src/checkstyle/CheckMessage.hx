@@ -11,6 +11,7 @@ abstract SeverityLevel(String) from String {
 typedef CheckMessage = {
 	var fileName:String;
 	var message:String;
+	var desc:String;
 	var line:Int;
 	var startColumn:Int;
 	var endColumn:Int;

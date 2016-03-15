@@ -4,7 +4,7 @@ import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 
 @name("ArrayLiteral", "ArrayInstantiation")
-@desc("Checks if the array is instantiated using [], not with new")
+@desc("Checks if the array is instantiated using [] which is shorter and cleaner, not with new.")
 class ArrayLiteralCheck extends Check {
 
 	public function new() {

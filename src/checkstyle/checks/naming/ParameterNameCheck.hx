@@ -6,7 +6,7 @@ import haxeparser.Data;
 using checkstyle.utils.ArrayUtils;
 
 @name("ParameterName")
-@desc("Checks that method parameter names conform to a format specified by the format property")
+@desc("Checks that parameter names conform to a format specified by the `format` property.")
 class ParameterNameCheck extends NameCheckBase<String> {
 
 	public function new() {

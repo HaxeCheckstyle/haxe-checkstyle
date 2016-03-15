@@ -1,7 +1,7 @@
 package checkstyle.checks.whitespace;
 
 @name("TrailingWhitespace")
-@desc("Checks if there are any trailing white spaces")
+@desc("Checks if there are any trailing white spaces.")
 class TrailingWhitespaceCheck extends Check {
 
 	public function new() {

@@ -243,7 +243,7 @@ class Main {
 	function generateDefaultConfig(path) {
 		addAllChecks();
 
-		var propsNotAllowed:Array<String> = ["moduleName", "severity", "type", "categories", "points"];
+		var propsNotAllowed:Array<String> = ["moduleName", "severity", "type", "categories", "points", "desc"];
 		var config = getEmptyConfig();
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {

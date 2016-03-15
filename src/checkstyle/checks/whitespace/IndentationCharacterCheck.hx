@@ -1,7 +1,7 @@
 package checkstyle.checks.whitespace;
 
 @name("IndentationCharacter")
-@desc("Checks indentation character (tab/space, default is tab)")
+@desc("Checks indentation character (tab/space, default is tab).")
 class IndentationCharacterCheck extends Check {
 
 	public var character:IndentationCharacterCheckCharacter;

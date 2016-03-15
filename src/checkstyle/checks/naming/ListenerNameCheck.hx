@@ -6,7 +6,7 @@ import haxe.macro.Expr.Field;
 import haxe.macro.Expr.Function;
 
 @name("ListenerName")
-@desc("Checks on naming conventions of event listener methods")
+@desc("Checks the naming conventions of event listener functions specified using `listeners` property.")
 class ListenerNameCheck extends Check {
 
 	public var listeners:Array<String>;

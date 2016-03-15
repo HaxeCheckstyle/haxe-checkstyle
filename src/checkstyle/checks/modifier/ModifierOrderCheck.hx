@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("ModifierOrder", "AccessOrder")
-@desc("Checks order of modifiers")
+@desc("Checks that the order of modifiers conforms to the standards.")
 class ModifierOrderCheck extends Check {
 
 	public var modifiers:Array<ModifierOrderCheckModifier>;

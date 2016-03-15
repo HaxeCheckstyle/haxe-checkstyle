@@ -4,7 +4,7 @@ import haxe.macro.Expr;
 import checkstyle.utils.ExprUtils;
 
 @name("ArrayAccess")
-@desc("Spacing check on array access")
+@desc("Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.")
 class ArrayAccessCheck extends Check {
 
 	public var spaceBefore:Bool;

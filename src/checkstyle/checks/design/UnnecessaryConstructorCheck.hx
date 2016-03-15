@@ -4,13 +4,13 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("UnnecessaryConstructor")
-@desc("Checks for unnecessary constructor in classes that contain only static methods or fields")
+@desc("Checks for unnecessary constructor in classes that contain only static methods or fields.")
 class UnnecessaryConstructorCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
 		categories = ["Bug Risk"];
-		points = 1;
+		points = 3;
 	}
 
 	override function actualRun() {

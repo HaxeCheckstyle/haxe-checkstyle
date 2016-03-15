@@ -4,7 +4,7 @@ import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 
 @name("HexadecimalLiteral", "HexadecimalLiterals")
-@desc("Checks the letter case of hexadecimal literals")
+@desc("Checks the letter case of hexadecimal literals.")
 class HexadecimalLiteralCheck extends Check {
 
 	public var option:String;

@@ -4,13 +4,13 @@ import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 
 @name("AvoidInlineConditionals")
-@desc("Detects inline conditionals")
+@desc("Detects inline conditionals. Useful for developers who find inline conditionals hard to read and want forbid them.")
 class AvoidInlineConditionalsCheck extends Check {
 
 	public function new() {
 		super(AST);
 		categories = ["Complexity"];
-		points = 2;
+		points = 3;
 	}
 
 	override function actualRun() {

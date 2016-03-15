@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("MemberName")
-@desc("Checks on naming conventions of non-static fields")
+@desc("Checks that instance variable names conform to a format specified by the `format` property.")
 class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	public function new() {

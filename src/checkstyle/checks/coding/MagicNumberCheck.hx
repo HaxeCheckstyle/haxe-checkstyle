@@ -6,7 +6,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("MagicNumber")
-@desc("Checks that there are no magic numbers")
+@desc("Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.")
 class MagicNumberCheck extends Check {
 
 	public var ignoreNumbers:Array<Float>;
@@ -15,7 +15,7 @@ class MagicNumberCheck extends Check {
 		super(TOKEN);
 		ignoreNumbers = [-1, 0, 1, 2];
 		categories = ["Clarity", "Complexity"];
-		points = 2;
+		points = 3;
 	}
 
 	override function actualRun() {

@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("VariableInitialisation")
-@desc("Checks if instance variables are initialised at class level")
+@desc("Checks for instance variables that are initialised at class level.")
 class VariableInitialisationCheck extends Check {
 
 	public function new() {

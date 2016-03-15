@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("MethodName")
-@desc("Checks the method names")
+@desc("Checks that method names conform to a format specified by the `format` property.")
 class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 
 	public function new() {

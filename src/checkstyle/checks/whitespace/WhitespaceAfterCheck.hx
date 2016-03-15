@@ -8,7 +8,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("WhitespaceAfter")
-@desc("Checks for whitespace after a token")
+@desc("Checks for whitespace after a token.")
 class WhitespaceAfterCheck extends Check {
 
 	public var tokens:Array<String>;

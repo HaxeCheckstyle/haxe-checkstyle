@@ -6,7 +6,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("TypeName")
-@desc("Checks on naming conventions of types (classes, interfaces, enums, typedefs)")
+@desc("Checks that type names conform to a format specified by the `format` property.")
 class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 
 	public function new() {

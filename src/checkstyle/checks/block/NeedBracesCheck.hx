@@ -8,7 +8,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("NeedBraces")
-@desc("Checks for braces on function, if, for and while statements")
+@desc("Checks for braces on function, if, for and while statements.")
 class NeedBracesCheck extends Check {
 
 	public var tokens:Array<NeedBracesCheckToken>;

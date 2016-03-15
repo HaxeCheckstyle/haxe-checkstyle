@@ -8,7 +8,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("RightCurly")
-@desc("Checks for placement of right curly braces")
+@desc("Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.")
 class RightCurlyCheck extends Check {
 
 	public var tokens:Array<RightCurlyCheckToken>;

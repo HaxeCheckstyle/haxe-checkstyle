@@ -8,7 +8,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("HiddenField")
-@desc("Checks that a local variable or parameter does not shadow a field")
+@desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")
 class HiddenFieldCheck extends Check {
 
 	static inline var MAX_FIELD_LEVEL:Int = 3;
@@ -23,7 +23,7 @@ class HiddenFieldCheck extends Check {
 		ignoreSetter = true;
 		ignoreFormat = "^(main|run)$";
 		categories = ["Complexity", "Clarity", "Bug Risk"];
-		points = 3;
+		points = 5;
 	}
 
 	override function actualRun() {

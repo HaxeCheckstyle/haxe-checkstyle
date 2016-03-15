@@ -5,7 +5,7 @@ import checkstyle.token.TokenTreeBuilder;
 import haxe.macro.Expr;
 
 @name("MultipleStringLiterals")
-@desc("Checks for multiple instances of string literals")
+@desc("Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.")
 class MultipleStringLiteralsCheck extends Check {
 
 	public var allowDuplicates:Int;

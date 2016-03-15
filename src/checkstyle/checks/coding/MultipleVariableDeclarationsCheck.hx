@@ -4,13 +4,13 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("MultipleVariableDeclarations")
-@desc("Checks that each variable declaration is in its own statement and on its own line")
+@desc("Checks that each variable declaration is in its own statement and on its own line.")
 class MultipleVariableDeclarationsCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
 		categories = ["Style", "Clarity", "Complexity"];
-		points = 1;
+		points = 2;
 	}
 
 	override function actualRun() {

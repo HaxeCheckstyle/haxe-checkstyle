@@ -6,7 +6,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("ParameterNumber")
-@desc("Max number of parameters per method (default 7)")
+@desc("Checks the number of parameters of a method (default is 7).")
 class ParameterNumberCheck extends Check {
 
 	static var DEFAULT_MAX_PARAMS:Int = 7;

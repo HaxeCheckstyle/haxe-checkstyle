@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("ConstantName")
-@desc("Checks on naming conventions of constants (static / static inline with initialisation)")
+@desc("Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.")
 class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	public function new() {

@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("EmptyPackage")
-@desc("Checks for empty package names")
+@desc("Checks for empty package names.")
 class EmptyPackageCheck extends Check {
 
 	public var enforceEmptyPackage:Bool;

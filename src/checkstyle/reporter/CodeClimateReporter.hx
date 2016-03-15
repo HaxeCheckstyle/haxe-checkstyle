@@ -21,6 +21,9 @@ class CodeClimateReporter extends BaseReporter {
 			type: "issue",
 			check_name: m.moduleName,
 			description: m.message,
+			content: {
+				body: m.desc
+			},
 			severity: getSeverity(m.severity),
 			categories: m.categories,
 			remediation_points: m.points * REMEDIATION_BASE,

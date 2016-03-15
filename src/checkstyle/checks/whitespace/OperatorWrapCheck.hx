@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("OperatorWrap")
-@desc("Checks line wrapping with operators")
+@desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {
 
 	public function new() {

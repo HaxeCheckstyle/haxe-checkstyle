@@ -14,6 +14,7 @@ class Check {
 	public var type(default, null):CheckType;
 	public var categories:Array<String>;
 	public var points:Int;
+	public var desc:String;
 
 	var messages:Array<CheckMessage>;
 	var moduleName:String;
@@ -26,6 +27,7 @@ class Check {
 		severity = SeverityLevel.INFO;
 		categories = ["Style"];
 		points = 1;
+		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
 	public function run(checker:Checker):Array<CheckMessage> {
@@ -62,6 +64,7 @@ class Check {
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
+			desc:desc,
 			line:l,
 			startColumn:startColumn,
 			endColumn:endColumn,

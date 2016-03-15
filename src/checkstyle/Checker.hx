@@ -273,6 +273,7 @@ class Checker {
 			moduleName:"Checker",
 			categories:["Style"],
 			points:1,
+			desc: "",
 			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())
 		};
 	}

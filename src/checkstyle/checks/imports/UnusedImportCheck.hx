@@ -9,7 +9,7 @@ import haxeparser.Data;
 using checkstyle.utils.ArrayUtils;
 
 @name("UnusedImport")
-@desc("Checks for unused or duplicate imports")
+@desc("Checks for unused or duplicate imports.")
 class UnusedImportCheck extends Check {
 
 	public var ignoreModules:Array<String>;
