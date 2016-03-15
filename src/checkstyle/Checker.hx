@@ -9,7 +9,7 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import sys.io.File;
 
-mport checkstyle.checks.Category;
+import checkstyle.checks.Category;
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 
