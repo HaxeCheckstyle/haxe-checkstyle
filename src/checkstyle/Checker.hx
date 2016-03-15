@@ -121,7 +121,10 @@ class Checker {
 
 	function makeASTs() {
 		asts = [makeAST(baseDefines)];
-		for (combination in defineCombinations) asts.push(makeAST(combination.concat(baseDefines)));
+		for (combination in defineCombinations) {
+			var res = makeAST(combination.concat(baseDefines));
+			if (res != null) asts.push(res);
+		}
 	}
 
 	function makeAST(defines:Array<String>):Ast {
@@ -134,7 +137,12 @@ class Checker {
 			var flagValue = define.split("=");
 			parser.define(flagValue[0], flagValue[1]);
 		}
-		return parser.parse();
+
+		try {
+			return parser.parse();
+		}
+		catch (e:Dynamic) {}
+		return null;
 	}
 
 	public function process(files:Array<CheckFile>, excludesMap:Map<String, Array<String>>) {

@@ -14,6 +14,7 @@ class TestMain {
 
 	public function new() {
 		CompileTime.importPackage("checks");
+		CompileTime.importPackage("misc");
 
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new TokenTreeBuilderTest());
