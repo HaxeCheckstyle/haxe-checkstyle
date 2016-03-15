@@ -516,6 +516,7 @@
 		},
 		{
 			"props": {
+				"moduleTypeMap": {},
 				"ignoreModules": [],
 				"severity": "IGNORE"
 			},
