@@ -19,8 +19,7 @@ class ModifierOrderCheck extends Check {
 			INLINE,
 			DYNAMIC
 		];
-		categories = ["Style", "Clarity"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	override function actualRun() {

@@ -17,7 +17,7 @@ class ReturnCheck extends Check {
 		super(AST);
 		allowEmptyReturn = true;
 		enforceReturnType = false;
-		categories = ["Clarity"];
+		categories = [Category.CLARITY];
 		points = 2;
 	}
 

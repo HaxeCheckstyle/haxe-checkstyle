@@ -12,7 +12,7 @@ class VariableInitialisationCheck extends Check {
 
 	public function new() {
 		super(AST);
-		categories = ["Style", "Clarity"];
+		categories = [Category.STYLE, Category.CLARITY];
 		points = 2;
 	}
 

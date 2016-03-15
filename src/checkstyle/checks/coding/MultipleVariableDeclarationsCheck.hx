@@ -9,7 +9,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Style", "Clarity", "Complexity"];
+		categories = [Category.STYLE, Category.CLARITY, Category.COMPLEXITY];
 		points = 2;
 	}
 

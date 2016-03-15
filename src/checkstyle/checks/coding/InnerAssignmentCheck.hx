@@ -10,7 +10,7 @@ class InnerAssignmentCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Complexity", "Clarity", "Bug Risk"];
+		categories = [Category.COMPLEXITY, Category.CLARITY, Category.BUG_RISK];
 		points = 5;
 	}
 

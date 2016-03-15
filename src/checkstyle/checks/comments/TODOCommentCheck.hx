@@ -11,7 +11,7 @@ class TODOCommentCheck extends Check {
 	public function new() {
 		super(LINE);
 		format = "TODO|FIXME|HACK|XXX|BUG";
-		categories = ["Bug Risk"];
+		categories = [Category.BUG_RISK];
 		points = 8;
 	}
 

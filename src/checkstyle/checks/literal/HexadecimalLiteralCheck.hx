@@ -12,7 +12,7 @@ class HexadecimalLiteralCheck extends Check {
 	public function new() {
 		super(AST);
 		option = "upperCase";
-		categories = ["Style", "Clarity"];
+		categories = [Category.STYLE, Category.CLARITY];
 		points = 1;
 	}
 

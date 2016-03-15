@@ -8,8 +8,7 @@ class TabForAligningCheck extends Check {
 
 	public function new() {
 		super(LINE);
-		categories = ["Style", "Clarity"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	override function actualRun() {

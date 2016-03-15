@@ -17,8 +17,7 @@ class WrapCheckBase extends Check {
 	public function new() {
 		super(TOKEN);
 		option = EOL;
-		categories = ["Style", "Clarity"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	function hasToken(token:String):Bool {

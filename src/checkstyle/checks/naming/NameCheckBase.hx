@@ -19,8 +19,7 @@ class NameCheckBase<T> extends Check {
 		format = "^.*$";
 		tokens = [];
 		ignoreExtern = true;
-		categories = ["Clarity", "Style"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	function hasToken(token:T):Bool {

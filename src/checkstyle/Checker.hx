@@ -9,6 +9,7 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import sys.io.File;
 
+mport checkstyle.checks.Category;
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 
@@ -279,7 +280,7 @@ class Checker {
 			endColumn:0,
 			severity:ERROR,
 			moduleName:"Checker",
-			categories:["Style"],
+			categories:[Category.STYLE],
 			points:1,
 			desc: "",
 			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())

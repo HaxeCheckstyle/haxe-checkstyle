@@ -9,7 +9,7 @@ class SimplifyBooleanExpressionCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Complexity"];
+		categories = [Category.COMPLEXITY];
 		points = 3;
 	}
 

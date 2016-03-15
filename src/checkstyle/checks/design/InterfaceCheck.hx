@@ -14,7 +14,7 @@ class InterfaceCheck extends Check {
 		super(TOKEN);
 		allowMarkerInterfaces = true;
 		allowProperties = false;
-		categories = ["Complexity", "Style"];
+		categories = [Category.COMPLEXITY, Category.STYLE];
 		points = 13;
 	}
 

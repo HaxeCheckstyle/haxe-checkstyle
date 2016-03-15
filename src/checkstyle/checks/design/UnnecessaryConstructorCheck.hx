@@ -9,7 +9,7 @@ class UnnecessaryConstructorCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Bug Risk"];
+		categories = [Category.BUG_RISK];
 		points = 3;
 	}
 

@@ -12,7 +12,7 @@ class NestedIfDepthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = 1;
-		categories = ["Complexity"];
+		categories = [Category.COMPLEXITY];
 		points = 8;
 	}
 
