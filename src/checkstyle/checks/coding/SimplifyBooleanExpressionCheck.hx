@@ -4,11 +4,13 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("SimplifyBooleanExpression")
-@desc("Checks for over-complicated boolean expressions")
+@desc("Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.")
 class SimplifyBooleanExpressionCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Complexity"];
+		points = 3;
 	}
 
 	override function actualRun() {

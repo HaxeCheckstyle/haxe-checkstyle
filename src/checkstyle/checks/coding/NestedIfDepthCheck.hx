@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("NestedIfDepth")
-@desc("Max number of nested if-else blocks (default 1)")
+@desc("Restricts nested `if-else` blocks to a specified depth (default = 1).")
 class NestedIfDepthCheck extends Check {
 
 	public var max:Int;
@@ -12,6 +12,8 @@ class NestedIfDepthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = 1;
+		categories = ["Complexity"];
+		points = 8;
 	}
 
 	override function actualRun() {

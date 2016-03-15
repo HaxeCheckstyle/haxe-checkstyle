@@ -2,8 +2,8 @@ package checks;
 
 import haxe.PosInfos;
 
-import checkstyle.LintMessage;
-import checkstyle.LintFile;
+import checkstyle.CheckMessage;
+import checkstyle.CheckFile;
 import checkstyle.reporter.IReporter;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
@@ -66,11 +66,11 @@ class TestReporter implements IReporter {
 
 	public function finish() {}
 
-	public function fileStart(f:LintFile) {}
+	public function fileStart(f:CheckFile) {}
 
-	public function fileFinish(f:LintFile) {}
+	public function fileFinish(f:CheckFile) {}
 
-	public function addMessage(m:LintMessage) {
+	public function addMessage(m:CheckMessage) {
 		message = m.message;
 	}
 }

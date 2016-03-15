@@ -180,7 +180,7 @@
 		},
 		{
 			"props": {
-				"max": 160,
+				"max": 320,
 				"severity": "INFO"
 			},
 			"type": "LineLength"
@@ -209,12 +209,7 @@
 		},
 		{
 			"props": {
-				"ignoreNumbers": [
-					-1,
-					0,
-					1,
-					2
-				],
+				"ignoreNumbers": [-1, 0, 1, 2, 3, 5, 8, 13, 21, 34],
 				"severity": "INFO"
 			},
 			"type": "MagicNumber"

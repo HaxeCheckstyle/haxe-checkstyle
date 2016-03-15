@@ -2,14 +2,15 @@ package checkstyle;
 
 import checkstyle.ChecksInfo;
 import checkstyle.Config;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.Check;
-import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
 import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
+import checkstyle.reporter.CodeClimateReporter;
+import checkstyle.reporter.ExitCodeReporter;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;
@@ -38,6 +39,8 @@ class Main {
 	var paths:Array<String>;
 	var allExcludes:Array<String>;
 	var excludesMap:Map<String, Array<String>>;
+	var configPath:String;
+	var excludePath:String;
 
 	function new() {
 		info = new ChecksInfo();
@@ -46,12 +49,11 @@ class Main {
 		allExcludes = [];
 		excludesMap = new Map();
 		exitCode = 0;
+		configPath = null;
+		excludePath = null;
 	}
 
 	function run(args:Array<String>) {
-		var configPath:String = null;
-		var excludePath:String = null;
-
 		var argHandler = Args.generate([
 			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
@@ -79,6 +81,23 @@ class Main {
 		}
 		argHandler.parse(args);
 
+		if (REPORT_TYPE == "codeclimate") {
+			var defaultConfig:CodeclimateConfig = Json.parse(File.getContent("/config.json"));
+			if (defaultConfig.include_paths != null && defaultConfig.include_paths.length > 0) {
+				for (s in defaultConfig.include_paths) {
+					if (s != ".codeclimate.yml") paths.push("/code/" + s);
+				}
+			}
+			else paths.push("/code");
+
+			if (defaultConfig.config != null) configPath = defaultConfig.config;
+			if (defaultConfig.exclude != null) excludePath = defaultConfig.exclude;
+			if (paths.length > 0) processArgs();
+		}
+		else processArgs();
+	}
+
+	function processArgs() {
 		if (configPath == null && FileSystem.exists(DEFAULT_CONFIG) && !FileSystem.isDirectory(DEFAULT_CONFIG)) {
 			configPath = DEFAULT_CONFIG;
 		}
@@ -94,8 +113,8 @@ class Main {
 		else start();
 	}
 
-	function loadConfig(configPath:String) {
-		var config:Config = Json.parse(File.getContent(configPath));
+	function loadConfig(path:String) {
+		var config:Config = Json.parse(File.getContent(path));
 		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
 		for (checkConf in config.checks) {
@@ -113,8 +132,8 @@ class Main {
 		}
 	}
 
-	function loadExcludeConfig(excludeConfigPath:String) {
-		var config:Config = Json.parse(File.getContent(excludeConfigPath));
+	function loadExcludeConfig(path:String) {
+		var config:Config = Json.parse(File.getContent(path));
 		var excludes = Reflect.fields(config);
 		for (exclude in excludes) {
 			createExcludeMapElement(exclude);
@@ -158,9 +177,7 @@ class Main {
 			}
 			Reflect.setField(check, prop, val);
 		}
-		if (defaultSeverity != null && !props.contains("severity")) {
-			check.severity = defaultSeverity;
-		}
+		if (defaultSeverity != null && !props.contains("severity")) check.severity = defaultSeverity;
 	}
 
 	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
@@ -202,6 +219,7 @@ class Main {
 			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE, NO_STYLE);
 			case "json": new JSONReporter(numFiles, JSON_PATH, NO_STYLE);
 			case "text": new TextReporter(numFiles, TEXT_PATH, NO_STYLE);
+			case "codeclimate": new CodeClimateReporter(numFiles, null, NO_STYLE);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}
@@ -225,6 +243,7 @@ class Main {
 	function generateDefaultConfig(path) {
 		addAllChecks();
 
+		var propsNotAllowed:Array<String> = ["moduleName", "severity", "type", "categories", "points", "desc"];
 		var config = getEmptyConfig();
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
@@ -234,7 +253,7 @@ class Main {
 				}
 			};
 			for (prop in Reflect.fields(check)) {
-				if (prop == "moduleName" || prop == "severity" || prop == "type") continue;
+				if (propsNotAllowed.contains(prop)) continue;
 				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
 			}
 			config.checks.push(checkConfig);
@@ -256,7 +275,7 @@ class Main {
 		files.sortStrings();
 
 		var i:Int = 0;
-		var toProcess:Array<LintFile> = [for (file in files) {name:file, content:null, index:i++}];
+		var toProcess:Array<CheckFile> = [for (file in files) { name:file, content:null, index:i++ }];
 
 		checker.addReporter(createReporter(files.length));
 		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
@@ -306,4 +325,11 @@ class Main {
 		if (oldCwd != null) Sys.setCwd(oldCwd);
 		Sys.exit(exitCode);
 	}
+}
+
+typedef CodeclimateConfig = {
+	@:optional var enabled:Bool;
+	@:optional var include_paths:Array<String>;
+	@:optional var config:String;
+	@:optional var exclude:String;
 }

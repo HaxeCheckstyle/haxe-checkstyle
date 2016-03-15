@@ -5,7 +5,7 @@ import haxe.macro.Expr;
 using Lambda;
 
 @name("CyclomaticComplexity")
-@desc("McCabe simplified cyclomatic complexity check")
+@desc("Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property.")
 class CyclomaticComplexityCheck extends Check {
 
 	static var DEFAULT_COMPLEXITY_WARNING:Int = 20;
@@ -19,6 +19,8 @@ class CyclomaticComplexityCheck extends Check {
 			{ severity : "WARNING", complexity : DEFAULT_COMPLEXITY_WARNING },
 			{ severity : "ERROR", complexity : DEFAULT_COMPLEXITY_ERROR }
 		];
+		categories = ["Complexity"];
+		points = 13;
 	}
 
 	override function actualRun() {

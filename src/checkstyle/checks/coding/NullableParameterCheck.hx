@@ -5,7 +5,7 @@ import haxe.macro.Expr.Position;
 using haxe.macro.ExprTools;
 
 @name("NullableParameter")
-@desc("Enforces a style for nullable parameters")
+@desc("Enforces a style for nullable parameters.")
 class NullableParameterCheck extends Check {
 
 	public var option:NullableParameterCheckOption;

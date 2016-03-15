@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("CatchParameterName")
-@desc("Checks that catch parameter names conform to a format specified by the format property")
+@desc("Checks that catch parameter names conform to a format specified by the `format` property.")
 class CatchParameterNameCheck extends Check {
 
 	public var format:String;

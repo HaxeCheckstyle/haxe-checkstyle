@@ -17,7 +17,7 @@ using StringTools;
 
 class Checker {
 
-	public var file:LintFile;
+	public var file:CheckFile;
 	public var lines:Array<String>;
 	public var tokens:Array<Token>;
 	public var ast:Ast;
@@ -121,7 +121,10 @@ class Checker {
 
 	function makeASTs() {
 		asts = [makeAST(baseDefines)];
-		for (combination in defineCombinations) asts.push(makeAST(combination.concat(baseDefines)));
+		for (combination in defineCombinations) {
+			var res = makeAST(combination.concat(baseDefines));
+			if (res != null) asts.push(res);
+		}
 	}
 
 	function makeAST(defines:Array<String>):Ast {
@@ -134,10 +137,15 @@ class Checker {
 			var flagValue = define.split("=");
 			parser.define(flagValue[0], flagValue[1]);
 		}
-		return parser.parse();
+
+		try {
+			return parser.parse();
+		}
+		catch (e:Dynamic) {}
+		return null;
 	}
 
-	public function process(files:Array<LintFile>, excludesMap:Map<String, Array<String>>) {
+	public function process(files:Array<CheckFile>, excludesMap:Map<String, Array<String>>) {
 		excludes = excludesMap;
 		var advanceFrame = function() {};
 		#if hxtelemetry
@@ -157,17 +165,17 @@ class Checker {
 		advanceFrame();
 	}
 
-	function loadFileContent(lintFile:LintFile) {
+	function loadFileContent(lintFile:CheckFile) {
 		// unittests set content before running Checker
 		// real checks load content here
 		if (lintFile.content == null) lintFile.content = File.getContent(lintFile.name);
 	}
 
-	function unloadFileContent(lintFile:LintFile) {
+	function unloadFileContent(lintFile:CheckFile) {
 		lintFile.content = null;
 	}
 
-	function createContext(lintFile:LintFile):Bool {
+	function createContext(lintFile:CheckFile):Bool {
 		this.file = lintFile;
 		for (reporter in reporters) reporter.fileStart(file);
 		try {
@@ -209,7 +217,7 @@ class Checker {
 		for (reporter in reporters) reporter.fileFinish(file);
 	}
 
-	function filterDuplicateMessages(messages:Array<LintMessage>):Array<LintMessage> {
+	function filterDuplicateMessages(messages:Array<CheckMessage>):Array<CheckMessage> {
 		var filteredMessages = [];
 		for (message in messages) {
 			var anyDuplicates = false;
@@ -224,7 +232,7 @@ class Checker {
 		return filteredMessages;
 	}
 
-	function areMessagesSame(message1:LintMessage, message2:LintMessage):Bool {
+	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
 		return
 			message1.fileName == message2.fileName &&
 			message1.message == message2.message &&
@@ -235,7 +243,7 @@ class Checker {
 			message1.moduleName == message2.moduleName;
 	}
 
-	function runCheck(check:Check):Array<LintMessage> {
+	function runCheck(check:Check):Array<CheckMessage> {
 		try {
 			if (checkForExclude(check.getModuleName())) return [];
 			return check.run(this);
@@ -263,7 +271,7 @@ class Checker {
 		return false;
 	}
 
-	function getErrorMessage(e:Dynamic, fileName:String, step:String):LintMessage {
+	function getErrorMessage(e:Dynamic, fileName:String, step:String):CheckMessage {
 		return {
 			fileName:fileName,
 			line:1,
@@ -271,6 +279,9 @@ class Checker {
 			endColumn:0,
 			severity:ERROR,
 			moduleName:"Checker",
+			categories:["Style"],
+			points:1,
+			desc: "",
 			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())
 		};
 	}

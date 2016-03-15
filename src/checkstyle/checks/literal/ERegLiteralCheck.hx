@@ -4,11 +4,13 @@ import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 
 @name("ERegLiteral", "ERegInstantiation")
-@desc("Checks for usage of EReg literals (between ~/ and /) instead of new")
+@desc("Checks for usage of EReg literals (between ~/ and /) instead of new.")
 class ERegLiteralCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

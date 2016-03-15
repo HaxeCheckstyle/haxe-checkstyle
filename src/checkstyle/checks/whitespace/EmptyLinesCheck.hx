@@ -3,7 +3,7 @@ package checkstyle.checks.whitespace;
 using StringTools;
 
 @name("EmptyLines")
-@desc("Checks for consecutive empty lines")
+@desc("Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.")
 class EmptyLinesCheck extends Check {
 
 	public var max:Int;
@@ -23,6 +23,8 @@ class EmptyLinesCheck extends Check {
 		requireEmptyLineAfterClass = true;
 		requireEmptyLineAfterInterface = true;
 		requireEmptyLineAfterAbstract = true;
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

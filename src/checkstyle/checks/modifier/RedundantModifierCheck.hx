@@ -7,7 +7,7 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
 @name("RedundantModifier", "PublicPrivate")
-@desc("Checks for redundant modifiers")
+@desc("Checks for redundant modifiers.")
 class RedundantModifierCheck extends Check {
 
 	public var enforcePublicPrivate:Bool;
@@ -15,6 +15,8 @@ class RedundantModifierCheck extends Check {
 	public function new() {
 		super(AST);
 		enforcePublicPrivate = false;
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

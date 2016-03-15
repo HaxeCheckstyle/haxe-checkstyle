@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("NestedTryDepth")
-@desc("Max number of nested try blocks (default 1)")
+@desc("Restricts nested `try` blocks to a specified depth (default = 1).")
 class NestedTryDepthCheck extends Check {
 
 	public var max:Int;
@@ -12,6 +12,8 @@ class NestedTryDepthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = 1;
+		categories = ["Complexity"];
+		points = 5;
 	}
 
 	override function actualRun() {

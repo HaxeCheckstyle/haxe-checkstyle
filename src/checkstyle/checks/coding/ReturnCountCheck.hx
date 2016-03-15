@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("ReturnCount")
-@desc("Restricts the number of return statements in functions (2 by default)")
+@desc("Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.")
 class ReturnCountCheck extends Check {
 
 	public var max:Int;
@@ -14,6 +14,8 @@ class ReturnCountCheck extends Check {
 		super(TOKEN);
 		max = 2;
 		ignoreFormat = "^$";
+		categories = ["Complexity"];
+		points = 5;
 	}
 
 	override function actualRun() {

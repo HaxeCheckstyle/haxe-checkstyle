@@ -3,7 +3,7 @@ package checkstyle.checks.comments;
 import haxeparser.Data.Token;
 
 @name("TODOComment")
-@desc("A check for TODO/FIXME/HACK/XXX/BUG comments.")
+@desc("A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised bu changing `format` property.")
 class TODOCommentCheck extends Check {
 
 	public var format:String;
@@ -11,6 +11,8 @@ class TODOCommentCheck extends Check {
 	public function new() {
 		super(LINE);
 		format = "TODO|FIXME|HACK|XXX|BUG";
+		categories = ["Bug Risk"];
+		points = 8;
 	}
 
 	override function actualRun() {

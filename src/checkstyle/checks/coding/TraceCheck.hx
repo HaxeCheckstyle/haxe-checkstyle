@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("Trace")
-@desc("Checks for trace calls in code")
+@desc("Checks for trace calls in code.")
 class TraceCheck extends Check {
 
 	public function new() {

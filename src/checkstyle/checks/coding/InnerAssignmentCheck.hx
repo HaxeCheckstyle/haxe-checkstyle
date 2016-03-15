@@ -5,11 +5,13 @@ import haxe.macro.Expr;
 import haxeparser.Data.TokenDef;
 
 @name("InnerAssignment")
-@desc("Checks for assignments in subexpressions")
+@desc("Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.")
 class InnerAssignmentCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Complexity", "Clarity", "Bug Risk"];
+		points = 5;
 	}
 
 	override function actualRun() {

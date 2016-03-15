@@ -65,5 +65,8 @@
 	],
 	"NestedForDepth": [
 		"TestMain"
+	],
+	"MemberName": [
+		"checkstyle.Main"
 	]
 }

@@ -3,11 +3,13 @@ package checkstyle.checks.whitespace;
 using checkstyle.utils.StringUtils;
 
 @name("TabForAligning")
-@desc("Checks if there are any tabs in the middle of a line")
+@desc("Checks if there are any tabs in the middle of a line.")
 class TabForAligningCheck extends Check {
 
 	public function new() {
 		super(LINE);
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	override function actualRun() {

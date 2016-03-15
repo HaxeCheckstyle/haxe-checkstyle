@@ -4,7 +4,7 @@ import checkstyle.utils.ExprUtils;
 import haxeparser.Data;
 
 @name("LocalVariableName")
-@desc("Checks the local variable names")
+@desc("Checks that the local variable names conform to a format specified by the `format` property.")
 class LocalVariableNameCheck extends NameCheckBase<String> {
 
 	public function new() {

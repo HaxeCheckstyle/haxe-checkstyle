@@ -1,6 +1,6 @@
 package checkstyle.reporter;
 
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 import haxe.io.Path;
 import sys.FileSystem;
 import sys.io.File;
@@ -60,11 +60,11 @@ class BaseReporter implements IReporter {
 		else Sys.println(styleText("No issues found.", Style.BOLD));
 	}
 
-	public function fileStart(f:LintFile) {}
+	public function fileStart(f:CheckFile) {}
 
-	public function fileFinish(f:LintFile) {}
+	public function fileFinish(f:CheckFile) {}
 
-	public function addMessage(m:LintMessage) {}
+	public function addMessage(m:CheckMessage) {}
 
 	function styleText(s:String, style:Style):String {
 		if (Sys.systemName() == "Windows" || noStyle) return s;
@@ -80,7 +80,7 @@ class BaseReporter implements IReporter {
 		}
 	}
 
-	function getMessage(m:LintMessage):StringBuf {
+	function getMessage(m:CheckMessage):StringBuf {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);
 		sb.add(':');

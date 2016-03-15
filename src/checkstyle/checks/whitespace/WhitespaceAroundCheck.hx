@@ -9,7 +9,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("WhitespaceAround")
-@desc("Checks that a token is surrounded by whitespace")
+@desc("Checks that a token is surrounded by whitespace.")
 class WhitespaceAroundCheck extends Check {
 
 	public var tokens:Array<String>;
@@ -50,6 +50,9 @@ class WhitespaceAroundCheck extends Check {
 			"^=",
 			"=>"
 		];
+
+		categories = ["Style", "Clarity"];
+		points = 1;
 	}
 
 	function hasToken(token:String):Bool {

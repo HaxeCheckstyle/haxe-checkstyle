@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("Interface")
-@desc("Checks and enforces interface style (allow properties and methods or just methods")
+@desc("Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.")
 class InterfaceCheck extends Check {
 
 	public var allowMarkerInterfaces:Bool;
@@ -14,6 +14,8 @@ class InterfaceCheck extends Check {
 		super(TOKEN);
 		allowMarkerInterfaces = true;
 		allowProperties = false;
+		categories = ["Complexity", "Style"];
+		points = 13;
 	}
 
 	override function actualRun() {

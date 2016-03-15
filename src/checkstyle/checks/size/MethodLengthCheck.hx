@@ -6,7 +6,7 @@ import haxe.macro.Expr.Field;
 import haxe.macro.Expr.Function;
 
 @name("MethodLength")
-@desc("Checks for long methods (default 50 lines)")
+@desc("Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.")
 class MethodLengthCheck extends Check {
 
 	static var DEFAULT_MAX_LENGTH:Int = 50;
@@ -16,6 +16,8 @@ class MethodLengthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = DEFAULT_MAX_LENGTH;
+		categories = ["Complexity", "Clarity"];
+		points = 8;
 	}
 
 	override public function actualRun() {

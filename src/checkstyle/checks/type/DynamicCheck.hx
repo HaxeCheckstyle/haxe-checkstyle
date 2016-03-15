@@ -5,11 +5,13 @@ import haxeparser.Data;
 import checkstyle.utils.ComplexTypeUtils;
 
 @name("Dynamic")
-@desc("Checks for use of Dynamic type")
+@desc("Checks for use of Dynamic type anywhere in the code.")
 class DynamicCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Clarity", "Bug Risk", "Complexity"];
+		points = 3;
 	}
 
 	override function actualRun() {

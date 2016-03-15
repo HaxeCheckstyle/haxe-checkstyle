@@ -7,11 +7,13 @@ import haxe.macro.Expr;
 using checkstyle.utils.FieldUtils;
 
 @name("Anonymous")
-@desc("Anonymous type structures check")
+@desc("Check to fins any anonymous type structures used.")
 class AnonymousCheck extends Check {
 
 	public function new() {
 		super(AST);
+		categories = ["Style", "Clarity", "Bug Risk", "Complexity"];
+		points = 8;
 	}
 
 	override function actualRun() {

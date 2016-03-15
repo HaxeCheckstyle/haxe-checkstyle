@@ -2,7 +2,7 @@ package checkstyle.checks;
 
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 import haxeparser.Data;
 
 using checkstyle.utils.ArrayUtils;
@@ -12,17 +12,25 @@ class Check {
 
 	public var severity:SeverityLevel;
 	public var type(default, null):CheckType;
+	public var categories:Array<String>;
+	public var points:Int;
+	public var desc:String;
 
-	var messages:Array<LintMessage>;
+	var messages:Array<CheckMessage>;
 	var moduleName:String;
 	var checker:Checker;
 
+	// Categories: Bug Risk, Clarity, Compatibility, Complexity, Duplication, Performance, Security, Style
+	// Points: Fibonacci - 1, 2, 3, 5, 8, 13, 21, 34, 55
 	public function new(type:CheckType) {
 		this.type = type;
 		severity = SeverityLevel.INFO;
+		categories = ["Style"];
+		points = 1;
+		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
-	public function run(checker:Checker):Array<LintMessage> {
+	public function run(checker:Checker):Array<CheckMessage> {
 		this.checker = checker;
 		messages = [];
 		if (severity != SeverityLevel.IGNORE) {
@@ -56,11 +64,14 @@ class Check {
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
+			desc:desc,
 			line:l,
 			startColumn:startColumn,
 			endColumn:endColumn,
 			severity:sev,
-			moduleName:getModuleName()
+			moduleName:getModuleName(),
+			categories:categories,
+			points:points
 		});
 	}
 

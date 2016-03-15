@@ -3,11 +3,13 @@ package checkstyle.checks.coding;
 import checkstyle.token.TokenTree;
 
 @name("SimplifyBooleanReturn")
-@desc("Checks for over-complicated boolean return statements")
+@desc("Checks for over-complicated boolean return statements.")
 class SimplifyBooleanReturnCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Complexity"];
+		points = 2;
 	}
 
 	override function actualRun() {

@@ -4,11 +4,13 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("AvoidStarImport")
-@desc("Checks for .* import and using directives")
+@desc("Checks for .* import and using directives.")
 class AvoidStarImportCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		categories = ["Style", "Clarity"];
+		points = 2;
 	}
 
 	override function actualRun() {

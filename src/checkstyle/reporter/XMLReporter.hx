@@ -48,7 +48,7 @@ class XMLReporter extends BaseReporter {
 		return escapeXML(s);
 	}
 
-	override public function fileStart(f:LintFile) {
+	override public function fileStart(f:CheckFile) {
 		var sb = new StringBuf();
 		sb.add("\t<file name=\"");
 		sb.add(encode(f.name));
@@ -56,7 +56,7 @@ class XMLReporter extends BaseReporter {
 		if (file != null) report.add(sb.toString());
 	}
 
-	override public function fileFinish(f:LintFile) {
+	override public function fileFinish(f:CheckFile) {
 		var sb = new StringBuf();
 		sb.add("\t</file>\n");
 		if (file != null) report.add(sb.toString());
@@ -72,7 +72,7 @@ class XMLReporter extends BaseReporter {
 		return replace(string, ENTITY_RE);
 	}
 
-	override public function addMessage(m:LintMessage) {
+	override public function addMessage(m:CheckMessage) {
 		var sb:StringBuf = new StringBuf();
 
 		sb.add("\t\t<error line=\"");

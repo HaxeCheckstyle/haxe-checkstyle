@@ -4,7 +4,7 @@ import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("NestedForDepth")
-@desc("Max number of nested for blocks (default 1)")
+@desc("Restricts nested `for` blocks to a specified depth (default = 1).")
 class NestedForDepthCheck extends Check {
 
 	public var max:Int;
@@ -12,6 +12,8 @@ class NestedForDepthCheck extends Check {
 	public function new() {
 		super(AST);
 		max = 1;
+		categories = ["Complexity"];
+		points = 8;
 	}
 
 	override function actualRun() {
