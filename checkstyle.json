@@ -180,7 +180,7 @@
 		},
 		{
 			"props": {
-				"max": 160,
+				"max": 320,
 				"severity": "INFO"
 			},
 			"type": "LineLength"
