@@ -51,8 +51,7 @@ class WhitespaceAroundCheck extends Check {
 			"=>"
 		];
 
-		categories = ["Style", "Clarity"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	function hasToken(token:String):Bool {

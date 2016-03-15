@@ -19,7 +19,7 @@ class UnusedImportCheck extends Check {
 		super(TOKEN);
 		ignoreModules = [];
 		moduleTypeMap = {};
-		categories = ["Style", "Clarity", "Duplication"];
+		categories = [Category.STYLE, Category.CLARITY, Category.DUPLICATION];
 		points = 1;
 	}
 

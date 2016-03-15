@@ -9,7 +9,7 @@ class AvoidInlineConditionalsCheck extends Check {
 
 	public function new() {
 		super(AST);
-		categories = ["Complexity"];
+		categories = [Category.COMPLEXITY];
 		points = 3;
 	}
 

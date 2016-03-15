@@ -8,7 +8,7 @@ class SimplifyBooleanReturnCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Complexity"];
+		categories = [Category.COMPLEXITY];
 		points = 2;
 	}
 
@@ -24,7 +24,7 @@ class SimplifyBooleanReturnCheck extends Check {
 			var thenStatement = token.childs[1];
 
 			if (canReturnOnlyBooleanLiteral(thenStatement) && canReturnOnlyBooleanLiteral(elseStatement)) {
-				logPos('Conditional logic can be removed', token.pos);
+				logPos("Conditional logic can be removed", token.pos);
 			}
 		}
 	}

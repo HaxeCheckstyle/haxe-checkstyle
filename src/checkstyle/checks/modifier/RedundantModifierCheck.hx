@@ -15,7 +15,7 @@ class RedundantModifierCheck extends Check {
 	public function new() {
 		super(AST);
 		enforcePublicPrivate = false;
-		categories = ["Style", "Clarity"];
+		categories = [Category.STYLE, Category.CLARITY];
 		points = 1;
 	}
 

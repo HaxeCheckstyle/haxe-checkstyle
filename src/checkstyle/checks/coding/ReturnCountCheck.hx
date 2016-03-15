@@ -14,7 +14,7 @@ class ReturnCountCheck extends Check {
 		super(TOKEN);
 		max = 2;
 		ignoreFormat = "^$";
-		categories = ["Complexity"];
+		categories = [Category.COMPLEXITY];
 		points = 5;
 	}
 

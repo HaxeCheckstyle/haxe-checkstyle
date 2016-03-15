@@ -19,7 +19,7 @@ class MultipleStringLiteralsCheck extends Check {
 		ignore = "^\\s+$";
 		allowDuplicates = 2;
 		minLength = 2;
-		categories = ["Style", "Clarity"];
+		categories = [Category.STYLE, Category.CLARITY];
 		points = 2;
 	}
 

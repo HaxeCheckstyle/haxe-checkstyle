@@ -22,7 +22,7 @@ class HiddenFieldCheck extends Check {
 		ignoreConstructorParameter = true;
 		ignoreSetter = true;
 		ignoreFormat = "^(main|run)$";
-		categories = ["Complexity", "Clarity", "Bug Risk"];
+		categories = [Category.COMPLEXITY, Category.CLARITY, Category.BUG_RISK];
 		points = 5;
 	}
 

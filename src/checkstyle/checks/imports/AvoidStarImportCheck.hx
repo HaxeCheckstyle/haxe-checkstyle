@@ -9,7 +9,7 @@ class AvoidStarImportCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		categories = ["Style", "Clarity"];
+		categories = [Category.STYLE, Category.CLARITY];
 		points = 2;
 	}
 

@@ -12,7 +12,7 @@ class Check {
 
 	public var severity:SeverityLevel;
 	public var type(default, null):CheckType;
-	public var categories:Array<String>;
+	public var categories:Array<Category>;
 	public var points:Int;
 	public var desc:String;
 
@@ -20,12 +20,11 @@ class Check {
 	var moduleName:String;
 	var checker:Checker;
 
-	// Categories: Bug Risk, Clarity, Compatibility, Complexity, Duplication, Performance, Security, Style
-	// Points: Fibonacci - 1, 2, 3, 5, 8, 13, 21, 34, 55
 	public function new(type:CheckType) {
 		this.type = type;
 		severity = SeverityLevel.INFO;
-		categories = ["Style"];
+		categories = [Category.STYLE];
+		// Points: Fibonacci - 1, 2, 3, 5, 8, 13, 21, 34, 55
 		points = 1;
 		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}

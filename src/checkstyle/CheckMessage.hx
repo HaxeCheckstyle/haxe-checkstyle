@@ -1,5 +1,7 @@
 package checkstyle;
 
+import checkstyle.checks.Category;
+
 @:enum
 abstract SeverityLevel(String) from String {
 	var INFO = "INFO";
@@ -17,6 +19,6 @@ typedef CheckMessage = {
 	var endColumn:Int;
 	var severity:SeverityLevel;
 	var moduleName:String;
-	var categories:Array<String>;
+	var categories:Array<Category>;
 	var points:Int;
 }

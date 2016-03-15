@@ -10,7 +10,7 @@ class DynamicCheck extends Check {
 
 	public function new() {
 		super(AST);
-		categories = ["Clarity", "Bug Risk", "Complexity"];
+		categories = [Category.CLARITY, Category.BUG_RISK, Category.COMPLEXITY];
 		points = 3;
 	}
 

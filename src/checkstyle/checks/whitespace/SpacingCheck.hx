@@ -29,9 +29,7 @@ class SpacingCheck extends Check {
 		spaceSwitchCase = true;
 		spaceCatch = true;
 		ignoreRangeOperator = true;
-
-		categories = ["Style", "Clarity"];
-		points = 1;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	override function actualRun() {

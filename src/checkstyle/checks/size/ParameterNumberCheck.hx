@@ -18,7 +18,7 @@ class ParameterNumberCheck extends Check {
 		super(AST);
 		max = DEFAULT_MAX_PARAMS;
 		ignoreOverriddenMethods = false;
-		categories = ["Complexity", "Clarity"];
+		categories = [Category.COMPLEXITY, Category.CLARITY];
 		points = 5;
 	}
 

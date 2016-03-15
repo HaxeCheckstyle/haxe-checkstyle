@@ -11,7 +11,7 @@ class LineLengthCheck extends Check {
 	public function new() {
 		super(LINE);
 		max = DEFAULT_MAX_LENGTH;
-		categories = ["Complexity", "Clarity"];
+		categories = [Category.COMPLEXITY, Category.CLARITY];
 		points = 2;
 	}
 

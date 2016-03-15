@@ -12,7 +12,7 @@ class AnonymousCheck extends Check {
 
 	public function new() {
 		super(AST);
-		categories = ["Style", "Clarity", "Bug Risk", "Complexity"];
+		categories = [Category.STYLE, Category.CLARITY, Category.BUG_RISK, Category.COMPLEXITY];
 		points = 8;
 	}
 
