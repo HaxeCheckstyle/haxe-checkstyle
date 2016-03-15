@@ -5,10 +5,10 @@ import haxe.Json;
 
 class CodeClimateReporter extends BaseReporter {
 
-	static var INFO:String = "info";
-	static var NORMAL:String = "normal";
-	static var CRITICAL:String = "critical";
-	static var REMEDIATION_BASE:Int = 50000;
+	static inline var INFO:String = "info";
+	static inline var NORMAL:String = "normal";
+	static inline var CRITICAL:String = "critical";
+	static inline var REMEDIATION_BASE:Int = 50000;
 
 	override public function start() {}
 
