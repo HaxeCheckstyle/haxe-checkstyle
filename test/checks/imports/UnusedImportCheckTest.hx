@@ -12,6 +12,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 	static inline var MSG_UNUSED_IN:String = "Unused import haxe.checkstyle.Check in Base detected";
 	static inline var MSG_UNUSED_IN_STATIC:String = "Unused import String.fromCharCode in f detected";
 	static inline var MSG_SAME_PACKAGE_IMPORT:String = "Detected import checkstyle.checks.Checker from same package checkstyle.checks";
+	static inline var MSG_UNUSED_TYPEMAP:String = "Unused import checkstyle.checks.Checker detected";
 
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();
@@ -35,6 +36,23 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 	public function testSamePackageImport() {
 		var check = new UnusedImportCheck();
 		assertMsg(check, SAME_PACKAGE_IMPORT, MSG_SAME_PACKAGE_IMPORT);
+	}
+
+	public function testTypeMap() {
+		var check = new UnusedImportCheck();
+		assertMsg(check, SAME_PACKAGE_TYPE_MAP, MSG_SAME_PACKAGE_IMPORT);
+		assertMsg(check, IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
+		assertMsg(check, UNUSED_IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
+
+		check.moduleTypeMap = {
+			"checkstyle.checks.Checker": [
+				"CheckBase",
+				"UnusedImportCheck"
+			]
+		};
+		assertNoMsg(check, SAME_PACKAGE_TYPE_MAP);
+		assertNoMsg(check, IMPORT_TYPE_MAP);
+		assertMsg(check, UNUSED_IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
 	}
 }
 
@@ -184,6 +202,42 @@ abstract UnusedImportCheckTests(String) to String {
 
 		static function main():Checker {
 			return new UnusedImportCheck ();
+		}
+	}";
+
+	var SAME_PACKAGE_TYPE_MAP = "
+	package checkstyle.checks;
+
+	import checkstyle.checks.Checker;
+
+	abstractAndClass Main {
+
+		static function main():Check {
+			return new UnusedImportCheck ();
+		}
+	}";
+
+	var IMPORT_TYPE_MAP = "
+	package checkstyle.test;
+
+	import checkstyle.checks.Checker;
+
+	abstractAndClass Main {
+
+		static function main():CheckBase {
+			return new UnusedImportCheck ();
+		}
+	}";
+
+	var UNUSED_IMPORT_TYPE_MAP = "
+	package checkstyle.test;
+
+	import checkstyle.checks.Checker;
+
+	abstractAndClass Main {
+
+		static function main():Check {
+			return new OtherCheck ();
 		}
 	}";
 }

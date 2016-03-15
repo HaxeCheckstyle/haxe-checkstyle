@@ -3,7 +3,8 @@
 	"Dynamic": [
 		"checkstyle.Main",
 		"checkstyle.Checker",
-		"checkstyle.ChecksInfo"
+		"checkstyle.ChecksInfo",
+		"checkstyle.checks.imports.UnusedImportCheck"
 	],
 	"EmptyLines": [
 		"checks.whitespace.EmptyLinesCheckTest"

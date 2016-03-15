@@ -13,10 +13,12 @@ using checkstyle.utils.ArrayUtils;
 class UnusedImportCheck extends Check {
 
 	public var ignoreModules:Array<String>;
+	public var moduleTypeMap:Dynamic;
 
 	public function new() {
 		super(TOKEN);
 		ignoreModules = [];
+		moduleTypeMap = {};
 		categories = ["Style", "Clarity", "Duplication"];
 		points = 1;
 	}
@@ -41,7 +43,7 @@ class UnusedImportCheck extends Check {
 			if ((typeName == null) || (moduleName == null)) continue;
 			if (ignoreModules.contains(moduleName)) continue;
 
-			if ((packageName != null) && ('$packageName.$typeName' == moduleName)) {
+			if ((packageName != null) && (!hasMapping(moduleName)) && ('$packageName.$typeName' == moduleName)) {
 				logPos('Detected import $moduleName from same package $packageName', imp.pos);
 				continue;
 			}
@@ -113,7 +115,7 @@ class UnusedImportCheck extends Check {
 	function checkUsage(typeName:String, moduleName:String, importTok:TokenTree, idents:Array<TokenTree>) {
 		for (ident in idents) {
 			var name:String = TokenDefPrinter.print(ident.tok);
-			if (typeName != name) continue;
+			if (!checkName(typeName, moduleName, name)) continue;
 			switch (ident.parent.tok) {
 				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef): continue;
 				case Dot: continue;
@@ -121,5 +123,21 @@ class UnusedImportCheck extends Check {
 			}
 		}
 		logPos('Unused import $moduleName detected', importTok.pos);
+	}
+
+	function hasMapping(moduleName:String):Bool {
+		var mappedTypes:Array<String> = Reflect.field(moduleTypeMap, moduleName);
+		return ((mappedTypes != null) && (mappedTypes.length > 0));
+	}
+
+	function checkName(typeName:String, moduleName:String, identName:String):Bool {
+		var mappedTypes:Array<String> = Reflect.field(moduleTypeMap, moduleName);
+		if ((mappedTypes == null) || (mappedTypes.length <= 0)) {
+			return typeName == identName;
+		}
+		for (mappedType in mappedTypes) {
+			if (mappedType == identName) return true;
+		}
+		return typeName == identName;
 	}
 }
