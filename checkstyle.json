@@ -523,10 +523,16 @@
 					"haxe.macro.Expr",
 					"haxe.macro.Expr.Access",
 					"haxe.macro.Expr.Field",
-					"haxe.macro.Expr.Function",
-					"checkstyle.ChecksInfo",
-					"checkstyle.Config"
-				]
+					"haxe.macro.Expr.Function"
+				],
+				"moduleTypeMap": {
+					"checkstyle.Config": [
+						"CheckConfig"
+					],
+					"checkstyle.ChecksInfo": [
+						"CheckInfo"
+					]
+				}
 			},
 			"type": "UnusedImport"
 		},
