@@ -108,16 +108,19 @@ class Checker {
 	}
 
 	function makeTokens() {
-		var code = file.content;
-		tokens = [];
-		tokenTree = null;
-		var lexer = new HaxeLexer(byte.ByteData.ofString(code), file.name);
-		var t:Token = lexer.token(HaxeLexer.tok);
+		try {
+			var code = file.content;
+			tokens = [];
+			tokenTree = null;
+			var lexer = new HaxeLexer(byte.ByteData.ofString(code), file.name);
+			var t:Token = lexer.token(HaxeLexer.tok);
 
-		while (t.tok != Eof) {
-			tokens.push(t);
-			t = lexer.token(haxeparser.HaxeLexer.tok);
+			while (t.tok != Eof) {
+				tokens.push(t);
+				t = lexer.token(haxeparser.HaxeLexer.tok);
+			}
 		}
+		catch (e:Dynamic) {}
 	}
 
 	function makeASTs() {
