@@ -290,12 +290,17 @@ class Main {
 	}
 
 	function traverse(path:String, files:Array<String>) {
-		if (FileSystem.isDirectory(path) && !allExcludes.contains(path)) {
-			var nodes = FileSystem.readDirectory(path);
-			for (child in nodes) traverse(pathJoin(path, child), files);
+		try {
+			if (FileSystem.isDirectory(path) && !allExcludes.contains(path)) {
+				var nodes = FileSystem.readDirectory(path);
+				for (child in nodes) traverse(pathJoin(path, child), files);
+			}
+			else if (~/(.hx)$/i.match(path) && !allExcludes.contains(path.substring(0, path.indexOf(".hx")))) {
+				files.push(path);
+			}
 		}
-		else if (~/(.hx)$/i.match(path) && !allExcludes.contains(path.substring(0, path.indexOf(".hx")))) {
-			files.push(path);
+		catch (e:Dynamic) {
+			Sys.println("\nPath " + path + " not found.");
 		}
 	}
 
