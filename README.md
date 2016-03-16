@@ -1,9 +1,9 @@
 ![logo](resources/logo/haxe-checkstyle.png)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT) 
-[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/) 
-[![codecov.io](https://codecov.io/github/adireddy/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/adireddy/haxe-checkstyle?branch=dev) 
-[![Build Status](https://travis-ci.org/adireddy/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/adireddy/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/adireddy/haxe-checkstyle)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
+[![codecov.io](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle?branch=dev)
+[![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
@@ -21,13 +21,13 @@ haxelib install checkstyle
 
 [More information and reference](https://adireddy.gitbooks.io/haxe-checkstyle/content/).
 
-### Issues [![Stories in Ready](https://badge.waffle.io/adireddy/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/adireddy/haxe-checkstyle)
+### Issues [![Stories in Ready](https://badge.waffle.io/HaxeCheckstyle/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/HaxeCheckstyle/haxe-checkstyle)
 
-Found any bug? Please create a new [issue](https://github.com/adireddy/haxe-checkstyle/issues/new).
+Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/new).
 
 ### Coverage
 
-![codecov.io](https://codecov.io/github/adireddy/haxe-checkstyle/branch.svg?branch=dev)
+![codecov.io](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle/branch.svg?branch=dev)
 
 ### Licensing Information ###
 
