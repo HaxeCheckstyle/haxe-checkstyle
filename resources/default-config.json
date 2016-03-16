@@ -148,6 +148,7 @@
 		{
 			"props": {
 				"character": "tab",
+				"ignorePattern": "^$",
 				"severity": "IGNORE"
 			},
 			"type": "IndentationCharacter"
@@ -478,6 +479,7 @@
 		},
 		{
 			"props": {
+				"ignorePattern": "^$",
 				"severity": "IGNORE"
 			},
 			"type": "TabForAligning"
