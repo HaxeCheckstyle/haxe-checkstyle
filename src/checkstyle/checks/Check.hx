@@ -24,7 +24,7 @@ class Check {
 		this.type = type;
 		severity = SeverityLevel.INFO;
 		categories = [Category.STYLE];
-		// Points: Fibonacci - 1, 2, 3, 5, 8, 13, 21, 34, 55
+
 		points = 1;
 		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
