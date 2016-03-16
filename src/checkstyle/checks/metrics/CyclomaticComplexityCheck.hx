@@ -2,6 +2,8 @@ package checkstyle.checks.metrics;
 
 import haxe.macro.Expr;
 
+import checkstyle.CheckMessage.SeverityLevel;
+
 using Lambda;
 
 @name("CyclomaticComplexity")
@@ -37,7 +39,7 @@ class CyclomaticComplexityCheck extends Check {
 		var complexity:Int = 1 + evaluateExpr(method.expr);
 
 		var risk:Null<Threshold> = thresholds.filter(function(t:Threshold):Bool {
-			return complexity >= t.complexity;
+			return (complexity >= t.complexity) && (t.severity != SeverityLevel.IGNORE);
 		}).pop();
 
 		if (risk != null) {
