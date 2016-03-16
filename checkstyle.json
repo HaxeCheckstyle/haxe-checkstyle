@@ -180,7 +180,8 @@
 		},
 		{
 			"props": {
-				"max": 320,
+				"max": 160,
+				"ignorePattern": "(^@desc)|(LONG LINE TEST)",
 				"severity": "INFO"
 			},
 			"type": "LineLength"
