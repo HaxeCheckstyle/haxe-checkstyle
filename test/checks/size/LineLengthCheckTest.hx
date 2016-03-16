@@ -5,7 +5,8 @@ import checkstyle.checks.size.LineLengthCheck;
 class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 
 	public function testDefaultLineLength() {
-		assertMsg(new LineLengthCheck(), TEST1, 'Too long line (> 160)');
+		var check = new LineLengthCheck();
+		assertMsg(new LineLengthCheck(), TEST1, "Too long line - 178, max length allowed is " + check.max);
 	}
 
 	public function testCorrectLineLength() {
@@ -15,8 +16,7 @@ class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.max = 40;
-
-		assertMsg(check, TEST3, 'Too long line (> 40)');
+		assertMsg(check, TEST3, "Too long line - 73, max length allowed is " + check.max);
 	}
 }
 
@@ -26,10 +26,7 @@ abstract LineLengthCheckTests(String) to String {
 	class Test {
 		var _a:Int;
 		public function new() {
-			_a = 10;
-			if (_a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290 && _a > 200 && _a < 250 && _a != 240 && _a != 250 && _a != 260 && _a != 270 && _a != 280 && _a != 290) {
-				_a = -1;
-			}
+			var s = 'LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST';
 		}
 	}";
 
@@ -51,10 +48,7 @@ abstract LineLengthCheckTests(String) to String {
 	var TEST3 =
 	"class Test {
 		public function new() {
-			_a = 10;
-			if (_a > 200 && _a < 250 && _a != 240 && _a != 250) {
-				_a = -1;
-			}
+			var s = 'LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST';
 		}
 	}";
 }

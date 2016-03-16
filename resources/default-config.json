@@ -191,6 +191,7 @@
 		{
 			"props": {
 				"max": 160,
+				"ignorePattern": "^$",
 				"severity": "IGNORE"
 			},
 			"type": "LineLength"
