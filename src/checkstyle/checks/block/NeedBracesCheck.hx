@@ -8,7 +8,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("NeedBraces")
-@desc("Checks for braces on function, if, for and while statements.")
+@desc("Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.")
 class NeedBracesCheck extends Check {
 
 	public var tokens:Array<NeedBracesCheckToken>;
