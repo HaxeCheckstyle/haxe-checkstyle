@@ -26,9 +26,6 @@
 		"checks.whitespace.IndentationCharacterCheckTest",
 		"checks.whitespace.TabForAligningCheckTest"
 	],
-	"LineLength": [
-		"checks.size.LineLengthCheckTest"
-	],
 	"IndentationCharacter": [
 		"checks.whitespace.IndentationCharacterCheckTest"
 	],

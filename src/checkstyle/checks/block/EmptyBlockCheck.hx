@@ -7,7 +7,7 @@ import haxe.macro.Expr;
 using checkstyle.utils.ArrayUtils;
 
 @name("EmptyBlock")
-@desc("Checks for empty blocks.")
+@desc("Checks for empty blocks. The policy to verify is specified using the property `option`.")
 class EmptyBlockCheck extends Check {
 
 	public var tokens:Array<EmptyBlockCheckToken>;
