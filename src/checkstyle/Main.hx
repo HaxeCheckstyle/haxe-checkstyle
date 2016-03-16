@@ -117,6 +117,8 @@ class Main {
 		var config:Config = Json.parse(File.getContent(path));
 		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
+		if (config.exclude != null) parseExcludes(config.exclude);
+
 		for (checkConf in config.checks) {
 			var check = createCheck(checkConf);
 			setCheckProperties(check, checkConf, config.defaultSeverity);
@@ -133,7 +135,12 @@ class Main {
 	}
 
 	function loadExcludeConfig(path:String) {
-		var config:Config = Json.parse(File.getContent(path));
+		var config = Json.parse(File.getContent(path));
+		parseExcludes(config);
+		start();
+	}
+
+	function parseExcludes(config:ExcludeConfig) {
 		var excludes = Reflect.fields(config);
 		for (exclude in excludes) {
 			createExcludeMapElement(exclude);
@@ -141,8 +148,6 @@ class Main {
 			if (excludeValues == null || excludeValues.length == 0) continue;
 			for (val in excludeValues) updateExcludes(exclude, val);
 		}
-
-		start();
 	}
 
 	function createExcludeMapElement(exclude:String) {
@@ -236,7 +241,8 @@ class Main {
 			defaultSeverity: SeverityLevel.INFO,
 			baseDefines: [],
 			defineCombinations: [],
-			checks: []
+			checks: [],
+			exclude: {}
 		};
 	}
 
