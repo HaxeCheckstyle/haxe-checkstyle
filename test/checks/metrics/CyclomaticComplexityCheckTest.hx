@@ -11,8 +11,13 @@ class CyclomaticComplexityCheckTest extends CheckTestCase<CyclomaticComplexityCh
 			{ severity : "ERROR", complexity : 2 }
 		];
 		assertMsg(check, TEST, 'Function "test" is too complex (score: 2).');
-	}
 
+		check.thresholds = [
+			{ severity : "IGNORE", complexity : 1 },
+			{ severity : "IGNORE", complexity : 2 }
+		];
+		assertNoMsg(check, TEST);
+	}
 }
 
 @:enum
