@@ -4,7 +4,7 @@ import checkstyle.checks.coding.SimplifyBooleanExpressionCheck;
 
 class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanExpressionCheckTests> {
 
-	static inline var MSG_SIMPLIFY:String = 'Boolean expression can be simplified';
+	static inline var MSG_SIMPLIFY:String = "Boolean expression can be simplified";
 
 	public function testWrongExpression() {
 		assertMsg(new SimplifyBooleanExpressionCheck(), TEST1, MSG_SIMPLIFY);
