@@ -23,7 +23,6 @@
 		"checks.naming.MemberNameCheckTest"
 	],
 	"TabForAligning": [
-		"checks.whitespace.IndentationCharacterCheckTest",
 		"checks.whitespace.TabForAligningCheckTest"
 	],
 	"IndentationCharacter": [

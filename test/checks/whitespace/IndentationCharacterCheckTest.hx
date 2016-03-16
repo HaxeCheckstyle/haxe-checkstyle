@@ -28,13 +28,13 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 abstract IndentationCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
-		 var _a:Int;
+		 static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
 		public function new() {}
 	}";
 
 	var TEST2 =
 	"class Test {
-		var _a:Int;
+		var a:Int;
 		public function new() {}
 	}";
 

@@ -33,7 +33,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 		for (i in 0 ... checker.lines.length) {
 			if (isLineSuppressed(i)) return;
 			var line = checker.lines[i];
-			if (~/(var ).*;.*(var ).*;$/.match(line)) log('Only one variable definition per line allowed', i + 1, 0);
+			if (~/(var ).*;.*(var ).*;$/.match(line)) log("Only one variable definition per line allowed", i + 1, 0);
 		}
 	}
 }
