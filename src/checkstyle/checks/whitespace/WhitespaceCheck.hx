@@ -22,7 +22,7 @@ class WhitespaceCheck extends Check {
 			ARROW, ASSIGN, UNARY, COMPARE, BITWISE, BOOL
 		];
 		mode = AROUND;
-		contexts = [OBJECT_DECL, FUNCTION, FIELD, SWITCH, TRY_CATCH, ARRAY_ACCESS];
+		contexts = [OBJECT_DECL, FUNCTION, FIELD, SWITCH, TRY_CATCH, ARRAY_ACCESS, BLOCK, CLASS, INTERFACE, TYPEDEF, ABSTRACT, ENUM];
 
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -150,14 +150,23 @@ class WhitespaceCheck extends Check {
 	}
 
 	function checkContext(token:TokenTree):Bool {
+		// TODO also handle package and using
 		if (TokenTreeCheckUtils.isImportMult(token)) return false;
 		if (TokenTreeCheckUtils.filterOpSub(token)) return false;
+
+		var currentContext:WhitespaceContext = determineContext(token);
+		if (currentContext == null || !hasContext(currentContext)) return false;
 
 		if (TokenTreeCheckUtils.isTypeParameter(token)) {
 			return hasContext(TYPE_PARAMETER);
 		}
 		if (!hasContext(FUNCTION)) {
 			if (isFunctionContext(token)) return true;
+		}
+		switch (token.tok) {
+			case Dot:
+			case DblDot:
+			default:
 		}
 		// TODO check contexts
 
@@ -182,6 +191,67 @@ class WhitespaceCheck extends Check {
 		return false;
 	}
 
+	function determineContext(token:TokenTree):WhitespaceContext {
+		while (token.tok != null) {
+			switch (token.tok) {
+				case At: return META;
+				case Dollar(_): return REIFICATION;
+				case Kwd(KwdClass): return CLASS;
+				case Kwd(KwdInterface): return INTERFACE;
+				case Kwd(KwdEnum): return ENUM;
+				case Kwd(KwdAbstract): return ABSTRACT;
+				case Kwd(KwdTypedef): return TYPEDEF;
+				case Kwd(KwdCase), Kwd(KwdDefault), Kwd(KwdSwitch): return SWITCH;
+				case Kwd(KwdCatch): return TRY_CATCH;
+
+				case Kwd(KwdIf), Kwd(KwdElse): return SINGLELINE;
+				case Kwd(KwdDo): return SINGLELINE;
+				case Kwd(KwdFor): return SINGLELINE;
+				case Kwd(KwdWhile): return SINGLELINE;
+				case Kwd(KwdFunction): return SINGLELINE;
+				case BkOpen: return ARRAY_ACCESS;
+				case BrOpen: return contextOfBrOpen(token.parent);
+				case POpen: return contextOfPOpen(token.parent);
+				case Binop(OpLt):
+					if (TokenTreeCheckUtils.isTypeParameter(token)) return TYPE_PARAMETER;
+				default:
+			}
+			token = token.parent;
+		}
+
+		return null;
+	}
+
+	function contextOfBrOpen(token:TokenTree):WhitespaceContext {
+		while (token.tok != null) {
+			switch (token.tok) {
+				case Kwd(_): return BLOCK;
+				case POpen: return OBJECT_DECL;
+				case Comma: return OBJECT_DECL;
+				case BrOpen: return contextOfBrOpen(token.parent);
+				case Binop(OpAssign), Binop(OpAssignOp(_)): return OBJECT_DECL;
+				default:
+			}
+			token = token.parent;
+		}
+		return null;
+	}
+
+	function contextOfPOpen(token:TokenTree):WhitespaceContext {
+		while (token.tok != null) {
+			switch (token.tok) {
+				case Kwd(KwdFunction): return FUNCTION;
+				case POpen: return contextOfPOpen(token);
+				case Binop(OpAssign), Binop(OpAssignOp(_)): return COND;
+				case Kwd(KwdVar): return PROPERTY;
+				case Kwd(KwdIf), Kwd(KwdFor), Kwd(KwdWhile), Kwd(KwdSwitch), Kwd(KwdCase): return COND;
+				default:
+			}
+			token = token.parent;
+		}
+		return null;
+	}
+
 	function hasContext(context:WhitespaceContext):Bool {
 		return contexts.contains(context);
 	}
@@ -198,13 +268,24 @@ abstract WhitespaceMode(String) {
 @:enum
 abstract WhitespaceContext(String) {
 	var OBJECT_DECL = "Object";
+	var CLASS = "Class";
+	var INTERFACE = "Interface";
+	var TYPEDEF = "Typedef";
+	var ABSTRACT = "Abstract";
+	var ENUM = "Enum";
 	var FUNCTION = "Function";
 	var FIELD = "Field";
+	var PROPERTY = "Property";
+	var BLOCK = "Block";
+	var IF = "If";
+	var COND = "Condition";
 	var SWITCH = "Switch";
 	var TRY_CATCH = "Switch";
 	var ARRAY_ACCESS = "Array";
 	var REIFICATION = "Reification";
 	var TYPE_PARAMETER = "TypeParameter";
+	var META = "Meta";
+	var SINGLELINE = "Singleline";
 }
 
 @:enum

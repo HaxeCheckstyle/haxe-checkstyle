@@ -549,7 +549,13 @@
 					"Field",
 					"Switch",
 					"Switch",
-					"Array"
+					"Array",
+					"Block",
+					"Class",
+					"Interface",
+					"Typedef",
+					"Abstract",
+					"Enum"
 				],
 				"severity": "IGNORE"
 			},

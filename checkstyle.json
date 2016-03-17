@@ -540,7 +540,7 @@
 		},
 		{
 			"props": {
-				"mode": "Around",
+				"mode": "around",
 				"tokens": [
 					"=>",
 					"Assign",
@@ -565,7 +565,7 @@
 		},
 		{
 			"props": {
-				"mode": "None",
+				"mode": "none",
 				"tokens": [
 					".",
 					":",
@@ -586,7 +586,7 @@
 		},
 		{
 			"props": {
-				"mode": "After",
+				"mode": "after",
 				"tokens": [
 					",",
 					";"
