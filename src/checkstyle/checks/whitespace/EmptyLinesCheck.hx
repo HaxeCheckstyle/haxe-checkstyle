@@ -4,7 +4,7 @@ using StringTools;
 
 @name("EmptyLines")
 @desc("Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.")
-class EmptyLinesCheck extends Check {
+class EmptyLinesCheck extends LineCheckBase {
 
 	public var max:Int;
 	public var allowEmptyLineAfterSingleLineComment:Bool;
@@ -15,7 +15,7 @@ class EmptyLinesCheck extends Check {
 	public var requireEmptyLineAfterAbstract:Bool;
 
 	public function new() {
-		super(LINE);
+		super();
 		max = 1;
 		allowEmptyLineAfterSingleLineComment = true;
 		allowEmptyLineAfterMultiLineComment = true;
@@ -27,7 +27,6 @@ class EmptyLinesCheck extends Check {
 	}
 
 	override function actualRun() {
-		var quotesRE = ~/('|")/;
 		var inGroup = false;
 		var isLastLinePackage = false;
 		var isLastLineClass = false;
@@ -35,12 +34,10 @@ class EmptyLinesCheck extends Check {
 		var isLastLineAbstract = false;
 		var start = 0;
 		var end = 0;
-		var multilineStringStart = false;
-		var multilineStartRE:EReg = null;
+
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
-			if (multilineStringStart && (multilineStartRE.match(line) || ~/.*;$/.match(line))) multilineStringStart = false;
-			if (multilineStringStart) continue;
+			if (isMultineString(line)) continue;
 			if (~/^\s*$/.match(line)) {
 				if (!inGroup) {
 					inGroup = true;
@@ -74,8 +71,6 @@ class EmptyLinesCheck extends Check {
 			isLastLineClass = ~/^\s*class\s.*?\{/.match(line);
 			isLastLineInterface = ~/^\s*interface\s.*?\{/.match(line);
 			isLastLineAbstract = ~/^\s*abstract\s.*?\{/.match(line);
-			multilineStringStart = quotesRE.match(line) && !~/.*;$/.match(line);
-			if (multilineStringStart) multilineStartRE = new EReg(quotesRE.matched(0), "");
 		}
 
 		if (inGroup) {

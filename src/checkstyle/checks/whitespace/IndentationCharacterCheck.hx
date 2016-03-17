@@ -2,13 +2,13 @@ package checkstyle.checks.whitespace;
 
 @name("IndentationCharacter")
 @desc("Checks indentation character (tab/space, default is tab).")
-class IndentationCharacterCheck extends Check {
+class IndentationCharacterCheck extends LineCheckBase {
 
 	public var character:IndentationCharacterCheckCharacter;
 	public var ignorePattern:String;
 
 	public function new() {
-		super(LINE);
+		super();
 		character = TAB;
 		ignorePattern = "^$";
 	}
@@ -19,6 +19,7 @@ class IndentationCharacterCheck extends Check {
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
 			if (ignoreRE.match(line) || isLineSuppressed(i)) continue;
+			if (isMultineString(line)) continue;
 			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (should be ${character})', i + 1, 0);
 		}
 	}
