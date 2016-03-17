@@ -23,6 +23,10 @@ class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 	public function testXXX() {
 		assertMsg(new TODOCommentCheck(), TEST5, "TODO comment: XXX remove test");
 	}
+
+	public function testString() {
+		assertNoMsg(new TODOCommentCheck(), TEST6);
+	}
 }
 
 @:enum
@@ -54,6 +58,12 @@ abstract TODOCommentCheckTests(String) to String {
 	var TEST5 = "
 	class Test {
 		// XXX remove test
+		public override function test() {}
+	}";
+
+	var TEST6 = "
+	class Test {
+		var a:String = 'TODO: remove test';
 		public override function test() {}
 	}";
 }
