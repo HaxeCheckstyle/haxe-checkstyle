@@ -1,7 +1,6 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 @name("MultipleVariableDeclarations")
 @desc("Checks that each variable declaration is in its own statement and on its own line.")
@@ -17,7 +16,11 @@ class MultipleVariableDeclarationsCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], ALL);
 
+		var lastVarLineNo = -1;
 		for (v in acceptableTokens) {
+			var curVarLineNo = checker.getLinePos(v.pos.min).line;
+			if (lastVarLineNo > 0 && lastVarLineNo == curVarLineNo) logPos("Only one variable definition per line allowed", v.pos);
+			lastVarLineNo = curVarLineNo;
 			var count = 0;
 			for (c in v.childs) {
 				switch (c.tok) {
@@ -27,13 +30,6 @@ class MultipleVariableDeclarationsCheck extends Check {
 				}
 			}
 			if (count > 1) logPos("Each variable declaration must be in its own statement", v.pos);
-		}
-
-		// Need line no of each token to remove line based check
-		for (i in 0 ... checker.lines.length) {
-			if (isLineSuppressed(i)) return;
-			var line = checker.lines[i];
-			if (~/(var ).*;.*(var ).*;$/.match(line)) log("Only one variable definition per line allowed", i + 1, 0);
 		}
 	}
 }
