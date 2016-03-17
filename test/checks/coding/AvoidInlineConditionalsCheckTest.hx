@@ -5,7 +5,7 @@ import checkstyle.checks.coding.AvoidInlineConditionalsCheck;
 class AvoidInlineConditionalsCheckTest extends CheckTestCase<AvoidInlineConditionalsTests> {
 
 	public function testInlineCondition() {
-		assertMsg(new AvoidInlineConditionalsCheck(), TEST1, 'Avoid inline conditionals');
+		assertMsg(new AvoidInlineConditionalsCheck(), TEST1, "Avoid inline conditionals");
 	}
 }
 
