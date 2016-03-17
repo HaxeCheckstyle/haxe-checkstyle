@@ -150,13 +150,36 @@ class WhitespaceCheck extends Check {
 	}
 
 	function checkContext(token:TokenTree):Bool {
-		if (TokenTreeCheckUtils.isTypeParameter(token)) return false;
 		if (TokenTreeCheckUtils.isImportMult(token)) return false;
 		if (TokenTreeCheckUtils.filterOpSub(token)) return false;
 
+		if (TokenTreeCheckUtils.isTypeParameter(token)) {
+			return hasContext(TYPE_PARAMETER);
+		}
+		if (!hasContext(FUNCTION)) {
+			if (isFunctionContext(token)) return true;
+		}
 		// TODO check contexts
 
 		return true;
+	}
+
+	function isFunctionContext(tok:TokenTree):Bool {
+		switch (tok.tok) {
+			case POpen, PClose, DblDot, Dot, Comma, BrOpen, BrClose:
+			case Binop(OpGt), Binop(OpLt), Binop(OpAssign):
+			default: return false;
+		}
+		var parent:TokenTree = tok.parent;
+		while (parent.tok != null) {
+			switch (parent.tok) {
+				case Kwd(KwdFunction): return true;
+				case Kwd(_): return false;
+				default:
+			}
+			parent = parent.parent;
+		}
+		return false;
 	}
 
 	function hasContext(context:WhitespaceContext):Bool {
@@ -180,6 +203,8 @@ abstract WhitespaceContext(String) {
 	var SWITCH = "Switch";
 	var TRY_CATCH = "Switch";
 	var ARRAY_ACCESS = "Array";
+	var REIFICATION = "Reification";
+	var TYPE_PARAMETER = "TypeParameter";
 }
 
 @:enum
