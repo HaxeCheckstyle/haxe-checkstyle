@@ -540,6 +540,71 @@
 		},
 		{
 			"props": {
+				"mode": "Around",
+				"tokens": [
+					"=>",
+					"Assign",
+					"Unary",
+					"Compare",
+					"Bitwise",
+					"Bool",
+					"{",
+					"}"
+				],
+				"contexts": [
+					"Object",
+					"Function",
+					"Field",
+					"Switch",
+					"Switch",
+					"Array"
+				],
+				"severity": "WARNING"
+			},
+			"type": "Whitespace"
+		},
+		{
+			"props": {
+				"mode": "None",
+				"tokens": [
+					".",
+					":",
+					"(",
+					")"
+				],
+				"contexts": [
+					"Object",
+					"Function",
+					"Field",
+					"Switch",
+					"Switch",
+					"Array"
+				],
+				"severity": "WARNING"
+			},
+			"type": "Whitespace"
+		},
+		{
+			"props": {
+				"mode": "After",
+				"tokens": [
+					",",
+					";"
+				],
+				"contexts": [
+					"Object",
+					"Function",
+					"Field",
+					"Switch",
+					"Switch",
+					"Array"
+				],
+				"severity": "WARNING"
+			},
+			"type": "Whitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					",",
 					";"

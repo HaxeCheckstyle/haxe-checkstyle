@@ -534,6 +534,29 @@
 		},
 		{
 			"props": {
+				"mode": "around",
+				"tokens": [
+					"=>",
+					"Assign",
+					"Unary",
+					"Compare",
+					"Bitwise",
+					"Bool"
+				],
+				"contexts": [
+					"Object",
+					"Function",
+					"Field",
+					"Switch",
+					"Switch",
+					"Array"
+				],
+				"severity": "IGNORE"
+			},
+			"type": "Whitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					",",
 					";"
