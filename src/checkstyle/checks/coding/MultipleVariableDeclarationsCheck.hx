@@ -26,7 +26,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 					default:
 				}
 			}
-			if (count > 1) logPos('Each variable declaration must be in its own statement', v.pos);
+			if (count > 1) logPos("Each variable declaration must be in its own statement", v.pos);
 		}
 
 		// Need line no of each token to remove line based check

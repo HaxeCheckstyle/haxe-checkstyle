@@ -36,9 +36,7 @@ class Check {
 			try {
 				actualRun();
 			}
-			catch (e:String) {
-				//exception
-			}
+			catch (e:String) {}
 		}
 		return messages;
 	}
