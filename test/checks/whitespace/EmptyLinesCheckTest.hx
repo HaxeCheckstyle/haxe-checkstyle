@@ -85,7 +85,25 @@ abstract EmptyLinesCheckTests(String) to String {
 
 			var b:Int;
 
-			var b:String = ' multistring
+			var c:String = ' multistring
+
+
+
+			';
+
+			var d:String = ' multistring; \"
+
+
+
+			';
+
+			var e:String = ' multistring; \"\'
+
+				var t=1;
+
+
+
+				var s='';
 
 
 
