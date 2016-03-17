@@ -10,10 +10,6 @@
 		"checks",
 		"token"
 	],
-	"MultipleVariableDeclarations": [
-		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck",
-		"checks.coding.MultipleVariableDeclarationsCheckTest"
-	],
 	"CyclomaticComplexity": [
 		"checkstyle.checks.Check",
 		"checkstyle.utils.ExprUtils",
