@@ -54,6 +54,21 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertNoMsg(check, IMPORT_TYPE_MAP);
 		assertMsg(check, UNUSED_IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
 	}
+
+	public function testImportHx() {
+		var check = new UnusedImportCheck();
+		assertNoMsg(check, IMPORT_NOT_USED, "import.hx");
+		assertNoMsg(check, DUPLICATE_IMPORT, "import.hx");
+		assertNoMsg(check, IMPORT_NAME_REUSED, "import.hx");
+		assertNoMsg(check, TOP_LEVEL_IMPORT, "import.hx");
+		assertNoMsg(check, UNUSED_IMPORT_AS, "import.hx");
+		assertNoMsg(check, UNUSED_IMPORT_IN, "import.hx");
+		assertNoMsg(check, UNUSED_IMPORT_IN_STATIC_FUNC, "import.hx");
+		assertNoMsg(check, SAME_PACKAGE_IMPORT, "import.hx");
+		assertNoMsg(check, SAME_PACKAGE_TYPE_MAP, "import.hx");
+		assertNoMsg(check, IMPORT_TYPE_MAP, "import.hx");
+		assertNoMsg(check, UNUSED_IMPORT_TYPE_MAP, "import.hx");
+	}
 }
 
 @:enum

@@ -17,25 +17,25 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 	override public function setup() {}
 
-	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?pos:PosInfos) {
+	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?fileName:String, ?pos:PosInfos) {
 		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
 		if (re.match(testCase)) {
-			actualAssertMsg(check, re.replace(testCase, "class $1"), expected, pos);
-			actualAssertMsg(check, re.replace(testCase, "abstract $1(Int)"), expected, pos);
+			actualAssertMsg(check, re.replace(testCase, "class $1"), expected, fileName, pos);
+			actualAssertMsg(check, re.replace(testCase, "abstract $1(Int)"), expected, fileName, pos);
 		}
-		else actualAssertMsg(check, testCase, expected, defines, pos);
+		else actualAssertMsg(check, testCase, expected, defines, fileName, pos);
 	}
 
-	function assertNoMsg(check:Check, testCase:T, ?pos:PosInfos) {
-		assertMsg(check, testCase, '', null, pos);
+	function assertNoMsg(check:Check, testCase:T, ?fileName:String, ?pos:PosInfos) {
+		assertMsg(check, testCase, '', null, fileName, pos);
 	}
 
-	function actualAssertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?pos:PosInfos) {
-		var msg = checkMessage(testCase, check, defines);
+	function actualAssertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?fileName:String, ?pos:PosInfos) {
+		var msg = checkMessage(testCase, check, defines, fileName, pos);
 		assertEquals(expected, msg, pos);
 	}
 
-	function checkMessage(src:String, check:Check, defines:Array<Array<String>>):String {
+	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, ?pos:PosInfos):String {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independant checkMessage calls in a single test
 		checker = new Checker();
@@ -44,7 +44,7 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 		if (defines != null) checker.defineCombinations = defines;
 		checker.addCheck(check);
 		checker.addReporter(reporter);
-		checker.process([{name:FILE_NAME, content:src, index:0}], null);
+		checker.process([{name:fileName, content:src, index:0}], null);
 		return reporter.message;
 	}
 
