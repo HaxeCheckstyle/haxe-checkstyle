@@ -6,9 +6,6 @@
 		"checkstyle.ChecksInfo",
 		"checkstyle.checks.imports.UnusedImportCheck"
 	],
-	"EmptyLines": [
-		"checks.whitespace.EmptyLinesCheckTest"
-	],
 	"MultipleStringLiterals": [
 		"checks",
 		"token"
@@ -16,17 +13,6 @@
 	"MultipleVariableDeclarations": [
 		"checkstyle.checks.coding.MultipleVariableDeclarationsCheck",
 		"checks.coding.MultipleVariableDeclarationsCheckTest"
-	],
-	"TrailingWhitespace": [
-		"checks.whitespace.SpacingCheckTest",
-		"checks.whitespace.TrailingWhitespaceCheckTest",
-		"checks.naming.MemberNameCheckTest"
-	],
-	"TabForAligning": [
-		"checks.whitespace.TabForAligningCheckTest"
-	],
-	"IndentationCharacter": [
-		"checks.whitespace.IndentationCharacterCheckTest"
 	],
 	"CyclomaticComplexity": [
 		"checkstyle.checks.Check",
@@ -55,9 +41,6 @@
 		"checkstyle.checks.whitespace.WhitespaceAroundCheck",
 		"checkstyle.checks.whitespace.EmptyLinesCheck",
 		"checkstyle.token.TokenTreeBuilder"
-	],
-	"MagicNumber": [
-		"checkstyle.reporter.ProgressReporter"
 	],
 	"NestedForDepth": [
 		"TestMain"
