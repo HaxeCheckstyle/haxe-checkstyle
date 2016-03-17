@@ -171,7 +171,6 @@ class Main {
 
 	function setCheckProperties(check:Check, checkConf:CheckConfig, defaultSeverity:SeverityLevel) {
 		validateAllowedFields(checkConf, ["type", "props"], check.getModuleName());
-
 		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
 		// use Type.getInstanceFields to make it work in c++ / profiler
 		var checkFields:Array<String> = Type.getInstanceFields(Type.getClass(check));
@@ -248,8 +247,11 @@ class Main {
 
 	function generateDefaultConfig(path) {
 		addAllChecks();
-
-		var propsNotAllowed:Array<String> = ["moduleName", "severity", "type", "categories", "points", "desc"];
+		var propsNotAllowed:Array<String> = [
+			"moduleName", "severity", "type", "categories",
+			"points", "desc", "quotesRE", "multilineStartRE",
+			"escapeRE", "multilineStringStart"
+		];
 		var config = getEmptyConfig();
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
