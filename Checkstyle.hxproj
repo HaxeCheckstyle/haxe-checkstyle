@@ -2,7 +2,7 @@
 <project version="2">
   <!-- Output SWF options -->
   <output>
-    <movie outputType="Application" />
+    <movie outputType="CustomBuild" />
     <movie input="" />
     <movie path="build.hxml" />
     <movie fps="0" />
@@ -31,7 +31,7 @@
   <haxelib>
     <library name="haxeparser:3.2.0" />
     <library name="compiletime:2.6.0" />
-    <library name="hxargs:3.0.0" />
+    <library name="hxargs" />
   </haxelib>
   <!-- Class files to compile (other referenced classes will automatically be included) -->
   <compileTargets>

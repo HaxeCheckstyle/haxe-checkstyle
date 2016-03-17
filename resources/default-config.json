@@ -72,6 +72,12 @@
 			"props": {
 				"severity": "IGNORE"
 			},
+			"type": "DefaultComesLast"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
 			"type": "Dynamic"
 		},
 		{
