@@ -4,12 +4,12 @@ using checkstyle.utils.StringUtils;
 
 @name("TabForAligning")
 @desc("Checks if there are any tabs in the middle of a line.")
-class TabForAligningCheck extends Check {
+class TabForAligningCheck extends LineCheckBase {
 
 	public var ignorePattern:String;
 
 	public function new() {
-		super(LINE);
+		super();
 		ignorePattern = "^$";
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -20,6 +20,7 @@ class TabForAligningCheck extends Check {
 		for (i in 0 ... checker.lines.length) {
 			var line = checker.lines[i];
 			if (ignoreRE.match(line)) continue;
+			if (isMultineString(line)) continue;
 			if (re.match(line)) log("Tab after non-space character, use space for aligning", i + 1, line.length);
 		}
 	}
