@@ -4,6 +4,7 @@ import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxe.macro.Expr;
 import haxe.macro.Expr;
+import haxe.io.Path;
 import haxeparser.Data;
 
 using checkstyle.utils.ArrayUtils;
@@ -25,6 +26,7 @@ class UnusedImportCheck extends Check {
 
 	override function actualRun() {
 		var seenModules:Array<String> = [];
+		if (isImportHx()) return;
 		var root:TokenTree = checker.getTokenTree();
 		var packageName:String = detectPackageName(root);
 		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], ALL);
@@ -60,6 +62,11 @@ class UnusedImportCheck extends Check {
 			seenModules.push(moduleName);
 			checkUsage(typeName, moduleName, imp, idents);
 		}
+	}
+
+	function isImportHx():Bool {
+		var fileName:String = Path.withoutDirectory(checker.file.name);
+		return fileName == "import.hx";
 	}
 
 	function detectPackageName(root:TokenTree):String {
