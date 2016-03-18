@@ -151,7 +151,9 @@ class OperatorWhitespaceCheck extends Check {
 	function checkTokenList(tokens:Array<TokenTree>, policy:WhitespacePolicy) {
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
+			if (TokenTreeCheckUtils.isImportMult(token)) continue;
 			if (TokenTreeCheckUtils.isTypeParameter(token)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(token)) continue;
 			checkWhitespace(token, policy);
 		}
 	}

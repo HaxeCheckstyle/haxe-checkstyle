@@ -564,12 +564,7 @@
 			"props": {
 				"mode": "around",
 				"tokens": [
-					"=>",
-					"Assign",
-					"Unary",
-					"Compare",
-					"Bitwise",
-					"Bool"
+					"=>"
 				],
 				"contexts": [
 					"Object",
