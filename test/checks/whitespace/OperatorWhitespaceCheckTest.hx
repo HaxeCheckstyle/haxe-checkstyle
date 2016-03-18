@@ -5,8 +5,12 @@ import checkstyle.checks.whitespace.OperatorWhitespaceCheck;
 class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckTests> {
 
 	static inline var MSG_EQUALS:String = 'OperatorWhitespace policy "around" violated by "="';
+	static inline var MSG_EQUALS_BEFORE:String = 'OperatorWhitespace policy "before" violated by "="';
+	static inline var MSG_EQUALS_AFTER:String = 'OperatorWhitespace policy "after" violated by "="';
 	static inline var MSG_UNARY_NONE:String = 'OperatorWhitespace policy "none" violated by "++"';
 	static inline var MSG_UNARY_INNER:String = 'OperatorWhitespace policy "inner" violated by "++"';
+	static inline var MSG_INTERVAL_NONE:String = 'OperatorWhitespace policy "none" violated by "..."';
+	static inline var MSG_INTERVAL_AROUND:String = 'OperatorWhitespace policy "around" violated by "..."';
 
 	public function testCorrectOperatorWhitespace() {
 		var check = new OperatorWhitespaceCheck();
@@ -27,23 +31,42 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, OPGT);
 	}
 
-	public function testIncorrectOperatorWhitespace() {
-		var check = new OperatorWhitespaceCheck();
-		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
-		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
-		assertMsg(check, ISSUE_59, MSG_EQUALS);
-		assertMsg(check, ISSUE_63, MSG_EQUALS);
-	}
-
 	public function testIncorrectOperatorWhitespaceToken() {
 		var check = new OperatorWhitespaceCheck();
-		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
+		assertMsg(check, ISSUE_59, MSG_EQUALS);
+		assertMsg(check, ISSUE_63, MSG_EQUALS);
 		assertMsg(check, NO_WHITESPACE_GT, MSG_EQUALS);
 		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
 		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_EQUALS);
 		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS);
 
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
+	}
+
+	public function testWhitespaceBefore() {
+		var check = new OperatorWhitespaceCheck();
+		check.assignOpPolicy = BEFORE;
+		assertNoMsg(check, ISSUE_63);
+		assertNoMsg(check, NO_WHITESPACE_TYPEDEF);
+
+		assertMsg(check, CORRECT_WHITESPACE_AROUND, MSG_EQUALS_BEFORE);
+		assertMsg(check, ISSUE_59, MSG_EQUALS_BEFORE);
+		assertMsg(check, NO_WHITESPACE_GT, MSG_EQUALS_BEFORE);
+		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS_BEFORE);
+		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS_BEFORE);
+	}
+
+	public function testWhitespaceAfter() {
+		var check = new OperatorWhitespaceCheck();
+		check.assignOpPolicy = AFTER;
+		assertNoMsg(check, NO_WHITESPACE_GT);
+
+		assertMsg(check, ISSUE_63, MSG_EQUALS_AFTER);
+		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_EQUALS_AFTER);
+		assertMsg(check, CORRECT_WHITESPACE_AROUND, MSG_EQUALS_AFTER);
+		assertMsg(check, ISSUE_59, MSG_EQUALS_AFTER);
+		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS_AFTER);
+		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS_AFTER);
 	}
 
 	public function testStarImport() {
@@ -63,6 +86,17 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		check.unaryOpPolicy = INNER;
 		assertMsg(check, UNARY_NO_WHITESPACE, MSG_UNARY_INNER);
 		assertNoMsg(check, UNARY_INNER_WHITESPACE);
+	}
+
+	public function testInterval() {
+		var check = new OperatorWhitespaceCheck();
+
+		assertNoMsg(check, INTERVAL_NO_WHITESPACE);
+		assertMsg(check, INTERVAL_WHITESPACE, MSG_INTERVAL_NONE);
+
+		check.intervalOpPolicy = AROUND;
+		assertMsg(check, INTERVAL_NO_WHITESPACE, MSG_INTERVAL_AROUND);
+		assertNoMsg(check, INTERVAL_WHITESPACE);
 	}
 }
 
@@ -278,6 +312,22 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 			if (! test) return a ++;
 			++ a;
+		}
+	}";
+
+	var INTERVAL_NO_WHITESPACE = "
+	class Test {
+		function test() {
+			for (i in 0...100) trace(i);
+			for (i in a...b) trace(i);
+		}
+	}";
+
+	var INTERVAL_WHITESPACE = "
+	class Test {
+		function test() {
+			for (i in 0 ... 100) trace(i);
+			for (i in a ... b) trace(i);
 		}
 	}";
 }
