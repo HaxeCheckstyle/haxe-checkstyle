@@ -56,4 +56,14 @@ class TokenTreeCheckUtils {
 			default: false;
 		}
 	}
+
+	function isUnaryLeftSided(tok:TokenTree):Bool {
+		var child:TokenTree = tok.getFirstChild();
+
+		if (child == null) return false;
+		return switch (child.tok) {
+			case Const(_): true;
+			default: false;
+		}
+	}
 }

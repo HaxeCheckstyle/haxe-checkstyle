@@ -344,7 +344,7 @@
 		},
 		{
 			"props": {
-				"unaryOpPolicy": "ignore",
+				"unaryOpPolicy": "none",
 				"boolOpPolicy": "around",
 				"intervalOpPolicy": "none",
 				"assignOpPolicy": "around",

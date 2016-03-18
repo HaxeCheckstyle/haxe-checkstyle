@@ -4,19 +4,20 @@ import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheck.WhitespacePolicy;
+import checkstyle.checks.whitespace.WhitespaceCheck.WhitespaceUnaryPolicy;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
 using checkstyle.utils.ArrayUtils;
 
 @name("OperatorWhitespace")
-@desc("Checks that is present or absent around a operators.")
+@desc("Checks that whitespace is present or absent around a operators.")
 class OperatorWhitespaceCheck extends Check {
 
 	// =, +=, -=, *=, /=, <<=, >>=, >>>=, &=, |=, ^=
 	public var assignOpPolicy:WhitespacePolicy;
 	// ++, --, !
-	public var unaryOpPolicy:WhitespacePolicy;
+	public var unaryOpPolicy:WhitespaceUnaryPolicy;
 	// +, -, *, /, %
 	public var arithmeticOpPolicy:WhitespacePolicy;
 	// ==, !=, <, <=, >, >=
@@ -31,7 +32,7 @@ class OperatorWhitespaceCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		assignOpPolicy = AROUND;
-		unaryOpPolicy = IGNORE;
+		unaryOpPolicy = NONE;
 		arithmeticOpPolicy = AROUND;
 		compareOpPolicy = AROUND;
 		bitwiseOpPolicy = AROUND;
@@ -45,8 +46,7 @@ class OperatorWhitespaceCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 
 		checkAssignOps(root);
-		// TODO figure out Unary
-		//checkUnaryOps(root);
+		checkUnaryOps(root);
 		checkArithmeticOps(root);
 		checkCompareOps(root);
 		checkBitwiseOps(root);
@@ -81,7 +81,11 @@ class OperatorWhitespaceCheck extends Check {
 				Unop(OpIncrement),
 				Unop(OpDecrement)
 			], ALL);
-		checkTokenList(tokens, unaryOpPolicy);
+
+		for (token in tokens) {
+			if (isPosSuppressed(token.pos)) continue;
+			checkUnaryWhitespace(token, unaryOpPolicy);
+		}
 	}
 
 	function checkArithmeticOps(root:TokenTree) {
@@ -154,12 +158,13 @@ class OperatorWhitespaceCheck extends Check {
 
 	function checkWhitespace(tok:TokenTree, policy:WhitespacePolicy) {
 		var linePos:LinePos = checker.getLinePos(tok.pos.min);
+		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
 		if (tok.tok.match(IntInterval(_))) {
 			linePos = checker.getLinePos(tok.pos.max - 3);
+			tokLen = 3;
 		}
 		var line:String = checker.lines[linePos.line];
 		var before:String = line.substr(0, linePos.ofs);
-		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
 		var after:String = line.substr(linePos.ofs + tokLen);
 
 		var whitespaceBefore:Bool = ~/^(.*\s|)$/.match(before);
@@ -179,7 +184,33 @@ class OperatorWhitespaceCheck extends Check {
 			default:
 				return;
 		}
+		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
+	}
 
+	function checkUnaryWhitespace(tok:TokenTree, policy:WhitespaceUnaryPolicy) {
+		var linePos:LinePos = checker.getLinePos(tok.pos.min);
+		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
+		var line:String = checker.lines[linePos.line];
+		var before:String = line.substr(0, linePos.ofs);
+		var after:String = line.substr(linePos.ofs + tokLen);
+
+		var whitespaceBefore:Bool = ~/^(.*\s|)$/.match(before);
+		var whitespaceAfter:Bool = ~/^(\s.*|)$/.match(after);
+
+		var leftSide:Bool = TokenTreeCheckUtils.isUnaryLeftSided(tok);
+
+		switch (policy) {
+			case INNER:
+				if (leftSide && whitespaceAfter) return;
+				if (!leftSide && whitespaceBefore) return;
+			case NONE:
+				if (leftSide && !whitespaceAfter) return;
+				if (!leftSide && !whitespaceBefore) return;
+			case IGNORE:
+				return;
+			default:
+				return;
+		}
 		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 	}
 }

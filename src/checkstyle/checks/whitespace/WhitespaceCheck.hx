@@ -318,3 +318,10 @@ abstract WhitespacePolicy(String) {
 	var NONE = "none";
 	var IGNORE = "ignore";
 }
+
+@:enum
+abstract WhitespaceUnaryPolicy(String) {
+	var INNER = "inner";
+	var NONE = "none";
+	var IGNORE = "ignore";
+}
