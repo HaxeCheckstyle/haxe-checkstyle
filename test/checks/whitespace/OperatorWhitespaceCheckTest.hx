@@ -98,6 +98,39 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, INTERVAL_NO_WHITESPACE, MSG_INTERVAL_AROUND);
 		assertNoMsg(check, INTERVAL_WHITESPACE);
 	}
+
+	public function testIgnore() {
+		var check = new OperatorWhitespaceCheck();
+		check.assignOpPolicy = IGNORE;
+		check.unaryOpPolicy = IGNORE;
+		check.intervalOpPolicy = IGNORE;
+
+		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
+		assertNoMsg(check, ISSUE_70);
+		assertNoMsg(check, ISSUE_71);
+		assertNoMsg(check, ISSUE_72);
+		assertNoMsg(check, ISSUE_77);
+		assertNoMsg(check, ISSUE_80);
+		assertNoMsg(check, ISSUE_81);
+		assertNoMsg(check, ISSUE_98);
+		assertNoMsg(check, MINUS_CONSTANT);
+		assertNoMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160);
+		assertNoMsg(check, CONDITIONAL_ELSE_STAR_IMPORT);
+		assertNoMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT);
+		assertNoMsg(check, NEGATIVE_VARS);
+		assertNoMsg(check, NEGATIVE_NUMS);
+		assertNoMsg(check, OPGT);
+		assertNoMsg(check, ISSUE_59);
+		assertNoMsg(check, ISSUE_63);
+		assertNoMsg(check, NO_WHITESPACE_GT);
+		assertNoMsg(check, NO_WHITESPACE_OBJECT_DECL);
+		assertNoMsg(check, NO_WHITESPACE_TYPEDEF);
+		assertNoMsg(check, NO_WHITESPACE_VAR_INIT);
+		assertNoMsg(check, UNARY_NO_WHITESPACE);
+		assertNoMsg(check, UNARY_INNER_WHITESPACE);
+		assertNoMsg(check, INTERVAL_NO_WHITESPACE);
+		assertNoMsg(check, INTERVAL_WHITESPACE);
+	}
 }
 
 @:enum

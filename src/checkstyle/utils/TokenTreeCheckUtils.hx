@@ -63,6 +63,7 @@ class TokenTreeCheckUtils {
 		if (child == null) return false;
 		return switch (child.tok) {
 			case Const(_): true;
+			case POpen: true;
 			default: false;
 		}
 	}
