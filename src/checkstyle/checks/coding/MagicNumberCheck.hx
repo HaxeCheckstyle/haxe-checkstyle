@@ -1,7 +1,6 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 using checkstyle.utils.ArrayUtils;
 
