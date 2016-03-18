@@ -85,7 +85,7 @@ class Checker {
 
 	function findLineSeparator() {
 		var code = file.content;
-		for (i in 0 ... code.length) {
+		for (i in 0...code.length) {
 			var char = code.charAt(i);
 			if (char == "\r" || char == "\n") {
 				lineSeparator = char;

@@ -38,7 +38,7 @@ class TestMain {
 		for (cls in classes) {
 			var coverageData = [null];
 			var results:CoverageResult = cls.getResults();
-			for (i in 1 ... results.l) coverageData[i] = 1;
+			for (i in 1...results.l) coverageData[i] = 1;
 			var c = cls.name.replace(".", "/") + ".hx";
 
 			var missingStatements:Array<Statement> = cls.getMissingStatements();

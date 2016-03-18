@@ -15,7 +15,7 @@ class ChecksInfo {
 		for (cl in checksClasses) {
 			if (ignoreClass(cl)) continue;
 			var names:Array<Dynamic> = getCheckNameFromClass(cl);
-			for (i in 0 ... names.length) {
+			for (i in 0...names.length) {
 				var desc = getCheckDescription(cl);
 				checkInfos[names[i]] = {
 					name: names[i],

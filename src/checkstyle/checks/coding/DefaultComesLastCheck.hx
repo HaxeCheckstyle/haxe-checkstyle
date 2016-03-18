@@ -21,7 +21,7 @@ class DefaultComesLastCheck extends Check {
 			if (tokens[tokens.length - 1].is(Kwd(KwdDefault))) continue;
 
 			var defaultExists = false;
-			for (i in 0 ... tokens.length) {
+			for (i in 0...tokens.length) {
 				if (tokens[i].is(Kwd(KwdDefault)) && i < tokens.length - 1) {
 					logPos("Default should be last label in the switch", token.pos);
 					continue;

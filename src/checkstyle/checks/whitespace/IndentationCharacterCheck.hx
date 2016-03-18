@@ -16,7 +16,7 @@ class IndentationCharacterCheck extends LineCheckBase {
 	override function actualRun() {
 		var ignoreRE = new EReg(ignorePattern, "");
 		var re = (character == TAB) ? ~/^\t*(\S.*| \*.*)?$/ : ~/^ *(\S.*)?$/;
-		for (i in 0 ... checker.lines.length) {
+		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
 			if (ignoreRE.match(line) || isLineSuppressed(i)) continue;
 			if (isMultineString(line)) continue;

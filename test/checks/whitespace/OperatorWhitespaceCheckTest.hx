@@ -337,6 +337,7 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 			if (!test) return a++;
 			++a;
+			return !(a++);
 		}
 	}";
 
@@ -345,6 +346,7 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 			if (! test) return a ++;
 			++ a;
+			return ! (a ++);
 		}
 	}";
 
