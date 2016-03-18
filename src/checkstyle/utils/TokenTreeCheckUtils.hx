@@ -57,7 +57,7 @@ class TokenTreeCheckUtils {
 		}
 	}
 
-	function isUnaryLeftSided(tok:TokenTree):Bool {
+	public static function isUnaryLeftSided(tok:TokenTree):Bool {
 		var child:TokenTree = tok.getFirstChild();
 
 		if (child == null) return false;

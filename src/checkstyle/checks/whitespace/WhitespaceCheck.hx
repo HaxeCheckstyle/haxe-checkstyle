@@ -19,7 +19,7 @@ class WhitespaceCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		tokens = [
-			ARROW, ASSIGN, UNARY, COMPARE, BITWISE, BOOL
+			ARROW,
 		];
 		mode = AROUND;
 		contexts = [OBJECT_DECL, FUNCTION, FIELD, SWITCH, TRY_CATCH, ARRAY_ACCESS, BLOCK, CLASS, INTERFACE, TYPEDEF, ABSTRACT, ENUM];
@@ -32,56 +32,6 @@ class WhitespaceCheck extends Check {
 
 		for (token in tokens) {
 			switch (token) {
-				case ASSIGN:
-					tokenList = tokenList.concat([
-						Binop(OpAssign),
-						Binop(OpAssignOp(OpAdd)),
-						Binop(OpAssignOp(OpSub)),
-						Binop(OpAssignOp(OpMult)),
-						Binop(OpAssignOp(OpDiv)),
-						Binop(OpAssignOp(OpMod)),
-						Binop(OpAssignOp(OpShl)),
-						Binop(OpAssignOp(OpShr)),
-						Binop(OpAssignOp(OpUShr)),
-						Binop(OpAssignOp(OpOr)),
-						Binop(OpAssignOp(OpAnd)),
-						Binop(OpAssignOp(OpXor))
-					]);
-				case UNARY:
-					tokenList = tokenList.concat([
-						Unop(OpNot),
-						Unop(OpIncrement),
-						Unop(OpDecrement)
-					]);
-				case COMPARE:
-					tokenList = tokenList.concat([
-						Binop(OpGt),
-						Binop(OpLt),
-						Binop(OpGte),
-						Binop(OpLte),
-						Binop(OpEq),
-						Binop(OpNotEq)
-					]);
-				case ARITHMETIC:
-					tokenList = tokenList.concat([
-						Binop(OpAdd),
-						Binop(OpSub),
-						Binop(OpMult),
-						Binop(OpDiv),
-						Binop(OpMod)
-					]);
-				case BITWISE:
-					tokenList = tokenList.concat([
-						Binop(OpAnd),
-						Binop(OpOr),
-						Binop(OpXor),
-						Binop(OpShl),
-						Binop(OpShr),
-						Binop(OpUShr)
-					]);
-				case BOOL:
-					tokenList.push(Binop(OpBoolAnd));
-					tokenList.push(Binop(OpBoolOr));
 				case ARROW:
 					tokenList.push(Arrow);
 				case COMMA:
@@ -104,8 +54,6 @@ class WhitespaceCheck extends Check {
 					tokenList.push(DblDot);
 				case DOT:
 					tokenList.push(Dot);
-				case INTERVAL:
-					tokenList.push(Binop(OpInterval));
 			}
 		}
 
@@ -290,12 +238,6 @@ abstract WhitespaceContext(String) {
 
 @:enum
 abstract WhitespaceToken(String) {
-	var ASSIGN = "Assign";
-	var UNARY = "Unary";
-	var COMPARE = "Compare";
-	var ARITHMETIC = "Arithmetic";
-	var BITWISE = "Bitwise";
-	var BOOL = "Bool";
 	var ARROW = "=>";
 	var COMMA = ",";
 	var SEMICOLON = ";";
@@ -307,7 +249,6 @@ abstract WhitespaceToken(String) {
 	var BKCLOSE = "]";
 	var DBLDOT = ":";
 	var DOT = ".";
-	var INTERVAL = "...";
 }
 
 @:enum
