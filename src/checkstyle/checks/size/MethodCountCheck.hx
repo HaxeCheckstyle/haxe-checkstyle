@@ -26,7 +26,7 @@ class MethodCountCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdFunction)], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdFunction)], FIRST);
 
 		if (acceptableTokens.length > maxTotal) {
 			log('Total number of methods is ${acceptableTokens.length} (max allowed is ${maxTotal})', 0, 0);
