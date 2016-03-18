@@ -67,6 +67,12 @@
 			"props": {
 				"severity": "INFO"
 			},
+			"type": "DefaultComesLast"
+		},
+		{
+			"props": {
+				"severity": "INFO"
+			},
 			"type": "Dynamic"
 		},
 		{
@@ -239,6 +245,15 @@
 				"severity": "INFO"
 			},
 			"type": "MemberName"
+		},
+		{
+			"props": {
+				"maxPrivate": 50,
+				"maxPublic": 50,
+				"maxTotal": 50,
+				"severity": "INFO"
+			},
+			"type": "MethodCount"
 		},
 		{
 			"props": {

@@ -248,6 +248,15 @@
 		},
 		{
 			"props": {
+				"maxPrivate": 100,
+				"maxPublic": 100,
+				"severity": "IGNORE",
+				"maxTotal": 100
+			},
+			"type": "MethodCount"
+		},
+		{
+			"props": {
 				"max": 50,
 				"severity": "IGNORE"
 			},
