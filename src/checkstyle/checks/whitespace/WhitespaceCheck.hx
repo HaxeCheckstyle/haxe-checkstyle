@@ -157,12 +157,12 @@ class WhitespaceCheck extends Check {
 		var currentContext:WhitespaceContext = determineContext(token);
 		if (currentContext == null || !hasContext(currentContext)) return false;
 
-		if (TokenTreeCheckUtils.isTypeParameter(token)) {
-			return hasContext(TYPE_PARAMETER);
-		}
-		if (!hasContext(FUNCTION)) {
-			if (isFunctionContext(token)) return true;
-		}
+		//if (TokenTreeCheckUtils.isTypeParameter(token)) {
+		//    return hasContext(TYPE_PARAMETER);
+		//}
+		//if (!hasContext(FUNCTION)) {
+		//    if (isFunctionContext(token)) return true;
+		//}
 		switch (token.tok) {
 			case Dot:
 			case DblDot:
@@ -308,4 +308,13 @@ abstract WhitespaceToken(String) {
 	var DBLDOT = ":";
 	var DOT = ".";
 	var INTERVAL = "...";
+}
+
+@:enum
+abstract WhitespacePolicy(String) {
+	var BEFORE = "before";
+	var AFTER = "after";
+	var AROUND = "around";
+	var NONE = "none";
+	var IGNORE = "ignore";
 }

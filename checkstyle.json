@@ -337,6 +337,19 @@
 		},
 		{
 			"props": {
+				"assignOpPolicy": "around",
+				"unaryOpPolicy": "ignore",
+				"arithmeticOpPolicy": "around",
+				"compareOpPolicy": "around",
+				"bitwiseOpPolicy": "around",
+				"boolOpPolicy": "around",
+				"intervalOpPolicy": "none",
+				"severity": "INFO"
+			},
+			"type": "OperatorWhitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					"=",
 					"+",
@@ -552,71 +565,6 @@
 				"severity": "INFO"
 			},
 			"type": "VariableInitialisation"
-		},
-		{
-			"props": {
-				"mode": "around",
-				"tokens": [
-					"=>",
-					"Assign",
-					"Unary",
-					"Compare",
-					"Bitwise",
-					"Bool",
-					"{",
-					"}"
-				],
-				"contexts": [
-					"Object",
-					"Function",
-					"Field",
-					"Switch",
-					"Switch",
-					"Array"
-				],
-				"severity": "WARNING"
-			},
-			"type": "Whitespace"
-		},
-		{
-			"props": {
-				"mode": "none",
-				"tokens": [
-					".",
-					":",
-					"(",
-					")"
-				],
-				"contexts": [
-					"Object",
-					"Function",
-					"Field",
-					"Switch",
-					"Switch",
-					"Array"
-				],
-				"severity": "WARNING"
-			},
-			"type": "Whitespace"
-		},
-		{
-			"props": {
-				"mode": "after",
-				"tokens": [
-					",",
-					";"
-				],
-				"contexts": [
-					"Object",
-					"Function",
-					"Field",
-					"Switch",
-					"Switch",
-					"Array"
-				],
-				"severity": "WARNING"
-			},
-			"type": "Whitespace"
 		},
 		{
 			"props": {
