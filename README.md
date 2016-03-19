@@ -1,4 +1,4 @@
-![logo](resources/logo/haxe-checkstyle.png)
+![logo](resources/logo.png)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
