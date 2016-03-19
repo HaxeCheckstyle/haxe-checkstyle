@@ -3,8 +3,6 @@ package checkstyle.checks.whitespace;
 import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
-import checkstyle.checks.whitespace.WhitespaceCheck.WhitespacePolicy;
-import checkstyle.checks.whitespace.WhitespaceCheck.WhitespaceUnaryPolicy;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -215,4 +213,20 @@ class OperatorWhitespaceCheck extends Check {
 		}
 		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 	}
+}
+
+@:enum
+abstract WhitespacePolicy(String) {
+	var BEFORE = "before";
+	var AFTER = "after";
+	var AROUND = "around";
+	var NONE = "none";
+	var IGNORE = "ignore";
+}
+
+@:enum
+abstract WhitespaceUnaryPolicy(String) {
+	var INNER = "inner";
+	var NONE = "none";
+	var IGNORE = "ignore";
 }

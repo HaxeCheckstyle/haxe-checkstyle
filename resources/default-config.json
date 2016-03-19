@@ -562,30 +562,6 @@
 		},
 		{
 			"props": {
-				"mode": "around",
-				"tokens": [
-					"=>"
-				],
-				"contexts": [
-					"Object",
-					"Function",
-					"Field",
-					"Switch",
-					"Switch",
-					"Array",
-					"Block",
-					"Class",
-					"Interface",
-					"Typedef",
-					"Abstract",
-					"Enum"
-				],
-				"severity": "IGNORE"
-			},
-			"type": "Whitespace"
-		},
-		{
-			"props": {
 				"tokens": [
 					",",
 					";"
