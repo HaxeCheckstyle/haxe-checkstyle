@@ -17,7 +17,7 @@ class TabForAligningCheck extends LineCheckBase {
 	override function actualRun() {
 		var ignoreRE = new EReg(ignorePattern, "");
 		var re = ~/^\s*\S[^\t]*\t/;
-		for (i in 0 ... checker.lines.length) {
+		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
 			if (ignoreRE.match(line)) continue;
 			if (isMultineString(line)) continue;

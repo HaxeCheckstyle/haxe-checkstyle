@@ -35,7 +35,7 @@ class EmptyLinesCheck extends LineCheckBase {
 		var start = 0;
 		var end = 0;
 
-		for (i in 0 ... checker.lines.length) {
+		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
 			if (isMultineString(line)) continue;
 			if (~/^\s*$/.match(line)) {

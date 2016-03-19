@@ -344,6 +344,19 @@
 		},
 		{
 			"props": {
+				"unaryOpPolicy": "none",
+				"boolOpPolicy": "around",
+				"intervalOpPolicy": "none",
+				"assignOpPolicy": "around",
+				"bitwiseOpPolicy": "around",
+				"arithmeticOpPolicy": "around",
+				"compareOpPolicy": "around",
+				"severity": "IGNORE"
+			},
+			"type": "OperatorWhitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					"=",
 					"+",
