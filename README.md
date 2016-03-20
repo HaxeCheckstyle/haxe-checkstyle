@@ -1,9 +1,10 @@
 ![logo](resources/logo.png)
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
+[![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle) 
 [![codecov.io](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle?branch=dev)
-[![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle) [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
+[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/) 
+[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
 Automated code analysis tool ideal for projects that want to enforce coding conventions.
 
