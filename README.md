@@ -6,16 +6,26 @@
 [![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/) 
 [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
-Automated code analysis tool ideal for projects that want to enforce coding conventions.
+Checkstyle is a development library to help developers write Haxe code that adheres to a coding standard.
 
-Code conventions improve readability, allowing team members to understand each other's code better.
+It automates the process of checking Haxe code to spare developers of this boring (but important) task.
 
-Please note that this project was derived from [haxelint](https://github.com/mcheshkov/haxelint) created by [@mcheshkov](https://github.com/mcheshkov).
+Code conventions improve readability, allowing team members to understand each others code better.
+
+Ideal for any project that want to enforce coding conventions.
+
+This project was derived from [haxelint](https://github.com/mcheshkov/haxelint) created by [@mcheshkov](https://github.com/mcheshkov).
 
 ### Installation
 
-```haxe
+```
 haxelib install checkstyle
+```
+
+### Basic Usage
+
+```
+haxelib run checkstyle -s src
 ```
 
 ### Reference
