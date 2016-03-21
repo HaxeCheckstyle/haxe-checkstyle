@@ -601,6 +601,9 @@ class TokenTreeBuilder {
 				walkPOpen(parent);
 				walkIdentifierContinue(parent);
 				return;
+			case Question:
+				walkQuestion(parent);
+				return;
 			case PClose, BrClose, BkClose:
 				return;
 			case Comma:
@@ -622,9 +625,18 @@ class TokenTreeBuilder {
 
 	function walkIdentifierContinue(parent:TokenTree) {
 		switch (stream.token()) {
-			case Dot, DblDot:
+			case Dot:
+				walkIdentifier(parent);
+			case DblDot:
+				var question:TokenTree = findQuestionParent(parent);
+			    if (question != null) {
+					walkIdentifier(question);
+					return;
+				}
 				walkIdentifier(parent);
 			case Binop(_), Unop(_):
+				walkIdentifier(parent);
+			case Question:
 				walkIdentifier(parent);
 			case Semicolon:
 				walkIdentifier(parent);
@@ -636,6 +648,21 @@ class TokenTreeBuilder {
 		}
 	}
 
+	function findQuestionParent(token:TokenTree):TokenTree {
+		var parent:TokenTree = token;
+		while (parent.tok != null) {
+			switch (parent.tok) {
+				case Question: return parent;
+				case Comma: return null;
+				case POpen, BrOpen, BkOpen: return null;
+				case Kwd(_): return null;
+				default:
+			}
+			parent = parent.parent;
+		}
+		return null;
+	}
+
 	function walkBinopSub(parent:TokenTree) {
 		var sub:TokenTree = stream.consumeOpSub();
 		parent.addChild(sub);
@@ -645,6 +672,12 @@ class TokenTreeBuilder {
 			default:
 				walkIdentifier(sub);
 		}
+	}
+
+	function walkQuestion(parent:TokenTree) {
+		var question:TokenTree = stream.consumeTokenDef(Question);
+		parent.addChild(question);
+		walkIdentifier(question);
 	}
 
 	/**

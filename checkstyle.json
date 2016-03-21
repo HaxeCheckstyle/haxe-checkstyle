@@ -339,7 +339,7 @@
 			"props": {
 				"assignOpPolicy": "around",
 				"unaryOpPolicy": "none",
-				"ternaryOpPolicy": "none",
+				"ternaryOpPolicy": "around",
 				"arithmeticOpPolicy": "around",
 				"compareOpPolicy": "around",
 				"bitwiseOpPolicy": "around",
