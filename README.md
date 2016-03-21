@@ -30,7 +30,7 @@ haxelib run checkstyle -s src
 
 ### Reference
 
-[More information and reference](https://adireddy.gitbooks.io/haxe-checkstyle/content/).
+[More information and reference](http://haxecheckstyle.github.io/haxe-checkstyle).
 
 ### Issues [![Stories in Ready](https://badge.waffle.io/HaxeCheckstyle/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/HaxeCheckstyle/haxe-checkstyle)
 
