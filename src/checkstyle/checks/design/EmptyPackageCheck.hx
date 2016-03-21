@@ -1,7 +1,6 @@
 package checkstyle.checks.design;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 @name("EmptyPackage")
 @desc("Checks for empty package names.")

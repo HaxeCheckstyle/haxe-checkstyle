@@ -48,7 +48,6 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	// This would not pass the cyclomatic complexity test.
-
 	function evaluateExpr(e:Expr):Int {
 		if (e == null || e.expr == null) return 0;
 		return switch (e.expr) {
@@ -100,6 +99,7 @@ typedef Target = {
 	var expr:Expr;
 	var pos:Position;
 }
+
 typedef Threshold = {
 	var severity:String;
 	var complexity:Int;

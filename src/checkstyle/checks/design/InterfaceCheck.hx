@@ -1,7 +1,6 @@
 package checkstyle.checks.design;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 @name("Interface")
 @desc("Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.")

@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 				command: "haxelib install haxeparser 3.2.0 && " +
 				 		 "haxelib install compiletime 2.6.0 && " +
 				 		 "haxelib install hxargs 3.0.0"
-			},
+			}
 		},
 
 		haxe: {
