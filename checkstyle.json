@@ -339,11 +339,14 @@
 			"props": {
 				"assignOpPolicy": "around",
 				"unaryOpPolicy": "none",
+				"ternaryOpPolicy": "none",
 				"arithmeticOpPolicy": "around",
 				"compareOpPolicy": "around",
 				"bitwiseOpPolicy": "around",
 				"boolOpPolicy": "around",
 				"intervalOpPolicy": "none",
+				"arrowPolicy": "around",
+				"functionArgPolicy": "around",
 				"severity": "INFO"
 			},
 			"type": "OperatorWhitespace"
