@@ -16,6 +16,8 @@ class OperatorWhitespaceCheck extends Check {
 	public var assignOpPolicy:WhitespacePolicy;
 	// ++, --, !
 	public var unaryOpPolicy:WhitespaceUnaryPolicy;
+	// ?:
+	public var ternaryOpPolicy:WhitespacePolicy;
 	// +, -, *, /, %
 	public var arithmeticOpPolicy:WhitespacePolicy;
 	// ==, !=, <, <=, >, >=
@@ -26,16 +28,23 @@ class OperatorWhitespaceCheck extends Check {
 	public var boolOpPolicy:WhitespacePolicy;
 	// ...
 	public var intervalOpPolicy:WhitespacePolicy;
+	// =>
+	public var arrowPolicy:WhitespacePolicy;
+	// ->
+	public var functionArgPolicy:WhitespacePolicy;
 
 	public function new() {
 		super(TOKEN);
 		assignOpPolicy = AROUND;
 		unaryOpPolicy = NONE;
+		ternaryOpPolicy = AROUND;
 		arithmeticOpPolicy = AROUND;
 		compareOpPolicy = AROUND;
 		bitwiseOpPolicy = AROUND;
 		boolOpPolicy = AROUND;
 		intervalOpPolicy = NONE;
+		arrowPolicy = AROUND;
+		functionArgPolicy = AROUND;
 
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -45,11 +54,14 @@ class OperatorWhitespaceCheck extends Check {
 
 		checkAssignOps(root);
 		checkUnaryOps(root);
+		checkTernaryOps(root);
 		checkArithmeticOps(root);
 		checkCompareOps(root);
 		checkBitwiseOps(root);
 		checkBoolOps(root);
 		checkIntervalOps(root);
+		checkArrowOps(root);
+		checkFunctionArg(root);
 	}
 
 	function checkAssignOps(root:TokenTree) {
@@ -83,6 +95,20 @@ class OperatorWhitespaceCheck extends Check {
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			checkUnaryWhitespace(token, unaryOpPolicy);
+		}
+	}
+
+	function checkTernaryOps(root:TokenTree) {
+		if ((ternaryOpPolicy == null) || (ternaryOpPolicy == IGNORE)) return;
+		var tokens:Array<TokenTree> = root.filter([Question], ALL);
+
+		for (token in tokens) {
+			if (isPosSuppressed(token.pos)) continue;
+			if (!TokenTreeCheckUtils.isTernary(token)) continue;
+			// ?
+			checkWhitespace(token, ternaryOpPolicy);
+			// :
+			checkWhitespace(token.getLastChild(), ternaryOpPolicy);
 		}
 	}
 
@@ -144,6 +170,18 @@ class OperatorWhitespaceCheck extends Check {
 			}
 		});
 		checkTokenList(tokens, intervalOpPolicy);
+	}
+
+	function checkArrowOps(root:TokenTree) {
+		if ((arrowPolicy == null) || (arrowPolicy == IGNORE)) return;
+		var tokens:Array<TokenTree> = root.filter([Binop(OpArrow)], ALL);
+		checkTokenList(tokens, arrowPolicy);
+	}
+
+	function checkFunctionArg(root:TokenTree) {
+		if ((functionArgPolicy == null) || (functionArgPolicy == IGNORE)) return;
+		var tokens:Array<TokenTree> = root.filter([Arrow], ALL);
+		checkTokenList(tokens, functionArgPolicy);
 	}
 
 	function checkTokenList(tokens:Array<TokenTree>, policy:WhitespacePolicy) {

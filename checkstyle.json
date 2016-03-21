@@ -271,11 +271,14 @@
 			"props": {
 				"assignOpPolicy": "around",
 				"unaryOpPolicy": "none",
+				"ternaryOpPolicy": "around",
 				"arithmeticOpPolicy": "around",
 				"compareOpPolicy": "around",
 				"bitwiseOpPolicy": "around",
 				"boolOpPolicy": "around",
-				"intervalOpPolicy": "none"
+				"intervalOpPolicy": "none",
+				"arrowPolicy": "around",
+				"functionArgPolicy": "around"
 			},
 			"type": "OperatorWhitespace"
 		},

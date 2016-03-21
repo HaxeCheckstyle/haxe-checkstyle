@@ -11,6 +11,12 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 	static inline var MSG_UNARY_INNER:String = 'OperatorWhitespace policy "inner" violated by "++"';
 	static inline var MSG_INTERVAL_NONE:String = 'OperatorWhitespace policy "none" violated by "..."';
 	static inline var MSG_INTERVAL_AROUND:String = 'OperatorWhitespace policy "around" violated by "..."';
+	static inline var MSG_FUNC_ARG_AROUND:String = 'OperatorWhitespace policy "around" violated by "->"';
+	static inline var MSG_FUNC_ARG_NONE:String = 'OperatorWhitespace policy "none" violated by "->"';
+	static inline var MSG_ARROW_AROUND:String = 'OperatorWhitespace policy "around" violated by "=>"';
+	static inline var MSG_ARROW_NONE:String = 'OperatorWhitespace policy "none" violated by "=>"';
+	static inline var MSG_TERNARY_AROUND:String = 'OperatorWhitespace policy "around" violated by ":"';
+	static inline var MSG_TERNARY_NONE:String = 'OperatorWhitespace policy "none" violated by ":"';
 
 	public function testCorrectOperatorWhitespace() {
 		var check = new OperatorWhitespaceCheck();
@@ -99,11 +105,47 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, INTERVAL_WHITESPACE);
 	}
 
+	public function testFunctionArg() {
+		var check = new OperatorWhitespaceCheck();
+
+		assertMsg(check, FUNC_ARG_NO_WHITESPACE, MSG_FUNC_ARG_AROUND);
+		assertNoMsg(check, FUNC_ARG_WHITESPACE);
+
+		check.functionArgPolicy = NONE;
+		assertNoMsg(check, FUNC_ARG_NO_WHITESPACE);
+		assertMsg(check, FUNC_ARG_WHITESPACE, MSG_FUNC_ARG_NONE);
+	}
+
+	public function testArrow() {
+		var check = new OperatorWhitespaceCheck();
+
+		assertMsg(check, MAP_NO_WHITESPACE, MSG_ARROW_AROUND);
+		assertNoMsg(check, MAP_WHITESPACE);
+
+		check.arrowPolicy = NONE;
+		assertNoMsg(check, MAP_NO_WHITESPACE);
+		assertMsg(check, MAP_WHITESPACE, MSG_ARROW_NONE);
+	}
+
+	public function testTernary() {
+		var check = new OperatorWhitespaceCheck();
+
+		assertMsg(check, TERNARY_NO_WHITESPACE, MSG_TERNARY_AROUND);
+		assertNoMsg(check, TERNARY_WHITESPACE);
+
+		check.ternaryOpPolicy = NONE;
+		assertNoMsg(check, TERNARY_NO_WHITESPACE);
+		assertMsg(check, TERNARY_WHITESPACE, MSG_TERNARY_NONE);
+	}
+
 	public function testIgnore() {
 		var check = new OperatorWhitespaceCheck();
 		check.assignOpPolicy = IGNORE;
 		check.unaryOpPolicy = IGNORE;
+		check.ternaryOpPolicy = IGNORE;
 		check.intervalOpPolicy = IGNORE;
+		check.arrowPolicy = IGNORE;
+		check.functionArgPolicy = IGNORE;
 
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
 		assertNoMsg(check, ISSUE_70);
@@ -130,6 +172,12 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, UNARY_INNER_WHITESPACE);
 		assertNoMsg(check, INTERVAL_NO_WHITESPACE);
 		assertNoMsg(check, INTERVAL_WHITESPACE);
+		assertNoMsg(check, FUNC_ARG_NO_WHITESPACE);
+		assertNoMsg(check, FUNC_ARG_WHITESPACE);
+		assertNoMsg(check, MAP_NO_WHITESPACE);
+		assertNoMsg(check, MAP_WHITESPACE);
+		assertNoMsg(check, TERNARY_NO_WHITESPACE);
+		assertNoMsg(check, TERNARY_WHITESPACE);
 	}
 }
 
@@ -363,6 +411,38 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 			for (i in 0 ... 100) trace(i);
 			for (i in a ... b) trace(i);
+		}
+	}";
+
+	var FUNC_ARG_WHITESPACE = "
+	typedef Test = Int -> String -> Array<Int>;
+	";
+
+	var FUNC_ARG_NO_WHITESPACE = "
+	typedef Test = Int->String->Array<Int>;
+	";
+
+	var MAP_WHITESPACE = "
+	class Test {
+		var test = ['key' => 'value', 'key2' => 'value2'];
+	}";
+
+	var MAP_NO_WHITESPACE = "
+	class Test {
+		var test = ['key'=>'value', 'key2'=>'value2'];
+	}";
+
+	var TERNARY_WHITESPACE = "
+	class Test {
+		function test() {
+			x = a ? b : c;
+		}
+	}";
+
+	var TERNARY_NO_WHITESPACE = "
+	class Test {
+		function test() {
+			x = a?b:c;
 		}
 	}";
 }

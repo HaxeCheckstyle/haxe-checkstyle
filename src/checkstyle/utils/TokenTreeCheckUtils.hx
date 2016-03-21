@@ -67,4 +67,10 @@ class TokenTreeCheckUtils {
 			default: false;
 		}
 	}
+
+	public static function isTernary(tok:TokenTree):Bool {
+		if (!tok.tok.match(Question)) return false;
+		if (!tok.getLastChild().tok.match(DblDot)) return false;
+		return true;
+	}
 }
