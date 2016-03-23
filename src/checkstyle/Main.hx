@@ -32,6 +32,7 @@ class Main {
 	static var SHOW_PROGRESS:Bool = false;
 	static var EXIT_CODE:Bool = false;
 	static var NO_STYLE:Bool = false;
+	static var CODE_CLIMATE_REPORTER:String = "codeclimate";
 	static var exitCode:Int;
 
 	var info:ChecksInfo;
@@ -81,7 +82,7 @@ class Main {
 		}
 		argHandler.parse(args);
 
-		if (REPORT_TYPE == "codeclimate") {
+		if (REPORT_TYPE == CODE_CLIMATE_REPORTER) {
 			var defaultConfig:CodeclimateConfig = Json.parse(File.getContent("/config.json"));
 			if (defaultConfig.include_paths != null && defaultConfig.include_paths.length > 0) {
 				for (s in defaultConfig.include_paths) {
@@ -307,6 +308,8 @@ class Main {
 	}
 
 	function failWith(message:String) {
+		// Skipping stderr for codeclimate
+		if (REPORT_TYPE == CODE_CLIMATE_REPORTER) return;
 		Sys.stderr().writeString(message + "\n");
 		Sys.exit(1);
 	}
