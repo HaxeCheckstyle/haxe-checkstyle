@@ -23,7 +23,7 @@ class LineLengthCheck extends Check {
 			var line = checker.lines[i];
 			if (line.length > max) {
 				if (ignoreRE.match(line) || isLineSuppressed(i)) continue;
-				log('Too long line - ${line.length}, max length allowed is ${max}', i + 1, 0, line.length);
+				log('Line is longer than ${max} characters (found ${line.length})', i + 1, 0, line.length);
 			}
 		}
 	}

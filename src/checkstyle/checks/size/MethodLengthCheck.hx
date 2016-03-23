@@ -44,7 +44,8 @@ class MethodLengthCheck extends Check {
 		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
-		if (lmax - lmin > max) warnFunctionLength(f.name, f.pos);
+		var len = lmax - lmin;
+		if (len > max) warnFunctionLength(len, f.name, f.pos);
 	}
 
 	function checkFunction(f:Expr) {
@@ -58,10 +59,11 @@ class MethodLengthCheck extends Check {
 			default: throw "EFunction only";
 		}
 
-		if (lmax - lmin > max) warnFunctionLength(fname, f.pos);
+		var len = lmax - lmin;
+		if (len > max) warnFunctionLength(len, fname, f.pos);
 	}
 
-	function warnFunctionLength(name:String, pos:Position) {
-		logPos('Function is too long: ${name} (> ${max} lines, try splitting into multiple functions)', pos);
+	function warnFunctionLength(len:Int, name:String, pos:Position) {
+		logPos('Method `${name}` length is ${len} lines (max allowed is ${max})', pos);
 	}
 }
