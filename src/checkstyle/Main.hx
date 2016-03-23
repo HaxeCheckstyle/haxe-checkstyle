@@ -121,6 +121,7 @@ class Main {
 		if (config.exclude != null) parseExcludes(config.exclude);
 
 		for (checkConf in config.checks) {
+			if (REPORT_TYPE == CODE_CLIMATE_REPORTER && checkConf.type == "TODOComment") continue;
 			var check = createCheck(checkConf);
 			setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
@@ -201,7 +202,10 @@ class Main {
 
 	function addAllChecks() {
 		for (check in getSortedCheckInfos()) {
-			if (!check.isAlias) checker.addCheck(info.build(check.name));
+			if (!check.isAlias) {
+				if (REPORT_TYPE == CODE_CLIMATE_REPORTER && check.name == "TODOComment") continue;
+				checker.addCheck(info.build(check.name));
+			}
 		}
 	}
 

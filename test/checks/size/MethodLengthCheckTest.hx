@@ -5,7 +5,7 @@ import checkstyle.checks.size.MethodLengthCheck;
 class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 
 	public function testWrongMethodLength() {
-		assertMsg(new MethodLengthCheck(), TEST1, 'Function is too long: test (> 50 lines, try splitting into multiple functions)');
+		assertMsg(new MethodLengthCheck(), TEST1, 'Method `test` length is 354 lines (max allowed is 50)');
 	}
 
 	public function testCorrectMethodLength() {
@@ -17,7 +17,7 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 		var check = new MethodLengthCheck();
 		check.max = 10;
 
-		assertMsg(check, TEST3, 'Function is too long: test (> 10 lines, try splitting into multiple functions)');
+		assertMsg(check, TEST3, 'Method `test` length is 12 lines (max allowed is 10)');
 	}
 }
 

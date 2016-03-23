@@ -6,7 +6,7 @@ class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 
 	public function testDefaultLineLength() {
 		var check = new LineLengthCheck();
-		assertMsg(new LineLengthCheck(), TEST1, "Too long line - 178, max length allowed is " + check.max);
+		assertMsg(new LineLengthCheck(), TEST1, "Line is longer than 160 characters (found 178)");
 	}
 
 	public function testCorrectLineLength() {
@@ -16,7 +16,7 @@ class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.max = 40;
-		assertMsg(check, TEST3, "Too long line - 73, max length allowed is " + check.max);
+		assertMsg(check, TEST3, "Line is longer than 40 characters (found 73)");
 	}
 }
 
