@@ -112,7 +112,7 @@ class EmptyBlockCheck extends Check {
 	function checkForEmpty(brOpen:TokenTree) {
 		if (brOpen.childs.length > 1) return;
 		var brClose:TokenTree = brOpen.childs[0];
-		if (brOpen.pos.max != brClose.pos.min) logPos("Empty block should be written as {}", brOpen.pos);
+		if (brOpen.pos.max != brClose.pos.min) logPos('Empty block should be written as "{}"', brOpen.pos);
 	}
 }
 
