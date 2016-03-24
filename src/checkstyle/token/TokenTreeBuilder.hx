@@ -14,7 +14,7 @@ class TokenTreeBuilder {
 
 	public static function buildTokenTree(tokens:Array<Token>):TokenTree {
 		var tokenizer:TokenTreeBuilder = new TokenTreeBuilder(new TokenStream(tokens));
-		var root:TokenTree = new TokenTree(null, null);
+		var root:TokenTree = new TokenTree(null, null, -1);
 		tokenizer.walkFile(root);
 		return root;
 	}
