@@ -18,7 +18,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
 	public function testImports() {
 		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IMPORT);
-		var root:TokenTree = new TokenTree(null, null);
+		var root:TokenTree = new TokenTree(null, null, -1);
 		builder.testWalkPackageImport(root);
 		builder.testWalkPackageImport(root);
 		builder.testWalkPackageImport(root);
@@ -31,7 +31,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
 	public function testAt() {
 		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.AT_ANNOTATION);
-		var root:TokenTree = new TokenTree(null, null);
+		var root:TokenTree = new TokenTree(null, null, -1);
 		root.addChild(builder.testWalkAt());
 		root.addChild(builder.testWalkAt());
 		root.addChild(builder.testWalkAt());
@@ -44,7 +44,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
 	public function testIf() {
 		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IF);
-		var root:TokenTree = new TokenTree(null, null);
+		var root:TokenTree = new TokenTree(null, null, -1);
 		builder.testWalkIf(root);
 		builder.testWalkIf(root);
 		builder.testWalkIf(root);
