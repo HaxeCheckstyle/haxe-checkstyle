@@ -1,6 +1,11 @@
 engines:
   haxe-checkstyle:
     enabled: true
+  fixme:
+    enabled: true
+
+exclude_paths:
+  - resources/**/*
 
 ratings:
   paths:
