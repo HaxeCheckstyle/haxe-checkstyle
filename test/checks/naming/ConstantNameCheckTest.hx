@@ -12,7 +12,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 
 	public function testWrongNaming() {
 		var check = new ConstantNameCheck();
-		var message = 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)';
+		var message = 'Invalid const signature: "Count" (name should be "~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/")';
 		assertMsg(check, TEST1, message);
 		assertMsg(check, TEST2, message);
 	}
@@ -21,7 +21,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 		var check = new ConstantNameCheck();
 		check.ignoreExtern = false;
 
-		var message = 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)';
+		var message = 'Invalid const signature: "Count" (name should be "~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/")';
 		assertNoMsg(check, TEST);
 		assertMsg(check, TEST1, message);
 		assertMsg(check, TEST2, message);
@@ -34,7 +34,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
+		assertMsg(check, TEST2, 'Invalid const signature: "Count" (name should be "~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/")');
 		assertNoMsg(check, TEST3);
 	}
 
@@ -43,7 +43,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 		check.tokens = [NOTINLINE];
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, 'Invalid const signature: Count (name should be ~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/)');
+		assertMsg(check, TEST1, 'Invalid const signature: "Count" (name should be "~/^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$/")');
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
 	}
@@ -52,7 +52,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 		var check = new ConstantNameCheck();
 		check.format = "^[A-Z][a-z]*$";
 
-		assertMsg(check, TEST, 'Invalid const signature: COUNT2 (name should be ~/^[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid const signature: "COUNT2" (name should be "~/^[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);

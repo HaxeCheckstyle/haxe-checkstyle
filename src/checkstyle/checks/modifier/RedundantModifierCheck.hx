@@ -28,11 +28,11 @@ class RedundantModifierCheck extends Check {
 		var implicitAccess = isDefaultPrivate ? "private" : "public";
 		if (enforcePublicPrivate) {
 			if (!f.access.contains(APublic) && !f.access.contains(APrivate)) {
-				logPos('Missing $implicitAccess keyword: ${f.name}', f.pos);
+				logPos('Missing "$implicitAccess" keyword: "${f.name}"', f.pos);
 			}
 		}
 		else if ((isDefaultPrivate && f.access.contains(APrivate)) || (!isDefaultPrivate && f.access.contains(APublic))) {
-			logPos('No need of $implicitAccess keyword: ${f.name}', f.pos);
+			logPos('No need of "$implicitAccess" keyword: "${f.name}"', f.pos);
 		}
 	}
 }

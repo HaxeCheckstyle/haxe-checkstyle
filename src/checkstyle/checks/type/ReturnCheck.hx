@@ -102,7 +102,7 @@ class ReturnCheck extends Check {
 	}
 
 	function warnVoid(name:String, pos:Position) {
-		logPos('Void return should not explicitly be specified for function $name', pos);
+		logPos('Void return should not explicitly be specified for function "$name"', pos);
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
@@ -110,7 +110,7 @@ class ReturnCheck extends Check {
 			logPos('Return type not specified for anonymous function', pos);
 		}
 		else {
-			logPos('Return type not specified for function: ${name}', pos);
+			logPos('Return type not specified for function "${name}"', pos);
 		}
 	}
 }

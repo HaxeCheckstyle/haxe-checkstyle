@@ -39,7 +39,7 @@ class NullableParameterCheck extends Check {
 	}
 
 	function formatArguments(opt:Bool, name:String, nullDefault:Bool):String {
-		return "'" + (opt ? "?" : "") + name + (nullDefault ? " = null" : "") + "'";
+		return '"' + (opt ? '?' : '') + name + (nullDefault ? ' = null' : '') + '"';
 	}
 }
 

@@ -11,13 +11,13 @@ class CatchParameterNameCheckTest extends CheckTestCase<CatchParameterNameCheckT
 
 	public function testInCorrectNaming() {
 		var check = new CatchParameterNameCheck();
-		assertMsg(check, TEST2, 'Val must match pattern ~/${check.format}/');
+		assertMsg(check, TEST2, '"Val" must match pattern "~/${check.format}/"');
 	}
 
 	public function testCustomNaming() {
 		var check = new CatchParameterNameCheck();
 		check.format = "^(ex)$";
-		assertMsg(check, TEST1, 'e must match pattern ~/${check.format}/');
+		assertMsg(check, TEST1, '"e" must match pattern "~/${check.format}/"');
 	}
 }
 

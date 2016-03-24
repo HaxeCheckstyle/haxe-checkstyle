@@ -16,7 +16,7 @@ class ArrayLiteralCheck extends Check {
 		ExprUtils.walkFile(checker.ast, function(e:Expr) {
 			switch (e.expr){
 				case ENew({pack:[], name:"Array"}, _):
-					logPos("Bad array instantiation, use the array literal notation [] which is shorter and cleaner", e.pos);
+					logPos('Bad array instantiation, use the array literal notation "[]" which is shorter and cleaner', e.pos);
 				default:
 			}
 		});

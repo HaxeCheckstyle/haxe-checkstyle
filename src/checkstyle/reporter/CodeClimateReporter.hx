@@ -3,6 +3,8 @@ package checkstyle.reporter;
 import checkstyle.CheckMessage.SeverityLevel;
 import haxe.Json;
 
+using StringTools;
+
 class CodeClimateReporter extends BaseReporter {
 
 	static inline var INFO:String = "info";
@@ -15,12 +17,15 @@ class CodeClimateReporter extends BaseReporter {
 	override public function finish() {}
 
 	override public function addMessage(m:CheckMessage) {
+		if (m.moduleName == "TODOComment") return;
+
 		var file = ~/^\/code\//.replace(m.fileName, "");
 		file = ~/\/\//.replace(file, "/");
+
 		var issue = {
 			type: "issue",
 			check_name: m.moduleName,
-			description: m.message,
+			description: m.message.replace("\"", "`"),
 			content: {
 				body: m.desc
 			},

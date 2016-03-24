@@ -14,19 +14,19 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 
 	public function testIncorrectNaming() {
 		var check = new TypeNameCheck();
-		assertMsg(check, TEST6, 'Invalid class signature: Test_ (name should be ~/^[A-Z]+[a-zA-Z0-9]*$/)');
+		assertMsg(check, TEST6, 'Invalid class signature: "Test_" (name should be "~/^[A-Z]+[a-zA-Z0-9]*$/")');
 	}
 
 	public function testFormat() {
 		var check = new TypeNameCheck();
 		check.format = FORMAT_CLASS;
 
-		assertMsg(check, TEST, 'Invalid typedef signature: Test3 (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid typedef signature: "Test3" (name should be "~/^C[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, 'Invalid interface signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
-		assertMsg(check, TEST3, 'Invalid typedef signature: TTest (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST2, 'Invalid interface signature: "Test" (name should be "~/^C[A-Z][a-z]*$/")');
+		assertMsg(check, TEST3, 'Invalid typedef signature: "TTest" (name should be "~/^C[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid enum signature: EnumTest (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST5, 'Invalid enum signature: "EnumTest" (name should be "~/^C[A-Z][a-z]*$/")');
 	}
 
 	public function testIgnoreExtern() {
@@ -37,7 +37,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 		assertNoMsg(check, TEST4);
 
 		check.format = FORMAT_CLASS;
-		assertMsg(check, TEST4, 'Invalid class signature: TEST1 (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST4, 'Invalid class signature: "TEST1" (name should be "~/^C[A-Z][a-z]*$/")');
 	}
 
 	public function testTokenCLASS() {
@@ -45,7 +45,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 		check.tokens = [CLASS];
 		check.format = FORMAT_CLASS;
 
-		assertMsg(check, TEST, 'Invalid class signature: Test (name should be ~/^C[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid class signature: "Test" (name should be "~/^C[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
@@ -60,7 +60,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, 'Invalid interface signature: Test (name should be ~/^I[A-Z][a-z]*$/)');
+		assertMsg(check, TEST2, 'Invalid interface signature: "Test" (name should be "~/^I[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
@@ -71,7 +71,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 		check.tokens = [ENUM];
 		check.format = "^Enum[A-Z][a-z]*$";
 
-		assertMsg(check, TEST, 'Invalid enum signature: Test2 (name should be ~/^Enum[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid enum signature: "Test2" (name should be "~/^Enum[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
@@ -84,7 +84,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 		check.tokens = [TYPEDEF];
 		check.format = "^T[A-Z][a-z]*$";
 
-		assertMsg(check, TEST, 'Invalid typedef signature: Test3 (name should be ~/^T[A-Z][a-z]*$/)');
+		assertMsg(check, TEST, 'Invalid typedef signature: "Test3" (name should be "~/^T[A-Z][a-z]*$/")');
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);

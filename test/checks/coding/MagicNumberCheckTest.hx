@@ -12,20 +12,20 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 
 	public function testMagicNumber() {
 		var check = new MagicNumberCheck();
-		assertMsg(check, INT_NUMBER_ASSIGN, 'Magic number "5" detected - consider using a constant');
-		assertMsg(check, NEGATIVE_INT_NUMBER_ASSIGN, 'Magic number "-2" detected - consider using a constant');
-		assertMsg(check, FLOAT_NUMBER_ASSIGN, 'Magic number "5.0" detected - consider using a constant');
-		assertMsg(check, INT_NUMBER_IF, 'Magic number "5" detected - consider using a constant');
-		assertMsg(check, INT_NUMBER_FUNCTION, 'Magic number "10" detected - consider using a constant');
+		assertMsg(check, INT_NUMBER_ASSIGN, '"5" is a magic number');
+		assertMsg(check, NEGATIVE_INT_NUMBER_ASSIGN, '"-2" is a magic number');
+		assertMsg(check, FLOAT_NUMBER_ASSIGN, '"5.0" is a magic number');
+		assertMsg(check, INT_NUMBER_IF, '"5" is a magic number');
+		assertMsg(check, INT_NUMBER_FUNCTION, '"10" is a magic number');
 	}
 
 	public function testIgnoreNumbers() {
 		var check = new MagicNumberCheck();
 		check.ignoreNumbers = [-1, 0, 2];
-		assertMsg(check, STANDARD_MAGIC_NUMBERS, 'Magic number "1" detected - consider using a constant');
+		assertMsg(check, STANDARD_MAGIC_NUMBERS, '"1" is a magic number');
 
 		check.ignoreNumbers = [1, 0, 2];
-		assertMsg(check, STANDARD_MAGIC_NUMBERS, 'Magic number "-1" detected - consider using a constant');
+		assertMsg(check, STANDARD_MAGIC_NUMBERS, '"-1" is a magic number');
 
 		check.ignoreNumbers = [-1, 0, 1, 2, 5];
 		assertNoMsg(check, STANDARD_MAGIC_NUMBERS);
@@ -33,7 +33,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertNoMsg(check, INT_NUMBER_ASSIGN);
 		assertNoMsg(check, FLOAT_NUMBER_ASSIGN);
 		assertNoMsg(check, INT_NUMBER_IF);
-		assertMsg(check, INT_NUMBER_FUNCTION, 'Magic number "10" detected - consider using a constant');
+		assertMsg(check, INT_NUMBER_FUNCTION, '"10" is a magic number');
 	}
 
 	public function testEnumAbstract() {

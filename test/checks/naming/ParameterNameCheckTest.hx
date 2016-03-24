@@ -13,21 +13,21 @@ class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 
 	public function testWrongNaming() {
 		var check = new ParameterNameCheck();
-		assertMsg(check, TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
-		assertMsg(check, TEST3, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
-		assertMsg(check, TEST5, 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)');
+		assertMsg(check, TEST1, 'Invalid parameter name signature: "Count" (name should be "~/${check.format}/")');
+		assertMsg(check, TEST3, 'Invalid parameter name signature: "ParamName" (name should be "~/${check.format}/")');
+		assertMsg(check, TEST5, 'Invalid parameter name signature: "ParamName" (name should be "~/${check.format}/")');
 	}
 
 	public function testIgnoreExtern() {
 		var check = new ParameterNameCheck();
 		check.ignoreExtern = false;
 
-		var paramNameMessage = 'Invalid parameter name signature: ParamName (name should be ~/${check.format}/)';
+		var paramNameMessage = 'Invalid parameter name signature: "ParamName" (name should be "~/${check.format}/")';
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST2);
-		assertMsg(check, TEST1, 'Invalid parameter name signature: Count (name should be ~/${check.format}/)');
+		assertMsg(check, TEST1, 'Invalid parameter name signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST3, paramNameMessage);
-		assertMsg(check, TEST4, 'Invalid parameter name signature: Param1 (name should be ~/${check.format}/)');
+		assertMsg(check, TEST4, 'Invalid parameter name signature: "Param1" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST5, paramNameMessage);
 	}
 
@@ -35,10 +35,10 @@ class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 		var check = new ParameterNameCheck();
 		check.format = "^[A-Z][a-zA-Z]*$";
 
-		assertMsg(check, TEST, 'Invalid parameter name signature: paramName (name should be ~/${check.format}/)');
+		assertMsg(check, TEST, 'Invalid parameter name signature: "paramName" (name should be "~/${check.format}/")');
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST3, 'Invalid parameter name signature: param1 (name should be ~/${check.format}/)');
+		assertMsg(check, TEST3, 'Invalid parameter name signature: "param1" (name should be "~/${check.format}/")');
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
 	}

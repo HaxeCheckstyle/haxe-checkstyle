@@ -9,7 +9,7 @@ class ERegLiteralCheckTest extends CheckTestCase<ERegLiteralCheckTests> {
 	}
 
 	public function testWrongEReg() {
-		assertMsg(new ERegLiteralCheck(), TEST1, 'Bad EReg instantiation, define expression between ~/ and /');
+		assertMsg(new ERegLiteralCheck(), TEST1, 'Bad EReg instantiation, define expression between "~/" and "/"');
 	}
 
 	public function testIssue43() {

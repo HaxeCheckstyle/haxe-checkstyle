@@ -5,20 +5,20 @@ import checkstyle.checks.type.TypeCheck;
 class TypeCheckTest extends CheckTestCase<TypeCheckTests> {
 
 	public function testClassVar() {
-		assertMsg(new TypeCheck(), TEST1, 'Type not specified: _a');
+		assertMsg(new TypeCheck(), TEST1, 'Variable "_a" type not specified');
 	}
 
 	public function testStaticClassVar() {
-		assertMsg(new TypeCheck(), TEST2, 'Type not specified: A');
+		assertMsg(new TypeCheck(), TEST2, 'Variable "A" type not specified');
 	}
 
 	public function testEnumAbstract() {
 		assertNoMsg(new TypeCheck(), TEST3);
-		assertMsg(new TypeCheck(), TEST4, 'Type not specified: VALUE');
+		assertMsg(new TypeCheck(), TEST4, 'Variable "VALUE" type not specified');
 
 		var check = new TypeCheck();
 		check.ignoreEnumAbstractValues = false;
-		assertMsg(check, TEST3, 'Type not specified: VALUE');
+		assertMsg(check, TEST3, 'Variable "VALUE" type not specified');
 	}
 }
 

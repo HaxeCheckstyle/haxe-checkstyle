@@ -86,14 +86,14 @@ class EmptyBlockCheck extends Check {
 
 	function checkForText(brOpen:TokenTree) {
 		if (brOpen.childs.length == 1) {
-			logPos('Empty block should contain a comment or a statement', brOpen.pos);
+			logPos("Empty block should contain a comment or a statement", brOpen.pos);
 			return;
 		}
 	}
 
 	function checkForStatement(brOpen:TokenTree) {
 		if (brOpen.childs.length == 1) {
-			logPos('Empty block should contain a statement', brOpen.pos);
+			logPos("Empty block should contain a statement", brOpen.pos);
 			return;
 		}
 		var onlyComments:Bool = true;

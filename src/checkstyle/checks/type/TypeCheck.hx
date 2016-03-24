@@ -31,6 +31,6 @@ class TypeCheck extends Check {
 	}
 
 	function error(name:String, pos:Position) {
-		logPos('Type not specified: ${name}', pos);
+		logPos('Variable "${name}" type not specified', pos);
 	}
 }

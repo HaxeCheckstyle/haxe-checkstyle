@@ -43,11 +43,11 @@ class MagicNumberCheck extends Check {
 				case Const(CInt(n)):
 					var number:Int = Std.parseInt(n);
 					if (ignoreNumbers.contains(number)) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos);
+					logPos('"$n" is a magic number', numberToken.pos);
 				case Const(CFloat(n)):
 					var number:Float = Std.parseFloat(n);
 					if (ignoreNumbers.contains(number)) continue;
-					logPos('Magic number "$n" detected - consider using a constant', numberToken.pos);
+					logPos('"$n" is a magic number', numberToken.pos);
 				default:
 			}
 		}
