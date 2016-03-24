@@ -4,15 +4,15 @@ import checkstyle.checks.imports.UnusedImportCheck;
 
 class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 
-	static inline var MSG_UNUSED:String = "Unused import haxe.checkstyle.Check3 detected";
-	static inline var MSG_NAME_REUSED:String = "Unused import haxe.checkstyle.Check detected";
-	static inline var MSG_DUPLICATE:String = "Duplicate import haxe.checkstyle.Check2 detected";
-	static inline var MSG_TOP_LEVEL:String = "Unnecessary toplevel import String detected";
-	static inline var MSG_UNUSED_AS:String = "Unused import haxe.checkstyle.Check as Base detected";
-	static inline var MSG_UNUSED_IN:String = "Unused import haxe.checkstyle.Check in Base detected";
-	static inline var MSG_UNUSED_IN_STATIC:String = "Unused import String.fromCharCode in f detected";
-	static inline var MSG_SAME_PACKAGE_IMPORT:String = "Detected import checkstyle.checks.Checker from same package checkstyle.checks";
-	static inline var MSG_UNUSED_TYPEMAP:String = "Unused import checkstyle.checks.Checker detected";
+	static inline var MSG_UNUSED:String = 'Unused import "haxe.checkstyle.Check3" detected';
+	static inline var MSG_NAME_REUSED:String = 'Unused import "haxe.checkstyle.Check" detected';
+	static inline var MSG_DUPLICATE:String = 'Duplicate import "haxe.checkstyle.Check2" detected';
+	static inline var MSG_TOP_LEVEL:String = 'Unnecessary toplevel import "String" detected';
+	static inline var MSG_UNUSED_AS:String = 'Unused import "haxe.checkstyle.Check as Base" detected';
+	static inline var MSG_UNUSED_IN:String = 'Unused import "haxe.checkstyle.Check in Base" detected';
+	static inline var MSG_UNUSED_IN_STATIC:String = 'Unused import "String.fromCharCode in f" detected';
+	static inline var MSG_SAME_PACKAGE_IMPORT:String = 'Detected import "checkstyle.checks.Checker" from same package "checkstyle.checks"';
+	static inline var MSG_UNUSED_TYPEMAP:String = 'Unused import "checkstyle.checks.Checker" detected';
 
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();

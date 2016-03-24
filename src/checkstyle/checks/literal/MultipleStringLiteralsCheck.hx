@@ -48,7 +48,7 @@ class MultipleStringLiteralsCheck extends Check {
 					if (s.length < minLength) continue;
 					if (checkLiteralCount(s, allLiterals)) {
 						if (isPosSuppressed(literalToken.pos)) continue;
-						logPos('Multiple string literal "$s" detected - consider using a constant', literalToken.pos);
+						logPos('String "$s" appears ${s.length} times in the file', literalToken.pos);
 					}
 				default:
 			}

@@ -102,15 +102,11 @@ class ReturnCheck extends Check {
 	}
 
 	function warnVoid(name:String, pos:Position) {
-		logPos('Redundant "Void" for function "$name"', pos);
+		logPos('Redundant "Void" for method "$name"', pos);
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
-		if (name == null) {
-			logPos('Return type not specified for anonymous function', pos);
-		}
-		else {
-			logPos('Return type not specified for function "${name}"', pos);
-		}
+		if (name == null) logPos('Return type not specified for anonymous method', pos);
+		else logPos('Return type not specified for method "${name}"', pos);
 	}
 }

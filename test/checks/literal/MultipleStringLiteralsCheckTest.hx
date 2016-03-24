@@ -15,9 +15,9 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 
 	public function testMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
-		assertMsg(check, THREE_XML, 'Multiple string literal "xml" detected - consider using a constant');
-		assertMsg(check, THREE_XML_SWITCH, 'Multiple string literal "xml" detected - consider using a constant');
-		assertMsg(check, OBJECT_FIELD_VALUES_ISSUE_116, 'Multiple string literal "duplicate" detected - consider using a constant');
+		assertMsg(check, THREE_XML, 'String "xml" appears 3 times in the file');
+		assertMsg(check, THREE_XML_SWITCH, 'String "xml" appears 3 times in the file');
+		assertMsg(check, OBJECT_FIELD_VALUES_ISSUE_116, 'String "duplicate" appears 9 times in the file');
 	}
 
 	public function testIgnoreRegEx() {
@@ -31,8 +31,8 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		var check = new MultipleStringLiteralsCheck();
 		check.allowDuplicates = 1;
 		assertNoMsg(check, INTERPOLATION_ISSUE_109);
-		assertMsg(check, NO_INTERPOLATION_ISSUE_109, 'Multiple string literal "value $$$$is i" detected - consider using a constant');
-		assertMsg(check, NO_INTERPOLATION_AT_START_ISSUE_109, 'Multiple string literal "$$$$is i" detected - consider using a constant');
+		assertMsg(check, NO_INTERPOLATION_ISSUE_109, 'String "value $$$$is i" appears 12 times in the file');
+		assertMsg(check, NO_INTERPOLATION_AT_START_ISSUE_109, 'String "$$$$is i" appears 6 times in the file');
 	}
 }
 
