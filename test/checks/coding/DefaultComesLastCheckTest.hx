@@ -4,7 +4,7 @@ import checkstyle.checks.coding.DefaultComesLastCheck;
 
 class DefaultComesLastCheckTest extends CheckTestCase<DefaultComesLastCheckTests> {
 
-	static inline var MSG:String = "Default should be last label in the switch";
+	static inline var MSG:String = 'Default should be last label in the "switch"';
 
 	public function testFirstDefault() {
 		assertMsg(new DefaultComesLastCheck(), TEST1, MSG);

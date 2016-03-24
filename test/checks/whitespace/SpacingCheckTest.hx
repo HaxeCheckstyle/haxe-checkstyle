@@ -5,35 +5,35 @@ import checkstyle.checks.whitespace.SpacingCheck;
 class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 
 	public function testIf() {
-		assertMsg(new SpacingCheck(), TEST1A, 'No space between if and (');
+		assertMsg(new SpacingCheck(), TEST1A, 'No space between "if" and "("');
 		assertNoMsg(new SpacingCheck(), TEST1B);
 	}
 
 	public function testBinaryOperator() {
-		assertMsg(new SpacingCheck(), TEST2, 'No space around +');
+		assertMsg(new SpacingCheck(), TEST2, 'No space around "+"');
 	}
 
 	public function testUnaryOperator() {
-		assertMsg(new SpacingCheck(), TEST3, 'Space around ++');
+		assertMsg(new SpacingCheck(), TEST3, 'Space around "++"');
 	}
 
 	public function testFor() {
-		assertMsg(new SpacingCheck(), TEST4A, 'No space between for and (');
+		assertMsg(new SpacingCheck(), TEST4A, 'No space between "for" and "("');
 		assertNoMsg(new SpacingCheck(), TEST4B);
 	}
 
 	public function testWhile() {
-		assertMsg(new SpacingCheck(), TEST5A, 'No space between while and (');
+		assertMsg(new SpacingCheck(), TEST5A, 'No space between "while" and "("');
 		assertNoMsg(new SpacingCheck(), TEST5B);
 	}
 
 	public function testSwitch() {
-		assertMsg(new SpacingCheck(), TEST6A, 'No space between switch and (');
+		assertMsg(new SpacingCheck(), TEST6A, 'No space between "switch" and "("');
 		assertNoMsg(new SpacingCheck(), TEST6B);
 	}
 
 	public function testCatch() {
-		assertMsg(new SpacingCheck(), TEST7A, 'No space between catch and (');
+		assertMsg(new SpacingCheck(), TEST7A, 'No space between "catch" and "("');
 		assertNoMsg(new SpacingCheck(), TEST7B);
 	}
 }
@@ -72,7 +72,7 @@ abstract SpacingCheckTests(String) to String {
 	"class Test {
 		public function test() {
 			for(i in 0...10) {
-			
+
 			}
 		}
 	}";
@@ -81,7 +81,7 @@ abstract SpacingCheckTests(String) to String {
 	"class Test {
 		public function test() {
 			for (i in 0...10) {
-			
+
 			}
 		}
 	}";

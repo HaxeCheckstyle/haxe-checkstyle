@@ -11,12 +11,12 @@ class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 
 	public function testDetectDynamic() {
 		var check = new DynamicCheck();
-		assertMsg(check, TEST1, 'Dynamic type used: Count');
-		assertMsg(check, TEST2, 'Dynamic type used: test');
-		assertMsg(check, TEST3, 'Dynamic type used: Count');
-		assertMsg(check, TEST4, 'Dynamic type used: param');
-		assertMsg(check, TEST5, 'Dynamic type used: test');
-		assertMsg(check, TEST6, 'Dynamic type used: Test');
+		assertMsg(check, TEST1, '"Count" type is "Dynamic"');
+		assertMsg(check, TEST2, '"test" type is "Dynamic"');
+		assertMsg(check, TEST3, '"Count" type is "Dynamic"');
+		assertMsg(check, TEST4, '"param" type is "Dynamic"');
+		assertMsg(check, TEST5, '"test" type is "Dynamic"');
+		assertMsg(check, TEST6, '"Test" type is "Dynamic"');
 
 		assertNoMsg(check, ISSUE_43);
 	}

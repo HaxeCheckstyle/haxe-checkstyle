@@ -4,7 +4,7 @@ import checkstyle.token.TokenTree;
 import haxe.macro.Expr;
 
 @name("AvoidStarImport")
-@desc("Checks for .* import and using directives.")
+@desc("Checks for import statements that use the * notation and using directives.")
 class AvoidStarImportCheck extends Check {
 
 	public function new() {
@@ -22,7 +22,7 @@ class AvoidStarImportCheck extends Check {
 		for (entry in importEntries) {
 			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
-			logPos("Import line uses a star (.*) import - consider using full type names", entry.pos);
+			logPos('Using the ".*" form of import should be avoided', entry.pos);
 		}
 	}
 }

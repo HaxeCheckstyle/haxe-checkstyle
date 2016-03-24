@@ -4,7 +4,7 @@ import checkstyle.checks.imports.AvoidStarImportCheck;
 
 class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> {
 
-	static inline var MSG_STAR_IMPORT:String = 'Import line uses a star (.*) import - consider using full type names';
+	static inline var MSG_STAR_IMPORT:String = 'Using the ".*" form of import should be avoided';
 
 	public function testNoStarImport() {
 		var check = new AvoidStarImportCheck();

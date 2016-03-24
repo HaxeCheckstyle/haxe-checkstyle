@@ -23,7 +23,7 @@ class CatchParameterNameCheck extends Check {
 				switch (item.getFirstChild().tok) {
 					case Const(CIdent(name)):
 						if (item.is(POpen)) {
-							if (!formatRE.match(name)) logPos('$name must match pattern ~/${format}/', item.pos);
+							if (!formatRE.match(name)) logPos('"$name" must match pattern "~/${format}/"', item.pos);
 							continue;
 						}
 					default:

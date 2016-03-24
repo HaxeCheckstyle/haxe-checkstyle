@@ -62,6 +62,6 @@ class NameCheckBase<T> extends Check {
 	}
 
 	function warn(type:String, name:String, pos:Position) {
-		logPos('Invalid ${type} signature: ${name} (name should be ~/${format}/)', pos);
+		logPos('Invalid ${type} signature: "${name}" (name should be "~/${format}/")', pos);
 	}
 }
