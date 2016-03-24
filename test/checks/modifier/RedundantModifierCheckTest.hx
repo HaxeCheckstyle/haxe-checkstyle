@@ -10,11 +10,11 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 	}
 
 	public function testNormalClass() {
-		assertMsg(new RedundantModifierCheck(), TEST1, 'No need of "private" keyword: "a"');
+		assertMsg(new RedundantModifierCheck(), TEST1, '"private" keyword is redundant for "a"');
 	}
 
 	public function testInterface() {
-		assertMsg(new RedundantModifierCheck(), TEST2, 'No need of "public" keyword: "a"');
+		assertMsg(new RedundantModifierCheck(), TEST2, '"public" keyword is redundant for "a"');
 	}
 
 	public function testClassWithEnforce() {
@@ -26,7 +26,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 	public function testClassWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, TEST, 'Missing "private" keyword: "_onUpdate"');
+		assertMsg(check, TEST, 'Missing "private" keyword for "_onUpdate"');
 	}
 
 	public function testInterfaceWithEnforce() {
@@ -38,44 +38,44 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 	public function testInterfaceWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, TEST3, 'Missing "public" keyword: "a"');
+		assertMsg(check, TEST3, 'Missing "public" keyword for "a"');
 	}
 
 	public function testClassWithPublicFields() {
 		var check = new RedundantModifierCheck();
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'No need of "public" keyword: "foo"');
+		assertMsg(check, TEST5, '"public" keyword is redundant for "foo"');
 
 		check.enforcePublicPrivate = true;
-		assertMsg(check, TEST6, 'Missing "public" keyword: "foo"');
+		assertMsg(check, TEST6, 'Missing "public" keyword for "foo"');
 	}
 
 	public function testEnumAbstract() {
 		var check = new RedundantModifierCheck();
-		assertMsg(check, TEST7, 'No need of "public" keyword: "value"');
+		assertMsg(check, TEST7, '"public" keyword is redundant for "value"');
 		assertNoMsg(check, TEST8);
-		assertMsg(check, TEST9, 'No need of "private" keyword: "CONSTANT"');
+		assertMsg(check, TEST9, '"private" keyword is redundant for "CONSTANT"');
 		assertNoMsg(check, TEST10);
-		assertMsg(check, TEST11, 'No need of "private" keyword: "foo"');
+		assertMsg(check, TEST11, '"private" keyword is redundant for "foo"');
 		assertNoMsg(check, TEST12);
 
 		check.enforcePublicPrivate = true;
 		assertNoMsg(check, TEST7);
-		assertMsg(check, TEST8, 'Missing "public" keyword: "value"');
+		assertMsg(check, TEST8, 'Missing "public" keyword for "value"');
 		assertNoMsg(check, TEST9);
-		assertMsg(check, TEST10, 'Missing "private" keyword: "CONSTANT"');
+		assertMsg(check, TEST10, 'Missing "private" keyword for "CONSTANT"');
 		assertNoMsg(check, TEST11);
-		assertMsg(check, TEST12, 'Missing "private" keyword: "foo"');
+		assertMsg(check, TEST12, 'Missing "private" keyword for "foo"');
 	}
 
 	public function testConstructor() {
 		var check = new RedundantModifierCheck();
 		assertNoMsg(check, TEST13);
-		assertMsg(check, TEST14, 'No need of "private" keyword: "new"');
+		assertMsg(check, TEST14, '"private" keyword is redundant for "new"');
 		assertNoMsg(check, TEST15);
 
 		check.enforcePublicPrivate = true;
-		assertMsg(check, TEST13, 'Missing "private" keyword: "new"');
+		assertMsg(check, TEST13, 'Missing "private" keyword for "new"');
 		assertNoMsg(check, TEST14);
 		assertNoMsg(check, TEST15);
 	}
