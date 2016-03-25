@@ -1,5 +1,7 @@
 package checkstyle.checks.whitespace;
 
+import checkstyle.CheckMessage.SeverityLevel;
+
 using checkstyle.utils.StringUtils;
 
 @name("TabForAligning")
@@ -10,6 +12,7 @@ class TabForAligningCheck extends LineCheckBase {
 
 	public function new() {
 		super();
+		severity = SeverityLevel.IGNORE;
 		ignorePattern = "^$";
 		categories = [Category.STYLE, Category.CLARITY];
 	}

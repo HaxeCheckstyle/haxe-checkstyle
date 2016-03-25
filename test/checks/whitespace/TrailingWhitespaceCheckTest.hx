@@ -1,11 +1,14 @@
 package checks.whitespace;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 
 class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckTests> {
 
 	public function test() {
-		assertMsg(new TrailingWhitespaceCheck(), TEST1, 'Trailing whitespace');
+		var check = new TrailingWhitespaceCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST1, "Trailing whitespace");
 	}
 }
 

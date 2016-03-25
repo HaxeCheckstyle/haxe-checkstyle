@@ -1,8 +1,15 @@
 package checkstyle.checks.whitespace;
 
+import checkstyle.CheckMessage.SeverityLevel;
+
 @name("TrailingWhitespace")
 @desc("Checks if there are any trailing white spaces.")
 class TrailingWhitespaceCheck extends LineCheckBase {
+
+	public function new() {
+		super();
+		severity = SeverityLevel.IGNORE;
+	}
 
 	override function actualRun() {
 		var re = ~/\s+$/;

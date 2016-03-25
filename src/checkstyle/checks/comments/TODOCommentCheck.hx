@@ -1,5 +1,6 @@
 package checkstyle.checks.comments;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import haxeparser.Data.Token;
 
 @name("TODOComment")
@@ -10,6 +11,7 @@ class TODOCommentCheck extends Check {
 
 	public function new() {
 		super(LINE);
+		severity = SeverityLevel.IGNORE;
 		format = "TODO|FIXME|HACK|XXX|BUG";
 		categories = [Category.BUG_RISK];
 		points = 8;
