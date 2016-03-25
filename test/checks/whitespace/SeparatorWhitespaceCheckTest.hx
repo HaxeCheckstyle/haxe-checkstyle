@@ -7,19 +7,19 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 	static inline var MSG_AFTER:String = 'SeparatorWhitespace policy "after" violated by ","';
 
 	public function testCorrectSeparatorWhitespace() {
-	    var check = new SeparatorWhitespaceCheck();
-	    assertNoMsg(check, CORRECT_WHITESPACE);
+		var check = new SeparatorWhitespaceCheck();
+		assertNoMsg(check, CORRECT_WHITESPACE);
 	}
 
 	public function testIncorrectSeparatorWhitespaceToken() {
 		var check = new SeparatorWhitespaceCheck();
+		check.commaPolicy = AFTER;
 		assertMsg(check, COMMA_WHITESPACE_NONE, MSG_AFTER);
-		//assertMsg(check, WHITESPACE_AROUND, MSG_AFTER);
+		assertMsg(check, WHITESPACE_AROUND, MSG_AFTER);
 	}
 
 	public function testWhitespaceAround() {
 		var check = new SeparatorWhitespaceCheck();
-		check.dotPolicy = AROUND;
 		check.commaPolicy = AROUND;
 		assertNoMsg(check, WHITESPACE_AROUND);
 	}
@@ -83,19 +83,19 @@ abstract SeparatorWhitespaceCheckTests(String) to String {
 
 	var COMMA_WHITESPACE_NONE = "
 	typedef Test = { x:Int,y:Int,z:Int }
-	typedef Test = { x:Int,
+	typedef Test2 = { x:Int,
 	    y:Int,
 	    z:Int }
-	typedef Test = { x:Int
+	typedef Test3 = { x:Int
 		,y:Int
 		,z:Int }
 	";
 
 	var WHITESPACE_AROUND = "
 	typedef Test = { x:String , y:Int , z:Int }
-	class Test {
+	class Test2 {
 		function test() {
-			a = create(1) . add(2) . add(3);
+			a = create(1).add(2).add(3);
 			a = [ 1 , 2 , 3 ];
 		}
 	}
