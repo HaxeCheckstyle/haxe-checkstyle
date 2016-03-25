@@ -1,8 +1,9 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
+import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
+import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
@@ -10,7 +11,7 @@ using checkstyle.utils.ArrayUtils;
 
 @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")
-class OperatorWhitespaceCheck extends Check {
+class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	// =, +=, -=, *=, /=, <<=, >>=, >>>=, &=, |=, ^=
 	public var assignOpPolicy:WhitespacePolicy;
@@ -34,7 +35,7 @@ class OperatorWhitespaceCheck extends Check {
 	public var functionArgPolicy:WhitespacePolicy;
 
 	public function new() {
-		super(TOKEN);
+		super();
 		assignOpPolicy = AROUND;
 		unaryOpPolicy = NONE;
 		ternaryOpPolicy = AROUND;
@@ -45,8 +46,6 @@ class OperatorWhitespaceCheck extends Check {
 		intervalOpPolicy = NONE;
 		arrowPolicy = AROUND;
 		functionArgPolicy = AROUND;
-
-		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	override function actualRun() {
@@ -65,8 +64,7 @@ class OperatorWhitespaceCheck extends Check {
 	}
 
 	function checkAssignOps(root:TokenTree) {
-		if ((assignOpPolicy == null) || (assignOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
+		checkTokens(root, [
 				Binop(OpAssign),
 				Binop(OpAssignOp(OpAdd)),
 				Binop(OpAssignOp(OpSub)),
@@ -79,9 +77,7 @@ class OperatorWhitespaceCheck extends Check {
 				Binop(OpAssignOp(OpOr)),
 				Binop(OpAssignOp(OpAnd)),
 				Binop(OpAssignOp(OpXor))
-			], ALL);
-
-		checkTokenList(tokens, assignOpPolicy);
+			], assignOpPolicy);
 	}
 
 	function checkUnaryOps(root:TokenTree) {
@@ -113,50 +109,42 @@ class OperatorWhitespaceCheck extends Check {
 	}
 
 	function checkArithmeticOps(root:TokenTree) {
-		if ((arithmeticOpPolicy == null) || (arithmeticOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
+		checkTokens(root, [
 				Binop(OpAdd),
 				Binop(OpSub),
 				Binop(OpMult),
 				Binop(OpDiv),
 				Binop(OpMod)
-			], ALL);
-		checkTokenList(tokens, arithmeticOpPolicy);
+			], arithmeticOpPolicy);
 	}
 
 	function checkCompareOps(root:TokenTree) {
-		if ((compareOpPolicy == null) || (compareOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
+		checkTokens(root, [
 				Binop(OpGt),
 				Binop(OpLt),
 				Binop(OpGte),
 				Binop(OpLte),
 				Binop(OpEq),
 				Binop(OpNotEq)
-			], ALL);
-		checkTokenList(tokens, compareOpPolicy);
+			], compareOpPolicy);
 	}
 
 	function checkBitwiseOps(root:TokenTree) {
-		if ((bitwiseOpPolicy == null) || (bitwiseOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
+		checkTokens(root, [
 				Binop(OpAnd),
 				Binop(OpOr),
 				Binop(OpXor),
 				Binop(OpShl),
 				Binop(OpShr),
 				Binop(OpUShr)
-			], ALL);
-		checkTokenList(tokens, bitwiseOpPolicy);
+			], bitwiseOpPolicy);
 	}
 
 	function checkBoolOps(root:TokenTree) {
-		if ((boolOpPolicy == null) || (boolOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
+		checkTokens(root, [
 				Binop(OpBoolAnd),
 				Binop(OpBoolOr)
-			], ALL);
-		checkTokenList(tokens, boolOpPolicy);
+			], boolOpPolicy);
 	}
 
 	function checkIntervalOps(root:TokenTree) {
@@ -184,87 +172,7 @@ class OperatorWhitespaceCheck extends Check {
 		checkTokenList(tokens, functionArgPolicy);
 	}
 
-	function checkTokenList(tokens:Array<TokenTree>, policy:WhitespacePolicy) {
-		for (token in tokens) {
-			if (isPosSuppressed(token.pos)) continue;
-			if (TokenTreeCheckUtils.isImportMult(token)) continue;
-			if (TokenTreeCheckUtils.isTypeParameter(token)) continue;
-			if (TokenTreeCheckUtils.filterOpSub(token)) continue;
-			checkWhitespace(token, policy);
-		}
-	}
-
-	function checkWhitespace(tok:TokenTree, policy:WhitespacePolicy) {
-		var linePos:LinePos = checker.getLinePos(tok.pos.min);
-		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
-		if (tok.tok.match(IntInterval(_))) {
-			linePos = checker.getLinePos(tok.pos.max - 3);
-			tokLen = 3;
-		}
-		var line:String = checker.lines[linePos.line];
-		var before:String = line.substr(0, linePos.ofs);
-		var after:String = line.substr(linePos.ofs + tokLen);
-
-		var whitespaceBefore:Bool = ~/^(.*\s|)$/.match(before);
-		var whitespaceAfter:Bool = ~/^(\s.*|)$/.match(after);
-
-		switch (policy) {
-			case BEFORE:
-				if (whitespaceBefore && !whitespaceAfter) return;
-			case AFTER:
-				if (!whitespaceBefore && whitespaceAfter) return;
-			case NONE:
-				if (!whitespaceBefore && !whitespaceAfter) return;
-			case AROUND:
-				if (whitespaceBefore && whitespaceAfter) return;
-			case IGNORE:
-				return;
-			default:
-				return;
-		}
+	override function violation(tok:TokenTree, policy:String) {
 		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 	}
-
-	function checkUnaryWhitespace(tok:TokenTree, policy:WhitespaceUnaryPolicy) {
-		var linePos:LinePos = checker.getLinePos(tok.pos.min);
-		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
-		var line:String = checker.lines[linePos.line];
-		var before:String = line.substr(0, linePos.ofs);
-		var after:String = line.substr(linePos.ofs + tokLen);
-
-		var whitespaceBefore:Bool = ~/^(.*\s|)$/.match(before);
-		var whitespaceAfter:Bool = ~/^(\s.*|)$/.match(after);
-
-		var leftSide:Bool = TokenTreeCheckUtils.isUnaryLeftSided(tok);
-
-		switch (policy) {
-			case INNER:
-				if (leftSide && whitespaceAfter) return;
-				if (!leftSide && whitespaceBefore) return;
-			case NONE:
-				if (leftSide && !whitespaceAfter) return;
-				if (!leftSide && !whitespaceBefore) return;
-			case IGNORE:
-				return;
-			default:
-				return;
-		}
-		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
-	}
-}
-
-@:enum
-abstract WhitespacePolicy(String) {
-	var BEFORE = "before";
-	var AFTER = "after";
-	var AROUND = "around";
-	var NONE = "none";
-	var IGNORE = "ignore";
-}
-
-@:enum
-abstract WhitespaceUnaryPolicy(String) {
-	var INNER = "inner";
-	var NONE = "none";
-	var IGNORE = "ignore";
 }

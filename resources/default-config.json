@@ -466,6 +466,15 @@
 		},
 		{
 			"props": {
+				"commaPolicy": "after",
+				"semicolonPolicy": "after",
+				"dotPolicy": "none",
+				"severity": "IGNORE"
+			},
+			"type": "SeparatorWhitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					",",
 					"."

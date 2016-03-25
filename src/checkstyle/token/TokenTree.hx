@@ -11,6 +11,12 @@ class TokenTree extends Token {
 	public var parent:TokenTree;
 	public var previousSibling:TokenTree;
 	public var childs:Array<TokenTree>;
+	public var index:Int;
+
+	public function new(tok:TokenDef, pos:Position, index:Int) {
+		super(tok, pos);
+		this.index = index;
+	}
 
 	public function is(tokenDef:TokenDef):Bool {
 		if (tok == null) return false;
