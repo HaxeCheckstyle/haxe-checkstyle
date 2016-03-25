@@ -1,5 +1,6 @@
 package checkstyle.checks.coding;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 
@@ -9,6 +10,7 @@ class AvoidInlineConditionalsCheck extends Check {
 
 	public function new() {
 		super(AST);
+		severity = SeverityLevel.IGNORE;
 		categories = [Category.COMPLEXITY];
 		points = 3;
 	}

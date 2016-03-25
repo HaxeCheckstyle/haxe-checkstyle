@@ -1,5 +1,6 @@
 package checks.coding;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.coding.TraceCheck;
 
 class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
@@ -7,17 +8,23 @@ class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
 	static inline var MSG_TRACE_DETECTED:String = "Trace detected";
 
 	public function testTrace() {
-		assertMsg(new TraceCheck(), TRACE_TEXT, MSG_TRACE_DETECTED);
-		assertMsg(new TraceCheck(), TRACE_VAR, MSG_TRACE_DETECTED);
+		var check = new TraceCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TRACE_TEXT, MSG_TRACE_DETECTED);
+		assertMsg(check, TRACE_VAR, MSG_TRACE_DETECTED);
 	}
 
 	public function testNotATrace() {
-		assertNoMsg(new TraceCheck(), CUSTOM_TRACE);
-		assertNoMsg(new TraceCheck(), TRACE_FUNCTION);
+		var check = new TraceCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, CUSTOM_TRACE);
+		assertNoMsg(check, TRACE_FUNCTION);
 	}
 
 	public function testSuppressedTrace() {
-		assertNoMsg(new TraceCheck(), TRACE_SUPPRESSED);
+		var check = new TraceCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, TRACE_SUPPRESSED);
 	}
 }
 

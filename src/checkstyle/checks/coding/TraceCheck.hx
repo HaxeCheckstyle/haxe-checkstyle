@@ -1,5 +1,6 @@
 package checkstyle.checks.coding;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.token.TokenTree;
 
 @name("Trace")
@@ -8,6 +9,7 @@ class TraceCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
+		severity = SeverityLevel.IGNORE;
 	}
 
 	override function actualRun() {

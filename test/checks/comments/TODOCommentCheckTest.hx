@@ -1,31 +1,44 @@
 package checks.comments;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.comments.TODOCommentCheck;
 
 class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 
 	public function testTODO() {
-		assertMsg(new TODOCommentCheck(), TEST1, "TODO comment: TODO: remove test");
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST1, "TODO comment: TODO: remove test");
 	}
 
 	public function testFIXME() {
-		assertMsg(new TODOCommentCheck(), TEST2, "TODO comment: FIXME remove test");
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST2, "TODO comment: FIXME remove test");
 	}
 
 	public function testHACK() {
-		assertMsg(new TODOCommentCheck(), TEST3, "TODO comment: HACK remove test");
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST3, "TODO comment: HACK remove test");
 	}
 
 	public function testBUG() {
-		assertMsg(new TODOCommentCheck(), TEST4, "TODO comment: BUG #171: remove test");
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST4, "TODO comment: BUG #171: remove test");
 	}
 
 	public function testXXX() {
-		assertMsg(new TODOCommentCheck(), TEST5, "TODO comment: XXX remove test");
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST5, "TODO comment: XXX remove test");
 	}
 
 	public function testString() {
-		assertNoMsg(new TODOCommentCheck(), TEST6);
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, TEST6);
 	}
 }
 

@@ -11,12 +11,6 @@
 			"type": "ArrayLiteral"
 		},
 		{
-			"props": {
-				"severity": "IGNORE"
-			},
-			"type": "AvoidInlineConditionals"
-		},
-		{
 			"type": "AvoidStarImport"
 		},
 		{

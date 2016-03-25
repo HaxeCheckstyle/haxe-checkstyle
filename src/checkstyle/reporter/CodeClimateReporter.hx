@@ -17,8 +17,6 @@ class CodeClimateReporter extends BaseReporter {
 	override public function finish() {}
 
 	override public function addMessage(m:CheckMessage) {
-		if (m.moduleName == "TODOComment") return;
-
 		var file = ~/^\/code\//.replace(m.fileName, "");
 		file = ~/\/\//.replace(file, "/");
 

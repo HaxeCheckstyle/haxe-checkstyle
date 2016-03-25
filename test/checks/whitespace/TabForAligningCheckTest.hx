@@ -1,15 +1,20 @@
 package checks.whitespace;
 
+import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.whitespace.TabForAligningCheck;
 
 class TabForAligningCheckTest extends CheckTestCase<TabForAligningCheckTests> {
 
 	public function testTab() {
-		assertMsg(new TabForAligningCheck(), TEST1, "Tab after non-space character, use space for aligning");
+		var check = new TabForAligningCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST1, "Tab after non-space character, use space for aligning");
 	}
 
 	public function testMultiline() {
-		assertNoMsg(new TabForAligningCheck(), TEST2);
+		var check = new TabForAligningCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, TEST2);
 	}
 }
 
