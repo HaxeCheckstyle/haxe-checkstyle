@@ -379,6 +379,14 @@
 		},
 		{
 			"props": {
+				"dotPolicy": "none",
+				"commaPolicy": "after",
+				"semicolonPolicy": "after",
+			},
+			"type": "SeparatorWhitespace"
+		},
+		{
+			"props": {
 				"tokens": [
 					",",
 					"."
