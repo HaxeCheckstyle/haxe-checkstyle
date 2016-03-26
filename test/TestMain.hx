@@ -37,14 +37,14 @@ class TestMain {
 		var report = { coverage: {} };
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
-			var coverageData:Array<String> = [null];
+			var coverageData:Array<Dynamic> = [null];
 			var results:CoverageResult = cls.getResults();
-			for (i in 1...results.l) coverageData[i] = "1";
+			for (i in 1...results.l) coverageData[i] = 1;
 			var c = cls.name.replace(".", "/") + ".hx";
 
 			var missingStatements:Array<Statement> = cls.getMissingStatements();
 			for (stmt in missingStatements) {
-				for (line in stmt.lines) coverageData[line] = "0";
+				for (line in stmt.lines) coverageData[line] = 0;
 			}
 			var missingBranches:Array<Branch> = cls.getMissingBranches();
 			for (branch in missingBranches) {
