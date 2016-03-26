@@ -9,6 +9,10 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import sys.io.File;
 
+#if debug
+import neko.Lib;
+#end
+
 import checkstyle.checks.Category;
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
@@ -120,7 +124,12 @@ class Checker {
 				t = lexer.token(haxeparser.HaxeLexer.tok);
 			}
 		}
-		catch (e:Dynamic) {}
+		catch (e:Dynamic) {
+#if debug
+			Lib.println(e);
+			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+#end
+		}
 	}
 
 	function makeASTs() {
@@ -145,7 +154,12 @@ class Checker {
 		try {
 			return parser.parse();
 		}
-		catch (e:Dynamic) {}
+		catch (e:Dynamic) {
+#if debug
+			Lib.println(e);
+			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+#end
+		}
 		return null;
 	}
 

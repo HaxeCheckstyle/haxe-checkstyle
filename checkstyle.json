@@ -545,6 +545,9 @@
 		"RightCurly": [
 			"checkstyle.checks.metrics.CyclomaticComplexityCheck"
 		],
+		"MethodCount": [
+			"checkstyle.token.TokenTreeBuilder"
+		],
 		"MethodLength": [
 			"checkstyle.checks.whitespace.WhitespaceAfterCheck",
 			"checkstyle.checks.whitespace.WhitespaceAroundCheck",

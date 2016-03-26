@@ -560,32 +560,9 @@ class TokenTreeBuilder {
 				wantMore = true;
 			case Unop(_):
 				if (parent.tok.match(Const(_))) wantMore = false;
-			case Kwd(KwdVar):
-				walkVar(parent, []);
-				return;
-			case Kwd(KwdNew):
-				walkNew(parent);
-				return;
-			case Kwd(KwdFor):
-				walkFor(parent);
-				return;
-			case Kwd(KwdFunction):
-				walkFunction(parent, []);
-				return;
-			case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdUsing):
-				walkPackageImport(parent);
-				return;
-			case Kwd(KwdExtends):
-				walkExtends(parent);
-				return;
-			case Kwd(KwdImplements):
-				walkImplements(parent);
-				return;
-			case Kwd(KwdClass):
-				walkClass(parent, []);
-				return;
-			case Kwd(KwdMacro), Kwd(KwdReturn):
-				wantMore = true;
+			case Kwd(_):
+				if (walkKeyword(parent)) wantMore = true;
+				else return;
 			case BrOpen:
 				walkObjectDecl(parent);
 				return;
@@ -646,6 +623,42 @@ class TokenTreeBuilder {
 				walkIdentifier(parent);
 			default:
 		}
+	}
+
+	function walkKeyword(parent:TokenTree):Bool {
+		switch (stream.token()) {
+			case Kwd(KwdVar):
+				walkVar(parent, []);
+			case Kwd(KwdNew):
+				walkNew(parent);
+			case Kwd(KwdFor):
+				walkFor(parent);
+			case Kwd(KwdFunction):
+				walkFunction(parent, []);
+			case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdUsing):
+				walkPackageImport(parent);
+			case Kwd(KwdExtends):
+				walkExtends(parent);
+			case Kwd(KwdImplements):
+				walkImplements(parent);
+			case Kwd(KwdClass):
+				walkClass(parent, []);
+			case Kwd(KwdMacro), Kwd(KwdReturn):
+				return true;
+			case Kwd(KwdSwitch):
+				walkSwitch(parent);
+			case Kwd(KwdIf):
+				walkIf(parent);
+			case Kwd(KwdTry):
+				walkTry(parent);
+			case Kwd(KwdDo):
+				walkDoWhile(parent);
+			case Kwd(KwdWhile):
+				walkWhile(parent);
+			default:
+				return true;
+		}
+		return false;
 	}
 
 	function findQuestionParent(token:TokenTree):TokenTree {
