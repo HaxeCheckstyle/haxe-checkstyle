@@ -5,6 +5,11 @@ import haxe.macro.Expr;
 import checkstyle.CheckMessage.SeverityLevel;
 import haxeparser.Data;
 
+#if debug
+import haxe.CallStack;
+import neko.Lib;
+#end
+
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 
@@ -36,7 +41,12 @@ class Check {
 			try {
 				actualRun();
 			}
-			catch (e:String) {}
+			catch (e:String) {
+#if debug
+				Lib.println(e);
+				Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+#end
+			}
 		}
 		return messages;
 	}
@@ -78,6 +88,7 @@ class Check {
 	}
 
 	function forEachField(cb:Field -> ParentType -> Void) {
+		if (checker.ast.decls == null) return;
 		for (td in checker.ast.decls) {
 			var fields:Array<Field> = switch (td.decl) {
 				case EClass(d): d.data;
@@ -126,6 +137,7 @@ class Check {
 	}
 
 	function isCharPosSuppressed(pos:Int):Bool {
+		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EAbstract(d):
@@ -177,6 +189,7 @@ class Check {
 	}
 
 	function isCharPosExtern(pos:Int):Bool {
+		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EAbstract(d):

@@ -9,6 +9,12 @@
 -neko run.n
 
 --next
+
+-main checkstyle.Main
+-debug
+-neko runD.n
+
+--next
 -cp test
 -lib mcover:2.1.1
 -x TestMain
