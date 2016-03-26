@@ -517,7 +517,8 @@
 			"checkstyle.Main",
 			"checkstyle.Checker",
 			"checkstyle.ChecksInfo",
-			"checkstyle.checks.imports.UnusedImportCheck"
+			"checkstyle.checks.imports.UnusedImportCheck",
+			"TestMain"
 		],
 		"MultipleStringLiterals": [
 			"checks",
