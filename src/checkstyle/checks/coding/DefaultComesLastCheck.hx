@@ -17,10 +17,9 @@ class DefaultComesLastCheck extends Check {
 		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdSwitch)], ALL);
 
 		for (token in acceptableTokens) {
-			var tokens:Array<TokenTree> = token.filter([Kwd(KwdCase), Kwd(KwdDefault)], ALL);
+			var tokens:Array<TokenTree> = token.filter([Kwd(KwdCase), Kwd(KwdDefault)], FIRST);
 			if (tokens[tokens.length - 1].is(Kwd(KwdDefault))) continue;
 
-			var defaultExists = false;
 			for (i in 0...tokens.length) {
 				if (tokens[i].is(Kwd(KwdDefault)) && i < tokens.length - 1) {
 					logPos('Default should be last label in the "switch"', token.pos);
