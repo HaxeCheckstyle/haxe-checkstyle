@@ -37,7 +37,7 @@ class TestMain {
 		var report = { coverage: {} };
 		var classes = logger.coverage.getClasses();
 		for (cls in classes) {
-			var coverageData:Array<Dynamic> = [null];
+			var coverageData:Array<LineCoverageResult> = [null];
 			var results:CoverageResult = cls.getResults();
 			for (i in 1...results.l) coverageData[i] = 1;
 			var c = cls.name.replace(".", "/") + ".hx";
@@ -68,3 +68,5 @@ class TestMain {
 		new TestMain();
 	}
 }
+
+typedef LineCoverageResult = Dynamic;
