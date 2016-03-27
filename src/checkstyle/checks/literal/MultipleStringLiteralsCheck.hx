@@ -2,6 +2,7 @@ package checkstyle.checks.literal;
 
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
+import checkstyle.utils.StringUtils;
 import haxe.macro.Expr;
 
 @name("MultipleStringLiterals")
@@ -43,7 +44,7 @@ class MultipleStringLiteralsCheck extends Check {
 
 			switch (literalToken.tok) {
 				case Const(CString(s)):
-					if (isStringInterpolation(s, literalToken.pos)) continue;
+					if (StringUtils.isStringInterpolation(s, checker.file.content, literalToken.pos)) continue;
 					if (ignoreRE.match(s)) continue;
 					if (s.length < minLength) continue;
 					if (checkLiteralCount(s, allLiterals)) {
@@ -70,10 +71,4 @@ class MultipleStringLiteralsCheck extends Check {
 		}
 	}
 
-	function isStringInterpolation(s:String, pos:Position):Bool {
-		var quote:String = checker.file.content.substr(pos.min, 1);
-		if (quote != "'") return false;
-		var regex:EReg = ~/(^|[^$])\$(\{|[a-zA-Z0-9_]+)/;
-		return regex.match(s);
-	}
 }

@@ -27,7 +27,7 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 	}
 
 	function assertNoMsg(check:Check, testCase:T, ?fileName:String, ?pos:PosInfos) {
-		assertMsg(check, testCase, '', null, fileName, pos);
+		assertMsg(check, testCase, "", null, fileName, pos);
 	}
 
 	function actualAssertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?fileName:String, ?pos:PosInfos) {

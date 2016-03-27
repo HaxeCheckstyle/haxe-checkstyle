@@ -5,9 +5,9 @@ import checkstyle.checks.block.EmptyBlockCheck;
 class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 
 	static inline var MSG_EMPTY_BLOCK:String = 'Empty block should be written as "{}"';
-	static inline var MSG_EMPTY_BLOCK_SHOULD_CONTAIN:String = 'Empty block should contain a comment or a statement';
-	static inline var MSG_EMPTY_BLOCK_CONTAIN_STATEMENT:String = 'Empty block should contain a statement';
-	static inline var MSG_BLOCK_SHOULD_CONTAIN:String = 'Block should contain a statement';
+	static inline var MSG_EMPTY_BLOCK_SHOULD_CONTAIN:String = "Empty block should contain a comment or a statement";
+	static inline var MSG_EMPTY_BLOCK_CONTAIN_STATEMENT:String = "Empty block should contain a statement";
+	static inline var MSG_BLOCK_SHOULD_CONTAIN:String = "Block should contain a statement";
 
 	public function testCorrectEmptyBlock() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();

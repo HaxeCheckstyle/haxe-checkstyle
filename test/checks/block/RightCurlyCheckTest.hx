@@ -4,8 +4,8 @@ import checkstyle.checks.block.RightCurlyCheck;
 
 class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 
-	static inline var MSG_ALONE:String = 'Right curly should be alone on a new line';
-	static inline var MSG_NOT_SAME_LINE:String = 'Right curly should not be on same line as left curly';
+	static inline var MSG_ALONE:String = "Right curly should be alone on a new line";
+	static inline var MSG_NOT_SAME_LINE:String = "Right curly should not be on same line as left curly";
 	static inline var MSG_SAME_LINE:String = 'Right curly should be on same line as following block (e.g. "} else" or "} catch")';
 
 	public function testCorrectAloneOrSingleLine() {

@@ -7,7 +7,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	static inline var MSG_VOID_RETURN:String = 'Redundant "Void" for method "test"';
 	static inline var MSG_NOT_TEST1_RETURN:String = 'Return type not specified for method "test1"';
 	static inline var MSG_NOT_TEST2_RETURN:String = 'Return type not specified for method "test2"';
-	static inline var MSG_NO_ANON_RETURN:String = 'Return type not specified for anonymous method';
+	static inline var MSG_NO_ANON_RETURN:String = "Return type not specified for anonymous method";
 
 	public function testVoid() {
 		assertMsg(new ReturnCheck(), TEST1, MSG_VOID_RETURN);

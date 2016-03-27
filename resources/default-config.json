@@ -512,6 +512,14 @@
 		},
 		{
 			"props": {
+				"policy": "doubleAndInterpolation",
+				"allowException": true,
+				"severity": "IGNORE"
+			},
+			"type": "StringLiteral"
+		},
+		{
+			"props": {
 				"format": "TODO|FIXME|HACK|XXX|BUG",
 				"severity": "IGNORE"
 			},

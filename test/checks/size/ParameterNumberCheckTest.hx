@@ -16,7 +16,7 @@ class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> 
 
 	public function test11Parameters() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, TEST3, 'Too many parameters for function: test2 (> 7)');
+		assertMsg(check, TEST3, "Too many parameters for function: test2 (> 7)");
 	}
 
 	public function testMaxParameter() {
@@ -28,12 +28,12 @@ class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> 
 
 		check.max = 3;
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST3, 'Too many parameters for function: test2 (> 3)');
+		assertMsg(check, TEST3, "Too many parameters for function: test2 (> 3)");
 	}
 
 	public function testInterface() {
 		var check = new ParameterNumberCheck();
-		assertMsg(check, TEST5, 'Too many parameters for function: test4 (> 7)');
+		assertMsg(check, TEST5, "Too many parameters for function: test4 (> 7)");
 	}
 
 	public function testIgnoreOverridenMethods() {

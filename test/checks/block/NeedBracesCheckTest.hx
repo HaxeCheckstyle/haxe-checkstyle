@@ -4,7 +4,7 @@ import checkstyle.checks.block.NeedBracesCheck;
 
 class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 
-	static inline var PREFIX:String = 'No braces used for body of ';
+	static inline var PREFIX:String = "No braces used for body of ";
 	static inline var MSG_IF:String = PREFIX + '"if"';
 	static inline var MSG_ELSE:String = PREFIX + '"else"';
 	static inline var MSG_FOR:String = PREFIX + '"for"';

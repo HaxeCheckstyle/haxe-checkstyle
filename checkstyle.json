@@ -409,6 +409,13 @@
 			"type": "Spacing"
 		},
 		{
+			"props": {
+				"allowException": true,
+				"policy": "doubleAndInterpolation"
+			},
+			"type": "StringLiteral"
+		},
+		{
 			"type": "TODOComment"
 		},
 		{
