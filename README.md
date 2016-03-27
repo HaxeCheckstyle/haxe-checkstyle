@@ -6,10 +6,8 @@
 [![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
 [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
-[![Code Climate](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/gpa.svg)]
-(https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
-[![Issue Count](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/issue_count.svg)]
-(https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
+[![Code Climate](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/gpa.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
+[![Issue Count](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/issue_count.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
 
 Checkstyle is a development library to help developers write Haxe code that adheres to a coding standard.
 
@@ -38,8 +36,7 @@ haxelib run checkstyle -s src
 
 [More information and reference](http://haxecheckstyle.github.io/docs).
 
-### Issues
-[![Stories in Ready](https://badge.waffle.io/HaxeCheckstyle/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/HaxeCheckstyle/haxe-checkstyle)
+### Issues [![Stories in Ready](https://badge.waffle.io/HaxeCheckstyle/haxe-checkstyle.svg?label=ready&title=Ready)](http://waffle.io/HaxeCheckstyle/haxe-checkstyle)
 
 Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/new).
 
@@ -49,8 +46,7 @@ Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/hax
 
 ### Licensing Information
 
-<a rel="license" href="http://opensource.org/licenses/MIT">
-<img alt="MIT license" height="40" src="http://upload.wikimedia.org/wikipedia/commons/c/c3/License_icon-mit.svg" /></a>
+[![MIT](https://commons.wikimedia.org/wiki/File:License_icon-mit.png)](http://opensource.org/licenses/MIT)
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
