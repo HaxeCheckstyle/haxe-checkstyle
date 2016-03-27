@@ -46,7 +46,7 @@ Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/hax
 
 ### Licensing Information
 
-[![MIT](https://commons.wikimedia.org/wiki/File:License_icon-mit.png)](http://opensource.org/licenses/MIT)
+[![MIT](https://upload.wikimedia.org/wikipedia/commons/8/83/License_icon-mit.png)](http://opensource.org/licenses/MIT)
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
 
