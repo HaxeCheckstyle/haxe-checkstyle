@@ -31,13 +31,13 @@ class ArrayAccessCheck extends Check {
 					if (!spaceBefore) {
 						var e1length = e1.pos.max - e1.pos.min;
 						var eString = checker.getString(e.pos.min, e.pos.max);
-						if (eString.substr(e1length, 1) == " ") logPos('Space between array and [', e.pos);
+						if (eString.substr(e1length, 1) == " ") logPos("Space between array and [", e.pos);
 					}
 
 					if (!spaceInside) {
 						var eString = checker.getString(e.pos.min, e.pos.max);
-						if (checker.file.content.substr(e2.pos.min - 1, 1) == " ") logPos('Space between [ and index', e.pos);
-						if (checker.file.content.substr(e2.pos.max, 1) == " ") logPos('Space between index and ]', e.pos);
+						if (checker.file.content.substr(e2.pos.min - 1, 1) == " ") logPos("Space between [ and index", e.pos);
+						if (checker.file.content.substr(e2.pos.max, 1) == " ") logPos("Space between index and ]", e.pos);
 					}
 				default:
 			}

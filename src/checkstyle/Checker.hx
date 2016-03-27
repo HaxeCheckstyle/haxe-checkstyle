@@ -66,7 +66,7 @@ class Checker {
 		var left = false;
 
 		for (i in 0...code.length) {
-			if (code.charAt(i) == '\n') {
+			if (code.charAt(i) == "\n") {
 				linesIdx.push({l:last, r:i});
 				last = i + 1;
 				left = false;

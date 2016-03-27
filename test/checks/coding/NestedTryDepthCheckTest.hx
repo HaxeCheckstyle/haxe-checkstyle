@@ -11,7 +11,7 @@ class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 
 	public function testDefaultTooMany() {
 		var check = new NestedTryDepthCheck();
-		assertMsg(check, TEST2, 'Nested try depth is 2 (max allowed is 1)');
+		assertMsg(check, TEST2, "Nested try depth is 2 (max allowed is 1)");
 	}
 
 	public function testMaxParameter() {
@@ -23,7 +23,7 @@ class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 
 		check.max = 0;
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, 'Nested try depth is 1 (max allowed is 0)');
+		assertMsg(check, TEST2, "Nested try depth is 1 (max allowed is 0)");
 	}
 }
 

@@ -5,7 +5,7 @@ import checkstyle.checks.coding.ReturnCountCheck;
 class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 
 	public function testReturnCount() {
-		assertMsg(new ReturnCountCheck(), TEST1, 'Return count is 3 (max allowed is 2)');
+		assertMsg(new ReturnCountCheck(), TEST1, "Return count is 3 (max allowed is 2)");
 	}
 
 	public function testCorrectReturnCount() {
@@ -19,18 +19,18 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 	public function testCustomReturnCount() {
 		var check = new ReturnCountCheck();
 		check.max = 1;
-		assertMsg(check, TEST4, 'Return count is 2 (max allowed is 1)');
+		assertMsg(check, TEST4, "Return count is 2 (max allowed is 1)");
 	}
 
 	public function testIgnoreRE() {
 		var check = new ReturnCountCheck();
 		check.ignoreFormat = "^equals$";
-		assertMsg(check, TEST5, '');
+		assertMsg(check, TEST5, "");
 	}
 
 	public function testClosure() {
 		assertNoMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE);
-		assertMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE_2, 'Return count is 3 (max allowed is 2)');
+			assertMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE_2, "Return count is 3 (max allowed is 2)");
 	}
 }
 

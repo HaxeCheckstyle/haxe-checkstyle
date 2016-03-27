@@ -51,17 +51,17 @@ class SpacingCheck extends Check {
 					else dist = e2.pos.min - e.pos.min;
 					if (dist > unopSize(uo)) logPos('Space around "${unopString(uo)}"', e.pos);
 				case EIf(econd, _, _) if (spaceIfCondition):
-					checkSpaceBetweenExpressions('if', e, econd);
+					checkSpaceBetweenExpressions("if", e, econd);
 				case EFor(it, _) if (spaceForLoop):
-					checkSpaceBetweenExpressions('for', e, it);
+					checkSpaceBetweenExpressions("for", e, it);
 				case EWhile(econd, _, true) if (spaceWhileLoop):
-					checkSpaceBetweenExpressions('while', e, econd);
+					checkSpaceBetweenExpressions("while", e, econd);
 				case ESwitch(eswitch, _, _) if (spaceSwitchCase):
-					checkSpaceBetweenManually('switch', lastExpr, eswitch);
+					checkSpaceBetweenManually("switch", lastExpr, eswitch);
 				case ETry(etry, catches) if (spaceCatch):
 					var exprBeforeCatch = lastExpr;
 					for (ctch in catches) {
-						checkSpaceBetweenManually('catch', exprBeforeCatch, ctch.expr);
+						checkSpaceBetweenManually("catch", exprBeforeCatch, ctch.expr);
 						exprBeforeCatch = ctch.expr;
 					}
 				default:

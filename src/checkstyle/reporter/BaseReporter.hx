@@ -35,7 +35,7 @@ class BaseReporter implements IReporter {
 		infos = 0;
 		total = 0;
 		Sys.println("");
-		Sys.println(styleText('Running Checkstyle v' + CompileTime.parseJsonFile("package.json").version + ' on $numFiles source files...', Style.BOLD));
+		Sys.println(styleText("Running Checkstyle v" + CompileTime.parseJsonFile("package.json").version + " on $numFiles source files...", Style.BOLD));
 		Sys.println("");
 	}
 
@@ -83,17 +83,17 @@ class BaseReporter implements IReporter {
 	function getMessage(m:CheckMessage):StringBuf {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);
-		sb.add(':');
+		sb.add(":");
 		sb.add(m.line);
 		if (m.startColumn >= 0) {
 			var isRange = m.startColumn != m.endColumn;
 			sb.add(': character${isRange ? "s" : ""} ');
 			sb.add(m.startColumn);
 			if (isRange) {
-				sb.add('-');
+				sb.add("-");
 				sb.add(m.endColumn);
 			}
-			sb.add(' ');
+			sb.add(" ");
 		}
 		sb.add(": ");
 		sb.add(BaseReporter.severityString(m.severity));

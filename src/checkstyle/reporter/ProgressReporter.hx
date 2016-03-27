@@ -26,9 +26,9 @@ class ProgressReporter implements IReporter {
 	}
 
 	function clear() {
-		Sys.print('\r');
-		for (count in 0...lineLength) Sys.print(' ');
-		Sys.print('\r');
+		Sys.print("\r");
+		for (count in 0...lineLength) Sys.print(" ");
+		Sys.print("\r");
 	}
 
 	public function fileFinish(f:CheckFile) {}

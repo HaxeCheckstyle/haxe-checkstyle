@@ -4,7 +4,7 @@ import checkstyle.checks.coding.InnerAssignmentCheck;
 
 class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> {
 
-	static inline var MSG_INNER_ASSIGNMENT:String = 'Inner assignment detected';
+	static inline var MSG_INNER_ASSIGNMENT:String = "Inner assignment detected";
 
 	public function testCorrectAssignment() {
 		var check = new InnerAssignmentCheck();
