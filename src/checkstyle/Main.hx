@@ -316,7 +316,6 @@ class Main {
 	}
 
 	function failWith(message:String) {
-		// Skipping stderr for codeclimate
 		if (REPORT_TYPE == CODE_CLIMATE_REPORTER) return;
 		Sys.stderr().writeString(message + "\n");
 		Sys.exit(1);

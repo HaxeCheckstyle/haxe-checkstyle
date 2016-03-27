@@ -48,6 +48,6 @@ class AnonymousCheck extends Check {
 	}
 
 	function error(name:String, pos:Position) {
-		logPos('Anonymous structure found, it is advised to use a typedef instead "${name}"', pos);
+		logPos('Anonymous structure "${name}" found, use "typedef"', pos);
 	}
 }
