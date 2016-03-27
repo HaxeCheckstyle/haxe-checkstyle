@@ -1,6 +1,8 @@
 engines:
   haxe-checkstyle:
     enabled: true
+  markdownlint:
+    enabled: true
 
 exclude_paths:
   - resources/**/*
@@ -8,3 +10,4 @@ exclude_paths:
 ratings:
   paths:
     - "**.hx"
+    - "**.md"
