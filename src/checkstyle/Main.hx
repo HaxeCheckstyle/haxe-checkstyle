@@ -215,10 +215,14 @@ class Main {
 	}
 
 	function listChecks() {
+		var count = 0;
 		for (check in getSortedCheckInfos()) {
 			Sys.println(check.name + ":");
 			Sys.println("  " + check.description + "\n");
+			if (~/\[DEPRECATED/.match(check.description)) continue;
+			count++;
 		}
+		Sys.println("Total: " + count + " checks");
 		Sys.exit(0);
 	}
 
