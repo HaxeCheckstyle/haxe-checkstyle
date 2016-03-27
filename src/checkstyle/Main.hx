@@ -14,6 +14,7 @@ import checkstyle.reporter.ExitCodeReporter;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;
+import neko.Lib;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -33,6 +34,7 @@ class Main {
 	static var EXIT_CODE:Bool = false;
 	static var NO_STYLE:Bool = false;
 	static var CODE_CLIMATE_REPORTER:String = "codeclimate";
+	static var SHOW_MISSING_CHECKS:Bool = false;
 	static var exitCode:Int;
 
 	var info:ChecksInfo;
@@ -73,6 +75,7 @@ class Main {
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
+			@doc("Show checks missing from active config") ["-showMissingChecks"] => function () SHOW_MISSING_CHECKS = true,
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
@@ -279,6 +282,11 @@ class Main {
 	}
 
 	function start() {
+		if (SHOW_MISSING_CHECKS) {
+			showMissingChecks();
+			Sys.exit(0);
+		}
+
 		var files:Array<String> = [];
 		for (path in paths) traverse(path, files);
 		files.sortStrings();
@@ -316,6 +324,30 @@ class Main {
 
 	public static function setExitCode(newExitCode:Int) {
 		exitCode = newExitCode;
+	}
+
+	function showMissingChecks() {
+		var configuredChecks = [];
+		var missingChecks = [];
+
+		for (check in checker.checks) {
+			configuredChecks.push(check.getModuleName());
+		}
+		for (check in info.checks()) {
+			if (configuredChecks.indexOf(check.name) >= 0) continue;
+			if (~/\[DEPRECATED/.match(check.description)) continue;
+			missingChecks.push(check);
+		}
+		if (missingChecks.length <= 0) {
+			Lib.println("You have no checks missing from your configuration");
+		}
+		else {
+
+			Lib.println("The following checks are missing from your configuration:");
+			for (check in missingChecks) {
+				Lib.println(check.name + " - " + check.description);
+			}
+		}
 	}
 
 	public static function main() {
