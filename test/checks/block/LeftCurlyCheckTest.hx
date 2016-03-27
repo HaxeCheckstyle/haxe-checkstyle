@@ -486,7 +486,7 @@ abstract LeftCurlyCheckTests(String) to String {
 	}";
 
 	var SINGLELINE_ISSUE_153 = "
-	class Test {
+	class Test<T:String, A> {
 		var positionMap = new Map<Int, {x:Bool, y:Bool}>();
 		function foo():Void {}
 	}
