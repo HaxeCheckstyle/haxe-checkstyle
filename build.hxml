@@ -1,4 +1,5 @@
 -cp src
+-cp test
 -lib haxeparser:3.2.0
 -lib compiletime:2.6.0
 -lib hxargs
@@ -15,7 +16,6 @@
 -neko runD.n
 
 --next
--cp test
 -lib mcover:2.1.1
 -x TestMain
 --macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
