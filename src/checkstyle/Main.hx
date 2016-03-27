@@ -74,8 +74,8 @@ class Main {
 			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
+			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
-			@doc("Show checks missing from active config") ["-showMissingChecks"] => function () SHOW_MISSING_CHECKS = true,
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
