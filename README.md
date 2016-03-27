@@ -3,11 +3,10 @@
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle)
 [![codecov.io](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle?branch=dev)
-[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
-[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
-
 [![Code Climate](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/gpa.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
 [![Issue Count](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/issue_count.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
+[![Version](https://img.shields.io/badge/haxelib-v2.0.0-orange.svg)](http://lib.haxe.org/p/checkstyle/)
+[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
 Checkstyle is a development library to help developers write Haxe code that adheres to a coding standard.
 
