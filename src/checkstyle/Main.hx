@@ -60,7 +60,7 @@ class Main {
 		var argHandler = Args.generate([
 			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
-			@doc("Set exclude config file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
+			@doc("Set exclude file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
 			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
 				XML_PATH = path;
@@ -74,8 +74,8 @@ class Main {
 			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
+			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
-			@doc("Show checks missing from active config") ["-showMissingChecks"] => function () SHOW_MISSING_CHECKS = true,
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
