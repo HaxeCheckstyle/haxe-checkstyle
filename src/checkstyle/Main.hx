@@ -226,12 +226,23 @@ class Main {
 		Sys.exit(0);
 	}
 
+	function getCheckCount():Int {
+		var count = 0;
+		for (check in info.checks()) {
+			if (~/\[DEPRECATED/.match(check.description)) continue;
+			count++;
+		}
+		return count;
+	}
+
 	function createReporter(numFiles:Int):IReporter {
+		var totalChecks = getCheckCount();
+		var checksUsed = checker.checks.length;
 		return switch (REPORT_TYPE) {
-			case "xml": new XMLReporter(numFiles, XML_PATH, STYLE, NO_STYLE);
-			case "json": new JSONReporter(numFiles, JSON_PATH, NO_STYLE);
-			case "text": new TextReporter(numFiles, TEXT_PATH, NO_STYLE);
-			case "codeclimate": new CodeClimateReporter(numFiles, null, NO_STYLE);
+			case "xml": new XMLReporter(numFiles, totalChecks, checksUsed, XML_PATH, STYLE, NO_STYLE);
+			case "json": new JSONReporter(numFiles, totalChecks, checksUsed, JSON_PATH, NO_STYLE);
+			case "text": new TextReporter(numFiles, totalChecks, checksUsed, TEXT_PATH, NO_STYLE);
+			case "codeclimate": new CodeClimateReporter(numFiles, totalChecks, checksUsed, null, NO_STYLE);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
 	}

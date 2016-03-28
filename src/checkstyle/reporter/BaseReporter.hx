@@ -16,10 +16,14 @@ class BaseReporter implements IReporter {
 	var report:StringBuf;
 	var file:FileOutput;
 	var numFiles:Int;
+	var numChecks:Int;
+	var numUsedChecks:Int;
 	var noStyle:Bool;
 
-	public function new(fileCount:Int, path:String, ns:Bool) {
+	public function new(fileCount:Int, checkCount:Int, usedCheckCount:Int, path:String, ns:Bool) {
 		numFiles = fileCount;
+		numChecks = checkCount;
+		numUsedChecks = usedCheckCount;
 		noStyle = ns;
 		if (path != null) {
 			var folder = Path.directory(path);
@@ -34,8 +38,11 @@ class BaseReporter implements IReporter {
 		warnings = 0;
 		infos = 0;
 		total = 0;
+
+		var version = CompileTime.parseJsonFile("package.json").version;
+
 		Sys.println("");
-		Sys.println(styleText("Running Checkstyle v" + CompileTime.parseJsonFile("package.json").version + ' on $numFiles source files...', Style.BOLD));
+		Sys.println(styleText('Running Checkstyle v$version using $numUsedChecks/$numChecks checks on $numFiles source files...', Style.BOLD));
 		Sys.println("");
 	}
 
