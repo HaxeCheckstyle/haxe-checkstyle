@@ -125,10 +125,10 @@ class Checker {
 			}
 		}
 		catch (e:Dynamic) {
-#if debug
+			#if debug
 			Lib.println(e);
 			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-#end
+			#end
 		}
 	}
 
@@ -155,10 +155,10 @@ class Checker {
 			return parser.parse();
 		}
 		catch (e:Dynamic) {
-#if debug
+			#if debug
 			Lib.println(e);
 			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-#end
+			#end
 		}
 		return null;
 	}
@@ -172,10 +172,10 @@ class Checker {
 		#end
 
 		for (reporter in reporters) reporter.start();
-		for (lintFile in files) {
-			loadFileContent(lintFile);
-			if (createContext(lintFile)) run();
-			unloadFileContent(lintFile);
+		for (checkFile in files) {
+			loadFileContent(checkFile);
+			if (createContext(checkFile)) run();
+			unloadFileContent(checkFile);
 			advanceFrame();
 		}
 		advanceFrame();
@@ -183,18 +183,18 @@ class Checker {
 		advanceFrame();
 	}
 
-	function loadFileContent(lintFile:CheckFile) {
+	function loadFileContent(checkFile:CheckFile) {
 		// unittests set content before running Checker
 		// real checks load content here
-		if (lintFile.content == null) lintFile.content = File.getContent(lintFile.name);
+		if (checkFile.content == null) checkFile.content = File.getContent(checkFile.name);
 	}
 
-	function unloadFileContent(lintFile:CheckFile) {
-		lintFile.content = null;
+	function unloadFileContent(checkFile:CheckFile) {
+		checkFile.content = null;
 	}
 
-	function createContext(lintFile:CheckFile):Bool {
-		this.file = lintFile;
+	function createContext(checkFile:CheckFile):Bool {
+		file = checkFile;
 		for (reporter in reporters) reporter.fileStart(file);
 		try {
 			findLineSeparator();
