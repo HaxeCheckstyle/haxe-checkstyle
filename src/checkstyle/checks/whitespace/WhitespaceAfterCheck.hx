@@ -1,18 +1,20 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
+import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("WhitespaceAfter")
-@desc("Checks for placement of right curly braces")
+@desc("Checks for whitespace after a token.")
 class WhitespaceAfterCheck extends Check {
 
 	public var tokens:Array<String>;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			",",
 			";"
@@ -20,12 +22,9 @@ class WhitespaceAfterCheck extends Check {
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
-	@SuppressWarnings(["checkstyle:CyclomaticComplexity", "checkstyle:MethodLength"])
 	override function actualRun() {
 		var tokenList:Array<TokenDef> = [];
 
@@ -91,11 +90,12 @@ class WhitespaceAfterCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var contentAfter:String = checker.file.content.substr(tok.pos.max, 1);
 			if (~/^(\s|)$/.match(contentAfter)) continue;
 
-			logPos('No whitespace after "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
+			logPos('No whitespace after "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 		}
 	}
 }

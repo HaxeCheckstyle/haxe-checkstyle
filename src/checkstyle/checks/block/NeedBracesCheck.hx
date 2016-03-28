@@ -1,35 +1,27 @@
 package checkstyle.checks.block;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("NeedBraces")
-@desc("Checks for braces on function, if, for and while statements")
+@desc("Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.")
 class NeedBracesCheck extends Check {
 
-	public static inline var FUNCTION:String = "FUNCTION";
-	public static inline var FOR:String = "FOR";
-	public static inline var IF:String = "IF";
-	public static inline var ELSE_IF:String = "ELSE_IF";
-	public static inline var WHILE:String = "WHILE";
-	public static inline var DO_WHILE:String = "DO_WHILE";
-	public static inline var CATCH:String = "CATCH";
-
-	public var tokens:Array<String>;
+	public var tokens:Array<NeedBracesCheckToken>;
 	public var allowSingleLineStatement:Bool;
 
 	public function new() {
-		super();
-		tokens = [];
+		super(TOKEN);
+		tokens = [FOR, IF, ELSE_IF, WHILE, DO_WHILE];
 		allowSingleLineStatement = true;
 	}
 
-	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+	function hasToken(token:NeedBracesCheckToken):Bool {
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {
@@ -68,8 +60,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkIfChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		if (Type.enumEq(lastChild.tok, Kwd(KwdElse))) {
@@ -84,8 +75,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkFunctionChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
@@ -105,8 +95,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkDoWhileChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		var expr:TokenTree = lastChild.previousSibling;
@@ -119,10 +108,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkWhileChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
-		if (Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
-
+		if (token == null || !token.hasChilds() || Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
 			case BrOpen:
@@ -133,8 +119,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkLastChild(token:TokenTree) {
-		if (token == null) return;
-		if (!token.hasChilds()) return;
+		if (token == null || !token.hasChilds()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
@@ -156,11 +141,11 @@ class NeedBracesCheck extends Check {
 		}
 		else {
 			if (singleLine) {
-				logPos('Body of "${TokenDefPrinter.print(parent.tok)}" on same line', child.pos, Reflect.field(SeverityLevel, severity));
+				logPos('Body of "${TokenDefPrinter.print(parent.tok)}" on same line', child.pos);
 				return;
 			}
 		}
-		logPos('No braces used for body of "${TokenDefPrinter.print(parent.tok)}"', child.pos, Reflect.field(SeverityLevel, severity));
+		logPos('No braces used for body of "${TokenDefPrinter.print(parent.tok)}"', child.pos);
 	}
 
 	function checkIfElseSingleline(parent:TokenTree, child:TokenTree):Bool {
@@ -179,4 +164,15 @@ class NeedBracesCheck extends Check {
 		var maxLine:LinePos = checker.getLinePos(child.getFirstChild().getPos().max);
 		return (minLine.line == maxLine.line);
 	}
+}
+
+@:enum
+abstract NeedBracesCheckToken(String) {
+	var FUNCTION = "FUNCTION";
+	var FOR = "FOR";
+	var IF = "IF";
+	var ELSE_IF = "ELSE_IF";
+	var WHILE = "WHILE";
+	var DO_WHILE = "DO_WHILE";
+	var CATCH = "CATCH";
 }

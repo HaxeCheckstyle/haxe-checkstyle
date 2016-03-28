@@ -1,28 +1,26 @@
 package checkstyle.checks.whitespace;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
+import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
-import haxe.macro.Expr;
+
+using checkstyle.utils.ArrayUtils;
 
 @ignore("base class for OperatorWrap and SeparatorWrap")
 class WrapCheckBase extends Check {
 
-	public static inline var EOL:String = "eol";
-	public static inline var NL:String = "nl";
-
 	public var tokens:Array<String>;
-	public var option:String;
+	public var option:WrapCheckBaseOption;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		option = EOL;
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	function checkTokens(tokenList:Array<TokenDef>) {
@@ -31,6 +29,9 @@ class WrapCheckBase extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
+			if (TokenTreeCheckUtils.isTypeParameter(tok)) continue;
+			if (TokenTreeCheckUtils.isImportMult(tok)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -40,15 +41,21 @@ class WrapCheckBase extends Check {
 
 			if (~/^\s*$/.match(before)) {
 				if (option != NL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be at the end of the line', tok.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be at the end of the line', tok.pos);
 					continue;
 				}
 			}
 			if (~/^\s*(\/\/.*|\/\*.*|)$/.match(after)) {
 				if (option != EOL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must on a new line', tok.pos, Reflect.field(SeverityLevel, severity));
+					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be on a new line', tok.pos);
 				}
 			}
 		}
 	}
+}
+
+@:enum
+abstract WrapCheckBaseOption(String) {
+	var EOL = "eol";
+	var NL = "nl";
 }

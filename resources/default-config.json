@@ -1,0 +1,634 @@
+{
+	"defineCombinations": [],
+	"defaultSeverity": "INFO",
+	"baseDefines": [],
+	"exclude": {},
+	"checks": [
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "Anonymous"
+		},
+		{
+			"props": {
+				"spaceBefore": false,
+				"spaceInside": false,
+				"severity": "IGNORE"
+			},
+			"type": "ArrayAccess"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "ArrayLiteral"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "AvoidInlineConditionals"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "AvoidStarImport"
+		},
+		{
+			"props": {
+				"format": "^(e|t|ex|[a-z][a-z][a-zA-Z]+)$",
+				"severity": "IGNORE"
+			},
+			"type": "CatchParameterName"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "ConstantName"
+		},
+		{
+			"props": {
+				"thresholds": [
+					{
+						"complexity": 20,
+						"severity": "WARNING"
+					},
+					{
+						"complexity": 25,
+						"severity": "ERROR"
+					}
+				],
+				"severity": "IGNORE"
+			},
+			"type": "CyclomaticComplexity"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "DefaultComesLast"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "Dynamic"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "ERegLiteral"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"option": "empty",
+				"severity": "IGNORE"
+			},
+			"type": "EmptyBlock"
+		},
+		{
+			"props": {
+				"requireEmptyLineAfterPackage": true,
+				"requireEmptyLineAfterInterface": true,
+				"requireEmptyLineAfterAbstract": true,
+				"allowEmptyLineAfterSingleLineComment": true,
+				"max": 1,
+				"requireEmptyLineAfterClass": true,
+				"allowEmptyLineAfterMultiLineComment": true,
+				"severity": "IGNORE"
+			},
+			"type": "EmptyLines"
+		},
+		{
+			"props": {
+				"enforceEmptyPackage": false,
+				"severity": "IGNORE"
+			},
+			"type": "EmptyPackage"
+		},
+		{
+			"props": {
+				"max": 2000,
+				"severity": "IGNORE"
+			},
+			"type": "FileLength"
+		},
+		{
+			"props": {
+				"option": "upperCase",
+				"severity": "IGNORE"
+			},
+			"type": "HexadecimalLiteral"
+		},
+		{
+			"props": {
+				"ignoreSetter": true,
+				"ignoreFormat": "^(main|run)$",
+				"ignoreConstructorParameter": true,
+				"severity": "IGNORE"
+			},
+			"type": "HiddenField"
+		},
+		{
+			"props": {
+				"character": "tab",
+				"ignorePattern": "^$",
+				"severity": "IGNORE"
+			},
+			"type": "IndentationCharacter"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "InnerAssignment"
+		},
+		{
+			"props": {
+				"allowProperties": false,
+				"allowMarkerInterfaces": true,
+				"severity": "IGNORE"
+			},
+			"type": "Interface"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"ignoreEmptySingleline": true,
+				"option": "eol",
+				"severity": "IGNORE"
+			},
+			"type": "LeftCurly"
+		},
+		{
+			"props": {
+				"max": 160,
+				"ignorePattern": "^$",
+				"severity": "IGNORE"
+			},
+			"type": "LineLength"
+		},
+		{
+			"props": {
+				"listeners": [
+					"addEventListener",
+					"addListener",
+					"on",
+					"once"
+				],
+				"format": "^_?[a-z][a-zA-Z0-9]*$",
+				"severity": "IGNORE"
+			},
+			"type": "ListenerName"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "LocalVariableName"
+		},
+		{
+			"props": {
+				"ignoreNumbers": [
+					-1,
+					0,
+					1,
+					2
+				],
+				"severity": "IGNORE"
+			},
+			"type": "MagicNumber"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "MemberName"
+		},
+		{
+			"props": {
+				"maxPrivate": 100,
+				"maxPublic": 100,
+				"severity": "IGNORE",
+				"maxTotal": 100
+			},
+			"type": "MethodCount"
+		},
+		{
+			"props": {
+				"max": 50,
+				"severity": "IGNORE"
+			},
+			"type": "MethodLength"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[a-z][a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "MethodName"
+		},
+		{
+			"props": {
+				"modifiers": [
+					"MACRO",
+					"OVERRIDE",
+					"PUBLIC_PRIVATE",
+					"STATIC",
+					"INLINE",
+					"DYNAMIC"
+				],
+				"severity": "IGNORE"
+			},
+			"type": "ModifierOrder"
+		},
+		{
+			"props": {
+				"minLength": 2,
+				"ignore": "^\\s+$",
+				"allowDuplicates": 2,
+				"severity": "IGNORE"
+			},
+			"type": "MultipleStringLiterals"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "MultipleVariableDeclarations"
+		},
+		{
+			"props": {
+				"allowSingleLineStatement": true,
+				"tokens": [
+					"FOR",
+					"IF",
+					"ELSE_IF",
+					"WHILE",
+					"DO_WHILE"
+				],
+				"severity": "IGNORE"
+			},
+			"type": "NeedBraces"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "IGNORE"
+			},
+			"type": "NestedForDepth"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "IGNORE"
+			},
+			"type": "NestedIfDepth"
+		},
+		{
+			"props": {
+				"max": 1,
+				"severity": "IGNORE"
+			},
+			"type": "NestedTryDepth"
+		},
+		{
+			"props": {
+				"option": "questionMark",
+				"severity": "IGNORE"
+			},
+			"type": "NullableParameter"
+		},
+		{
+			"props": {
+				"ternaryOpPolicy": "around",
+				"unaryOpPolicy": "none",
+				"boolOpPolicy": "around",
+				"intervalOpPolicy": "none",
+				"assignOpPolicy": "around",
+				"functionArgPolicy": "around",
+				"bitwiseOpPolicy": "around",
+				"arithmeticOpPolicy": "around",
+				"compareOpPolicy": "around",
+				"arrowPolicy": "around",
+				"severity": "IGNORE"
+			},
+			"type": "OperatorWhitespace"
+		},
+		{
+			"props": {
+				"tokens": [
+					"=",
+					"+",
+					"-",
+					"*",
+					"/",
+					"%",
+					">",
+					"<",
+					">=",
+					"<=",
+					"==",
+					"!=",
+					"&",
+					"|",
+					"^",
+					"&&",
+					"||",
+					"<<",
+					">>",
+					">>>",
+					"+=",
+					"-=",
+					"*=",
+					"/=",
+					"%=",
+					"<<=",
+					">>=",
+					">>>=",
+					"|=",
+					"&=",
+					"^=",
+					"...",
+					"=>",
+					"++",
+					"--"
+				],
+				"option": "eol",
+				"severity": "IGNORE"
+			},
+			"type": "OperatorWrap"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^(_|[a-z][a-zA-Z0-9]*$)",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "ParameterName"
+		},
+		{
+			"props": {
+				"max": 7,
+				"severity": "IGNORE",
+				"ignoreOverriddenMethods": false
+			},
+			"type": "ParameterNumber"
+		},
+		{
+			"props": {
+				"enforcePublicPrivate": false,
+				"severity": "IGNORE"
+			},
+			"type": "RedundantModifier"
+		},
+		{
+			"props": {
+				"allowEmptyReturn": true,
+				"enforceReturnType": false,
+				"severity": "IGNORE"
+			},
+			"type": "Return"
+		},
+		{
+			"props": {
+				"ignoreFormat": "^$",
+				"max": 2,
+				"severity": "IGNORE"
+			},
+			"type": "ReturnCount"
+		},
+		{
+			"props": {
+				"tokens": [
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"ABSTRACT_DEF",
+					"TYPEDEF_DEF",
+					"INTERFACE_DEF",
+					"OBJECT_DECL",
+					"FUNCTION",
+					"FOR",
+					"IF",
+					"WHILE",
+					"SWITCH",
+					"TRY",
+					"CATCH"
+				],
+				"option": "aloneorsingle",
+				"severity": "IGNORE"
+			},
+			"type": "RightCurly"
+		},
+		{
+			"props": {
+				"commaPolicy": "after",
+				"semicolonPolicy": "after",
+				"dotPolicy": "none",
+				"severity": "IGNORE"
+			},
+			"type": "SeparatorWhitespace"
+		},
+		{
+			"props": {
+				"tokens": [
+					",",
+					"."
+				],
+				"option": "eol",
+				"severity": "IGNORE"
+			},
+			"type": "SeparatorWrap"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "SimplifyBooleanExpression"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "SimplifyBooleanReturn"
+		},
+		{
+			"props": {
+				"spaceIfCondition": true,
+				"spaceAroundBinop": true,
+				"spaceForLoop": true,
+				"ignoreRangeOperator": true,
+				"spaceWhileLoop": true,
+				"spaceCatch": true,
+				"spaceSwitchCase": true,
+				"noSpaceAroundUnop": true,
+				"severity": "IGNORE"
+			},
+			"type": "Spacing"
+		},
+		{
+			"props": {
+				"policy": "doubleAndInterpolation",
+				"allowException": true,
+				"severity": "IGNORE"
+			},
+			"type": "StringLiteral"
+		},
+		{
+			"props": {
+				"format": "TODO|FIXME|HACK|XXX|BUG",
+				"severity": "IGNORE"
+			},
+			"type": "TODOComment"
+		},
+		{
+			"props": {
+				"ignorePattern": "^$",
+				"severity": "IGNORE"
+			},
+			"type": "TabForAligning"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "Trace"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "TrailingWhitespace"
+		},
+		{
+			"props": {
+				"ignoreEnumAbstractValues": true,
+				"severity": "IGNORE"
+			},
+			"type": "Type"
+		},
+		{
+			"props": {
+				"ignoreExtern": true,
+				"format": "^[A-Z]+[a-zA-Z0-9]*$",
+				"tokens": [],
+				"severity": "IGNORE"
+			},
+			"type": "TypeName"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "UnnecessaryConstructor"
+		},
+		{
+			"props": {
+				"moduleTypeMap": {},
+				"ignoreModules": [],
+				"severity": "IGNORE"
+			},
+			"type": "UnusedImport"
+		},
+		{
+			"props": {
+				"severity": "IGNORE"
+			},
+			"type": "VariableInitialisation"
+		},
+		{
+			"props": {
+				"tokens": [
+					",",
+					";"
+				],
+				"severity": "IGNORE"
+			},
+			"type": "WhitespaceAfter"
+		},
+		{
+			"props": {
+				"tokens": [
+					"=",
+					"+",
+					"-",
+					"*",
+					"/",
+					"%",
+					">",
+					"<",
+					">=",
+					"<=",
+					"==",
+					"!=",
+					"&",
+					"|",
+					"^",
+					"&&",
+					"||",
+					"<<",
+					">>",
+					">>>",
+					"+=",
+					"-=",
+					"*=",
+					"/=",
+					"%=",
+					"<<=",
+					">>=",
+					">>>=",
+					"|=",
+					"&=",
+					"^=",
+					"=>"
+				],
+				"severity": "IGNORE"
+			},
+			"type": "WhitespaceAround"
+		}
+	]
+}

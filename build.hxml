@@ -1,29 +1,26 @@
--cmd haxelib newrepo
--cmd haxelib install haxeparser 3.2.0 || true
--cmd haxelib install compiletime 2.6.0 || true
--cmd haxelib install hxargs 3.0.0 || true
-
---next
-
 -cp src
--lib haxeparser
--lib compiletime
+-cp test
+-lib haxeparser:3.2.0
+-lib compiletime:2.6.0
 -lib hxargs
 
 --each
 
 -main checkstyle.Main
--D checkstyle
 -neko run.n
 
 --next
+
 -main checkstyle.Main
--neko run.n
+-debug
+-neko runD.n
 
 --next
--cmd neko run -s src -p resources/static-analysis.xml -report
+-lib mcover:2.1.1
+-x TestMain
+--macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
 
 --next
--cp test
--main TestMain
---interp
+-cmd neko run -s src -s test -p resources/static-analysis.txt
+-cmd neko run --default-config resources/default-config.json
+-cmd neko run -c resources/default-config.json

@@ -2,30 +2,50 @@ package checkstyle.checks;
 
 import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
 import haxeparser.Data;
+
+#if debug
+import haxe.CallStack;
+import neko.Lib;
+#end
+
+using checkstyle.utils.ArrayUtils;
+using checkstyle.utils.FieldUtils;
 
 class Check {
 
-	public var severity:String;
+	public var severity:SeverityLevel;
+	public var type(default, null):CheckType;
+	public var categories:Array<Category>;
+	public var points:Int;
+	public var desc:String;
 
-	var messages:Array<LintMessage>;
+	var messages:Array<CheckMessage>;
 	var moduleName:String;
 	var checker:Checker;
 
-	public function new() {
-		severity = "INFO";
+	public function new(type:CheckType) {
+		this.type = type;
+		severity = SeverityLevel.INFO;
+		categories = [Category.STYLE];
+
+		points = 1;
+		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
-	public function run(checker:Checker):Array<LintMessage> {
+	public function run(checker:Checker):Array<CheckMessage> {
 		this.checker = checker;
 		messages = [];
-		if (Reflect.field(SeverityLevel, severity) != SeverityLevel.IGNORE) {
+		if (severity != SeverityLevel.IGNORE) {
 			try {
 				actualRun();
 			}
-			catch(e:String) {
-				//exception
+			catch (e:String) {
+#if debug
+				Lib.println(e);
+				Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+#end
 			}
 		}
 		return messages;
@@ -35,26 +55,30 @@ class Check {
 		throw "Unimplemented";
 	}
 
-	public function logPos(msg:String, pos:Position, sev:SeverityLevel) {
+	public function logPos(msg:String, pos:Position, ?sev:SeverityLevel) {
 		logRange(msg, pos.min, pos.max, sev);
 	}
 
-	public function logRange(msg:String, startPos:Int, endPos:Int, sev:SeverityLevel) {
+	public function logRange(msg:String, startPos:Int, endPos:Int, ?sev:SeverityLevel) {
 		var lp = checker.getLinePos(startPos);
 		var length = endPos - startPos;
 		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
 	}
 
-	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, sev:SeverityLevel) {
+	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, ?sev:SeverityLevel) {
 		if (endColumn == null) endColumn = startColumn;
+		if (sev == null) sev = severity;
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
+			desc:desc,
 			line:l,
 			startColumn:startColumn,
 			endColumn:endColumn,
 			severity:sev,
-			moduleName:getModuleName()
+			moduleName:getModuleName(),
+			categories:categories,
+			points:points
 		});
 	}
 
@@ -63,24 +87,18 @@ class Check {
 		return moduleName;
 	}
 
-	@SuppressWarnings('checkstyle:AvoidInlineConditionals')
-	function forEachField(cb:Field -> FieldParent -> Void) {
+	function forEachField(cb:Field -> ParentType -> Void) {
+		if (checker.ast.decls == null) return;
 		for (td in checker.ast.decls) {
-			var fields:Array<Field> = null;
-			var parent:FieldParent = null;
-			switch (td.decl) {
-				case EClass(d):
-					fields = d.data;
-					parent = (d.flags.indexOf(HInterface) < 0) ? CLASS : INTERFACE;
-				case EAbstract(a):
-					fields = a.data;
-					parent = ABSTRACT;
-				default:
+			var fields:Array<Field> = switch (td.decl) {
+				case EClass(d): d.data;
+				case EAbstract(a): a.data;
+				default: null;
 			}
 
 			if (fields == null) continue;
 			for (field in fields) {
-				if (!isCheckSuppressed(field)) cb(field, parent);
+				if (!isCheckSuppressed(field)) cb(field, td.decl.toParentType());
 			}
 		}
 	}
@@ -106,9 +124,7 @@ class Check {
 
 	function isLineSuppressed(i:Int):Bool {
 		var pos:Int = 0;
-		for (j in 0 ... i + 1) {
-			pos += checker.lines[j].length;
-		}
+		for (j in 0...i + 1) pos += checker.lines[j].length;
 		return isCharPosSuppressed(pos);
 	}
 
@@ -120,8 +136,8 @@ class Check {
 		return isCharPosSuppressed(pos.min);
 	}
 
-	@SuppressWarnings('checkstyle:CyclomaticComplexity')
 	function isCharPosSuppressed(pos:Int):Bool {
+		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EAbstract(d):
@@ -173,27 +189,22 @@ class Check {
 	}
 
 	function isCharPosExtern(pos:Int):Bool {
+		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
 			switch (td.decl){
 				case EAbstract(d):
 				case EClass(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(HExtern) > -1;
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(HExtern);
 				case EEnum(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(EExtern) > -1;
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
 				case ETypedef(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						return d.flags.indexOf(EExtern) > -1;
-					}
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
 					switch (d.data) {
 						case TAnonymous(fields):
 							for (field in fields) {
 								if (pos > field.pos.max) continue;
 								if (pos < field.pos.min) continue;
-								return d.flags.indexOf(EExtern) > -1;
+								return d.flags.contains(EExtern);
 							}
 						default:
 					}
@@ -221,9 +232,8 @@ class Check {
 	}
 }
 
-@SuppressWarnings('checkstyle:MemberName')
-enum FieldParent {
-	CLASS;
-	INTERFACE;
-	ABSTRACT;
+enum CheckType {
+	AST;
+	TOKEN;
+	LINE;
 }

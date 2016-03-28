@@ -1,41 +1,21 @@
 package checkstyle.checks.block;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("RightCurly")
-@desc("Checks for placement of right curly braces")
+@desc("Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.")
 class RightCurlyCheck extends Check {
 
-	public static inline var CLASS_DEF:String = "CLASS_DEF";
-	public static inline var ENUM_DEF:String = "ENUM_DEF";
-	public static inline var ABSTRACT_DEF:String = "ABSTRACT_DEF";
-	public static inline var TYPEDEF_DEF:String = "TYPEDEF_DEF";
-	public static inline var INTERFACE_DEF:String = "INTERFACE_DEF";
-
-	public static inline var OBJECT_DECL:String = "OBJECT_DECL";
-	public static inline var FUNCTION:String = "FUNCTION";
-	public static inline var FOR:String = "FOR";
-	public static inline var IF:String = "IF";
-	public static inline var WHILE:String = "WHILE";
-	public static inline var SWITCH:String = "SWITCH";
-	public static inline var TRY:String = "TRY";
-	public static inline var CATCH:String = "CATCH";
-	public static inline var REIFICATION:String = "REIFICATION";
-
-	public static inline var SAME:String = "same";
-	public static inline var ALONE:String = "alone";
-	public static inline var ALONE_OR_SINGLELINE:String = "aloneorsingle";
-
-	var sameRegex:EReg;
-
-	public var tokens:Array<String>;
-	public var option:String;
+	public var tokens:Array<RightCurlyCheckToken>;
+	public var option:RightCurlyCheckOption;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			CLASS_DEF,
 			ENUM_DEF,
@@ -52,15 +32,10 @@ class RightCurlyCheck extends Check {
 			CATCH
 		];
 		option = ALONE_OR_SINGLELINE;
-
-		// only else and catch allowed on same line after a right curly
-		sameRegex = ~/^\s*(else|catch)/;
 	}
 
-	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+	function hasToken(token:RightCurlyCheckToken):Bool {
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
 	override function actualRun() {
@@ -75,7 +50,6 @@ class RightCurlyCheck extends Check {
 		}
 	}
 
-	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	function filterParentToken(token:TokenTree):Bool {
 		if (token == null) return false;
 		switch (token.tok) {
@@ -94,6 +68,9 @@ class RightCurlyCheck extends Check {
 			case Kwd(KwdIf), Kwd(KwdElse):
 				return !hasToken(IF);
 			case Kwd(KwdFor):
+				if (isArrayComprehension(token.parent)) {
+					return !hasToken(ARRAY_COMPREHENSION);
+				}
 				return !hasToken(FOR);
 			case Kwd(KwdWhile):
 				return !hasToken(WHILE);
@@ -119,6 +96,15 @@ class RightCurlyCheck extends Check {
 				return !hasToken(OBJECT_DECL);
 			default:
 				return filterParentToken(token.parent);
+		}
+	}
+
+	function isArrayComprehension(token:TokenTree):Bool {
+		return switch (token.tok) {
+			case BkOpen: true;
+			case Kwd(KwdFunction): false;
+			case Kwd(KwdVar): false;
+			default: isArrayComprehension(token.parent);
 		}
 	}
 
@@ -148,6 +134,8 @@ class RightCurlyCheck extends Check {
 				var afterLine:String = checker.lines[linePos.line];
 				if (linePos.ofs < afterLine.length) afterCurly = afterLine.substr(linePos.ofs);
 			}
+			// only else and catch allowed on same line after a right curly
+			var sameRegex = ~/^\s*(else|catch)/;
 			var needsSameOption:Bool = sameRegex.match(afterCurly);
 			var shouldHaveSameOption:Bool = false;
 			if (checker.lines.length > linePos.line + 1) {
@@ -157,14 +145,14 @@ class RightCurlyCheck extends Check {
 			// adjust to show correct line number in log message
 			pos.min = pos.max;
 
-			logErrorIf (singleLine && (option != ALONE_OR_SINGLELINE), 'Right curly should not be on same line as left curly', pos);
+			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), "Right curly should not be on same line as left curly", pos);
 			if (singleLine) return;
 
 			var curlyAlone:Bool = ~/^\s*\}[\)\],;\s]*(|\/\/.*)$/.match(line);
-			logErrorIf (!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), 'Right curly should be alone on a new line', pos);
-			logErrorIf (curlyAlone && needsSameOption, 'Right curly should be alone on a new line', pos);
-			logErrorIf (needsSameOption && (option != SAME), 'Right curly must not be on same line as following block', pos);
-			logErrorIf (shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', pos);
+			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", pos);
+			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", pos);
+			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", pos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', pos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
@@ -173,8 +161,35 @@ class RightCurlyCheck extends Check {
 
 	function logErrorIf(condition:Bool, msg:String, pos:Position) {
 		if (condition) {
-			logPos(msg, pos, Reflect.field(SeverityLevel, severity));
+			logPos(msg, pos);
 			throw "exit";
 		}
 	}
+}
+
+@:enum
+abstract RightCurlyCheckToken(String) {
+	var CLASS_DEF = "CLASS_DEF";
+	var ENUM_DEF = "ENUM_DEF";
+	var ABSTRACT_DEF = "ABSTRACT_DEF";
+	var TYPEDEF_DEF = "TYPEDEF_DEF";
+	var INTERFACE_DEF = "INTERFACE_DEF";
+
+	var OBJECT_DECL = "OBJECT_DECL";
+	var FUNCTION = "FUNCTION";
+	var FOR = "FOR";
+	var IF = "IF";
+	var WHILE = "WHILE";
+	var SWITCH = "SWITCH";
+	var TRY = "TRY";
+	var CATCH = "CATCH";
+	var REIFICATION = "REIFICATION";
+	var ARRAY_COMPREHENSION = "ARRAY_COMPREHENSION";
+}
+
+@:enum
+abstract RightCurlyCheckOption(String) {
+	var SAME = "same";
+	var ALONE = "alone";
+	var ALONE_OR_SINGLELINE = "aloneorsingle";
 }

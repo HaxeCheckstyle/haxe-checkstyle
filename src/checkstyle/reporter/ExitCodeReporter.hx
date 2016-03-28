@@ -14,11 +14,11 @@ class ExitCodeReporter implements IReporter {
 		Main.setExitCode(failCheckCount);
 	}
 
-	public function fileStart(f:LintFile) {}
+	public function fileStart(f:CheckFile) {}
 
-	public function fileFinish(f:LintFile) {}
+	public function fileFinish(f:CheckFile) {}
 
-	public function addMessage(m:LintMessage) {
+	public function addMessage(m:CheckMessage) {
 		failCheckCount++;
 	}
 }

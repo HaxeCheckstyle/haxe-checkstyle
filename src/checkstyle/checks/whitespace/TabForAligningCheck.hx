@@ -1,18 +1,30 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.CheckMessage.SeverityLevel;
+
+using checkstyle.utils.StringUtils;
 
 @name("TabForAligning")
-@desc("Checks if there are any tabs in the middle of a line")
-class TabForAligningCheck extends Check {
+@desc("Checks if there are any tabs in the middle of a line.")
+class TabForAligningCheck extends LineCheckBase {
+
+	public var ignorePattern:String;
+
+	public function new() {
+		super();
+		severity = SeverityLevel.IGNORE;
+		ignorePattern = "^$";
+		categories = [Category.STYLE, Category.CLARITY];
+	}
 
 	override function actualRun() {
+		var ignoreRE = new EReg(ignorePattern, "");
 		var re = ~/^\s*\S[^\t]*\t/;
-		for (i in 0 ... checker.lines.length) {
+		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
-			if (re.match(line) && line.indexOf("//") == -1) {
-				log("Tab after non-space character. Use space for aligning", i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
-			}
+			if (ignoreRE.match(line)) continue;
+			if (isMultineString(line)) continue;
+			if (re.match(line)) log("Tab after non-space character, use space for aligning", i + 1, line.length);
 		}
 	}
 }

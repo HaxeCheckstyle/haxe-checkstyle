@@ -2,12 +2,17 @@ git:
     depth: 1
 
 language: haxe
-os:
-  - linux
-  - osx
 haxe:
   - "3.2.1"
   - development
-hxml:
-  - build.hxml
+install:
+  - haxelib install haxeparser 3.2.0
+  - haxelib install compiletime 2.6.0
+  - haxelib git hxargs https://github.com/Simn/hxargs
+  - haxelib install mcover 2.1.1
+script:
+  - haxe build.hxml
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false

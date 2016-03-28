@@ -1,12 +1,10 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("OperatorWrap")
-@desc("Checks line wrapping with operators")
+@desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {
 
 	public function new() {
@@ -45,13 +43,11 @@ class OperatorWrapCheck extends WrapCheckBase {
 			"^=",
 			"...",
 			"=>",
-			"!",
 			"++",
 			"--"
 		];
 	}
 
-	@SuppressWarnings("checkstyle:CyclomaticComplexity")
 	override function actualRun() {
 		var tokenList:Array<TokenDef> = [];
 

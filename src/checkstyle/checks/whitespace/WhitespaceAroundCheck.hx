@@ -1,18 +1,21 @@
 package checkstyle.checks.whitespace;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.LintMessage.SeverityLevel;
+import checkstyle.token.TokenTree;
+import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
 import haxe.macro.Expr;
 
+using checkstyle.utils.ArrayUtils;
+
 @name("WhitespaceAround")
-@desc("Checks that a token is surrounded by whitespace")
+@desc("Checks that a token is surrounded by whitespace.")
 class WhitespaceAroundCheck extends Check {
 
 	public var tokens:Array<String>;
 
 	public function new() {
-		super();
+		super(TOKEN);
 		tokens = [
 			"=",
 			"+",
@@ -45,17 +48,16 @@ class WhitespaceAroundCheck extends Check {
 			"|=",
 			"&=",
 			"^=",
-			"=>",
+			"=>"
 		];
+
+		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	function hasToken(token:String):Bool {
-		if (tokens.length == 0) return true;
-		if (tokens.indexOf(token) > -1) return true;
-		return false;
+		return (tokens.length == 0 || tokens.contains(token));
 	}
 
-	@SuppressWarnings(["checkstyle:CyclomaticComplexity", "checkstyle:MethodLength"])
 	override function actualRun() {
 		var tokenList:Array<TokenDef> = [];
 
@@ -124,8 +126,9 @@ class WhitespaceAroundCheck extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
-			if (isTypeParameter(tok)) continue;
-			if (isImport(tok)) continue;
+			if (TokenTreeCheckUtils.isTypeParameter(tok)) continue;
+			if (TokenTreeCheckUtils.isImportMult(tok)) continue;
+			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
@@ -134,51 +137,13 @@ class WhitespaceAroundCheck extends Check {
 			var after:String = line.substr(linePos.ofs + tokLen);
 
 			if (!(~/^.*\s$/.match(before))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
+				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 				continue;
 			}
 			if (!(~/^(\s.*|)$/.match(after))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos, Reflect.field(SeverityLevel, severity));
+				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
 				continue;
 			}
-		}
-	}
-
-	function isImport(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpMult), Dot:
-				var parent:TokenTree = token.parent;
-				while (parent != null) {
-					switch (parent.tok) {
-						case Kwd(KwdMacro):
-						case Kwd(KwdExtern):
-						case Const(CIdent(_)):
-						case Dot:
-						case Kwd(KwdImport): return true;
-						default: return false;
-					}
-					parent = parent.parent;
-				}
-				return false;
-			default:
-				return false;
-		}
-	}
-
-	function isTypeParameter(token:TokenTree):Bool {
-		switch (token.tok) {
-			case Binop(OpGt):
-				return switch (token.parent.tok) {
-					case Binop(OpLt): true;
-					default: false;
-				}
-			case Binop(OpLt):
-				return switch (token.getLastChild().tok) {
-					case Binop(OpGt): true;
-					default: false;
-				}
-			default:
-				return false;
 		}
 	}
 }

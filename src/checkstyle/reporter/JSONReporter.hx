@@ -1,55 +1,47 @@
 package checkstyle.reporter;
 
 import haxe.Json;
-import sys.io.File;
-import checkstyle.LintMessage.SeverityLevel;
 
-class JSONReporter implements IReporter {
+class JSONReporter extends BaseReporter {
 
-	var report:GlobalReport;
+	var jsonReport:GlobalReport;
 	var fileReport:FileReport;
-	var path:String;
 
-	public function new(path:String) {
-		this.path = path;
+	override public function start() {
+		jsonReport = [];
+		super.start();
 	}
 
-	public function start() {
-		report = [];
-	}
-
-	public function finish() {}
-
-	public function fileStart(f:LintFile) {
+	override public function fileStart(f:CheckFile) {
 		fileReport = {
 			fileName: f.name,
 			messages: []
 		};
-		report.push(fileReport);
+		jsonReport.push(fileReport);
 	}
 
-	public function fileFinish(f:LintFile) {
-		File.saveContent(path, Json.stringify(report));
+	override public function finish() {
+		if (file != null) report.add(Json.stringify(jsonReport));
+		super.finish();
 	}
 
-	public function addMessage(m:LintMessage) {
+	override public function addMessage(m:CheckMessage) {
 		var reportMessage:ReportMessage = {
 			line: m.line,
 			column: m.startColumn,
-			severity: severityString(m.severity),
+			severity: BaseReporter.severityString(m.severity),
 			message: m.message
 		};
 		fileReport.messages.push(reportMessage);
-	}
 
-	static function severityString(s:SeverityLevel):String {
-		switch (s) {
-			case INFO: return "info";
-			case WARNING: return "warning";
-			case ERROR: return "error";
-			case IGNORE:
+		switch (m.severity) {
+			case ERROR: errors++;
+			case WARNING: warnings++;
+			case INFO: infos++;
+			default:
 		}
-		return "info";
+
+		Sys.print(applyColour(getMessage(m).toString(), m.severity));
 	}
 }
 

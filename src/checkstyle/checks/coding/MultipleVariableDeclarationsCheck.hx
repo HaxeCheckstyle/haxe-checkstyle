@@ -1,0 +1,35 @@
+package checkstyle.checks.coding;
+
+import checkstyle.token.TokenTree;
+
+@name("MultipleVariableDeclarations")
+@desc("Checks that each variable declaration is in its own statement and on its own line.")
+class MultipleVariableDeclarationsCheck extends Check {
+
+	public function new() {
+		super(TOKEN);
+		categories = [Category.STYLE, Category.CLARITY, Category.COMPLEXITY];
+		points = 2;
+	}
+
+	override function actualRun() {
+		var root:TokenTree = checker.getTokenTree();
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], ALL);
+
+		var lastVarLineNo = -1;
+		for (v in acceptableTokens) {
+			var curVarLineNo = checker.getLinePos(v.pos.min).line;
+			if (lastVarLineNo > 0 && lastVarLineNo == curVarLineNo) logPos("Only one variable definition per line allowed", v.pos);
+			lastVarLineNo = curVarLineNo;
+			var count = 0;
+			for (c in v.childs) {
+				switch (c.tok) {
+					case Const(CIdent(name)):
+						count++;
+					default:
+				}
+			}
+			if (count > 1) logPos("Each variable declaration must be in its own statement", v.pos);
+		}
+	}
+}

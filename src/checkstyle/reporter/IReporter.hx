@@ -1,7 +1,5 @@
 package checkstyle.reporter;
 
-import checkstyle.LintMessage;
-
 interface IReporter {
 
 	// Before any file checked
@@ -11,11 +9,11 @@ interface IReporter {
 	function finish():Void;
 
 	// Before file checked
-	function fileStart(f:LintFile):Void;
+	function fileStart(f:CheckFile):Void;
 
 	// After file checked
-	function fileFinish(f:LintFile):Void;
+	function fileFinish(f:CheckFile):Void;
 
 	// When issue found
-	function addMessage(m:LintMessage):Void;
+	function addMessage(m:CheckMessage):Void;
 }

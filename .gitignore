@@ -1,13 +1,19 @@
 *.iml
+.idea
+.temp
 *.iws
 *.log
 *.cache
 .DS_Store
 *.n
 *.zip
-*.hxproj
 .haxelib/
-.out/
+out/
+node_modules
+.DS_Store
+log/
+target/
 
 check-style-report.json
 check-style-report.xml
+coverage.json

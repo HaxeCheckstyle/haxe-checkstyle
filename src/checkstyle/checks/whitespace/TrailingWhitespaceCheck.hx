@@ -1,17 +1,22 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.LintMessage.SeverityLevel;
-import haxeparser.Data.Token;
+import checkstyle.CheckMessage.SeverityLevel;
 
 @name("TrailingWhitespace")
-@desc("Checks if there are any trailing white spaces")
-class TrailingWhitespaceCheck extends Check {
+@desc("Checks if there are any trailing white spaces.")
+class TrailingWhitespaceCheck extends LineCheckBase {
+
+	public function new() {
+		super();
+		severity = SeverityLevel.IGNORE;
+	}
 
 	override function actualRun() {
 		var re = ~/\s+$/;
-		for (i in 0 ... checker.lines.length) {
+		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
-			if (re.match(line)) log('Trailing whitespace', i + 1, line.length, null, Reflect.field(SeverityLevel, severity));
+			if (isMultineString(line)) continue;
+			if (re.match(line)) log("Trailing whitespace", i + 1, line.length);
 		}
 	}
 }
