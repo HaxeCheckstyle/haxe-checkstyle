@@ -25,6 +25,10 @@ class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 @:enum
 abstract DynamicCheckTests(String) to String {
 	var TEST = "
+	import checkstyle.check.type.DynamicCheck;
+
+	using StringTools;
+
 	class Test {
 		public var a:Int;
 		private var b:Int;
@@ -36,8 +40,23 @@ abstract DynamicCheckTests(String) to String {
 		var count6:Dynamic;
 
 		@SuppressWarnings('checkstyle:Dynamic')
-		function calc(val:Dynamic, val2:Dynamic):Dynamic {
-			return null;
+		function calc(?val:Dynamic, val2:Dynamic):Dynamic {
+			return 'value';
+		}
+	}
+
+	abstract Test(String) {
+		public var a:Int;
+	}
+
+	class Test extends Parent implements Interface {
+		function calc(?value:{x:Int, y:Int}, value2:Map<Int, String>) {
+			try {
+				return [1 + 2, 3];
+			}
+			catch (e:String) {
+				print(e);
+			}
 		}
 	}
 
