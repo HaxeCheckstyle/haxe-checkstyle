@@ -18,7 +18,7 @@ module.exports = function (grunt) {
 		},
 
 		zip: {
-			"checkstyle.zip": ["src/**", "resources/sample-config.json", "haxelib.json", "run.n", "README.md"]
+			"checkstyle.zip": ["src/**", "resources/sample-config.json", "resources/logo.png", "haxelib.json", "run.n", "README.md"]
 		}
 	});
 
