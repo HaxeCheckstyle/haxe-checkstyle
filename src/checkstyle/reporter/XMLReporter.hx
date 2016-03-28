@@ -19,8 +19,8 @@ class XMLReporter extends BaseReporter {
 
 	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
 
-	public function new(numFiles:Int, path:String, s:String, ns:Bool) {
-		super(numFiles, path, ns);
+	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {
+		super(numFiles, checkCount, usedCheckCount, path, ns);
 		style = s;
 	}
 
