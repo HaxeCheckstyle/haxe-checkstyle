@@ -50,16 +50,21 @@ abstract DynamicCheckTests(String) to String {
 	}
 
 	class Test extends Parent implements Interface {
+		public var type(get_type, null):TestResultType;
 		function calc(?value:{x:Int, y:Int}, value2:Map<Int, String>) {
 			try {
 				if (x == 1) throw 'error';
 				for (i in 0...10) trace(i);
 				while(true) break;
-				return [1 + 2, 3];
+				var test = new Array<String>();
+				return [1 + 2, 3++, {x:5, y:9}, (x == 2) ? 4 : 5];
 			}
 			catch (e:String) {
 				print(e);
 			}
+		}
+		function test() {
+			return;
 		}
 	}
 
