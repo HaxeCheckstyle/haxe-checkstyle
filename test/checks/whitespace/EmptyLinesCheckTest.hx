@@ -97,13 +97,13 @@ abstract EmptyLinesCheckTests(String) to String {
 
 			';
 
-			var e:String = ' multistring; \"\'
+			var e:String = ' multistring; \"\\'
 
 				var t=1;
 
 
 
-				var s='';
+				var s=\\'\\';
 
 
 
