@@ -14,7 +14,6 @@ import checkstyle.reporter.ExitCodeReporter;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;
-import neko.Lib;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -353,13 +352,13 @@ class Main {
 			missingChecks.push(check);
 		}
 		if (missingChecks.length <= 0) {
-			Lib.println("You have no checks missing from your configuration");
+			Sys.println("You have no checks missing from your configuration");
 		}
 		else {
 
-			Lib.println("The following checks are missing from your configuration:");
+			Sys.println("The following checks are missing from your configuration:");
 			for (check in missingChecks) {
-				Lib.println(check.name + " - " + check.description);
+				Sys.println(check.name + " - " + check.description);
 			}
 		}
 	}
