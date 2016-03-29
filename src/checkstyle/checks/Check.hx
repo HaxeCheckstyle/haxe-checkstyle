@@ -7,7 +7,6 @@ import haxeparser.Data;
 
 #if debug
 import haxe.CallStack;
-import neko.Lib;
 #end
 
 using checkstyle.utils.ArrayUtils;
@@ -42,10 +41,10 @@ class Check {
 				actualRun();
 			}
 			catch (e:String) {
-#if debug
-				Lib.println(e);
-				Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-#end
+				#if debug
+				Sys.println(e);
+				Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+				#end
 			}
 		}
 		return messages;

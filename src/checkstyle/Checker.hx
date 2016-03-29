@@ -9,10 +9,6 @@ import haxeparser.HaxeLexer;
 import haxeparser.Data.Token;
 import sys.io.File;
 
-#if debug
-import neko.Lib;
-#end
-
 import checkstyle.checks.Category;
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
@@ -126,8 +122,8 @@ class Checker {
 		}
 		catch (e:Dynamic) {
 			#if debug
-			Lib.println(e);
-			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+			Sys.println(e);
+			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
 			#end
 		}
 	}
@@ -156,8 +152,8 @@ class Checker {
 		}
 		catch (e:Dynamic) {
 			#if debug
-			Lib.println(e);
-			Lib.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+			Sys.println(e);
+			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
 			#end
 		}
 		return null;
