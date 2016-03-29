@@ -53,9 +53,7 @@ abstract SeparatorWhitespaceCheckTests(String) to String {
 			var a = create(1)
 				.add(2)
 				.add(3);
-			var a = create(1).
-				add(2).
-				add(3);
+			var a = create(1).add(2).add(3);
 			var a = [1, 2, 3, 4];
 			var a = [1,
 				2,
