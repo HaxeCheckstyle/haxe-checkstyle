@@ -8,6 +8,8 @@ engines:
         enabled: false
       MD013:
         enabled: false
+      MD033:
+        enabled: false
 
 exclude_paths:
   - resources/**/*

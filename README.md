@@ -20,7 +20,7 @@ Ideal for any project that wants to enforce coding conventions.
 
 Haxe-Checkstyle is available on the [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform (free for open source projects). It requires a `checkstyle.json` and a `.codeclimate.yml` file to be added to the root of your repository - see [here](https://docs.codeclimate.com/docs/haxe-checkstyle) for more details.
 
-When everything is set up, Code Climate automatically runs Haxe-Checkstyle for you on each new commit (also on pull requests if configured that way). 
+When everything is set up, Code Climate automatically runs Haxe-Checkstyle for you on each new commit (also on pull requests if configured that way).
 
 The current number of issues can be tracked via a badge:
 
