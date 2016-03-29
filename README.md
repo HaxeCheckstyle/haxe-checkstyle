@@ -16,8 +16,13 @@ Code conventions improve readability, allowing team members to understand each o
 
 Ideal for any project that want to enforce coding conventions.
 
-This project was derived from [haxelint](https://github.com/mcheshkov/haxelint)
-created by [@mcheshkov](https://github.com/mcheshkov).
+### Code Climate
+
+Haxe Checkstyle is available in [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform which lets you configure your analysis via a .codeclimate.yml file in the root of your repository.
+
+[![codeclimate](http://adireddy.github.io/images/codeclimate-platform.png)](https://docs.codeclimate.com/docs/haxe-checkstyle)
+
+If you are not familiar with Code Climate, it’s a static analysis tool for monitoring the health of your code. It supports a whole host of languages and frameworks – and it’s all open source!
 
 ### Installation
 
@@ -48,6 +53,9 @@ Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/hax
 [![MIT](https://upload.wikimedia.org/wikipedia/commons/8/83/License_icon-mit.png)](http://opensource.org/licenses/MIT)
 
 This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+
+This project was derived from [haxelint](https://github.com/mcheshkov/haxelint)
+created by [@mcheshkov](https://github.com/mcheshkov).
 
 ### Contributor Code of Conduct
 
