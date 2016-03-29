@@ -17,7 +17,7 @@
 		"adireddy"
 	],
 	"releasenote": "new release",
-	"version": "2.1.0",
+	"version": "2.1.1",
 	"url": "https://github.com/adireddy/haxe-checkstyle",
 	"dependencies": {
 
