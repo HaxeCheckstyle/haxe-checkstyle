@@ -924,9 +924,6 @@ class TokenTreeBuilder {
 	 *
 	 */
 	function walkCase(parent:TokenTree) {
-		if (!stream.is(Kwd(KwdCase)) && !stream.is(Kwd(KwdDefault))) {
-			throw 'bad token ${stream.token()} != case/default';
-		}
 		var caseTok:TokenTree = stream.consumeToken();
 		parent.addChild(caseTok);
 		walkCaseExpr(caseTok);
