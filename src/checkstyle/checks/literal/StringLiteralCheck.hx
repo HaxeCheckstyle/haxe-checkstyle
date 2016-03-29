@@ -14,7 +14,7 @@ class StringLiteralCheck extends Check {
 
 	public function new() {
 		super(TOKEN);
-		policy = DOUBLE_WITH_INTERPOLATION;
+		policy = DOUBLE_AND_INTERPOLATION;
 		allowException = true;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -53,7 +53,7 @@ class StringLiteralCheck extends Check {
 				if (singleQuote) return;
 				if (allowException && ~/'/.match(s)) return;
 				logPos('String "$s" uses double quotes instead of single quotes', pos);
-			case DOUBLE_WITH_INTERPOLATION:
+			case DOUBLE_AND_INTERPOLATION:
 				if (!singleQuote) return;
 				if (StringUtils.isStringInterpolation(s, checker.file.content, pos)) return;
 				if (allowException && ~/"/.match(s)) return;
@@ -66,5 +66,5 @@ class StringLiteralCheck extends Check {
 abstract StringLiteralPolicy(String) {
 	var ONLY_SINGLE = "onlySingle";
 	var ONLY_DOUBLE = "onlyDouble";
-	var DOUBLE_WITH_INTERPOLATION = "doubleAndInterpolation";
+	var DOUBLE_AND_INTERPOLATION = "doubleAndInterpolation";
 }
