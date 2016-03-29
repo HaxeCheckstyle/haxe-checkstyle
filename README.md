@@ -12,17 +12,23 @@ Checkstyle is a development library to help developers write Haxe code that adhe
 
 It automates the process of checking Haxe code to spare developers of this boring (but important) task.
 
-Code conventions improve readability, allowing team members to understand each others code better.
+Code conventions improve readability, allowing team members to understand each other's code better.
 
-Ideal for any project that want to enforce coding conventions.
+Ideal for any project that wants to enforce coding conventions.
 
 ### Code Climate
 
-Haxe Checkstyle is available in [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform which lets you configure your analysis via a .codeclimate.yml file in the root of your repository.
+Haxe-Checkstyle is available on the [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform (free for open source projects). It requires a `checkstyle.json` and a `.codeclimate.yml` file to be added to the root of your repository - see [here](https://docs.codeclimate.com/docs/haxe-checkstyle) for more details.
 
-[![codeclimate](http://adireddy.github.io/images/codeclimate-platform.png)](https://docs.codeclimate.com/docs/haxe-checkstyle)
+When everything is set up, Code Climate automatically runs Haxe-Checkstyle for you on each new commit (also on pull requests if configured that way). 
 
-If you are not familiar with Code Climate, it’s a static analysis tool for monitoring the health of your code. It supports a whole host of languages and frameworks – and it’s all open source!
+The current number of issues can be tracked via a badge:
+
+[![Issue Count](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/issue_count.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
+
+For pull requests, the summary is displayed in the "checks" section:
+
+<img src="http://blog.codeclimate.com/images/integrations_red.png" width="600">
 
 ### Installation
 
