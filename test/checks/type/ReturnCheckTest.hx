@@ -8,6 +8,14 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	static inline var MSG_NOT_TEST1_RETURN:String = 'Return type not specified for method "test1"';
 	static inline var MSG_NOT_TEST2_RETURN:String = 'Return type not specified for method "test2"';
 	static inline var MSG_NO_ANON_RETURN:String = "Return type not specified for anonymous method";
+	static inline var MSG_EMPTY_RETURN_TEST2:String = 'Empty return in method "test2" found';
+
+	public function testCorrectRetrn() {
+		var check = new ReturnCheck();
+		assertNoMsg(check, CORRECT_RETURN);
+		check.enforceReturnType = true;
+		assertNoMsg(check, CORRECT_RETURN);
+	}
 
 	public function testVoid() {
 		assertMsg(new ReturnCheck(), TEST1, MSG_VOID_RETURN);
@@ -47,7 +55,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = false;
 
-		assertMsg(check, TEST3, MSG_NOT_TEST2_RETURN);
+		assertMsg(check, TEST3, MSG_EMPTY_RETURN_TEST2);
 	}
 
 	public function testReturnTypeAllowEmptyReturnTrue() {
@@ -61,6 +69,14 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	public function testExternVoid() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, TEST6);
+	}
+
+	public function testInterface() {
+		var check = new ReturnCheck();
+		assertNoMsg(check, INTERFACE);
+
+		check.enforceReturnType = true;
+		assertNoMsg(check, INTERFACE);
 	}
 }
 
@@ -147,6 +163,18 @@ abstract ReturnCheckTests(String) to String {
 			while (true) {
 				return 5;
 			}
+		}
+	}";
+
+	var INTERFACE =
+	"interface Test {
+		public function test1();
+	}";
+
+	var CORRECT_RETURN =
+	"abstractAndClass Test {
+		public function test1():Int {
+			return 5;
 		}
 	}";
 }
