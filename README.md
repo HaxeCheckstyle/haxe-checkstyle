@@ -8,19 +8,21 @@
 [![Version](https://img.shields.io/badge/haxelib-v2.1.1-EA8220.svg)](http://lib.haxe.org/p/checkstyle/)
 [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
-Checkstyle is a development library to help developers write Haxe code that adheres to a coding standard.
+**Haxe Checkstyle** is a static analysis tool to help developers write Haxe code that adheres to a coding standard.
 
 It automates the process of checking Haxe code to spare developers of this boring (but important) task.
 
-Code conventions improve readability, allowing team members to understand each other's code better.
+Code conventions improve readability, allowing team members to understand each others code better.
 
-Ideal for any project that wants to enforce coding conventions.
+Ideal for any project that want to enforce coding conventions.
+
+Static analysis is usually performed as part of a code review.
 
 ### Code Climate
 
-Haxe-Checkstyle is available on the [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform (free for open source projects). It requires a `checkstyle.json` and a `.codeclimate.yml` file to be added to the root of your repository - see [here](https://docs.codeclimate.com/docs/haxe-checkstyle) for more details.
+Haxe Checkstyle is available on the [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform (free for open source projects). It requires a `.codeclimate.yml` file and an optional but recommended `checkstyle.json` file to be added to the root of your repository - see [here](https://docs.codeclimate.com/docs/haxe-checkstyle) for more details.
 
-When everything is set up, Code Climate automatically runs Haxe-Checkstyle for you on each new commit (also on pull requests if configured that way).
+When everything is set up, Code Climate automatically runs Haxe Checkstyle for you on each new commit (also on pull requests if configured that way).
 
 The current number of issues can be tracked via a badge:
 
