@@ -12,7 +12,7 @@
 
 It automates the process of checking Haxe code to spare developers of this boring (but important) task.
 
-Code conventions improve readability, allowing team members to understand each others code better.
+Code conventions improve readability, allowing team members to understand each other's code better.
 
 Ideal for any project that wants to enforce coding conventions.
 
