@@ -42,7 +42,8 @@ class BaseReporter implements IReporter {
 		var version = CompileTime.parseJsonFile("package.json").version;
 
 		Sys.println("");
-		Sys.println(styleText('Running Checkstyle v$version using $numUsedChecks/$numChecks checks on $numFiles source files...', Style.BOLD));
+		var fileString = (numFiles == 1) ? "file" : "files";
+		Sys.println(styleText('Running Checkstyle v$version using $numUsedChecks/$numChecks checks on $numFiles source $fileString...', Style.BOLD));
 		Sys.println("");
 	}
 
