@@ -28,9 +28,9 @@ The current number of issues can be tracked via a badge:
 
 [![Code Climate](https://img.shields.io/codeclimate/issues/github/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
 
-For pull requests, the summary is displayed in the "checks" section:
+Immediate results, right in your pull requests.
 
-<img src="http://blog.codeclimate.com/images/integrations_red.png" width="600">
+![img](https://codeclimate.com/marketing/images/features/pull_requests-67ad7029.png)
 
 ### Installation
 
