@@ -57,7 +57,7 @@ class Main {
 
 	function run(args:Array<String>) {
 		var argHandler = Args.generate([
-			@doc("Set source folder to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
+			@doc("Set source path to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
 			@doc("Set exclude file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
