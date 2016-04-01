@@ -58,9 +58,7 @@ Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/hax
 
 ### Licensing Information
 
-[![MIT](https://upload.wikimedia.org/wikipedia/commons/8/83/License_icon-mit.png)](http://opensource.org/licenses/MIT)
-
-This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+This content is released under the [MIT](http://opensource.org/licenses/MIT) license.
 
 This project was derived from [haxelint](https://github.com/mcheshkov/haxelint)
 created by [@mcheshkov](https://github.com/mcheshkov).
