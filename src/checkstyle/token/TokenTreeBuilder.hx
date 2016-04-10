@@ -1176,6 +1176,8 @@ class TokenTreeBuilder {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
+				case Sharp(IF):
+					walkSharp(ifToken);
 				case Sharp(ELSEIF):
 					walkSharpElseIf(ifToken);
 				case Sharp(ELSE):

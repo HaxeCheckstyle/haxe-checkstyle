@@ -61,7 +61,7 @@ class LeftCurlyCheck extends Check {
 	 * find effective parent token and check against configured tokens
 	 */
 	function findParentToken(token:TokenTree):ParentToken {
-		if (token == null) return {token:token, hasToken: false};
+		if ((token == null) || (token.tok == null)) return {token:token, hasToken: false};
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return {token: token, hasToken: hasToken(CLASS_DEF)};
@@ -112,7 +112,7 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function findParentTokenDblDot(token:TokenTree):ParentToken {
-		if (token == null) return {token:token, hasToken: false};
+		if ((token == null) || (token.tok == null)) return {token:token, hasToken: false};
 		switch (token.tok) {
 			case Kwd(KwdCase), Kwd(KwdDefault):
 				return {token: token, hasToken: hasToken(SWITCH)};

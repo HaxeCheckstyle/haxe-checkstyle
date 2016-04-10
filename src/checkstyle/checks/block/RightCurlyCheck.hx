@@ -51,7 +51,7 @@ class RightCurlyCheck extends Check {
 	}
 
 	function filterParentToken(token:TokenTree):Bool {
-		if (token == null) return false;
+		if ((token == null) || (token.tok == null)) return false;
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return !hasToken(CLASS_DEF);
