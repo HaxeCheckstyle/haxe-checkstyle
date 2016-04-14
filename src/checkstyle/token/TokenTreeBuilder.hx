@@ -333,7 +333,7 @@ class TokenTreeBuilder {
 		if (stream.is(DblDot)) {
 			var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 			name.addChild(dblDot);
-			walkTypeNameDef(name);
+			walkTypeNameDef(dblDot);
 		}
 		walkBlock(name);
 	}
