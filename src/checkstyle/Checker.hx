@@ -125,6 +125,9 @@ class Checker {
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
 			#end
+			#if unittest
+			throw e;
+			#end
 		}
 	}
 
@@ -154,6 +157,9 @@ class Checker {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+			#end
+			#if unittest
+			throw e;
 			#end
 		}
 		return null;
