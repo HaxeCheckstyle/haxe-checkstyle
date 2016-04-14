@@ -19,7 +19,9 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertNoMsg(check, ISSUE_65);
 		assertNoMsg(check, ISSUE_66);
 		assertNoMsg(check, ISSUE_67);
+		assertNoMsg(check, ISSUE_154);
 		assertNoMsg(check, ISSUE_235);
+		assertNoMsg(check, ISSUE_239);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -175,6 +177,12 @@ abstract WhitespaceAfterCheckTests(String) to String {
 		}
 	}";
 
+	var ISSUE_154 = "
+	#if macro
+		private enum PrivateEnum {}
+	#end
+	";
+
 	var ISSUE_235 = "
 	#if def
 		#if def2
@@ -183,6 +191,22 @@ abstract WhitespaceAfterCheckTests(String) to String {
 		#if def3
 		#end
 	#end
+	";
+
+	var ISSUE_239 = "
+	#if def1
+		#if def2
+		#end
+		// comment
+	#end
+	class Foo
+	{
+#if def1
+		#if def2
+		#end
+		public var test:Int;
+#end
+	}
 	";
 
 }
