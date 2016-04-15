@@ -288,10 +288,6 @@ class TokenTreeBuilder {
 			}
 			if (stream.is(Binop(OpAssign))) {
 				walkStatement(name);
-				if (stream.is(Semicolon)) {
-					name.addChild(stream.consumeTokenDef(Semicolon));
-				}
-				return;
 			}
 			if (stream.is(Comma)) {
 				var comma:TokenTree = stream.consumeTokenDef(Comma);
@@ -300,7 +296,9 @@ class TokenTreeBuilder {
 			}
 			break;
 		}
-		name.addChild(stream.consumeTokenDef(Semicolon));
+		if (stream.is(Semicolon)) {
+			name.addChild(stream.consumeTokenDef(Semicolon));
+		}
 	}
 
 	function walkNew(parent:TokenTree) {
@@ -1143,6 +1141,9 @@ class TokenTreeBuilder {
 					break;
 				case Sharp(END):
 					break;
+				case Comma:
+					var comma:TokenTree = stream.consumeToken();
+					ifToken.addChild(comma);
 				default:
 					walkStatement(ifToken);
 			}
