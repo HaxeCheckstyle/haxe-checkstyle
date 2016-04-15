@@ -519,7 +519,8 @@
 			"checkstyle.ChecksInfo",
 			"checkstyle.checks.imports.UnusedImportCheck",
 			"TestMain",
-			"misc.ExtensionsTest"
+			"misc.ExtensionsTest",
+			"token.TokenTreeBuilderParsingTest"
 		],
 		"MultipleStringLiterals": [
 			"checks",
