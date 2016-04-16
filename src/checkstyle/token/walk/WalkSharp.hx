@@ -80,7 +80,7 @@ class WalkSharp {
 		WalkSharp.walkSharpIfExpr(stream, ifToken);
 		WalkSharp.walkSharpExpr(stream, ifToken);
 		if (stream.token().match(Sharp(_))) return;
-		throw 'bad token ${stream.token()} != #elseif/#end';
+		stream.error('bad token ${stream.token()} != #elseif/#end');
 	}
 
 	static function walkSharpIfExpr(stream:TokenStream, parent:TokenTree) {

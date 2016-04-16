@@ -20,7 +20,7 @@ class StringLiteralCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens);
+		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens, checker.bytes);
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
