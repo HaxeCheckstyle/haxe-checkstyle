@@ -19,7 +19,7 @@ class WalkBlock {
 
 	public static function walkBlock(stream:TokenStream, parent:TokenTree) {
 		if (stream.is(BrOpen)) {
-			if (isArrayComprehension(parent)) {
+			if (isObjectDecl(parent)) {
 				WalkObjectDecl.walkObjectDecl(stream, parent);
 				return;
 			}
@@ -35,13 +35,14 @@ class WalkBlock {
 		else WalkStatement.walkStatement(stream, parent);
 	}
 
-	static function isArrayComprehension(token:TokenTree):Bool {
+	static function isObjectDecl(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
 			case BkOpen: true;
 			case Kwd(KwdTypedef): true;
 			case Kwd(KwdReturn): true;
-			default: isArrayComprehension(token.parent);
+			case Binop(OpAssign): true;
+			default: isObjectDecl(token.parent);
 		}
 	}
 }
