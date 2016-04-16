@@ -6,6 +6,11 @@ import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
 import checkstyle.token.TokenTree;
+import checkstyle.token.TokenStream;
+
+import checkstyle.token.walk.WalkAt;
+import checkstyle.token.walk.WalkIf;
+import checkstyle.token.walk.WalkPackageImport;
 
 class TokenTreeBuilderTest extends haxe.unit.TestCase {
 
@@ -14,25 +19,27 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 
 	public function testImports() {
-		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IMPORT);
+		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.IMPORT);
 		var root:TokenTree = new TokenTree(null, null, -1);
-		builder.testWalkPackageImport(root);
-		builder.testWalkPackageImport(root);
-		builder.testWalkPackageImport(root);
-		builder.testWalkPackageImport(root);
-		builder.testWalkPackageImport(root);
+		var stream:TokenStream = builder.getTokenStream();
+		WalkPackageImport.walkPackageImport(stream, root);
+		WalkPackageImport.walkPackageImport(stream, root);
+		WalkPackageImport.walkPackageImport(stream, root);
+		WalkPackageImport.walkPackageImport(stream, root);
+		WalkPackageImport.walkPackageImport(stream, root);
 		checkStreamEmpty(builder);
 
 		assertTokenEquals(IMPORT_GOLD, treeToString(root));
 	}
 
 	public function testAt() {
-		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.AT_ANNOTATION);
+		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.AT_ANNOTATION);
 		var root:TokenTree = new TokenTree(null, null, -1);
-		root.addChild(builder.testWalkAt());
-		root.addChild(builder.testWalkAt());
-		root.addChild(builder.testWalkAt());
-		root.addChild(builder.testWalkAt());
+		var stream:TokenStream = builder.getTokenStream();
+		root.addChild(WalkAt.walkAt(stream));
+		root.addChild(WalkAt.walkAt(stream));
+		root.addChild(WalkAt.walkAt(stream));
+		root.addChild(WalkAt.walkAt(stream));
 		builder.getTokenStream().consumeToken(); // remove comment line
 		checkStreamEmpty(builder);
 
@@ -40,19 +47,16 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 
 	public function testIf() {
-		var builder:TestTokenTreeBuilder = newBuilder(TokenTreeBuilderTests.IF);
+		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.IF);
 		var root:TokenTree = new TokenTree(null, null, -1);
-		builder.testWalkIf(root);
-		builder.testWalkIf(root);
-		builder.testWalkIf(root);
-		builder.testWalkIf(root);
+		var stream:TokenStream = builder.getTokenStream();
+		WalkIf.walkIf(stream, root);
+		WalkIf.walkIf(stream, root);
+		WalkIf.walkIf(stream, root);
+		WalkIf.walkIf(stream, root);
 		checkStreamEmpty(builder);
 
 		assertTokenEquals(IF_GOLD, treeToString(root));
-	}
-
-	function newBuilder(code:String):TestTokenTreeBuilder {
-		return new TestTokenTreeBuilder(TestTokenTreeBuilder.makeTokenStream(code));
 	}
 
 	function checkStreamEmpty(builder:TestTokenTreeBuilder) {
