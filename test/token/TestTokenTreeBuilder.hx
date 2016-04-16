@@ -1,5 +1,6 @@
 package token;
 
+import byte.ByteData;
 import haxeparser.HaxeLexer;
 
 import haxeparser.Data.Token;
@@ -28,7 +29,7 @@ class TestTokenTreeBuilder extends TokenTreeBuilder {
 			tokens.push(t);
 			t = lexer.token(haxeparser.HaxeLexer.tok);
 		}
-		return new TokenStream(tokens);
+		return new TokenStream(tokens, ByteData.ofString(code));
 	}
 
 	var stream:TokenStream;

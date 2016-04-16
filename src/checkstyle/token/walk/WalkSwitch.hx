@@ -50,7 +50,7 @@ class WalkSwitch {
 				case Comment(_), CommentLine(_):
 					WalkStatement.walkStatement(stream, brOpen);
 				default:
-					throw 'bad token ${stream.token()} != case/default';
+					stream.error('bad token ${stream.token()} != case/default');
 			}
 		}
 		brOpen.addChild(stream.consumeTokenDef(BrClose));
