@@ -540,7 +540,7 @@
 			"checkstyle.checks.whitespace.WhitespaceAroundCheck",
 			"checkstyle.checks.block.EmptyBlockCheck",
 			"checkstyle.checks.whitespace.EmptyLinesCheck",
-			"checkstyle.token.TokenTreeBuilder"
+			"checkstyle.token.walk.WalkStatement"
 		],
 		"LeftCurly": [
 			"checkstyle.checks.metrics.CyclomaticComplexityCheck"
@@ -555,7 +555,7 @@
 			"checkstyle.checks.whitespace.WhitespaceAfterCheck",
 			"checkstyle.checks.whitespace.WhitespaceAroundCheck",
 			"checkstyle.checks.whitespace.EmptyLinesCheck",
-			"checkstyle.token.TokenTreeBuilder"
+			"checkstyle.token.walk.WalkStatement"
 		],
 		"NestedForDepth": [
 			"TestMain"
