@@ -51,7 +51,7 @@ class TokenStream {
 	}
 
 	public inline function error(s:String) {
-		throw formatCurrentPos() + " " + s;
+		throw formatCurrentPos() + ": " + s;
 	}
 	
 	function formatCurrentPos():String {
