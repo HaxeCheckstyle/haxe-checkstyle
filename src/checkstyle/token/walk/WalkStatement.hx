@@ -41,6 +41,7 @@ class WalkStatement {
 				return;
 			case BkOpen:
 				WalkArrayAccess.walkArrayAccess(stream, parent);
+				WalkStatement.walkStatementContinue(stream, parent);
 				return;
 			case Dollar(_):
 				var dollarTok:TokenTree = stream.consumeToken();
