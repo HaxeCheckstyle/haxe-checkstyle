@@ -15,6 +15,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(ISSUE_245);
 		assertCodeParses(ISSUE_249);
 		assertCodeParses(ISSUE_251);
+		assertCodeParses(ISSUE_253);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -90,5 +91,10 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			var array = ['string'];
 			for (char in array[0].split('')) {}
 		}
+	}";
+
+	var ISSUE_253 = "
+	class Foo {
+		var color = #if def { rgb:0x00FFFFFF, a:0 }; #end
 	}";
 }
