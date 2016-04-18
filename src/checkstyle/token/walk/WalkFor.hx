@@ -59,12 +59,16 @@ class WalkFor {
 	 */
 	static function walkForPOpen(stream:TokenStream, parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
+		WalkComment.walkComment(stream, pOpen);
 		var identifier:TokenTree = stream.consumeConstIdent();
 		parent.addChild(pOpen);
 		pOpen.addChild(identifier);
+		WalkComment.walkComment(stream, identifier);
 		var inTok:TokenTree = stream.consumeTokenDef(Kwd(KwdIn));
 		identifier.addChild(inTok);
+		WalkComment.walkComment(stream, inTok);
 		WalkStatement.walkStatement(stream, inTok);
+		WalkComment.walkComment(stream, pOpen);
 		pOpen.addChild(stream.consumeTokenDef(PClose));
 		WalkComment.walkComment(stream, parent);
 		return;
