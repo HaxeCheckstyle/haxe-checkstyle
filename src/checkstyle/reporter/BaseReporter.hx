@@ -113,11 +113,11 @@ class BaseReporter implements IReporter {
 	}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch (s){
-			case INFO: return "Info";
-			case WARNING: return "Warning";
-			case ERROR: return "Error";
-			case IGNORE: return "Ignore";
+		return switch (s) {
+			case INFO: "Info";
+			case WARNING: "Warning";
+			case ERROR: "Error";
+			case IGNORE: "Ignore";
 		}
 	}
 }
