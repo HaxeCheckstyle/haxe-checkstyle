@@ -12,7 +12,7 @@ class TODOCommentCheck extends Check {
 	public function new() {
 		super(LINE);
 		severity = SeverityLevel.IGNORE;
-		format = "TODO|FIXME|HACK|XXX|BUG";
+		format = "^\\s*[TODO|FIXME|HACK|XXX|BUG]";
 		categories = [Category.BUG_RISK];
 		points = 8;
 	}
