@@ -22,6 +22,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, ISSUE_97);
 		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+		assertNoMsg(check, ABSTRACT);
 	}
 
 	public function testWrongBraces() {
@@ -492,4 +493,11 @@ abstract LeftCurlyCheckTests(String) to String {
 	}
 
 	class Empty {}";
+
+	var ABSTRACT = "
+	abstract MyAbstract(Int) from Int to Int {
+	  inline function new(i:Int) {
+		this = i;
+	  }
+	}";
 }

@@ -1,10 +1,10 @@
 {
   "name": "checkstyle",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
   "repository": {
     "type": "git",
-    "url": "https://github.com/adireddy/haxe-checkstyle"
+    "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle"
   },
   "keywords": [
     "checkstyle",

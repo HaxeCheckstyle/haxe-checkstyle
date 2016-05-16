@@ -17,6 +17,7 @@
 
 --next
 -lib mcover:2.1.1
+-D unittest
 -x TestMain
 --macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
 

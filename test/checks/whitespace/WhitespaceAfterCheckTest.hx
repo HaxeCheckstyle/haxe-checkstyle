@@ -19,6 +19,9 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertNoMsg(check, ISSUE_65);
 		assertNoMsg(check, ISSUE_66);
 		assertNoMsg(check, ISSUE_67);
+		assertNoMsg(check, ISSUE_239);
+		assertNoMsg(check, ISSUE_244);
+		assertNoMsg(check, ISSUE_245);
 	}
 
 	public function testIncorrectWhitespace() {
@@ -171,6 +174,34 @@ abstract WhitespaceAfterCheckTests(String) to String {
 			(1 * -a);
 			do -a * 2 while(true);
 			for (a in [-1, -2]) -a + 2;
+		}
+	}";
+
+	var ISSUE_239 = "
+	#if def1
+		#if def2
+		#end
+		// comment
+	#end
+	class Foo
+	{
+#if def1
+		#if def2
+		#end
+		public var test:Int;
+#end
+	}
+	";
+
+	var ISSUE_244 = "
+	class Foo {
+		var list = ['screenX' #if def , 'screenY' #end];
+	}";
+
+	var ISSUE_245 = "
+	class Foo {
+		function foo() {
+			var a = 4, b;
 		}
 	}";
 }

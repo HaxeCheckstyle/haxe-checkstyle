@@ -45,6 +45,9 @@ class Check {
 				Sys.println(e);
 				Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
 				#end
+				#if unittest
+				throw e;
+				#end
 			}
 		}
 		return messages;

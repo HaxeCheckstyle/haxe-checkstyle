@@ -55,10 +55,11 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST9, MSG_SAME_LINE_FOR);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST12, MSG_ELSE);
-		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST14, MSG_ELSE);
+		assertMsg(check, TEST12, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST14);
 		assertNoMsg(check, INTERFACE_DEF);
+		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
 	public function testTokenFor() {
@@ -102,16 +103,17 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST9);
 		assertNoMsg(check, TEST10);
 		assertMsg(check, TEST11, MSG_IF);
-		assertMsg(check, TEST12, MSG_ELSE);
+		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
-		assertMsg(check, TEST14, MSG_ELSE);
+		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, TEST, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST14, MSG_ELSE);
+		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST14);
+		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
 	public function testTokenElseIf() {
@@ -138,9 +140,11 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST12, MSG_ELSE);
-		assertMsg(check, TEST13, MSG_SAME_LINE_ELSE);
-		assertMsg(check, TEST14, MSG_ELSE);
+		assertMsg(check, TEST12, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
 	public function testTokenWhile() {
@@ -329,6 +333,28 @@ abstract NeedBracesCheckTests(String) to String {
 			} else if (condition2) {
 				anotherAction();
 			}
+		}
+	}";
+
+	var TEST15 = "
+	class Test {
+		public function test(a:Bool, b:Bool) {
+		   if (a) {
+
+		   }
+		   else if (!b) {
+
+		   }
+		}
+	}";
+
+	var TEST16 = "
+	class Test {
+		function test() {
+			if (true) {
+				return;
+			}
+			else return;
 		}
 	}";
 

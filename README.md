@@ -1,23 +1,36 @@
 ![logo](resources/logo.png)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](http://opensource.org/licenses/MIT)
-[![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg?branch=master)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle)
-[![codecov.io](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle/coverage.svg?branch=dev)](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle?branch=dev)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
+[![Release](https://img.shields.io/github/release/HaxeCheckstyle/haxe-checkstyle.svg)](http://lib.haxe.org/p/checkstyle/)
+[![Build Status](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle.svg)](https://travis-ci.org/HaxeCheckstyle/haxe-checkstyle)
+[![Codecov](https://img.shields.io/codecov/c/github/HaxeCheckstyle/haxe-checkstyle.svg)](https://codecov.io/github/HaxeCheckstyle/haxe-checkstyle?branch=dev)
 [![Code Climate](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/gpa.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
-[![Issue Count](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/issue_count.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
-[![Version](https://img.shields.io/badge/haxelib-v2.1.1-EA8220.svg)](http://lib.haxe.org/p/checkstyle/)
+[![Code Climate Issues](https://img.shields.io/codeclimate/issues/github/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
 [![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
-Checkstyle is a development library to help developers write Haxe code that adheres to a coding standard.
+**Haxe Checkstyle** is a static analysis tool to help developers write Haxe code that adheres to a coding standard.
 
 It automates the process of checking Haxe code to spare developers of this boring (but important) task.
 
-Code conventions improve readability, allowing team members to understand each others code better.
+Code conventions improve readability, allowing team members to understand each other's code better.
 
-Ideal for any project that want to enforce coding conventions.
+Ideal for any project that wants to enforce coding conventions.
 
-This project was derived from [haxelint](https://github.com/mcheshkov/haxelint)
-created by [@mcheshkov](https://github.com/mcheshkov).
+Static analysis is usually performed as part of a code review.
+
+### Code Climate
+
+Haxe Checkstyle is available on the [Code Climate](https://docs.codeclimate.com/docs/haxe-checkstyle) platform (free for open source projects). It requires a **`.codeclimate.yml`** file and an optional but recommended **`checkstyle.json`** file to be added to the root of your repository - see [here](https://docs.codeclimate.com/docs/haxe-checkstyle) for more details.
+
+When everything is set up, Code Climate automatically runs Haxe Checkstyle for you on each new commit (also on pull requests if configured that way).
+
+The current number of issues can be tracked via a badge:
+
+[![Code Climate](https://img.shields.io/codeclimate/issues/github/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
+
+Immediate results, right in your pull requests.
+
+![img](https://codeclimate.com/marketing/images/features/pull_requests-67ad7029.png)
 
 ### Installation
 
@@ -45,9 +58,10 @@ Found any bug? Please create a new [issue](https://github.com/HaxeCheckstyle/hax
 
 ### Licensing Information
 
-[![MIT](https://upload.wikimedia.org/wikipedia/commons/8/83/License_icon-mit.png)](http://opensource.org/licenses/MIT)
+This content is released under the [MIT](http://opensource.org/licenses/MIT) license.
 
-This content is released under the [MIT](http://opensource.org/licenses/MIT) License.
+This project was derived from [haxelint](https://github.com/mcheshkov/haxelint)
+created by [@mcheshkov](https://github.com/mcheshkov).
 
 ### Contributor Code of Conduct
 

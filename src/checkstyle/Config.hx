@@ -3,18 +3,18 @@ package checkstyle;
 import checkstyle.CheckMessage.SeverityLevel;
 
 typedef Config = {
-	var defaultSeverity:SeverityLevel;
+	@:optional var defaultSeverity:SeverityLevel;
 	// defines that are always added
-	var baseDefines:Array<String>;
+	@:optional var baseDefines:Array<String>;
 	// different define combinations to use (on top of `defines`)
-	var defineCombinations:Array<Array<String>>;
-	var checks:Array<CheckConfig>;
-	var exclude:ExcludeConfig;
+	@:optional var defineCombinations:Array<Array<String>>;
+	@:optional var checks:Array<CheckConfig>;
+	@:optional var exclude:ExcludeConfig;
 }
 
 typedef CheckConfig = {
 	var type:String;
-	var props:{};
+	@:optional var props:{};
 }
 
 typedef ExcludeConfig = {}

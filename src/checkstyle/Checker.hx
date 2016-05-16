@@ -1,5 +1,6 @@
 package checkstyle;
 
+import byte.ByteData;
 import haxe.CallStack;
 import checkstyle.checks.Check;
 import haxeparser.Data.TypeDecl;
@@ -19,6 +20,7 @@ using StringTools;
 class Checker {
 
 	public var file:CheckFile;
+	public var bytes:ByteData;
 	public var lines:Array<String>;
 	public var tokens:Array<Token>;
 	public var ast:Ast;
@@ -50,7 +52,7 @@ class Checker {
 
 	public function getTokenTree():TokenTree {
 		if (tokens == null) return null;
-		if (tokenTree == null) tokenTree = TokenTreeBuilder.buildTokenTree(tokens);
+		if (tokenTree == null) tokenTree = TokenTreeBuilder.buildTokenTree(tokens, bytes);
 		return tokenTree;
 	}
 
@@ -112,7 +114,7 @@ class Checker {
 			var code = file.content;
 			tokens = [];
 			tokenTree = null;
-			var lexer = new HaxeLexer(byte.ByteData.ofString(code), file.name);
+			var lexer = new HaxeLexer(bytes, file.name);
 			var t:Token = lexer.token(HaxeLexer.tok);
 
 			while (t.tok != Eof) {
@@ -124,6 +126,9 @@ class Checker {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+			#end
+			#if unittest
+			throw e;
 			#end
 		}
 	}
@@ -154,6 +159,9 @@ class Checker {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
+			#end
+			#if unittest
+			throw e;
 			#end
 		}
 		return null;
@@ -191,6 +199,7 @@ class Checker {
 
 	function createContext(checkFile:CheckFile):Bool {
 		file = checkFile;
+		bytes = byte.ByteData.ofString(file.content);
 		for (reporter in reporters) reporter.fileStart(file);
 		try {
 			findLineSeparator();

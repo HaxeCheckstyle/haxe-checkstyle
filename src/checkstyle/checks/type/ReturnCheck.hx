@@ -93,16 +93,21 @@ class ReturnCheck extends Check {
 					walkExpr(ecatch.expr, noReturn, name, pos);
 				}
 			case EReturn(expr):
-				if (noReturn && allowEmptyReturn && expr == null) return;
-				else if (noReturn) {
-					warnReturnTypeMissing(name, pos);
+				if (expr == null) {
+					if (allowEmptyReturn) return;
+					warnEmptyReturn(name, pos);
 				}
+				else warnReturnTypeMissing(name, pos);
 			default:
 		}
 	}
 
 	function warnVoid(name:String, pos:Position) {
 		logPos('Redundant "Void" for method "$name"', pos);
+	}
+
+	function warnEmptyReturn(name:String, pos:Position) {
+		logPos('Empty return in method "$name" found', pos);
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {

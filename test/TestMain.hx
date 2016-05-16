@@ -3,6 +3,7 @@ import sys.io.File;
 import sys.io.FileOutput;
 import checks.CheckTestCase;
 import token.TokenTreeBuilderTest;
+import token.TokenTreeBuilderParsingTest;
 import mcover.coverage.client.PrintClient;
 import mcover.coverage.data.CoverageResult;
 import mcover.coverage.data.Statement;
@@ -19,6 +20,7 @@ class TestMain {
 
 		var runner = new haxe.unit.TestRunner();
 		runner.add(new TokenTreeBuilderTest());
+		runner.add(new TokenTreeBuilderParsingTest());
 
 		var tests = CompileTime.getAllClasses(CheckTestCase);
 		for (testClass in tests) runner.add(Type.createInstance(testClass, []));

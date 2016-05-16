@@ -1,8 +1,10 @@
 package checkstyle.token;
 
+import byte.ByteData;
 import haxe.macro.Expr;
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
+import hxparse.Position;
 
 class TokenStream {
 
@@ -10,9 +12,11 @@ class TokenStream {
 
 	var tokens:Array<Token>;
 	var current:Int;
+	var bytes:ByteData;
 
-	public function new(tokens:Array<Token>) {
+	public function new(tokens:Array<Token>, bytes:ByteData) {
 		this.tokens = tokens;
+		this.bytes = bytes;
 		current = 0;
 	}
 
@@ -30,20 +34,29 @@ class TokenStream {
 	public function consumeConstIdent():TokenTree {
 		switch (token()) {
 			case Const(CIdent(_)): return consumeToken();
-			default: throw 'bad token ${token()} != Const(CIdent(_))';
+			default: error('bad token ${token()} != Const(CIdent(_))');
 		}
 	}
 
 	public function consumeConst():TokenTree {
 		switch (token()) {
 			case Const(_): return consumeToken();
-			default: throw 'bad token ${token()} != Const(_)';
+			default: error('bad token ${token()} != Const(_)');
 		}
 	}
 
 	public function consumeTokenDef(tokenDef:TokenDef):TokenTree {
 		if (is(tokenDef)) return consumeToken();
-		throw 'bad token ${token()} != $tokenDef';
+		error('bad token ${token()} != $tokenDef');
+	}
+
+	public inline function error(s:String) {
+		throw formatCurrentPos() + ": " + s;
+	}
+	
+	function formatCurrentPos():String {
+		var pos = tokens[current].pos;
+		return new Position(pos.file, pos.min, pos.max).format(bytes);
 	}
 
 	public function is(tokenDef:TokenDef):Bool {

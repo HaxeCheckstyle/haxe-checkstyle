@@ -42,7 +42,8 @@ class BaseReporter implements IReporter {
 		var version = CompileTime.parseJsonFile("package.json").version;
 
 		Sys.println("");
-		Sys.println(styleText('Running Checkstyle v$version using $numUsedChecks/$numChecks checks on $numFiles source files...', Style.BOLD));
+		var fileString = (numFiles == 1) ? "file" : "files";
+		Sys.println(styleText('Running Checkstyle v$version using $numUsedChecks/$numChecks checks on $numFiles source $fileString...', Style.BOLD));
 		Sys.println("");
 	}
 
@@ -112,11 +113,11 @@ class BaseReporter implements IReporter {
 	}
 
 	static function severityString(s:SeverityLevel):String {
-		return switch (s){
-			case INFO: return "Info";
-			case WARNING: return "Warning";
-			case ERROR: return "Error";
-			case IGNORE: return "Ignore";
+		return switch (s) {
+			case INFO: "Info";
+			case WARNING: "Warning";
+			case ERROR: "Error";
+			case IGNORE: "Ignore";
 		}
 	}
 }
