@@ -47,6 +47,10 @@ class NeedBracesCheck extends Check {
 			switch (tok.tok) {
 				case Kwd(KwdIf):
 					checkIfChild(tok);
+				case Kwd(KwdElse):
+					var firstChild = tok.getFirstChild();
+					if (firstChild.is(Kwd(KwdIf))) checkIfChild(firstChild);
+					else checkLastChild(tok);
 				case Kwd(KwdFunction):
 					checkFunctionChild(tok);
 				case Kwd(KwdDo):
