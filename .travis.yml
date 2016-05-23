@@ -4,7 +4,6 @@ git:
 language: haxe
 haxe:
   - "3.2.1"
-  - development
 install:
   - haxelib install haxeparser 3.2.0
   - haxelib install compiletime 2.6.0
