@@ -40,6 +40,12 @@ class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST6);
 	}
+
+	public function testInsideString() {
+		var check = new TODOCommentCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, TEST7);
+	}
 }
 
 @:enum
@@ -78,5 +84,14 @@ abstract TODOCommentCheckTests(String) to String {
 	class Test {
 		var a:String = 'TODO: remove test';
 		public override function test() {}
+	}";
+
+	var TEST7 = "
+	class Test {
+		function test() {
+			//trace('TODO');
+			//trace('FIXME');
+			//trace('BUG:');
+		}
 	}";
 }
