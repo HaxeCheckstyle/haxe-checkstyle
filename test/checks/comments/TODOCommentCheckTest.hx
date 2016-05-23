@@ -41,7 +41,7 @@ class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 		assertNoMsg(check, TEST6);
 	}
 
-	public function testInideComment() {
+	public function testInsideComment() {
 		var check = new TODOCommentCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST7);
