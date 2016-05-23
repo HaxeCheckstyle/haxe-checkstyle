@@ -41,7 +41,7 @@ class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 		assertNoMsg(check, TEST6);
 	}
 
-	public function testInsideString() {
+	public function testInideComment() {
 		var check = new TODOCommentCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST7);
@@ -92,6 +92,7 @@ abstract TODOCommentCheckTests(String) to String {
 			//trace('TODO');
 			//trace('FIXME');
 			//trace('BUG:');
+			//Test TODO:;
 		}
 	}";
 }
