@@ -109,8 +109,8 @@ class Main {
 			excludePath = DEFAULT_EXCLUDE_CONFIG;
 		}
 
-		if (configPath == null) addAllChecks();
-		else loadConfig(configPath);
+		if (configPath != null && FileSystem.exists(configPath) && !FileSystem.isDirectory(configPath)) loadConfig(configPath);
+		else addAllChecks();
 
 		if (excludePath != null) loadExcludeConfig(excludePath);
 		else start();
