@@ -17,5 +17,6 @@ code_climate:
   repo_token: 1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
 
 after_success:
-  - bash <(curl -X POST -d @coverage.json -H 'Content-Type: application/json' -H 'User-Agent: Code Climate (PHP Test Reporter v0.1.1)' https://codeclimate.com/test_reports) || echo "Codeclimate did not collect coverage reports"
+  - bash <(curl -s -X POST @coverage.json https://codeclimate.com/test_reports) || echo "Codeclimate did not collect coverage reports"
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
