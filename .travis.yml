@@ -4,14 +4,21 @@ git:
 language: haxe
 haxe:
   - "3.2.1"
+node_js: "4.4.5"
 install:
   - haxelib install haxeparser 3.2.0
   - haxelib install compiletime 2.6.0
   - haxelib git hxargs https://github.com/Simn/hxargs
   - haxelib install mcover 2.1.1
+  - npm install codeclimate-test-reporter
 script:
   - haxe build.hxml
 
+addons:
+  code_climate:
+	  repo_token: 1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
+
 after_success:
+  - codeclimate-test-reporter < coverage.json
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
