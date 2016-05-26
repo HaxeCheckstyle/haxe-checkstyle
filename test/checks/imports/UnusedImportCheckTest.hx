@@ -69,6 +69,11 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertNoMsg(check, IMPORT_TYPE_MAP, "import.hx");
 		assertNoMsg(check, UNUSED_IMPORT_TYPE_MAP, "import.hx");
 	}
+
+	public function testStringInterpolation() {
+		var check = new UnusedImportCheck();
+		assertMsg(check, STRING_INTERPOL, MSG_UNUSED);
+	}
 }
 
 @:enum
@@ -79,6 +84,7 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check;
 	import haxe.checkstyle.Check2;
 	import haxe.checkstyle.Check3;
+	import haxe.checkstyle.Check5;
 	import haxe.checkstyle.sub.*;
 
 	abstractAndClass Test {
@@ -88,6 +94,7 @@ abstract UnusedImportCheckTests(String) to String {
 			new Check2();
 			Check3.test();
 			new Check4();
+			trace ('${Check5.debug()} ${blah.xxx}');
 		}
 	}";
 
@@ -255,4 +262,17 @@ abstract UnusedImportCheckTests(String) to String {
 			return new OtherCheck ();
 		}
 	}";
+
+	var STRING_INTERPOL = "
+	package checkstyle.test;
+
+	import haxe.checkstyle.Check3;
+
+	abstractAndClass Test {
+
+		public function new() {
+			trace ('${Check3}');
+		}
+	}";
+
 }
