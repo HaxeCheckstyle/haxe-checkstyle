@@ -234,9 +234,21 @@ class Main {
 		return count;
 	}
 
+	function getUsedCheckCount():Int {
+		var count = 0;
+		var list:Array<String> = [];
+		for (check in checker.checks) {
+			var name = Type.getClassName(Type.getClass(check));
+			if (list.indexOf(name) >= 0) continue;
+			list.push(name);
+			count++;
+		}
+		return count;
+	}
+
 	function createReporter(numFiles:Int):IReporter {
 		var totalChecks = getCheckCount();
-		var checksUsed = checker.checks.length;
+		var checksUsed = getUsedCheckCount();
 		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(numFiles, totalChecks, checksUsed, XML_PATH, STYLE, NO_STYLE);
 			case "json": new JSONReporter(numFiles, totalChecks, checksUsed, JSON_PATH, NO_STYLE);
