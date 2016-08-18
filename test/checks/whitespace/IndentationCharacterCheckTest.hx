@@ -37,6 +37,12 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 		assertNoMsg(check, TEST5_1);
 		assertMsg(check, TEST5_2, "Wrong indentation character (should be tab)");
 	}
+
+	public function testMultilineQuoteIndentation() {
+		var check = new IndentationCharacterCheck();
+		check.severity = SeverityLevel.INFO;
+		assertMsg(check, TEST6, "Wrong indentation character (should be tab)");
+	}
 }
 
 @:enum
@@ -78,6 +84,14 @@ abstract IndentationCheckTests(String) to String {
 	var TEST5_2 =
 	"class Test {
 		public function new() {
+		  // bad indentation here
+		}
+	}";
+
+	var TEST6 =
+	"class Test {
+		public function new() {
+			// breaking comment with quote '
 		  // bad indentation here
 		}
 	}";
