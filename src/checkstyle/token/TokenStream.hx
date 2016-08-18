@@ -53,7 +53,7 @@ class TokenStream {
 	public inline function error(s:String) {
 		throw formatCurrentPos() + ": " + s;
 	}
-	
+
 	function formatCurrentPos():String {
 		var pos = tokens[current].pos;
 		return new Position(pos.file, pos.min, pos.max).format(bytes);
