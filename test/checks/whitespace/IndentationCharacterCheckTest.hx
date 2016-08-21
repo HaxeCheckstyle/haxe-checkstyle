@@ -30,6 +30,13 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST4);
 	}
+
+	public function testFileBoundaryIndentation() {
+		var check = new IndentationCharacterCheck();
+		check.severity = SeverityLevel.INFO;
+		assertNoMsg(check, TEST5_1);
+		assertMsg(check, TEST5_2, "Wrong indentation character (should be tab)");
+	}
 }
 
 @:enum
@@ -58,6 +65,20 @@ abstract IndentationCheckTests(String) to String {
 				(actionType == 'BASKET' && ( actionNumber == 2 || actionNumber == 4) )) {
 				return BetAreaModel.STREET;
 			}
+		}
+	}";
+
+	var TEST5_1 =
+	"class Test {
+		public function new() {
+			// breaking comment with quote '
+		}
+	}";
+
+	var TEST5_2 =
+	"class Test {
+		public function new() {
+		  // bad indentation here
 		}
 	}";
 }
