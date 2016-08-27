@@ -6,7 +6,7 @@ haxe:
   - "3.2.1"
   - development
 install:
-  - haxelib install haxeparser
+  - haxelib git haxeparser https://github.com/Simn/haxeparser
   - haxelib install compiletime 2.6.0
   - haxelib git hxargs https://github.com/Simn/hxargs
   - haxelib install mcover 2.1.1
