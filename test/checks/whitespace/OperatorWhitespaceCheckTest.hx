@@ -35,6 +35,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, NEGATIVE_VARS);
 		assertNoMsg(check, NEGATIVE_NUMS);
 		assertNoMsg(check, OPGT);
+		assertNoMsg(check, MACRO_TYPES);
 	}
 
 	public function testIncorrectOperatorWhitespaceToken() {
@@ -443,6 +444,16 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 	class Test {
 		function test() {
 			x = a?b:c;
+		}
+	}";
+
+	var MACRO_TYPES = "
+	class Test {
+		function test() {
+			macro:Array<String>;
+			var ct = macro:String;
+			macro:Array<$ct>;
+			return macro $e + $e;
 		}
 	}";
 }

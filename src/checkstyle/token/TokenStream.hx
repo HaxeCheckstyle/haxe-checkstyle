@@ -90,6 +90,7 @@ class TokenStream {
 				case Comma:
 				case Const(CIdent(_)):
 				case Kwd(_):
+				case Dollar(_):
 				case Binop(OpLt):
 				case Binop(OpGt): return true;
 				default: return false;
