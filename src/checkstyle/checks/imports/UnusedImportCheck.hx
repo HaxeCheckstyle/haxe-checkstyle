@@ -32,9 +32,18 @@ class UnusedImportCheck extends Check {
 		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], ALL);
 		var idents:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
-				case Const(CIdent(name)):
+				case Const(CIdent(_)):
 					if (TokenTreeCheckUtils.isImport(token)) return GO_DEEPER;
 					return FOUND_GO_DEEPER;
+				default:
+			}
+			return GO_DEEPER;
+		});
+		var stringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			switch (token.tok) {
+				case Const(CString(text)):
+					if (checker.file.content.substr(token.pos.min, 1) != "'") return GO_DEEPER;
+					if (~/\$\{[^\}]+\.[^\}]+\}/.match (text)) return FOUND_GO_DEEPER;
 				default:
 			}
 			return GO_DEEPER;
@@ -60,7 +69,7 @@ class UnusedImportCheck extends Check {
 				continue;
 			}
 			seenModules.push(moduleName);
-			checkUsage(typeName, moduleName, imp, idents);
+			checkUsage(typeName, moduleName, imp, idents, stringLiterals);
 		}
 	}
 
@@ -119,7 +128,7 @@ class UnusedImportCheck extends Check {
 		return null;
 	}
 
-	function checkUsage(typeName:String, moduleName:String, importTok:TokenTree, idents:Array<TokenTree>) {
+	function checkUsage(typeName:String, moduleName:String, importTok:TokenTree, idents:Array<TokenTree>, stringLiterals:Array<TokenTree>) {
 		for (ident in idents) {
 			var name:String = TokenDefPrinter.print(ident.tok);
 			if (!checkName(typeName, moduleName, name)) continue;
@@ -129,7 +138,33 @@ class UnusedImportCheck extends Check {
 				default: return;
 			}
 		}
+		for (literal in stringLiterals) {
+			var names : Array<String> = extractLiteralNames(TokenDefPrinter.print (literal.tok));
+			for (name in names) {
+				if (checkName(typeName, moduleName, name)) return;
+			}
+		}
 		logPos('Unused import "$moduleName" detected', importTok.pos);
+	}
+
+	function extractLiteralNames(text : String):Array<String> {
+		var names : Array<String> = [];
+		var interpols : Array<String> = [];
+		var interpolRegEx : EReg = ~/\$\{([^\}]+)\}/g;
+		while (true) {
+			if (!interpolRegEx.match(text)) break;
+			interpols.push(interpolRegEx.matched(1));
+			text = interpolRegEx.matchedRight();
+		}
+		var namesRegEx : EReg = ~/([A-Z][A-Za-z0-9_]*)/g;
+		for (interpol in interpols) {
+			while (true) {
+				if (!namesRegEx.match(interpol)) break;
+				names.push(namesRegEx.matched(1));
+				interpol = namesRegEx.matchedRight();
+			}
+		}
+		return names;
 	}
 
 	function hasMapping(moduleName:String):Bool {

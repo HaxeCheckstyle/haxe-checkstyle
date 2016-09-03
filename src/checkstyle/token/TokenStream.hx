@@ -53,7 +53,7 @@ class TokenStream {
 	public inline function error(s:String) {
 		throw formatCurrentPos() + ": " + s;
 	}
-	
+
 	function formatCurrentPos():String {
 		var pos = tokens[current].pos;
 		return new Position(pos.file, pos.min, pos.max).format(bytes);
@@ -90,6 +90,7 @@ class TokenStream {
 				case Comma:
 				case Const(CIdent(_)):
 				case Kwd(_):
+				case Dollar(_):
 				case Binop(OpLt):
 				case Binop(OpGt): return true;
 				default: return false;
@@ -195,7 +196,7 @@ class TokenStream {
 		var prevTok:Token = tokens[previous];
 		switch (prevTok.tok) {
 			case Binop(_), Unop(_), BkOpen, POpen, Comma, DblDot, IntInterval(_), Question:
-			case Kwd(KwdReturn), Kwd(KwdIf), Kwd(KwdElse), Kwd(KwdWhile), Kwd(KwdDo), Kwd(KwdFor):
+			case Kwd(KwdReturn), Kwd(KwdIf), Kwd(KwdElse), Kwd(KwdWhile), Kwd(KwdDo), Kwd(KwdFor), Kwd(KwdCase):
 			default:
 				return new TokenTree(tok.tok, tok.pos, tok.index);
 		}

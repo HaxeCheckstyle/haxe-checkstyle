@@ -16,6 +16,11 @@ class LineCheckBase extends Check {
 		multilineStringStart = false;
 	}
 
+	override public function run(checker:Checker):Array<CheckMessage> {
+		multilineStringStart = false;
+		return super.run(checker);
+	}
+
 	function isMultineString(line:String):Bool {
 		if (!multilineStringStart && quotesRE.match(line)) {
 			var matched = quotesRE.matched(0);
