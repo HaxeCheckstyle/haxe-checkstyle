@@ -196,7 +196,7 @@ class TokenStream {
 		var prevTok:Token = tokens[previous];
 		switch (prevTok.tok) {
 			case Binop(_), Unop(_), BkOpen, POpen, Comma, DblDot, IntInterval(_), Question:
-			case Kwd(KwdReturn), Kwd(KwdIf), Kwd(KwdElse), Kwd(KwdWhile), Kwd(KwdDo), Kwd(KwdFor):
+			case Kwd(KwdReturn), Kwd(KwdIf), Kwd(KwdElse), Kwd(KwdWhile), Kwd(KwdDo), Kwd(KwdFor), Kwd(KwdCase):
 			default:
 				return new TokenTree(tok.tok, tok.pos, tok.index);
 		}

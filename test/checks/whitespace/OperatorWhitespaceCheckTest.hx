@@ -193,6 +193,11 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 				z: 20 * 10
 			};
 			var y:Array<String> = [];
+
+			switch int() {
+				case -1:
+				default:
+			}
 		}
 	}
 
