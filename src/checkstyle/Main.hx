@@ -286,9 +286,7 @@ class Main {
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
 				type: check.getModuleName(),
-				props: {
-					severity: SeverityLevel.IGNORE
-				}
+				props: {}
 			};
 			for (prop in Reflect.fields(check)) {
 				if (propsNotAllowed.contains(prop)) continue;
