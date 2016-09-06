@@ -7,7 +7,7 @@ import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
 
 @name("Spacing")
-@desc("Spacing check on if statement and around operators.")
+@desc("Spacing check on if, for, while, switch, try statements and around operators.")
 class SpacingCheck extends Check {
 
 	public var spaceAroundBinop:Bool;
