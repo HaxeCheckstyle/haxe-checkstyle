@@ -1,9 +1,7 @@
 package checkstyle.checks;
 
-import haxe.macro.Expr.Position;
 import haxe.macro.Expr;
 import checkstyle.CheckMessage.SeverityLevel;
-import haxeparser.Data;
 
 #if debug
 import haxe.CallStack;

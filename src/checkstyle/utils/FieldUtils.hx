@@ -1,8 +1,6 @@
 package checkstyle.utils;
 
-import haxe.macro.Expr.Access;
 import haxe.macro.Expr.Field;
-import haxeparser.Data.TypeDecl;
 import haxeparser.Data.TypeDef;
 
 using checkstyle.utils.ArrayUtils;

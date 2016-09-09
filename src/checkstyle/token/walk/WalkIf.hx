@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenTree;
 
@@ -24,7 +20,6 @@ class WalkIf {
 	 *          |- BrClose
 	 *
 	 */
-
 	public static function walkIf(stream:TokenStream, parent:TokenTree) {
 		var ifTok:TokenTree = stream.consumeTokenDef(Kwd(KwdIf));
 		parent.addChild(ifTok);

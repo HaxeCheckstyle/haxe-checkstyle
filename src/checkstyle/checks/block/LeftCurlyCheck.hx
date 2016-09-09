@@ -1,7 +1,6 @@
 package checkstyle.checks.block;
 
 import checkstyle.token.TokenTree;
-import haxeparser.Data;
 import haxe.macro.Expr;
 
 using checkstyle.utils.ArrayUtils;
@@ -170,8 +169,6 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function checkLeftCurly(line:String, wrapped:Bool = false, pos:Position) {
-		var lineLength:Int = line.length;
-
 		// must have at least one non whitespace character before curly
 		// and only whitespace, /* + comment or // + comment after curly
 		var curlyAtEOL:Bool = ~/^\s*\S.*\{\s*(|\/\*.*|\/\/.*)$/.match(line);

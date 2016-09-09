@@ -1,7 +1,6 @@
 package checkstyle.checks.type;
 
 import haxe.macro.Expr;
-import haxeparser.Data;
 import checkstyle.utils.ComplexTypeUtils;
 
 @name("Dynamic")

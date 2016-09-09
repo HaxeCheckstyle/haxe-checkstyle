@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenStreamProgress;
 import checkstyle.token.TokenTree;
@@ -16,7 +12,6 @@ class WalkBlock {
 	 *  |- BrClose
 	 *
 	 */
-
 	public static function walkBlock(stream:TokenStream, parent:TokenTree) {
 		if (stream.is(BrOpen)) {
 			if (isObjectDecl(parent)) {

@@ -4,7 +4,6 @@ import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxeparser.Data;
-import haxe.macro.Expr;
 
 using checkstyle.utils.ArrayUtils;
 

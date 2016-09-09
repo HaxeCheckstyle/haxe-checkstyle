@@ -2,8 +2,6 @@ package checkstyle.checks.naming;
 
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
-import haxe.macro.Expr.Field;
-import haxe.macro.Expr.Function;
 
 @name("ListenerName")
 @desc("Checks the naming conventions of event listener functions specified using `listeners` property.")

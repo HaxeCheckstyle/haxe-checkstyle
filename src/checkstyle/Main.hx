@@ -18,7 +18,6 @@ import sys.FileSystem;
 import sys.io.File;
 
 using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.StringUtils;
 
 class Main {
 

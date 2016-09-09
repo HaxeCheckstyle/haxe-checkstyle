@@ -2,8 +2,6 @@ package checkstyle.checks.imports;
 
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
-import haxe.macro.Expr;
-import haxe.macro.Expr;
 import haxe.io.Path;
 import haxeparser.Data;
 
@@ -93,7 +91,6 @@ class UnusedImportCheck extends Check {
 	function detectModuleName(token:TokenTree):String {
 		var moduleName:StringBuf = new StringBuf();
 
-		var copy:Bool = false;
 		while (true) {
 			switch (token.tok) {
 				case Binop(OpMult): return null;
