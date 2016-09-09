@@ -1,7 +1,6 @@
 package checkstyle.checks.whitespace;
 
 import haxeparser.Data;
-import haxe.macro.Expr;
 
 @name("OperatorWrap")
 @desc("Checks line wrapping with operators.")

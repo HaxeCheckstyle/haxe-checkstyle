@@ -1,7 +1,6 @@
 package checkstyle.checks.comments;
 
 import checkstyle.CheckMessage.SeverityLevel;
-import haxeparser.Data.Token;
 
 @name("TODOComment")
 @desc("A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.")

@@ -1,10 +1,8 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import haxeparser.Data.TokenDef;
 
 using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
 
 @name("HiddenField")
 @desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")

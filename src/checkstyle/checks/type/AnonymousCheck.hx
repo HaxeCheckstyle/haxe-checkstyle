@@ -1,7 +1,6 @@
 package checkstyle.checks.type;
 
 import checkstyle.utils.ExprUtils;
-import haxeparser.Data;
 import haxe.macro.Expr;
 
 using checkstyle.utils.FieldUtils;

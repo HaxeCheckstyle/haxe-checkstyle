@@ -1,7 +1,6 @@
 package checkstyle.checks.imports;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 @name("AvoidStarImport")
 @desc("Checks for import statements that use the * notation and using directives.")

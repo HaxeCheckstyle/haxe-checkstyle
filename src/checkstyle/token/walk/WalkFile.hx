@@ -1,15 +1,10 @@
 package checkstyle.token.walk;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenTree;
 
 class WalkFile {
 	public static function walkFile(stream:TokenStream, parent:TokenTree) {
-		var newChild:TokenTree = null;
 		var tempStore:Array<TokenTree> = [];
 		while (stream.hasMore()) {
 			switch (stream.token()) {

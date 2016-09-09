@@ -1,7 +1,6 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 import haxeparser.Data.TokenDef;
 
 @name("InnerAssignment")
@@ -32,7 +31,6 @@ class InnerAssignmentCheck extends Check {
 			Binop(OpAssignOp(OpOr)),
 			Binop(OpAssignOp(OpXor))
 		], ALL);
-		var x:Int = 0;
 		for (assignToken in allAssignments) {
 			if (isPosSuppressed(assignToken.pos) || !filterAssignment(assignToken)) continue;
 			logPos("Inner assignment detected", assignToken.pos);
