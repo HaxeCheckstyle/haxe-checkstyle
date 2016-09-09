@@ -5,7 +5,7 @@ language: haxe
 haxe:
   - "3.2.1"
 install:
-  - haxelib install haxeparser
+  - haxelib install haxeparser 3.2.0
   - haxelib install compiletime 2.6.0
   - haxelib git hxargs https://github.com/Simn/hxargs
   - haxelib install mcover 2.1.1
