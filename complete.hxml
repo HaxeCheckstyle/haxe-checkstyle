@@ -1,0 +1,7 @@
+-cp src
+-cp test
+-lib haxeparser
+-lib compiletime:2.6.0
+-lib hxargs
+-main checkstyle.Main
+-neko run.n
