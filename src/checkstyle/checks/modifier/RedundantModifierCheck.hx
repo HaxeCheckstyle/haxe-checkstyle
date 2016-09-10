@@ -1,6 +1,5 @@
 package checkstyle.checks.modifier;
 
-import haxeparser.Data;
 import haxe.macro.Expr;
 
 using checkstyle.utils.ArrayUtils;

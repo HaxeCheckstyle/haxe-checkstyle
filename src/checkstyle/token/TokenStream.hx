@@ -1,7 +1,6 @@
 package checkstyle.token;
 
 import byte.ByteData;
-import haxe.macro.Expr;
 import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 import hxparse.Position;

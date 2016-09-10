@@ -1,8 +1,6 @@
 package checkstyle.utils;
 
-import haxe.macro.Expr.Access;
 import haxe.macro.Expr.Field;
-import haxeparser.Data.TypeDecl;
 import haxeparser.Data.TypeDef;
 
 using checkstyle.utils.ArrayUtils;
@@ -60,7 +58,8 @@ class FieldUtils {
 				var kind = d.flags.contains(HInterface) ? INTERFACE : CLASS;
 				return {decl:decl, kind:kind};
 			case EAbstract(a):
-				var kind = a.meta.hasMeta(":kwdenum") ? ENUM_ABSTRACT : ABSTRACT;
+				var metaName = #if (haxeparser > "3.2.0") ":enum" #else ":kwdenum" #end;
+				var kind = a.meta.hasMeta(metaName) ? ENUM_ABSTRACT : ABSTRACT;
 				return {decl:decl, kind:kind};
 			case ETypedef(d):
 				return return {decl:decl, kind:TYPEDEF};

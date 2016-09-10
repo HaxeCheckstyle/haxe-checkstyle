@@ -1,7 +1,6 @@
 package checkstyle.checks.coding;
 
 import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
 
 @name("SimplifyBooleanExpression")
 @desc("Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.")

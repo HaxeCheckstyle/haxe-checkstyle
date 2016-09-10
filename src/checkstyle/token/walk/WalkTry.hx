@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenTree;
 

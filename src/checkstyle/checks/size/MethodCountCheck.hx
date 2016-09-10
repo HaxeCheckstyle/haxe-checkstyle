@@ -1,9 +1,6 @@
 package checkstyle.checks.size;
 
 import checkstyle.token.TokenTree;
-import haxeparser.Data;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("MethodCount")
 @desc("Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.")

@@ -1,6 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxeparser.Data;
 import haxe.macro.Expr;
 
 @name("NestedIfDepth")

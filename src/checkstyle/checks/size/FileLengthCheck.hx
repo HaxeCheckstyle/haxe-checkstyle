@@ -1,7 +1,5 @@
 package checkstyle.checks.size;
 
-import haxeparser.Data.Token;
-
 @name("FileLength")
 @desc("Checks for long source files. If a source file becomes very long it is hard to understand. Therefore long classes should usually be refactored into several individual classes that focus on a specific task.")
 class FileLengthCheck extends Check {

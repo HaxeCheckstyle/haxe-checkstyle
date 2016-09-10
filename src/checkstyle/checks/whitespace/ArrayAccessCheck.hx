@@ -35,7 +35,6 @@ class ArrayAccessCheck extends Check {
 					}
 
 					if (!spaceInside) {
-						var eString = checker.getString(e.pos.min, e.pos.max);
 						if (checker.file.content.substr(e2.pos.min - 1, 1) == " ") logPos("Space between [ and index", e.pos);
 						if (checker.file.content.substr(e2.pos.max, 1) == " ") logPos("Space between index and ]", e.pos);
 					}

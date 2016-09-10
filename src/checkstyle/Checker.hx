@@ -104,14 +104,11 @@ class Checker {
 
 	function makeLines() {
 		var code = file.content;
-		var left = false;
-		var s = 0;
 		lines = code.split(lineSeparator);
 	}
 
 	function makeTokens() {
 		try {
-			var code = file.content;
 			tokens = [];
 			tokenTree = null;
 			var lexer = new HaxeLexer(bytes, file.name);

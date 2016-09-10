@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenStreamProgress;
 import checkstyle.token.TokenTree;
@@ -78,7 +74,6 @@ class WalkSwitch {
 		WalkSwitch.walkCaseExpr(stream, caseTok);
 		var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 		caseTok.addChild(dblDot);
-		var newChild:TokenTree = null;
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {

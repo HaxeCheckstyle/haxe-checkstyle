@@ -2,8 +2,6 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.CheckMessage.SeverityLevel;
 
-using checkstyle.utils.StringUtils;
-
 @name("TabForAligning")
 @desc("Checks if there are any tabs in the middle of a line.")
 class TabForAligningCheck extends LineCheckBase {

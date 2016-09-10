@@ -5,9 +5,6 @@ import checkstyle.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
 import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")

@@ -4,9 +4,6 @@ import checkstyle.Checker.LinePos;
 import checkstyle.token.TokenTree;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("SeparatorWhitespace")
 @desc("Checks that whitespace is present or absent around a separators.")

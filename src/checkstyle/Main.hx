@@ -18,7 +18,6 @@ import sys.FileSystem;
 import sys.io.File;
 
 using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.StringUtils;
 
 class Main {
 
@@ -286,9 +285,7 @@ class Main {
 		for (check in checker.checks) {
 			var checkConfig:CheckConfig = {
 				type: check.getModuleName(),
-				props: {
-					severity: SeverityLevel.IGNORE
-				}
+				props: {}
 			};
 			for (prop in Reflect.fields(check)) {
 				if (propsNotAllowed.contains(prop)) continue;

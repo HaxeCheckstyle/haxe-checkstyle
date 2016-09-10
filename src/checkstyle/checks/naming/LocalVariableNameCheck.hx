@@ -1,7 +1,6 @@
 package checkstyle.checks.naming;
 
 import checkstyle.utils.ExprUtils;
-import haxeparser.Data;
 
 @name("LocalVariableName")
 @desc("Checks that the local variable names conform to a format specified by the `format` property.")
