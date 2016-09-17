@@ -35,11 +35,11 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 		assertEquals(expected, msg, pos);
 	}
 
-	override function assertEquals<T>(expected:T, actual:T, ?c:PosInfos):Void {
+	override function assertEquals<T>(expected:T, actual:T, ?c:PosInfos) {
 		currentTest.done = true;
-		if (actual != expected){
+		if (actual != expected) {
 			currentTest.success = false;
-			currentTest.error   = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
+			currentTest.error = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
 			currentTest.posInfos = c;
 			throw currentTest;
 		}

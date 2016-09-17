@@ -1,21 +1,15 @@
 package misc;
 
 import checks.CheckTestCase;
-import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class ExtensionsTest extends CheckTestCase<ExtensionsTests> {
 
 	public function testExtensions() {
-		try {
-			assertNoMsg(new IndentationCharacterCheck(), TEST1);
-			// the upcoming haxeparser does not fail here, so disabling failing part
-			// // unless haxeparse bug is fixed, this code is unreachable
-			// assertFalse(true);
-		}
-		catch (e:Dynamic) {
-			assertEquals("misc.ExtensionsTest", e.classname);
-			assertEquals("expected '' but was 'Parsing failed: Unexpected >", e.error.substr(0, 49));
-		}
+		#if (haxeparser >= "3.3.0")
+		assertNoMsg(new IndentationCharacterCheck(), TEST1);
+		#else
+		assertTrue(true);
+		#end
 	}
 }
 
