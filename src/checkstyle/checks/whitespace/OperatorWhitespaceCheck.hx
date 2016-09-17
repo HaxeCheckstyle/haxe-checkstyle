@@ -4,7 +4,6 @@ import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
-import haxeparser.Data;
 
 @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")
@@ -170,6 +169,6 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	override function violation(tok:TokenTree, policy:String) {
-		logPos('OperatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
+		logPos('OperatorWhitespace policy "$policy" violated by "$tok"', tok.pos);
 	}
 }

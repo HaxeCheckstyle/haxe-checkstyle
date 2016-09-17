@@ -132,15 +132,15 @@ class WhitespaceAroundCheck extends Check {
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
 			var before:String = line.substr(0, linePos.ofs);
-			var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
+			var tokLen:Int = tok.toString().length;
 			var after:String = line.substr(linePos.ofs + tokLen);
 
 			if (!(~/^.*\s$/.match(before))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
+				logPos('No whitespace around "$tok"', tok.pos);
 				continue;
 			}
 			if (!(~/^(\s.*|)$/.match(after))) {
-				logPos('No whitespace around "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
+				logPos('No whitespace around "$tok"', tok.pos);
 				continue;
 			}
 		}
