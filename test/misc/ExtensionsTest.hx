@@ -1,6 +1,9 @@
 package misc;
 
 import checks.CheckTestCase;
+#if (haxeparser >= "3.3.0")
+import checkstyle.checks.whitespace.IndentationCharacterCheck;
+#end
 
 class ExtensionsTest extends CheckTestCase<ExtensionsTests> {
 
