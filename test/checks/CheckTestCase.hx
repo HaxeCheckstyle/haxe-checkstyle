@@ -35,6 +35,16 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 		assertEquals(expected, msg, pos);
 	}
 
+	override function assertEquals<T>(expected:T, actual:T, ?c:PosInfos):Void {
+		currentTest.done = true;
+		if (actual != expected){
+			currentTest.success = false;
+			currentTest.error   = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
+			currentTest.posInfos = c;
+			throw currentTest;
+		}
+	}
+
 	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, ?pos:PosInfos):String {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independant checkMessage calls in a single test
