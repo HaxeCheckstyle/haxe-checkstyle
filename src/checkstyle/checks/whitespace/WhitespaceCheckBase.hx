@@ -67,7 +67,7 @@ class WhitespaceCheckBase extends Check {
 
 	function checkWhitespaceExt(tok:TokenTree, checkCallback:WhitespacePolicyCheck) {
 		var linePos:LinePos = checker.getLinePos(tok.pos.min);
-		var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
+		var tokLen:Int = tok.toString().length;
 		if (tok.tok.match(IntInterval(_))) {
 			linePos = checker.getLinePos(tok.pos.max - 3);
 			tokLen = 3;

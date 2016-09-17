@@ -103,10 +103,6 @@ class TokenTree extends Token {
 		return false;
 	}
 
-	override public function toString():String {
-		return printTokenTree();
-	}
-
 	public function printTokenTree(prefix:String = ""):String {
 		var buf:StringBuf = new StringBuf();
 		if (tok != null) buf.add('$prefix${tok}\t\t\t\t${getPos()}');

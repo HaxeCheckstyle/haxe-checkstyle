@@ -35,7 +35,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	override function violation(tok:TokenTree, policy:String) {
 		if (isWrapped(tok, cast (policy, WhitespacePolicy))) return;
-		logPos('SeparatorWhitespace policy "$policy" violated by "${TokenDefPrinter.print(tok.tok)}"', tok.pos);
+		logPos('SeparatorWhitespace policy "$policy" violated by "$tok"', tok.pos);
 	}
 
 	function isWrapped(tok:TokenTree, policy:WhitespacePolicy):Bool {
