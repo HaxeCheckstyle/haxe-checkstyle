@@ -33,7 +33,9 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, DOUBLE_QUOTE);
 		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
 		assertMsg(check, INTERPOLATION, 'String "$$value is $${i++} $$i" uses single quotes instead of double quotes');
+		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
+		#end
 		assertMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION, 'String "test "xml" " uses single quotes instead of double quotes');
 	}
 
@@ -45,7 +47,9 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION);
 		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
 		assertMsg(check, INTERPOLATION, 'String "$$value is $${i++} $$i" uses single quotes instead of double quotes');
+		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
+		#end
 	}
 
 	public function testDoubleQuoteWithInterpolation() {
@@ -54,7 +58,9 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, DOUBLE_QUOTE);
 		assertNoMsg(check, INTERPOLATION);
 		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
+		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
+		#end
 		assertMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION, 'String "test "xml" " uses single quotes instead of double quotes');
 	}
 
@@ -65,7 +71,9 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, INTERPOLATION);
 		assertNoMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION);
 		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
+		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
+		#end
 	}
 }
 
