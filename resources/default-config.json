@@ -373,6 +373,8 @@
 		},
 		{
 			"props": {
+				"enforcePrivate": false,
+				"enforcePublic": false,
 				"enforcePublicPrivate": false
 			},
 			"type": "RedundantModifier"

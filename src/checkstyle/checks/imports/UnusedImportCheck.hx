@@ -3,7 +3,6 @@ package checkstyle.checks.imports;
 import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
-import haxeparser.Data;
 
 using checkstyle.utils.ArrayUtils;
 
@@ -98,12 +97,12 @@ class UnusedImportCheck extends Check {
 				case Kwd(KwdPackage):
 				case Semicolon: return moduleName.toString();
 				case Kwd(KwdIn):
-					if (token.parent.tok.match(Dot)) moduleName.add(TokenDefPrinter.print(token.tok));
+					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" in ");
 				case Const(CIdent("as")):
-					if (token.parent.tok.match(Dot)) moduleName.add(TokenDefPrinter.print(token.tok));
+					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" as ");
-				default: moduleName.add(TokenDefPrinter.print(token.tok));
+				default: moduleName.add(token.toString());
 			}
 			token = token.getFirstChild();
 		}
@@ -127,7 +126,7 @@ class UnusedImportCheck extends Check {
 
 	function checkUsage(typeName:String, moduleName:String, importTok:TokenTree, idents:Array<TokenTree>, stringLiterals:Array<TokenTree>) {
 		for (ident in idents) {
-			var name:String = TokenDefPrinter.print(ident.tok);
+			var name:String = ident.toString();
 			if (!checkName(typeName, moduleName, name)) continue;
 			switch (ident.parent.tok) {
 				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef): continue;
@@ -136,7 +135,7 @@ class UnusedImportCheck extends Check {
 			}
 		}
 		for (literal in stringLiterals) {
-			var names : Array<String> = extractLiteralNames(TokenDefPrinter.print (literal.tok));
+			var names:Array<String> = extractLiteralNames(literal.toString());
 			for (name in names) {
 				if (checkName(typeName, moduleName, name)) return;
 			}
@@ -144,16 +143,16 @@ class UnusedImportCheck extends Check {
 		logPos('Unused import "$moduleName" detected', importTok.pos);
 	}
 
-	function extractLiteralNames(text : String):Array<String> {
-		var names : Array<String> = [];
-		var interpols : Array<String> = [];
-		var interpolRegEx : EReg = ~/\$\{([^\}]+)\}/g;
+	function extractLiteralNames(text:String):Array<String> {
+		var names:Array<String> = [];
+		var interpols:Array<String> = [];
+		var interpolRegEx:EReg = ~/\$\{([^\}]+)\}/g;
 		while (true) {
 			if (!interpolRegEx.match(text)) break;
 			interpols.push(interpolRegEx.matched(1));
 			text = interpolRegEx.matchedRight();
 		}
-		var namesRegEx : EReg = ~/([A-Z][A-Za-z0-9_]*)/g;
+		var namesRegEx:EReg = ~/([A-Z][A-Za-z0-9_]*)/g;
 		for (interpol in interpols) {
 			while (true) {
 				if (!namesRegEx.match(interpol)) break;

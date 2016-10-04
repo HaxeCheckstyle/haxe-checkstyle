@@ -36,18 +36,18 @@ class WrapCheckBase extends Check {
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
 			var line:String = checker.lines[linePos.line];
 			var before:String = line.substr(0, linePos.ofs);
-			var tokLen:Int = TokenDefPrinter.print(tok.tok).length;
+			var tokLen:Int = tok.toString().length;
 			var after:String = line.substr(linePos.ofs + tokLen);
 
 			if (~/^\s*$/.match(before)) {
 				if (option != NL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be at the end of the line', tok.pos);
+					logPos('Token "$tok" must be at the end of the line', tok.pos);
 					continue;
 				}
 			}
 			if (~/^\s*(\/\/.*|\/\*.*|)$/.match(after)) {
 				if (option != EOL) {
-					logPos('Token "${TokenDefPrinter.print(tok.tok)}" must be on a new line', tok.pos);
+					logPos('Token "$tok" must be on a new line', tok.pos);
 				}
 			}
 		}
