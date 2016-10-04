@@ -79,6 +79,22 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 		assertNoMsg(check, TEST14);
 		assertNoMsg(check, TEST15);
 	}
+
+	public function testJustPublic() {
+		var check = new RedundantModifierCheck();
+		check.enforcePublic = true;
+		assertMsg(check, TEST3, 'Missing "public" keyword for "a"');
+		assertMsg(check, TEST1, '"private" keyword is redundant for "a"');
+		assertNoMsg(check, TEST4);
+	}
+
+	public function testJustPrivate() {
+		var check = new RedundantModifierCheck();
+		check.enforcePrivate = true;
+		assertMsg(check, TEST12, 'Missing "private" keyword for "foo"');
+		assertMsg(check, TEST2, '"public" keyword is redundant for "a"');
+		assertNoMsg(check, TEST3);
+	}
 }
 
 @:enum

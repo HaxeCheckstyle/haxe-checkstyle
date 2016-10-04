@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "bug fixes",
-	"version": "2.1.3",
+	"releasenote": "enhancement to RedundantModifier check",
+	"version": "2.1.4",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
