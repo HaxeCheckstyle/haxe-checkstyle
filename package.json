@@ -1,6 +1,6 @@
 {
   "name": "checkstyle",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
   "repository": {
     "type": "git",
