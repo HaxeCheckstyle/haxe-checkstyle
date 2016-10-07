@@ -27,6 +27,7 @@ class SimplifyBooleanExpressionCheck extends Check {
 		], ALL);
 
 		for (token in acceptableTokens) {
+			if (isPosSuppressed(token.pos)) continue;
 			if (token.is(Kwd(KwdTrue)) || token.is(Kwd(KwdFalse))) checkToken(token);
 		}
 	}

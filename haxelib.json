@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "enhancement to RedundantModifier check",
-	"version": "2.1.4",
+	"releasenote": "fix for #296, added SuppressWarnings for SimplifyBooleanExpression check",
+	"version": "2.1.5",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 

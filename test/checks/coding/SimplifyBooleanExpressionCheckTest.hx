@@ -17,6 +17,10 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST5);
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST6);
 	}
+
+	public function testSupressExpression() {
+		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST7);
+	}
 }
 
 @:enum
@@ -66,6 +70,15 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 		function test() {
 			var bvar:Bool;
 			if (!bvar) {}
+		}
+	}";
+
+	var TEST7 = "
+	abstractAndClass Test {
+		@SuppressWarnings('checkstyle:SimplifyBooleanExpression')
+		public static function main() {
+			var value: Null<Bool> = null;
+			trace(value == true);
 		}
 	}";
 }
