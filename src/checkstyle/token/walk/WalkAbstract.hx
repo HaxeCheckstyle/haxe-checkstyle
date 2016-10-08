@@ -28,31 +28,34 @@ class WalkAbstract {
 					typeParent = typeChild;
 			}
 		}
-		var tempStore:Array<TokenTree> = [];
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
+		WalkAbstract.walkAbstractBody(stream, block);
+		block.addChild(stream.consumeTokenDef(BrClose));
+	}
 
+	public static function walkAbstractBody(stream:TokenStream, parent:TokenTree) {
+		var tempStore:Array<TokenTree> = [];
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
-					WalkVar.walkVar(stream, block, tempStore);
+					WalkVar.walkVar(stream, parent, tempStore);
 					tempStore = [];
 				case Kwd(KwdFunction):
-					WalkFunction.walkFunction(stream, block, tempStore);
+					WalkFunction.walkFunction(stream, parent, tempStore);
 					tempStore = [];
 				case Sharp(_):
-					WalkSharp.walkSharp(stream, block);
+					WalkSharp.walkSharp(stream, parent, WalkAbstract.walkAbstractBody);
 				case At:
 					tempStore.push(WalkAt.walkAt(stream));
 				case BrClose: break;
 				case Semicolon:
-					block.addChild(stream.consumeToken());
+					parent.addChild(stream.consumeToken());
 				default:
 					tempStore.push(stream.consumeToken());
 			}
 		}
-		for (tok in tempStore) block.addChild(tok);
-		block.addChild(stream.consumeTokenDef(BrClose));
+		for (tok in tempStore) parent.addChild(tok);
 	}
 }

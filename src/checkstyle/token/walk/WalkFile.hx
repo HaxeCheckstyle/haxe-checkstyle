@@ -13,7 +13,13 @@ class WalkFile {
 					tempStore = [];
 					WalkPackageImport.walkPackageImport(stream, parent);
 				case Sharp(_):
-					WalkSharp.walkSharp(stream, parent);
+					WalkSharp.walkSharp(stream, parent, WalkFile.walkFile);
+					if (!stream.hasMore()) return;
+					switch (stream.token()) {
+						case BrOpen:
+							WalkBlock.walkBlock(stream, parent.childs[parent.childs.length - 1]);
+						default:
+					}
 				case At:
 					tempStore.push(WalkAt.walkAt(stream));
 				case Comment(_), CommentLine(_):

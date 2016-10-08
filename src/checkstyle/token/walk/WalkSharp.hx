@@ -5,6 +5,8 @@ import checkstyle.token.TokenStreamProgress;
 import checkstyle.token.TokenTree;
 
 class WalkSharp {
+	static var SHARP_IFS:Array<TokenTree> = [];
+
 	/**
 	 * Sharp("if") | Sharp("elseif")
 	 *  |- POpen
@@ -21,10 +23,10 @@ class WalkSharp {
 	 * Sharp(_)
 	 *
 	 */
-	public static function walkSharp(stream:TokenStream, parent:TokenTree) {
+	public static function walkSharp(stream:TokenStream, parent:TokenTree, walker:WalkCB) {
 		switch (stream.token()) {
 			case Sharp(IF):
-				WalkSharp.walkSharpIf(stream, parent);
+				WalkSharp.walkSharpIf(stream, parent, walker);
 			case Sharp(ERROR):
 				var errorToken:TokenTree = stream.consumeToken();
 				parent.addChild(errorToken);
@@ -33,48 +35,72 @@ class WalkSharp {
 						errorToken.addChild(stream.consumeToken());
 					default:
 				}
-			case Sharp(ELSEIF), Sharp(ELSE), Sharp(END):
-				throw 'unexpected token ${stream.token()}';
+			case Sharp(ELSEIF):
+				WalkSharp.walkSharpElseIf(stream, parent);
+			case Sharp(ELSE):
+				WalkSharp.walkSharpElse(stream, parent);
+			case Sharp(END):
+				WalkSharp.walkSharpEnd(stream, parent);
 			case Sharp(_):
 				parent.addChild(stream.consumeToken());
 			default:
 		}
 	}
 
-	static function walkSharpIf(stream:TokenStream, parent:TokenTree) {
+	static function walkSharpIf(stream:TokenStream, parent:TokenTree, walker:WalkCB) {
 		var ifToken:TokenTree = stream.consumeToken();
 		parent.addChild(ifToken);
 		WalkSharp.walkSharpIfExpr(stream, ifToken);
-		WalkSharp.walkSharpExpr(stream, ifToken);
+		SHARP_IFS.push(ifToken);
+
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
-			switch (stream.token()) {
-				case Sharp(IF):
-					WalkSharp.walkSharp(stream, ifToken);
-				case Sharp(ELSEIF):
-					WalkSharp.walkSharpElseIf(stream, ifToken);
-				case Sharp(ELSE):
-					var elseToken:TokenTree = stream.consumeToken();
-					ifToken.addChild(elseToken);
-					WalkSharp.walkSharpExpr(stream, elseToken);
-					break;
-				case Sharp(END):
-					break;
-				case Comma:
-					var comma:TokenTree = stream.consumeToken();
-					ifToken.addChild(comma);
-				default:
-					WalkStatement.walkStatement(stream, ifToken);
+			try {
+				walker(stream, ifToken);
+				switch (stream.token()) {
+					case BrClose, Comma:
+						var newChild:TokenTree = stream.consumeToken();
+						ifToken.addChild(newChild);
+					default:
+				}
+			}
+			catch (e:SharpElseException) {
+				// continue;
+			}
+			catch (e:SharpEndException) {
+				SHARP_IFS.pop();
+				if (!stream.hasMore()) return;
+				switch (stream.token()) {
+					case Comma:
+						var newChild:TokenTree = stream.consumeToken();
+						ifToken.addChild(newChild);
+					default:
+				}
+				return;
 			}
 		}
-		ifToken.addChild(stream.consumeTokenDef(Sharp("end")));
+	}
+
+	static function walkSharpElse(stream:TokenStream, parent:TokenTree) {
+		var sharpIfParent:TokenTree = SHARP_IFS[SHARP_IFS.length - 1];
+		var ifToken:TokenTree = stream.consumeToken();
+		sharpIfParent.addChild(ifToken);
+		throw new SharpElseException();
 	}
 
 	static function walkSharpElseIf(stream:TokenStream, parent:TokenTree) {
+		var sharpIfParent:TokenTree = SHARP_IFS[SHARP_IFS.length - 1];
 		var ifToken:TokenTree = stream.consumeToken();
-		parent.addChild(ifToken);
+		sharpIfParent.addChild(ifToken);
 		WalkSharp.walkSharpIfExpr(stream, ifToken);
-		WalkSharp.walkSharpExpr(stream, ifToken);
+		throw new SharpElseException();
+	}
+
+	static function walkSharpEnd(stream:TokenStream, parent:TokenTree) {
+		var sharpIfParent:TokenTree = SHARP_IFS[SHARP_IFS.length - 1];
+		var endToken:TokenTree = stream.consumeToken();
+		sharpIfParent.addChild(endToken);
+		throw new SharpEndException();
 	}
 
 	static function walkSharpIfExpr(stream:TokenStream, parent:TokenTree) {
@@ -99,43 +125,16 @@ class WalkSharp {
 			}
 		}
 	}
+}
 
-	static function walkSharpExpr(stream:TokenStream, parent:TokenTree) {
-		var prefixes:Array<TokenTree> = [];
-		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
-		while (progress.streamHasChanged()) {
-			switch (stream.token()) {
-				case Kwd(KwdClass):
-					WalkClass.walkClass(stream, parent, prefixes);
-					prefixes = [];
-				case Kwd(KwdInterface):
-					WalkInterface.walkInterface(stream, parent, prefixes);
-					prefixes = [];
-				case Kwd(KwdAbstract):
-					WalkAbstract.walkAbstract(stream, parent, prefixes);
-					prefixes = [];
-				case Kwd(KwdTypedef):
-					WalkTypedef.walkTypedef(stream, parent, prefixes);
-					prefixes = [];
-				case Kwd(KwdEnum):
-					WalkEnum.walkEnum(stream, parent, prefixes);
-					prefixes = [];
-				case BrOpen:
-					WalkBlock.walkBlock(stream, parent);
-				case Sharp(IF), Sharp(ERROR):
-					WalkSharp.walkSharp(stream, parent);
-					return;
-				case Sharp(_):
-					return;
-				case At:
-					prefixes.push(WalkAt.walkAt(stream));
-				case Comment(_), CommentLine(_):
-					prefixes.push(stream.consumeToken());
-				default:
-					WalkStatement.walkStatement(stream, parent);
-			}
-		}
-	}
+typedef WalkCB = TokenStream -> TokenTree -> Void;
+
+class SharpElseException {
+	public function new () {}
+}
+
+class SharpEndException {
+	public function new () {}
 }
 
 @:enum

@@ -34,22 +34,26 @@ class WalkSwitch {
 		WalkComment.walkComment(stream, switchTok);
 		var brOpen:TokenTree = stream.consumeTokenDef(BrOpen);
 		switchTok.addChild(brOpen);
+		WalkSwitch.walkSwitchCases(stream, brOpen);
+		brOpen.addChild(stream.consumeTokenDef(BrClose));
+	}
+
+	public static function walkSwitchCases(stream:TokenStream, parent:TokenTree) {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case BrClose:
 					break;
 				case Kwd(KwdCase), Kwd(KwdDefault):
-					WalkSwitch.walkCase(stream, brOpen);
+					WalkSwitch.walkCase(stream, parent);
 				case Sharp(_):
-					WalkSharp.walkSharp(stream, brOpen);
+					WalkSharp.walkSharp(stream, parent, WalkSwitch.walkSwitchCases);
 				case Comment(_), CommentLine(_):
-					WalkStatement.walkStatement(stream, brOpen);
+					WalkStatement.walkStatement(stream, parent);
 				default:
 					stream.error('bad token ${stream.token()} != case/default');
 			}
 		}
-		brOpen.addChild(stream.consumeTokenDef(BrClose));
 	}
 
 	/**
