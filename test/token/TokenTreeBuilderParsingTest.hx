@@ -8,13 +8,17 @@ import haxeparser.Data.TokenDef;
 class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 
 	public function testIssues() {
+		assertCodeParses(ISSUE_76);
+		assertCodeParses(ISSUE_79);
 		assertCodeParses(ISSUE_154);
 		assertCodeParses(ISSUE_235);
+		assertCodeParses(ISSUE_238);
 		assertCodeParses(ISSUE_239);
 		assertCodeParses(ISSUE_244);
 		assertCodeParses(ISSUE_245);
 		assertCodeParses(ISSUE_249);
 		assertCodeParses(ISSUE_251);
+		assertCodeParses(ISSUE_252);
 		assertCodeParses(ISSUE_253);
 		assertCodeParses(ISSUE_256);
 	}
@@ -106,5 +110,52 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 		}
 	}";
 
+	var ISSUE_238 = "
+	class Foo
+	{
+		function foo()
+		{
+			#if def
+			if (true) {}
+			else
+			{
+			#end
+
+			trace('test');
+
+			#if def
+			}
+			#end
+		}
+	}";
+
+	var ISSUE_252 = "
+	class Foo {
+		var library = new #if haxe3 Map<String, #else Hash <#end String>();
+	}";
+
+	var ISSUE_76 = "
+	class Base {}
+
+	#if true
+	class Test extends Base
+	#else
+	class Test
+	#end
+	{
+	}";
+
+	var ISSUE_79 = "
+	class Test {
+		function foo() {
+			#if true
+			if (true) {
+			#else
+			if (true) {
+			#end
+
+			}
+		}
+	}";
 
 }

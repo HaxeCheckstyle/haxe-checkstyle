@@ -8,26 +8,30 @@ class WalkPOpen {
 	public static function walkPOpen(stream:TokenStream, parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
 		parent.addChild(pOpen);
+		WalkPOpen.walkPOpenParts(stream, pOpen);
+		pOpen.addChild(stream.consumeTokenDef(PClose));
+	}
+
+	public static function walkPOpenParts(stream:TokenStream, parent:TokenTree) {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case POpen:
-					WalkPOpen.walkPOpen(stream, pOpen);
+					WalkPOpen.walkPOpen(stream, parent);
 				case BrOpen:
-					WalkObjectDecl.walkObjectDecl(stream, pOpen);
+					WalkObjectDecl.walkObjectDecl(stream, parent);
 				case BkOpen:
-					WalkArrayAccess.walkArrayAccess(stream, pOpen);
+					WalkArrayAccess.walkArrayAccess(stream, parent);
 				case PClose:
 					break;
 				case Sharp(_):
-					WalkSharp.walkSharp(stream, pOpen);
+					WalkSharp.walkSharp(stream, parent, WalkPOpen.walkPOpenParts);
 				case Comma:
 					var comma:TokenTree = stream.consumeToken();
-					pOpen.addChild(comma);
+					parent.addChild(comma);
 				default:
-					WalkStatement.walkStatement(stream, pOpen);
+					WalkStatement.walkStatement(stream, parent);
 			}
 		}
-		pOpen.addChild(stream.consumeTokenDef(PClose));
 	}
 }
