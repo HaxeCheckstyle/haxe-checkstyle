@@ -19,19 +19,19 @@ class UnnecessaryConstructorCheck extends Check {
 			var acceptableTokens:Array<TokenTree> = cls.filter([
 				Kwd(KwdFunction),
 				Kwd(KwdVar)
-			], ALL);
+			], FIRST);
 
 			var haveConstructor:Bool = false;
 			var staticTokens:Int = 0;
 			var constructorPos = null;
 			for (token in acceptableTokens) {
-				if (token.filter([Kwd(KwdNew)], FIRST).length > 0) {
+				if (token.filter([Kwd(KwdNew)], FIRST, 2).length > 0) {
 					haveConstructor = true;
 					constructorPos = token.pos;
 					continue;
 				}
 
-				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) {
+				if (token.filter([Kwd(KwdStatic)], FIRST, 2).length > 0) {
 					staticTokens++;
 					continue;
 				}
