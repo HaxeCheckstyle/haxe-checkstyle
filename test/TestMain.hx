@@ -30,7 +30,7 @@ class TestMain {
 		Sys.exit(success ? 0 : 1);
 	}
 
-	static function setupCoverageReport() {
+	function setupCoverageReport() {
 		var client:PrintClient = new PrintClient();
 		var logger = MCoverage.getLogger();
 		logger.addClient(client);
