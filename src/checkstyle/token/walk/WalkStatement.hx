@@ -3,8 +3,6 @@ package checkstyle.token.walk;
 import checkstyle.token.TokenStream;
 import checkstyle.token.TokenTree;
 
-import checkstyle.token.walk.WalkSharp.WalkSharpConsts;
-
 class WalkStatement {
 	public static function walkStatement(stream:TokenStream, parent:TokenTree) {
 		var wantMore:Bool = true;
@@ -55,10 +53,8 @@ class WalkStatement {
 				return;
 			case Comma:
 				return;
-			case Sharp(WalkSharpConsts.IF):
-				WalkSharp.walkSharp(stream, parent);
-				return;
 			case Sharp(_):
+				WalkSharp.walkSharp(stream, parent, WalkStatement.walkStatement);
 				return;
 			case Dot, DblDot:
 				wantMore = true;

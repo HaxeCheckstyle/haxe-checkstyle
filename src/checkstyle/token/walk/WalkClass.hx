@@ -13,35 +13,44 @@ class WalkClass {
 		var name:TokenTree = WalkTypeNameDef.walkTypeNameDef(stream, typeTok);
 		// add all comments, annotations
 		for (prefix in prefixes) name.addChild(prefix);
-		if (stream.isSharp()) WalkSharp.walkSharp(stream, name);
-		WalkExtends.walkExtends(stream, name);
-		WalkImplements.walkImplements(stream, name);
-		WalkComment.walkComment(stream, name);
-		var tempStore:Array<TokenTree> = [];
+		if (stream.isSharp()) WalkSharp.walkSharp(stream, name, WalkClass.walkClassExtends);
+		WalkClass.walkClassExtends(stream, name);
 		var block:TokenTree = stream.consumeTokenDef(BrOpen);
 		name.addChild(block);
+		WalkClass.walkClassBody(stream, block);
+		block.addChild(stream.consumeTokenDef(BrClose));
+	}
 
+	public static function walkClassExtends(stream:TokenStream, name:TokenTree) {
+		WalkExtends.walkExtends(stream, name);
+		if (stream.isSharp()) WalkSharp.walkSharp(stream, name, WalkClass.walkClassExtends);
+		WalkImplements.walkImplements(stream, name);
+		if (stream.isSharp()) WalkSharp.walkSharp(stream, name, WalkClass.walkClassExtends);
+		WalkComment.walkComment(stream, name);
+	}
+
+	public static function walkClassBody(stream:TokenStream, parent:TokenTree) {
+		var tempStore:Array<TokenTree> = [];
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			switch (stream.token()) {
 				case Kwd(KwdVar):
-					WalkVar.walkVar(stream, block, tempStore);
+					WalkVar.walkVar(stream, parent, tempStore);
 					tempStore = [];
 				case Kwd(KwdFunction):
-					WalkFunction.walkFunction(stream, block, tempStore);
+					WalkFunction.walkFunction(stream, parent, tempStore);
 					tempStore = [];
 				case Sharp(_):
-					WalkSharp.walkSharp(stream, block);
+					WalkSharp.walkSharp(stream, parent, WalkClass.walkClassBody);
 				case At:
 					tempStore.push(WalkAt.walkAt(stream));
 				case BrClose: break;
 				case Semicolon:
-					block.addChild(stream.consumeToken());
+					parent.addChild(stream.consumeToken());
 				default:
 					tempStore.push(stream.consumeToken());
 			}
 		}
-		for (tok in tempStore) block.addChild(tok);
-		block.addChild(stream.consumeTokenDef(BrClose));
+		for (tok in tempStore) parent.addChild(tok);
 	}
 }

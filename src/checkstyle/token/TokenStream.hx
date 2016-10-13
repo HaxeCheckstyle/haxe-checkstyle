@@ -27,6 +27,9 @@ class TokenStream {
 		if ((current < 0) || (current >= tokens.length)) throw NO_MORE_TOKENS;
 		var token:Token = tokens[current];
 		current++;
+#if debugTokenTree
+		Sys.println (token);
+#end
 		return new TokenTree(token.tok, token.pos, current - 1);
 	}
 

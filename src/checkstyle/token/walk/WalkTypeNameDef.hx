@@ -23,8 +23,14 @@ class WalkTypeNameDef {
 			case Dollar(_):
 				name = stream.consumeToken();
 			case Sharp(_):
-				WalkSharp.walkSharp(stream, parent);
-				return parent.getFirstChild();
+				WalkSharp.walkSharp(stream, parent, WalkStatement.walkStatement);
+				if (!stream.hasMore()) return parent.getFirstChild();
+				switch (stream.token()) {
+					case Const(_):
+						name = stream.consumeConst();
+					default:
+						return parent.getFirstChild();
+				}
 			default:
 				name = stream.consumeToken();
 		}
