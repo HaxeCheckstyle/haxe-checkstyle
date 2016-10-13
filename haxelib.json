@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "fix for #296, added SuppressWarnings for SimplifyBooleanExpression check",
-	"version": "2.1.5",
+	"releasenote": "bug fixes",
+	"version": "2.1.6",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
