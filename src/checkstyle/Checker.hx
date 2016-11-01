@@ -282,10 +282,11 @@ class Checker {
 		var cls = file.name.substring(0, file.name.indexOf(".hx"));
 		if (excludesForCheck.contains(cls)) return true;
 
-		cls = cls.replace("/", ":");
+		var slashes:EReg = ~/[\/\\]/g;
+		cls = slashes.replace(cls, ":");
 		for (exclude in excludesForCheck) {
-			var regStr:String = exclude + ":.*?" + cls.substring(cls.lastIndexOf(":") + 1, cls.length) + "$";
-			var r = new EReg(regStr.replace("/", ":"), "i");
+			var regStr:String = slashes.replace(exclude, ":") + ":.*?" + cls.substring(cls.lastIndexOf(":") + 1, cls.length) + "$";
+			var r = new EReg(regStr, "i");
 			if (r.match(cls)) return true;
 		}
 		return false;
