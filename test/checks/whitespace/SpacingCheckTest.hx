@@ -52,14 +52,30 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 		assertNoMsg(check, TEST5A);
 	}
 
-	public function testSwitch() {
+	public function testSwitchShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST6A, 'No space between "switch" and "("');
 		assertNoMsg(new SpacingCheck(), TEST6B);
 	}
 
-	public function testCatch() {
+	public function testSwitchShouldNotContainSpace() {
+		var check = new SpacingCheck();
+		check.spaceSwitchCase = Directive.SHOULD_NOT;
+
+		assertMsg(check, TEST6B, 'Space between "switch" and "("');
+		assertNoMsg(check, TEST6A);
+	}
+
+	public function testCatchShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST7A, 'No space between "catch" and "("');
 		assertNoMsg(new SpacingCheck(), TEST7B);
+	}
+
+	public function testCatchShouldNotContainSpace() {
+		var check = new SpacingCheck();
+		check.spaceCatch = Directive.SHOULD_NOT;
+
+		assertMsg(check, TEST7B, 'Space between "catch" and "("');
+		assertNoMsg(check, TEST7A);
 	}
 }
 

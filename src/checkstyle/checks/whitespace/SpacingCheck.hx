@@ -16,8 +16,8 @@ class SpacingCheck extends Check {
 	public var spaceIfCondition:Directive;
 	public var spaceForLoop:Directive;
 	public var spaceWhileLoop:Directive;
-	public var spaceSwitchCase:Bool;
-	public var spaceCatch:Bool;
+	public var spaceSwitchCase:Directive;
+	public var spaceCatch:Directive;
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -27,8 +27,8 @@ class SpacingCheck extends Check {
 		spaceIfCondition = SHOULD;
 		spaceForLoop = SHOULD;
 		spaceWhileLoop = SHOULD;
-		spaceSwitchCase = true;
-		spaceCatch = true;
+		spaceSwitchCase = SHOULD;
+		spaceCatch = SHOULD;
 		ignoreRangeOperator = true;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -68,12 +68,12 @@ class SpacingCheck extends Check {
 					checkSpaceBetweenExpressions("for", e, it, spaceForLoop);
 				case EWhile(econd, _, true):
 					checkSpaceBetweenExpressions("while", e, econd, spaceWhileLoop);
-				case ESwitch(eswitch, _, _) if (spaceSwitchCase):
-					checkSpaceBetweenManually("switch", lastExpr, eswitch);
-				case ETry(etry, catches) if (spaceCatch):
+				case ESwitch(eswitch, _, _):
+					checkSpaceBetweenManually("switch", lastExpr, eswitch, spaceSwitchCase);
+				case ETry(etry, catches):
 					var exprBeforeCatch = lastExpr;
 					for (ctch in catches) {
-						checkSpaceBetweenManually("catch", exprBeforeCatch, ctch.expr);
+						checkSpaceBetweenManually("catch", exprBeforeCatch, ctch.expr, spaceCatch);
 						exprBeforeCatch = ctch.expr;
 					}
 				default:
@@ -99,7 +99,7 @@ class SpacingCheck extends Check {
 		return (new Printer()).printUnop(uo);
 	}
 
-	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr, directive:Directive = SHOULD) {
+	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr, directive:Directive) {
 		switch (directive) {
 			case ANY:
 			case SHOULD_NOT:
@@ -113,12 +113,21 @@ class SpacingCheck extends Check {
 		}
 	}
 
-	function checkSpaceBetweenManually(name:String, before:Expr, check:Expr) {
+	function checkSpaceBetweenManually(name:String, before:Expr, check:Expr, directive:Directive) {
 		var prevExprUntilChecked = checker.file.content.substring(before.pos.min, check.pos.min + 1);
 		var checkPos = prevExprUntilChecked.lastIndexOf('$name(');
-		if (checkPos > -1) {
-			var fileCheckPos = before.pos.min + checkPos;
-			logRange('No space between "$name" and "("', fileCheckPos, fileCheckPos + '$name('.length);
+		var fileCheckPos = before.pos.min + checkPos;
+
+		switch (directive) {
+			case ANY:
+			case SHOULD_NOT:
+				if (checkPos < 0) {
+					logRange('Space between "$name" and "("', fileCheckPos, fileCheckPos + '$name ('.length);
+				}
+			case SHOULD:
+				if (checkPos > -1) {
+					logRange('No space between "$name" and "("', fileCheckPos, fileCheckPos + '$name('.length);
+				}
 		}
 	}
 }

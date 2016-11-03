@@ -447,8 +447,8 @@
 				"spaceForLoop": "should",
 				"ignoreRangeOperator": true,
 				"spaceWhileLoop": "should",
-				"spaceCatch": true,
-				"spaceSwitchCase": true,
+				"spaceCatch": "should",
+				"spaceSwitchCase": "should",
 				"noSpaceAroundUnop": true
 			},
 			"type": "Spacing"
