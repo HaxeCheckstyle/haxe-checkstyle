@@ -18,3 +18,5 @@ target/
 check-style-report.json
 check-style-report.xml
 coverage.json
+
+display.hxml
