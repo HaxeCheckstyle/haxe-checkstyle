@@ -31,7 +31,7 @@ class Check {
 		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
-	public function configureProperty(name:String, value:Any) {
+	public function configureProperty(name:String, value:Dynamic) {
 		Reflect.setField(this, name, value);
 	}
 

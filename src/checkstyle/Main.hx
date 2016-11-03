@@ -188,7 +188,7 @@ class Main {
 			catch (e:Dynamic) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
 				message += (Std.is(e, Error) ? (e:Error).message : Std.string(message));
-				failWith(e.message);
+				failWith(message);
 			}
 		}
 		if (defaultSeverity != null && !props.contains("severity")) check.severity = defaultSeverity;

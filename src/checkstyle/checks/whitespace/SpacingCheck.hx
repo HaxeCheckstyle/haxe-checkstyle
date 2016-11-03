@@ -6,6 +6,7 @@ import haxe.macro.Expr;
 import haxe.macro.Printer;
 import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
+import checkstyle.checks.Directive;
 
 @name("Spacing")
 @desc("Spacing check on if, for, while, switch, try statements and around operators.")
@@ -33,12 +34,12 @@ class SpacingCheck extends Check {
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
-	override public function configureProperty(name:String, value:Any) {
+	override public function configureProperty(name:String, value:Dynamic) {
 		var currentValue = Reflect.field(this, name);
 
 		switch (Type.typeof(currentValue)) {
-			case ValueType.TClass(String):
-				Reflect.setField(this, name, (value:Directive));
+			case ValueType.TEnum(Directive):
+				Reflect.setField(this, name, DirectiveTools.fromDynamic(value));
 			case _:
 				super.configureProperty(name, value);
 		}
