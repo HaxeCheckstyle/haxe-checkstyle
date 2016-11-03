@@ -1,5 +1,6 @@
 package checkstyle.checks.whitespace;
 
+import Type.ValueType;
 import checkstyle.utils.ExprUtils;
 import haxe.macro.Expr;
 import haxe.macro.Printer;
@@ -12,9 +13,9 @@ class SpacingCheck extends Check {
 
 	public var spaceAroundBinop:Bool;
 	public var noSpaceAroundUnop:Bool;
-	public var spaceIfCondition:Bool;
-	public var spaceForLoop:Bool;
-	public var spaceWhileLoop:Bool;
+	public var spaceIfCondition:Directive;
+	public var spaceForLoop:Directive;
+	public var spaceWhileLoop:Directive;
 	public var spaceSwitchCase:Bool;
 	public var spaceCatch:Bool;
 	public var ignoreRangeOperator:Bool;
@@ -23,13 +24,24 @@ class SpacingCheck extends Check {
 		super(AST);
 		spaceAroundBinop = true;
 		noSpaceAroundUnop = true;
-		spaceIfCondition = true;
-		spaceForLoop = true;
-		spaceWhileLoop = true;
+		spaceIfCondition = SHOULD;
+		spaceForLoop = SHOULD;
+		spaceWhileLoop = SHOULD;
 		spaceSwitchCase = true;
 		spaceCatch = true;
 		ignoreRangeOperator = true;
 		categories = [Category.STYLE, Category.CLARITY];
+	}
+
+	override public function configureProperty(name:String, value:Any) {
+		var currentValue = Reflect.field(this, name);
+
+		switch (Type.typeof(currentValue)) {
+			case ValueType.TClass(String):
+				Reflect.setField(this, name, (value:Directive));
+			case _:
+				super.configureProperty(name, value);
+		}
 	}
 
 	override function actualRun() {
@@ -50,12 +62,12 @@ class SpacingCheck extends Check {
 					if (post) dist = e.pos.max - e2.pos.max;
 					else dist = e2.pos.min - e.pos.min;
 					if (dist > unopSize(uo)) logPos('Space around "${unopString(uo)}"', e.pos);
-				case EIf(econd, _, _) if (spaceIfCondition):
-					checkSpaceBetweenExpressions("if", e, econd);
-				case EFor(it, _) if (spaceForLoop):
-					checkSpaceBetweenExpressions("for", e, it);
-				case EWhile(econd, _, true) if (spaceWhileLoop):
-					checkSpaceBetweenExpressions("while", e, econd);
+				case EIf(econd, _, _):
+					checkSpaceBetweenExpressions("if", e, econd, spaceIfCondition);
+				case EFor(it, _):
+					checkSpaceBetweenExpressions("for", e, it, spaceForLoop);
+				case EWhile(econd, _, true):
+					checkSpaceBetweenExpressions("while", e, econd, spaceWhileLoop);
 				case ESwitch(eswitch, _, _) if (spaceSwitchCase):
 					checkSpaceBetweenManually("switch", lastExpr, eswitch);
 				case ETry(etry, catches) if (spaceCatch):
@@ -87,9 +99,17 @@ class SpacingCheck extends Check {
 		return (new Printer()).printUnop(uo);
 	}
 
-	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr) {
-		if (e2.pos.min - e1.pos.min < '$name ('.length) {
-			logRange('No space between "$name" and "("', e1.pos.max, e2.pos.min);
+	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr, directive:Directive = SHOULD) {
+		switch (directive) {
+			case ANY:
+			case SHOULD_NOT:
+				if (e2.pos.min - e1.pos.min > '$name('.length) {
+					logRange('Space between "$name" and "("', e1.pos.max, e2.pos.min);
+				}
+			case SHOULD:
+				if (e2.pos.min - e1.pos.min < '$name ('.length) {
+					logRange('No space between "$name" and "("', e1.pos.max, e2.pos.min);
+				}
 		}
 	}
 

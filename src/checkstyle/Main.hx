@@ -11,6 +11,7 @@ import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
+import checkstyle.errors.Error;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;
@@ -181,7 +182,14 @@ class Main {
 			if (!checkFields.contains(prop)) {
 				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
 			}
-			Reflect.setField(check, prop, val);
+			try {
+				check.configureProperty(prop, val);
+			}
+			catch (e:Dynamic) {
+				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
+				message += (Std.is(e, Error) ? (e:Error).message : Std.string(message));
+				failWith(e.message);
+			}
 		}
 		if (defaultSeverity != null && !props.contains("severity")) check.severity = defaultSeverity;
 	}

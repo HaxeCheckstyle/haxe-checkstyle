@@ -1,12 +1,21 @@
 package checks.whitespace;
 
 import checkstyle.checks.whitespace.SpacingCheck;
+import checkstyle.checks.Directive;
 
 class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 
-	public function testIf() {
+	public function testIfShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST1A, 'No space between "if" and "("');
 		assertNoMsg(new SpacingCheck(), TEST1B);
+	}
+
+	public function testIfShouldNotContainSpace() {
+		var check = new SpacingCheck();
+		check.spaceIfCondition = Directive.SHOULD_NOT;
+
+		assertMsg(check, TEST1B, 'Space between "if" and "("');
+		assertNoMsg(check, TEST1A);
 	}
 
 	public function testBinaryOperator() {
@@ -17,14 +26,30 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 		assertMsg(new SpacingCheck(), TEST3, 'Space around "++"');
 	}
 
-	public function testFor() {
+	public function testForShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST4A, 'No space between "for" and "("');
 		assertNoMsg(new SpacingCheck(), TEST4B);
 	}
 
-	public function testWhile() {
+	public function testForShouldNotContainSpace() {
+		var check = new SpacingCheck();
+		check.spaceForLoop = Directive.SHOULD_NOT;
+
+		assertMsg(check, TEST4B, 'Space between "for" and "("');
+		assertNoMsg(check, TEST4A);
+	}
+
+	public function testWhileShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST5A, 'No space between "while" and "("');
 		assertNoMsg(new SpacingCheck(), TEST5B);
+	}
+
+	public function testWhileShouldNotContainSpace() {
+		var check = new SpacingCheck();
+		check.spaceWhileLoop = Directive.SHOULD_NOT;
+
+		assertMsg(check, TEST5B, 'Space between "while" and "("');
+		assertNoMsg(check, TEST5A);
 	}
 
 	public function testSwitch() {
@@ -53,6 +78,7 @@ abstract SpacingCheckTests(String) to String {
 			if (true) {}
 		}
 	}";
+
 
 	var TEST2 =
 	"class Test {
