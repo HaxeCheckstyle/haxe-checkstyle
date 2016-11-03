@@ -187,7 +187,7 @@ class Main {
 			}
 			catch (e:Dynamic) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
-				message += (Std.is(e, Error) ? (e:Error).message : Std.string(message));
+				message += (Std.is(e, Error) ? (e:Error).message : Std.string(e));
 				failWith(message);
 			}
 		}
