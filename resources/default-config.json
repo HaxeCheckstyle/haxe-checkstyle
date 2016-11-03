@@ -35,6 +35,13 @@
 		},
 		{
 			"props": {
+				"policy": "aligned",
+				"allowSingleline": true
+			},
+			"type": "ConditionalCompilation"
+		},
+		{
+			"props": {
 				"ignoreExtern": true,
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$",
 				"tokens": []
