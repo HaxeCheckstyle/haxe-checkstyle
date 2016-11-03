@@ -105,7 +105,7 @@ class SpacingCheck extends Check {
 			case ANY:
 			case SHOULD_NOT:
 				if (e2.pos.min - e1.pos.min > '$name('.length) {
-					logRange('Space between "$name" and "("', e1.pos.max, e2.pos.min);
+					logRange('Space between "$name" and "("', e2.pos.max, e2.pos.min);
 				}
 			case SHOULD:
 				if (e2.pos.min - e1.pos.min < '$name ('.length) {
@@ -123,7 +123,7 @@ class SpacingCheck extends Check {
 			case ANY:
 			case SHOULD_NOT:
 				if (checkPos < 0) {
-					logRange('Space between "$name" and "("', fileCheckPos, fileCheckPos + '$name ('.length);
+					logRange('Space between "$name" and "("', check.pos.min, check.pos.max);
 				}
 			case SHOULD:
 				if (checkPos > -1) {
