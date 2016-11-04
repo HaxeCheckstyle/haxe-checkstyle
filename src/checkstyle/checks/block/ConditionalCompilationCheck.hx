@@ -103,7 +103,6 @@ class ConditionalCompilationCheck extends Check {
 	}
 
 	function checkIndentation(tok:TokenTree, linePos:LinePos):Bool {
-
 		var prevLen:Int = -1;
 		var nextLen:Int = -1;
 
