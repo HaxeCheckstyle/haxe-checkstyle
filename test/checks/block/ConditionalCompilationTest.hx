@@ -80,6 +80,7 @@ abstract ConditionalCompilationTests(String) to String {
 	var ISSUE_79 = "
 	class Test {
 		function foo() {
+
 			#if true
 			if (true) {
 			#else

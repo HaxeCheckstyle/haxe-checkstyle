@@ -31,7 +31,6 @@ class ConditionalCompilationCheck extends Check {
 	}
 
 	function checkSingleLine(tok:TokenTree, line:Int):Bool {
-
 		var endTok:TokenTree = null;
 
 		for (child in tok.childs) {
