@@ -20,6 +20,9 @@
 			"type": "CatchParameterName"
 		},
 		{
+			"type": "ConditionalCompilation"
+		},
+		{
 			"props": {
 				"ignoreExtern": true,
 				"format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$"
