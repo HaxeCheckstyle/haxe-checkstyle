@@ -5,7 +5,6 @@ import checkstyle.checks.size.LineLengthCheck;
 class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 
 	public function testDefaultLineLength() {
-		var check = new LineLengthCheck();
 		assertMsg(new LineLengthCheck(), TEST1, "Line is longer than 160 characters (found 178)");
 	}
 

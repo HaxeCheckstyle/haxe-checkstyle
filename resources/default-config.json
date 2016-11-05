@@ -514,6 +514,10 @@
 		},
 		{
 			"props": {},
+			"type": "UnusedLocalVar"
+		},
+		{
+			"props": {},
 			"type": "VariableInitialisation"
 		},
 		{
