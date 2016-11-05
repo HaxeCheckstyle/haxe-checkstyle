@@ -65,10 +65,12 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			var index:Int;
 			var index2:Array<Int>;
 			var index3:String;
+			var index4:String;
 
 			trace ('$index');
 			trace ('${index2.toString()}');
 			trace ('${Std.parseInt(index3)}');
+			trace ('${index4}');
 		}
 	}";
 
@@ -81,6 +83,7 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			trace ('$index2');
 			trace ('${index2.toString()}');
 			trace ('${Std.parseInt(index3)}');
+			trace ('${index4}');
 		}
 	}";
 }

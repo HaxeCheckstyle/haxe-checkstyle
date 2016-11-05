@@ -90,8 +90,8 @@ class UnusedLocalVarCheck extends Check {
 			return FOUND_GO_DEEPER;
 		}
 
-		// '${name.doSomething()} or ${doSomething(name)}
-		format = "\\$\\{(|.*[^_0-9a-zA-Z])" + name + "([^_0-9a-zA-Z].*)\\}";
+		// '${name.doSomething()} or ${doSomething(name)} or ${name}
+		format = "\\$\\{(|.*[^_0-9a-zA-Z])" + name + "([^_0-9a-zA-Z].*|)\\}";
 		r = new EReg(format, "");
 		if (r.match(s)) {
 			return FOUND_GO_DEEPER;
