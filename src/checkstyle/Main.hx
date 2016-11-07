@@ -286,8 +286,9 @@ class Main {
 		addAllChecks();
 		var propsNotAllowed:Array<String> = [
 			"moduleName", "severity", "type", "categories",
-			"points", "desc", "quotesRE", "multilineStartRE",
-			"escapeRE", "multilineStringStart"
+			"points", "desc", "currentState", "skipOverStringStart",
+			"commentStartRE", "commentBlockEndRE", "stringStartRE",
+			"stringInterpolatedEndRE", "stringLiteralEndRE"
 		];
 		var config = getEmptyConfig();
 		for (check in checker.checks) {
