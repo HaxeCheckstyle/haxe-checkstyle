@@ -126,7 +126,7 @@ abstract EmptyLinesCheckTests(String) to String {
 	var TEST4 =
 	"class Test {
 
-		// comments
+		// comments (with text before)
 
 		public function new() {
 			var b:Int;
@@ -136,7 +136,7 @@ abstract EmptyLinesCheckTests(String) to String {
 	var TEST5 =
 	"class Test {
 
-		// comments
+// comments (with no text before)
 
 		var a:Int;
 	}";
