@@ -463,6 +463,9 @@
 			"type": "UnusedImport"
 		},
 		{
+			"type": "UnusedLocalVar"
+		},
+		{
 			"type": "VariableInitialisation"
 		},
 		{

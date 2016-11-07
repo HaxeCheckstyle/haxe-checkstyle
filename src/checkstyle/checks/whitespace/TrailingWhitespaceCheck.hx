@@ -15,8 +15,12 @@ class TrailingWhitespaceCheck extends LineCheckBase {
 		var re = ~/\s+$/;
 		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
-			if (isMultineString(line)) continue;
-			if (re.match(line)) log("Trailing whitespace", i + 1, line.length);
+			var ranges = getRanges(line);
+			var endTextRange = ranges.filter(function(r):Bool return r.type == TEXT && r.end == line.length)[0];
+			if (endTextRange == null) continue;
+			var endText = line.substring(endTextRange.start, endTextRange.end);
+
+			if (re.match(endText)) log("Trailing whitespace", i + 1, line.length);
 		}
 	}
 }

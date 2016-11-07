@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added ConditionalCompilationCheck",
-	"version": "2.1.8",
+	"releasenote": "bug fixes and improvements to spacing checks",
+	"version": "2.1.9",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 

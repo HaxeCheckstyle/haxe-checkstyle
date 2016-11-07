@@ -1,9 +1,10 @@
 package checkstyle.checks.whitespace;
 
-import Type.ValueType;
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
 import haxe.macro.Printer;
+import checkstyle.utils.ExprUtils;
+import checkstyle.token.TokenTree;
+import Type.ValueType;
+import haxe.macro.Expr;
 import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
 import checkstyle.checks.Directive;
@@ -22,21 +23,20 @@ class SpacingCheck extends Check {
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
-		super(AST);
-		spaceAroundBinop = true;
-		noSpaceAroundUnop = true;
+		super(TOKEN);
 		spaceIfCondition = SHOULD;
 		spaceForLoop = SHOULD;
 		spaceWhileLoop = SHOULD;
 		spaceSwitchCase = SHOULD;
 		spaceCatch = SHOULD;
+		spaceAroundBinop = true;
+		noSpaceAroundUnop = true;
 		ignoreRangeOperator = true;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
 	override public function configureProperty(name:String, value:Dynamic) {
 		var currentValue = Reflect.field(this, name);
-
 		switch (Type.typeof(currentValue)) {
 			case ValueType.TEnum(Directive):
 				Reflect.setField(this, name, DirectiveTools.fromDynamic(value));
@@ -46,6 +46,32 @@ class SpacingCheck extends Check {
 	}
 
 	override function actualRun() {
+		var root:TokenTree = checker.getTokenTree();
+		var acceptableTokens:Array<TokenTree> = root.filter([
+			Kwd(KwdIf),
+			Kwd(KwdFor),
+			Kwd(KwdWhile),
+			Kwd(KwdSwitch),
+			Kwd(KwdCatch)
+		], ALL);
+
+		for (token in acceptableTokens) {
+			var firstChild:TokenTree = token.getFirstChild();
+			switch (token.tok) {
+				case Kwd(KwdIf):
+					checkSpaceBetweenExpressions(token.toString(), token, firstChild, spaceIfCondition);
+				case Kwd(KwdFor):
+					checkSpaceBetweenExpressions(token.toString(), token, firstChild, spaceForLoop);
+				case Kwd(KwdWhile):
+					checkSpaceBetweenExpressions(token.toString(), token, firstChild, spaceWhileLoop);
+				case Kwd(KwdSwitch):
+					checkSpaceBetweenExpressions(token.toString(), token, firstChild, spaceSwitchCase);
+				case Kwd(KwdCatch):
+					checkSpaceBetweenExpressions(token.toString(), token, firstChild, spaceCatch);
+				case _:
+			}
+		}
+
 		var lastExpr = null;
 
 		ExprUtils.walkFile(checker.ast, function(e) {
@@ -63,25 +89,21 @@ class SpacingCheck extends Check {
 					if (post) dist = e.pos.max - e2.pos.max;
 					else dist = e2.pos.min - e.pos.min;
 					if (dist > unopSize(uo)) logPos('Space around "${unopString(uo)}"', e.pos);
-				case EIf(econd, _, _):
-					checkSpaceBetweenExpressions("if", e, econd, spaceIfCondition);
-				case EFor(it, _):
-					checkSpaceBetweenExpressions("for", e, it, spaceForLoop);
-				case EWhile(econd, _, true):
-					checkSpaceBetweenExpressions("while", e, econd, spaceWhileLoop);
-				case ESwitch(eswitch, _, _):
-					checkSpaceBetweenManually("switch", lastExpr, eswitch, spaceSwitchCase);
-				case ETry(etry, catches):
-					var exprBeforeCatch = lastExpr;
-					for (ctch in catches) {
-						checkSpaceBetweenManually("catch", exprBeforeCatch, ctch.expr, spaceCatch);
-						exprBeforeCatch = ctch.expr;
-					}
 				default:
 			}
 
 			lastExpr = e;
 		});
+	}
+
+	function checkSpaceBetweenExpressions(name:String, e1:TokenTree, e2:TokenTree, directive:Directive) {
+		switch (directive) {
+			case ANY:
+			case SHOULD_NOT:
+				if (e2.pos.max - e1.pos.max > 1) logRange('Space between "$name" and "("', e2.pos.max, e2.pos.min);
+			case SHOULD:
+				if (e2.pos.max - e1.pos.max == 1) logRange('No space between "$name" and "("', e1.pos.max, e2.pos.min);
+		}
 	}
 
 	function binopSize(bo:Binop):Int {
@@ -98,37 +120,5 @@ class SpacingCheck extends Check {
 
 	function unopString(uo:Unop):String {
 		return (new Printer()).printUnop(uo);
-	}
-
-	function checkSpaceBetweenExpressions(name:String, e1:Expr, e2:Expr, directive:Directive) {
-		switch (directive) {
-			case ANY:
-			case SHOULD_NOT:
-				if (e2.pos.min - e1.pos.min > '$name('.length) {
-					logRange('Space between "$name" and "("', e2.pos.max, e2.pos.min);
-				}
-			case SHOULD:
-				if (e2.pos.min - e1.pos.min < '$name ('.length) {
-					logRange('No space between "$name" and "("', e1.pos.max, e2.pos.min);
-				}
-		}
-	}
-
-	function checkSpaceBetweenManually(name:String, before:Expr, check:Expr, directive:Directive) {
-		var prevExprUntilChecked = checker.file.content.substring(before.pos.min, check.pos.min + 1);
-		var checkPos = prevExprUntilChecked.lastIndexOf('$name(');
-		var fileCheckPos = before.pos.min + checkPos;
-
-		switch (directive) {
-			case ANY:
-			case SHOULD_NOT:
-				if (checkPos < 0) {
-					logRange('Space between "$name" and "("', check.pos.min, check.pos.max);
-				}
-			case SHOULD:
-				if (checkPos > -1) {
-					logRange('No space between "$name" and "("', fileCheckPos, fileCheckPos + '$name('.length);
-				}
-		}
 	}
 }

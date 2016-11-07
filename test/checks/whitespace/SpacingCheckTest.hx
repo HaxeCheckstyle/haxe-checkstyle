@@ -77,6 +77,14 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 		assertMsg(check, TEST7B, 'Space between "catch" and "("');
 		assertNoMsg(check, TEST7A);
 	}
+
+	public function testMultilineIf() {
+		var check = new SpacingCheck();
+		assertMsg(check, TEST8, 'No space between "if" and "("');
+
+		check.spaceIfCondition = Directive.SHOULD_NOT;
+		assertMsg(check, TEST8, 'Space between "if" and "("');
+	}
 }
 
 @:enum
@@ -94,7 +102,6 @@ abstract SpacingCheckTests(String) to String {
 			if (true) {}
 		}
 	}";
-
 
 	var TEST2 =
 	"class Test {
@@ -175,6 +182,23 @@ abstract SpacingCheckTests(String) to String {
 		public function test() {
 			try {}
 			catch (e:Dynamic) {}
+		}
+	}";
+
+	var TEST8 =
+	"class Test {
+		public function test() {
+			if(
+				true
+				&& true
+				|| false
+			) {}
+
+			if (
+				true
+				&& true
+				|| false
+			) {}
 		}
 	}";
 }
