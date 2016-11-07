@@ -21,9 +21,13 @@ class IndentationCharacterCheck extends LineCheckBase {
 		var re = (character == TAB) ? ~/^\t*(\S.*| \*.*)?$/ : ~/^ *(\S.*)?$/;
 		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
+			var ranges = getRanges(line);
+			var startTextRange = ranges.filter(function(r):Bool return r.type == TEXT && r.start == 0)[0];
+			if (startTextRange == null) continue;
+			var startText = line.substring(startTextRange.start, startTextRange.end);
+
 			if (ignoreRE.match(line) || isLineSuppressed(i)) continue;
-			if (isMultineString(line)) continue;
-			if (line.length > 0 && !re.match(line)) log('Wrong indentation character (should be ${character})', i + 1, 0);
+			if (!re.match(startText)) log('Wrong indentation character (should be ${character})', i + 1, 0);
 		}
 	}
 }

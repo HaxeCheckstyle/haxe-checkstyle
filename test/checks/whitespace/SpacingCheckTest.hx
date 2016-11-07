@@ -103,7 +103,6 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-
 	var TEST2 =
 	"class Test {
 		public function test() {
