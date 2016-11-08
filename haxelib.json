@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "bug fixes and improvements to spacing checks",
-	"version": "2.1.9",
+	"releasenote": "bug fixes",
+	"version": "2.1.10",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
