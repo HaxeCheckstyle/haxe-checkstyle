@@ -14,7 +14,7 @@ install:
   - haxelib git hxargs https://github.com/Simn/hxargs
   - haxelib install mcover 2.1.1
 script:
-  - haxe build.hxml
+  - haxe buildAll.hxml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

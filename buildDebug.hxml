@@ -1,3 +1,4 @@
 buildGlobal.hxml
 -main checkstyle.Main
--neko run.n
+-debug
+-neko runD.n
