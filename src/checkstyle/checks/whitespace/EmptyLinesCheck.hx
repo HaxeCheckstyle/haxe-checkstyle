@@ -38,7 +38,13 @@ class EmptyLinesCheck extends LineCheckBase {
 		for (i in 0...checker.lines.length) {
 			var line = checker.lines[i];
 			var ranges = getRanges(line);
-			if (ranges.length == 1 && ranges[0].type != TEXT) continue;
+			if (ranges.length == 1) {
+				switch (ranges[0].type) {
+					case TEXT:
+					case COMMENT(isBlock): if (isBlock) continue;
+					case STRING(isInterpolated): continue;
+				}
+			}
 
 			if (~/^\s*$/.match(line)) {
 				if (!inGroup) {
