@@ -75,7 +75,7 @@ abstract EmptyLinesCheckTests(String) to String {
 
 		var a:Int;
 
-		var b:String = '\\\\';
+		var b:String = '\\\\' + \"\\\\\";
 
 
 	}";
