@@ -40,6 +40,7 @@ class MultipleStringLiteralsCheck extends Check {
 			if (!filterLiteral(literalToken.parent)) continue;
 			// skip string object keys issue #116
 			if (literalToken.parent.tok.match(BrOpen)) continue;
+			if (isPosSuppressed(literalToken.pos)) continue;
 
 			switch (literalToken.tok) {
 				case Const(CString(s)):
@@ -47,8 +48,7 @@ class MultipleStringLiteralsCheck extends Check {
 					if (ignoreRE.match(s)) continue;
 					if (s.length < minLength) continue;
 					if (checkLiteralCount(s, allLiterals)) {
-						if (isPosSuppressed(literalToken.pos)) continue;
-						logPos('String "$s" appears ${s.length} times in the file', literalToken.pos);
+						logPos('String "$s" appears ${allLiterals.get(s)} times in the file', literalToken.pos);
 					}
 				default:
 			}
