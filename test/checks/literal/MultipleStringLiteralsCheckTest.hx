@@ -17,7 +17,8 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		var check = new MultipleStringLiteralsCheck();
 		assertMsg(check, THREE_XML, 'String "xml" appears 3 times in the file');
 		assertMsg(check, THREE_XML_SWITCH, 'String "xml" appears 3 times in the file');
-		assertMsg(check, OBJECT_FIELD_VALUES_ISSUE_116, 'String "duplicate" appears 9 times in the file');
+		assertMsg(check, OBJECT_FIELD_VALUES_ISSUE_116, 'String "duplicate" appears 4 times in the file');
+		assertMsg(check, EXAGGERATION_ISSUE_318, 'String "user.name" appears 3 times in the file');
 	}
 
 	public function testIgnoreRegEx() {
@@ -156,6 +157,16 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 		function foo() {
 			trace('$$is i');
 			trace('$$is i');
+		}
+	}";
+
+	var EXAGGERATION_ISSUE_318 = "
+	class Test {
+		function foo() {
+			name = new Value<String>(System.storage.get('user.name'), function(to, _) System.storage.set('user.name', to));
+		}
+		function clear() {
+			System.storage.remove('user.name');
 		}
 	}";
 }
