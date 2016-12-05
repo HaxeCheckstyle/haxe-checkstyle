@@ -34,7 +34,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		assertNoMsg(check, INTERPOLATION_ISSUE_109);
 		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION_ISSUE_109, 'String "value $$$$is i" appears 2 times in the file');
-		assertMsg(check, NO_INTERPOLATION_AT_START_ISSUE_109, 'String "$$$$is i" appears 6 times in the file');
+		assertMsg(check, NO_INTERPOLATION_AT_START_ISSUE_109, 'String "$$$$is i" appears 2 times in the file');
 		#end
 	}
 }
