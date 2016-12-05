@@ -11,6 +11,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		assertNoMsg(check, SINGLE_CHARS);
 		assertNoMsg(check, THREE_SPACE);
 		assertNoMsg(check, OBJECT_FIELD_KEYS_ISSUE_116);
+		assertNoMsg(check, SUPPRESSION);
 	}
 
 	public function testMultipleStringLiterals() {
@@ -165,6 +166,17 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 		function foo() {
 			name = new Value<String>(System.storage.get('user.name'), function(to, _) System.storage.set('user.name', to));
 		}
+		function clear() {
+			System.storage.remove('user.name');
+		}
+	}";
+
+	var SUPPRESSION  = "
+	class Test {
+		function foo() {
+			name = new Value<String>(System.storage.get('user.name'), function(to, _) System.storage.set('user.name', to));
+		}
+		@SuppressWarnings('checkstyle:MultipleStringLiterals')
 		function clear() {
 			System.storage.remove('user.name');
 		}
