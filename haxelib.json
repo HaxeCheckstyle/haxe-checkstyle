@@ -17,7 +17,7 @@
 		"adireddy"
 	],
 	"releasenote": "bug fixes",
-	"version": "2.1.10",
+	"version": "2.1.11",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
