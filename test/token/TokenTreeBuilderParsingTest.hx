@@ -21,6 +21,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(ISSUE_252);
 		assertCodeParses(ISSUE_253);
 		assertCodeParses(ISSUE_256);
+		assertCodeParses(DOLLAR_TOKEN_AS_VAR_NAME);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -155,6 +156,13 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			#end
 
 			}
+		}
+	}";
+
+	var DOLLAR_TOKEN_AS_VAR_NAME = "
+	class Test {
+		function foo() {
+			macro var $componentVarName = new $typePath();
 		}
 	}";
 

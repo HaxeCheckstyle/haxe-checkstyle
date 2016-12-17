@@ -35,6 +35,7 @@ class TokenStream {
 
 	public function consumeConstIdent():TokenTree {
 		switch (token()) {
+			case Dollar(_): return consumeToken();
 			case Const(CIdent(_)): return consumeToken();
 			default: error('bad token ${token()} != Const(CIdent(_))');
 		}
