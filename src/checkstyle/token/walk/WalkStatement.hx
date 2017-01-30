@@ -97,7 +97,14 @@ class WalkStatement {
 			case Kwd(KwdVar):
 				WalkVar.walkVar(stream, parent, []);
 			case Kwd(KwdNew):
-				WalkNew.walkNew(stream, parent);
+				if (parent.is(Dot)) {
+					var newChild:TokenTree = stream.consumeToken();
+					parent.addChild(newChild);
+					WalkStatement.walkStatementContinue(stream, newChild);
+				}
+				else {
+					WalkNew.walkNew(stream, parent);
+				}
 			case Kwd(KwdFor):
 				WalkFor.walkFor(stream, parent);
 			case Kwd(KwdFunction):
