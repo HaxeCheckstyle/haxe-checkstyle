@@ -1,8 +1,4 @@
--cp resources
--cp src
--lib haxeparser
--lib compiletime
--lib hxargs
+buildGlobal.hxml
 -lib hxtelemetry
 
 --each

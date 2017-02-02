@@ -124,7 +124,7 @@ class Main {
 
 		for (checkConf in config.checks) {
 			var check = createCheck(checkConf);
-			setCheckProperties(check, checkConf, config.defaultSeverity);
+			if (check != null) setCheckProperties(check, checkConf, config.defaultSeverity);
 		}
 
 		if (config.baseDefines != null) {
@@ -167,7 +167,10 @@ class Main {
 
 	function createCheck(checkConf:CheckConfig):Check {
 		var check:Check = info.build(checkConf.type);
-		if (check == null) failWith('Unknown check \'${checkConf.type}\'');
+		if (check == null) {
+			Sys.stdout().writeString('Unknown check \'${checkConf.type}\'');
+			return null;
+		}
 		checker.addCheck(check);
 		return check;
 	}

@@ -8,7 +8,9 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 	static inline var MSG_EQUALS_BEFORE:String = 'OperatorWhitespace policy "before" violated by "="';
 	static inline var MSG_EQUALS_AFTER:String = 'OperatorWhitespace policy "after" violated by "="';
 	static inline var MSG_UNARY_NONE:String = 'OperatorWhitespace policy "none" violated by "++"';
+	static inline var MSG_UNARY_NONE_BITWISE:String = 'OperatorWhitespace policy "none" violated by "~"';
 	static inline var MSG_UNARY_INNER:String = 'OperatorWhitespace policy "inner" violated by "++"';
+	static inline var MSG_UNARY_INNER_BITWISE:String = 'OperatorWhitespace policy "inner" violated by "~"';
 	static inline var MSG_INTERVAL_NONE:String = 'OperatorWhitespace policy "none" violated by "..."';
 	static inline var MSG_INTERVAL_AROUND:String = 'OperatorWhitespace policy "around" violated by "..."';
 	static inline var MSG_FUNC_ARG_AROUND:String = 'OperatorWhitespace policy "around" violated by "->"';
@@ -36,6 +38,8 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, NEGATIVE_NUMS);
 		assertNoMsg(check, OPGT);
 		assertNoMsg(check, MACRO_TYPES);
+		assertNoMsg(check, MACRO_NOT);
+		assertNoMsg(check, BITWISE_NEG);
 	}
 
 	public function testIncorrectOperatorWhitespaceToken() {
@@ -89,10 +93,14 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 
 		assertNoMsg(check, UNARY_NO_WHITESPACE);
 		assertMsg(check, UNARY_INNER_WHITESPACE, MSG_UNARY_NONE);
+		assertNoMsg(check, BITWISE_NEG);
+		assertMsg(check, BITWISE_NEG_WRONG, MSG_UNARY_NONE_BITWISE);
 
 		check.unaryOpPolicy = INNER;
 		assertMsg(check, UNARY_NO_WHITESPACE, MSG_UNARY_INNER);
 		assertNoMsg(check, UNARY_INNER_WHITESPACE);
+		assertMsg(check, BITWISE_NEG, MSG_UNARY_INNER_BITWISE);
+		assertNoMsg(check, BITWISE_NEG_WRONG);
 	}
 
 	public function testInterval() {
@@ -459,6 +467,29 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			var ct = macro:String;
 			macro:Array<$ct>;
 			return macro $e + $e;
+		}
+	}";
+
+	var MACRO_NOT = "
+	#if !macro
+	@:autoBuild(some.BuildMacro.build())
+	#end
+	class Test {
+		function test() {
+		}
+	}";
+
+	var BITWISE_NEG = "
+	class Test {
+		function test() {
+			var test = ~test;
+		}
+	}";
+
+	var BITWISE_NEG_WRONG = "
+	class Test {
+		function test() {
+			var test = ~ test;
 		}
 	}";
 }

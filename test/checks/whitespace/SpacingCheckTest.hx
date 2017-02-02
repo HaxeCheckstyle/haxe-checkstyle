@@ -26,6 +26,14 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 		assertMsg(new SpacingCheck(), TEST3, 'Space around "++"');
 	}
 
+	public function testRangeOperator() {
+		var check = new SpacingCheck();
+		assertNoMsg(check, TEST4B);
+
+		check.ignoreRangeOperator = false;
+		assertMsg(check, TEST4B, 'No space around "..."');
+	}
+
 	public function testForShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST4A, 'No space between "for" and "("');
 		assertNoMsg(new SpacingCheck(), TEST4B);

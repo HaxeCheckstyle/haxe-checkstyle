@@ -11,7 +11,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	// =, +=, -=, *=, /=, <<=, >>=, >>>=, &=, |=, ^=
 	public var assignOpPolicy:WhitespacePolicy;
-	// ++, --, !
+	// ++, --, !, ~
 	public var unaryOpPolicy:WhitespaceUnaryPolicy;
 	// ?:
 	public var ternaryOpPolicy:WhitespacePolicy;
@@ -19,7 +19,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	public var arithmeticOpPolicy:WhitespacePolicy;
 	// ==, !=, <, <=, >, >=
 	public var compareOpPolicy:WhitespacePolicy;
-	// ~, &, |, ^, <<, >>, >>>
+	// &, |, ^, <<, >>, >>>
 	public var bitwiseOpPolicy:WhitespacePolicy;
 	// &&, ||
 	public var boolOpPolicy:WhitespacePolicy;
@@ -79,6 +79,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	function checkUnaryOps(root:TokenTree) {
 		if ((unaryOpPolicy == null) || (unaryOpPolicy == IGNORE)) return;
 		var tokens:Array<TokenTree> = root.filter([
+				Unop(OpNegBits),
 				Unop(OpNot),
 				Unop(OpIncrement),
 				Unop(OpDecrement)

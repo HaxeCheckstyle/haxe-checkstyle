@@ -13,8 +13,20 @@ module.exports = function (grunt) {
 		},
 
 		haxe: {
-			project: {
+			all: {
+				hxml: "buildAll.hxml"
+			},
+			build: {
 				hxml: "build.hxml"
+			},
+			test: {
+				hxml: "buildTest.hxml"
+			},
+			debug: {
+				hxml: "buildDebug.hxml"
+			},
+			telemetry: {
+				hxml: "buildTelemetry.hxml"
 			}
 		},
 
@@ -26,5 +38,5 @@ module.exports = function (grunt) {
 	grunt.loadNpmTasks("grunt-haxe");
 	grunt.loadNpmTasks("grunt-zip");
 	grunt.loadNpmTasks("grunt-shell");
-	grunt.registerTask("default", ["shell", "haxe"]);
+	grunt.registerTask("default", ["shell", "haxe:all"]);
 };

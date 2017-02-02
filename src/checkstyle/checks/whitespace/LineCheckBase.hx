@@ -18,8 +18,8 @@ class LineCheckBase extends Check {
 		commentStartRE = ~/\/([\/*])/;
 		commentBlockEndRE = ~/\*\//;
 		stringStartRE = ~/['"]/;
-		stringInterpolatedEndRE = ~/(?<!\\)'/;
-		stringLiteralEndRE = ~/(?<!\\)"/;
+		stringInterpolatedEndRE = ~/^(?:[^'\\]|\\\S)*'/;
+		stringLiteralEndRE = ~/^(?:[^"\\]|\\\S)*"/;
 	}
 
 	override public function run(checker:Checker):Array<CheckMessage> {
@@ -90,16 +90,11 @@ class LineCheckBase extends Check {
 
 	function handleStringState(line:String, ranges:Array<Range>, currentStart:Int, isInterpolated:Bool):Int {
 		var adjustedStart = currentStart + (skipOverInitialQuote ? 1 : 0);
-		skipOverInitialQuote = false; 
-		if (isInterpolated && stringInterpolatedEndRE.matchSub(line, adjustedStart)) {
-			var stringEnd = stringInterpolatedEndRE.matchedPos().pos + 1;
-			ranges.push({ type: currentState, start: currentStart, end: stringEnd });
-			
-			currentState = TEXT;
-			return stringEnd;
-		}
-		else if (!isInterpolated && stringLiteralEndRE.matchSub(line, adjustedStart)) {
-			var stringEnd = stringLiteralEndRE.matchedPos().pos + 1;
+		skipOverInitialQuote = false;
+		var re = isInterpolated ? stringInterpolatedEndRE : stringLiteralEndRE;
+		if (re.match(line.substring(adjustedStart))) {
+			var matchedPos = re.matchedPos();
+			var stringEnd = adjustedStart + matchedPos.pos + matchedPos.len;
 			ranges.push({ type: currentState, start: currentStart, end: stringEnd });
 			
 			currentState = TEXT;

@@ -64,6 +64,7 @@ class TokenTreeCheckUtils {
 		return switch (child.tok) {
 			case Const(_): true;
 			case POpen: true;
+			case Kwd(KwdMacro): true;
 			default: false;
 		}
 	}
