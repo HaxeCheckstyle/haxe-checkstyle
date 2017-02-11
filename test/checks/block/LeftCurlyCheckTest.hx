@@ -4,10 +4,10 @@ import checkstyle.checks.block.LeftCurlyCheck;
 
 class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 
-	static inline var MSG_EOL:String = "Left curly should be at EOL (only linebreak or comment after curly)";
+	static inline var MSG_EOL:String = "Left curly should be at EOL (only line break or comment after curly)";
 	static inline var MSG_NL:String = "Left curly should be on new line (only whitespace before curly)";
-	static inline var MSG_NL_SPLIT:String = "Left curly should be on new line (previous expression is split over muliple lines)";
-	static inline var MSG_NLOW:String = "Left curly should be at EOL (previous expression is not split over muliple lines)";
+	static inline var MSG_NL_SPLIT:String = "Left curly should be on new line (previous expression is split over multiple lines)";
+	static inline var MSG_NLOW:String = "Left curly should be at EOL (previous expression is not split over multiple lines)";
 
 	public function testCorrectBraces() {
 		var check = new LeftCurlyCheck();

@@ -4,7 +4,6 @@ import haxe.macro.Printer;
 import checkstyle.utils.ExprUtils;
 import checkstyle.token.TokenTree;
 import Type.ValueType;
-import haxe.macro.Expr;
 import haxe.macro.Expr.Binop;
 import haxe.macro.Expr.Unop;
 import checkstyle.checks.Directive;

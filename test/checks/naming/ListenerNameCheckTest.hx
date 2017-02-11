@@ -2,7 +2,7 @@ package checks.naming;
 
 import checkstyle.checks.naming.ListenerNameCheck;
 
-class ListenerNameCheckTest extends CheckTestCase<ListernerCheckTests> {
+class ListenerNameCheckTest extends CheckTestCase<ListenerNameCheckTests> {
 
 	public function testCorrectListenerName() {
 		assertNoMsg(new ListenerNameCheck(), TEST);
@@ -16,7 +16,7 @@ class ListenerNameCheckTest extends CheckTestCase<ListernerCheckTests> {
 }
 
 @:enum
-abstract ListernerCheckTests(String) to String {
+abstract ListenerNameCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		var a:Stage;

@@ -18,7 +18,7 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST6);
 	}
 
-	public function testSupressExpression() {
+	public function testSuppressExpression() {
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST7);
 	}
 }

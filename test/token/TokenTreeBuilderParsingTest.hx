@@ -2,9 +2,6 @@ package token;
 
 import haxe.PosInfos;
 
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 
 	public function testIssues() {

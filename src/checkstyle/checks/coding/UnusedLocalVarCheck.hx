@@ -36,7 +36,7 @@ class UnusedLocalVarCheck extends Check {
 
 	function checkLocalVars(f:TokenTree, localVars:Array<TokenTree>) {
 		for (localVar in localVars) {
-			for (child in localVar.childs) {
+			for (child in localVar.children) {
 				switch (child.tok) {
 					case Const(CIdent(name)):
 						checkLocalVar(f, child, name);

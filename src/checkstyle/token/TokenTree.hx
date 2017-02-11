@@ -10,7 +10,7 @@ class TokenTree extends Token {
 
 	public var parent:TokenTree;
 	public var previousSibling:TokenTree;
-	public var childs:Array<TokenTree>;
+	public var children:Array<TokenTree>;
 	public var index:Int;
 
 	public function new(tok:TokenDef, pos:Position, index:Int) {
@@ -24,33 +24,33 @@ class TokenTree extends Token {
 	}
 
 	public function addChild(child:TokenTree) {
-		if (childs == null) childs = [];
-		if (childs.length > 0) child.previousSibling = childs[childs.length - 1];
-		childs.push(child);
+		if (children == null) children = [];
+		if (children.length > 0) child.previousSibling = children[children.length - 1];
+		children.push(child);
 		child.parent = this;
 	}
 
-	public function hasChilds():Bool {
-		if (childs == null) return false;
-		return childs.length > 0;
+	public function hasChildren():Bool {
+		if (children == null) return false;
+		return children.length > 0;
 	}
 
 	public function getFirstChild():TokenTree {
-		if (!hasChilds()) return null;
-		return childs[0];
+		if (!hasChildren()) return null;
+		return children[0];
 	}
 
 	public function getLastChild():TokenTree {
-		if (!hasChilds()) return null;
-		return childs[childs.length - 1];
+		if (!hasChildren()) return null;
+		return children[children.length - 1];
 	}
 
 	public function getPos():Position {
-		if ((childs == null) || (childs.length <= 0)) return pos;
+		if ((children == null) || (children.length <= 0)) return pos;
 
 		var fullPos:Position = {file:pos.file, min:pos.min, max:pos.max};
 		var childPos:Position;
-		for (child in childs) {
+		for (child in children) {
 			childPos = child.getPos();
 			if (childPos.min < pos.min) fullPos.min = childPos.min;
 			if (childPos.max > pos.max) fullPos.max = childPos.max;
@@ -83,8 +83,8 @@ class TokenTree extends Token {
 					return [];
 			}
 		}
-		if (childs == null) return results;
-		for (child in childs) {
+		if (children == null) return results;
+		for (child in children) {
 			switch (child.tok) {
 				case Sharp(_):
 					results = results.concat(child.filterCallback(callback, depth));
@@ -106,8 +106,8 @@ class TokenTree extends Token {
 	public function printTokenTree(prefix:String = ""):String {
 		var buf:StringBuf = new StringBuf();
 		if (tok != null) buf.add('$prefix${tok}\t\t\t\t${getPos()}');
-		if (childs == null) return buf.toString();
-		for (child in childs) buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');
+		if (children == null) return buf.toString();
+		for (child in children) buf.add('\n$prefix${child.printTokenTree(prefix + "  ")}');
 		return buf.toString();
 	}
 }

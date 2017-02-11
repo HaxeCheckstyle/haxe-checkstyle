@@ -21,7 +21,7 @@ class SimplifyBooleanReturnCheck extends Check {
 			if (elseLiteral == null) continue;
 
 			var elseStatement = elseLiteral.getFirstChild();
-			var thenStatement = token.childs[1];
+			var thenStatement = token.children[1];
 
 			if (canReturnOnlyBooleanLiteral(thenStatement) && canReturnOnlyBooleanLiteral(elseStatement)) {
 				logPos("Conditional logic can be removed", token.pos);

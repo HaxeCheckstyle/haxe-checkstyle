@@ -90,8 +90,8 @@ class InnerAssignmentCheck extends Check {
 		var parent:TokenTree;
 		if (Type.enumEq(token.parent.tok, BrOpen)) {
 			var brOpen:TokenTree = token.parent;
-			// parent is a block and has more than two childs
-			if (brOpen.childs.length > 2) return true;
+			// parent is a block and has more than two children
+			if (brOpen.children.length > 2) return true;
 			parent = brOpen.parent;
 		}
 		else {

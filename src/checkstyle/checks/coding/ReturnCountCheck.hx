@@ -28,7 +28,7 @@ class ReturnCountCheck extends Check {
 				default:
 			}
 			if (isPosSuppressed(fn.pos)) continue;
-			if (!fn.hasChilds()) throw "function has invalid structure!";
+			if (!fn.hasChildren()) throw "function has invalid structure!";
 			var returns = fn.filterCallback(filterReturns);
 			if (returns.length > max) {
 				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos);
