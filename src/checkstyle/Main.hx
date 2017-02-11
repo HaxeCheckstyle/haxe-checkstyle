@@ -186,7 +186,7 @@ class Main {
 			try {
 				check.configureProperty(prop, val);
 			}
-			catch (e:Dynamic) {
+			catch (e:Any) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
 				message += (Std.is(e, Error) ? (e:Error).message : Std.string(e));
 				failWith(message);
@@ -343,7 +343,7 @@ class Main {
 				files.push(path);
 			}
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			Sys.println("\nPath " + path + " not found.");
 		}
 	}
@@ -398,7 +398,7 @@ class Main {
 
 			new Main().run(args);
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			Sys.stderr().writeString(e + "\n");
 			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
 		}

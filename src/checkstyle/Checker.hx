@@ -113,7 +113,7 @@ class Checker {
 				t = lexer.token(haxeparser.HaxeLexer.tok);
 			}
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
@@ -146,7 +146,7 @@ class Checker {
 		try {
 			return parser.parse();
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
@@ -199,7 +199,7 @@ class Checker {
 			makeTokens();
 			makeASTs();
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			for (reporter in reporters) {
 				reporter.addMessage(getErrorMessage(e, file.name, "Parsing"));
 				reporter.fileFinish(file);
@@ -262,7 +262,7 @@ class Checker {
 			if (checkForExclude(check.getModuleName())) return [];
 			return check.run(this);
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			for (reporter in reporters) reporter.addMessage(getErrorMessage(e, file.name, "Check " + check.getModuleName()));
 			return [];
 		}
@@ -286,7 +286,7 @@ class Checker {
 		return false;
 	}
 
-	function getErrorMessage(e:Dynamic, fileName:String, step:String):CheckMessage {
+	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
 		return {
 			fileName:fileName,
 			line:1,
