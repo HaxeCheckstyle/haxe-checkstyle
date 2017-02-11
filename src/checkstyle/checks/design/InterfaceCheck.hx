@@ -1,7 +1,5 @@
 package checkstyle.checks.design;
 
-import checkstyle.token.TokenTree;
-
 @name("Interface")
 @desc("Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.")
 class InterfaceCheck extends Check {

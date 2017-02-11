@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkStatement {
 	public static function walkStatement(stream:TokenStream, parent:TokenTree) {
 		var wantMore:Bool = true;

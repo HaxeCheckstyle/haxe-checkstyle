@@ -1,11 +1,7 @@
 package checkstyle.checks.whitespace;
 
 import haxe.macro.Printer;
-import checkstyle.utils.ExprUtils;
-import checkstyle.token.TokenTree;
 import Type.ValueType;
-import haxe.macro.Expr.Binop;
-import haxe.macro.Expr.Unop;
 import checkstyle.checks.Directive;
 
 @name("Spacing")
@@ -73,7 +69,7 @@ class SpacingCheck extends Check {
 
 		var lastExpr = null;
 
-		ExprUtils.walkFile(checker.ast, function(e) {
+		checker.ast.walkFile(function(e) {
 			if (lastExpr == null) {
 				lastExpr = e;
 				return;

@@ -1,9 +1,5 @@
 package checkstyle.checks.size;
 
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-import haxe.macro.Expr.Field;
-
 @name("MethodLength")
 @desc("Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.")
 class MethodLengthCheck extends Check {
@@ -30,7 +26,7 @@ class MethodLengthCheck extends Check {
 			default:
 		}
 
-		ExprUtils.walkField(f, function(e) {
+		f.walkField(function(e) {
 			switch (e.expr){
 				case EFunction(name, ff):
 					checkFunction(e);

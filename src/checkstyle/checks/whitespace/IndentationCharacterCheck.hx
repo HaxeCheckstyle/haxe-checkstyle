@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.CheckMessage.SeverityLevel;
-
 @name("IndentationCharacter")
 @desc("Checks indentation character (tab/space, default is tab).")
 class IndentationCharacterCheck extends LineCheckBase {

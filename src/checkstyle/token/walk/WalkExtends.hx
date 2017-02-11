@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkExtends {
 	public static function walkExtends(stream:TokenStream, parent:TokenTree) {
 		if (!stream.is(Kwd(KwdExtends))) return;

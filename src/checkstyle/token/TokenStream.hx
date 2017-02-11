@@ -1,8 +1,6 @@
 package checkstyle.token;
 
 import byte.ByteData;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
 import hxparse.Position;
 
 class TokenStream {

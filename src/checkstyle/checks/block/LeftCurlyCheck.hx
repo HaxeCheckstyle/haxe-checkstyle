@@ -1,10 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("LeftCurly")
 @desc("Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.")
 class LeftCurlyCheck extends Check {

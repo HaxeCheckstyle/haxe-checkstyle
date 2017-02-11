@@ -1,10 +1,6 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
-import haxeparser.Data;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("WhitespaceAfter")
 @desc("Checks for whitespace after a token.")

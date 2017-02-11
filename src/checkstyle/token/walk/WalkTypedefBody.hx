@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkTypedefBody {
 	public static function walkTypedefBody(stream:TokenStream, parent:TokenTree) {
 		if (stream.is(BrOpen)) {

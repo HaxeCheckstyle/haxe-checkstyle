@@ -1,7 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.token.TokenTree;
-
 @name("CatchParameterName")
 @desc("Checks that catch parameter names conform to a format specified by the `format` property.")
 class CatchParameterNameCheck extends Check {

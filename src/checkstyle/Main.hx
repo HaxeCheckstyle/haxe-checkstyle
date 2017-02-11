@@ -18,8 +18,6 @@ import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
 
-using checkstyle.utils.ArrayUtils;
-
 class Main {
 
 	static var DEFAULT_CONFIG:String = "checkstyle.json";

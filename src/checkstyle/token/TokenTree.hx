@@ -1,9 +1,5 @@
 package checkstyle.token;
 
-import haxe.macro.Expr;
-import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
-
 class TokenTree extends Token {
 
 	static inline var MAX_LEVEL:Int = 9999;

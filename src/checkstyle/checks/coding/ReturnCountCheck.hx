@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-
 @name("ReturnCount")
 @desc("Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.")
 class ReturnCountCheck extends Check {

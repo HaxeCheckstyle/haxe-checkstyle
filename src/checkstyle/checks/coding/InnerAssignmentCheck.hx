@@ -1,8 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-import haxeparser.Data.TokenDef;
-
 @name("InnerAssignment")
 @desc("Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.")
 class InnerAssignmentCheck extends Check {

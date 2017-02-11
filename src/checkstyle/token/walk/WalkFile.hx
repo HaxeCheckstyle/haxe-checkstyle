@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkFile {
 	public static function walkFile(stream:TokenStream, parent:TokenTree) {
 		var tempStore:Array<TokenTree> = [];

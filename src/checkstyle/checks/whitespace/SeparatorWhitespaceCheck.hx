@@ -1,9 +1,6 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.token.TokenTree;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
-import haxeparser.Data;
 
 @name("SeparatorWhitespace")
 @desc("Checks that whitespace is present or absent around a separators.")

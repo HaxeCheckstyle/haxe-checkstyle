@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxe.macro.Expr.FunctionArg;
-import haxe.macro.Expr.Position;
 using haxe.macro.ExprTools;
 
 @name("NullableParameter")

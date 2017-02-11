@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkLtGt {
 	public static function walkLtGt(stream:TokenStream, parent:TokenTree) {
 		var ltTok:TokenTree = stream.consumeTokenDef(Binop(OpLt));

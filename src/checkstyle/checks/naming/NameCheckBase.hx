@@ -1,10 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @ignore("Base class for name checks")
 class NameCheckBase<T> extends Check {
 

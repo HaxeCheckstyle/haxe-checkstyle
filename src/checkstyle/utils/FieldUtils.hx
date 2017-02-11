@@ -1,12 +1,5 @@
 package checkstyle.utils;
 
-import haxe.macro.Expr.Field;
-import haxeparser.Data.TypeDef;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.ExprUtils;
-using StringTools;
-
 class FieldUtils {
 
 	public static function isPublic(f:Field, p:ParentType):Bool {

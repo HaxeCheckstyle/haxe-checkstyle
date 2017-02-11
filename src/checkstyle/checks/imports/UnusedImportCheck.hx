@@ -1,10 +1,7 @@
 package checkstyle.checks.imports;
 
-import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("UnusedImport")
 @desc("Checks for unused or duplicate imports.")

@@ -3,18 +3,13 @@ package checkstyle;
 import byte.ByteData;
 import haxe.CallStack;
 import checkstyle.checks.Check;
-import haxeparser.Data.TypeDecl;
 import haxeparser.HaxeParser;
 import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
-import haxeparser.Data.Token;
 import sys.io.File;
 
 import checkstyle.checks.Category;
-import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
-
-using checkstyle.utils.ArrayUtils;
 
 class Checker {
 

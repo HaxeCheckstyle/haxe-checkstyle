@@ -1,9 +1,5 @@
 package checkstyle.checks.size;
 
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("ParameterNumber")
 @desc("Checks the number of parameters of a method.")
 class ParameterNumberCheck extends Check {

@@ -1,10 +1,5 @@
 package checkstyle.checks.modifier;
 
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-
 @name("RedundantModifier", "PublicPrivate")
 @desc("Checks for redundant modifiers.")
 class RedundantModifierCheck extends Check {

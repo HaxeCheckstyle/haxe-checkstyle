@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import haxeparser.Data;
-
 @name("SeparatorWrap")
 @desc("Checks line wrapping with separators.")
 class SeparatorWrapCheck extends WrapCheckBase {

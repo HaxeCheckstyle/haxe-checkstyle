@@ -1,10 +1,5 @@
 package checkstyle.token.walk;
 
-import haxeparser.Data.TokenDef;
-
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkPackageImport {
 	/**
 	 * Kwd(KwdPackage)

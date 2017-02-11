@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxe.macro.Expr;
-
 @name("NestedTryDepth")
 @desc("Restricts nested `try` blocks to a specified depth (default = 1).")
 class NestedTryDepthCheck extends Check {

@@ -1,7 +1,5 @@
 package checkstyle.checks.design;
 
-import checkstyle.token.TokenTree;
-
 @name("EmptyPackage")
 @desc("Checks for empty package names.")
 class EmptyPackageCheck extends Check {

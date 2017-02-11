@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxe.macro.Expr;
-
 @name("NestedIfDepth")
 @desc("Restricts nested `if-else` blocks to a specified depth (default = 1).")
 class NestedIfDepthCheck extends Check {
