@@ -8,7 +8,7 @@ import haxe.io.Path;
 class UnusedImportCheck extends Check {
 
 	public var ignoreModules:Array<String>;
-	public var moduleTypeMap:Dynamic;
+	public var moduleTypeMap:Any;
 
 	public function new() {
 		super(TOKEN);

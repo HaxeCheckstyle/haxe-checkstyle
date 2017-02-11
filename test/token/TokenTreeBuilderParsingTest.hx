@@ -27,7 +27,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		try {
 			builder = TestTokenTreeBuilder.parseCode(code);
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			assertTrue(false, pos);
 		}
 		assertTrue(builder.isStreamEmpty(), pos);

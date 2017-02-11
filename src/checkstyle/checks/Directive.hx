@@ -16,7 +16,7 @@ class DirectiveTools {
 		"any" => ANY
 	];
 
-	public static function fromDynamic(value:Dynamic):Directive {
+	public static function fromAny(value:Any):Directive {
 		return switch (Type.typeof(value)) {
 			case ValueType.TClass(String): getValidated(value);
 			//support for legacy configs when such settings were boolean

@@ -30,11 +30,11 @@ class SpacingCheck extends Check {
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
-	override public function configureProperty(name:String, value:Dynamic) {
+	override public function configureProperty(name:String, value:Any) {
 		var currentValue = Reflect.field(this, name);
 		switch (Type.typeof(currentValue)) {
 			case ValueType.TEnum(Directive):
-				Reflect.setField(this, name, DirectiveTools.fromDynamic(value));
+				Reflect.setField(this, name, DirectiveTools.fromAny(value));
 			case _:
 				super.configureProperty(name, value);
 		}
