@@ -10,7 +10,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	static inline var MSG_NO_ANON_RETURN:String = "Return type not specified for anonymous method";
 	static inline var MSG_EMPTY_RETURN_TEST2:String = 'Empty return in method "test2" found';
 
-	public function testCorrectRetrn() {
+	public function testCorrectReturn() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, CORRECT_RETURN);
 		check.enforceReturnType = true;

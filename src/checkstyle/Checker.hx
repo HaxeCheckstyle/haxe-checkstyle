@@ -15,7 +15,6 @@ import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 
 using checkstyle.utils.ArrayUtils;
-using StringTools;
 
 class Checker {
 

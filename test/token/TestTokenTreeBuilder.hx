@@ -4,7 +4,6 @@ import byte.ByteData;
 import haxeparser.HaxeLexer;
 
 import haxeparser.Data.Token;
-import haxeparser.Data.TokenDef;
 
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenStream;

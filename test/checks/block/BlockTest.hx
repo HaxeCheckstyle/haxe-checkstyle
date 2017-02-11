@@ -4,7 +4,7 @@ import checkstyle.checks.block.EmptyBlockCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
 
-// tests for blocks using mutliple check classes
+// tests for blocks using multiple check classes
 class BlockTest extends CheckTestCase<BlockTests> {
 
 	public function testBlockFormatIssue42() {

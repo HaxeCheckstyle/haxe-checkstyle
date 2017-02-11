@@ -19,7 +19,7 @@ class FileLengthCheckTest extends CheckTestCase<FileLengthCheckTests> {
 		assertMsg(check, TEST41, "File length is 42 lines (max allowed is 40)");
 	}
 
-	public function testSupressFileLength() {
+	public function testSuppressFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
 		assertNoMsg(check, TEST42);

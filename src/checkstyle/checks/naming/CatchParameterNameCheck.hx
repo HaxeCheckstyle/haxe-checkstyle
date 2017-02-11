@@ -19,7 +19,7 @@ class CatchParameterNameCheck extends Check {
 		var catchTokens = root.filter([Kwd(KwdCatch)], ALL);
 
 		for (tkn in catchTokens) {
-			for (item in tkn.childs) {
+			for (item in tkn.children) {
 				switch (item.getFirstChild().tok) {
 					case Const(CIdent(name)):
 						if (item.is(POpen)) {

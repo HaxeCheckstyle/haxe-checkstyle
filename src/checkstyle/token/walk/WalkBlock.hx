@@ -8,7 +8,7 @@ class WalkBlock {
 	/**
 	 * BrOpen
 	 *  |- statement
-	 *  |- startement
+	 *  |- statement
 	 *  |- BrClose
 	 *
 	 */

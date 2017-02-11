@@ -12,7 +12,6 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 		assertNoMsg(new MethodLengthCheck(), TEST2);
 	}
 
-	@SupressWarnings("checkstyle:MagicNumber")
 	public function testConfigurableMethodLength() {
 		var check = new MethodLengthCheck();
 		check.max = 10;

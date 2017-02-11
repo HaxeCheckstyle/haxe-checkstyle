@@ -17,7 +17,7 @@ class WalkFile {
 					if (!stream.hasMore()) return;
 					switch (stream.token()) {
 						case BrOpen:
-							WalkBlock.walkBlock(stream, parent.childs[parent.childs.length - 1]);
+							WalkBlock.walkBlock(stream, parent.children[parent.children.length - 1]);
 						default:
 					}
 				case At:

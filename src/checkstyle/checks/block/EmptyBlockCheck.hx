@@ -83,19 +83,19 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function checkForText(brOpen:TokenTree) {
-		if (brOpen.childs.length == 1) {
+		if (brOpen.children.length == 1) {
 			logPos("Empty block should contain a comment or a statement", brOpen.pos);
 			return;
 		}
 	}
 
 	function checkForStatement(brOpen:TokenTree) {
-		if (brOpen.childs.length == 1) {
+		if (brOpen.children.length == 1) {
 			logPos("Empty block should contain a statement", brOpen.pos);
 			return;
 		}
 		var onlyComments:Bool = true;
-		for (child in brOpen.childs) {
+		for (child in brOpen.children) {
 			switch (child.tok) {
 				case Comment(_), CommentLine(_):
 				case BrClose:
@@ -108,8 +108,8 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function checkForEmpty(brOpen:TokenTree) {
-		if (brOpen.childs.length > 1) return;
-		var brClose:TokenTree = brOpen.childs[0];
+		if (brOpen.children.length > 1) return;
+		var brClose:TokenTree = brOpen.children[0];
 		if (brOpen.pos.max != brClose.pos.min) logPos('Empty block should be written as "{}"', brOpen.pos);
 	}
 }

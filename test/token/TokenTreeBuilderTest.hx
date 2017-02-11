@@ -2,7 +2,6 @@ package token;
 
 import haxe.PosInfos;
 
-import haxeparser.Data.Token;
 import haxeparser.Data.TokenDef;
 
 import checkstyle.token.TokenTree;
@@ -67,8 +66,8 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		var buf:StringBuf = new StringBuf();
 		var tokDef:TokenDef = token.tok;
 		if (tokDef != null) buf.add('$prefix${tokDef}\n');
-		if (token.hasChilds()) {
-			for (child in token.childs) {
+		if (token.hasChildren()) {
+			for (child in token.children) {
 				buf.add(treeToString(child, prefix + "  "));
 			}
 		}
@@ -147,11 +146,11 @@ abstract TokenTreeBuilderTests(String) to String {
 			return;
 		else
 			throw "error";
-		if (token.hasChilds()) {
-			return token.childs;
+		if (token.hasChildren()) {
+			return token.children;
 		}
-		if (token.hasChilds()) {
-			return token.childs;
+		if (token.hasChildren()) {
+			return token.children;
 		}
 		else {
 			return [];
@@ -182,7 +181,7 @@ abstract TokenTreeBuilderTests(String) to String {
 	"    POpen\n" +
 	"      Const(CIdent(token))\n" +
 	"        Dot\n" +
-	"          Const(CIdent(hasChilds))\n" +
+	"          Const(CIdent(hasChildren))\n" +
 	"            POpen\n" +
 	"              PClose\n" +
 	"      PClose\n" +
@@ -190,14 +189,14 @@ abstract TokenTreeBuilderTests(String) to String {
 	"      Kwd(KwdReturn)\n" +
 	"        Const(CIdent(token))\n" +
 	"          Dot\n" +
-	"            Const(CIdent(childs))\n" +
+	"            Const(CIdent(children))\n" +
 	"              Semicolon\n" +
 	"      BrClose\n" +
 	"  Kwd(KwdIf)\n" +
 	"    POpen\n" +
 	"      Const(CIdent(token))\n" +
 	"        Dot\n" +
-	"          Const(CIdent(hasChilds))\n" +
+	"          Const(CIdent(hasChildren))\n" +
 	"            POpen\n" +
 	"              PClose\n" +
 	"      PClose\n" +
@@ -205,7 +204,7 @@ abstract TokenTreeBuilderTests(String) to String {
 	"      Kwd(KwdReturn)\n" +
 	"        Const(CIdent(token))\n" +
 	"          Dot\n" +
-	"            Const(CIdent(childs))\n" +
+	"            Const(CIdent(children))\n" +
 	"              Semicolon\n" +
 	"      BrClose\n" +
 	"    Kwd(KwdElse)\n" +

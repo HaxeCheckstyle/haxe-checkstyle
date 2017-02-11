@@ -22,7 +22,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 			if (lastVarLineNo > 0 && lastVarLineNo == curVarLineNo) logPos("Only one variable definition per line allowed", v.pos);
 			lastVarLineNo = curVarLineNo;
 			var count = 0;
-			for (c in v.childs) {
+			for (c in v.children) {
 				switch (c.tok) {
 					case Const(CIdent(name)):
 						count++;

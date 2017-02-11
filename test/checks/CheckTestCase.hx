@@ -47,7 +47,7 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, ?pos:PosInfos):String {
 		// a fresh Checker and Reporter for every checkMessage
-		// to allow multiple independant checkMessage calls in a single test
+		// to allow multiple independent checkMessage calls in a single test
 		checker = new Checker();
 		reporter = new TestReporter();
 

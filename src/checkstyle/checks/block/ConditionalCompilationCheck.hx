@@ -33,7 +33,7 @@ class ConditionalCompilationCheck extends Check {
 	function checkSingleLine(tok:TokenTree, line:Int):Bool {
 		var endTok:TokenTree = null;
 
-		for (child in tok.childs) {
+		for (child in tok.children) {
 			switch (child.tok) {
 				case Sharp("end"):
 					endTok = child;
@@ -67,7 +67,7 @@ class ConditionalCompilationCheck extends Check {
 			case ALIGNED:
 				if (checkIndentation(tok, linePos)) return;
 		}
-		for (childTok in tok.childs) {
+		for (childTok in tok.children) {
 			switch (childTok.tok) {
 				case Sharp("else"), Sharp("elseif"), Sharp("end"):
 					var childLinePos:LinePos = checker.getLinePos(childTok.pos.min);
@@ -106,7 +106,7 @@ class ConditionalCompilationCheck extends Check {
 		var nextLen:Int = -1;
 
 		var lineIndex:Int = linePos.line - 1;
-		while (lineIndex >= 0)  {
+		while (lineIndex >= 0) {
 			var line:String = checker.lines[lineIndex];
 			prevLen = getIndentLength(line);
 			if (prevLen >= 0) break;
