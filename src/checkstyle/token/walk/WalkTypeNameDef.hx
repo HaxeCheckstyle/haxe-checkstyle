@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkTypeNameDef {
 	public static function walkTypeNameDef(stream:TokenStream, parent:TokenTree):TokenTree {
 		if (stream.is(BrOpen)) {

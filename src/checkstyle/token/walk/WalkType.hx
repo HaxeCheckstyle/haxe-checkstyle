@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkType {
 	public static function walkType(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
 		switch (stream.token()) {

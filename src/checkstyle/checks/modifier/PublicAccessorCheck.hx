@@ -1,11 +1,5 @@
 package checkstyle.checks.modifier;
 
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-using StringTools;
-
 @name("PublicAccessor")
 @desc("Checks for public accessors.")
 class PublicAccessorCheck extends Check {

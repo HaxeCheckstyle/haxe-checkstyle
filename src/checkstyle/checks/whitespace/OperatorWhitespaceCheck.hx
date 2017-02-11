@@ -1,6 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;

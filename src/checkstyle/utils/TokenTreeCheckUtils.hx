@@ -1,7 +1,5 @@
 package checkstyle.utils;
 
-import checkstyle.token.TokenTree;
-
 class TokenTreeCheckUtils {
 
 	public static function isImportMult(token:TokenTree):Bool {

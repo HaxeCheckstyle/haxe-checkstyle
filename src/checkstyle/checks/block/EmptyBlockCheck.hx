@@ -1,9 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.token.TokenTree;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("EmptyBlock")
 @desc("Checks for empty blocks. The policy to verify is specified using the property `option`.")
 class EmptyBlockCheck extends Check {

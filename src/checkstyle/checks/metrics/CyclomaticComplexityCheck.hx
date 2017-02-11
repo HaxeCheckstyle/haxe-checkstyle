@@ -1,9 +1,5 @@
 package checkstyle.checks.metrics;
 
-import haxe.macro.Expr;
-
-import checkstyle.CheckMessage.SeverityLevel;
-
 using Lambda;
 
 @name("CyclomaticComplexity")
@@ -53,8 +49,8 @@ class CyclomaticComplexityCheck extends Check {
 		return switch (e.expr) {
 			case ExprDef.EArray(e1, e2) : evaluateExpr(e1) + evaluateExpr(e2);
 			case ExprDef.EBinop(op, e1, e2) : evaluateExpr(e1) + evaluateExpr(e2) + switch (op) {
-				case Binop.OpBoolAnd : 1;
-				case Binop.OpBoolOr : 1;
+				case haxe.macro.Expr.Binop.OpBoolAnd : 1;
+				case haxe.macro.Expr.Binop.OpBoolOr : 1;
 				default : 0;
 			};
 			case ExprDef.EParenthesis(e) : evaluateExpr(e);

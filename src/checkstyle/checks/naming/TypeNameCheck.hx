@@ -1,10 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("TypeName")
 @desc("Checks that type names conform to a format specified by the `format` property.")
 class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {

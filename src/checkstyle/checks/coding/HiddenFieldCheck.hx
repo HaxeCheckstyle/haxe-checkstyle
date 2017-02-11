@@ -1,9 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("HiddenField")
 @desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")
 class HiddenFieldCheck extends Check {

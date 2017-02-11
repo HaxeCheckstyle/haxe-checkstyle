@@ -1,8 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import haxe.macro.Expr;
-import checkstyle.utils.ExprUtils;
-
 @name("ArrayAccess")
 @desc("Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.")
 class ArrayAccessCheck extends Check {
@@ -20,7 +17,7 @@ class ArrayAccessCheck extends Check {
 	override function actualRun() {
 		var lastExpr = null;
 
-		ExprUtils.walkFile(checker.ast, function(e:Expr) {
+		checker.ast.walkFile(function(e:Expr) {
 			if (lastExpr == null) {
 				lastExpr = e;
 				return;

@@ -1,8 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.token.TokenTree;
-import checkstyle.Checker.LinePos;
-
 @name("ConditionalCompilation")
 @desc("Checks placement and indentation of conditional compilation flags.")
 class ConditionalCompilationCheck extends Check {

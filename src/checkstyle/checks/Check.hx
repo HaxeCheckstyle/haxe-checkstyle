@@ -1,14 +1,8 @@
 package checkstyle.checks;
 
-import haxe.macro.Expr;
-import checkstyle.CheckMessage.SeverityLevel;
-
 #if debug
 import haxe.CallStack;
 #end
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
 
 class Check {
 

@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkPOpen {
 	public static function walkPOpen(stream:TokenStream, parent:TokenTree) {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);

@@ -1,7 +1,6 @@
 package checkstyle.token;
 
 import byte.ByteData;
-import haxeparser.Data.Token;
 
 import checkstyle.token.walk.WalkFile;
 

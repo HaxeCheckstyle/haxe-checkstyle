@@ -1,7 +1,5 @@
 package checkstyle.checks.modifier;
 
-import haxe.macro.Expr;
-
 @name("ModifierOrder", "AccessOrder")
 @desc("Checks that the order of modifiers conforms to the standards.")
 class ModifierOrderCheck extends Check {

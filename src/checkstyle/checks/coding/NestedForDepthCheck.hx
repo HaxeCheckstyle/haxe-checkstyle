@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxe.macro.Expr;
-
 @name("NestedForDepth")
 @desc("Restricts nested `for` blocks to a specified depth (default = 1).")
 class NestedForDepthCheck extends Check {

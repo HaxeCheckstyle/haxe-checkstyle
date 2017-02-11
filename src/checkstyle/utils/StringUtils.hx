@@ -1,7 +1,5 @@
 package checkstyle.utils;
 
-import haxe.macro.Expr;
-
 class StringUtils {
 
 	public static inline function contains(s:String, c:String):Bool {

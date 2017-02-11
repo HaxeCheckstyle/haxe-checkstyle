@@ -1,10 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxe.macro.Expr;
-import haxeparser.Data;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("ParameterName")
 @desc("Checks that parameter names conform to a format specified by the `format` property.")
 class ParameterNameCheck extends NameCheckBase<String> {
