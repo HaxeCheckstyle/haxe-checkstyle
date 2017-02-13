@@ -518,60 +518,61 @@
 		}
 	],
 	"exclude": {
-		"path": "relative",
+		"path": "absolute",
 		"all": [],
 		"Dynamic": [
-			"checkstyle/Main",
-			"checkstyle/Checker",
-			"checkstyle/ChecksInfo",
-			"checkstyle/checks/Check",
-			"checkstyle/checks/Directive",
-			"checkstyle/checks/whitespace/SpacingCheck",
-			"checkstyle/checks/imports/UnusedImportCheck",
-			"TestMain",
-			"misc/ExtensionsTest",
-			"token/TokenTreeBuilderParsingTest"
+			"src/checkstyle/Main",
+			"src/checkstyle/Checker",
+			"src/checkstyle/ChecksInfo",
+			"src/checkstyle/checks/Check",
+			"src/checkstyle/checks/Directive",
+			"src/checkstyle/checks/whitespace/SpacingCheck",
+			"src/checkstyle/checks/imports/UnusedImportCheck",
+			"test/TestMain",
+			"test/token/TokenTreeBuilderParsingTest"
 		],
 		"MultipleStringLiterals": [
-			"checks",
-			"token"
+			"src/checks",
+			"src/token",
+			"test/checks",
+			"test/token"
 		],
 		"CyclomaticComplexity": [
-			"checkstyle/checks/Check",
-			"checkstyle/utils/ExprUtils",
-			"checkstyle/utils/ComplexTypeUtils",
-			"checkstyle/checks/metrics/CyclomaticComplexityCheck",
-			"checkstyle/checks/block/LeftCurlyCheck",
-			"checkstyle/checks/block/RightCurlyCheck",
-			"checkstyle/checks/naming/MethodNameCheck",
-			"checkstyle/checks/type/ReturnCheck",
-			"checkstyle/checks/whitespace/OperatorWrapCheck",
-			"checkstyle/checks/whitespace/WhitespaceAfterCheck",
-			"checkstyle/checks/whitespace/WhitespaceAroundCheck",
-			"checkstyle/checks/block/EmptyBlockCheck",
-			"checkstyle/checks/whitespace/EmptyLinesCheck",
-			"checkstyle/token/walk/WalkStatement"
+			"src/checkstyle/checks/Check",
+			"src/checkstyle/utils/ExprUtils",
+			"src/checkstyle/utils/ComplexTypeUtils",
+			"src/checkstyle/checks/metrics/CyclomaticComplexityCheck",
+			"src/checkstyle/checks/block/LeftCurlyCheck",
+			"src/checkstyle/checks/block/RightCurlyCheck",
+			"src/checkstyle/checks/naming/MethodNameCheck",
+			"src/checkstyle/checks/type/ReturnCheck",
+			"src/checkstyle/checks/whitespace/OperatorWrapCheck",
+			"src/checkstyle/checks/whitespace/WhitespaceAfterCheck",
+			"src/checkstyle/checks/whitespace/WhitespaceAroundCheck",
+			"src/checkstyle/checks/block/EmptyBlockCheck",
+			"src/checkstyle/checks/whitespace/EmptyLinesCheck",
+			"src/checkstyle/token/walk/WalkStatement"
 		],
 		"LeftCurly": [
-			"checkstyle/checks/metrics/CyclomaticComplexityCheck"
+			"src/checkstyle/checks/metrics/CyclomaticComplexityCheck"
 		],
 		"RightCurly": [
-			"checkstyle/checks/metrics/CyclomaticComplexityCheck"
+			"src/checkstyle/checks/metrics/CyclomaticComplexityCheck"
 		],
 		"MethodCount": [
-			"checkstyle/token/TokenTreeBuilder"
+			"src/checkstyle/token/TokenTreeBuilder"
 		],
 		"MethodLength": [
-			"checkstyle/checks/whitespace/WhitespaceAfterCheck",
-			"checkstyle/checks/whitespace/WhitespaceAroundCheck",
-			"checkstyle/checks/whitespace/EmptyLinesCheck",
-			"checkstyle/token/walk/WalkStatement"
+			"src/checkstyle/checks/whitespace/WhitespaceAfterCheck",
+			"src/checkstyle/checks/whitespace/WhitespaceAroundCheck",
+			"src/checkstyle/checks/whitespace/EmptyLinesCheck",
+			"src/checkstyle/token/walk/WalkStatement"
 		],
 		"NestedForDepth": [
-			"TestMain"
+			"test/TestMain"
 		],
 		"MemberName": [
-			"checkstyle/Main"
+			"src/checkstyle/Main"
 		]
 	}
 }
