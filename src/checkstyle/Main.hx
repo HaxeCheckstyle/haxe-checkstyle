@@ -33,8 +33,6 @@ class Main {
 	static var CODE_CLIMATE_REPORTER:String = "codeclimate";
 	static var SHOW_MISSING_CHECKS:Bool = false;
 	static var exitCode:Int;
-	static var PATH_TYPE_RELATIVE:String = "relative";
-	static var PATH_TYPE_ABSOLUTE:String = "absolute";
 
 	var info:ChecksInfo;
 	var checker:Checker;
@@ -146,7 +144,7 @@ class Main {
 	function parseExcludes(config:ExcludeConfig) {
 		var excludes = Reflect.fields(config);
 		var pathType = Reflect.field(config, "path");
-		if (pathType == null) pathType = PATH_TYPE_RELATIVE;
+		if (pathType == null) pathType = RELATIVE_TO_SOURCE;
 		for (exclude in excludes) {
 			if (exclude == "path") continue;
 			createExcludeMapElement(exclude);
@@ -160,8 +158,8 @@ class Main {
 		if (excludesMap.get(exclude) == null) excludesMap.set(exclude, []);
 	}
 
-	function updateExcludes(exclude:String, val:String, pathType:String) {
-		if (pathType == PATH_TYPE_RELATIVE) {
+	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
+		if (pathType == RELATIVE_TO_SOURCE) {
 			for (p in paths) {
 				//var basePath = ~/[\/\\]/.split(p)[0];
 				var path = p + "/" + val.split(".").join("/");
@@ -425,4 +423,10 @@ typedef CodeclimateConfig = {
 	@:optional var include_paths:Array<String>;
 	@:optional var config:String;
 	@:optional var exclude:String;
+}
+
+@:enum
+abstract ExcludePath(String) {
+	var RELATIVE_TO_PROJECT = "RELATIVE_TO_PROJECT";
+	var RELATIVE_TO_SOURCE = "RELATIVE_TO_SOURCE";
 }
