@@ -518,7 +518,6 @@
 		}
 	],
 	"exclude": {
-		"path": "relative",
 		"all": [],
 		"Dynamic": [
 			"checkstyle/Main",
