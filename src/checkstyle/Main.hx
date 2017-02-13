@@ -33,6 +33,8 @@ class Main {
 	static var CODE_CLIMATE_REPORTER:String = "codeclimate";
 	static var SHOW_MISSING_CHECKS:Bool = false;
 	static var exitCode:Int;
+	static var PATH_TYPE_RELATIVE:String = "relative";
+	static var PATH_TYPE_ABSOLUTE:String = "absolute";
 
 	var info:ChecksInfo;
 	var checker:Checker;
@@ -143,11 +145,14 @@ class Main {
 
 	function parseExcludes(config:ExcludeConfig) {
 		var excludes = Reflect.fields(config);
+		var pathType = Reflect.field(config, "path");
+		if (pathType == null) pathType = PATH_TYPE_RELATIVE;
 		for (exclude in excludes) {
+			if (exclude == "path") continue;
 			createExcludeMapElement(exclude);
 			var excludeValues:Array<String> = Reflect.field(config, exclude);
 			if (excludeValues == null || excludeValues.length == 0) continue;
-			for (val in excludeValues) updateExcludes(exclude, val);
+			for (val in excludeValues) updateExcludes(exclude, val, pathType);
 		}
 	}
 
@@ -155,9 +160,17 @@ class Main {
 		if (excludesMap.get(exclude) == null) excludesMap.set(exclude, []);
 	}
 
-	function updateExcludes(exclude:String, val:String) {
-		for (p in paths) {
-			var path = p + "/" + val.split(".").join("/");
+	function updateExcludes(exclude:String, val:String, pathType:String) {
+		if (pathType == PATH_TYPE_RELATIVE) {
+			for (p in paths) {
+				//var basePath = ~/[\/\\]/.split(p)[0];
+				var path = p + "/" + val.split(".").join("/");
+				if (exclude == "all") allExcludes.push(path);
+				else excludesMap.get(exclude).push(path);
+			}
+		}
+		else {
+			var path = val.split(".").join("/");
 			if (exclude == "all") allExcludes.push(path);
 			else excludesMap.get(exclude).push(path);
 		}
