@@ -4,6 +4,8 @@ import checkstyle.checks.modifier.ModifierOrderCheck;
 
 class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 
+	static inline var ERROR:String = '"test" modifier order is invalid (modifier: "PUBLIC_PRIVATE")';
+
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
 		assertNoMsg(check, TEST1);
@@ -14,7 +16,9 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 		assertMsg(check, TEST2, '"test" modifier order is invalid (modifier: "OVERRIDE")');
 		assertMsg(check, TEST3, '"test" modifier order is invalid (modifier: "STATIC")');
 		assertMsg(check, TEST4, '"test" modifier order is invalid (modifier: "MACRO")');
-		assertMsg(check, TEST5, '"test" modifier order is invalid (modifier: "PUBLIC_PRIVATE")');
+		assertMsg(check, TEST5, ERROR);
+		assertMsg(check, TEST7, ERROR);
+		assertMsg(check, TEST8, ERROR);
 	}
 
 	public function testModifiers() {
@@ -25,6 +29,7 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
 	}
 
 	public function testIgnore() {
@@ -64,5 +69,20 @@ abstract ModifierOrderCheckTests(String) to String {
 	var TEST5 =
 	"abstractAndClass Test {
 		dynamic public function test() {}
+	}";
+
+	var TEST6 =
+	"interface Test {
+		dynamic public function test();
+	}";
+
+	var TEST7 =
+	"abstractAndClass Test {
+		inline public var test:String=0;
+	}";
+
+	var TEST8 =
+	"abstractAndClass Test {
+		inline public var test(default,null):String=0;
 	}";
 }
