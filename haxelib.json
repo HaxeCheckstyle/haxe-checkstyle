@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "new PublicAccessorCheck and bug fixes",
-	"version": "2.1.12",
+	"releasenote": "added path option in exclude config",
+	"version": "2.1.13",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
