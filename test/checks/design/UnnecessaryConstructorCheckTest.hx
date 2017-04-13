@@ -31,6 +31,10 @@ class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstruct
 	public function testStaticOnlyWithNew() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_STATIC_ONLY_WITH_NEW);
 	}
+
+	public function testChildClass() {
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_CHILD_CLASS);
+	}
 }
 
 @:enum
@@ -102,6 +106,17 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 		public static function init():Void
 		{
 			VAR1 = new String();
+		}
+	}";
+
+	var TEST_CHILD_CLASS = "
+	class Test extends Base
+	{
+		public static var VAR1:String = 'test';
+
+		public function new()
+		{
+			super(VAR1);
 		}
 	}";
 }
