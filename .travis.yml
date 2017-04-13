@@ -3,7 +3,7 @@ git:
 
 language: haxe
 haxe:
-  - 3.4.0
+  - 3.4.2
   - development
 install:
   - haxelib install haxeparser 3.3.0
