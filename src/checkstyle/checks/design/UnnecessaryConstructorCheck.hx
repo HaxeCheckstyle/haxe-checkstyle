@@ -14,6 +14,9 @@ class UnnecessaryConstructorCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var classes:Array<TokenTree> = root.filter([Kwd(KwdClass)], ALL);
 		for (cls in classes) {
+			if (extendsBaseClass(cls)) {
+				continue;
+			}
 			var acceptableTokens:Array<TokenTree> = cls.filter([
 				Kwd(KwdFunction),
 				Kwd(KwdVar)
@@ -39,5 +42,15 @@ class UnnecessaryConstructorCheck extends Check {
 				logPos("Unnecessary constructor found", constructorPos);
 			}
 		}
+	}
+
+	function extendsBaseClass(cls:TokenTree):Bool {
+		var clsName:TokenTree = cls.getFirstChild();
+		for (child in clsName.children) {
+			if (child.is(Kwd(KwdExtends))) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
