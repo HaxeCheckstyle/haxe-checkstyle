@@ -27,6 +27,8 @@ class WalkStatement {
 			case Kwd(_):
 				if (WalkStatement.walkKeyword(stream, parent)) wantMore = true;
 				else return;
+			case Arrow:
+				wantMore = true;
 			case BrOpen:
 				WalkObjectDecl.walkObjectDecl(stream, parent);
 				return;
@@ -40,8 +42,8 @@ class WalkStatement {
 				WalkBlock.walkBlock(stream, dollarTok);
 				return;
 			case POpen:
-				WalkPOpen.walkPOpen(stream, parent);
-				WalkStatement.walkStatementContinue(stream, parent);
+				var pOpen:TokenTree = WalkPOpen.walkPOpen(stream, parent);
+				WalkStatement.walkStatementContinue(stream, pOpen);
 				return;
 			case Question:
 				WalkQuestion.walkQuestion(stream, parent);
@@ -74,6 +76,13 @@ class WalkStatement {
 					WalkStatement.walkStatement(stream, question);
 					return;
 				}
+				var dblDotTok:TokenTree = stream.consumeToken();
+				parent.addChild(dblDotTok);
+				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
+				if (stream.is(Arrow)) {
+					WalkStatement.walkStatement(stream, parent);
+				}
+			case Arrow:
 				WalkStatement.walkStatement(stream, parent);
 			case Binop(_), Unop(_):
 				WalkStatement.walkStatement(stream, parent);

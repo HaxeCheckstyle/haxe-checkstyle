@@ -1,11 +1,12 @@
 package checkstyle.token.walk;
 
 class WalkPOpen {
-	public static function walkPOpen(stream:TokenStream, parent:TokenTree) {
+	public static function walkPOpen(stream:TokenStream, parent:TokenTree):TokenTree {
 		var pOpen:TokenTree = stream.consumeTokenDef(POpen);
 		parent.addChild(pOpen);
 		WalkPOpen.walkPOpenParts(stream, pOpen);
 		pOpen.addChild(stream.consumeTokenDef(PClose));
+		return pOpen;
 	}
 
 	public static function walkPOpenParts(stream:TokenStream, parent:TokenTree) {

@@ -16,7 +16,7 @@ class WalkVar {
 			if (stream.is(DblDot)) {
 				var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 				name.addChild(dblDot);
-				WalkTypeNameDef.walkTypeNameDef(stream, dblDot);
+				WalkTypedefBody.walkTypedefAlias(stream, dblDot);
 			}
 			if (stream.is(Binop(OpAssign))) {
 				WalkStatement.walkStatement(stream, name);
