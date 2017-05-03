@@ -20,11 +20,17 @@ class WalkTypedefBody {
 		else walkTypedefAlias(stream, parent);
 	}
 
-	static function walkTypedefAlias(stream:TokenStream, parent:TokenTree) {
-		var name:TokenTree = WalkTypeNameDef.walkTypeNameDef(stream, parent);
+	public static function walkTypedefAlias(stream:TokenStream, parent:TokenTree) {
+		var newParent:TokenTree;
+		if (stream.is(POpen)) {
+			newParent = WalkPOpen.walkPOpen(stream, parent);
+		}
+		else {
+			newParent = WalkTypeNameDef.walkTypeNameDef(stream, parent);
+		}
 		if (stream.is(Arrow)) {
 			var arrowTok:TokenTree = stream.consumeTokenDef(Arrow);
-			name.addChild(arrowTok);
+			newParent.addChild(arrowTok);
 			walkTypedefAlias(stream, arrowTok);
 		}
 	}
