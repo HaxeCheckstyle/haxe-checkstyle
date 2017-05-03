@@ -39,11 +39,6 @@ class WalkTypeNameDef {
 			return name;
 		}
 		if (stream.is(Binop(OpLt))) WalkLtGt.walkLtGt(stream, name);
-		if (stream.is(Arrow)) {
-			var arrow:TokenTree = stream.consumeTokenDef(Arrow);
-			name.addChild(arrow);
-			WalkTypeNameDef.walkTypeNameDef(stream, arrow);
-		}
 		return name;
 	}
 }

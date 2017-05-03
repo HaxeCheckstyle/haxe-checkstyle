@@ -7,7 +7,7 @@ class WalkTypedefBody {
 			parent.addChild(openTok);
 			var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 			while (progress.streamHasChanged()) {
-				switch (stream.token()) {
+			switch (stream.token()) {
 					case BrClose: break;
 					default:
 						WalkFieldDef.walkFieldDef(stream, openTok);
@@ -17,6 +17,15 @@ class WalkTypedefBody {
 			}
 			openTok.addChild(stream.consumeTokenDef(BrClose));
 		}
-		else WalkTypeNameDef.walkTypeNameDef(stream, parent);
+		else walkTypedefAlias(stream, parent);
+	}
+
+	static function walkTypedefAlias(stream:TokenStream, parent:TokenTree) {
+		var name:TokenTree = WalkTypeNameDef.walkTypeNameDef(stream, parent);
+		if (stream.is(Arrow)) {
+			var arrowTok:TokenTree = stream.consumeTokenDef(Arrow);
+			name.addChild(arrowTok);
+			walkTypedefAlias(stream, arrowTok);
+		}
 	}
 }
