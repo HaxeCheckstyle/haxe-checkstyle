@@ -44,6 +44,22 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
 
+		check.tokens = [PUBLIC];
+		assertNoMsg(check, TEST);
+		assertMsg(check, TEST1, memberMessage);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+
+		check.tokens = [ABSTRACT, CLASS, PUBLIC];
+		assertNoMsg(check, TEST);
+		assertMsg(check, TEST1, memberMessage);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+
 		check.tokens = [PUBLIC, TYPEDEF];
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
 	}
@@ -52,6 +68,22 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		var check = new MemberNameCheck();
 		check.tokens = [CLASS, PRIVATE];
 
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+
+		check.tokens = [PRIVATE];
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+
+		check.tokens = [ABSTRACT, CLASS, PRIVATE];
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST1);
 		assertMsg(check, TEST2, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
@@ -115,7 +147,19 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		check.tokens = [ABSTRACT, PRIVATE];
 		assertNoMsg(check, ABSTRACT_FIELDS);
 
+		check.tokens = [PRIVATE];
+		assertNoMsg(check, ABSTRACT_FIELDS);
+
+		check.tokens = [ABSTRACT, CLASS, PRIVATE];
+		assertNoMsg(check, ABSTRACT_FIELDS);
+
 		check.tokens = [ABSTRACT, PUBLIC];
+		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+
+		check.tokens = [PUBLIC];
+		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+
+		check.tokens = [ABSTRACT, CLASS, PUBLIC];
 		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
 	}
 

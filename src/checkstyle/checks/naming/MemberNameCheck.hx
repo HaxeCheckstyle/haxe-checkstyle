@@ -10,7 +10,10 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
-		if (!hasToken(CLASS)) return;
+		if (!hasToken(CLASS)) {
+			if (hasToken(ABSTRACT)) return;
+			if (!hasToken(PUBLIC) && !hasToken(PRIVATE)) return;
+		}
 		if (ignoreExtern && d.flags.contains(HExtern)) return;
 		checkFields(d.data, decl.toParentType());
 	}
@@ -22,7 +25,10 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	}
 
 	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
-		if (!hasToken(ABSTRACT)) return;
+		if (!hasToken(ABSTRACT)) {
+			if (hasToken(CLASS)) return;
+			if (!hasToken(PUBLIC) && !hasToken(PRIVATE)) return;
+		}
 		checkFields(d.data, decl.toParentType());
 	}
 
