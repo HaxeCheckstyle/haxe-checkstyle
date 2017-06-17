@@ -11,6 +11,7 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(CLASS)) {
+			// if ABSTRACT is set, PUBLIC and PRIVATE don't affect CLASS
 			if (hasToken(ABSTRACT)) return;
 			if (!hasToken(PUBLIC) && !hasToken(PRIVATE)) return;
 		}
@@ -26,6 +27,7 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {
 		if (!hasToken(ABSTRACT)) {
+			// if CLASS is set, PUBLIC and PRIVATE don't affect ABSTRACT
 			if (hasToken(CLASS)) return;
 			if (!hasToken(PUBLIC) && !hasToken(PRIVATE)) return;
 		}
@@ -74,6 +76,7 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
 		if (f.isStatic(p)) return;
 		if (hasToken(PUBLIC) || hasToken(PRIVATE)) {
+			// with PUBLIC or PRIVATE set, only look at fields with matching access modifiers
 			if (!hasToken(PUBLIC) && f.isPublic(p)) return;
 			if (!hasToken(PRIVATE) && f.isPrivate(p)) return;
 		}
