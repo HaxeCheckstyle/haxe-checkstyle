@@ -73,8 +73,10 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 
 	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
 		if (f.isStatic(p)) return;
-		if (!hasToken(PUBLIC) && f.isPublic(p)) return;
-		if (!hasToken(PRIVATE) && f.isPrivate(p)) return;
+		if (hasToken(PUBLIC) || hasToken(PRIVATE)) {
+			if (!hasToken(PUBLIC) && f.isPublic(p)) return;
+			if (!hasToken(PRIVATE) && f.isPrivate(p)) return;
+		}
 
 		matchTypeName("member", f.name, f.pos);
 	}
