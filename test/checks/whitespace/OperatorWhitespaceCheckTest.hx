@@ -96,6 +96,12 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, BITWISE_NEG);
 		assertMsg(check, BITWISE_NEG_WRONG, MSG_UNARY_NONE_BITWISE);
 
+		check.unaryOpPolicy = NONE;
+		assertNoMsg(check, UNARY_NO_WHITESPACE);
+		assertMsg(check, UNARY_INNER_WHITESPACE, MSG_UNARY_NONE);
+		assertNoMsg(check, BITWISE_NEG);
+		assertMsg(check, BITWISE_NEG_WRONG, MSG_UNARY_NONE_BITWISE);
+
 		check.unaryOpPolicy = INNER;
 		assertMsg(check, UNARY_NO_WHITESPACE, MSG_UNARY_INNER);
 		assertNoMsg(check, UNARY_INNER_WHITESPACE);
@@ -398,8 +404,10 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 	class Test {
 		function test() {
 			if (!test) return a++;
+			if ( !test ) return a++;
 			++a;
 			return !(a++);
+			return !( a++ );
 		}
 	}";
 
