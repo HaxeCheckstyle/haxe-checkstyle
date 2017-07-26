@@ -63,6 +63,7 @@ class TokenTreeCheckUtils {
 			case Const(_): true;
 			case POpen: true;
 			case Kwd(KwdMacro): true;
+			case Kwd(KwdThis): true;
 			default: false;
 		}
 	}

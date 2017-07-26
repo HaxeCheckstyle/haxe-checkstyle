@@ -405,6 +405,8 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 			if (!test) return a++;
 			if ( !test ) return a++;
+			if ( !this.func() ) return a++;
+			if ( !super.func() ) return a++;
 			++a;
 			return !(a++);
 			return !( a++ );
