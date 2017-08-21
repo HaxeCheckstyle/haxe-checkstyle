@@ -17,3 +17,7 @@ after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
 dist: trusty
+
+allow_failures:
+  haxe:
+  - development
