@@ -144,7 +144,6 @@ class Main {
 	function parseExcludes(config:ExcludeConfig) {
 		var excludes = Reflect.fields(config);
 		var pathType = Reflect.field(config, "path");
-		if (pathType == null) pathType = RELATIVE_TO_SOURCE;
 		for (exclude in excludes) {
 			if (exclude == "path") continue;
 			createExcludeMapElement(exclude);
@@ -159,19 +158,35 @@ class Main {
 	}
 
 	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
-		if (pathType == RELATIVE_TO_SOURCE) {
-			for (p in paths) {
-				//var basePath = ~/[\/\\]/.split(p)[0];
-				var path = p + "/" + val.split(".").join("/");
-				if (exclude == "all") allExcludes.push(path);
-				else excludesMap.get(exclude).push(path);
+		Sys.println(pathType);
+		if (pathType == null) {
+			addToExclude(exclude, val);
+		} else {
+			if (pathType == RELATIVE_TO_SOURCE) {
+				for (path in paths) {
+					addNormalisedPathToExclude(exclude, path);
+				} 
+			} else {
+				addNormalisedPathToExclude(exclude, path);
 			}
-		}
-		else {
-			var path = val.split(".").join("/");
-			if (exclude == "all") allExcludes.push(path);
-			else excludesMap.get(exclude).push(path);
-		}
+		}		
+	}
+
+	function addNormalisedPathToExclude(exclude:String, path:String) {
+		var path = normalisePath(val);
+		addToExclude(exclude, path);
+	}
+
+	function normalisePath(path:String) {
+		var slashes:EReg = ~/[\/\\]/g;
+		path = path.split(".").join(":");
+		path = slashes.replace(path, ":");
+		return path;
+	}
+
+	function addToExclude(exclude:String, value:String) {
+		if (exclude == "all") allExcludes.push(value);
+		else excludesMap.get(exclude).push(value);
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {
