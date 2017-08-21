@@ -164,16 +164,16 @@ class Main {
 		} else {
 			if (pathType == RELATIVE_TO_SOURCE) {
 				for (path in paths) {
-					addNormalisedPathToExclude(exclude, path);
+					addNormalisedPathToExclude(exclude, path + ":" + val);
 				} 
 			} else {
-				addNormalisedPathToExclude(exclude, path);
+				addNormalisedPathToExclude(exclude, val);
 			}
 		}		
 	}
 
 	function addNormalisedPathToExclude(exclude:String, path:String) {
-		var path = normalisePath(val);
+		var path = normalisePath(path);
 		addToExclude(exclude, path);
 	}
 
