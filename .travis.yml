@@ -18,6 +18,7 @@ after_success:
 sudo: false
 dist: trusty
 
-allow_failures:
-  haxe:
-  - development
+matrix:
+  allow_failures:
+    haxe:
+    - development
