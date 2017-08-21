@@ -20,4 +20,4 @@ dist: trusty
 
 matrix:
   allow_failures:
-    haxe: development
+    - haxe: development
