@@ -158,18 +158,17 @@ class Main {
 	}
 
 	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
-		Sys.println(pathType);
 		if (pathType == null) {
 			addToExclude(exclude, val);
 		} else {
 			if (pathType == RELATIVE_TO_SOURCE) {
 				for (path in paths) {
 					addNormalisedPathToExclude(exclude, path + ":" + val);
-				} 
+				}
 			} else {
 				addNormalisedPathToExclude(exclude, val);
 			}
-		}		
+		}
 	}
 
 	function addNormalisedPathToExclude(exclude:String, path:String) {
@@ -177,7 +176,7 @@ class Main {
 		addToExclude(exclude, path);
 	}
 
-	function normalisePath(path:String) {
+	function normalisePath(path:String):String {
 		var slashes:EReg = ~/[\/\\]/g;
 		path = path.split(".").join(":");
 		path = slashes.replace(path, ":");
