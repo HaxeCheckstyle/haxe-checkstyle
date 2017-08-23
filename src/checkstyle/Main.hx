@@ -160,12 +160,14 @@ class Main {
 	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
 		if (pathType == null) {
 			addToExclude(exclude, val);
-		} else {
+		}
+		else {
 			if (pathType == RELATIVE_TO_SOURCE) {
 				for (path in paths) {
 					addNormalisedPathToExclude(exclude, path + ":" + val);
 				}
-			} else {
+			}
+			else {
 				addNormalisedPathToExclude(exclude, val);
 			}
 		}
