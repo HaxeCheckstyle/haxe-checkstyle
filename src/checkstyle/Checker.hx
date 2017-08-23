@@ -279,8 +279,7 @@ class Checker {
 		var slashes:EReg = ~/[\/\\]/g;
 		cls = slashes.replace(cls, ":");
 		for (exclude in excludesForCheck) {
-			var regStr:String = slashes.replace(exclude, ":") + ":.*?" + cls.substring(cls.lastIndexOf(":") + 1, cls.length) + "$";
-			var r = new EReg(regStr, "i");
+			var r = new EReg(exclude, "i");
 			if (r.match(cls)) return true;
 		}
 		return false;
