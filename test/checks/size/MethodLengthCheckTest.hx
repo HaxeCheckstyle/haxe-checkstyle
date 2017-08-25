@@ -16,7 +16,18 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 		var check = new MethodLengthCheck();
 		check.max = 10;
 
-		assertMsg(check, TEST3, "Method `test` length is 12 lines (max allowed is 10)");
+		assertMsg(check, TEST3, "Method `test` length is 14 lines (max allowed is 10)");
+	}
+
+	public function testIgnoreEmptyLines() {
+		var check = new MethodLengthCheck();
+		check.max = 10;
+		check.countEmpty = true;
+
+		assertNoMsg(check, TEST3);
+
+		check.countEmpty = false;
+		assertMsg(check, TEST3, "Method `test` length is 14 lines (max allowed is 10)");
 	}
 }
 
@@ -25,7 +36,7 @@ abstract MethodLengthCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test() {
-			tarce('TEST');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
+			trace('TEST');\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
@@ -41,43 +52,45 @@ abstract MethodLengthCheckTests(String) to String {
 	var TEST2 =
 	"abstractAndClass Test {
 		public function test() {
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 		}
 	}";
 
 	var TEST3 =
 	"abstractAndClass Test {
 		public function test() {
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
+
+			// comment
 		}
 
 		@SuppressWarnings('checkstyle:MethodLength')
 		public function test1() {
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 
-			tarce('TEST');
+			trace('TEST');
 		}
 	}";
 }

@@ -231,7 +231,8 @@
 		},
 		{
 			"props": {
-				"max": 50
+				"max": 50,
+				"countEmpty": false
 			},
 			"type": "MethodLength"
 		},

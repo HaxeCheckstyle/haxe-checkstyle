@@ -7,10 +7,12 @@ class MethodLengthCheck extends Check {
 	static var DEFAULT_MAX_LENGTH:Int = 50;
 
 	public var max:Int;
+	public var countEmpty:Bool;
 
 	public function new() {
 		super(AST);
 		max = DEFAULT_MAX_LENGTH;
+		countEmpty = false;
 		categories = [Category.COMPLEXITY, Category.CLARITY];
 		points = 8;
 	}
@@ -39,7 +41,8 @@ class MethodLengthCheck extends Check {
 		var lp = checker.getLinePos(f.pos.min);
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
-		var len = lmax - lmin;
+
+		var len = getLineCount(lmin, lmax);
 		if (len > max) warnFunctionLength(len, f.name, f.pos);
 	}
 
@@ -54,8 +57,18 @@ class MethodLengthCheck extends Check {
 			default: throw "EFunction only";
 		}
 
-		var len = lmax - lmin;
+		var len = getLineCount(lmin, lmax);
 		if (len > max) warnFunctionLength(len, fname, f.pos);
+	}
+
+	function getLineCount(lmin:Int, lmax:Int):Int {
+		var emptyLines = 0;
+		if (countEmpty) {
+			for (i in lmin...lmax) {
+				if (~/^\s*$/.match(checker.lines[i]) || ~/^\s*\/\/.*/.match(checker.lines[i])) emptyLines++;
+			}
+		}
+		return lmax - lmin - emptyLines;
 	}
 
 	function warnFunctionLength(len:Int, name:String, pos:Position) {
