@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "exclude config regex #349",
-	"version": "2.1.14",
+	"releasenote": "#354",
+	"version": "2.1.15",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
