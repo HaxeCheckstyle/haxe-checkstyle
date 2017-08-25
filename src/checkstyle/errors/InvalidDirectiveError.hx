@@ -1,3 +1,3 @@
 package checkstyle.errors;
 
-class InvalidDirectiveError extends Error {}
+class InvalidDirectiveError extends checkstyle.errors.Error {}

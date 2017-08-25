@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkVar {
 	public static function walkVar(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
 		var name:TokenTree = null;
@@ -20,7 +16,7 @@ class WalkVar {
 			if (stream.is(DblDot)) {
 				var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
 				name.addChild(dblDot);
-				WalkTypeNameDef.walkTypeNameDef(stream, dblDot);
+				WalkTypedefBody.walkTypedefAlias(stream, dblDot);
 			}
 			if (stream.is(Binop(OpAssign))) {
 				WalkStatement.walkStatement(stream, name);

@@ -1,8 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-
 @name("ListenerName")
 @desc("Checks the naming conventions of event listener functions specified using `listeners` property.")
 class ListenerNameCheck extends Check {
@@ -18,7 +15,7 @@ class ListenerNameCheck extends Check {
 	}
 
 	override public function actualRun() {
-		ExprUtils.walkFile(checker.ast, function(e) {
+		checker.ast.walkFile(function(e) {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
 				case ECall(e, params):

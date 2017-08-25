@@ -1,10 +1,5 @@
 package checkstyle.checks.type;
 
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-
-using checkstyle.utils.FieldUtils;
-
 @name("Return")
 @desc("Warns if Void is used for return or if return type is not specified when returning.")
 class ReturnCheck extends Check {
@@ -52,7 +47,7 @@ class ReturnCheck extends Check {
 	}
 
 	function checkInlineFunctions() {
-		ExprUtils.walkFile(checker.ast, function(e) {
+		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				case EFunction(fname, f):
 					var funNoReturn:Bool = (f.ret == null);

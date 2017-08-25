@@ -1,7 +1,5 @@
 package checkstyle.utils;
 
-import checkstyle.token.TokenTree;
-
 class TokenTreeCheckUtils {
 
 	public static function isImportMult(token:TokenTree):Bool {
@@ -65,6 +63,7 @@ class TokenTreeCheckUtils {
 			case Const(_): true;
 			case POpen: true;
 			case Kwd(KwdMacro): true;
+			case Kwd(KwdThis): true;
 			default: false;
 		}
 	}

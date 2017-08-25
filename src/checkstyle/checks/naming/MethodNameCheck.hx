@@ -1,11 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-
 @name("MethodName")
 @desc("Checks that method names conform to a format specified by the `format` property.")
 class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {

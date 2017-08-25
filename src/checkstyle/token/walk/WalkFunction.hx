@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkFunction {
 	public static function walkFunction(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
 		var funcTok:TokenTree = stream.consumeTokenDef(Kwd(KwdFunction));

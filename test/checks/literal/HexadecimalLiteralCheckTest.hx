@@ -5,7 +5,7 @@ import checkstyle.checks.literal.HexadecimalLiteralCheck;
 class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckTests> {
 
 	public function test1() {
-		assertMsg(new HexadecimalLiteralCheck(), TEST1, "Bad hexademical literal, use upperCase");
+		assertMsg(new HexadecimalLiteralCheck(), TEST1, "Bad hexadecimal literal, use upperCase");
 	}
 
 	public function test2() {
@@ -15,7 +15,7 @@ class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckT
 	public function test3() {
 		var check = new HexadecimalLiteralCheck();
 		check.option = "lowerCase";
-		assertMsg(check, TEST3, "Bad hexademical literal, use lowerCase");
+		assertMsg(check, TEST3, "Bad hexadecimal literal, use lowerCase");
 	}
 }
 

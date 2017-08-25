@@ -1,10 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("LeftCurly")
 @desc("Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.")
 class LeftCurlyCheck extends Check {
@@ -178,13 +173,13 @@ class LeftCurlyCheck extends Check {
 		try {
 			if (curlyAtEOL) {
 				logErrorIf((option == NL), "Left curly should be on new line (only whitespace before curly)", pos);
-				logErrorIf((option == NLOW) && wrapped, "Left curly should be on new line (previous expression is split over muliple lines)", pos);
+				logErrorIf((option == NLOW) && wrapped, "Left curly should be on new line (previous expression is split over multiple lines)", pos);
 				logErrorIf((option != EOL) && (option != NLOW), "Left curly unknown option ${option}", pos);
 				return;
 			}
-			logErrorIf((option == EOL), "Left curly should be at EOL (only linebreak or comment after curly)", pos);
+			logErrorIf((option == EOL), "Left curly should be at EOL (only line break or comment after curly)", pos);
 			logErrorIf((!curlyOnNL), "Left curly should be on new line (only whitespace before curly)", pos);
-			logErrorIf((option == NLOW) && !wrapped, "Left curly should be at EOL (previous expression is not split over muliple lines)", pos);
+			logErrorIf((option == NLOW) && !wrapped, "Left curly should be at EOL (previous expression is not split over multiple lines)", pos);
 			logErrorIf((option != NL) && (option != NLOW), "Left curly unknown option ${option}", pos);
 		}
 		catch (e:String) {

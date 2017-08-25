@@ -36,7 +36,7 @@ class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> 
 		assertMsg(check, TEST5, "Too many parameters for function: test4 (> 7)");
 	}
 
-	public function testIgnoreOverridenMethods() {
+	public function testIgnoreOverriddenMethods() {
 		var check = new ParameterNumberCheck();
 		check.ignoreOverriddenMethods = true;
 

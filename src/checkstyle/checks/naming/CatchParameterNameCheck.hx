@@ -1,7 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.token.TokenTree;
-
 @name("CatchParameterName")
 @desc("Checks that catch parameter names conform to a format specified by the `format` property.")
 class CatchParameterNameCheck extends Check {
@@ -19,7 +17,7 @@ class CatchParameterNameCheck extends Check {
 		var catchTokens = root.filter([Kwd(KwdCatch)], ALL);
 
 		for (tkn in catchTokens) {
-			for (item in tkn.childs) {
+			for (item in tkn.children) {
 				switch (item.getFirstChild().tok) {
 					case Const(CIdent(name)):
 						if (item.is(POpen)) {

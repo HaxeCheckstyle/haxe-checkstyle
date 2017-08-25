@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-
 @name("ReturnCount")
 @desc("Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.")
 class ReturnCountCheck extends Check {
@@ -28,7 +26,7 @@ class ReturnCountCheck extends Check {
 				default:
 			}
 			if (isPosSuppressed(fn.pos)) continue;
-			if (!fn.hasChilds()) throw "function has invalid structure!";
+			if (!fn.hasChildren()) throw "function has invalid structure!";
 			var returns = fn.filterCallback(filterReturns);
 			if (returns.length > max) {
 				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos);

@@ -1,10 +1,5 @@
 package checkstyle.checks.type;
 
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-
 @name("Type")
 @desc("Checks of type is specified or not for member variables.")
 class TypeCheck extends Check {

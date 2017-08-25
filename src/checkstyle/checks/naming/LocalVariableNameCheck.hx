@@ -1,7 +1,5 @@
 package checkstyle.checks.naming;
 
-import checkstyle.utils.ExprUtils;
-
 @name("LocalVariableName")
 @desc("Checks that the local variable names conform to a format specified by the `format` property.")
 class LocalVariableNameCheck extends NameCheckBase<String> {
@@ -13,7 +11,7 @@ class LocalVariableNameCheck extends NameCheckBase<String> {
 
 	override function actualRun() {
 		formatRE = new EReg (format, "");
-		ExprUtils.walkFile(checker.ast, function(e) {
+		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				case EVars(vars):
 					if (ignoreExtern && isPosExtern(e.pos)) return;

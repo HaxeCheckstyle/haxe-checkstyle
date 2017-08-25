@@ -1,8 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-import haxeparser.Data.TokenDef;
-
 @name("InnerAssignment")
 @desc("Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.")
 class InnerAssignmentCheck extends Check {
@@ -90,8 +87,8 @@ class InnerAssignmentCheck extends Check {
 		var parent:TokenTree;
 		if (Type.enumEq(token.parent.tok, BrOpen)) {
 			var brOpen:TokenTree = token.parent;
-			// parent is a block and has more than two childs
-			if (brOpen.childs.length > 2) return true;
+			// parent is a block and has more than two children
+			if (brOpen.children.length > 2) return true;
 			parent = brOpen.parent;
 		}
 		else {

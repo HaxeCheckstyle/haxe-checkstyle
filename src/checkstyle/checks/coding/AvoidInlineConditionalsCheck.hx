@@ -1,9 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.CheckMessage.SeverityLevel;
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-
 @name("AvoidInlineConditionals")
 @desc("Detects inline conditionals. Useful for developers who find inline conditionals hard to read and want forbid them.")
 class AvoidInlineConditionalsCheck extends Check {
@@ -16,7 +12,7 @@ class AvoidInlineConditionalsCheck extends Check {
 	}
 
 	override function actualRun() {
-		ExprUtils.walkFile(checker.ast, function(e:Expr) {
+		checker.ast.walkFile(function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
 				case ETernary(econd, eif, eelse): logPos("Avoid inline conditionals", e.pos);

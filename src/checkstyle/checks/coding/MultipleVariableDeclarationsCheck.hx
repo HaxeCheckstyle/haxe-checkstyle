@@ -1,7 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-
 @name("MultipleVariableDeclarations")
 @desc("Checks that each variable declaration is in its own statement and on its own line.")
 class MultipleVariableDeclarationsCheck extends Check {
@@ -22,7 +20,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 			if (lastVarLineNo > 0 && lastVarLineNo == curVarLineNo) logPos("Only one variable definition per line allowed", v.pos);
 			lastVarLineNo = curVarLineNo;
 			var count = 0;
-			for (c in v.childs) {
+			for (c in v.children) {
 				switch (c.tok) {
 					case Const(CIdent(name)):
 						count++;

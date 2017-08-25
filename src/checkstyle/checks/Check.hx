@@ -1,14 +1,8 @@
 package checkstyle.checks;
 
-import haxe.macro.Expr;
-import checkstyle.CheckMessage.SeverityLevel;
-
 #if debug
 import haxe.CallStack;
 #end
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
 
 class Check {
 
@@ -31,7 +25,7 @@ class Check {
 		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
-	public function configureProperty(name:String, value:Dynamic) {
+	public function configureProperty(name:String, value:Any) {
 		Reflect.setField(this, name, value);
 	}
 

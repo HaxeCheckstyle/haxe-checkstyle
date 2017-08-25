@@ -1,11 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.token.TokenTree;
-import haxeparser.Data;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("NeedBraces")
 @desc("Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.")
 class NeedBracesCheck extends Check {
@@ -63,7 +57,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkIfChild(token:TokenTree) {
-		if (token == null || !token.hasChilds()) return;
+		if (token == null || !token.hasChildren()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		if (Type.enumEq(lastChild.tok, Kwd(KwdElse))) {
@@ -78,12 +72,12 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkFunctionChild(token:TokenTree) {
-		if (token == null || !token.hasChilds()) return;
+		if (token == null || !token.hasChildren()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
 			case Const(CIdent(_)), Kwd(KwdNew):
-				if (!lastChild.hasChilds()) return;
+				if (!lastChild.hasChildren()) return;
 				lastChild = lastChild.getLastChild();
 			default:
 		}
@@ -98,7 +92,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkDoWhileChild(token:TokenTree) {
-		if (token == null || !token.hasChilds()) return;
+		if (token == null || !token.hasChildren()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		var expr:TokenTree = lastChild.previousSibling;
@@ -111,7 +105,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkWhileChild(token:TokenTree) {
-		if (token == null || !token.hasChilds() || Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
+		if (token == null || !token.hasChildren() || Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {
 			case BrOpen:
@@ -122,7 +116,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkLastChild(token:TokenTree) {
-		if (token == null || !token.hasChilds()) return;
+		if (token == null || !token.hasChildren()) return;
 
 		var lastChild:TokenTree = token.getLastChild();
 		switch (lastChild.tok) {

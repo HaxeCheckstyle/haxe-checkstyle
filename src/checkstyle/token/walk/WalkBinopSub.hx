@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkBinopSub {
 	public static function walkBinopSub(stream:TokenStream, parent:TokenTree) {
 		var sub:TokenTree = stream.consumeOpSub();

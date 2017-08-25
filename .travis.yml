@@ -3,15 +3,12 @@ git:
 
 language: haxe
 haxe:
-  - 3.2.1
+  - 3.4.2
   - development
 install:
-  - if [[ $(haxe -version 2>&1) == "3.2.1" ]];
-    then haxelib install haxeparser 3.2.0; else
-    haxelib git haxeparser https://github.com/Simn/haxeparser;
-    fi
+  - haxelib install haxeparser 3.3.0
   - haxelib install compiletime 2.6.0
-  - haxelib git hxargs https://github.com/Simn/hxargs
+  - haxelib install hxargs 3.0.2
   - haxelib install mcover 2.1.1
 script:
   - haxe buildAll.hxml
@@ -19,3 +16,8 @@ script:
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
+dist: trusty
+
+matrix:
+  allow_failures:
+    - haxe: development

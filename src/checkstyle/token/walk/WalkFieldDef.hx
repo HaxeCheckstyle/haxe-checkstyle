@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkFieldDef {
 
 	public static function walkFieldDef(stream:TokenStream, parent:TokenTree) {
@@ -36,6 +32,10 @@ class WalkFieldDef {
 			WalkStatement.walkStatement(stream, name);
 		}
 		switch (stream.token()) {
+			case Arrow:
+				var arrowTok:TokenTree = stream.consumeTokenDef(Arrow);
+				name.addChild(arrowTok);
+				walkFieldDef (stream, arrowTok);
 			case Comma:
 				name.addChild(stream.consumeTokenDef(Comma));
 			case Semicolon:

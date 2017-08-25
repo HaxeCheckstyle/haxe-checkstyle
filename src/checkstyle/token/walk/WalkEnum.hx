@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkEnum {
 	public static function walkEnum(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
 		var typeTok:TokenTree = stream.consumeToken();

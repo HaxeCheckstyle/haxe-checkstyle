@@ -1,13 +1,5 @@
 package checkstyle.utils;
 
-import haxeparser.Data.TypeDecl;
-import haxeparser.Data.Definition;
-import haxeparser.Data.ClassFlag;
-import haxeparser.Data.AbstractFlag;
-import haxeparser.Data.EnumFlag;
-import haxeparser.Data.EnumConstructor;
-import haxe.macro.Expr;
-
 class ComplexTypeUtils {
 
 	public static function walkFile(file:{ pack:Array<String>, decls:Array<TypeDecl> }, cb:ComplexTypeCallback) {

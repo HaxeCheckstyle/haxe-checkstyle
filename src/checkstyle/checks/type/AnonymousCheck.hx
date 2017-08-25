@@ -1,10 +1,5 @@
 package checkstyle.checks.type;
 
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-
-using checkstyle.utils.FieldUtils;
-
 @name("Anonymous")
 @desc("Check to find any anonymous type structures used.")
 class AnonymousCheck extends Check {
@@ -30,7 +25,7 @@ class AnonymousCheck extends Check {
 	}
 
 	function checkLocalVars() {
-		ExprUtils.walkFile(checker.ast, function(e) {
+		checker.ast.walkFile(function(e) {
 			switch (e.expr){
 				case EVars(vars):
 					for (v in vars) {

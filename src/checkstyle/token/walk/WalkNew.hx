@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkNew {
 	public static function walkNew(stream:TokenStream, parent:TokenTree) {
 		var newTok:TokenTree = stream.consumeTokenDef(Kwd(KwdNew));

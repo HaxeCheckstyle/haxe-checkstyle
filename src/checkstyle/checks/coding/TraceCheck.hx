@@ -1,8 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.CheckMessage.SeverityLevel;
-import checkstyle.token.TokenTree;
-
 @name("Trace")
 @desc("Checks for trace calls in code.")
 class TraceCheck extends Check {

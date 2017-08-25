@@ -18,8 +18,6 @@ import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
 
-using checkstyle.utils.ArrayUtils;
-
 class Main {
 
 	static var DEFAULT_CONFIG:String = "checkstyle.json";
@@ -145,11 +143,13 @@ class Main {
 
 	function parseExcludes(config:ExcludeConfig) {
 		var excludes = Reflect.fields(config);
+		var pathType = Reflect.field(config, "path");
 		for (exclude in excludes) {
+			if (exclude == "path") continue;
 			createExcludeMapElement(exclude);
 			var excludeValues:Array<String> = Reflect.field(config, exclude);
 			if (excludeValues == null || excludeValues.length == 0) continue;
-			for (val in excludeValues) updateExcludes(exclude, val);
+			for (val in excludeValues) updateExcludes(exclude, val, pathType);
 		}
 	}
 
@@ -157,12 +157,37 @@ class Main {
 		if (excludesMap.get(exclude) == null) excludesMap.set(exclude, []);
 	}
 
-	function updateExcludes(exclude:String, val:String) {
-		for (p in paths) {
-			var path = p + "/" + val.split(".").join("/");
-			if (exclude == "all") allExcludes.push(path);
-			else excludesMap.get(exclude).push(path);
+	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
+		if (pathType == null) {
+			addToExclude(exclude, val);
 		}
+		else {
+			if (pathType == RELATIVE_TO_SOURCE) {
+				for (path in paths) {
+					addNormalisedPathToExclude(exclude, path + ":" + val);
+				}
+			}
+			else {
+				addNormalisedPathToExclude(exclude, val);
+			}
+		}
+	}
+
+	function addNormalisedPathToExclude(exclude:String, path:String) {
+		var path = normalisePath(path);
+		addToExclude(exclude, path);
+	}
+
+	function normalisePath(path:String):String {
+		var slashes:EReg = ~/[\/\\]/g;
+		path = path.split(".").join(":");
+		path = slashes.replace(path, ":");
+		return path;
+	}
+
+	function addToExclude(exclude:String, value:String) {
+		if (exclude == "all") allExcludes.push(value);
+		else excludesMap.get(exclude).push(value);
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {
@@ -188,7 +213,7 @@ class Main {
 			try {
 				check.configureProperty(prop, val);
 			}
-			catch (e:Dynamic) {
+			catch (e:Any) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
 				message += (Std.is(e, Error) ? (e:Error).message : Std.string(e));
 				failWith(message);
@@ -345,7 +370,7 @@ class Main {
 				files.push(path);
 			}
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			Sys.println("\nPath " + path + " not found.");
 		}
 	}
@@ -400,7 +425,7 @@ class Main {
 
 			new Main().run(args);
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			Sys.stderr().writeString(e + "\n");
 			Sys.stderr().writeString(CallStack.toString(CallStack.exceptionStack()) + "\n");
 		}
@@ -414,4 +439,10 @@ typedef CodeclimateConfig = {
 	@:optional var include_paths:Array<String>;
 	@:optional var config:String;
 	@:optional var exclude:String;
+}
+
+@:enum
+abstract ExcludePath(String) {
+	var RELATIVE_TO_PROJECT = "RELATIVE_TO_PROJECT";
+	var RELATIVE_TO_SOURCE = "RELATIVE_TO_SOURCE";
 }

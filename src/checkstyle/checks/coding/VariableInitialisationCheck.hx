@@ -1,10 +1,5 @@
 package checkstyle.checks.coding;
 
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-
 @name("VariableInitialisation")
 @desc("Checks for instance variables that are initialised at class level.")
 class VariableInitialisationCheck extends Check {

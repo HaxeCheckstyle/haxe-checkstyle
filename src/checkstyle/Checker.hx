@@ -3,19 +3,13 @@ package checkstyle;
 import byte.ByteData;
 import haxe.CallStack;
 import checkstyle.checks.Check;
-import haxeparser.Data.TypeDecl;
 import haxeparser.HaxeParser;
 import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
-import haxeparser.Data.Token;
 import sys.io.File;
 
 import checkstyle.checks.Category;
-import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
-
-using checkstyle.utils.ArrayUtils;
-using StringTools;
 
 class Checker {
 
@@ -119,7 +113,7 @@ class Checker {
 				t = lexer.token(haxeparser.HaxeLexer.tok);
 			}
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
@@ -152,7 +146,7 @@ class Checker {
 		try {
 			return parser.parse();
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			#if debug
 			Sys.println(e);
 			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
@@ -205,7 +199,7 @@ class Checker {
 			makeTokens();
 			makeASTs();
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			for (reporter in reporters) {
 				reporter.addMessage(getErrorMessage(e, file.name, "Parsing"));
 				reporter.fileFinish(file);
@@ -268,7 +262,7 @@ class Checker {
 			if (checkForExclude(check.getModuleName())) return [];
 			return check.run(this);
 		}
-		catch (e:Dynamic) {
+		catch (e:Any) {
 			for (reporter in reporters) reporter.addMessage(getErrorMessage(e, file.name, "Check " + check.getModuleName()));
 			return [];
 		}
@@ -285,14 +279,13 @@ class Checker {
 		var slashes:EReg = ~/[\/\\]/g;
 		cls = slashes.replace(cls, ":");
 		for (exclude in excludesForCheck) {
-			var regStr:String = slashes.replace(exclude, ":") + ":.*?" + cls.substring(cls.lastIndexOf(":") + 1, cls.length) + "$";
-			var r = new EReg(regStr, "i");
+			var r = new EReg(exclude, "i");
 			if (r.match(cls)) return true;
 		}
 		return false;
 	}
 
-	function getErrorMessage(e:Dynamic, fileName:String, step:String):CheckMessage {
+	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
 		return {
 			fileName:fileName,
 			line:1,

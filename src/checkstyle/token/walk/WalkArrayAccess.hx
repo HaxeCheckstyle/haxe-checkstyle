@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkArrayAccess {
 	public static function walkArrayAccess(stream:TokenStream, parent:TokenTree) {
 		var bkOpen:TokenTree = stream.consumeTokenDef(BkOpen);

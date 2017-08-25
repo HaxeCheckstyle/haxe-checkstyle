@@ -1,11 +1,5 @@
 package checkstyle.checks.block;
 
-import checkstyle.Checker.LinePos;
-import checkstyle.token.TokenTree;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("RightCurly")
 @desc("Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.")
 class RightCurlyCheck extends Check {

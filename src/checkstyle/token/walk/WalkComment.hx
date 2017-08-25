@@ -1,9 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkComment {
 	public static function walkComment(stream:TokenStream, parent:TokenTree) {
 		if (!stream.hasMore()) return;

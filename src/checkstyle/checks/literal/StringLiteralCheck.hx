@@ -1,9 +1,7 @@
 package checkstyle.checks.literal;
 
-import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 import checkstyle.utils.StringUtils;
-import haxe.macro.Expr;
 
 @name("StringLiteral")
 @desc("Checks for single or double quote string literals.")

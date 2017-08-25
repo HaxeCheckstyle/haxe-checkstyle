@@ -1,7 +1,5 @@
 package checkstyle.checks.imports;
 
-import checkstyle.token.TokenTree;
-
 @name("AvoidStarImport")
 @desc("Checks for import statements that use the * notation and using directives.")
 class AvoidStarImportCheck extends Check {

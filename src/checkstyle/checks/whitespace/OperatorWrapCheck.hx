@@ -1,7 +1,5 @@
 package checkstyle.checks.whitespace;
 
-import haxeparser.Data;
-
 @name("OperatorWrap")
 @desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {

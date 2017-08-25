@@ -1,8 +1,5 @@
 package checkstyle.checks.literal;
 
-import checkstyle.utils.ExprUtils;
-import haxe.macro.Expr;
-
 @name("ERegLiteral", "ERegInstantiation")
 @desc("Checks for usage of EReg literals (between ~/ and /) instead of new.")
 class ERegLiteralCheck extends Check {
@@ -13,7 +10,7 @@ class ERegLiteralCheck extends Check {
 	}
 
 	override function actualRun() {
-		ExprUtils.walkFile(checker.ast, function(e:Expr) {
+		checker.ast.walkFile(function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr){
 				case ENew(

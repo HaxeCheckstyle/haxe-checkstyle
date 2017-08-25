@@ -1,6 +1,6 @@
 package checkstyle.checks.modifier;
 
-import haxe.macro.Expr;
+import haxe.macro.PositionTools;
 
 @name("ModifierOrder", "AccessOrder")
 @desc("Checks that the order of modifiers conforms to the standards.")
@@ -33,10 +33,23 @@ class ModifierOrderCheck extends Check {
 			var modifier:ModifierOrderCheckModifier = access;
 			index = modifiers.indexOf(modifier);
 			if (index < lastIndex) {
-				warnOrder(f.name, modifier, f.pos);
+				var pos = calcPos(f);
+				warnOrder(f.name, modifier, pos);
 				return;
 			}
 			lastIndex = index;
+		}
+	}
+
+	function calcPos(f:Field):Position {
+		switch (f.kind) {
+			case FVar(_, _), FProp(_, _, _, _):
+				return f.pos;
+			case FFun(fun):
+				if (fun.expr == null) {
+					return f.pos;
+				}
+				return PositionTools.make({min: f.pos.min, max: fun.expr.pos.min, file: f.pos.file});
 		}
 	}
 

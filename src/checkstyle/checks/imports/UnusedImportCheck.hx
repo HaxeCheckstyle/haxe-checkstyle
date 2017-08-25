@@ -1,17 +1,14 @@
 package checkstyle.checks.imports;
 
-import checkstyle.token.TokenTree;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
-
-using checkstyle.utils.ArrayUtils;
 
 @name("UnusedImport")
 @desc("Checks for unused or duplicate imports.")
 class UnusedImportCheck extends Check {
 
 	public var ignoreModules:Array<String>;
-	public var moduleTypeMap:Dynamic;
+	public var moduleTypeMap:Any;
 
 	public function new() {
 		super(TOKEN);

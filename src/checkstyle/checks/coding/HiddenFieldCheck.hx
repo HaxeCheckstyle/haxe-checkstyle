@@ -1,9 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.token.TokenTree;
-
-using checkstyle.utils.ArrayUtils;
-
 @name("HiddenField")
 @desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")
 class HiddenFieldCheck extends Check {
@@ -42,10 +38,10 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkMethod(method:TokenTree, memberNames:Array<String>, ignoreFormatRE:EReg) {
-		if (!method.hasChilds()) throw "function has invalid structure!";
+		if (!method.hasChildren()) throw "function has invalid structure!";
 
 		// handle constructor and setters
-		var methodName:TokenTree = method.childs[0];
+		var methodName:TokenTree = method.children[0];
 		if (methodName.is(Kwd(KwdNew)) && ignoreConstructorParameter) return;
 		if (ignoreSetter && isSetterFunction(methodName, memberNames)) return;
 		switch (methodName.tok) {
@@ -81,15 +77,15 @@ class HiddenFieldCheck extends Check {
 		if ((paramDef == null) || (paramDef.length != 1)) {
 			throw "function parameters have invalid structure!";
 		}
-		var paramList:Array<TokenTree> = paramDef[0].childs;
+		var paramList:Array<TokenTree> = paramDef[0].children;
 		for (param in paramList) checkName(param, memberNames, "Parameter definition");
 	}
 
 	function checkVars(method:TokenTree, memberNames:Array<String>) {
 		var vars:Array<TokenTree> = method.filter([Kwd(KwdVar)], ALL);
 		for (v in vars) {
-			if (!v.hasChilds()) throw "var has invalid structure!";
-			checkName(v.childs[0], memberNames, "Variable definition");
+			if (!v.hasChildren()) throw "var has invalid structure!";
+			checkName(v.children[0], memberNames, "Variable definition");
 		}
 	}
 
@@ -99,8 +95,8 @@ class HiddenFieldCheck extends Check {
 			var popens:Array<TokenTree> = f.filter([POpen], FIRST, 2);
 			if (popens.length <= 0) continue;
 			var pOpen:TokenTree = popens[0];
-			if (!pOpen.hasChilds()) continue;
-			checkName(pOpen.childs[0], memberNames, "For loop definition");
+			if (!pOpen.hasChildren()) continue;
+			checkName(pOpen.children[0], memberNames, "For loop definition");
 		}
 	}
 
@@ -124,8 +120,8 @@ class HiddenFieldCheck extends Check {
 		//          |- Kwd(KwdFunction)
 		var varFields:Array<TokenTree> = clazz.filter([Kwd(KwdVar)], FIRST, MAX_FIELD_LEVEL);
 		for (member in varFields) {
-			if (!member.hasChilds()) continue;
-			switch (member.childs[0].tok) {
+			if (!member.hasChildren()) continue;
+			switch (member.children[0].tok) {
 				case Const(CIdent(name)): memberNames.push(name);
 				default:
 			}

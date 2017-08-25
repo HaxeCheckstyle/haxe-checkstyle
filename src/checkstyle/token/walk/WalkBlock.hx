@@ -1,14 +1,10 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenStreamProgress;
-import checkstyle.token.TokenTree;
-
 class WalkBlock {
 	/**
 	 * BrOpen
 	 *  |- statement
-	 *  |- startement
+	 *  |- statement
 	 *  |- BrClose
 	 *
 	 */

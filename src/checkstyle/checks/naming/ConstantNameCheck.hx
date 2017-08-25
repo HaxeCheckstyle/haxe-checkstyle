@@ -1,11 +1,5 @@
 package checkstyle.checks.naming;
 
-import haxeparser.Data;
-import haxe.macro.Expr;
-
-using checkstyle.utils.ArrayUtils;
-using checkstyle.utils.FieldUtils;
-
 @name("ConstantName")
 @desc("Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.")
 class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {

@@ -1,6 +1,5 @@
 package checkstyle.checks.literal;
 
-import checkstyle.token.TokenTree;
 import checkstyle.token.TokenTreeBuilder;
 import checkstyle.utils.StringUtils;
 

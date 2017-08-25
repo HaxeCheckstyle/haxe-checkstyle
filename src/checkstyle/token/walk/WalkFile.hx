@@ -1,8 +1,5 @@
 package checkstyle.token.walk;
 
-import checkstyle.token.TokenStream;
-import checkstyle.token.TokenTree;
-
 class WalkFile {
 	public static function walkFile(stream:TokenStream, parent:TokenTree) {
 		var tempStore:Array<TokenTree> = [];
@@ -17,7 +14,7 @@ class WalkFile {
 					if (!stream.hasMore()) return;
 					switch (stream.token()) {
 						case BrOpen:
-							WalkBlock.walkBlock(stream, parent.childs[parent.childs.length - 1]);
+							WalkBlock.walkBlock(stream, parent.children[parent.children.length - 1]);
 						default:
 					}
 				case At:
