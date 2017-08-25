@@ -16,8 +16,8 @@
 	"contributors": [
 		"adireddy"
 	],
-	"releasenote": "added path option in exclude config",
-	"version": "2.1.13",
+	"releasenote": "exclude config regex #349",
+	"version": "2.1.14",
 	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
 	"dependencies": {
 
