@@ -19,6 +19,6 @@ class ExitCodeReporter implements IReporter {
 	public function fileFinish(f:CheckFile) {}
 
 	public function addMessage(m:CheckMessage) {
-		failCheckCount++;
+		if (m.severity == ERROR) failCheckCount++;
 	}
 }
