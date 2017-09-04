@@ -393,6 +393,7 @@
 		},
 		{
 			"props": {
+				"enforceReturnTypeForAnonymous": false,
 				"allowEmptyReturn": true,
 				"enforceReturnType": false
 			},
