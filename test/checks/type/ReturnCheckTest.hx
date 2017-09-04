@@ -17,6 +17,21 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertNoMsg(check, CORRECT_RETURN);
 	}
 
+	public function testCorrectReturnForAnonymous() {
+		var check = new ReturnCheck();
+		assertNoMsg(check, CORRECT_RETURN_ANONYMOUS);
+		check.enforceReturnTypeForAnonymous = true;
+		assertNoMsg(check, CORRECT_RETURN_ANONYMOUS);
+	}
+
+	public function testIncorrectReturnForAnonymous() {
+		var check = new ReturnCheck();
+		assertNoMsg(check, TEST5);
+		check.enforceReturnTypeForAnonymous = true;
+		assertMsg(check, TEST5, MSG_NO_ANON_RETURN);
+
+	}
+
 	public function testVoid() {
 		assertMsg(new ReturnCheck(), TEST1, MSG_VOID_RETURN);
 	}
@@ -28,6 +43,9 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertMsg(check, TEST2B, MSG_NOT_TEST1_RETURN);
 		assertMsg(check, TEST_FOR, MSG_NOT_TEST1_RETURN);
 		assertMsg(check, TEST_WHILE, MSG_NOT_TEST1_RETURN);
+
+		assertNoMsg(check, TEST5);
+		check.enforceReturnTypeForAnonymous = true;
 		assertMsg(check, TEST5, MSG_NO_ANON_RETURN);
 	}
 
@@ -169,6 +187,16 @@ abstract ReturnCheckTests(String) to String {
 	var INTERFACE =
 	"interface Test {
 		public function test1();
+	}";
+
+	var CORRECT_RETURN_ANONYMOUS =
+	"abstractAndClass Test {
+		public function test7() {
+			var x = function(i):Int{
+				return i * i;
+			}
+			return;
+		}
 	}";
 
 	var CORRECT_RETURN =
