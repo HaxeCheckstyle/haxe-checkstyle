@@ -6,11 +6,13 @@ class ReturnCheck extends Check {
 
 	public var allowEmptyReturn:Bool;
 	public var enforceReturnType:Bool;
+	public var enforceReturnTypeForAnonymous:Bool;
 
 	public function new() {
 		super(AST);
 		allowEmptyReturn = true;
 		enforceReturnType = false;
+		enforceReturnTypeForAnonymous = false;
 		categories = [Category.CLARITY];
 		points = 2;
 	}
@@ -105,7 +107,11 @@ class ReturnCheck extends Check {
 	}
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
-		if (name == null) logPos("Return type not specified for anonymous method", pos);
+		if (name == null) {
+			if (enforceReturnTypeForAnonymous) {
+				logPos("Return type not specified for anonymous method", pos);
+			}
+		}
 		else logPos('Return type not specified for method "${name}"', pos);
 	}
 }
