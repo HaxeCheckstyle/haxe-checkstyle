@@ -108,10 +108,9 @@ class ReturnCheck extends Check {
 
 	function warnReturnTypeMissing(name:String, pos:Position) {
 		if (name == null) {
-			if (!enforceReturnTypeForAnonymous) {
-				return;
+			if (enforceReturnTypeForAnonymous) {
+				logPos("Return type not specified for anonymous method", pos);
 			}
-			logPos("Return type not specified for anonymous method", pos);
 		}
 		else logPos('Return type not specified for method "${name}"', pos);
 	}
