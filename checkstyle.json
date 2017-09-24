@@ -170,7 +170,7 @@
 		},
 		{
 			"props": {
-				"ignoreNumbers": [-1, 0, 1, 2, 3, 5, 8, 13, 21, 34, 100]
+				"ignoreNumbers": [-1, 0, 1, 2, 3, 4.0, 5, 8, 13, 21, 34, 100]
 			},
 			"type": "MagicNumber"
 		},
