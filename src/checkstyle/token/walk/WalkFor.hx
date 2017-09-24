@@ -57,7 +57,11 @@ class WalkFor {
 		parent.addChild(pOpen);
 		pOpen.addChild(identifier);
 		WalkComment.walkComment(stream, identifier);
+		#if (haxe_ver < 4.0)
 		var inTok:TokenTree = stream.consumeTokenDef(Kwd(KwdIn));
+		#else
+		var inTok:TokenTree = stream.consumeTokenDef(Binop(OpIn));
+		#end
 		identifier.addChild(inTok);
 		WalkComment.walkComment(stream, inTok);
 		WalkStatement.walkStatement(stream, inTok);

@@ -18,7 +18,11 @@ class TokenTreeCheckUtils {
 				case Kwd(KwdExtern):
 				case Const(CIdent(_)):
 				case Dot:
+				#if (haxe_ver < 4.0)
 				case Kwd(KwdIn):
+				#else
+				case Binop(OpIn):
+				#end
 				case Kwd(KwdImport): return true;
 				default: return false;
 			}

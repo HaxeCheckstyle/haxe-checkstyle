@@ -164,7 +164,9 @@ class ComplexTypeUtils {
 			case EFunction(name, f): walkFunction(f, name, e.pos, cb);
 			case EBlock(exprs): for (e in exprs) walkExpr(e, cb);
 			case EFor(it, expr): walkExpr(it, cb); walkExpr(expr, cb);
+			#if (haxe_ver < 4.0)
 			case EIn(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
+			#end
 			case EIf(econd, eif, eelse): walkExpr(econd, cb);
 				walkExpr(eif, cb);
 				if (eelse != null) walkExpr(eelse, cb);
