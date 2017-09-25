@@ -31,7 +31,7 @@ The current number of issues can be tracked via a badge:
 
 Immediate results, right in your pull requests.
 
-![img](https://codeclimate.com/marketing/images/features/pull_requests-67ad7029.png)
+![codeclimate-pr](resources/codeclimate_pr.png)
 
 ### Installation
 
