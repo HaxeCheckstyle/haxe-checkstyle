@@ -362,17 +362,34 @@ class Main {
 
 	function traverse(path:String, files:Array<String>) {
 		try {
-			if (FileSystem.isDirectory(path) && !allExcludes.contains(path)) {
+			if (FileSystem.isDirectory(path) && !isExcludedFromAll(path)) {
 				var nodes = FileSystem.readDirectory(path);
 				for (child in nodes) traverse(pathJoin(path, child), files);
 			}
-			else if (~/(.hx)$/i.match(path) && !allExcludes.contains(path.substring(0, path.indexOf(".hx")))) {
+			else if (~/(.hx)$/i.match(path) && !isExcludedFromAll(path)) {
 				files.push(path);
 			}
 		}
 		catch (e:Any) {
 			Sys.println("\nPath " + path + " not found.");
 		}
+	}
+
+	function isExcludedFromAll(path:String):Bool {
+		var offset = path.indexOf(".hx");
+		if (offset > 0)
+		{
+			path = path.substring(0, offset);
+		}
+		if (allExcludes.contains(path)) return true;
+
+		var slashes:EReg = ~/[\/\\]/g;
+		path = slashes.replace(path, ":");
+		for (exclude in allExcludes) {
+			var r = new EReg(exclude, "i");
+			if (r.match(path)) return true;
+		}
+		return false;
 	}
 
 	function failWith(message:String) {
