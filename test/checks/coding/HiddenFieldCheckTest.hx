@@ -11,11 +11,13 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
 		assertNoMsg(check, HIDDEN_FIELDS_SETTER);
 		assertNoMsg(check, HIDDEN_FIELDS_MAIN);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT);
 	}
 
 	public function testDetectHiddenFields() {
 		var check = new HiddenFieldCheck();
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
 	}
 
@@ -28,6 +30,8 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR, 'Variable definition of "field2" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT, 'Variable definition of "field2" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsInSetter() {
@@ -37,8 +41,10 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertNoMsg(check, NO_HIDDEN_FIELDS);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT);
 		assertMsg(check, HIDDEN_FIELDS_SETTER, 'Parameter definition of "field2" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
 	}
 
 	public function testDetectHiddenFieldsiRegEx() {
@@ -47,8 +53,10 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertNoMsg(check, NO_HIDDEN_FIELDS);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
+		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT);
 		assertNoMsg(check, HIDDEN_FIELDS_SETTER);
 		assertNoMsg(check, HIDDEN_FIELDS_FUNC);
+		assertNoMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT);
 		assertMsg(check, HIDDEN_FIELDS_MAIN, 'Variable definition of "field2" masks member of same name');
 	}
 }
@@ -132,6 +140,26 @@ abstract HiddenFieldCheckTests(String) to String {
 		var field2:Int = 1;
 		public function test() {
 			for (field1 in []) trace(field1);
+		}
+	}";
+
+	var HIDDEN_FIELDS_FUNC_WITH_COMMENT = "
+	class Test {
+		var field1:Int;
+		var field2:Int = 1;
+		public function test(/* comment */field1/* comment */:/* comment */Int/* comment */)/* comment */ {
+			field2 = field1;
+		}
+	}";
+
+	var HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT = "
+	class Test {
+		var field1:Int;
+		var field2:Int = 1;
+		public function new(fieldVal:String) {
+			this.field1 = fieldVal;
+			var field2:String='test';
+			var /* comment */field2/* comment */:/* comment */String/* comment */ = /* comment */'test'/* comment */;
 		}
 	}";
 }
