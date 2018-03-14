@@ -2,6 +2,8 @@ package checkstyle.token.walk;
 
 class WalkStatement {
 	public static function walkStatement(stream:TokenStream, parent:TokenTree) {
+		WalkComment.walkComment(stream, parent);
+
 		var wantMore:Bool = true;
 		switch (stream.token()) {
 			case Binop(OpSub):

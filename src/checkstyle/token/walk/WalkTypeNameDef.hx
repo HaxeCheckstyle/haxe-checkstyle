@@ -2,6 +2,7 @@ package checkstyle.token.walk;
 
 class WalkTypeNameDef {
 	public static function walkTypeNameDef(stream:TokenStream, parent:TokenTree):TokenTree {
+		WalkComment.walkComment(stream, parent);
 		if (stream.is(BrOpen)) {
 			WalkTypedefBody.walkTypedefBody(stream, parent);
 			return parent.getFirstChild();
@@ -39,6 +40,7 @@ class WalkTypeNameDef {
 			return name;
 		}
 		if (stream.is(Binop(OpLt))) WalkLtGt.walkLtGt(stream, name);
+		WalkComment.walkComment(stream, name);
 		return name;
 	}
 }

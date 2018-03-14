@@ -22,6 +22,7 @@ class WalkFieldDef {
 		for (tok in tempStore) {
 			name.addChild(tok);
 		}
+		WalkComment.walkComment(stream, name);
 
 		if (stream.is(DblDot)) {
 			var dblDot:TokenTree = stream.consumeTokenDef(DblDot);
