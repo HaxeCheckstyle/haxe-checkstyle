@@ -21,6 +21,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(DOLLAR_TOKEN_AS_VAR_NAME);
 		assertCodeParses(REFERENCE_CONSTRUCTOR);
 		assertCodeParses(SHORT_LAMBDA);
+		assertCodeParses(EXPRESSION_METADATA_ISSUE_365);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -169,6 +170,17 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 	@:allow(SomeClass.new) class Test {}
 	class Test {
 		var constructor = SomeClass.new;
+	}";
+
+	var EXPRESSION_METADATA_ISSUE_365 = "
+	@test enum ContextSelectorEnum {
+		@test(2) DIRECT_CHILD;
+	}
+
+	@test class Test2 {
+		@test static function main() {
+			@test 5 - @test 2;
+		}
 	}";
 
 	var SHORT_LAMBDA = "
