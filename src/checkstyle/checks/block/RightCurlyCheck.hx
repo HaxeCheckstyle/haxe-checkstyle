@@ -116,6 +116,7 @@ class RightCurlyCheck extends Check {
 
 	function checkRightCurly(line:String, singleLine:Bool, pos:Position) {
 		try {
+			pos = {file: pos.file, min: pos.min, max: pos.max};
 			var eof:Bool = false;
 			if (pos.max >= checker.file.content.length) {
 				pos.max = checker.file.content.length - 1;
