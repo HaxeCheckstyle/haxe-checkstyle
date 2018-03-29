@@ -6,9 +6,10 @@ class WalkStatement {
 
 		var tempStore:Array<TokenTree> = [];
 		var wantMore:Bool = true;
+
+		while (stream.is(At)) tempStore.push(WalkAt.walkAt(stream));
+
 		switch (stream.token()) {
-			case At:
-				tempStore.push(WalkAt.walkAt(stream));
 			case Binop(OpSub):
 				WalkBinopSub.walkBinopSub(stream, parent);
 				return;
