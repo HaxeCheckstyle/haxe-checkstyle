@@ -21,6 +21,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(DOLLAR_TOKEN_AS_VAR_NAME);
 		assertCodeParses(REFERENCE_CONSTRUCTOR);
 		assertCodeParses(SHORT_LAMBDA);
+		assertCodeParses(TERNARY_WITH_KEYWORD);
 		assertCodeParses(EXPRESSION_METADATA_ISSUE_365);
 	}
 
@@ -180,6 +181,13 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 	@test class Test2 {
 		@test static function main() {
 			@test 5 - @test 2;
+		}
+	}";
+
+	var TERNARY_WITH_KEYWORD = "
+	class Test {
+		function foo() {
+			doSomething(withThis, Std.is(args, Array) ? cast args : [args]);
 		}
 	}";
 
