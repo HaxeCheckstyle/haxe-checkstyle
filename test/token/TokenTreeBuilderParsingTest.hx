@@ -22,6 +22,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(REFERENCE_CONSTRUCTOR);
 		assertCodeParses(SHORT_LAMBDA);
 		assertCodeParses(TERNARY_WITH_KEYWORD);
+		assertCodeParses(OBJECT_WITH_ARRAY);
 		assertCodeParses(EXPRESSION_METADATA_ISSUE_365);
 	}
 
@@ -190,6 +191,14 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			doSomething(withThis, Std.is(args, Array) ? cast args : [args]);
 		}
 	}";
+
+	var OBJECT_WITH_ARRAY = "
+	class Test2 {
+		var t = {
+			arg: [2, 3]
+		};
+	}
+	";
 
 	var SHORT_LAMBDA = "
 		class TestArrowFunctions extends Test {
