@@ -85,7 +85,8 @@ class WalkStatement {
 				}
 				var dblDotTok:TokenTree = stream.consumeToken();
 				parent.addChild(dblDotTok);
-				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
+				//WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
+				WalkStatement.walkStatement(stream, dblDotTok);
 				if (stream.is(Arrow)) {
 					WalkStatement.walkStatement(stream, parent);
 				}
@@ -154,8 +155,8 @@ class WalkStatement {
 			switch (parent.tok) {
 				case Question: return parent;
 				case Comma: return null;
-				case POpen, BrOpen, BkOpen: return null;
-				case Kwd(_): return null;
+				//case POpen, BrOpen, BkOpen: return null;
+				//case Kwd(_): return null;
 				default:
 			}
 			parent = parent.parent;
