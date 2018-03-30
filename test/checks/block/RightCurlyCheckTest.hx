@@ -474,11 +474,11 @@ abstract RightCurlyCheckTests(String) to String {
 	class Test {
 		public function test() {
 			var l = {
-				p1 : { x:100, y: 10, z: 2 },
+				p1 : { x:100, y: -x, z: 2 },
 				p2 : { x:200, y: 50, z: 2 }
 			};
 			var l2 = [
-				{ x:100, y: 10, z: 2 },
+				{ x:100, y: 10, z: [2, b] },
 				{ x:200, y: 50, z: 2 }];
 		}
 	}";
@@ -495,12 +495,12 @@ abstract RightCurlyCheckTests(String) to String {
 				p2 : {
 					x:200,
 					y: 50,
-					z: 2
+					z: -y
 				}};
 			var l2 = [
 				{
 					x:100,
-					y: 10,
+					y: -x,
 					z: 2
 				},
 				{
@@ -522,14 +522,14 @@ abstract RightCurlyCheckTests(String) to String {
 				},
 				p2 : {
 					x:200,
-					y: 50,
+					y: -x,
 					z: 2
 				}
 			};
 			var l2 = [
 				{
 					x:100,
-					y: 10,
+					y: -z,
 					z: 2
 				},
 				{

@@ -377,8 +377,7 @@ class Main {
 
 	function isExcludedFromAll(path:String):Bool {
 		var offset = path.indexOf(".hx");
-		if (offset > 0)
-		{
+		if (offset > 0) {
 			path = path.substring(0, offset);
 		}
 		if (allExcludes.contains(path)) return true;

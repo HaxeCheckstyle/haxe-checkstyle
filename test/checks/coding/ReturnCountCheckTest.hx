@@ -30,7 +30,7 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 
 	public function testClosure() {
 		assertNoMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE);
-			assertMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE_2, "Return count is 3 (max allowed is 2)");
+		assertMsg(new ReturnCountCheck(), RETURN_IN_CLOSURE_2, "Return count is 3 (max allowed is 2)");
 	}
 }
 
