@@ -36,7 +36,7 @@ class WalkStatement {
 			case Arrow:
 				wantMore = true;
 			case BrOpen:
-				WalkObjectDecl.walkObjectDecl(stream, parent);
+				WalkBlock.walkBlock(stream, parent);
 				return;
 			case BkOpen:
 				WalkArrayAccess.walkArrayAccess(stream, parent);
@@ -83,11 +83,17 @@ class WalkStatement {
 					WalkStatement.walkStatement(stream, question);
 					return;
 				}
+				if (isDblDotObjectDecl(parent)) {
+					return;
+				}
 				var dblDotTok:TokenTree = stream.consumeToken();
 				parent.addChild(dblDotTok);
 				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
+				if (stream.is(Binop(OpAssign))) {
+					walkStatement(stream, parent);
+				}
 				if (stream.is(Arrow)) {
-					WalkStatement.walkStatement(stream, parent);
+					walkStatement(stream, parent);
 				}
 			case Arrow:
 				WalkStatement.walkStatement(stream, parent);
@@ -154,12 +160,19 @@ class WalkStatement {
 			switch (parent.tok) {
 				case Question: return parent;
 				case Comma: return null;
-				case POpen, BrOpen, BkOpen: return null;
-				case Kwd(_): return null;
 				default:
 			}
 			parent = parent.parent;
 		}
 		return null;
+	}
+
+	static function isDblDotObjectDecl(token:TokenTree):Bool {
+		if ((token == null) || (token.tok == null)) return false;
+		return switch (token.tok) {
+			case BrOpen: true;
+			case POpen: false;
+			default: isDblDotObjectDecl(token.parent);
+		}
 	}
 }

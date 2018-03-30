@@ -17,6 +17,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertNoMsg(check, BLOCK_WITH_COMMENT);
 		assertNoMsg(check, EMPTY_OBJECT_DECL);
 		assertNoMsg(check, OBJECT_DECL_WITH_COMMENT);
+		assertNoMsg(check, NESTED_OBJECT_DECL);
 	}
 
 	public function testWrongEmptyBlock() {
@@ -144,6 +145,19 @@ abstract EmptyBlockCheckTests(String) to String {
 		public function new() { /* comment
 								 */
 			var a = { // comment
+			};
+		}
+	}";
+
+	var NESTED_OBJECT_DECL = "
+	class Test {
+		public function new() {
+			var a = {
+				x: {
+					arg1: [-x, y, -z],
+					arg2: -w,
+					arg3: {}
+				}
 			};
 		}
 	}";

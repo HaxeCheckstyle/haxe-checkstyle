@@ -110,6 +110,14 @@ class TokenStream {
 		current--;
 	}
 
+	public function currentPos():Int {
+		return current;
+	}
+
+	public function rewindTo(pos:Int) {
+		current = pos;
+	}
+
 	/**
 	 * HaxeLexer does not handle '>=', '>>', '>>=' and '>>>=' it produces an
 	 * individual token for each character.

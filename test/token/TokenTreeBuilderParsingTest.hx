@@ -23,6 +23,10 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(SHORT_LAMBDA);
 		assertCodeParses(EXPRESSION_METADATA_ISSUE_365);
 		assertCodeParses(MULTIPLE_METADATAS);
+		assertCodeParses(TERNARY_WITH_KEYWORD);
+		assertCodeParses(OBJECT_WITH_ARRAY);
+		assertCodeParses(MACRO_REIFICATION);
+		assertCodeParses(BLOCK_METADATA);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -339,6 +343,51 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 					someStuff();
 				}
 		}
-	}
-	";
+	}";
+
+	var TERNARY_WITH_KEYWORD = "
+	class Test {
+		function foo() {
+			doSomething(withThis, Std.is(args, Array) ? cast args : [args]);
+		}
+	}";
+
+	var OBJECT_WITH_ARRAY = "
+	class Test2 {
+		var t = {
+			arg: [2, 3],
+			'arg': [2, 3],
+			arg2: [-x, Math.max(-x, -y)],
+			arg3: {
+				x: Math.max(-x, -y)
+			},
+			arg4: [for(i in 0...10) {x:i, x:-i}],
+		};
+	}";
+
+	var MACRO_REIFICATION = "
+	class Test {
+		function foo() {
+			switch (x) {
+				case 0:
+					return ${typePath};
+				case 1:
+					return $a{typePath};
+				case 2:
+					return new $typename();
+				case 3:
+					return { $name: 1 };
+			}
+		}
+	}";
+
+	var BLOCK_METADATA = "
+	class Test2 {
+		static function main() @in('test') @do {
+			@test 5 - @test 2;
+
+			if (test) @test @do return x;
+		}
+	}";
+
 }
