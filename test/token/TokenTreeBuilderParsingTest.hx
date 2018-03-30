@@ -26,6 +26,7 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 		assertCodeParses(TERNARY_WITH_KEYWORD);
 		assertCodeParses(OBJECT_WITH_ARRAY);
 		assertCodeParses(MACRO_REIFICATION);
+		assertCodeParses(BLOCK_METADATA);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -378,4 +379,12 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			}
 		}
 	}";
+
+	var BLOCK_METADATA = "
+	class Test2 {
+		static function main() @in('test') @do {
+			@test 5 - @test 2;
+		}
+	}";
+
 }
