@@ -89,8 +89,11 @@ class WalkStatement {
 				var dblDotTok:TokenTree = stream.consumeToken();
 				parent.addChild(dblDotTok);
 				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
+				if (stream.is(Binop(OpAssign))) {
+					walkStatement(stream, parent);
+				}
 				if (stream.is(Arrow)) {
-					WalkStatement.walkStatement(stream, parent);
+					walkStatement(stream, parent);
 				}
 			case Arrow:
 				WalkStatement.walkStatement(stream, parent);
