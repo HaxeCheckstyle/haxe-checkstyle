@@ -170,10 +170,8 @@ class WalkStatement {
 	static function isDblDotObjectDecl(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
-			case BkOpen: true;
 			case BrOpen: true;
 			case POpen: false;
-			case Kwd(_): false;
 			default: isDblDotObjectDecl(token.parent);
 		}
 	}
