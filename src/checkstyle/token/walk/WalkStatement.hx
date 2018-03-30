@@ -157,8 +157,6 @@ class WalkStatement {
 			switch (parent.tok) {
 				case Question: return parent;
 				case Comma: return null;
-				// case POpen, BrOpen, BkOpen: return null;
-				// case Kwd(_): return null;
 				default:
 			}
 			parent = parent.parent;
