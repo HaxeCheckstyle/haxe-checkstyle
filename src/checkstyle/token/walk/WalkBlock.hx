@@ -10,6 +10,7 @@ class WalkBlock {
 	 */
 	public static function walkBlock(stream:TokenStream, parent:TokenTree) {
 		var tempStore:Array<TokenTree> = [];
+		var rewindPos:Int = stream.currentPos();
 		while (stream.is(At)) tempStore.push(WalkAt.walkAt(stream));
 		if (stream.is(BrOpen)) {
 			if (isBrOpenObjectDecl(parent)) {
@@ -28,10 +29,7 @@ class WalkBlock {
 			openTok.addChild(stream.consumeTokenDef(BrClose));
 		}
 		else {
-			while (tempStore.length > 0) {
-				tempStore.pop();
-				stream.rewind();
-			}
+			stream.rewindTo(rewindPos);
 			WalkStatement.walkStatement(stream, parent);
 		}
 	}
@@ -40,7 +38,6 @@ class WalkBlock {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
 			case BkOpen: true;
-			case Kwd(KwdTypedef): true;
 			case Kwd(KwdReturn): true;
 			case Kwd(KwdFor): isBrOpenObjectDecl(token.parent);
 			case Kwd(_): false;

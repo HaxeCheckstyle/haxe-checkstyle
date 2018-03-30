@@ -384,6 +384,8 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 	class Test2 {
 		static function main() @in('test') @do {
 			@test 5 - @test 2;
+
+			if (test) @test @do return x;
 		}
 	}";
 
