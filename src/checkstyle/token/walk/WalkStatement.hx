@@ -173,9 +173,7 @@ class WalkStatement {
 			case BkOpen: true;
 			case BrOpen: true;
 			case POpen: false;
-			case Kwd(KwdFor): isDblDotObjectDecl(token.parent);
 			case Kwd(_): false;
-			// case Binop(OpAssign): true;
 			default: isDblDotObjectDecl(token.parent);
 		}
 	}

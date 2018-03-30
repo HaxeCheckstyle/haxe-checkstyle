@@ -360,7 +360,8 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			arg2: [-x, Math.max(-x, -y)],
 			arg3: {
 				x: Math.max(-x, -y)
-			}
+			},
+			arg4: [for(i in 0...10) {x:i, x:-i}],
 		};
 	}";
 
