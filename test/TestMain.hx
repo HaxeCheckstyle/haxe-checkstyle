@@ -1,13 +1,17 @@
+import haxe.EntryPoint;
 import haxe.Json;
+
 import sys.io.File;
 import sys.io.FileOutput;
+
+import massive.munit.TestRunner;
+
 import mcover.coverage.client.PrintClient;
+import mcover.coverage.munit.client.MCoverPrintClient;
 import mcover.coverage.data.CoverageResult;
 import mcover.coverage.data.Statement;
 import mcover.coverage.data.Branch;
 import mcover.coverage.MCoverage;
-import massive.munit.client.RichPrintClient;
-import massive.munit.TestRunner;
 
 using StringTools;
 
@@ -16,10 +20,14 @@ class TestMain {
 	public function new() {
 		var suites:Array<Class<massive.munit.TestSuite>> = [TestSuite];
 
-		var client = new RichPrintClient();
+		var client:MCoverPrintClient = new MCoverPrintClient();
 		var runner:TestRunner = new TestRunner(client);
 		runner.completionHandler = completionHandler;
+		EntryPoint.addThread(function() {
+			while (true) Sys.sleep(1);
+		});
 		runner.run(suites);
+		EntryPoint.run();
 	}
 
 	function completionHandler(success:Bool) {
