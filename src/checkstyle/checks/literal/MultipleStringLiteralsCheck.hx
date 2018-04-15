@@ -1,6 +1,5 @@
 package checkstyle.checks.literal;
 
-import checkstyle.token.TokenTreeBuilder;
 import checkstyle.utils.StringUtils;
 
 @name("MultipleStringLiterals")
@@ -24,7 +23,7 @@ class MultipleStringLiteralsCheck extends Check {
 
 	override function actualRun() {
 		ignoreRE = new EReg (ignore, "");
-		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens, checker.bytes);
+		var root:TokenTree = checker.getTokenTree();
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {

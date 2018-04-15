@@ -1,6 +1,5 @@
 package checkstyle.checks.literal;
 
-import checkstyle.token.TokenTreeBuilder;
 import checkstyle.utils.StringUtils;
 
 @name("StringLiteral")
@@ -18,7 +17,7 @@ class StringLiteralCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = TokenTreeBuilder.buildTokenTree(checker.tokens, checker.bytes);
+		var root:TokenTree = checker.getTokenTree();
 
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			if (token.tok == null) return GO_DEEPER;

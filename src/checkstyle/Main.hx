@@ -11,6 +11,7 @@ import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
+import checkstyle.reporter.ReporterManager;
 import checkstyle.errors.Error;
 import haxe.CallStack;
 import haxe.Json;
@@ -41,6 +42,8 @@ class Main {
 	var excludesMap:Map<String, Array<String>>;
 	var configPath:String;
 	var excludePath:String;
+	var numberOfCheckerThreads:Int;
+	var overrideCheckerThreads:Int;
 
 	function new() {
 		info = new ChecksInfo();
@@ -51,6 +54,8 @@ class Main {
 		exitCode = 0;
 		configPath = null;
 		excludePath = null;
+		numberOfCheckerThreads = 5;
+		overrideCheckerThreads = 0;
 	}
 
 	function run(args:Array<String>) {
@@ -72,6 +77,7 @@ class Main {
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
 			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
+			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -133,6 +139,7 @@ class Main {
 			for (combination in config.defineCombinations) validateDefines(combination);
 			checker.defineCombinations = config.defineCombinations;
 		}
+		validateCheckerThreads(config.numberOfCheckerThreads);
 	}
 
 	function loadExcludeConfig(path:String) {
@@ -236,6 +243,15 @@ class Main {
 		}
 	}
 
+	function validateCheckerThreads(checkerThreads:Null<Int>) {
+		if (checkerThreads != null) {
+			numberOfCheckerThreads = checkerThreads;
+		}
+		if (overrideCheckerThreads > 0) numberOfCheckerThreads = overrideCheckerThreads;
+		if (numberOfCheckerThreads <= 0) numberOfCheckerThreads = 5;
+		if (numberOfCheckerThreads > 15) numberOfCheckerThreads = 15;
+	}
+
 	function addAllChecks() {
 		for (check in getSortedCheckInfos()) {
 			if (!check.isAlias) checker.addCheck(info.build(check.name));
@@ -303,6 +319,7 @@ class Main {
 	function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
+			numberOfCheckerThreads: 5,
 			baseDefines: [],
 			defineCombinations: [],
 			checks: [],
@@ -354,10 +371,19 @@ class Main {
 		var i:Int = 0;
 		var toProcess:Array<CheckFile> = [for (file in files) { name:file, content:null, index:i++ }];
 
-		checker.addReporter(createReporter(files.length));
-		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
-		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
-		checker.process(toProcess, excludesMap);
+		ReporterManager.INSTANCE.addReporter(createReporter(files.length));
+		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(files.length));
+		if (EXIT_CODE) ReporterManager.INSTANCE.addReporter(new ExitCodeReporter());
+
+		ReporterManager.INSTANCE.start();
+
+		var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
+		parserQueue.start(numberOfCheckerThreads + 1);
+		var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
+		checkerPool.start(numberOfCheckerThreads);
+
+		while (!checkerPool.isFinished()) Sys.sleep(0.1);
+		ReporterManager.INSTANCE.finish();
 	}
 
 	function traverse(path:String, files:Array<String>) {
