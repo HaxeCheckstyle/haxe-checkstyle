@@ -3,6 +3,10 @@ package checkstyle.token.walk;
 class WalkSharp {
 	static var SHARP_IFS:Array<TokenTree> = [];
 
+	public static function clear() {
+		SHARP_IFS = [];
+	}
+
 	/**
 	 * Sharp("if") | Sharp("elseif")
 	 *  |- POpen
@@ -48,20 +52,22 @@ class WalkSharp {
 		parent.addChild(ifToken);
 		WalkSharp.walkSharpIfExpr(stream, ifToken);
 		SHARP_IFS.push(ifToken);
+		var newParent:TokenTree = ifToken;
 
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			try {
-				walker(stream, ifToken);
+				walker(stream, newParent);
 				switch (stream.token()) {
 					case BrClose, Comma:
 						var newChild:TokenTree = stream.consumeToken();
-						ifToken.addChild(newChild);
+						newParent.addChild(newChild);
 					default:
 				}
 			}
 			catch (e:SharpElseException) {
 				// continue;
+				newParent = e.token;
 			}
 			catch (e:SharpEndException) {
 				SHARP_IFS.pop();
@@ -69,7 +75,7 @@ class WalkSharp {
 				switch (stream.token()) {
 					case Comma:
 						var newChild:TokenTree = stream.consumeToken();
-						ifToken.addChild(newChild);
+						newParent.addChild(newChild);
 					default:
 				}
 				return;
@@ -81,7 +87,7 @@ class WalkSharp {
 		var sharpIfParent:TokenTree = SHARP_IFS[SHARP_IFS.length - 1];
 		var ifToken:TokenTree = stream.consumeToken();
 		sharpIfParent.addChild(ifToken);
-		throw new SharpElseException();
+		throw new SharpElseException(ifToken);
 	}
 
 	static function walkSharpElseIf(stream:TokenStream, parent:TokenTree) {
@@ -89,7 +95,7 @@ class WalkSharp {
 		var ifToken:TokenTree = stream.consumeToken();
 		sharpIfParent.addChild(ifToken);
 		WalkSharp.walkSharpIfExpr(stream, ifToken);
-		throw new SharpElseException();
+		throw new SharpElseException(ifToken);
 	}
 
 	static function walkSharpEnd(stream:TokenStream, parent:TokenTree) {
@@ -126,7 +132,10 @@ class WalkSharp {
 typedef WalkCB = TokenStream -> TokenTree -> Void;
 
 class SharpElseException {
-	public function new () {}
+	public var token:TokenTree;
+	public function new (token:TokenTree) {
+		this.token = token;
+	}
 }
 
 class SharpEndException {
