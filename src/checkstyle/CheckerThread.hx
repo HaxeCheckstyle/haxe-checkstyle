@@ -1,6 +1,10 @@
 package checkstyle;
 
+#if neko
 import neko.vm.Thread;
+#elseif cpp
+import cpp.vm.Thread;
+#end
 
 import checkstyle.checks.Check;
 
@@ -49,14 +53,22 @@ class CheckerThread {
 
 	function runChecker() {
 		finished = false;
+		var advanceFrame = function() {};
+		#if hxtelemetry
+		var hxt = new hxtelemetry.HxTelemetry();
+		advanceFrame = function() hxt.advance_frame();
+		#end
 		while (true) {
 			if (parserQueue.isFinished()) break;
 			var checker:Checker = parserQueue.nextFile();
 			if (checker == null) {
 				Sys.sleep(SLEEP_TIME);
+				advanceFrame();
 				continue;
 			}
+			advanceFrame();
 			runAllChecks(checker);
+			advanceFrame();
 		}
 		finished = true;
 	}
