@@ -7,20 +7,24 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 	static inline var MSG_TOO_MANY:String = "Too many consecutive empty lines (> 1)";
 	static inline var MSG_AFTER_COMMENT:String = "Empty line not allowed after comment(s)";
 
+	@Test
 	public function testDefaultEmptyLines() {
 		assertMsg(new EmptyLinesCheck(), TEST1, MSG_TOO_MANY);
 	}
 
+	@Test
 	public function testCorrectEmptyLines() {
 		assertNoMsg(new EmptyLinesCheck(), TEST2);
 	}
 
+	@Test
 	public function testConfigurableEmptyLines() {
 		var check = new EmptyLinesCheck();
 		check.max = 2;
 		assertNoMsg(check, TEST3);
 	}
 
+	@Test
 	public function testEmptyLineAfterSingleLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterSingleLineComment = false;
@@ -29,6 +33,7 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertMsg(check, TEST5, MSG_AFTER_COMMENT);
 	}
 
+	@Test
 	public function testEmptyLineAfterMultiLineComment() {
 		var check = new EmptyLinesCheck();
 		check.allowEmptyLineAfterMultiLineComment = false;
@@ -37,6 +42,7 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertMsg(check, TEST7, MSG_AFTER_COMMENT);
 	}
 
+	@Test
 	public function testAllowEmptyLineAfterComment() {
 		assertNoMsg(new EmptyLinesCheck(), TEST4);
 		assertNoMsg(new EmptyLinesCheck(), TEST5);
@@ -44,23 +50,27 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 		assertNoMsg(new EmptyLinesCheck(), TEST7);
 	}
 
+	@Test
 	public function testRequireEmptyLineAfterPackage() {
 		assertMsg(new EmptyLinesCheck(), TEST8, "Empty line required after package declaration");
 		assertNoMsg(new EmptyLinesCheck(), TEST9);
 	}
 
+	@Test
 	public function testRequireEmptyLineAfterClass() {
 		assertMsg(new EmptyLinesCheck(), TEST10, "Empty line required after class declaration");
 		assertNoMsg(new EmptyLinesCheck(), TEST11);
 		assertNoMsg(new EmptyLinesCheck(), TEST12);
 	}
 
+	@Test
 	public function testRequireEmptyLineAfterInterface() {
 		assertMsg(new EmptyLinesCheck(), TEST13, "Empty line required after interface declaration");
 		assertNoMsg(new EmptyLinesCheck(), TEST14);
 		assertNoMsg(new EmptyLinesCheck(), TEST15);
 	}
 
+	@Test
 	public function testRequireEmptyLineAfterAbstract() {
 		assertMsg(new EmptyLinesCheck(), TEST16, "Empty line required after abstract declaration");
 		assertNoMsg(new EmptyLinesCheck(), TEST17);

@@ -7,6 +7,7 @@ class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
 
 	static inline var MSG_TRACE_DETECTED:String = "Trace detected";
 
+	@Test
 	public function testTrace() {
 		var check = new TraceCheck();
 		check.severity = SeverityLevel.INFO;
@@ -14,6 +15,7 @@ class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
 		assertMsg(check, TRACE_VAR, MSG_TRACE_DETECTED);
 	}
 
+	@Test
 	public function testNotATrace() {
 		var check = new TraceCheck();
 		check.severity = SeverityLevel.INFO;
@@ -21,6 +23,7 @@ class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
 		assertNoMsg(check, TRACE_FUNCTION);
 	}
 
+	@Test
 	public function testSuppressedTrace() {
 		var check = new TraceCheck();
 		check.severity = SeverityLevel.INFO;

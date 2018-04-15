@@ -4,21 +4,25 @@ import checkstyle.checks.size.ParameterNumberCheck;
 
 class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> {
 
+	@Test
 	public function testNoParams() {
 		var check = new ParameterNumberCheck();
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function test10Parameters() {
 		var check = new ParameterNumberCheck();
 		assertNoMsg(check, TEST2);
 	}
 
+	@Test
 	public function test11Parameters() {
 		var check = new ParameterNumberCheck();
 		assertMsg(check, TEST3, "Too many parameters for function: test2 (> 7)");
 	}
 
+	@Test
 	public function testMaxParameter() {
 		var check = new ParameterNumberCheck();
 		check.max = 11;
@@ -31,11 +35,13 @@ class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> 
 		assertMsg(check, TEST3, "Too many parameters for function: test2 (> 3)");
 	}
 
+	@Test
 	public function testInterface() {
 		var check = new ParameterNumberCheck();
 		assertMsg(check, TEST5, "Too many parameters for function: test4 (> 7)");
 	}
 
+	@Test
 	public function testIgnoreOverriddenMethods() {
 		var check = new ParameterNumberCheck();
 		check.ignoreOverriddenMethods = true;

@@ -6,10 +6,12 @@ class PublicAccessorCheckTest extends CheckTestCase<PublicAccessorCheckTests> {
 
 	static inline var ERROR:String = "Accessor method should not be public";
 
+	@Test
 	public function testNonAccessors() {
 		assertNoMsg(new PublicAccessorCheck(), NON_ACCESSOR);
 	}
 
+	@Test
 	public function testPublicAccessors() {
 		assertMsg(new PublicAccessorCheck(), PUBLIC_GETTER, ERROR);
 		assertMsg(new PublicAccessorCheck(), PUBLIC_SETTER, ERROR);

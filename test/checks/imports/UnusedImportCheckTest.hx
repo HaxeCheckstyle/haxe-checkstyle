@@ -14,6 +14,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 	static inline var MSG_SAME_PACKAGE_IMPORT:String = 'Detected import "checkstyle.checks.Checker" from same package "checkstyle.checks"';
 	static inline var MSG_UNUSED_TYPEMAP:String = 'Unused import "checkstyle.checks.Checker" detected';
 
+	@Test
 	public function testCorrectImport() {
 		var check = new UnusedImportCheck();
 		assertNoMsg(check, ALL_IMPORTS_USED);
@@ -22,6 +23,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertNoMsg(check, IMPORT_IN_STATIC_FUNC);
 	}
 
+	@Test
 	public function testUnusedImport() {
 		var check = new UnusedImportCheck();
 		assertMsg(check, IMPORT_NOT_USED, MSG_UNUSED);
@@ -33,11 +35,13 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertMsg(check, UNUSED_IMPORT_IN_STATIC_FUNC, MSG_UNUSED_IN_STATIC);
 	}
 
+	@Test
 	public function testSamePackageImport() {
 		var check = new UnusedImportCheck();
 		assertMsg(check, SAME_PACKAGE_IMPORT, MSG_SAME_PACKAGE_IMPORT);
 	}
 
+	@Test
 	public function testTypeMap() {
 		var check = new UnusedImportCheck();
 		assertMsg(check, SAME_PACKAGE_TYPE_MAP, MSG_SAME_PACKAGE_IMPORT);
@@ -55,6 +59,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertMsg(check, UNUSED_IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
 	}
 
+	@Test
 	public function testImportHx() {
 		var check = new UnusedImportCheck();
 		assertNoMsg(check, IMPORT_NOT_USED, "import.hx");
@@ -70,6 +75,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertNoMsg(check, UNUSED_IMPORT_TYPE_MAP, "import.hx");
 	}
 
+	@Test
 	public function testStringInterpolation() {
 		var check = new UnusedImportCheck();
 		assertMsg(check, STRING_INTERPOL, MSG_UNUSED);

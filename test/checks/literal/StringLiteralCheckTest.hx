@@ -4,6 +4,7 @@ import checkstyle.checks.literal.StringLiteralCheck;
 
 class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 
+	@Test
 	public function testOnlySingleQuote() {
 		var check = new StringLiteralCheck();
 		check.policy = ONLY_SINGLE;
@@ -15,6 +16,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertMsg(check, SINGLE_QUOTE_WITH_EXCEPTION, "String \"test 'xml' \" uses double quotes instead of single quotes");
 	}
 
+	@Test
 	public function testSingleQuoteWithException() {
 		var check = new StringLiteralCheck();
 		check.policy = ONLY_SINGLE;
@@ -26,6 +28,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertMsg(check, DOUBLE_QUOTE, 'String "test" uses double quotes instead of single quotes');
 	}
 
+	@Test
 	public function testOnlyDoubleQuote() {
 		var check = new StringLiteralCheck();
 		check.policy = ONLY_DOUBLE;
@@ -39,6 +42,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION, 'String "test "xml" " uses single quotes instead of double quotes');
 	}
 
+	@Test
 	public function testDoubleQuoteWithException() {
 		var check = new StringLiteralCheck();
 		check.policy = ONLY_DOUBLE;
@@ -52,6 +56,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		#end
 	}
 
+	@Test
 	public function testDoubleQuoteWithInterpolation() {
 		var check = new StringLiteralCheck();
 		check.allowException = false;
@@ -64,6 +69,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION, 'String "test "xml" " uses single quotes instead of double quotes');
 	}
 
+	@Test
 	public function testDoubleQuoteWithInterpolationAndException() {
 		var check = new StringLiteralCheck();
 		check.allowException = true;

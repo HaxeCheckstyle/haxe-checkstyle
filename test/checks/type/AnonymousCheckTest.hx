@@ -4,10 +4,12 @@ import checkstyle.checks.type.AnonymousCheck;
 
 class AnonymousCheckTest extends CheckTestCase<AnonymousCheckTests> {
 
+	@Test
 	public function testAnonymousStructureClassVar() {
 		assertMsg(new AnonymousCheck(), TEST1, 'Anonymous structure "anonymous" found, use "typedef"');
 	}
 
+	@Test
 	public function testAnonymousStructureLocalVar() {
 		assertMsg(new AnonymousCheck(), TEST2, 'Anonymous structure "b" found, use "typedef"');
 	}

@@ -4,12 +4,14 @@ import checkstyle.checks.naming.LocalVariableNameCheck;
 
 class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTests> {
 
+	@Test
 	public function testCorrectNaming() {
 		var check = new LocalVariableNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testWrongNaming() {
 		var check = new LocalVariableNameCheck();
 		var message = 'Invalid local var signature: "Count" (name should be "~/${check.format}/")';
@@ -17,6 +19,7 @@ class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTes
 		assertMsg(check, TEST3, message);
 	}
 
+	@Test
 	public function testIgnoreExtern() {
 		var check = new LocalVariableNameCheck();
 		check.ignoreExtern = false;
@@ -29,6 +32,7 @@ class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTes
 		assertMsg(check, TEST4, message);
 	}
 
+	@Test
 	public function testFormat() {
 		var check = new LocalVariableNameCheck();
 		check.format = "^[A-Za-z_]*$";

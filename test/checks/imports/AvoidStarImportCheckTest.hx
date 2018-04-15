@@ -6,11 +6,13 @@ class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> 
 
 	static inline var MSG_STAR_IMPORT:String = 'Using the ".*" form of import should be avoided';
 
+	@Test
 	public function testNoStarImport() {
 		var check = new AvoidStarImportCheck();
 		assertNoMsg(check, IMPORT);
 	}
 
+	@Test
 	public function testStarImport() {
 		var check = new AvoidStarImportCheck();
 		assertMsg(check, STAR_IMPORT, MSG_STAR_IMPORT);

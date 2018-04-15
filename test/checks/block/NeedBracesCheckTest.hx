@@ -15,6 +15,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	static inline var MSG_SAME_LINE_FOR:String = 'Body of "for" on same line';
 	static inline var MSG_SAME_LINE_WHILE:String = 'Body of "while" on same line';
 
+	@Test
 	public function testCorrectBraces() {
 		var check = new NeedBracesCheck();
 		assertNoMsg(check, TEST);
@@ -29,6 +30,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, INTERFACE_DEF);
 	}
 
+	@Test
 	public function testWrongBraces() {
 		var check = new NeedBracesCheck();
 		assertMsg(check, TEST1, MSG_IF);
@@ -39,6 +41,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST11, MSG_IF);
 	}
 
+	@Test
 	public function testNoAllowSingleLine() {
 		var check = new NeedBracesCheck();
 		check.allowSingleLineStatement = false;
@@ -62,6 +65,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
+	@Test
 	public function testTokenFor() {
 		var check = new NeedBracesCheck();
 		check.tokens = [FOR];
@@ -87,6 +91,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST9, MSG_SAME_LINE_FOR);
 	}
 
+	@Test
 	public function testTokenIf() {
 		var check = new NeedBracesCheck();
 		check.tokens = [IF];
@@ -116,6 +121,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
+	@Test
 	public function testTokenElseIf() {
 		var check = new NeedBracesCheck();
 		check.tokens = [IF, ELSE_IF];
@@ -147,6 +153,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
 
+	@Test
 	public function testTokenWhile() {
 		var check = new NeedBracesCheck();
 		check.tokens = [WHILE];

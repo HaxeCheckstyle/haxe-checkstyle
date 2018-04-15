@@ -4,23 +4,27 @@ import checkstyle.checks.size.MethodCountCheck;
 
 class MethodCountCheckTest extends CheckTestCase<MethodCountCheckTests> {
 
+	@Test
 	public function testTotal() {
 		var check = new MethodCountCheck();
 		assertMsg(check, TEST1, "Total number of methods is 101 (max allowed is 100)");
 	}
 
+	@Test
 	public function testPrivate() {
 		var check = new MethodCountCheck();
 		check.maxPrivate = 5;
 		assertMsg(check, TEST2, "Number of private methods is 8 (max allowed is 5)");
 	}
 
+	@Test
 	public function testPublic() {
 		var check = new MethodCountCheck();
 		check.maxPublic = 5;
 		assertMsg(check, TEST3, "Number of public methods is 7 (max allowed is 5)");
 	}
 
+	@Test
 	public function testCorrectCount() {
 		assertNoMsg(new MethodCountCheck(), TEST3);
 	}

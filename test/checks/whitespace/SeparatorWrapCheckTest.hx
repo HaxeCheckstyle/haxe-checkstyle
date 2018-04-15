@@ -10,6 +10,7 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 	static inline var MSG_COMMA_NL:String = 'Token "," must be on a new line';
 	static inline var MSG_DOT_NL:String = 'Token "." must be on a new line';
 
+	@Test
 	public function testCorrectWrap() {
 		var check = new SeparatorWrapCheck();
 		assertNoMsg(check, CORRECT_WRAP);
@@ -21,6 +22,7 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 		assertNoMsg(check, NOWRAP_IMPORT);
 	}
 
+	@Test
 	public function testIncorrectWrap() {
 		var check = new SeparatorWrapCheck();
 		assertMsg(check, NL_WRAP_FUNC, MSG_COMMA_EOL);
@@ -30,6 +32,7 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 		assertMsg(check, NL_WRAP_IMPORT, MSG_DOT_EOL);
 	}
 
+	@Test
 	public function testOptionNL() {
 		var check = new SeparatorWrapCheck();
 		check.option = NL;

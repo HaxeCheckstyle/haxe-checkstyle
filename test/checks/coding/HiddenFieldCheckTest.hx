@@ -4,6 +4,7 @@ import checkstyle.checks.coding.HiddenFieldCheck;
 
 class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 
+	@Test
 	public function testCorrectHidden() {
 		var check = new HiddenFieldCheck();
 		assertNoMsg(check, NO_HIDDEN_FIELDS);
@@ -14,6 +15,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT);
 	}
 
+	@Test
 	public function testDetectHiddenFields() {
 		var check = new HiddenFieldCheck();
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
@@ -21,6 +23,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
 	}
 
+	@Test
 	public function testDetectHiddenFieldsInConstructor() {
 		var check = new HiddenFieldCheck();
 		check.ignoreConstructorParameter = false;
@@ -34,6 +37,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT, 'Variable definition of "field2" masks member of same name');
 	}
 
+	@Test
 	public function testDetectHiddenFieldsInSetter() {
 		var check = new HiddenFieldCheck();
 		check.ignoreSetter = false;
@@ -47,6 +51,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
 	}
 
+	@Test
 	public function testDetectHiddenFieldsiRegEx() {
 		var check = new HiddenFieldCheck();
 		check.ignoreFormat = "^test$";
