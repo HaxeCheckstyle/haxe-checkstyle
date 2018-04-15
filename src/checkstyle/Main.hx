@@ -44,6 +44,7 @@ class Main {
 	var excludePath:String;
 	var numberOfCheckerThreads:Int;
 	var overrideCheckerThreads:Int;
+	var disableThreads:Bool;
 
 	function new() {
 		info = new ChecksInfo();
@@ -78,6 +79,7 @@ class Main {
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
 			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
 			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
+			@doc("Do not use checker threads") ["-nothreads"] => function () disableThreads = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -375,15 +377,19 @@ class Main {
 		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) ReporterManager.INSTANCE.addReporter(new ExitCodeReporter());
 
-		ReporterManager.INSTANCE.start();
+		if (disableThreads) {
+			checker.process(toProcess, excludesMap);
+		}
+		else {
+			ReporterManager.INSTANCE.start();
+			var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
+			parserQueue.start(numberOfCheckerThreads + 1);
+			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
+			checkerPool.start(numberOfCheckerThreads);
 
-		var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
-		parserQueue.start(numberOfCheckerThreads + 1);
-		var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
-		checkerPool.start(numberOfCheckerThreads);
-
-		while (!checkerPool.isFinished()) Sys.sleep(0.1);
-		ReporterManager.INSTANCE.finish();
+			while (!checkerPool.isFinished()) Sys.sleep(0.1);
+			ReporterManager.INSTANCE.finish();
+		}
 	}
 
 	function traverse(path:String, files:Array<String>) {
