@@ -5,6 +5,7 @@ import haxe.PosInfos;
 import checkstyle.CheckMessage;
 import checkstyle.CheckFile;
 import checkstyle.reporter.IReporter;
+import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 
@@ -53,7 +54,9 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 		if (defines != null) checker.defineCombinations = defines;
 		checker.addCheck(check);
-		checker.addReporter(reporter);
+
+		ReporterManager.INSTANCE.clear();
+		ReporterManager.INSTANCE.addReporter(reporter);
 		checker.process([{name:fileName, content:src, index:0}], null);
 		return reporter.message;
 	}

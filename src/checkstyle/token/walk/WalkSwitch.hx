@@ -45,7 +45,7 @@ class WalkSwitch {
 				case Sharp(_):
 					WalkSharp.walkSharp(stream, parent, WalkSwitch.walkSwitchCases);
 				case Comment(_), CommentLine(_):
-					WalkStatement.walkStatement(stream, parent);
+					WalkComment.walkComment(stream, parent);
 				default:
 					stream.error('bad token ${stream.token()} != case/default');
 			}
