@@ -1,7 +1,12 @@
 package checkstyle;
 
+#if neko
 import neko.vm.Mutex;
 import neko.vm.Thread;
+#elseif cpp
+import cpp.vm.Mutex;
+import cpp.vm.Thread;
+#end
 
 class ParserQueue {
 	static inline var SLEEP_TIME:Float = 0.1;

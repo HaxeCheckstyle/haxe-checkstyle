@@ -1,6 +1,10 @@
 package checkstyle.reporter;
 
+#if neko
 import neko.vm.Mutex;
+#elseif cpp
+import cpp.vm.Mutex;
+#end
 
 import haxe.CallStack;
 
