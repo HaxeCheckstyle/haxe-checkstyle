@@ -8,6 +8,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 	static inline var MSG_NOT_SAME_LINE:String = "Right curly should not be on same line as left curly";
 	static inline var MSG_SAME_LINE:String = 'Right curly should be on same line as following block (e.g. "} else" or "} catch")';
 
+	@Test
 	public function testCorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
 		assertNoMsg(check, ALONE_OR_SINGLELINE_CORRECT);
@@ -50,6 +51,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, CONSTRUCTOR_OBJECT_DECL_ISSUE_152);
 	}
 
+	@Test
 	public function testIncorrectAloneOrSingleLine() {
 		var check = new RightCurlyCheck();
 		assertMsg(check, SAMELINE_IF, MSG_ALONE);
@@ -57,6 +59,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
+	@Test
 	public function testCorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = SAME;
@@ -80,6 +83,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, MACRO_REIFICATION);
 	}
 
+	@Test
 	public function testIncorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = SAME;
@@ -101,6 +105,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertMsg(check, ALONE_TRY_CATCH, MSG_SAME_LINE);
 	}
 
+	@Test
 	public function testCorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = ALONE;
@@ -121,6 +126,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, MACRO_REIFICATION);
 	}
 
+	@Test
 	public function testIncorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = ALONE;
@@ -144,6 +150,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
 	}
 
+	@Test
 	public function testTokenIF() {
 		var check = new RightCurlyCheck();
 		check.tokens = [IF];
@@ -171,6 +178,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, ALONE_FOR);
 	}
 
+	@Test
 	public function testTokenMacroReification() {
 		var check = new RightCurlyCheck();
 		check.tokens = [REIFICATION];
@@ -183,6 +191,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertMsg(check, MACRO_REIFICATION, MSG_NOT_SAME_LINE);
 	}
 
+	@Test
 	public function testArrayComprehension() {
 		var check = new RightCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION];

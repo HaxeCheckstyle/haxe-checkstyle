@@ -4,16 +4,19 @@ import checkstyle.checks.coding.NestedForDepthCheck;
 
 class NestedForDepthCheckTest extends CheckTestCase<NestedForDepthCheckTests> {
 
+	@Test
 	public function testDefault() {
 		var check = new NestedForDepthCheck();
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function testDefaultTooMany() {
 		var check = new NestedForDepthCheck();
 		assertMsg(check, TEST2, "Nested for depth is 2 (max allowed is 1)");
 	}
 
+	@Test
 	public function testMaxParameter() {
 		var check = new NestedForDepthCheck();
 		check.max = 2;

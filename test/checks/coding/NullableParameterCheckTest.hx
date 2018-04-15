@@ -5,6 +5,7 @@ import checkstyle.checks.coding.NullableParameterCheck;
 
 class NullableParameterCheckTest extends CheckTestCase<NullableParameterCheckTests> {
 
+	@Test
 	function testQuestionMark() {
 		var check = new NullableParameterCheck();
 		check.option = QUESTION_MARK;
@@ -17,6 +18,7 @@ class NullableParameterCheckTest extends CheckTestCase<NullableParameterCheckTes
 		assertNoMsg(check, OPTIONAL_WITH_NON_NULL_DEFAULT);
 	}
 
+	@Test
 	function testNullDefault() {
 		var check = new NullableParameterCheck();
 		check.option = NULL_DEFAULT;

@@ -4,43 +4,51 @@ import checkstyle.checks.modifier.RedundantModifierCheck;
 
 class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTests> {
 
+	@Test
 	public function testCorrectUsage() {
 		assertNoMsg(new RedundantModifierCheck(), TEST);
 		assertNoMsg(new RedundantModifierCheck(), TEST3);
 	}
 
+	@Test
 	public function testNormalClass() {
 		assertMsg(new RedundantModifierCheck(), TEST1, '"private" keyword is redundant for "a"');
 	}
 
+	@Test
 	public function testInterface() {
 		assertMsg(new RedundantModifierCheck(), TEST2, '"public" keyword is redundant for "a"');
 	}
 
+	@Test
 	public function testClassWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function testClassWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
 		assertMsg(check, TEST, 'Missing "private" keyword for "_onUpdate"');
 	}
 
+	@Test
 	public function testInterfaceWithEnforce() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
 		assertNoMsg(check, TEST2);
 	}
 
+	@Test
 	public function testInterfaceWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
 		assertMsg(check, TEST3, 'Missing "public" keyword for "a"');
 	}
 
+	@Test
 	public function testClassWithPublicFields() {
 		var check = new RedundantModifierCheck();
 		assertNoMsg(check, TEST4);
@@ -50,6 +58,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 		assertMsg(check, TEST6, 'Missing "public" keyword for "foo"');
 	}
 
+	@Test
 	public function testEnumAbstract() {
 		var check = new RedundantModifierCheck();
 		assertMsg(check, TEST7, '"public" keyword is redundant for "value"');
@@ -68,6 +77,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 		assertMsg(check, TEST12, 'Missing "private" keyword for "foo"');
 	}
 
+	@Test
 	public function testConstructor() {
 		var check = new RedundantModifierCheck();
 		assertNoMsg(check, TEST13);
@@ -80,6 +90,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 		assertNoMsg(check, TEST15);
 	}
 
+	@Test
 	public function testJustPublic() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublic = true;
@@ -88,6 +99,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testJustPrivate() {
 		var check = new RedundantModifierCheck();
 		check.enforcePrivate = true;

@@ -4,14 +4,17 @@ import checkstyle.checks.literal.HexadecimalLiteralCheck;
 
 class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckTests> {
 
+	@Test
 	public function test1() {
 		assertMsg(new HexadecimalLiteralCheck(), TEST1, "Bad hexadecimal literal, use upperCase");
 	}
 
+	@Test
 	public function test2() {
 		assertNoMsg(new HexadecimalLiteralCheck(), TEST2);
 	}
 
+	@Test
 	public function test3() {
 		var check = new HexadecimalLiteralCheck();
 		check.option = "lowerCase";

@@ -4,14 +4,17 @@ import checkstyle.checks.type.TypeCheck;
 
 class TypeCheckTest extends CheckTestCase<TypeCheckTests> {
 
+	@Test
 	public function testClassVar() {
 		assertMsg(new TypeCheck(), TEST1, 'Variable "_a" type not specified');
 	}
 
+	@Test
 	public function testStaticClassVar() {
 		assertMsg(new TypeCheck(), TEST2, 'Variable "A" type not specified');
 	}
 
+	@Test
 	public function testEnumAbstract() {
 		assertNoMsg(new TypeCheck(), TEST3);
 		assertMsg(new TypeCheck(), TEST4, 'Variable "VALUE" type not specified');

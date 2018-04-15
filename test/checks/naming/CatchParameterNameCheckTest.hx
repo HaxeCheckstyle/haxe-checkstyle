@@ -4,16 +4,19 @@ import checkstyle.checks.naming.CatchParameterNameCheck;
 
 class CatchParameterNameCheckTest extends CheckTestCase<CatchParameterNameCheckTests> {
 
+	@Test
 	public function testCorrectNaming() {
 		var check = new CatchParameterNameCheck();
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function testInCorrectNaming() {
 		var check = new CatchParameterNameCheck();
 		assertMsg(check, TEST2, '"Val" must match pattern "~/${check.format}/"');
 	}
 
+	@Test
 	public function testCustomNaming() {
 		var check = new CatchParameterNameCheck();
 		check.format = "^(ex)$";

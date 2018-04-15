@@ -6,6 +6,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 
 	static inline var MSG_EQUALS:String = 'No whitespace around "="';
 
+	@Test
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAroundCheck();
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
@@ -25,6 +26,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, OPGT);
 	}
 
+	@Test
 	public function testIncorrectWhitespace() {
 		var check = new WhitespaceAroundCheck();
 		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_EQUALS);
@@ -33,6 +35,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertMsg(check, ISSUE_63, MSG_EQUALS);
 	}
 
+	@Test
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAroundCheck();
 		check.tokens = ["="];
@@ -48,6 +51,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, NO_WHITESPACE_GT);
 	}
 
+	@Test
 	public function testStarImport() {
 		var check = new WhitespaceAroundCheck();
 		check.tokens = ["*"];

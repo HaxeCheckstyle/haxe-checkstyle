@@ -7,15 +7,18 @@ class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariab
 	static inline var MSG_MULTI_VAR_COMMA:String = "Each variable declaration must be in its own statement";
 	static inline var MSG_MULTI_VAR:String = "Only one variable definition per line allowed";
 
+	@Test
 	public function testMultiVarsStatement() {
 		assertMsg(new MultipleVariableDeclarationsCheck(), TEST1, MSG_MULTI_VAR_COMMA);
 		assertMsg(new MultipleVariableDeclarationsCheck(), TEST2, MSG_MULTI_VAR_COMMA);
 	}
 
+	@Test
 	public function testMultiVarsInOneLine() {
 		assertMsg(new MultipleVariableDeclarationsCheck(), TEST3, MSG_MULTI_VAR);
 	}
 
+	@Test
 	public function testCorrectVariables() {
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST4);
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST5);

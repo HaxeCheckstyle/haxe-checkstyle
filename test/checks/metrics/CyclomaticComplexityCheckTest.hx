@@ -4,6 +4,7 @@ import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 
 class CyclomaticComplexityCheckTest extends CheckTestCase<CyclomaticComplexityCheckTests> {
 
+	@Test
 	public function testCorrectNaming() {
 		var check = new CyclomaticComplexityCheck();
 		check.thresholds = [

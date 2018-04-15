@@ -2,8 +2,11 @@ package token;
 
 import haxe.PosInfos;
 
-class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
+import massive.munit.Assert;
 
+class TokenTreeBuilderParsingTest {
+
+	@Test
 	public function testIssues() {
 		assertCodeParses(ISSUE_76);
 		assertCodeParses(ISSUE_79);
@@ -35,9 +38,9 @@ class TokenTreeBuilderParsingTest extends haxe.unit.TestCase {
 			builder = TestTokenTreeBuilder.parseCode(code);
 		}
 		catch (e:Any) {
-			assertTrue(false, pos);
+			Assert.isTrue(false, pos);
 		}
-		assertTrue(builder.isStreamEmpty(), pos);
+		Assert.isTrue(builder.isStreamEmpty(), pos);
 	}
 }
 

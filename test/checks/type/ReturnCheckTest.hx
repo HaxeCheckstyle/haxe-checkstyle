@@ -10,6 +10,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	static inline var MSG_NO_ANON_RETURN:String = "Return type not specified for anonymous method";
 	static inline var MSG_EMPTY_RETURN_TEST2:String = 'Empty return in method "test2" found';
 
+	@Test
 	public function testCorrectReturn() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, CORRECT_RETURN);
@@ -17,6 +18,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertNoMsg(check, CORRECT_RETURN);
 	}
 
+	@Test
 	public function testCorrectReturnForAnonymous() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, CORRECT_RETURN_ANONYMOUS);
@@ -24,6 +26,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertNoMsg(check, CORRECT_RETURN_ANONYMOUS);
 	}
 
+	@Test
 	public function testIncorrectReturnForAnonymous() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, TEST5);
@@ -32,10 +35,12 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 
 	}
 
+	@Test
 	public function testVoid() {
 		assertMsg(new ReturnCheck(), TEST1, MSG_VOID_RETURN);
 	}
 
+	@Test
 	public function testNoReturnType() {
 		var check = new ReturnCheck();
 		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
@@ -49,10 +54,12 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertMsg(check, TEST5, MSG_NO_ANON_RETURN);
 	}
 
+	@Test
 	public function testEmptyReturnType() {
 		assertNoMsg(new ReturnCheck(), TEST3);
 	}
 
+	@Test
 	public function testEnforceReturnType() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
@@ -60,6 +67,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testEnforceReturnTypeMissing() {
 		var check = new ReturnCheck();
 		check.enforceReturnType = true;
@@ -69,6 +77,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertMsg(check, TEST3, MSG_NOT_TEST2_RETURN);
 	}
 
+	@Test
 	public function testReturnTypeAllowEmptyReturnFalse() {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = false;
@@ -76,6 +85,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertMsg(check, TEST3, MSG_EMPTY_RETURN_TEST2);
 	}
 
+	@Test
 	public function testReturnTypeAllowEmptyReturnTrue() {
 		var check = new ReturnCheck();
 		check.allowEmptyReturn = true;
@@ -84,11 +94,13 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
 	}
 
+	@Test
 	public function testExternVoid() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, TEST6);
 	}
 
+	@Test
 	public function testInterface() {
 		var check = new ReturnCheck();
 		assertNoMsg(check, INTERFACE);

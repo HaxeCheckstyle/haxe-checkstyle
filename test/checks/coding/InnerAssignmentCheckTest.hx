@@ -6,6 +6,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 
 	static inline var MSG_INNER_ASSIGNMENT:String = "Inner assignment detected";
 
+	@Test
 	public function testCorrectAssignment() {
 		var check = new InnerAssignmentCheck();
 		assertNoMsg(check, IF_EXPR);
@@ -15,6 +16,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertNoMsg(check, BRACELESS_ANON_FUNC_ISSUE_113);
 	}
 
+	@Test
 	public function testIncorrectInnerAssignment() {
 		var check = new InnerAssignmentCheck();
 		assertMsg(check, IF_COND, MSG_INNER_ASSIGNMENT);
@@ -24,6 +26,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertMsg(check, SETTER_GETTER_ISSUE_259, MSG_INNER_ASSIGNMENT);
 	}
 
+	@Test
 	public function testIgnoreReturnAssignments () {
 		var check = new InnerAssignmentCheck();
 		check.ignoreReturnAssignments = true;

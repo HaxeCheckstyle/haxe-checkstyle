@@ -6,6 +6,7 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 
 	static inline var MSG_SIMPLIFY:String = "Boolean expression can be simplified";
 
+	@Test
 	public function testWrongExpression() {
 		assertMsg(new SimplifyBooleanExpressionCheck(), TEST1, MSG_SIMPLIFY);
 		assertMsg(new SimplifyBooleanExpressionCheck(), TEST2, MSG_SIMPLIFY);
@@ -13,11 +14,13 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 		assertMsg(new SimplifyBooleanExpressionCheck(), TEST4, MSG_SIMPLIFY);
 	}
 
+	@Test
 	public function testCorrectExpression() {
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST5);
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST6);
 	}
 
+	@Test
 	public function testSuppressExpression() {
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST7);
 	}
