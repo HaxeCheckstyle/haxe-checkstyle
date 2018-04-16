@@ -377,6 +377,7 @@ class Main {
 		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(files.length));
 		if (EXIT_CODE) ReporterManager.INSTANCE.addReporter(new ExitCodeReporter());
 
+		#if (neko || cpp)
 		if (disableThreads) {
 			checker.process(toProcess, excludesMap);
 		}
@@ -390,6 +391,9 @@ class Main {
 			while (!checkerPool.isFinished()) Sys.sleep(0.1);
 			ReporterManager.INSTANCE.finish();
 		}
+		#else
+		checker.process(toProcess, excludesMap);
+		#end
 	}
 
 	function traverse(path:String, files:Array<String>) {
