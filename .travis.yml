@@ -10,7 +10,7 @@ install:
   - haxelib install compiletime 2.6.0
   - haxelib install hxargs 3.0.2
   - haxelib install mcover 2.1.1
-  - haxelib install munit 2.2.1
+  - haxelib install munit
 script:
   - haxe buildAll.hxml
 
