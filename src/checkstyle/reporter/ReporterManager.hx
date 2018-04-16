@@ -115,3 +115,11 @@ class ReporterManager {
 		};
 	}
 }
+
+#if (!neko && !cpp)
+class Mutex {
+	public function new() {}
+	public function acquire() {}
+	public function release() {}
+}
+#end
