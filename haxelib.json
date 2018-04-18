@@ -19,7 +19,7 @@
         "Gama11",
         "chipshort"
     ],
-    "releasenote": "added mutlithreading for parsing and checking + bug fixes",
+    "releasenote": "added multithreading for parsing and checking + bug fixes",
     "version": "2.2.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
