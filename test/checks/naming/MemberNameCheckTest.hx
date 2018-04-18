@@ -4,12 +4,14 @@ import checkstyle.checks.naming.MemberNameCheck;
 
 class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 
+	@Test
 	public function testCorrectNaming() {
 		var check = new MemberNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testWrongNaming() {
 		var check = new MemberNameCheck();
 		assertMsg(check, TEST1, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
@@ -20,6 +22,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testIgnoreExtern() {
 		var check = new MemberNameCheck();
 		check.ignoreExtern = false;
@@ -33,6 +36,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST5, 'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testTokenClass() {
 		var check = new MemberNameCheck();
 		check.tokens = [CLASS];
@@ -47,6 +51,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, ABSTRACT_FIELDS);
 	}
 
+	@Test
 	public function testTokenPublic() {
 		var check = new MemberNameCheck();
 		check.tokens = [CLASS, PUBLIC];
@@ -80,6 +85,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testTokenPrivate() {
 		var check = new MemberNameCheck();
 		check.tokens = [CLASS, PRIVATE];
@@ -112,6 +118,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testTokenEnum() {
 		var check = new MemberNameCheck();
 		check.tokens = [ENUM];
@@ -125,6 +132,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, ABSTRACT_FIELDS);
 	}
 
+	@Test
 	public function testTokenTypedef() {
 		var check = new MemberNameCheck();
 		check.tokens = [TYPEDEF];
@@ -137,6 +145,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, ABSTRACT_FIELDS);
 	}
 
+	@Test
 	public function testFormat() {
 		var check = new MemberNameCheck();
 		check.format = "^[A-Z_]*$";
@@ -155,6 +164,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST6, 'Invalid enum member signature: "VALUE_" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testTokenAbstract() {
 		var check = new MemberNameCheck();
 		check.tokens = [ABSTRACT, PUBLIC, PRIVATE];
@@ -186,6 +196,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
 	}
 
+	@Test
 	public function testDefineCombinations() {
 		var check = new MemberNameCheck();
 		assertNoMsg(check, DEFINE_COMBINATIONS);

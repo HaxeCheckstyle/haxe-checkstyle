@@ -6,14 +6,17 @@ class SimplifyBooleanReturnCheckTest extends CheckTestCase<SimplifyBooleanReturn
 
 	static inline var MSG_SIMPLIFY:String = "Conditional logic can be removed";
 
+	@Test
 	public function testWrongExpression() {
 		assertMsg(new SimplifyBooleanReturnCheck(), TEST1, MSG_SIMPLIFY);
 	}
 
+	@Test
 	public function testCorrectExpression() {
 		assertNoMsg(new SimplifyBooleanReturnCheck(), TEST2);
 	}
 
+	@Test
 	public function testOnlyIfExpression() {
 		assertNoMsg(new SimplifyBooleanReturnCheck(), TEST3);
 	}

@@ -2,13 +2,14 @@ package checkstyle;
 
 import byte.ByteData;
 import haxe.CallStack;
-import checkstyle.checks.Check;
 import haxeparser.HaxeParser;
-import checkstyle.reporter.IReporter;
 import haxeparser.HaxeLexer;
 import sys.io.File;
 
-import checkstyle.checks.Category;
+import checkstyle.checks.Check;
+
+import checkstyle.reporter.ReporterManager;
+
 import checkstyle.token.TokenTreeBuilder;
 
 class Checker {
@@ -22,26 +23,20 @@ class Checker {
 	public var baseDefines:Array<String>;
 	public var defineCombinations:Array<Array<String>>;
 
-	var reporters:Array<IReporter>;
 	var linesIdx:Array<LineIds>;
 	var lineSeparator:String;
 	var tokenTree:TokenTree;
-	var asts:Array<Ast>;
-	var excludes:Map<String, Array<String>>;
+	public var asts:Array<Ast>;
+	public var excludes:Map<String, Array<String>>;
 
 	public function new() {
 		checks = [];
-		reporters = [];
 		baseDefines = [];
 		defineCombinations = [];
 	}
 
 	public function addCheck(check:Check) {
 		checks.push(check);
-	}
-
-	public function addReporter(r:IReporter) {
-		reporters.push(r);
 	}
 
 	public function getTokenTree():TokenTree {
@@ -166,7 +161,7 @@ class Checker {
 		advanceFrame = function() hxt.advance_frame();
 		#end
 
-		for (reporter in reporters) reporter.start();
+		ReporterManager.INSTANCE.start();
 		for (checkFile in files) {
 			loadFileContent(checkFile);
 			if (createContext(checkFile)) run();
@@ -174,42 +169,40 @@ class Checker {
 			advanceFrame();
 		}
 		advanceFrame();
-		for (reporter in reporters) reporter.finish();
+		ReporterManager.INSTANCE.finish();
 		advanceFrame();
 	}
 
-	function loadFileContent(checkFile:CheckFile) {
+	public function loadFileContent(checkFile:CheckFile) {
 		// unittests set content before running Checker
 		// real checks load content here
 		if (checkFile.content == null) checkFile.content = File.getContent(checkFile.name);
 	}
 
-	function unloadFileContent(checkFile:CheckFile) {
+	public function unloadFileContent(checkFile:CheckFile) {
 		checkFile.content = null;
 	}
 
-	function createContext(checkFile:CheckFile):Bool {
+	public function createContext(checkFile:CheckFile):Bool {
 		file = checkFile;
 		bytes = byte.ByteData.ofString(file.content);
-		for (reporter in reporters) reporter.fileStart(file);
+		ReporterManager.INSTANCE.fileStart(file);
 		try {
 			findLineSeparator();
 			makeLines();
 			makePosIndices();
 			makeTokens();
 			makeASTs();
+			getTokenTree();
 		}
 		catch (e:Any) {
-			for (reporter in reporters) {
-				reporter.addMessage(getErrorMessage(e, file.name, "Parsing"));
-				reporter.fileFinish(file);
-			}
+			ReporterManager.INSTANCE.addParseError(file, e);
 			return false;
 		}
 		return true;
 	}
 
-	function run() {
+	public function run() {
 		for (check in checks) {
 			var messages = [];
 
@@ -224,37 +217,9 @@ class Checker {
 				ast = asts[0];
 				messages = messages.concat(runCheck(check));
 			}
-
-			messages = filterDuplicateMessages(messages);
-			for (reporter in reporters) for (m in messages) reporter.addMessage(m);
+			ReporterManager.INSTANCE.addMessages(messages);
 		}
-		for (reporter in reporters) reporter.fileFinish(file);
-	}
-
-	function filterDuplicateMessages(messages:Array<CheckMessage>):Array<CheckMessage> {
-		var filteredMessages = [];
-		for (message in messages) {
-			var anyDuplicates = false;
-			for (filteredMessage in filteredMessages) {
-				if (areMessagesSame(message, filteredMessage)) {
-					anyDuplicates = true;
-					break;
-				}
-			}
-			if (!anyDuplicates) filteredMessages.push(message);
-		}
-		return filteredMessages;
-	}
-
-	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
-		return
-			message1.fileName == message2.fileName &&
-			message1.message == message2.message &&
-			message1.line == message2.line &&
-			message1.startColumn == message2.startColumn &&
-			message1.endColumn == message2.endColumn &&
-			message1.severity == message2.severity &&
-			message1.moduleName == message2.moduleName;
+		ReporterManager.INSTANCE.fileFinish(file);
 	}
 
 	function runCheck(check:Check):Array<CheckMessage> {
@@ -263,7 +228,7 @@ class Checker {
 			return check.run(this);
 		}
 		catch (e:Any) {
-			for (reporter in reporters) reporter.addMessage(getErrorMessage(e, file.name, "Check " + check.getModuleName()));
+			ReporterManager.INSTANCE.addCheckError(file, e, check.getModuleName());
 			return [];
 		}
 	}
@@ -283,21 +248,6 @@ class Checker {
 			if (r.match(cls)) return true;
 		}
 		return false;
-	}
-
-	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
-		return {
-			fileName:fileName,
-			line:1,
-			startColumn:0,
-			endColumn:0,
-			severity:ERROR,
-			moduleName:"Checker",
-			categories:[Category.STYLE],
-			points:1,
-			desc: "",
-			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())
-		};
 	}
 }
 

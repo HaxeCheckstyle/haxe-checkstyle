@@ -6,11 +6,13 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 
 	static inline var MSG_AFTER:String = 'SeparatorWhitespace policy "after" violated by ","';
 
+	@Test
 	public function testCorrectSeparatorWhitespace() {
 		var check = new SeparatorWhitespaceCheck();
 		assertNoMsg(check, CORRECT_WHITESPACE);
 	}
 
+	@Test
 	public function testIncorrectSeparatorWhitespaceToken() {
 		var check = new SeparatorWhitespaceCheck();
 		check.commaPolicy = AFTER;
@@ -18,18 +20,21 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 		assertMsg(check, WHITESPACE_AROUND, MSG_AFTER);
 	}
 
+	@Test
 	public function testWhitespaceAround() {
 		var check = new SeparatorWhitespaceCheck();
 		check.commaPolicy = AROUND;
 		assertNoMsg(check, WHITESPACE_AROUND);
 	}
 
+	@Test
 	public function testWhitespaceNone() {
 		var check = new SeparatorWhitespaceCheck();
 		check.commaPolicy = NONE;
 		assertNoMsg(check, COMMA_WHITESPACE_NONE);
 	}
 
+	@Test
 	public function testIgnore() {
 		var check = new SeparatorWhitespaceCheck();
 		check.dotPolicy = IGNORE;

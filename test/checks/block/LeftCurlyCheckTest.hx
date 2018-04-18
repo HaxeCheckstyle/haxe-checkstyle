@@ -9,6 +9,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 	static inline var MSG_NL_SPLIT:String = "Left curly should be on new line (previous expression is split over multiple lines)";
 	static inline var MSG_NLOW:String = "Left curly should be at EOL (previous expression is not split over multiple lines)";
 
+	@Test
 	public function testCorrectBraces() {
 		var check = new LeftCurlyCheck();
 		assertNoMsg(check, TEST);
@@ -25,6 +26,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, ABSTRACT);
 	}
 
+	@Test
 	public function testWrongBraces() {
 		var check = new LeftCurlyCheck();
 		assertMsg(check, TEST1, MSG_EOL);
@@ -38,6 +40,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, NLOW_CASEBLOCK, MSG_EOL);
 	}
 
+	@Test
 	public function testBraceOnNL() {
 		var check = new LeftCurlyCheck();
 		check.option = NL;
@@ -61,6 +64,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, TEST13);
 	}
 
+	@Test
 	public function testSwitch() {
 		var check = new LeftCurlyCheck();
 		check.option = NL;
@@ -70,6 +74,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, NLOW_CASEBLOCK, MSG_NL);
 	}
 
+	@Test
 	public function testNLOW() {
 		var check = new LeftCurlyCheck();
 		check.option = NLOW;
@@ -82,12 +87,14 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, TEST19, MSG_NL_SPLIT);
 	}
 
+	@Test
 	public function testReification() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [REIFICATION];
 		assertMsg(check, MACRO_REIFICATION, MSG_EOL);
 	}
 
+	@Test
 	public function testIgnoreEmptySingleline() {
 		var check = new LeftCurlyCheck();
 		check.ignoreEmptySingleline = false;
@@ -100,6 +107,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, SINGLELINE_ISSUE_153);
 	}
 
+	@Test
 	public function testArrayComprehension() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION];

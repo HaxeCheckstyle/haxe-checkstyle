@@ -5,17 +5,21 @@ import haxe.PosInfos;
 import checkstyle.CheckMessage;
 import checkstyle.CheckFile;
 import checkstyle.reporter.IReporter;
+import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 
-class CheckTestCase<T:String> extends haxe.unit.TestCase {
+import massive.munit.Assert;
+
+class CheckTestCase<T:String> {
 
 	static inline var FILE_NAME:String = "Test.hx";
 
 	var checker:Checker;
 	var reporter:TestReporter;
 
-	override public function setup() {}
+	@Before
+	public function setup() {}
 
 	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?fileName:String, ?pos:PosInfos) {
 		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
@@ -32,18 +36,18 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 	function actualAssertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?fileName:String, ?pos:PosInfos) {
 		var msg = checkMessage(testCase, check, defines, fileName, pos);
-		assertEquals(expected, msg, pos);
+		Assert.areEqual(expected, msg, pos);
 	}
 
-	override function assertEquals<T>(expected:T, actual:T, ?c:PosInfos) {
-		currentTest.done = true;
-		if (actual != expected) {
-			currentTest.success = false;
-			currentTest.error = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
-			currentTest.posInfos = c;
-			throw currentTest;
-		}
-	}
+	// function assertEquals<T>(expected:T, actual:T, ?c:PosInfos) {
+	// 	currentTest.done = true;
+	// 	if (actual != expected) {
+	// 		currentTest.success = false;
+	// 		currentTest.error = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
+	// 		currentTest.posInfos = c;
+	// 		throw currentTest;
+	// 	}
+	// }
 
 	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, ?pos:PosInfos):String {
 		// a fresh Checker and Reporter for every checkMessage
@@ -53,12 +57,15 @@ class CheckTestCase<T:String> extends haxe.unit.TestCase {
 
 		if (defines != null) checker.defineCombinations = defines;
 		checker.addCheck(check);
-		checker.addReporter(reporter);
+
+		ReporterManager.INSTANCE.clear();
+		ReporterManager.INSTANCE.addReporter(reporter);
 		checker.process([{name:fileName, content:src, index:0}], null);
 		return reporter.message;
 	}
 
-	override public function tearDown() {
+	@After
+	public function tearDown() {
 		checker = null;
 		reporter = null;
 	}

@@ -5,10 +5,13 @@ class WalkVar {
 		var name:TokenTree = null;
 		var varTok:TokenTree = stream.consumeTokenDef(Kwd(KwdVar));
 		parent.addChild(varTok);
+		WalkComment.walkComment(stream, parent);
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
+			WalkComment.walkComment(stream, parent);
 			name = stream.consumeConstIdent();
 			varTok.addChild(name);
+			WalkComment.walkComment(stream, name);
 			if (stream.is(POpen)) {
 				WalkPOpen.walkPOpen(stream, name);
 			}
@@ -21,6 +24,7 @@ class WalkVar {
 			if (stream.is(Binop(OpAssign))) {
 				WalkStatement.walkStatement(stream, name);
 			}
+			WalkComment.walkComment(stream, name);
 			if (stream.is(Comma)) {
 				var comma:TokenTree = stream.consumeTokenDef(Comma);
 				name.addChild(comma);

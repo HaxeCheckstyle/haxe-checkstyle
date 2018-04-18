@@ -4,11 +4,13 @@ import checkstyle.checks.type.DynamicCheck;
 
 class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 
+	@Test
 	public function testNoDynamic() {
 		var check = new DynamicCheck();
 		assertNoMsg(check, TEST);
 	}
 
+	@Test
 	public function testDetectDynamic() {
 		var check = new DynamicCheck();
 		assertMsg(check, TEST1, '"Count" type is "Dynamic"');

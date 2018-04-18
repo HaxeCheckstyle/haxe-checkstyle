@@ -8,14 +8,17 @@ class WalkObjectDecl {
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
 			if (stream.is(BrClose)) break;
+			WalkStatement.walkStatement(stream, openTok);
+			if (stream.is(BrClose)) break;
+
+			var name:TokenTree = openTok.getLastChild();
+			var dbldot:TokenTree = stream.consumeTokenDef(DblDot);
+			name.addChild(dbldot);
+
+			WalkStatement.walkStatement(stream, dbldot);
 			if (stream.is(Comma)) {
 				openTok.addChild(stream.consumeToken());
-				continue;
 			}
-			if (stream.is(DblDot)) {
-				openTok.addChild(stream.consumeToken());
-			}
-			WalkStatement.walkStatement(stream, openTok);
 		}
 		openTok.addChild(stream.consumeTokenDef(BrClose));
 	}

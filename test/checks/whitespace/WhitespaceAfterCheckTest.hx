@@ -8,6 +8,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 	static inline var MSG_EQUALS:String = 'No whitespace after "="';
 	static inline var MSG_GREATER:String = 'No whitespace after ">"';
 
+	@Test
 	public function testCorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
 		assertNoMsg(check, CORRECT_WHITESPACE_AFTER);
@@ -24,6 +25,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertNoMsg(check, ISSUE_245);
 	}
 
+	@Test
 	public function testIncorrectWhitespace() {
 		var check = new WhitespaceAfterCheck();
 		assertMsg(check, NO_WHITESPACE_FUNC, MSG_COMMA);
@@ -31,6 +33,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_COMMA);
 	}
 
+	@Test
 	public function testIncorrectWhitespaceToken() {
 		var check = new WhitespaceAfterCheck();
 		check.tokens = ["="];
@@ -47,6 +50,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertMsg(check, NO_WHITESPACE_GT, MSG_GREATER);
 	}
 
+	@Test
 	public function testNegativeVars() {
 		var check = new WhitespaceAfterCheck();
 		check.tokens = ["-"];

@@ -6,11 +6,13 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 
 	static inline var ERROR:String = '"test" modifier order is invalid (modifier: "PUBLIC_PRIVATE")';
 
+	@Test
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function testWrongOrder() {
 		var check = new ModifierOrderCheck();
 		assertMsg(check, TEST2, '"test" modifier order is invalid (modifier: "OVERRIDE")');
@@ -21,6 +23,7 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 		assertMsg(check, TEST8, ERROR);
 	}
 
+	@Test
 	public function testModifiers() {
 		var check = new ModifierOrderCheck();
 		check.modifiers = [DYNAMIC, PUBLIC_PRIVATE, OVERRIDE, INLINE, STATIC, MACRO];
@@ -32,6 +35,7 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 		assertNoMsg(check, TEST6);
 	}
 
+	@Test
 	public function testIgnore() {
 		var check = new ModifierOrderCheck();
 		check.severity = "ignore";

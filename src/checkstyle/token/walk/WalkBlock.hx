@@ -9,13 +9,18 @@ class WalkBlock {
 	 *
 	 */
 	public static function walkBlock(stream:TokenStream, parent:TokenTree) {
+		var tempStore:Array<TokenTree> = [];
+		var rewindPos:Int = stream.currentPos();
+		while (stream.is(At)) tempStore.push(WalkAt.walkAt(stream));
 		if (stream.is(BrOpen)) {
-			if (isObjectDecl(parent)) {
+			if (isBrOpenObjectDecl(parent)) {
 				WalkObjectDecl.walkObjectDecl(stream, parent);
 				return;
 			}
 			var openTok:TokenTree = stream.consumeTokenDef(BrOpen);
 			parent.addChild(openTok);
+			for (tok in tempStore) openTok.addChild(tok);
+
 			var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 			while (progress.streamHasChanged()) {
 				if (stream.is(BrClose)) break;
@@ -23,17 +28,21 @@ class WalkBlock {
 			}
 			openTok.addChild(stream.consumeTokenDef(BrClose));
 		}
-		else WalkStatement.walkStatement(stream, parent);
+		else {
+			stream.rewindTo(rewindPos);
+			WalkStatement.walkStatement(stream, parent);
+		}
 	}
 
-	static function isObjectDecl(token:TokenTree):Bool {
+	static function isBrOpenObjectDecl(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
 			case BkOpen: true;
-			case Kwd(KwdTypedef): true;
 			case Kwd(KwdReturn): true;
+			case Kwd(KwdFor): isBrOpenObjectDecl(token.parent);
+			case Kwd(_): false;
 			case Binop(OpAssign): true;
-			default: isObjectDecl(token.parent);
+			default: isBrOpenObjectDecl(token.parent);
 		}
 	}
 }

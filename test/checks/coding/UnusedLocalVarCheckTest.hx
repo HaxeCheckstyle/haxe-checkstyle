@@ -6,12 +6,14 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 
 	static inline var MSG_UNUSED_VAR_INDEX:String = "Unused local variable index";
 
+	@Test
 	public function testLocalVar() {
 		var check = new UnusedLocalVarCheck();
 		assertNoMsg(check, USED_INDEX);
 		assertNoMsg(check, STRING_INTERPOLATION);
 	}
 
+	@Test
 	public function testUnusedLocalVar() {
 		var check = new UnusedLocalVarCheck();
 		assertMsg(check, UNUSED_INDEX, MSG_UNUSED_VAR_INDEX);

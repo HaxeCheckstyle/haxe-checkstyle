@@ -4,14 +4,17 @@ import checkstyle.checks.size.LineLengthCheck;
 
 class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 
+	@Test
 	public function testDefaultLineLength() {
 		assertMsg(new LineLengthCheck(), TEST1, "Line is longer than 160 characters (found 178)");
 	}
 
+	@Test
 	public function testCorrectLineLength() {
 		assertNoMsg(new LineLengthCheck(), TEST2);
 	}
 
+	@Test
 	public function testConfigurableLineLength() {
 		var check = new LineLengthCheck();
 		check.max = 40;

@@ -4,15 +4,18 @@ import checkstyle.checks.design.EmptyPackageCheck;
 
 class EmptyPackageCheckTest extends CheckTestCase<EmptyPackageCheckTests> {
 
+	@Test
 	public function testEmptyPackage() {
 		assertMsg(new EmptyPackageCheck(), TEST1, "Found empty package");
 		assertNoMsg(new EmptyPackageCheck(), TEST3);
 	}
 
+	@Test
 	public function testCorrectPackage() {
 		assertNoMsg(new EmptyPackageCheck(), TEST2);
 	}
 
+	@Test
 	public function testEnforceEmptyPackage() {
 		var check = new EmptyPackageCheck();
 		check.enforceEmptyPackage = true;

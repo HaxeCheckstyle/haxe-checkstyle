@@ -4,6 +4,8 @@ import haxe.PosInfos;
 
 import haxeparser.Data.TokenDef;
 
+import massive.munit.Assert;
+
 import checkstyle.token.TokenTree;
 import checkstyle.token.TokenStream;
 
@@ -11,12 +13,13 @@ import checkstyle.token.walk.WalkAt;
 import checkstyle.token.walk.WalkIf;
 import checkstyle.token.walk.WalkPackageImport;
 
-class TokenTreeBuilderTest extends haxe.unit.TestCase {
+class TokenTreeBuilderTest {
 
 	function assertTokenEquals(testCase:TokenTreeBuilderTests, actual:String, ?pos:PosInfos) {
-		assertEquals((testCase:String), actual, pos);
+		Assert.areEqual((testCase:String), actual, pos);
 	}
 
+	@Test
 	public function testImports() {
 		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.IMPORT);
 		var root:TokenTree = new TokenTree(null, null, -1);
@@ -31,6 +34,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		assertTokenEquals(IMPORT_GOLD, treeToString(root));
 	}
 
+	@Test
 	public function testAt() {
 		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.AT_ANNOTATION);
 		var root:TokenTree = new TokenTree(null, null, -1);
@@ -45,6 +49,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 		assertTokenEquals(AT_ANNOTATION_GOLD, treeToString(root));
 	}
 
+	@Test
 	public function testIf() {
 		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(TokenTreeBuilderTests.IF);
 		var root:TokenTree = new TokenTree(null, null, -1);
@@ -59,7 +64,7 @@ class TokenTreeBuilderTest extends haxe.unit.TestCase {
 	}
 
 	function checkStreamEmpty(builder:TestTokenTreeBuilder) {
-		assertTrue(builder.isStreamEmpty());
+		Assert.isTrue(builder.isStreamEmpty());
 	}
 
 	function treeToString(token:TokenTree, prefix:String = ""):String {

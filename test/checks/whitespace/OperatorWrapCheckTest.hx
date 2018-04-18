@@ -7,6 +7,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 	static inline var MSG_PLUS_EOL:String = 'Token "+" must be at the end of the line';
 	static inline var MSG_GT_NL:String = 'Token ">" must be on a new line';
 
+	@Test
 	public function testCorrectWrap() {
 		var check = new OperatorWrapCheck();
 		assertNoMsg(check, CORRECT_EOL_WRAP);
@@ -15,11 +16,13 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 		assertNoMsg(check, NEG_OPERATOR);
 	}
 
+	@Test
 	public function testIncorrectWrap() {
 		var check = new OperatorWrapCheck();
 		assertMsg(check, CORRECT_NL_WRAP_PLUS, MSG_PLUS_EOL);
 	}
 
+	@Test
 	public function testOptionNL() {
 		var check = new OperatorWrapCheck();
 		check.option = NL;

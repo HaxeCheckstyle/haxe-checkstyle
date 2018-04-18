@@ -4,18 +4,22 @@ import checkstyle.checks.literal.ERegLiteralCheck;
 
 class ERegLiteralCheckTest extends CheckTestCase<ERegLiteralCheckTests> {
 
+	@Test
 	public function testCorrectEReg() {
 		assertNoMsg(new ERegLiteralCheck(), TEST2);
 	}
 
+	@Test
 	public function testWrongEReg() {
 		assertMsg(new ERegLiteralCheck(), TEST1, 'Bad EReg instantiation, define expression between "~/" and "/"');
 	}
 
+	@Test
 	public function testIssue43() {
 		assertNoMsg(new ERegLiteralCheck(), ISSUE_43);
 	}
 
+	@Test
 	public function testIssue99() {
 		assertNoMsg(new ERegLiteralCheck(), REGEX_WITH_STRING_INTERPOLATION);
 	}

@@ -4,12 +4,14 @@ import checkstyle.checks.coding.MagicNumberCheck;
 
 class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 
+	@Test
 	public function testNoMagicNumber() {
 		var check = new MagicNumberCheck();
 		assertNoMsg(check, STANDARD_MAGIC_NUMBERS);
 		assertNoMsg(check, ALLOWED_MAGIC_NUMBER);
 	}
 
+	@Test
 	public function testMagicNumber() {
 		var check = new MagicNumberCheck();
 		assertMsg(check, INT_NUMBER_ASSIGN, '"5" is a magic number');
@@ -19,6 +21,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertMsg(check, INT_NUMBER_FUNCTION, '"10" is a magic number');
 	}
 
+	@Test
 	public function testIgnoreNumbers() {
 		var check = new MagicNumberCheck();
 		check.ignoreNumbers = [-1, 0, 2];
@@ -36,6 +39,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertMsg(check, INT_NUMBER_FUNCTION, '"10" is a magic number');
 	}
 
+	@Test
 	public function testEnumAbstract() {
 		var check = new MagicNumberCheck();
 		assertNoMsg(check, ENUM_ABSTRACT);
