@@ -4,16 +4,19 @@ import checkstyle.checks.coding.NestedTryDepthCheck;
 
 class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 
+	@Test
 	public function testDefault() {
 		var check = new NestedTryDepthCheck();
 		assertNoMsg(check, TEST1);
 	}
 
+	@Test
 	public function testDefaultTooMany() {
 		var check = new NestedTryDepthCheck();
 		assertMsg(check, TEST2, "Nested try depth is 2 (max allowed is 1)");
 	}
 
+	@Test
 	public function testMaxParameter() {
 		var check = new NestedTryDepthCheck();
 		check.max = 2;

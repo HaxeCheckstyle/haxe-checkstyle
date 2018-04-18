@@ -4,10 +4,12 @@ import checkstyle.checks.whitespace.ArrayAccessCheck;
 
 class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 
+	@Test
 	public function testSpaceBefore() {
 		assertMsg(new ArrayAccessCheck(), TEST1, "Space between array and [");
 	}
 
+	@Test
 	public function testSpaceInside() {
 		var check = new ArrayAccessCheck();
 		assertMsg(check, TEST2, "Space between [ and index");
@@ -15,6 +17,7 @@ class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 		assertMsg(check, TEST4, "Space between index and ]");
 	}
 
+	@Test
 	public function testAllowSpaceInside() {
 		var check = new ArrayAccessCheck();
 		check.spaceBefore = true;
@@ -25,6 +28,7 @@ class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testCorrectUsage() {
 		var check = new ArrayAccessCheck();
 		assertNoMsg(check, TEST5);

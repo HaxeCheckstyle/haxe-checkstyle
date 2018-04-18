@@ -5,18 +5,21 @@ import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests> {
 
+	@Test
 	public function testWrongIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
 		assertMsg(check, TEST1, "Wrong indentation character (should be tab)");
 	}
 
+	@Test
 	public function testCorrectIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST2);
 	}
 
+	@Test
 	public function testConfigurableIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
@@ -25,12 +28,14 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 		assertMsg(check, TEST3, "Wrong indentation character (should be space)");
 	}
 
+	@Test
 	public function testMultilineIfIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, TEST4);
 	}
 
+	@Test
 	public function testFileBoundaryIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
@@ -38,6 +43,7 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 		assertMsg(check, TEST5_2, "Wrong indentation character (should be tab)");
 	}
 
+	@Test
 	public function testMultilineQuoteIndentation() {
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;

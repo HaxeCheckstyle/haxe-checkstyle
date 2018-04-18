@@ -4,34 +4,42 @@ import checkstyle.checks.design.UnnecessaryConstructorCheck;
 
 class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstructorCheckTests> {
 
+	@Test
 	public function testWithConstructor() {
 		assertMsg(new UnnecessaryConstructorCheck(), TEST1, "Unnecessary constructor found");
 	}
 
+	@Test
 	public function testWithoutConstructor() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST2);
 	}
 
+	@Test
 	public function testWithConstructorAndInstanceVar() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST3);
 	}
 
+	@Test
 	public function testWithConstructorAndInstanceFunction() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST4);
 	}
 
+	@Test
 	public function testJustVarsWithConstructor() {
 		assertMsg(new UnnecessaryConstructorCheck(), TEST5, "Unnecessary constructor found");
 	}
 
+	@Test
 	public function testJustWithConstructor() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST6);
 	}
 
+	@Test
 	public function testStaticOnlyWithNew() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_STATIC_ONLY_WITH_NEW);
 	}
 
+	@Test
 	public function testChildClass() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_CHILD_CLASS);
 	}

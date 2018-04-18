@@ -1,25 +1,28 @@
 {
-	"name": "checkstyle",
-	"classPath": "src",
-	"license": "MIT",
-	"tags": [
-		"checkstyle",
-		"haxe",
-		"standards",
-		"static",
-		"analysis",
-		"coding",
-		"style",
-		"cross"
-	],
-	"description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
-	"contributors": [
-		"adireddy"
-	],
-	"releasenote": "added enforceReturnTypeForAnonymous option to ReturnCheck #357",
-	"version": "2.1.16",
-	"url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
-	"dependencies": {
+    "name": "checkstyle",
+    "classPath": "src",
+    "license": "MIT",
+    "tags": [
+        "checkstyle",
+        "haxe",
+        "standards",
+        "static",
+        "analysis",
+        "coding",
+        "style",
+        "cross"
+    ],
+    "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
+    "contributors": [
+        "adireddy",
+        "AlexHaxe",
+        "Gama11",
+        "chipshort"
+    ],
+    "releasenote": "added multithreading for parsing and checking + bug fixes",
+    "version": "2.2.0",
+    "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
+    "dependencies": {
 
-	}
+    }
 }

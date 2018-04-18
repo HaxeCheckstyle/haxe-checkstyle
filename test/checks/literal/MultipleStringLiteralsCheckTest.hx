@@ -4,6 +4,7 @@ import checkstyle.checks.literal.MultipleStringLiteralsCheck;
 
 class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLiteralsCheckTests> {
 
+	@Test
 	public function testAllowedMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
 		assertNoMsg(check, LESS_THAN_THREE);
@@ -14,6 +15,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		assertNoMsg(check, SUPPRESSION);
 	}
 
+	@Test
 	public function testMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
 		assertMsg(check, THREE_XML, 'String "xml" appears 3 times in the file');
@@ -22,6 +24,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		assertMsg(check, EXAGGERATION_ISSUE_318, 'String "user.name" appears 3 times in the file');
 	}
 
+	@Test
 	public function testIgnoreRegEx() {
 		var check = new MultipleStringLiteralsCheck();
 		check.ignore = "^(\\s+|xml)$";
@@ -29,6 +32,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		assertNoMsg(check, THREE_XML_SWITCH);
 	}
 
+	@Test
 	public function testStringInterpolation() {
 		var check = new MultipleStringLiteralsCheck();
 		check.allowDuplicates = 1;

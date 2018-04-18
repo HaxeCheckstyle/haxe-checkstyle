@@ -116,12 +116,13 @@ class RightCurlyCheck extends Check {
 
 	function checkRightCurly(line:String, singleLine:Bool, pos:Position) {
 		try {
+			var curlyPos:Position = {file: pos.file, min: pos.min, max: pos.max};
 			var eof:Bool = false;
-			if (pos.max >= checker.file.content.length) {
-				pos.max = checker.file.content.length - 1;
+			if (curlyPos.max >= checker.file.content.length) {
+				curlyPos.max = checker.file.content.length - 1;
 				eof = true;
 			}
-			var linePos:LinePos = checker.getLinePos(pos.max);
+			var linePos:LinePos = checker.getLinePos(curlyPos.max);
 			var afterCurly:String = "";
 			if (!eof) {
 				var afterLine:String = checker.lines[linePos.line];
@@ -136,16 +137,16 @@ class RightCurlyCheck extends Check {
 				shouldHaveSameOption = sameRegex.match(nextLine);
 			}
 			// adjust to show correct line number in log message
-			pos.min = pos.max;
+			curlyPos.min = curlyPos.max;
 
-			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), "Right curly should not be on same line as left curly", pos);
+			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), "Right curly should not be on same line as left curly", curlyPos);
 			if (singleLine) return;
 
 			var curlyAlone:Bool = ~/^\s*\}[\)\],;\s]*(|\/\/.*)$/.match(line);
-			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", pos);
-			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", pos);
-			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", pos);
-			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', pos);
+			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
+			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", curlyPos);
+			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", curlyPos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', curlyPos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing

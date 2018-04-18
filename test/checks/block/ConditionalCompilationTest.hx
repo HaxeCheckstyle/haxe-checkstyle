@@ -11,6 +11,7 @@ class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTes
 	static inline var MSG_WHITESPACE_BEFORE:String = "only whitespace allowed before #if";
 	static inline var MSG_WHITESPACE_AFTER:String = "only whitespace allowed after #if";
 
+	@Test
 	public function testAlignedWithSingleline() {
 		var check:ConditionalCompilationCheck = new ConditionalCompilationCheck();
 
@@ -23,6 +24,7 @@ class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTes
 		assertMsg(check, ISSUE_79_WRONG_INDENT, MSG_WRONG_INDENT);
 	}
 
+	@Test
 	public function testAlignedWithNoSingleline() {
 		var check:ConditionalCompilationCheck = new ConditionalCompilationCheck();
 		check.allowSingleline = false;
@@ -36,6 +38,7 @@ class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTes
 		assertMsg(check, ISSUE_79_WRONG_INDENT, MSG_WRONG_INDENT);
 	}
 
+	@Test
 	public function testStartOfLine() {
 		var check:ConditionalCompilationCheck = new ConditionalCompilationCheck();
 		check.allowSingleline = false;
@@ -49,6 +52,7 @@ class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTes
 		assertMsg(check, ISSUE_252, MSG_NO_SINGLELINE);
 	}
 
+	@Test
 	public function testWhitespace() {
 		var check:ConditionalCompilationCheck = new ConditionalCompilationCheck();
 

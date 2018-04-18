@@ -20,6 +20,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 	static inline var MSG_TERNARY_AROUND:String = 'OperatorWhitespace policy "around" violated by ":"';
 	static inline var MSG_TERNARY_NONE:String = 'OperatorWhitespace policy "none" violated by ":"';
 
+	@Test
 	public function testCorrectOperatorWhitespace() {
 		var check = new OperatorWhitespaceCheck();
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
@@ -42,6 +43,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, BITWISE_NEG);
 	}
 
+	@Test
 	public function testIncorrectOperatorWhitespaceToken() {
 		var check = new OperatorWhitespaceCheck();
 		assertMsg(check, ISSUE_59, MSG_EQUALS);
@@ -54,6 +56,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, CORRECT_WHITESPACE_AROUND);
 	}
 
+	@Test
 	public function testWhitespaceBefore() {
 		var check = new OperatorWhitespaceCheck();
 		check.assignOpPolicy = BEFORE;
@@ -67,6 +70,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS_BEFORE);
 	}
 
+	@Test
 	public function testWhitespaceAfter() {
 		var check = new OperatorWhitespaceCheck();
 		check.assignOpPolicy = AFTER;
@@ -80,6 +84,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, NO_WHITESPACE_VAR_INIT, MSG_EQUALS_AFTER);
 	}
 
+	@Test
 	public function testStarImport() {
 		var check = new OperatorWhitespaceCheck();
 		assertNoMsg(check, ISSUE_70);
@@ -88,6 +93,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT);
 	}
 
+	@Test
 	public function testUnary() {
 		var check = new OperatorWhitespaceCheck();
 
@@ -109,6 +115,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, BITWISE_NEG_WRONG);
 	}
 
+	@Test
 	public function testInterval() {
 		var check = new OperatorWhitespaceCheck();
 
@@ -120,6 +127,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertNoMsg(check, INTERVAL_WHITESPACE);
 	}
 
+	@Test
 	public function testFunctionArg() {
 		var check = new OperatorWhitespaceCheck();
 
@@ -131,6 +139,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, FUNC_ARG_WHITESPACE, MSG_FUNC_ARG_NONE);
 	}
 
+	@Test
 	public function testArrow() {
 		var check = new OperatorWhitespaceCheck();
 
@@ -142,6 +151,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, MAP_WHITESPACE, MSG_ARROW_NONE);
 	}
 
+	@Test
 	public function testTernary() {
 		var check = new OperatorWhitespaceCheck();
 
@@ -153,6 +163,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 		assertMsg(check, TERNARY_WHITESPACE, MSG_TERNARY_NONE);
 	}
 
+	@Test
 	public function testIgnore() {
 		var check = new OperatorWhitespaceCheck();
 		check.assignOpPolicy = IGNORE;

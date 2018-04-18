@@ -9,6 +9,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 	static inline var MSG_EMPTY_BLOCK_CONTAIN_STATEMENT:String = "Empty block should contain a statement";
 	static inline var MSG_BLOCK_SHOULD_CONTAIN:String = "Block should contain a statement";
 
+	@Test
 	public function testCorrectEmptyBlock() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		assertNoMsg(check, EMPTY_BLOCK);
@@ -17,14 +18,17 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertNoMsg(check, BLOCK_WITH_COMMENT);
 		assertNoMsg(check, EMPTY_OBJECT_DECL);
 		assertNoMsg(check, OBJECT_DECL_WITH_COMMENT);
+		assertNoMsg(check, NESTED_OBJECT_DECL);
 	}
 
+	@Test
 	public function testWrongEmptyBlock() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		assertMsg(check, EMPTY_BLOCK_WHITESPACE, MSG_EMPTY_BLOCK);
 		assertMsg(check, EMPTY_OBJECT_DECL_WHITESPACE, MSG_EMPTY_BLOCK);
 	}
 
+	@Test
 	public function testEmptyBlockComment() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = TEXT;
@@ -40,6 +44,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertMsg(check, EMPTY_OBJECT_DECL_WHITESPACE, MSG_EMPTY_BLOCK_SHOULD_CONTAIN);
 	}
 
+	@Test
 	public function testEmptyBlockStatement() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = STATEMENT;
@@ -55,6 +60,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertMsg(check, EMPTY_OBJECT_DECL_WHITESPACE, MSG_EMPTY_BLOCK_CONTAIN_STATEMENT);
 	}
 
+	@Test
 	public function testEmptyBlockStatementObjectDecl() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.option = STATEMENT;
@@ -71,6 +77,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 		assertMsg(check, EMPTY_OBJECT_DECL_WHITESPACE, MSG_EMPTY_BLOCK_CONTAIN_STATEMENT);
 	}
 
+	@Test
 	public function testMacroReificationIssue149() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		check.tokens = [REIFICATION];
@@ -144,6 +151,19 @@ abstract EmptyBlockCheckTests(String) to String {
 		public function new() { /* comment
 								 */
 			var a = { // comment
+			};
+		}
+	}";
+
+	var NESTED_OBJECT_DECL = "
+	class Test {
+		public function new() {
+			var a = {
+				x: {
+					arg1: [-x, y, -z],
+					arg2: -w,
+					arg3: {}
+				}
 			};
 		}
 	}";

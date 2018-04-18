@@ -4,10 +4,12 @@ import checkstyle.checks.naming.ListenerNameCheck;
 
 class ListenerNameCheckTest extends CheckTestCase<ListenerNameCheckTests> {
 
+	@Test
 	public function testCorrectListenerName() {
 		assertNoMsg(new ListenerNameCheck(), TEST);
 	}
 
+	@Test
 	public function testListenerName1() {
 		var check = new ListenerNameCheck();
 		check.format = "^_?on.*";

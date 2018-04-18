@@ -7,6 +7,7 @@ import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class ExtensionsTest extends CheckTestCase<ExtensionsTests> {
 
+	@Test
 	public function testExtensions() {
 		#if (haxeparser >= "3.3.0")
 		assertNoMsg(new IndentationCharacterCheck(), TEST1);

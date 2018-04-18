@@ -4,14 +4,17 @@ import checkstyle.checks.size.MethodLengthCheck;
 
 class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 
+	@Test
 	public function testWrongMethodLength() {
 		assertMsg(new MethodLengthCheck(), TEST1, "Method `test` length is 354 lines (max allowed is 50)");
 	}
 
+	@Test
 	public function testCorrectMethodLength() {
 		assertNoMsg(new MethodLengthCheck(), TEST2);
 	}
 
+	@Test
 	public function testConfigurableMethodLength() {
 		var check = new MethodLengthCheck();
 		check.max = 10;
@@ -19,6 +22,7 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 		assertMsg(check, TEST3, "Method `test` length is 14 lines (max allowed is 10)");
 	}
 
+	@Test
 	public function testIgnoreEmptyLines() {
 		var check = new MethodLengthCheck();
 		check.max = 10;

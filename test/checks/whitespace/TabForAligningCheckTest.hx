@@ -5,12 +5,14 @@ import checkstyle.checks.whitespace.TabForAligningCheck;
 
 class TabForAligningCheckTest extends CheckTestCase<TabForAligningCheckTests> {
 
+	@Test
 	public function testTab() {
 		var check = new TabForAligningCheck();
 		check.severity = SeverityLevel.INFO;
 		assertMsg(check, TEST1, "Tab after non-space character, use space for aligning");
 	}
 
+	@Test
 	public function testMultiline() {
 		var check = new TabForAligningCheck();
 		check.severity = SeverityLevel.INFO;

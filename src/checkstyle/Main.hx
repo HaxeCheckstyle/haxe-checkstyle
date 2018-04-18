@@ -11,6 +11,7 @@ import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
+import checkstyle.reporter.ReporterManager;
 import checkstyle.errors.Error;
 import haxe.CallStack;
 import haxe.Json;
@@ -41,6 +42,9 @@ class Main {
 	var excludesMap:Map<String, Array<String>>;
 	var configPath:String;
 	var excludePath:String;
+	var numberOfCheckerThreads:Int;
+	var overrideCheckerThreads:Int;
+	var disableThreads:Bool;
 
 	function new() {
 		info = new ChecksInfo();
@@ -51,6 +55,8 @@ class Main {
 		exitCode = 0;
 		configPath = null;
 		excludePath = null;
+		numberOfCheckerThreads = 5;
+		overrideCheckerThreads = 0;
 	}
 
 	function run(args:Array<String>) {
@@ -72,6 +78,8 @@ class Main {
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
 			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
+			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
+			@doc("Do not use checker threads") ["-nothreads"] => function () disableThreads = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -133,6 +141,7 @@ class Main {
 			for (combination in config.defineCombinations) validateDefines(combination);
 			checker.defineCombinations = config.defineCombinations;
 		}
+		validateCheckerThreads(config.numberOfCheckerThreads);
 	}
 
 	function loadExcludeConfig(path:String) {
@@ -236,6 +245,15 @@ class Main {
 		}
 	}
 
+	function validateCheckerThreads(checkerThreads:Null<Int>) {
+		if (checkerThreads != null) {
+			numberOfCheckerThreads = checkerThreads;
+		}
+		if (overrideCheckerThreads > 0) numberOfCheckerThreads = overrideCheckerThreads;
+		if (numberOfCheckerThreads <= 0) numberOfCheckerThreads = 5;
+		if (numberOfCheckerThreads > 15) numberOfCheckerThreads = 15;
+	}
+
 	function addAllChecks() {
 		for (check in getSortedCheckInfos()) {
 			if (!check.isAlias) checker.addCheck(info.build(check.name));
@@ -303,6 +321,7 @@ class Main {
 	function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
+			numberOfCheckerThreads: 5,
 			baseDefines: [],
 			defineCombinations: [],
 			checks: [],
@@ -354,25 +373,58 @@ class Main {
 		var i:Int = 0;
 		var toProcess:Array<CheckFile> = [for (file in files) { name:file, content:null, index:i++ }];
 
-		checker.addReporter(createReporter(files.length));
-		if (SHOW_PROGRESS) checker.addReporter(new ProgressReporter(files.length));
-		if (EXIT_CODE) checker.addReporter(new ExitCodeReporter());
+		ReporterManager.INSTANCE.addReporter(createReporter(files.length));
+		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(files.length));
+		if (EXIT_CODE) ReporterManager.INSTANCE.addReporter(new ExitCodeReporter());
+
+		#if (neko || cpp)
+		if (disableThreads) {
+			checker.process(toProcess, excludesMap);
+		}
+		else {
+			ReporterManager.INSTANCE.start();
+			var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
+			parserQueue.start(numberOfCheckerThreads + 1);
+			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
+			checkerPool.start(numberOfCheckerThreads);
+
+			while (!checkerPool.isFinished()) Sys.sleep(0.1);
+			ReporterManager.INSTANCE.finish();
+		}
+		#else
 		checker.process(toProcess, excludesMap);
+		#end
 	}
 
 	function traverse(path:String, files:Array<String>) {
 		try {
-			if (FileSystem.isDirectory(path) && !allExcludes.contains(path)) {
+			if (FileSystem.isDirectory(path) && !isExcludedFromAll(path)) {
 				var nodes = FileSystem.readDirectory(path);
 				for (child in nodes) traverse(pathJoin(path, child), files);
 			}
-			else if (~/(.hx)$/i.match(path) && !allExcludes.contains(path.substring(0, path.indexOf(".hx")))) {
+			else if (~/(.hx)$/i.match(path) && !isExcludedFromAll(path)) {
 				files.push(path);
 			}
 		}
 		catch (e:Any) {
 			Sys.println("\nPath " + path + " not found.");
 		}
+	}
+
+	function isExcludedFromAll(path:String):Bool {
+		var offset = path.indexOf(".hx");
+		if (offset > 0) {
+			path = path.substring(0, offset);
+		}
+		if (allExcludes.contains(path)) return true;
+
+		var slashes:EReg = ~/[\/\\]/g;
+		path = slashes.replace(path, ":");
+		for (exclude in allExcludes) {
+			var r = new EReg(exclude, "i");
+			if (r.match(path)) return true;
+		}
+		return false;
 	}
 
 	function failWith(message:String) {

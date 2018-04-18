@@ -7,6 +7,7 @@ import checkstyle.checks.block.RightCurlyCheck;
 // tests for blocks using multiple check classes
 class BlockTest extends CheckTestCase<BlockTests> {
 
+	@Test
 	public function testBlockFormatIssue42() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		assertNoMsg(check, ISSUE_42);
@@ -22,6 +23,7 @@ class BlockTest extends CheckTestCase<BlockTests> {
 		assertNoMsg(checkRight, ISSUE_42_MACRO);
 	}
 
+	@Test
 	public function testBlockFormatIssue42Eol() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		assertNoMsg(check, ISSUE_42_MACRO_EOL);

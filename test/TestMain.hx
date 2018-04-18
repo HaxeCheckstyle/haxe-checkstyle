@@ -1,10 +1,13 @@
+import haxe.EntryPoint;
 import haxe.Json;
+
 import sys.io.File;
 import sys.io.FileOutput;
-import checks.CheckTestCase;
-import token.TokenTreeBuilderTest;
-import token.TokenTreeBuilderParsingTest;
+
+import massive.munit.TestRunner;
+
 import mcover.coverage.client.PrintClient;
+import mcover.coverage.munit.client.MCoverPrintClient;
 import mcover.coverage.data.CoverageResult;
 import mcover.coverage.data.Statement;
 import mcover.coverage.data.Branch;
@@ -15,17 +18,19 @@ using StringTools;
 class TestMain {
 
 	public function new() {
-		CompileTime.importPackage("checks");
-		CompileTime.importPackage("misc");
+		var suites:Array<Class<massive.munit.TestSuite>> = [TestSuite];
 
-		var runner = new haxe.unit.TestRunner();
-		runner.add(new TokenTreeBuilderTest());
-		runner.add(new TokenTreeBuilderParsingTest());
+		var client:MCoverPrintClient = new MCoverPrintClient();
+		var runner:TestRunner = new TestRunner(client);
+		runner.completionHandler = completionHandler;
+		EntryPoint.addThread(function() {
+			while (true) Sys.sleep(1);
+		});
+		runner.run(suites);
+		EntryPoint.run();
+	}
 
-		var tests = CompileTime.getAllClasses(CheckTestCase);
-		for (testClass in tests) runner.add(Type.createInstance(testClass, []));
-
-		var success = runner.run();
+	function completionHandler(success:Bool) {
 		setupCoverageReport();
 		Sys.exit(success ? 0 : 1);
 	}

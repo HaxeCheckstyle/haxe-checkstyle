@@ -6,14 +6,17 @@ class DefaultComesLastCheckTest extends CheckTestCase<DefaultComesLastCheckTests
 
 	static inline var MSG:String = 'Default should be last label in the "switch"';
 
+	@Test
 	public function testFirstDefault() {
 		assertMsg(new DefaultComesLastCheck(), TEST1, MSG);
 	}
 
+	@Test
 	public function testMiddleDefault() {
 		assertMsg(new DefaultComesLastCheck(), TEST2, MSG);
 	}
 
+	@Test
 	public function testLastDefault() {
 		assertNoMsg(new DefaultComesLastCheck(), TEST3);
 	}
