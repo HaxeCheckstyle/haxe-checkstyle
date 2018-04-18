@@ -16,8 +16,7 @@
     "contributors": [
         "adireddy",
         "AlexHaxe",
-        "Gama11",
-        "chipshort"
+        "Gama11"
     ],
     "releasenote": "added mutlithreading for parsing and checking + bug fixes",
     "version": "2.2.0",
