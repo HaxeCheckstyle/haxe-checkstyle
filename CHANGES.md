@@ -1,6 +1,6 @@
 ## next version (2.2.x)
 
- - added a reset function for checks (#279)
+ - added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
 
 ## version 2.2.0
 
