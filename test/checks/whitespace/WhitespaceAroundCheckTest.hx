@@ -24,6 +24,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 		assertNoMsg(check, NEGATIVE_VARS);
 		assertNoMsg(check, NEGATIVE_NUMS);
 		assertNoMsg(check, OPGT);
+		assertNoMsg(check, ISSUE_78);
 	}
 
 	@Test
@@ -260,4 +261,16 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			if (a >>> b > c) return a >>>= b;
 		}
 	}";
+
+	var ISSUE_78 = "
+	#if true
+	@:forward
+	abstract Test(Int) {
+	    function foo(nullableArg:Null<Int>) {}
+	}
+	#else
+	import haxe.ds.ArraySort;
+	class Test {}
+	#end
+	";
 }
