@@ -25,13 +25,17 @@ class Check {
 		desc = haxe.rtti.Meta.getType(Type.getClass(this)).desc[0];
 	}
 
+	public function reset() {
+		messages = [];
+	}
+
 	public function configureProperty(name:String, value:Any) {
 		Reflect.setField(this, name, value);
 	}
 
 	public function run(checker:Checker):Array<CheckMessage> {
+		reset();
 		this.checker = checker;
-		messages = [];
 		if (severity != SeverityLevel.IGNORE) {
 			try {
 				actualRun();
