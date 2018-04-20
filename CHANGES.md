@@ -1,6 +1,9 @@
-## next version (2.2.x)
+## next version (2.2.1)
 
- - added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
+ - Added CHANGES.md
+ - Added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
+ - Added unittest for [#78](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/78)
+ - Removed conditional section for unittest [#181](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/181)
 
 ## version 2.2.0
 
