@@ -22,10 +22,10 @@ class LineCheckBase extends Check {
 		stringLiteralEndRE = ~/^(?:[^"\\]|\\\S)*"/;
 	}
 
-	override public function run(checker:Checker):Array<CheckMessage> {
+	override public function reset() {
+		super.reset();
 		currentState = TEXT;
 		skipOverInitialQuote = false;
-		return super.run(checker);
 	}
 
 	function getRanges(line:String):Array<Range> {
@@ -67,7 +67,7 @@ class LineCheckBase extends Check {
 		}
 		else {
 			ranges.push({ type: currentState, start: currentStart, end: line.length });
-			
+
 			return line.length;
 		}
 	}
@@ -76,13 +76,13 @@ class LineCheckBase extends Check {
 		if (isBlock && commentBlockEndRE.matchSub(line, currentStart)) {
 			var commentEnd = commentBlockEndRE.matchedPos().pos + 2;
 			ranges.push({ type: currentState, start: currentStart, end: commentEnd });
-			
+
 			currentState = TEXT;
 			return commentEnd;
 		}
 		else {
 			ranges.push({ type: currentState, start: currentStart, end: line.length });
-			
+
 			if (!isBlock) currentState = TEXT;
 			return line.length;
 		}
@@ -96,13 +96,13 @@ class LineCheckBase extends Check {
 			var matchedPos = re.matchedPos();
 			var stringEnd = adjustedStart + matchedPos.pos + matchedPos.len;
 			ranges.push({ type: currentState, start: currentStart, end: stringEnd });
-			
+
 			currentState = TEXT;
 			return stringEnd;
 		}
 		else {
 			ranges.push({ type: currentState, start: currentStart, end: line.length });
-			
+
 			return line.length;
 		}
 	}
