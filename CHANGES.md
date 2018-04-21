@@ -3,6 +3,7 @@
  - Added CHANGES.md
  - Added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
  - Added unittest for [#78](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/78)
+ - Updated formula for number of pre-parsed files [#386](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/386)
  - Removed conditional section for unittest [#181](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/181)
 
 ## version 2.2.0
