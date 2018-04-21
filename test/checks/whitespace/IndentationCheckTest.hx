@@ -115,8 +115,10 @@ long comment
 			doSomething2();
 		}
 		switch (value) {
+			#if php
 			case 1:
 				doSomething();
+			#end
 			case 2:
 				doSomething();
 			default:
