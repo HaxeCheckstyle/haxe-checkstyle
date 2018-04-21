@@ -47,7 +47,7 @@ class WalkSwitch {
 				case Comment(_), CommentLine(_):
 					WalkComment.walkComment(stream, parent);
 				default:
-					stream.error('bad token ${stream.token()} != case/default');
+					WalkStatement.walkStatement(stream, parent);
 			}
 		}
 	}
@@ -67,7 +67,7 @@ class WalkSwitch {
 	 *          |- BrClose
 	 *
 	 */
-	static function walkCase(stream:TokenStream, parent:TokenTree) {
+	public static function walkCase(stream:TokenStream, parent:TokenTree) {
 		WalkComment.walkComment(stream, parent);
 		var caseTok:TokenTree = stream.consumeToken();
 		parent.addChild(caseTok);
@@ -81,6 +81,10 @@ class WalkSwitch {
 					return;
 				case BrOpen:
 					WalkBlock.walkBlock(stream, dblDot);
+				case Comment(_), CommentLine(_):
+					WalkComment.walkComment(stream, parent);
+				case Sharp(_):
+					WalkSharp.walkSharp(stream, parent, WalkSwitch.walkSwitchCases);
 				default:
 					WalkStatement.walkStatement(stream, dblDot);
 			}

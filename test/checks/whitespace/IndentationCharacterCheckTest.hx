@@ -3,7 +3,7 @@ package checks.whitespace;
 import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
-class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests> {
+class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCheckTests> {
 
 	@Test
 	public function testWrongIndentation() {
@@ -52,7 +52,7 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCheckTests>
 }
 
 @:enum
-abstract IndentationCheckTests(String) to String {
+abstract IndentationCharacterCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		 static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
