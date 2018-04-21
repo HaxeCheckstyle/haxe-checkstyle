@@ -35,6 +35,15 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 	}
 
 	@Test
+	public function testComments() {
+		var check = new IndentationCheck();
+		check.severity = SeverityLevel.INFO;
+		check.ignoreComments = false;
+		assertNoMsg(check, CORRECT_COMMENTS);
+		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 2, actual: 0");
+	}
+
+	@Test
 	public function testWrap() {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
@@ -56,7 +65,7 @@ class Test {
 	public function new() {}
 	public function test() {
 		// comment
-		doSomething();
+		doSomething(); // comment
 		x = [
 			1,
 			2,
@@ -78,11 +87,20 @@ long comment
 		if (true) doSomething();
 		for (i in items)
 			doSomething(i);
+		for (i in items) {
+			doSomething(i);
+		}
 		while (true)
 			doSomething();
+		while (true) {
+			doSomething();
+		}
 		do
 			doSomething()
 		while(true);
+		do {
+			doSomething();
+		} while(true);
 		if (true)
 			doSomething();
 
@@ -90,6 +108,12 @@ long comment
 			doSomething();
 		else
 			doSomething2();
+		if (false) {
+			doSomething();
+		}
+		else {
+			doSomething2();
+		}
 		switch (value) {
 			case 1:
 				doSomething();
@@ -170,6 +194,25 @@ class Test {
 test
 test
 test';
+	}
+}";
+
+	var CORRECT_COMMENTS = "
+class Test {
+	// comment
+	public function new() {
+		/* comment
+		comment
+		comment
+		*/
+		// comment
+		doSomething(); // comment
+		switch (value) {
+			// comment
+			case 1:
+				doSomething();
+			default:
+		}
 	}
 }";
 }
