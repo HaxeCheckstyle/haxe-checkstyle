@@ -137,6 +137,15 @@
 		{
 			"props": {
 				"character": "tab",
+				"wrapPolicy": "larger",
+				"ignoreComments": true,
+				"ignoreConditionals": false
+			},
+			"type": "Indentation"
+		},
+		{
+			"props": {
+				"character": "tab",
 				"ignorePattern": "^$"
 			},
 			"type": "IndentationCharacter"

@@ -7,7 +7,7 @@ class WalkTypedefBody {
 			parent.addChild(openTok);
 			var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 			while (progress.streamHasChanged()) {
-			switch (stream.token()) {
+				switch (stream.token()) {
 					case BrClose: break;
 					default:
 						WalkFieldDef.walkFieldDef(stream, openTok);

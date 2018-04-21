@@ -3,6 +3,7 @@
  - Added CHANGES.md
  - Added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
  - Added unittest for [#78](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/78)
+ - Added IndentationCheck [#387](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/387)
  - Updated formula for number of pre-parsed files [#386](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/386)
  - Removed conditional section for unittest [#181](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/181)
 
@@ -10,7 +11,7 @@
 
  - Added support for Binop(OpIn) [#352](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/352) ([#359](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/359))
  - Added 1 parser and n checker threads ([#374](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/374))
-   use `-checkerthreads n` to change number of checker threads (default: 5)
+   use `-checkerthreads n` to change number of checker threads (range:1-15 default: 5)
    use `-nothreads` to turn off threads and use old behaviour
    use `numberOfCheckerThreads` in config file to set number of checker threads (see `resources/default-conmfig.json`)
  - Fixed allow same regex logic for "all" excludes, fixes [#361](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/361) ([#362](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/362))
