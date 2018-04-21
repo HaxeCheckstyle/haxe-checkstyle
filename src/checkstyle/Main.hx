@@ -384,7 +384,9 @@ class Main {
 		else {
 			ReporterManager.INSTANCE.start();
 			var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
-			parserQueue.start(numberOfCheckerThreads + 1);
+			var preParseCount:Int = numberOfCheckerThreads * 3;
+			if (preParseCount < 15) preParseCount = 15;
+			parserQueue.start(preParseCount);
 			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
 			checkerPool.start(numberOfCheckerThreads);
 
