@@ -67,6 +67,7 @@ abstract IndentationCheckTests(String) to String {
 	var CORRECT_TAB_INDENT = "
 class Test {
 	static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
+	public var type(default, null):CheckType;
 	public function new() {}
 	public function test() {
 		// comment
