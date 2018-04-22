@@ -40,14 +40,14 @@ abstract TypeCheckTests(String) to String {
 		static inline var A = 1;
 	}";
 
-	var TEST3 =
-	"@:enum
+	var TEST3 = "
+	@:enum
 	abstract Test(Int) {
 		var VALUE = 0;
 	}";
 
-	var TEST4 =
-	"@:enum
+	var TEST4 = "
+	@:enum
 	abstract Test(Int) {
 		static inline var VALUE = 0;
 	}";

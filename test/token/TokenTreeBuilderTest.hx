@@ -91,31 +91,31 @@ abstract TokenTreeBuilderTests(String) to String {
 		import checkstyle.TokenTreeBuilder;
 	";
 	var IMPORT_GOLD =
-	"  Kwd(KwdPackage)\n" +
-	"    Const(CIdent(checkstyle))\n" +
-	"      Dot\n" +
-	"        Const(CIdent(checks))\n" +
-	"          Semicolon\n" +
-	"  Kwd(KwdImport)\n" +
-	"    Const(CIdent(haxeparser))\n" +
-	"      Dot\n" +
-	"        Binop(OpMult)\n" +
-	"          Semicolon\n" +
-	"  Kwd(KwdImport)\n" +
-	"    Const(CIdent(checkstyle))\n" +
-	"      Dot\n" +
-	"        Const(CIdent(TokenTree))\n" +
-	"          Semicolon\n" +
-	"  Kwd(KwdImport)\n" +
-	"    Const(CIdent(checkstyle))\n" +
-	"      Dot\n" +
-	"        Const(CIdent(TokenStream))\n" +
-	"          Semicolon\n" +
-	"  Kwd(KwdImport)\n" +
-	"    Const(CIdent(checkstyle))\n" +
-	"      Dot\n" +
-	"        Const(CIdent(TokenTreeBuilder))\n" +
-	"          Semicolon\n";
+		"  Kwd(KwdPackage)\n" +
+		"    Const(CIdent(checkstyle))\n" +
+		"      Dot\n" +
+		"        Const(CIdent(checks))\n" +
+		"          Semicolon\n" +
+		"  Kwd(KwdImport)\n" +
+		"    Const(CIdent(haxeparser))\n" +
+		"      Dot\n" +
+		"        Binop(OpMult)\n" +
+		"          Semicolon\n" +
+		"  Kwd(KwdImport)\n" +
+		"    Const(CIdent(checkstyle))\n" +
+		"      Dot\n" +
+		"        Const(CIdent(TokenTree))\n" +
+		"          Semicolon\n" +
+		"  Kwd(KwdImport)\n" +
+		"    Const(CIdent(checkstyle))\n" +
+		"      Dot\n" +
+		"        Const(CIdent(TokenStream))\n" +
+		"          Semicolon\n" +
+		"  Kwd(KwdImport)\n" +
+		"    Const(CIdent(checkstyle))\n" +
+		"      Dot\n" +
+		"        Const(CIdent(TokenTreeBuilder))\n" +
+		"          Semicolon\n";
 
 	var AT_ANNOTATION = '
 		@SuppressWarnings("checkstyle:MagicNumber")
@@ -125,25 +125,25 @@ abstract TokenTreeBuilderTests(String) to String {
 		// EOF
 	';
 	var AT_ANNOTATION_GOLD =
-	"  At\n" +
-	"    Const(CIdent(SuppressWarnings))\n" +
-	"      POpen\n" +
-	"        Const(CString(checkstyle:MagicNumber))\n" +
-	"        PClose\n" +
-	"  At\n" +
-	"    Const(CIdent(SuppressWarnings))\n" +
-	"      POpen\n" +
-	"        BkOpen\n" +
-	"          Const(CString(checkstyle:MagicNumber))\n" +
-	"          Comma\n" +
-	"          Const(CString(checkstyle:AvoidStarImport))\n" +
-	"          BkClose\n" +
-	"        PClose\n" +
-	"  At\n" +
-	"    DblDot\n" +
-	"      Const(CIdent(from))\n" +
-	"  At\n" +
-	"    Const(CIdent(Before))\n";
+		"  At\n" +
+		"    Const(CIdent(SuppressWarnings))\n" +
+		"      POpen\n" +
+		"        Const(CString(checkstyle:MagicNumber))\n" +
+		"        PClose\n" +
+		"  At\n" +
+		"    Const(CIdent(SuppressWarnings))\n" +
+		"      POpen\n" +
+		"        BkOpen\n" +
+		"          Const(CString(checkstyle:MagicNumber))\n" +
+		"          Comma\n" +
+		"          Const(CString(checkstyle:AvoidStarImport))\n" +
+		"          BkClose\n" +
+		"        PClose\n" +
+		"  At\n" +
+		"    DblDot\n" +
+		"      Const(CIdent(from))\n" +
+		"  At\n" +
+		"    Const(CIdent(Before))\n";
 
 	var IF = '
 		if (tokDef != null) return;
@@ -162,61 +162,61 @@ abstract TokenTreeBuilderTests(String) to String {
 		}
 	';
 	var IF_GOLD =
-	"  Kwd(KwdIf)\n" +
-	"    POpen\n" +
-	"      Const(CIdent(tokDef))\n" +
-	"        Binop(OpNotEq)\n" +
-	"          Kwd(KwdNull)\n" +
-	"      PClose\n" +
-	"    Kwd(KwdReturn)\n" +
-	"      Semicolon\n" +
-	"  Kwd(KwdIf)\n" +
-	"    POpen\n" +
-	"      Const(CIdent(tokDef))\n" +
-	"        Binop(OpNotEq)\n" +
-	"          Kwd(KwdNull)\n" +
-	"      PClose\n" +
-	"    Kwd(KwdReturn)\n" +
-	"      Semicolon\n" +
-	"    Kwd(KwdElse)\n" +
-	"      Kwd(KwdThrow)\n" +
-	"        Const(CString(error))\n" +
-	"          Semicolon\n" +
-	"  Kwd(KwdIf)\n" +
-	"    POpen\n" +
-	"      Const(CIdent(token))\n" +
-	"        Dot\n" +
-	"          Const(CIdent(hasChildren))\n" +
-	"            POpen\n" +
-	"              PClose\n" +
-	"      PClose\n" +
-	"    BrOpen\n" +
-	"      Kwd(KwdReturn)\n" +
-	"        Const(CIdent(token))\n" +
-	"          Dot\n" +
-	"            Const(CIdent(children))\n" +
-	"              Semicolon\n" +
-	"      BrClose\n" +
-	"  Kwd(KwdIf)\n" +
-	"    POpen\n" +
-	"      Const(CIdent(token))\n" +
-	"        Dot\n" +
-	"          Const(CIdent(hasChildren))\n" +
-	"            POpen\n" +
-	"              PClose\n" +
-	"      PClose\n" +
-	"    BrOpen\n" +
-	"      Kwd(KwdReturn)\n" +
-	"        Const(CIdent(token))\n" +
-	"          Dot\n" +
-	"            Const(CIdent(children))\n" +
-	"              Semicolon\n" +
-	"      BrClose\n" +
-	"    Kwd(KwdElse)\n" +
-	"      BrOpen\n" +
-	"        Kwd(KwdReturn)\n" +
-	"          BkOpen\n" +
-	"            BkClose\n" +
-	"          Semicolon\n" +
-	"        BrClose\n";
+		"  Kwd(KwdIf)\n" +
+		"    POpen\n" +
+		"      Const(CIdent(tokDef))\n" +
+		"        Binop(OpNotEq)\n" +
+		"          Kwd(KwdNull)\n" +
+		"      PClose\n" +
+		"    Kwd(KwdReturn)\n" +
+		"      Semicolon\n" +
+		"  Kwd(KwdIf)\n" +
+		"    POpen\n" +
+		"      Const(CIdent(tokDef))\n" +
+		"        Binop(OpNotEq)\n" +
+		"          Kwd(KwdNull)\n" +
+		"      PClose\n" +
+		"    Kwd(KwdReturn)\n" +
+		"      Semicolon\n" +
+		"    Kwd(KwdElse)\n" +
+		"      Kwd(KwdThrow)\n" +
+		"        Const(CString(error))\n" +
+		"          Semicolon\n" +
+		"  Kwd(KwdIf)\n" +
+		"    POpen\n" +
+		"      Const(CIdent(token))\n" +
+		"        Dot\n" +
+		"          Const(CIdent(hasChildren))\n" +
+		"            POpen\n" +
+		"              PClose\n" +
+		"      PClose\n" +
+		"    BrOpen\n" +
+		"      Kwd(KwdReturn)\n" +
+		"        Const(CIdent(token))\n" +
+		"          Dot\n" +
+		"            Const(CIdent(children))\n" +
+		"              Semicolon\n" +
+		"      BrClose\n" +
+		"  Kwd(KwdIf)\n" +
+		"    POpen\n" +
+		"      Const(CIdent(token))\n" +
+		"        Dot\n" +
+		"          Const(CIdent(hasChildren))\n" +
+		"            POpen\n" +
+		"              PClose\n" +
+		"      PClose\n" +
+		"    BrOpen\n" +
+		"      Kwd(KwdReturn)\n" +
+		"        Const(CIdent(token))\n" +
+		"          Dot\n" +
+		"            Const(CIdent(children))\n" +
+		"              Semicolon\n" +
+		"      BrClose\n" +
+		"    Kwd(KwdElse)\n" +
+		"      BrOpen\n" +
+		"        Kwd(KwdReturn)\n" +
+		"          BkOpen\n" +
+		"            BkClose\n" +
+		"          Semicolon\n" +
+		"        BrClose\n";
 }

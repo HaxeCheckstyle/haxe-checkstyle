@@ -86,15 +86,15 @@ abstract LocalVariableNameCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"typedef Test = {
+	var TEST3 = "
+	typedef Test = {
 		public function test() {
 			var Count:Int;
 		}
 	}";
 
-	var TEST4 =
-	"extern class Test {
+	var TEST4 = "
+	extern class Test {
 		public function test() {
 			var Count:Int = 1;
 		}

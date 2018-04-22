@@ -53,8 +53,8 @@ abstract MethodLengthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test() {
 			trace('TEST');
 
@@ -64,8 +64,8 @@ abstract MethodLengthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"abstractAndClass Test {
+	var TEST3 = "
+	abstractAndClass Test {
 		public function test() {
 			trace('TEST');
 

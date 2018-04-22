@@ -70,8 +70,8 @@ abstract NestedForDepthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test1(param:Array<Int>) {
 			for (outerParam in params) {                      // level 0
 				for (middleParam in params) {                 // level 1

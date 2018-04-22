@@ -162,13 +162,13 @@ abstract MethodNameCheckTests(String) to String {
 		function Test3() {}
 	}";
 
-	var TEST3 =
-	"typedef Test = {
+	var TEST3 = "
+	typedef Test = {
 		public function Test() {}
 	}";
 
-	var TEST4 =
-	"extern class Test {
+	var TEST4 = "
+	extern class Test {
 		public function Test() {}
 	}";
 

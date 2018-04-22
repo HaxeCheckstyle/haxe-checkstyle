@@ -70,8 +70,8 @@ abstract ParameterNumberCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test1(param1:Int,
 								param2:Int,
 								param3:Int,
@@ -83,8 +83,8 @@ abstract ParameterNumberCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"abstractAndClass Test {
+	var TEST3 = "
+	abstractAndClass Test {
 		override public function test2(param1:Int,
 								param2:Int,
 								param3:Int,
@@ -97,8 +97,8 @@ abstract ParameterNumberCheckTests(String) to String {
 		}
 	}";
 
-	var TEST4 =
-	"abstractAndClass Test {
+	var TEST4 = "
+	abstractAndClass Test {
 		public function test3(param1:Int,
 								param2:Int,
 								param3:Int) {
@@ -106,8 +106,8 @@ abstract ParameterNumberCheckTests(String) to String {
 		}
 	}";
 
-	var TEST5 =
-	"interface ITest {
+	var TEST5 = "
+	interface ITest {
 		public function test4(param1:Int,
 								param2:Int,
 								param3:Int,

@@ -102,28 +102,28 @@ abstract EmptyBlockCheckTests(String) to String {
 		}
 	}";
 
-	var BLOCK_WITH_STATEMENT =
-	"class Test {
+	var BLOCK_WITH_STATEMENT = "
+	class Test {
 		public function new() { var a:Int;
 
 		}
 	}";
 
-	var BLOCK_WITH_STATEMENT2 =
-	"class Test {
+	var BLOCK_WITH_STATEMENT2 = "
+	class Test {
 		public function new() {
 			var a:Int; }
 	}";
 
-	var BLOCK_WITH_COMMENT =
-	"class Test {
+	var BLOCK_WITH_COMMENT = "
+	class Test {
 		public function new() {
 			// comment
 		}
 	}";
 
-	var EMPTY_OBJECT_DECL =
-	"class Test {
+	var EMPTY_OBJECT_DECL = "
+	class Test {
 		public function new() {
 			var a = {};
 		}

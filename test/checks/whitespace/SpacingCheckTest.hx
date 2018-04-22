@@ -125,22 +125,22 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 		public function test() {
 			var a = a+1;
 		}
 	}";
 
-	var TEST3 =
-	"class Test {
+	var TEST3 = "
+	class Test {
 		public function test() {
 			var a = a ++;
 		}
 	}";
 
-	var TEST4A =
-	"class Test {
+	var TEST4A = "
+	class Test {
 		public function test() {
 			for(i in 0...10) {
 
@@ -148,8 +148,8 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-	var TEST4B =
-	"class Test {
+	var TEST4B = "
+	class Test {
 		public function test() {
 			for (i in 0...10) {
 
@@ -157,22 +157,22 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-	var TEST5A =
-	"class Test {
+	var TEST5A = "
+	class Test {
 		public function test() {
 			while(true) {}
 		}
 	}";
 
-	var TEST5B =
-	"class Test {
+	var TEST5B = "
+	class Test {
 		public function test() {
 			while (true) {}
 		}
 	}";
 
-	var TEST6A =
-	"class Test {
+	var TEST6A = "
+	class Test {
 		public function test() {
 			switch(0) {
 				case 1:
@@ -181,8 +181,8 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-	var TEST6B =
-	"class Test {
+	var TEST6B = "
+	class Test {
 		public function test() {
 			switch (0) {
 				case 1:
@@ -191,24 +191,24 @@ abstract SpacingCheckTests(String) to String {
 		}
 	}";
 
-	var TEST7A =
-	"class Test {
+	var TEST7A = "
+	class Test {
 		public function test() {
 			try {}
 			catch(e:Dynamic) {}
 		}
 	}";
 
-	var TEST7B =
-	"class Test {
+	var TEST7B = "
+	class Test {
 		public function test() {
 			try {}
 			catch (e:Dynamic) {}
 		}
 	}";
 
-	var TEST8 =
-	"class Test {
+	var TEST8 = "
+	class Test {
 		public function test() {
 			if(
 				true

@@ -65,8 +65,8 @@ abstract NestedTryDepthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test1() {
 			try {                           // level 0
 				try {                       // level 0

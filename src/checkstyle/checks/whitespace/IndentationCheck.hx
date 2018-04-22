@@ -23,6 +23,8 @@ class IndentationCheck extends Check {
 		var wrappedStatements:Array<Bool> = calcWrapStatements();
 		var tolerateViolations:Array<Bool> = calcIgnoreLineIndentation();
 
+		correctWrappedIndentation(lineIndentation, wrappedStatements);
+
 		var splitChar:String = character;
 		if (splitChar == "tab") splitChar = "\t";
 		for (i in 0...checker.lines.length) {
@@ -48,12 +50,42 @@ class IndentationCheck extends Check {
 		if (tolerate) return;
 		if (wrapped) {
 			switch (wrapPolicy) {
+				case NONE:
 				case EXACT:
 				case LARGER:
 					if (actual >= expected) return;
 			}
 		}
 		log('Indentation mismatch: expected: $expected, actual: $actual', line + 1, 0);
+	}
+
+	function correctWrappedIndentation(lineIndentation:Array<Int>, wrappedStatements:Array<Bool>) {
+		if (wrapPolicy == NONE) return;
+		var currentIndent:Int = 0;
+		for (i in 0...lineIndentation.length) {
+			if (!wrappedStatements[i]) {
+				currentIndent = lineIndentation[i];
+				continue;
+			}
+			if (currentIndent < lineIndentation[i]) {
+				currentIndent = -1;
+				continue;
+			}
+			if (currentIndent == lineIndentation[i]) {
+				lineIndentation[i]++;
+			}
+		}
+		var currentIndent:Int = 0;
+		for (i in 0...lineIndentation.length) {
+			var newIndent = lineIndentation[i];
+			if (newIndent == currentIndent) continue;
+			if (newIndent > currentIndent) {
+				currentIndent++;
+				lineIndentation[i] = currentIndent;
+				continue;
+			}
+			currentIndent = newIndent;
+		}
 	}
 
 	function calcLineIndentation():Array<Int> {
@@ -65,7 +97,10 @@ class IndentationCheck extends Check {
 			switch (token.tok) {
 				case BkOpen:
 					var child:TokenTree = token.getFirstChild();
-					if (child.is(BrOpen)) continue;
+					if (child.is(BrOpen)) {
+						// only indent once, if directly next to each other `[{`
+						if (token.pos.min + 1 == child.pos.min) continue;
+					}
 					increaseBlockIndent(token, lineIndentation);
 				case BrOpen:
 					increaseBlockIndent(token, lineIndentation);
@@ -111,6 +146,8 @@ class IndentationCheck extends Check {
 		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
 		for (token in tokenList) {
 			var pos = token.getPos();
+			var child:TokenTree = token.getFirstChild();
+			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
 		return wrapped;
@@ -130,7 +167,7 @@ class IndentationCheck extends Check {
 		});
 		for (token in tokenList) {
 			switch (token.tok) {
-				case POpen, Const(CString(_)):
+				case Const(CString(_)):
 					ignoreRange(token.getPos(), ignoreIndentation);
 				case Comment(_):
 					if (ignoreComments) ignoreRange(token.getPos(), ignoreIndentation, false);
@@ -179,6 +216,7 @@ class IndentationCheck extends Check {
 
 @:enum
 abstract WrappedIndentationPolicy(String) {
+	var NONE = "none";
 	var EXACT = "exact";
 	var LARGER = "larger";
 }

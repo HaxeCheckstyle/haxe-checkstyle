@@ -28,8 +28,8 @@ abstract TabForAligningCheckTests(String) to String {
 
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 		public function test() {
 			var a:Array<String> = ['one', 'two',
 									'three'];

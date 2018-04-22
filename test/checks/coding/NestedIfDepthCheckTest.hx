@@ -59,8 +59,8 @@ abstract NestedIfDepthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test1(param:Int) {
 			if (param == 1) {                           // level 0
 				return 1;

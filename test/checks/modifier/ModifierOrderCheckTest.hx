@@ -55,38 +55,38 @@ abstract ModifierOrderCheckTests(String) to String {
 		public static inline function test6() {}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public override function test() {}
 	}";
 
-	var TEST3 =
-	"abstractAndClass Test {
+	var TEST3 = "
+	abstractAndClass Test {
 		public inline static function test() {}
 	}";
 
-	var TEST4 =
-	"abstractAndClass Test {
+	var TEST4 = "
+	abstractAndClass Test {
 		public macro function test() {}
 	}";
 
-	var TEST5 =
-	"abstractAndClass Test {
+	var TEST5 = "
+	abstractAndClass Test {
 		dynamic public function test() {}
 	}";
 
-	var TEST6 =
-	"interface Test {
+	var TEST6 = "
+	interface Test {
 		dynamic public function test();
 	}";
 
-	var TEST7 =
-	"abstractAndClass Test {
+	var TEST7 = "
+	abstractAndClass Test {
 		inline public var test:String=0;
 	}";
 
-	var TEST8 =
-	"abstractAndClass Test {
+	var TEST8 = "
+	abstractAndClass Test {
 		inline public var test(default,null):String=0;
 	}";
 }

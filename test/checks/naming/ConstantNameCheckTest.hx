@@ -92,16 +92,16 @@ abstract ConstantNameCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 		static inline var Count:Int = 1;
 		public function test() {
 			var Count:Int;
 		}
 	}";
 
-	var TEST3 =
-	"extern class Test {
+	var TEST3 = "
+	extern class Test {
 		static var Count:Int = 1;
 		static inline var Count:Int = 1;
 		public function test() {

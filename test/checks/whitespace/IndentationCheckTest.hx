@@ -10,7 +10,6 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_TAB_INDENT);
-		assertNoMsg(check, WRAPPED_PARAMS);
 		assertMsg(check, CORRECT_SPACE_INDENT, "Indentation mismatch: expected: 1, actual: 0");
 	}
 
@@ -47,13 +46,19 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 	public function testWrap() {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
-		assertNoMsg(check, WRAPPED_PARAMS);
+		assertNoMsg(check, LARGER_WRAPPED_PARAMS);
+		assertNoMsg(check, EXACT_WRAPPED_PARAMS);
 		assertNoMsg(check, WRAPPED_STRING);
-		assertMsg(check, WRONG_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
-		check.wrapPolicy = LARGER;
-		assertNoMsg(check, WRAPPED_PARAMS);
+		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		check.wrapPolicy = EXACT;
 		assertNoMsg(check, WRAPPED_STRING);
-		assertMsg(check, WRONG_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 6");
+		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+
+		check.wrapPolicy = NONE;
+		assertNoMsg(check, NONE_WRAPPED_PARAMS);
+		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 6");
+		assertMsg(check, EXACT_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 2");
 	}
 }
 
@@ -124,6 +129,10 @@ long comment
 			default:
 				doSomething();
 		}
+		doSomething({
+			a: 1,
+			b: 2
+		});
 	}
 }";
 
@@ -163,7 +172,7 @@ class Test {
 	public function new() {}
 }";
 
-	var WRAPPED_PARAMS = "
+	var LARGER_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
 		param2:Int,
@@ -179,13 +188,23 @@ class Test {
 	}
 }";
 
-	var WRONG_WRAPPED_PARAMS = "
+	var EXACT_WRAPPED_PARAMS = "
+class Test {
+	public function new(param1:Int,
+		param2:Int,
+		param3:Int,
+		param4:Int) {
+		doSomething();
+	}
+}";
+
+	var NONE_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
 	param2:Int,
 	param3:Int,
 	param4:Int) {
-	doSomething();
+		doSomething();
 	}
 }";
 

@@ -123,13 +123,13 @@ abstract DynamicCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"typedef Test = {
+	var TEST3 = "
+	typedef Test = {
 		var Count:Dynamic;
 	}";
 
-	var TEST4 =
-	"extern class Test {
+	var TEST4 = "
+	extern class Test {
 		var Count:Int = 1;
 		static inline var Count:Int = 1;
 		public function test(param:Dynamic) {
@@ -144,11 +144,11 @@ abstract DynamicCheckTests(String) to String {
 		}
 	}";
 
-	var TEST6 =
-	"typedef Test = String -> Dynamic;";
+	var TEST6 = "
+	typedef Test = String -> Dynamic;";
 
-	var ISSUE_43 =
-	"class Test {
+	var ISSUE_43 = "
+	class Test {
 		function test() {
 			cast (Type.createInstance(Array, []));
 		}
