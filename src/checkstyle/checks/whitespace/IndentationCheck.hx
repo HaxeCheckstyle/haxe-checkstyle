@@ -50,7 +50,7 @@ class IndentationCheck extends Check {
 		if (tolerate) return;
 		if (wrapped) {
 			switch (wrapPolicy) {
-				case NO:
+				case NONE:
 				case EXACT:
 				case LARGER:
 					if (actual >= expected) return;
@@ -60,7 +60,7 @@ class IndentationCheck extends Check {
 	}
 
 	function correctWrappedIndentation(lineIndentation:Array<Int>, wrappedStatements:Array<Bool>) {
-		if (wrapPolicy == NO) return;
+		if (wrapPolicy == NONE) return;
 		var currentIndent:Int = 0;
 		for (i in 0...lineIndentation.length) {
 			if (!wrappedStatements[i]) {
@@ -216,7 +216,7 @@ class IndentationCheck extends Check {
 
 @:enum
 abstract WrappedIndentationPolicy(String) {
-	var NO = "no";
+	var NONE = "none";
 	var EXACT = "exact";
 	var LARGER = "larger";
 }

@@ -49,14 +49,14 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, LARGER_WRAPPED_PARAMS);
 		assertNoMsg(check, EXACT_WRAPPED_PARAMS);
 		assertNoMsg(check, WRAPPED_STRING);
-		assertMsg(check, NO_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
 		check.wrapPolicy = EXACT;
 		assertNoMsg(check, WRAPPED_STRING);
 		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 6");
-		assertMsg(check, NO_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
 
-		check.wrapPolicy = NO;
-		assertNoMsg(check, NO_WRAPPED_PARAMS);
+		check.wrapPolicy = NONE;
+		assertNoMsg(check, NONE_WRAPPED_PARAMS);
 		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 6");
 		assertMsg(check, EXACT_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 2");
 	}
@@ -198,7 +198,7 @@ class Test {
 	}
 }";
 
-	var NO_WRAPPED_PARAMS = "
+	var NONE_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
 	param2:Int,
