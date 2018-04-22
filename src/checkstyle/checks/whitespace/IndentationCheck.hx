@@ -91,7 +91,17 @@ class IndentationCheck extends Check {
 	function calcLineIndentation():Array<Int> {
 		var lineIndentation:Array<Int> = [for (i in 0...checker.lines.length) 0];
 
-		var searchFor:Array<TokenDef> = [BrOpen, BkOpen, Kwd(KwdIf), Kwd(KwdElse), Kwd(KwdFor), Kwd(KwdDo), Kwd(KwdWhile), Kwd(KwdCase), Kwd(KwdDefault)];
+		var searchFor:Array<TokenDef> = [
+			BrOpen,
+			BkOpen,
+			Kwd(KwdIf),
+			Kwd(KwdElse),
+			Kwd(KwdFor),
+			Kwd(KwdDo),
+			Kwd(KwdWhile),
+			Kwd(KwdCase),
+			Kwd(KwdDefault)
+		];
 		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
 		for (token in tokenList) {
 			switch (token.tok) {
@@ -104,39 +114,57 @@ class IndentationCheck extends Check {
 					increaseBlockIndent(token, lineIndentation);
 				case BrOpen:
 					increaseBlockIndent(token, lineIndentation);
-				case Kwd(KwdIf):
-					var child:TokenTree = token.getLastChild();
-					if (child.is(Kwd(KwdElse))) {
-						child = token.children[token.children.length - 2];
-					}
-					if (child.is(BrOpen)) continue;
-					increaseIndentIfNextLine(token, child, lineIndentation);
-				case Kwd(KwdElse):
-					var child:TokenTree = token.getFirstChild();
-					if (child.is(BrOpen)) continue;
-					increaseIndentIfNextLine(token, child, lineIndentation);
-				case Kwd(KwdFor):
-					var child:TokenTree = token.getLastChild();
-					if (child.is(BrOpen)) continue;
-					increaseIndentIfNextLine(token, child, lineIndentation);
-				case Kwd(KwdDo):
-					var child:TokenTree = token.getFirstChild();
-					if (child.is(BrOpen)) continue;
-					increaseIndentIfNextLine(token, child, lineIndentation);
-				case Kwd(KwdWhile):
-					var child:TokenTree = token.getLastChild();
-					if (child.is(BrOpen)) continue;
-					increaseIndentIfNextLine(token, child, lineIndentation);
+				case Kwd(KwdIf), Kwd(KwdElse):
+					calcLineIndentationIf(token, lineIndentation);
+				case Kwd(KwdFor), Kwd(KwdDo), Kwd(KwdWhile):
+					calcLineIndentationLoops(token, lineIndentation);
 				case Kwd(KwdCase):
 					var child:TokenTree = token.getLastChild();
 					increaseRangeIndent(child.getPos(), lineIndentation);
 				case Kwd(KwdDefault):
 					var child:TokenTree = token.getLastChild();
+					// getter/setter 'default' has no childs
+					if (child == null) continue;
 					increaseRangeIndent(child.getPos(), lineIndentation);
 				default:
 			}
 		}
 		return lineIndentation;
+	}
+
+	function calcLineIndentationIf(token:TokenTree, lineIndentation:Array<Int>) {
+		switch (token.tok) {
+			case Kwd(KwdIf):
+				var child:TokenTree = token.getLastChild();
+				if (child.is(Kwd(KwdElse))) {
+					child = token.children[token.children.length - 2];
+				}
+				if (child.is(BrOpen)) return;
+				increaseIndentIfNextLine(token, child, lineIndentation);
+			case Kwd(KwdElse):
+				var child:TokenTree = token.getFirstChild();
+				if (child.is(BrOpen)) return;
+				increaseIndentIfNextLine(token, child, lineIndentation);
+			default:
+		}
+	}
+
+	function calcLineIndentationLoops(token:TokenTree, lineIndentation:Array<Int>) {
+		switch (token.tok) {
+			case Kwd(KwdFor):
+				var child:TokenTree = token.getLastChild();
+				if (child.is(BrOpen)) return;
+				increaseIndentIfNextLine(token, child, lineIndentation);
+			case Kwd(KwdDo):
+				var child:TokenTree = token.getFirstChild();
+				if (child.is(BrOpen)) return;
+				increaseIndentIfNextLine(token, child, lineIndentation);
+			case Kwd(KwdWhile):
+				var child:TokenTree = token.getLastChild();
+				if (child.is(BrOpen)) return;
+				increaseIndentIfNextLine(token, child, lineIndentation);
+			default:
+		}
 	}
 
 	function calcWrapStatements():Array<Bool> {
