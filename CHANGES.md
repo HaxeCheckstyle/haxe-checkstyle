@@ -1,6 +1,6 @@
 ## next version (2.x.x)
 
-- Fixed handling of default setters/getters in indentation check
+- Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
 
 ## version 2.2.1
 
