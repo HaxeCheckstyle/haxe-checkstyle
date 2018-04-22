@@ -18,8 +18,8 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "added mutlithreading for parsing and checking + bug fixes",
-    "version": "2.2.0",
+    "releasenote": "new indentation check and bugfixes - see CHANGES.md",
+    "version": "2.2.1",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
 
