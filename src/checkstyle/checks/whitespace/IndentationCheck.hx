@@ -23,6 +23,8 @@ class IndentationCheck extends Check {
 		var wrappedStatements:Array<Bool> = calcWrapStatements();
 		var tolerateViolations:Array<Bool> = calcIgnoreLineIndentation();
 
+		correctWrappedIndentation(lineIndentation, wrappedStatements);
+
 		var splitChar:String = character;
 		if (splitChar == "tab") splitChar = "\t";
 		for (i in 0...checker.lines.length) {
@@ -48,12 +50,31 @@ class IndentationCheck extends Check {
 		if (tolerate) return;
 		if (wrapped) {
 			switch (wrapPolicy) {
+				case NO:
 				case EXACT:
 				case LARGER:
 					if (actual >= expected) return;
 			}
 		}
 		log('Indentation mismatch: expected: $expected, actual: $actual', line + 1, 0);
+	}
+
+	function correctWrappedIndentation(lineIndentation:Array<Int>, wrappedStatements:Array<Bool>) {
+		if (wrapPolicy == NO) return;
+		var currentIndent:Int = 0;
+		for (i in 0...lineIndentation.length) {
+			if (!wrappedStatements[i]) {
+				currentIndent = lineIndentation[i];
+				continue;
+			}
+			if (currentIndent < lineIndentation[i]) {
+				currentIndent = -1;
+				continue;
+			}
+			if (currentIndent == lineIndentation[i]) {
+				lineIndentation[i]++;
+			}
+		}
 	}
 
 	function calcLineIndentation():Array<Int> {
@@ -130,7 +151,7 @@ class IndentationCheck extends Check {
 		});
 		for (token in tokenList) {
 			switch (token.tok) {
-				case POpen, Const(CString(_)):
+				case Const(CString(_)):
 					ignoreRange(token.getPos(), ignoreIndentation);
 				case Comment(_):
 					if (ignoreComments) ignoreRange(token.getPos(), ignoreIndentation, false);
@@ -179,6 +200,7 @@ class IndentationCheck extends Check {
 
 @:enum
 abstract WrappedIndentationPolicy(String) {
+	var NO = "no";
 	var EXACT = "exact";
 	var LARGER = "larger";
 }
