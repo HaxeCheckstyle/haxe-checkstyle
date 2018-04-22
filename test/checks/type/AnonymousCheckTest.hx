@@ -22,8 +22,8 @@ abstract AnonymousCheckTests(String) to String {
 		var anonymous:{a:Int, b:Int};
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function new() {
 			var b:{a:Int, b:Int};
 		}

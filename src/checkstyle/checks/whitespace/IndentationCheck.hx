@@ -75,6 +75,17 @@ class IndentationCheck extends Check {
 				lineIndentation[i]++;
 			}
 		}
+		var currentIndent:Int = 0;
+		for (i in 0...lineIndentation.length) {
+			var newIndent = lineIndentation[i];
+			if (newIndent == currentIndent) continue;
+			if (newIndent > currentIndent) {
+				currentIndent++;
+				lineIndentation[i] = currentIndent;
+				continue;
+			}
+			currentIndent = newIndent;
+		}
 	}
 
 	function calcLineIndentation():Array<Int> {
@@ -86,7 +97,10 @@ class IndentationCheck extends Check {
 			switch (token.tok) {
 				case BkOpen:
 					var child:TokenTree = token.getFirstChild();
-					if (child.is(BrOpen)) continue;
+					if (child.is(BrOpen)) {
+						// only indent once, if directly next to each other `[{`
+						if (token.pos.min + 1 == child.pos.min) continue;
+					}
 					increaseBlockIndent(token, lineIndentation);
 				case BrOpen:
 					increaseBlockIndent(token, lineIndentation);
@@ -132,6 +146,8 @@ class IndentationCheck extends Check {
 		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
 		for (token in tokenList) {
 			var pos = token.getPos();
+			var child:TokenTree = token.getFirstChild();
+			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
 		return wrapped;

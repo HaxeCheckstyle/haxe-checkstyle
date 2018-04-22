@@ -51,7 +51,7 @@ class TestMain {
 
 			var missingStatements:Array<Statement> = cls.getMissingStatements();
 			for (stmt in missingStatements) {
-				for (line in stmt.lines) coverageData[line] = 0;
+				for (line in stmt.lines) coverageData[line + 1] = 0;
 			}
 			var missingBranches:Array<Branch> = cls.getMissingBranches();
 			for (branch in missingBranches) {

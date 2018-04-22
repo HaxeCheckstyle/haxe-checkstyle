@@ -244,33 +244,33 @@ abstract MemberNameCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"typedef Test = {
+	var TEST3 = "
+	typedef Test = {
 		var Count:Int;
 	}";
 
-	var TEST4 =
-	"extern class Test {
+	var TEST4 = "
+	extern class Test {
 		var Count:Int = 1;
 		static inline var Count:Int = 1;
 		public function test() {
 		}
 	}";
 
-	var TEST5 =
-	"enum Test {
+	var TEST5 = "
+	enum Test {
 		VALUE_TEST_;
 		VALUE_TEST;
 	}";
 
-	var TEST6 =
-	"enum Test {
+	var TEST6 = "
+	enum Test {
 		VALUE_;
 		VALUE;
 	}";
 
-	var ABSTRACT_FIELDS =
-	"@:enum abstract MyAbstract(Int) from Int to Int
+	var ABSTRACT_FIELDS = "
+	@:enum abstract MyAbstract(Int) from Int to Int
 	{
 		static public inline var NORMAL_CONST = 'hello, world';
 

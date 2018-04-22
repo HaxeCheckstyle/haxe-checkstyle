@@ -134,21 +134,21 @@ abstract TypeNameCheckTests(String) to String {
 	interface Test {
 	}";
 
-	var TEST3 =
-	"typedef TTest = {
+	var TEST3 = "
+	typedef TTest = {
 		var Count:Int;
 	}";
 
-	var TEST4 =
-	"extern class TEST1 {
+	var TEST4 = "
+	extern class TEST1 {
 		var Count:Int = 1;
 		static inline var Count:Int = 1;
 		public function test() {
 		}
 	}";
 
-	var TEST5 =
-	"enum EnumTest {
+	var TEST5 = "
+	enum EnumTest {
 		VALUE;
 	}";
 

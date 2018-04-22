@@ -32,8 +32,8 @@ abstract LineLengthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 		public function new() {
 			var b:Int;
 		}
@@ -47,8 +47,8 @@ abstract LineLengthCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"class Test {
+	var TEST3 = "
+	class Test {
 		public function new() {
 			var s = 'LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST';
 		}

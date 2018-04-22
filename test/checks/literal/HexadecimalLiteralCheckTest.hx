@@ -29,13 +29,13 @@ abstract HexadecimalLiteralCheckTests(String) to String {
 		var clr = 0xffffff;
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		var clr = 0x0033FF;
 	}";
 
-	var TEST3 =
-	"abstractAndClass Test {
+	var TEST3 = "
+	abstractAndClass Test {
 		var clr = 0x0033FF;
 	}";
 }

@@ -129,6 +129,10 @@ long comment
 			default:
 				doSomething();
 		}
+		doSomething({
+			a: 1,
+			b: 2
+		});
 	}
 }";
 

@@ -49,10 +49,10 @@ class CyclomaticComplexityCheck extends Check {
 		return switch (e.expr) {
 			case ExprDef.EArray(e1, e2) : evaluateExpr(e1) + evaluateExpr(e2);
 			case ExprDef.EBinop(op, e1, e2) : evaluateExpr(e1) + evaluateExpr(e2) + switch (op) {
-				case haxe.macro.Expr.Binop.OpBoolAnd : 1;
-				case haxe.macro.Expr.Binop.OpBoolOr : 1;
-				default : 0;
-			};
+					case haxe.macro.Expr.Binop.OpBoolAnd : 1;
+					case haxe.macro.Expr.Binop.OpBoolOr : 1;
+					default : 0;
+				};
 			case ExprDef.EParenthesis(e) : evaluateExpr(e);
 			case ExprDef.EObjectDecl(fields) :
 				fields.map(function(f):Expr {

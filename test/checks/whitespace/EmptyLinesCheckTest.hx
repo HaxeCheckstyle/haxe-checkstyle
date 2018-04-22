@@ -90,8 +90,8 @@ abstract EmptyLinesCheckTests(String) to String {
 
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 
 		public function new() {
 
@@ -124,8 +124,8 @@ abstract EmptyLinesCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"class Test {
+	var TEST3 = "
+	class Test {
 
 		public function new() {
 
@@ -135,8 +135,8 @@ abstract EmptyLinesCheckTests(String) to String {
 		}
 	}";
 
-	var TEST4 =
-	"class Test {
+	var TEST4 = "
+	class Test {
 
 		// comments (with text before)
 
@@ -145,16 +145,16 @@ abstract EmptyLinesCheckTests(String) to String {
 		}
 	}";
 
-	var TEST5 =
-	"class Test {
+	var TEST5 = "
+	class Test {
 
 // comments (with no text before)
 
 		var a:Int;
 	}";
 
-	var TEST6 =
-	"class Test {
+	var TEST6 = "
+	class Test {
 
 		/**
 		 *comments
@@ -163,8 +163,8 @@ abstract EmptyLinesCheckTests(String) to String {
 		var a:Int;
 	}";
 
-	var TEST7 =
-	"class Test {
+	var TEST7 = "
+	class Test {
 
 		/**
 		 *comments
@@ -188,23 +188,23 @@ abstract EmptyLinesCheckTests(String) to String {
 
 	class Test {}";
 
-	var TEST10 =
-	"class Test {
+	var TEST10 = "
+	class Test {
 		public function new() {
 			var b:Int;
 		}
 	}";
 
-	var TEST11 =
-	"class Test {
+	var TEST11 = "
+	class Test {
 
 		public function new() {
 			var b:Int;
 		}
 	}";
 
-	var TEST12 =
-	"class Test
+	var TEST12 = "
+	class Test
 	{
 
 		public function new() {
@@ -212,39 +212,39 @@ abstract EmptyLinesCheckTests(String) to String {
 		}
 	}";
 
-	var TEST13 =
-	"interface Test {
+	var TEST13 = "
+	interface Test {
 		var b:Int;
 	}";
 
-	var TEST14 =
-	"interface Test {
+	var TEST14 = "
+	interface Test {
 
 		function test():Void;
 
 	}";
 
-	var TEST15 =
-	"interface Test
+	var TEST15 = "
+	interface Test
 	{
 
 		function test():Void;
 	}";
 
-	var TEST16 =
-	"abstract Test(Int) {
+	var TEST16 = "
+	abstract Test(Int) {
 		var A = 10;
 	}";
 
-	var TEST17 =
-	"abstract Test(Int) {
+	var TEST17 = "
+	abstract Test(Int) {
 
 		var A = 10;
 
 	}";
 
-	var TEST18 =
-	"abstract Test(Int)
+	var TEST18 = "
+	abstract Test(Int)
 	{
 		var A = 10;
 	}";

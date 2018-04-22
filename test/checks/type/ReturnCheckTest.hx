@@ -117,8 +117,8 @@ abstract ReturnCheckTests(String) to String {
 		public function test():Void {}
 	}";
 
-	var TEST2 =
-	"abstractAndClass Test {
+	var TEST2 = "
+	abstractAndClass Test {
 		public function test1() {
 			if (true) {
 				return 0;
@@ -126,8 +126,8 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2A =
-	"abstractAndClass Test {
+	var TEST2A = "
+	abstractAndClass Test {
 		public function test1() {
 			switch (true) {
 				case true:
@@ -136,8 +136,8 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2B =
-	"abstractAndClass Test {
+	var TEST2B = "
+	abstractAndClass Test {
 		public function test1() {
 			try {
 				return 0;
@@ -148,23 +148,23 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"abstractAndClass Test {
+	var TEST3 = "
+	abstractAndClass Test {
 		public function test2() {
 			var x = 1;
 			return;
 		}
 	}";
 
-	var TEST4 =
-	"abstractAndClass Test {
+	var TEST4 = "
+	abstractAndClass Test {
 		public function test3():Void {
 			return;
 		}
 	}";
 
-	var TEST5 =
-	"abstractAndClass Test {
+	var TEST5 = "
+	abstractAndClass Test {
 		public function test4() {
 			var x = function(i){
 				return i * i;
@@ -178,8 +178,8 @@ abstract ReturnCheckTests(String) to String {
 		function test4():Void;
 	}";
 
-	var TEST_FOR =
-	"abstractAndClass Test {
+	var TEST_FOR = "
+	abstractAndClass Test {
 		public function test1() {
 			for (i in 0 ... 10) {
 				return 5;
@@ -187,8 +187,8 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var TEST_WHILE =
-	"abstractAndClass Test {
+	var TEST_WHILE = "
+	abstractAndClass Test {
 		public function test1() {
 			while (true) {
 				return 5;
@@ -196,13 +196,13 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var INTERFACE =
-	"interface Test {
+	var INTERFACE = "
+	interface Test {
 		public function test1();
 	}";
 
-	var CORRECT_RETURN_ANONYMOUS =
-	"abstractAndClass Test {
+	var CORRECT_RETURN_ANONYMOUS = "
+	abstractAndClass Test {
 		public function test7() {
 			var x = function(i):Int{
 				return i * i;
@@ -211,8 +211,8 @@ abstract ReturnCheckTests(String) to String {
 		}
 	}";
 
-	var CORRECT_RETURN =
-	"abstractAndClass Test {
+	var CORRECT_RETURN = "
+	abstractAndClass Test {
 		public function test1():Int {
 			return 5;
 		}

@@ -36,8 +36,8 @@ abstract CatchParameterNameCheckTests(String) to String {
 		}
 	}";
 
-	var TEST2 =
-	"class Test {
+	var TEST2 = "
+	class Test {
 		public function test() {
 			try {
 				var Count:Int = 1;

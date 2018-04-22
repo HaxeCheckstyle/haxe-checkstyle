@@ -83,20 +83,20 @@ abstract ParameterNameCheckTests(String) to String {
 		}
 	}";
 
-	var TEST3 =
-	"typedef Test = {
+	var TEST3 = "
+	typedef Test = {
 		function test(param1:Int, ParamName:String) {
 		}
 	}";
 
-	var TEST4 =
-	"extern class Test {
+	var TEST4 = "
+	extern class Test {
 		public function test(Param1:Int) {
 		}
 	}";
 
-	var TEST5 =
-	"enum Test {
+	var TEST5 = "
+	enum Test {
 		VALUE(ParamName:String);
 	}";
 }
