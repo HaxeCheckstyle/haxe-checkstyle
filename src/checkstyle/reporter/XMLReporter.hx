@@ -4,6 +4,8 @@ class XMLReporter extends BaseReporter {
 
 	var style:String;
 
+	var messageCache:Map<String, Array<CheckMessage>>;
+
 	/*
 	* Solution from mustache.js
 	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
@@ -21,6 +23,7 @@ class XMLReporter extends BaseReporter {
 
 	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {
 		super(numFiles, checkCount, usedCheckCount, path, ns);
+		messageCache = new Map<String, Array<CheckMessage>>();
 		style = s;
 	}
 
@@ -49,15 +52,17 @@ class XMLReporter extends BaseReporter {
 	}
 
 	override public function fileStart(f:CheckFile) {
-		var sb = new StringBuf();
-		sb.add("\t<file name=\"");
-		sb.add(encode(f.name));
-		sb.add("\">\n");
-		if (file != null) report.add(sb.toString());
+		messageCache.set(f.name, []);
 	}
 
 	override public function fileFinish(f:CheckFile) {
 		var sb = new StringBuf();
+		sb.add("\t<file name=\"");
+		sb.add(encode(f.name));
+		sb.add("\">\n");
+		var messages:Array<CheckMessage> = messageCache.get(f.name);
+		for (m in messages) sb.add(formatMessage(m));
+		messageCache.remove(f.name);
 		sb.add("\t</file>\n");
 		if (file != null) report.add(sb.toString());
 	}
@@ -73,6 +78,11 @@ class XMLReporter extends BaseReporter {
 	}
 
 	override public function addMessage(m:CheckMessage) {
+		if (!messageCache.exists(m.fileName)) messageCache.set(m.fileName, [m]);
+		else messageCache.get(m.fileName).push(m);
+	}
+
+	function formatMessage(m:CheckMessage):String {
 		var sb:StringBuf = new StringBuf();
 
 		sb.add("\t\t<error line=\"");
@@ -102,6 +112,6 @@ class XMLReporter extends BaseReporter {
 
 		Sys.print(applyColour(getMessage(m).toString(), m.severity));
 
-		if (file != null) report.add(sb.toString());
+		return sb.toString();
 	}
 }
