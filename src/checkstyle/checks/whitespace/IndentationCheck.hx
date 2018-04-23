@@ -170,7 +170,25 @@ class IndentationCheck extends Check {
 	function calcWrapStatements():Array<Bool> {
 		var wrapped:Array<Bool> = [for (i in 0...checker.lines.length) false];
 
-		var searchFor:Array<TokenDef> = [POpen, Kwd(KwdReturn), Binop(OpAssign)];
+		var searchFor:Array<TokenDef> = [
+			POpen,
+			Dot,
+			Kwd(KwdReturn),
+			Kwd(KwdCase),
+			Binop(OpAssign),
+			Binop(OpAssignOp(OpShr)),
+			Binop(OpAssignOp(OpAdd)),
+			Binop(OpAssignOp(OpSub)),
+			Binop(OpAssignOp(OpMult)),
+			Binop(OpAssignOp(OpDiv)),
+			Binop(OpAssignOp(OpMod)),
+			Binop(OpAssignOp(OpShl)),
+			Binop(OpAssignOp(OpShr)),
+			Binop(OpAssignOp(OpUShr)),
+			Binop(OpAssignOp(OpOr)),
+			Binop(OpAssignOp(OpAnd)),
+			Binop(OpAssignOp(OpXor))
+		];
 		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
 		for (token in tokenList) {
 			var pos = token.getPos();
