@@ -39,7 +39,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.severity = SeverityLevel.INFO;
 		check.ignoreComments = false;
 		assertNoMsg(check, CORRECT_COMMENTS);
-		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 2, actual: 0");
+		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 0, actual: 1");
 	}
 
 	@Test
@@ -127,6 +127,10 @@ long comment
 			#end
 			case 2:
 				doSomething();
+			case 3,
+				4,
+				5:
+				doSomething();
 			default:
 				doSomething();
 		}
@@ -134,8 +138,19 @@ long comment
 			a: 1,
 			b: 2
 		});
+		builder()
+			.create
+			.something()
+			.with()
+			.data()
+			.build()
+			.run();
 	}
-}";
+}
+/*
+	comment
+*/
+";
 
 	var CORRECT_SPACE_INDENT = "
 class Test {
@@ -224,9 +239,9 @@ class Test {
 	// comment
 	public function new() {
 		/* comment
-		comment
-		comment
-		*/
+		 * comment
+		 * comment
+		 */
 		// comment
 		doSomething(); // comment
 		switch (value) {
@@ -236,5 +251,8 @@ class Test {
 			default:
 		}
 	}
-}";
+}
+/*
+ * test comment
+ */";
 }

@@ -28,5 +28,6 @@ class WalkFile {
 					tempStore.push(stream.consumeToken());
 			}
 		}
+		for (stored in tempStore) parent.addChild(stored);
 	}
 }
