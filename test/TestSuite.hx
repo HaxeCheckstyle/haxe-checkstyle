@@ -11,6 +11,7 @@ class TestSuite extends massive.munit.TestSuite {
 
 		add(TokenTreeBuilderTest);
 		add(TokenTreeBuilderParsingTest);
+		add(ThreadTest);
 
 		var tests = CompileTime.getAllClasses(CheckTestCase);
 		for (testClass in tests) add(testClass);
