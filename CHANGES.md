@@ -1,6 +1,7 @@
 ## next version (2.x.x)
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
+- Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
 
 ## version 2.2.1

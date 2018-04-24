@@ -25,6 +25,7 @@ class ParserQueue {
 	}
 
 	public function start(max:Int) {
+		if (max <= 0) max = 1;
 		maxPreparse = max;
 		checkers = [];
 		Thread.create(runParser);
