@@ -131,6 +131,13 @@ long comment
 				4,
 				5:
 				doSomething();
+			case 6:
+				#if php
+				doSomething();
+				#else
+				doSomething();
+				#end
+				doSomething();
 			default:
 				doSomething();
 		}
