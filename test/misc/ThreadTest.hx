@@ -1,3 +1,5 @@
+package misc;
+
 import checkstyle.CheckFile;
 import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;

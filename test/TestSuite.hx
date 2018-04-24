@@ -1,4 +1,5 @@
 import checks.CheckTestCase;
+import misc.ThreadTest;
 import token.TokenTreeBuilderTest;
 import token.TokenTreeBuilderParsingTest;
 
