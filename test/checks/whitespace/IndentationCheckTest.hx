@@ -131,6 +131,17 @@ long comment
 				4,
 				5:
 				doSomething();
+			case 6:
+				#if php
+				doSomething();
+				#else
+				doSomething();
+				#end
+				doSomething();
+			#if (haxe_ver < 4.0)
+			case 7:
+				doSomething();
+			#end
 			default:
 				doSomething();
 		}

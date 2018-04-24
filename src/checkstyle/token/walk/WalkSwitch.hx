@@ -85,6 +85,31 @@ class WalkSwitch {
 					WalkComment.walkComment(stream, parent);
 				case Sharp(_):
 					WalkSharp.walkSharp(stream, parent, WalkSwitch.walkSwitchCases);
+					/*
+					 * relocate sharp subtree from:
+					 *  |- BrOpen
+					 *      |- Kwd(KwdCase)
+					 *      |   |- expression
+					 *      |   |- DblDot
+					 *      |       |- statement
+					 *      |- Sharp(If)
+					 *      |   |- condition
+					 *      |   |- statement (if not a new case)
+					 * to:
+					 *      |- Kwd(KwdCase)
+					 *      |   |- expression
+					 *      |   |- DblDot
+					 *      |       |- statement
+					 *      |       |- Sharp(If)
+					 *      |           |- condition
+					 *      |           |- statement
+					 */
+					var sharp:TokenTree = parent.getLastChild();
+					if (sharp.children.length < 2) continue;
+					var body:TokenTree = sharp.children[1];
+					if (body.is(Kwd(KwdCase))) continue;
+					parent.children.pop();
+					dblDot.addChild(sharp);
 				default:
 					WalkStatement.walkStatement(stream, dblDot);
 			}
