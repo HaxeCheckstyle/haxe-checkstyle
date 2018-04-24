@@ -138,6 +138,10 @@ long comment
 				doSomething();
 				#end
 				doSomething();
+			#if (haxe_ver < 4.0)
+			case 7:
+				doSomething();
+			#end
 			default:
 				doSomething();
 		}
