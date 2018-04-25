@@ -30,6 +30,7 @@ class TokenTreeBuilderParsingTest {
 		assertCodeParses(OBJECT_WITH_ARRAY);
 		assertCodeParses(MACRO_REIFICATION);
 		assertCodeParses(BLOCK_METADATA);
+		assertCodeParses(COMMENTS_IN_FUNCTION_PARAMS);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -392,5 +393,12 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			if (test) @test @do return x;
 		}
 	}";
+
+	var COMMENTS_IN_FUNCTION_PARAMS = "
+	class Test {
+		function test( /* comment */ a:String /* comment */) { }
+		function test2( /* comment */ /* comment */) { }
+	}
+	";
 
 }
