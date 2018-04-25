@@ -34,6 +34,7 @@ class WalkFunction {
 		parent.addChild(pOpen);
 		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
 		while (progress.streamHasChanged()) {
+			WalkComment.walkComment(stream, pOpen);
 			if (stream.is(PClose)) break;
 			WalkFieldDef.walkFieldDef(stream, pOpen);
 		}

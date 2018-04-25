@@ -156,7 +156,7 @@ class WalkStatement {
 
 	static function findQuestionParent(token:TokenTree):TokenTree {
 		var parent:TokenTree = token;
-		while (parent.tok != null) {
+		while (parent != null && parent.tok != null) {
 			switch (parent.tok) {
 				case Question: return parent;
 				case Comma: return null;
