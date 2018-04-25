@@ -83,9 +83,6 @@ class WalkStatement {
 					WalkStatement.walkStatement(stream, question);
 					return;
 				}
-				if (isDblDotObjectDecl(parent)) {
-					return;
-				}
 				var dblDotTok:TokenTree = stream.consumeToken();
 				parent.addChild(dblDotTok);
 				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
@@ -165,14 +162,5 @@ class WalkStatement {
 			parent = parent.parent;
 		}
 		return null;
-	}
-
-	static function isDblDotObjectDecl(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
-		return switch (token.tok) {
-			case BrOpen: true;
-			case POpen: false;
-			default: isDblDotObjectDecl(token.parent);
-		}
 	}
 }

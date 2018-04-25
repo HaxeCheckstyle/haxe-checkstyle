@@ -23,7 +23,7 @@ class WalkArrayAccess {
 				case BrOpen:
 					for (stored in tempStore) bkOpen.addChild(stored);
 					tempStore = [];
-					WalkObjectDecl.walkObjectDecl(stream, bkOpen);
+					WalkBlock.walkBlock(stream, bkOpen);
 				case BkOpen:
 					for (stored in tempStore) bkOpen.addChild(stored);
 					tempStore = [];

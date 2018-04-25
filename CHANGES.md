@@ -2,6 +2,7 @@
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
 - Fixed token tree structure for Sharp(If) inside Kwd(KwdCase) [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
+- Fixed parser errors when handling block and object declarations
 - Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
 
