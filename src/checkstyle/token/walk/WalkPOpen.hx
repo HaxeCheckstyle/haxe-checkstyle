@@ -16,7 +16,7 @@ class WalkPOpen {
 				case POpen:
 					WalkPOpen.walkPOpen(stream, parent);
 				case BrOpen:
-					WalkObjectDecl.walkObjectDecl(stream, parent);
+					WalkBlock.walkBlock(stream, parent);
 				case BkOpen:
 					WalkArrayAccess.walkArrayAccess(stream, parent);
 				case PClose:

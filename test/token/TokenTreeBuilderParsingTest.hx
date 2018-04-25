@@ -31,6 +31,9 @@ class TokenTreeBuilderParsingTest {
 		assertCodeParses(MACRO_REIFICATION);
 		assertCodeParses(BLOCK_METADATA);
 		assertCodeParses(COMMENTS_IN_FUNCTION_PARAMS);
+		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_1);
+		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_2);
+		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_3);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -398,7 +401,46 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 	class Test {
 		function test( /* comment */ a:String /* comment */) { }
 		function test2( /* comment */ /* comment */) { }
-	}
-	";
+	}";
 
+	var BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_1 = "
+	class Test {
+		function test() {
+			//fails with: bad token Comma != BrClose
+			var test = switch a
+			{
+			    case 3: {a: 1, b: 2};
+			    default: {a: 0, b: 2};
+			}
+		}
+	}";
+
+	var BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_2 = "
+	class Test {
+		function test() {
+			//fails with: bad token Kwd(KwdFunction) != DblDot
+			return {
+			    #if js
+			    something:
+			    #else
+			    somethingelse:
+			    #end
+			    function (e)
+			    {
+			        e.preventDefault();
+			        callback();
+			    }
+			};
+		}
+	}";
+
+	var BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_3 = "
+	class Test {
+		function test() {
+			return {
+			    doSomething();
+			    1;
+			}
+		}
+	}";
 }
