@@ -34,6 +34,7 @@ class TokenTreeBuilderParsingTest {
 		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_1);
 		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_2);
 		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_3);
+		assertCodeParses(BLOCK_OBJECT_DECL_WITH_TERNARY);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -441,6 +442,18 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			    doSomething();
 			    1;
 			}
+		}
+	}";
+
+	var BLOCK_OBJECT_DECL_WITH_TERNARY = "
+	class Test {
+		public function new() {
+			checkInfos[names[i]] = {
+				name: names[i],
+				clazz: cl,
+				isAlias: i > 0,
+				description: (i == 0) ? desc : desc + ' [DEPRECATED, use ' + names[0] + ' instead]'
+			};
 		}
 	}";
 }

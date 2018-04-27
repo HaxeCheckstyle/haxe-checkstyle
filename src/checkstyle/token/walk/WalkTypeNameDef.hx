@@ -17,6 +17,7 @@ class WalkTypeNameDef {
 			parent = questTok;
 		}
 		var name:TokenTree;
+		var bAdd:Bool = true;
 		switch (stream.token()) {
 			case Kwd(KwdMacro), Kwd(KwdExtern), Kwd(KwdNew):
 				name = stream.consumeToken();
@@ -24,6 +25,12 @@ class WalkTypeNameDef {
 				name = stream.consumeConst();
 			case Dollar(_):
 				name = stream.consumeToken();
+			case POpen:
+				name = WalkPOpen.walkPOpen(stream, parent);
+				if (stream.is(Question)) {
+					WalkQuestion.walkQuestion(stream, name);
+				}
+				bAdd = false;
 			case Sharp(_):
 				WalkSharp.walkSharp(stream, parent, WalkStatement.walkStatement);
 				if (!stream.hasMore()) return parent.getFirstChild();
@@ -36,15 +43,21 @@ class WalkTypeNameDef {
 			default:
 				name = stream.consumeToken();
 		}
-		parent.addChild(name);
+		if (bAdd) parent.addChild(name);
+		walkTypeNameDefContinue(stream, name);
+		return name;
+	}
+
+	static function walkTypeNameDefContinue(stream:TokenStream, parent:TokenTree) {
+
 		if (stream.is(Dot)) {
 			var dot:TokenTree = stream.consumeTokenDef(Dot);
-			name.addChild(dot);
+			parent.addChild(dot);
 			WalkTypeNameDef.walkTypeNameDef(stream, dot);
-			return name;
+			return;
 		}
-		if (stream.is(Binop(OpLt))) WalkLtGt.walkLtGt(stream, name);
-		WalkComment.walkComment(stream, name);
-		return name;
+		if (stream.is(Binop(OpLt))) WalkLtGt.walkLtGt(stream, parent);
+		if (stream.is(BkOpen)) WalkArrayAccess.walkArrayAccess(stream, parent);
+		WalkComment.walkComment(stream, parent);
 	}
 }
