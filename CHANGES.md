@@ -2,8 +2,10 @@
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
 - Fixed token tree structure for Sharp(If) inside Kwd(KwdCase) [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
-- Fixed comments in function parameters [#395](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
-- Fixed parser errors when handling block and object declarations, fixes [#366](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/396) ([#397](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394))
+- Fixed comments in function parameters [#395](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/395)
+- Fixed parser errors when handling block and object declarations, fixes [#396](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/396) ([#397](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/397))
+- Fixed BkOpen childs in token tree parser [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
+- Fixed bad offset crash with C++ build on7 Windows 10 [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
 - Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
 
