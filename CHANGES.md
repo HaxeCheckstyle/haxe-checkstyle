@@ -4,6 +4,8 @@
 - Fixed token tree structure for Sharp(If) inside Kwd(KwdCase) [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
 - Fixed comments in function parameters [#395](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
 - Fixed parser errors when handling block and object declarations, fixes [#366](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/396) ([#397](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394))
+- Fixed BkOpen childs in token tree parser
+- Fixed bad offset crash with C++ build on7 Windows 10
 - Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
 

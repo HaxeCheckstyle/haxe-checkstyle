@@ -60,7 +60,7 @@ class Checker {
 			}
 			left = true;
 		}
-		if (left) linesIdx.push({l:last, r:code.length - 1});
+		if (left) linesIdx.push({l:last, r:code.length});
 	}
 
 	public function getLinePos(off:Int):LinePos {

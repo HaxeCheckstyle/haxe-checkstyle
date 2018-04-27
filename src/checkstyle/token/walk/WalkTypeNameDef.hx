@@ -7,6 +7,10 @@ class WalkTypeNameDef {
 			WalkTypedefBody.walkTypedefBody(stream, parent);
 			return parent.getFirstChild();
 		}
+		if (stream.is(BkOpen)) {
+			WalkArrayAccess.walkArrayAccess(stream, parent);
+			return parent.getFirstChild();
+		}
 		if (stream.is(Question)) {
 			var questTok:TokenTree = stream.consumeTokenDef(Question);
 			parent.addChild(questTok);
