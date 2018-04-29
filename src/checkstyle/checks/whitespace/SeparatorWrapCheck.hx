@@ -8,7 +8,6 @@ class SeparatorWrapCheck extends WrapCheckBase {
 		super();
 		tokens = [
 			",",
-			"."
 		];
 	}
 
