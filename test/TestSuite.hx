@@ -2,6 +2,7 @@ import checks.CheckTestCase;
 import misc.ThreadTest;
 import token.TokenTreeBuilderTest;
 import token.TokenTreeBuilderParsingTest;
+import token.verify.VerifyTokenTreeTest;
 
 class TestSuite extends massive.munit.TestSuite {
 	public function new() {
@@ -12,6 +13,7 @@ class TestSuite extends massive.munit.TestSuite {
 
 		add(TokenTreeBuilderTest);
 		add(TokenTreeBuilderParsingTest);
+		add(VerifyTokenTreeTest);
 		add(ThreadTest);
 
 		var tests = CompileTime.getAllClasses(CheckTestCase);

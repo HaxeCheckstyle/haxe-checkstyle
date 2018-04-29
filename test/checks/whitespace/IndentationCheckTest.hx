@@ -149,6 +149,12 @@ long comment
 			a: 1,
 			b: 2
 		});
+		checkInfos[names[i]] = {
+			name: names[i],
+			clazz: cl,
+			isAlias: i > 0,
+			description: (i == 0) ? desc : desc + ' [DEPRECATED, use ' + names[0] + ' instead]'
+		};
 		builder()
 			.create
 			.something()

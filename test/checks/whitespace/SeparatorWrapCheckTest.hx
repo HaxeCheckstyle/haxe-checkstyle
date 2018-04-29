@@ -5,7 +5,6 @@ import checkstyle.checks.whitespace.SeparatorWrapCheck;
 class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 
 	static inline var MSG_COMMA_EOL:String = 'Token "," must be at the end of the line';
-	static inline var MSG_DOT_EOL:String = 'Token "." must be at the end of the line';
 
 	static inline var MSG_COMMA_NL:String = 'Token "," must be on a new line';
 	static inline var MSG_DOT_NL:String = 'Token "." must be on a new line';
@@ -28,8 +27,6 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 		assertMsg(check, NL_WRAP_FUNC, MSG_COMMA_EOL);
 		assertMsg(check, NL_WRAP_OBJECT_DECL, MSG_COMMA_EOL);
 		assertMsg(check, NL_WRAP_ARRAY, MSG_COMMA_EOL);
-		assertMsg(check, NL_WRAP_CALL, MSG_DOT_EOL);
-		assertMsg(check, NL_WRAP_IMPORT, MSG_DOT_EOL);
 	}
 
 	@Test
@@ -46,7 +43,9 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 		assertNoMsg(check, NOWRAP_ARRAY);
 		assertNoMsg(check, NOWRAP_CALL);
 		assertNoMsg(check, NOWRAP_IMPORT);
+		assertNoMsg(check, EOL_WRAP_IMPORT);
 
+		check.tokens = [",", "."];
 		assertMsg(check, CORRECT_WRAP, MSG_COMMA_NL);
 		assertMsg(check, EOL_WRAP_ARRAY, MSG_COMMA_NL);
 		assertMsg(check, EOL_WRAP_IMPORT, MSG_DOT_NL);

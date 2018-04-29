@@ -8,6 +8,8 @@
 - Fixed bad offset crash with C++ build on7 Windows 10 [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
 - Fixed object declaration handling [#399](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/399)
 - Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
+- Added unittests for TokenTree structure verification [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
+- Removed `.` from default settings in SeparatorWrapCheck [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
 
 ## version 2.2.1
