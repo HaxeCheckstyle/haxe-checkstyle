@@ -1,5 +1,7 @@
 package checkstyle;
 
+import haxe.io.Bytes;
+
 import haxe.macro.Expr;
 import haxeparser.Data;
 

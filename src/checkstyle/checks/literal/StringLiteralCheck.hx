@@ -38,7 +38,7 @@ class StringLiteralCheck extends Check {
 	}
 
 	function checkLiteral(s:String, pos:Position) {
-		var quote:String = checker.file.content.substr(pos.min, 1);
+		var quote:String = checker.getString(pos.min, pos.min + 1);
 		var singleQuote:Bool = quote == "'";
 		switch (policy) {
 			case ONLY_DOUBLE:

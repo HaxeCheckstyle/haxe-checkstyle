@@ -51,8 +51,8 @@ class ConditionalCompilationCheck extends Check {
 	}
 
 	function checkMultiLine(tok:TokenTree, linePos:LinePos) {
-		var line:String = checker.lines[linePos.line];
-		var prefix:String = line.substr(0, linePos.ofs);
+		var line:Bytes = Bytes.ofString(checker.lines[linePos.line]);
+		var prefix:String = line.sub(0, linePos.ofs).toString();
 		if (checkLine(tok, linePos, line)) return;
 
 		switch (policy) {
@@ -68,8 +68,8 @@ class ConditionalCompilationCheck extends Check {
 			switch (childTok.tok) {
 				case Sharp("else"), Sharp("elseif"), Sharp("end"):
 					var childLinePos:LinePos = checker.getLinePos(childTok.pos.min);
-					var childLine:String = checker.lines[childLinePos.line];
-					var childPrefix:String = childLine.substr(0, childLinePos.ofs);
+					var childLine:Bytes = Bytes.ofString(checker.lines[childLinePos.line]);
+					var childPrefix:String = childLine.sub(0, childLinePos.ofs).toString();
 					if (checkLine(childTok, childLinePos, childLine)) continue;
 					if (childPrefix == prefix) continue;
 					logPos('Indentation of $childTok must match corresponding #if', childTok.pos);
@@ -78,9 +78,9 @@ class ConditionalCompilationCheck extends Check {
 		}
 	}
 
-	function checkLine(tok:TokenTree, linePos:LinePos, line:String):Bool {
+	function checkLine(tok:TokenTree, linePos:LinePos, line:Bytes):Bool {
 		var r:EReg = ~/^[ \t]*$/;
-		var prefix:String = line.substr(0, linePos.ofs);
+		var prefix:String = line.sub(0, linePos.ofs).toString();
 		if (!r.match(prefix)) {
 			logPos('only whitespace allowed before $tok', tok.pos);
 			return true;
@@ -89,7 +89,7 @@ class ConditionalCompilationCheck extends Check {
 		if (expr == null) return false;
 		var linePosAfter:LinePos = checker.getLinePos(expr.getPos().max);
 		if (linePosAfter.line == linePos.line) {
-			var postfix:String = line.substr(linePosAfter.ofs);
+			var postfix:String = line.sub(linePosAfter.ofs, line.length - linePosAfter.ofs).toString();
 			if (!r.match(postfix)) {
 				logPos('only whitespace allowed after $tok', tok.pos);
 				return true;

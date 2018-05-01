@@ -36,7 +36,7 @@ class UnusedImportCheck extends Check {
 		var stringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
 				case Const(CString(text)):
-					if (checker.file.content.substr(token.pos.min, 1) != "'") return GO_DEEPER;
+					if (checker.getString(token.pos.min, token.pos.min + 1) != "'") return GO_DEEPER;
 					if (~/\$\{[^\}]+\.[^\}]+\}/.match (text)) return FOUND_GO_DEEPER;
 				default:
 			}

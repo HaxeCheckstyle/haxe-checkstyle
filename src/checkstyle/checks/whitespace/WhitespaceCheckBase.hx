@@ -69,9 +69,10 @@ class WhitespaceCheckBase extends Check {
 			linePos = checker.getLinePos(tok.pos.max - 3);
 			tokLen = 3;
 		}
-		var line:String = checker.lines[linePos.line];
-		var before:String = line.substr(0, linePos.ofs);
-		var after:String = line.substr(linePos.ofs + tokLen);
+		var line:Bytes = Bytes.ofString(checker.lines[linePos.line]);
+		var before:String = line.sub(0, linePos.ofs).toString();
+		var offs:Int = linePos.ofs + tokLen;
+		var after:String = line.sub(offs, line.length - offs).toString();
 
 		var whitespaceBefore:Bool = ~/^(.*\s|)$/.match(before);
 		var whitespaceAfter:Bool = ~/^(\s.*|)$/.match(after);

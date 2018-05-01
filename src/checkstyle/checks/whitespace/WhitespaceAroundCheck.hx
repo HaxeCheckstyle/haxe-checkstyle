@@ -125,10 +125,11 @@ class WhitespaceAroundCheck extends Check {
 			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
 			var linePos:LinePos = checker.getLinePos(tok.pos.min);
-			var line:String = checker.lines[linePos.line];
-			var before:String = line.substr(0, linePos.ofs);
+			var line:Bytes = Bytes.ofString(checker.lines[linePos.line]);
+			var before:String = line.sub(0, linePos.ofs).toString();
 			var tokLen:Int = tok.toString().length;
-			var after:String = line.substr(linePos.ofs + tokLen);
+			var offs:Int = linePos.ofs + tokLen;
+			var after:String = line.sub(offs, line.length - offs).toString();
 
 			if (!(~/^.*\s$/.match(before))) {
 				logPos('No whitespace around "$tok"', tok.pos);

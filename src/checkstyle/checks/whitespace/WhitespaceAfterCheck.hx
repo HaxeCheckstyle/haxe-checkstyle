@@ -87,7 +87,7 @@ class WhitespaceAfterCheck extends Check {
 			if (isPosSuppressed(tok.pos)) continue;
 			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
 
-			var contentAfter:String = checker.file.content.substr(tok.pos.max, 1);
+			var contentAfter:String = checker.getString(tok.pos.max, tok.pos.max + 1);
 			if (~/^(\s|)$/.match(contentAfter)) continue;
 
 			logPos('No whitespace after "$tok"', tok.pos);

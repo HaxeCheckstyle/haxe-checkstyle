@@ -1,5 +1,7 @@
 package misc;
 
+import byte.ByteData;
+
 import checkstyle.CheckFile;
 import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;
@@ -82,10 +84,11 @@ class ThreadTest {
 
 	function setupFiles(count:Int):Array<CheckFile> {
 		var files:Array<CheckFile> = [];
+		var content:ByteData = ByteData.ofString(IndentationCheckTests.CORRECT_TAB_INDENT);
 		for (i in 0...count) {
 			files.push({
 				name: 'test_$i.hx',
-				content: IndentationCheckTests.CORRECT_TAB_INDENT,
+				content: content,
 				index: i
 			});
 		}
