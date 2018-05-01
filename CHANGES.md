@@ -11,7 +11,7 @@
 - Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Added unittests for TokenTree structure verification [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
 - Removed `.` from default settings in SeparatorWrapCheck [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
-- Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392)
+- Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392) + [#403](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/403)
 
 ## version 2.2.1
 
