@@ -193,6 +193,7 @@ class IndentationCheck extends Check {
 		for (token in tokenList) {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
+			if (token.is(Dot)) pos = token.parent.getPos();
 			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
