@@ -74,6 +74,38 @@ class VerifyTokenTreeTest {
 		block.childLast().is(BrClose).noChilds();
 	}
 
+	@Test
+	public function testTypedefComments() {
+		var root:IVerifyTokenTree = buildTokenTree(TokenTreeBuilderParsingTests.TYPEDEF_COMMENTS);
+
+		// typedef CheckFile
+		var type:IVerifyTokenTree = root.childFirst().is(Kwd(KwdTypedef)).oneChild().childFirst().is(Const(CIdent("CheckFile")));
+		var brOpen:IVerifyTokenTree = type.childFirst().is(Binop(OpAssign)).oneChild().childFirst().is(BrOpen).childCount(8);
+		brOpen.childAt(0).is(CommentLine(" °"));
+
+		// var name:String;
+		var v:IVerifyTokenTree = brOpen.childAt(1).is(Kwd(KwdVar)).oneChild().childFirst().is(Const(CIdent("name"))).childCount(2);
+		v.childFirst().is(DblDot).oneChild().childFirst().is(Const(CIdent("String"))).noChilds();
+		v.childLast().is(Semicolon).noChilds();
+
+		brOpen.childAt(2).is(CommentLine(" öäü")).noChilds();
+
+		// var content:String;
+		v = brOpen.childAt(3).is(Kwd(KwdVar)).oneChild().childFirst().is(Const(CIdent("content"))).childCount(2);
+		v.childFirst().is(DblDot).oneChild().childFirst().is(Const(CIdent("String"))).noChilds();
+		v.childLast().is(Semicolon).noChilds();
+
+		brOpen.childAt(4).is(CommentLine(" €łµ")).noChilds();
+
+		// var index:Int;
+		v = brOpen.childAt(5).is(Kwd(KwdVar)).oneChild().childFirst().is(Const(CIdent("index"))).childCount(2);
+		v.childFirst().is(DblDot).oneChild().childFirst().is(Const(CIdent("Int"))).noChilds();
+		v.childLast().is(Semicolon).noChilds();
+
+		brOpen.childAt(6).is(CommentLine(" æ@ð")).noChilds();
+		brOpen.childLast().is(BrClose).noChilds();
+	}
+
 	function buildTokenTree(content:String):IVerifyTokenTree {
 		var builder:TestTokenTreeBuilder = new TestTokenTreeBuilder(content);
 		var root:TokenTree = new TokenTree(null, null, -1);

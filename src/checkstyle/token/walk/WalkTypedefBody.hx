@@ -9,6 +9,8 @@ class WalkTypedefBody {
 			while (progress.streamHasChanged()) {
 				switch (stream.token()) {
 					case BrClose: break;
+					case Comment(_), CommentLine(_):
+						WalkComment.walkComment(stream, openTok);
 					default:
 						WalkFieldDef.walkFieldDef(stream, openTok);
 				}
