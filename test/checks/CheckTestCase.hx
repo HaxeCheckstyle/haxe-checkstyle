@@ -1,5 +1,7 @@
 package checks;
 
+import byte.ByteData;
+
 import haxe.PosInfos;
 
 import checkstyle.CheckMessage;
@@ -60,7 +62,7 @@ class CheckTestCase<T:String> {
 
 		ReporterManager.INSTANCE.clear();
 		ReporterManager.INSTANCE.addReporter(reporter);
-		checker.process([{name:fileName, content:src, index:0}], null);
+		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}], null);
 		return reporter.message;
 	}
 

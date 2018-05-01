@@ -1,6 +1,5 @@
 package checkstyle;
 
-import byte.ByteData;
 import haxe.CallStack;
 import haxeparser.HaxeParser;
 import haxeparser.HaxeLexer;
@@ -15,7 +14,6 @@ import checkstyle.token.TokenTreeBuilder;
 class Checker {
 
 	public var file:CheckFile;
-	public var bytes:ByteData;
 	public var lines:Array<String>;
 	public var tokens:Array<Token>;
 	public var ast:Ast;
@@ -41,19 +39,19 @@ class Checker {
 
 	public function getTokenTree():TokenTree {
 		if (tokens == null) return null;
-		if (tokenTree == null) tokenTree = TokenTreeBuilder.buildTokenTree(tokens, bytes);
+		if (tokenTree == null) tokenTree = TokenTreeBuilder.buildTokenTree(tokens, file.content);
 		return tokenTree;
 	}
 
 	function makePosIndices() {
-		var code = file.content;
+		var code:Bytes = cast file.content;
 		linesIdx = [];
 
 		var last = 0;
 		var left = false;
 
 		for (i in 0...code.length) {
-			if (code.charAt(i) == "\n") {
+			if (code.get(i) == 0x0A) {
 				linesIdx.push({l:last, r:i});
 				last = i + 1;
 				left = false;
@@ -71,11 +69,16 @@ class Checker {
 	}
 
 	public function getString(off:Int, off2:Int):String {
-		return file.content.substr(off, off2 - off);
+		var code:Bytes = cast file.content;
+		var len:Int = off2 - off;
+		if ((off >= code.length) || (off + len > code.length)) return "";
+		return code.sub(off, off2 - off).toString();
 	}
 
 	function findLineSeparator() {
-		var code = file.content;
+		var codeBytes:Bytes = cast file.content;
+		var code:String = codeBytes.toString();
+
 		for (i in 0...code.length) {
 			var char = code.charAt(i);
 			if (char == "\r" || char == "\n") {
@@ -92,15 +95,16 @@ class Checker {
 	}
 
 	function makeLines() {
-		var code = file.content;
-		lines = code.split(lineSeparator);
+		var code:Bytes = cast file.content;
+		var textCode:String = code.toString();
+		lines = textCode.split(lineSeparator);
 	}
 
 	function makeTokens() {
 		try {
 			tokens = [];
 			tokenTree = null;
-			var lexer = new HaxeLexer(bytes, file.name);
+			var lexer = new HaxeLexer(file.content, file.name);
 			var t:Token = lexer.token(HaxeLexer.tok);
 
 			while (t.tok != Eof) {
@@ -128,8 +132,7 @@ class Checker {
 	}
 
 	function makeAST(defines:Array<String>):Ast {
-		var code = file.content;
-		var parser = new HaxeParser(byte.ByteData.ofString(code), file.name);
+		var parser = new HaxeParser(file.content, file.name);
 		parser.define("cross");
 		parser.define("scriptable");
 		parser.define("unsafe");
@@ -176,7 +179,7 @@ class Checker {
 	public function loadFileContent(checkFile:CheckFile) {
 		// unittests set content before running Checker
 		// real checks load content here
-		if (checkFile.content == null) checkFile.content = File.getContent(checkFile.name);
+		if (checkFile.content == null) checkFile.content = cast File.getBytes(checkFile.name);
 	}
 
 	public function unloadFileContent(checkFile:CheckFile) {
@@ -185,7 +188,6 @@ class Checker {
 
 	public function createContext(checkFile:CheckFile):Bool {
 		file = checkFile;
-		bytes = byte.ByteData.ofString(file.content);
 		ReporterManager.INSTANCE.fileStart(file);
 		try {
 			findLineSeparator();

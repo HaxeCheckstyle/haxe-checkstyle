@@ -125,8 +125,8 @@ class RightCurlyCheck extends Check {
 			var linePos:LinePos = checker.getLinePos(curlyPos.max);
 			var afterCurly:String = "";
 			if (!eof) {
-				var afterLine:String = checker.lines[linePos.line];
-				if (linePos.ofs < afterLine.length) afterCurly = afterLine.substr(linePos.ofs);
+				var afterLine:Bytes = Bytes.ofString(checker.lines[linePos.line]);
+				if (linePos.ofs < afterLine.length) afterCurly = afterLine.sub(linePos.ofs, afterLine.length - linePos.ofs).toString();
 			}
 			// only else and catch allowed on same line after a right curly
 			var sameRegex = ~/^\s*(else|catch)/;
