@@ -36,6 +36,7 @@ class TokenTreeBuilderParsingTest {
 		assertCodeParses(BLOCK_OBJECT_DECL_SAMPLES_ISSUE_396_3);
 		assertCodeParses(BLOCK_OBJECT_DECL_WITH_TERNARY);
 		assertCodeParses(TYPEDEF_COMMENTS);
+		assertCodeParses(TYPEDEF_COMMENTS_2);
 	}
 
 	public function assertCodeParses(code:String, ?pos:PosInfos) {
@@ -467,5 +468,14 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 		// €łµ
 		var index:Int;
 		// æ@ð
+	}";
+
+	var TYPEDEF_COMMENTS_2 = "
+	typedef CheckFile = {
+		// °
+		var name:String;
+		var content:String;
+		// €łµ
+		var index:Int;
 	}";
 }
