@@ -1,4 +1,6 @@
-## next version (2.x.x)
+## dev branch / next version (2.x.x)
+
+## version 2.2.2
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
 - Fixed token tree structure for Sharp(If) inside Kwd(KwdCase) [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
