@@ -13,6 +13,8 @@ class WalkFieldDef {
 					parent = tok;
 				case At:
 					tempStore.push(WalkAt.walkAt(stream));
+				case Comment(_), CommentLine(_):
+					WalkComment.walkComment(stream, parent);
 				default:
 					break;
 			}
