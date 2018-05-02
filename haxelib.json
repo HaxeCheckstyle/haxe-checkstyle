@@ -18,8 +18,8 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "new indentation check and bugfixes - see CHANGES.md",
-    "version": "2.2.1",
+    "releasenote": "added tests, improved support for vscode-checkstyle and bugfixes - see CHANGES.md",
+    "version": "2.2.2",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
 
