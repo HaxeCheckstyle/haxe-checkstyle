@@ -7,7 +7,7 @@
 - Fixed comments in function parameters [#395](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/395)
 - Fixed parser errors when handling block and object declarations, fixes [#396](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/396) ([#397](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/397))
 - Fixed BkOpen childs in token tree parser [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
-- Fixed bad offset crash with C++ build on7 Windows 10 [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
+- Fixed bad offset crash with C++ build on Windows 10 [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
 - Fixed object declaration handling [#399](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/399)
 - Fixed false positives for files with UTF-8 characters when running as vscode-checkstyle [#402](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/402)
 - Fixed comments in typedefs [#404](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/404) + [#405](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/405)
