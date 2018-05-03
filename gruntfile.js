@@ -15,7 +15,11 @@ module.exports = function(grunt) {
         haxe: haxeOptions(),
 
         zip: {
-            "checkstyle.zip": ["src/**", "resources/sample-config.json", "resources/logo.png", "haxelib.json", "run.n", "README.md"]
+            "checkstyle.zip": [
+                "src/**",
+                "resources/sample-config.json", "resources/logo.png", "resources/codeclimate_pr.png",
+                "haxelib.json", "run.n", "README.md", "CHANGES.md"
+            ]
         }
     });
 

@@ -115,22 +115,37 @@ class Main {
 			excludePath = DEFAULT_EXCLUDE_CONFIG;
 		}
 
-		if (configPath != null && FileSystem.exists(configPath) && !FileSystem.isDirectory(configPath)) loadConfig(configPath);
-		else addAllChecks();
+		loadConfig(configPath);
 
 		if (excludePath != null) loadExcludeConfig(excludePath);
-		else start();
+		start();
 	}
 
-	function loadConfig(path:String) {
-		var config:Config = Json.parse(File.getContent(path));
+	public function loadConfig(path:String) {
+		if (path != null && FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
+			parseAndValidateConfig(Json.parse(File.getContent(path)));
+		}
+		else addAllChecks();
+	}
+
+	public function parseAndValidateConfig(config:Config, allowExtend:Bool = true) {
+
 		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
+
+		if (allowExtend && !config.extendsConfigPath.isEmpty()) {
+			if (FileSystem.exists(config.extendsConfigPath) && !FileSystem.isDirectory(config.extendsConfigPath)) {
+				parseAndValidateConfig(Json.parse(File.getContent(config.extendsConfigPath)), false);
+			}
+			else failWith('extendsConfig: Failed to load parent configuration file [${config.extendsConfigPath}]');
+		}
 
 		if (config.exclude != null) parseExcludes(config.exclude);
 
-		for (checkConf in config.checks) {
-			var check = createCheck(checkConf);
-			if (check != null) setCheckProperties(check, checkConf, config.defaultSeverity);
+		if (config.checks != null) {
+			for (checkConf in config.checks) {
+				var check = createCheck(checkConf);
+				if (check != null) setCheckProperties(check, checkConf, config.defaultSeverity);
+			}
 		}
 
 		if (config.baseDefines != null) {
@@ -144,10 +159,9 @@ class Main {
 		validateCheckerThreads(config.numberOfCheckerThreads);
 	}
 
-	function loadExcludeConfig(path:String) {
+	public function loadExcludeConfig(path:String) {
 		var config = Json.parse(File.getContent(path));
 		parseExcludes(config);
-		start();
 	}
 
 	function parseExcludes(config:ExcludeConfig) {
@@ -321,6 +335,7 @@ class Main {
 	function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
+			extendsConfigPath: "",
 			numberOfCheckerThreads: 5,
 			baseDefines: [],
 			defineCombinations: [],

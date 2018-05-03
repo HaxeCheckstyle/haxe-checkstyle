@@ -3,6 +3,7 @@ package checkstyle;
 import checkstyle.CheckMessage.SeverityLevel;
 
 typedef Config = {
+	@:optional var extendsConfigPath:String;
 	@:optional var defaultSeverity:SeverityLevel;
 	// defines that are always added
 	@:optional var baseDefines:Array<String>;
