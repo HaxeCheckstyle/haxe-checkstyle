@@ -13,4 +13,8 @@ class StringUtils {
 		var regex:EReg = ~/(^|[^$])\$(\{|[a-zA-Z0-9_]+)/;
 		return regex.match(s);
 	}
+
+	public static function isEmpty(s:String):Bool {
+		return (s == null) || (s.length <= 0);
+	}
 }

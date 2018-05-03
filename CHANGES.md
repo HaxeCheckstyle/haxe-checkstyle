@@ -1,4 +1,5 @@
 ## dev branch / next version (2.x.x)
+- Added `extendsConfigPath` field to config files, to allow one level of extension, fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401)
 
 ## version 2.2.2
 
