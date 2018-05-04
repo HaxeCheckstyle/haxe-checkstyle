@@ -45,12 +45,14 @@ class Main {
 	var numberOfCheckerThreads:Int;
 	var overrideCheckerThreads:Int;
 	var disableThreads:Bool;
+	var seenConfigPaths:Array<String>;
 
 	function new() {
 		info = new ChecksInfo();
 		checker = new Checker();
 		paths = [];
 		allExcludes = [];
+		seenConfigPaths = [];
 		excludesMap = new Map();
 		exitCode = 0;
 		configPath = null;
@@ -123,18 +125,21 @@ class Main {
 
 	public function loadConfig(path:String) {
 		if (path != null && FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
+			seenConfigPaths.push(path);
 			parseAndValidateConfig(Json.parse(File.getContent(path)));
 		}
 		else addAllChecks();
 	}
 
-	public function parseAndValidateConfig(config:Config, allowExtend:Bool = true) {
+	public function parseAndValidateConfig(config:Config) {
 
 		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
 
-		if (allowExtend && !config.extendsConfigPath.isEmpty()) {
+		if (!config.extendsConfigPath.isEmpty()) {
+			if (seenConfigPaths.contains(config.extendsConfigPath)) failWith("extendsConfig: config file loop detected!");
+			seenConfigPaths.push(config.extendsConfigPath);
 			if (FileSystem.exists(config.extendsConfigPath) && !FileSystem.isDirectory(config.extendsConfigPath)) {
-				parseAndValidateConfig(Json.parse(File.getContent(config.extendsConfigPath)), false);
+				parseAndValidateConfig(Json.parse(File.getContent(config.extendsConfigPath)));
 			}
 			else failWith('extendsConfig: Failed to load parent configuration file [${config.extendsConfigPath}]');
 		}
