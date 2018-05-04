@@ -1,6 +1,6 @@
 package checks.whitespace;
 
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 
 class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckTests> {
@@ -17,6 +17,6 @@ class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckT
 abstract TrailingWhitespaceCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
-		public function test() {} 
+		public function test() {} " + "
 	}";
 }

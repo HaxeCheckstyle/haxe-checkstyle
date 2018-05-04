@@ -259,6 +259,25 @@ class IndentationCheck extends Check {
 	function increaseIndent(lineIndentation:Array<Int>, start:Int, end:Int) {
 		for (i in start...end) lineIndentation[i]++;
 	}
+
+	override public function detectableProperties():DetectableProperties {
+		return [{
+			propertyName: "character",
+			values: ["tab", " ", "  ", "   ", "    ", "     "]
+		},
+		{
+			propertyName: "ignoreConditionals",
+			values: [true, false]
+		},
+		{
+			propertyName: "ignoreComments",
+			values: [true, false]
+		},
+		{
+			propertyName: "wrapPolicy",
+			values: [NONE, EXACT, LARGER]
+		}];
+	}
 }
 
 @:enum

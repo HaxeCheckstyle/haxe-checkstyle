@@ -1,6 +1,5 @@
 package checkstyle.reporter;
 
-import checkstyle.CheckMessage.SeverityLevel;
 import haxe.io.Path;
 import sys.FileSystem;
 import sys.io.File;

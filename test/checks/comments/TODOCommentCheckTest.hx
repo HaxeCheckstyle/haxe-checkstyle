@@ -1,6 +1,6 @@
 package checks.comments;
 
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.checks.comments.TODOCommentCheck;
 
 class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {

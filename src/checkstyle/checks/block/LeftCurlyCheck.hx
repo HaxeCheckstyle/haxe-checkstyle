@@ -193,6 +193,17 @@ class LeftCurlyCheck extends Check {
 			throw "exit";
 		}
 	}
+
+	override public function detectableProperties():DetectableProperties {
+		return [{
+			propertyName: "option",
+			values: [EOL, NL, NLOW]
+		},
+		{
+			propertyName: "ignoreEmptySingleline",
+			values: [true, false]
+		}];
+	}
 }
 
 typedef ParentToken = {

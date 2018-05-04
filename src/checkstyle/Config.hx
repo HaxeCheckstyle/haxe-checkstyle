@@ -1,7 +1,5 @@
 package checkstyle;
 
-import checkstyle.CheckMessage.SeverityLevel;
-
 typedef Config = {
 	@:optional var extendsConfigPath:String;
 	@:optional var defaultSeverity:SeverityLevel;

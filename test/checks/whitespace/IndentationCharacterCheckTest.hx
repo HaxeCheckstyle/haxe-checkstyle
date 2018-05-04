@@ -1,6 +1,6 @@
 package checks.whitespace;
 
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCheckTests> {

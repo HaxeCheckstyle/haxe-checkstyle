@@ -135,6 +135,17 @@ class ConditionalCompilationCheck extends Check {
 		}
 		return -1;
 	}
+
+	override public function detectableProperties():DetectableProperties {
+		return [{
+			propertyName: "policy",
+			values: [START_OF_LINE, ALIGNED]
+		},
+		{
+			propertyName: "allowSingleline",
+			values: [true, false]
+		}];
+	}
 }
 
 @:enum

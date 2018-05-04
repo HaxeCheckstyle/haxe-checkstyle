@@ -6,8 +6,9 @@ import haxe.macro.Expr;
 import haxeparser.Data;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.token.TokenTree;
+import checkstyle.detect.DetectableProperties;
 
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
