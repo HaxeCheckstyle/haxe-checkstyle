@@ -29,10 +29,13 @@ class IndentationCharacterCheck extends LineCheckBase {
 		}
 	}
 
-	override public function detectableProperties():DetectableProperties {
+	override public function detectableInstances():DetectableInstances {
 		return [{
-			propertyName: "character",
-			values: [TAB, SPACE]
+			fixed: [],
+			properties: [{
+				propertyName: "character",
+				values: [SPACE, TAB]
+			}]
 		}];
 	}
 }

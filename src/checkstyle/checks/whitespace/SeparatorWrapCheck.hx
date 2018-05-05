@@ -23,10 +23,13 @@ class SeparatorWrapCheck extends WrapCheckBase {
 		checkTokens(tokenList);
 	}
 
-	override public function detectableProperties():DetectableProperties {
+	override public function detectableInstances():DetectableInstances {
 		return [{
-			propertyName: "option",
-			values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+			}]
 		}];
 	}
 }

@@ -1,5 +1,6 @@
 ## dev branch / next version (2.x.x)
-- Added `extendsConfigPath` field to config files fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
+- New `extendsConfigPath` field to config files fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
+- New experimental command line option `-detect <filename>` to generate a checkstyle configuration file based on a source folder
 
 ## version 2.2.2
 

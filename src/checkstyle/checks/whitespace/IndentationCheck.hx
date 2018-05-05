@@ -4,14 +4,14 @@ package checkstyle.checks.whitespace;
 @desc("Checks correct indentation")
 class IndentationCheck extends Check {
 
-	public var character:String;
+	public var character:IndentationCheckCharacter;
 	public var ignoreConditionals:Bool;
 	public var ignoreComments:Bool;
 	public var wrapPolicy:WrappedIndentationPolicy;
 
 	public function new() {
 		super(TOKEN);
-		character = "tab";
+		character = TAB;
 		ignoreConditionals = false;
 		ignoreComments = true;
 		wrapPolicy = LARGER;
@@ -26,7 +26,7 @@ class IndentationCheck extends Check {
 		correctWrappedIndentation(lineIndentation, wrappedStatements);
 
 		var splitChar:String = character;
-		if (splitChar == "tab") splitChar = "\t";
+		if (splitChar == TAB) splitChar = "\t";
 		for (i in 0...checker.lines.length) {
 			if (isLineSuppressed(i)) continue;
 			var line:String = checker.lines[i];
@@ -260,22 +260,35 @@ class IndentationCheck extends Check {
 		for (i in start...end) lineIndentation[i]++;
 	}
 
-	override public function detectableProperties():DetectableProperties {
+	override public function detectableInstances():DetectableInstances {
 		return [{
-			propertyName: "character",
-			values: ["tab", " ", "  ", "   ", "    ", "     "]
-		},
-		{
-			propertyName: "ignoreConditionals",
-			values: [true, false]
-		},
-		{
-			propertyName: "ignoreComments",
-			values: [true, false]
-		},
-		{
-			propertyName: "wrapPolicy",
-			values: [NONE, EXACT, LARGER]
+			fixed: [],
+			properties: [{
+				propertyName: "character",
+				values: [
+					TAB,
+					EIGHT_SPACES,
+					SEVEN_SPACES,
+					SIX_SPACES,
+					FIVE_SPACES,
+					FOUR_SPACES,
+					THREE_SPACES,
+					TWO_SPACES,
+					ONE_SPACE
+				]
+			},
+			{
+				propertyName: "ignoreConditionals",
+				values: [true, false]
+			},
+			{
+				propertyName: "ignoreComments",
+				values: [true, false]
+			},
+			{
+				propertyName: "wrapPolicy",
+				values: [NONE, LARGER, EXACT]
+			}]
 		}];
 	}
 }
@@ -285,4 +298,17 @@ abstract WrappedIndentationPolicy(String) {
 	var NONE = "none";
 	var EXACT = "exact";
 	var LARGER = "larger";
+}
+
+@:enum
+abstract IndentationCheckCharacter(String) to String {
+	var TAB = "tab";
+	var ONE_SPACE = " ";
+	var TWO_SPACES = "  ";
+	var THREE_SPACES = "   ";
+	var FOUR_SPACES = "    ";
+	var FIVE_SPACES = "     ";
+	var SIX_SPACES = "      ";
+	var SEVEN_SPACES = "       ";
+	var EIGHT_SPACES = "        ";
 }

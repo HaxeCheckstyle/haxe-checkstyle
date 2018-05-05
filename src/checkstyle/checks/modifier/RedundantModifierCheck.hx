@@ -38,4 +38,22 @@ class RedundantModifierCheck extends Check {
 			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "enforcePublicPrivate",
+				values: [true, false]
+			},
+			{
+				propertyName: "enforcePublic",
+				values: [true, false]
+			},
+			{
+				propertyName: "enforcePrivate",
+				values: [true, false]
+			}]
+		}];
+	}
 }

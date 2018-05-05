@@ -160,10 +160,13 @@ class RightCurlyCheck extends Check {
 		}
 	}
 
-	override public function detectableProperties():DetectableProperties {
+	override public function detectableInstances():DetectableInstances {
 		return [{
-			propertyName: "option",
-			values: [SAME, ALONE, ALONE_OR_SINGLELINE]
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [SAME, ALONE_OR_SINGLELINE, ALONE]
+			}]
 		}];
 	}
 }

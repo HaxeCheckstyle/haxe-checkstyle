@@ -4,8 +4,6 @@ package checkstyle.checks;
 import haxe.CallStack;
 #end
 
-import checkstyle.detect.DetectableProperties;
-
 class Check {
 
 	public var severity:SeverityLevel;
@@ -235,7 +233,7 @@ class Check {
 		return false;
 	}
 
-	public function detectableProperties():DetectableProperties {
+	public function detectableInstances():DetectableInstances {
 		return [];
 	}
 }

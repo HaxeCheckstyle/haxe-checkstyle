@@ -1,12 +1,14 @@
 package checkstyle.checks.naming;
 
+import checkstyle.detect.DetectableInstance;
+
 @name("ConstantName")
 @desc("Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.")
 class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	public function new() {
 		super();
-		format = "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$";
+		format = UPPER_CASE;
 	}
 
 	override function checkClassType(decl:TypeDef, d:Definition<ClassFlag, Array<Field>>, pos:Position) {
@@ -40,10 +42,49 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 		matchTypeName("const", f.name, f.pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		var instanceInline:DetectableInstance = {
+			fixed: [{
+				propertyName: "tokens",
+				value: [INLINE]
+			}],
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			},
+			{
+				propertyName: "ignoreExtern",
+				values: [true, false]
+			}]
+		};
+		var instanceNotInline:DetectableInstance = {
+			fixed: [{
+				propertyName: "tokens",
+				value: [NOTINLINE]
+			}],
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			},
+			{
+				propertyName: "ignoreExtern",
+				values: [true, false]
+			}]
+		}
+		return [instanceInline, instanceNotInline];
+	}
 }
 
 @:enum
 abstract ConstantNameCheckToken(String) {
 	var INLINE = "INLINE";
 	var NOTINLINE = "NOTINLINE";
+}
+
+@:enum
+abstract ConstantNameCheckFormt(String) to String {
+	var UPPER_CASE = "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$";
+	var CAMEL_CASE = "^[A-Z]+[a-zA-Z0-9]*$";
+	var LOWER_CASE = "^[a-z][a-zA-Z0-9]*$";
 }

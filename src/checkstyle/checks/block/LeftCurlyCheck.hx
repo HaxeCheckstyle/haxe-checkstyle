@@ -194,14 +194,48 @@ class LeftCurlyCheck extends Check {
 		}
 	}
 
-	override public function detectableProperties():DetectableProperties {
+	override public function detectableInstances():DetectableInstances {
 		return [{
-			propertyName: "option",
-			values: [EOL, NL, NLOW]
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					CLASS_DEF,
+					ENUM_DEF,
+					ABSTRACT_DEF,
+					INTERFACE_DEF,
+					FUNCTION,
+					FOR,
+					IF,
+					WHILE,
+					SWITCH,
+					TRY,
+					CATCH
+				]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [EOL, NLOW, NL]
+			},
+			{
+				propertyName: "ignoreEmptySingleline",
+				values: [true, false]
+			}]
 		},
 		{
-			propertyName: "ignoreEmptySingleline",
-			values: [true, false]
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					TYPEDEF_DEF,
+				]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [EOL, NLOW, NL]
+			},
+			{
+				propertyName: "ignoreEmptySingleline",
+				values: [true, false]
+			}]
 		}];
 	}
 }

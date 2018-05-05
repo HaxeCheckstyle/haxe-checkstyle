@@ -1,6 +1,7 @@
 package checkstyle.detect;
 
 import checkstyle.ChecksInfo;
+import checkstyle.Config;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 import checkstyle.utils.ConfigUtils;
@@ -19,73 +20,94 @@ class DetectCodingStyle {
 
 		var checks:Array<Check> = [];
 
-		// build default check list
 		for (checkInfo in info.checks()) {
 			if (checkInfo.isAlias) continue;
 			var check:Check = info.build(checkInfo.name);
 			checks.push(check);
 		}
 
-		var detectedChecker:Checker = new Checker();
-		for (check in checks) {
-			var result:DetectionResult = iterateOptions(check, fileList);
-			switch (result) {
-				case NO_CHANGE:
-				case CHANGE_DETECTED:
-					check.reset();
-					detectedChecker.addCheck(check);
-			}
-		}
-		if (detectedChecker.checks.length <= 0) return;
+		var detectedChecks:Array<CheckConfig> = [];
+		for (check in checks) detectCheck(check, detectedChecks, fileList);
 
-		ConfigUtils.saveConfig(detectedChecker, fileName);
+		if (detectedChecks.length <= 0) return;
+
+		ConfigUtils.saveCheckConfigList(detectedChecks, fileName);
 	}
 
-	static function iterateOptions(check:Check, fileList:Array<CheckFile>):DetectionResult {
+	static function detectCheck(check:Check, detectedChecks:Array<CheckConfig>, fileList:Array<CheckFile>) {
+		var detectableInstances:DetectableInstances = check.detectableInstances();
+		if (detectableInstances.length <= 0) return;
+		printProgress(check.getModuleName() + ": ");
 
-		var detectableProperties:DetectableProperties = check.detectableProperties();
-		if (detectableProperties.length <= 0) {
+		for (instance in detectableInstances) {
+			for (fixedProp in instance.fixed) {
+				check.configureProperty(fixedProp.propertyName, fixedProp.value);
+			}
+			var checkConfig:CheckConfig = detectPropertyIterations(check, instance.properties, fileList);
+			if (checkConfig != null) detectedChecks.push(checkConfig);
+		}
+	}
+
+	static function detectPropertyIterations(check:Check, detectableProperties:DetectableProperties, fileList:Array<CheckFile>):CheckConfig {
+		var ignored:Bool = true;
+		for (property in detectableProperties) {
+			check.reset();
+			if (detectInFiles(check, property, fileList)) ignored = false;
+		}
+		if (ignored) {
+			printProgress(" ignored", true);
+			return null;
+		}
+		else {
+			printProgress(" ok", true);
+			return ConfigUtils.makeCheckConfig(check);
+		}
+	}
+
+	static function detectInFiles(check:Check, property:DetectablePropertyList, fileList:Array<CheckFile>):Bool {
+		for (file in fileList) {
+			var result:DetectionResult = iterateProperty(check, property, file);
+			switch (result) {
+				case NO_CHANGE:
+				case CHANGE_DETECTED(value):
+					check.configureProperty(property.propertyName, value);
+					return true;
+			}
+		}
+		return false;
+	}
+
+	static function iterateProperty(check:Check, property:DetectablePropertyList, file:CheckFile):DetectionResult {
+		if (property.values.length <= 0) {
 			return NO_CHANGE;
 		}
-		printProgress(check.getModuleName() + ": ");
+		if (property.values.length == 1) {
+			return CHANGE_DETECTED(property.values[0]);
+		}
 
 		var checker:Checker = new Checker();
 		checker.addCheck(check);
-		if (check.severity == IGNORE) check.severity = INFO;
 
-		var hasChanges:Bool = false;
-
-		for (prop in detectableProperties) {
-			var lastCount:Int = -1;
-			var lowestCountValue:Any = null;
-			var changed:Bool = false;
-			for (value in prop.values) {
-				check.configureProperty(prop.propertyName, value);
-				printProgress(".");
-				var count:Int = runCheck(checker, fileList);
-				if (lastCount == -1) {
-					lastCount = count;
-					lowestCountValue = value;
-					continue;
-				}
-				if (count == lastCount) continue;
-				if (count < lastCount) {
-					lastCount = count;
-					lowestCountValue = value;
-				}
-				changed = true;
+		var lastCount:Int = -1;
+		var lowestCountValue:Any = null;
+		var changed:Bool = false;
+		for (value in property.values) {
+			check.configureProperty(property.propertyName, value);
+			printProgress(".");
+			var count:Int = runCheck(checker, [file]);
+			if (lastCount == -1) {
+				lastCount = count;
+				lowestCountValue = value;
+				continue;
 			}
-			if (changed) {
-				check.configureProperty(prop.propertyName, lowestCountValue);
-				hasChanges = true;
-				printProgress("*");
+			if (count == lastCount) continue;
+			if (count < lastCount) {
+				lastCount = count;
+				lowestCountValue = value;
 			}
+			changed = true;
 		}
-		if (hasChanges) {
-			printProgress(" ok", true);
-			return CHANGE_DETECTED;
-		}
-		printProgress(" ignored", true);
+		if (changed) return CHANGE_DETECTED(lowestCountValue);
 		return NO_CHANGE;
 	}
 

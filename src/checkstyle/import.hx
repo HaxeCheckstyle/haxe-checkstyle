@@ -8,7 +8,7 @@ import haxeparser.Data;
 import checkstyle.Checker.LinePos;
 import checkstyle.SeverityLevel;
 import checkstyle.token.TokenTree;
-import checkstyle.detect.DetectableProperties;
+import checkstyle.detect.DetectableInstances;
 
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
