@@ -16,7 +16,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 	@Test
 	public function testCorrectSpaceIndentation() {
 		var check = new IndentationCheck();
-		check.character = "  ";
+		check.character = cast "  ";
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_SPACE_INDENT);
 		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 1, actual: 0");
