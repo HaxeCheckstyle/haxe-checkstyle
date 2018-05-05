@@ -56,7 +56,19 @@ class IndentationCheck extends Check {
 					if (actual >= expected) return;
 			}
 		}
-		log('Indentation mismatch: expected: $expected, actual: $actual', line + 1, 0);
+		var expectedText:String = buildReadableIndentCount(expected);
+		var actualText:String = buildReadableIndentCount(actual);
+		log('Indentation mismatch: expected: $expectedText, actual: $actualText', line + 1, 0);
+	}
+
+	function buildReadableIndentCount(count:Int):String {
+		if (count == 0) return "no indentation";
+		var indent:String = "";
+		for (i in 0...count) {
+			indent += character;
+		}
+		indent = indent.split("tab").join("\\t");
+		return '"$indent"[$count]';
 	}
 
 	function correctWrappedIndentation(lineIndentation:Array<Int>, wrappedStatements:Array<Bool>) {
