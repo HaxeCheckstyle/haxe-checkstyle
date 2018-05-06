@@ -21,4 +21,14 @@ class TrailingWhitespaceCheck extends LineCheckBase {
 			if (re.match(endText)) log("Trailing whitespace", i + 1, line.length);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
+	}
 }

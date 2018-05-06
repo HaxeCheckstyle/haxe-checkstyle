@@ -5,6 +5,7 @@ import checkstyle.Checker;
 import checkstyle.checks.Check;
 
 import haxe.Json;
+import haxe.ds.ArraySort;
 import sys.io.File;
 
 class ConfigUtils {
@@ -24,6 +25,7 @@ class ConfigUtils {
 	public static function saveConfig(checker:Checker, path:String) {
 		var config = getEmptyConfig();
 		for (check in checker.checks) config.checks.push(makeCheckConfig(check));
+		ArraySort.sort(config.checks, checkConfigSort);
 
 		var file = File.write(path, false);
 		file.writeString(Json.stringify(config, null, "\t"));
@@ -33,10 +35,17 @@ class ConfigUtils {
 	public static function saveCheckConfigList(list:Array<CheckConfig>, path:String) {
 		var config = getEmptyConfig();
 		config.checks = list;
+		ArraySort.sort(config.checks, checkConfigSort);
 
 		var file = File.write(path, false);
 		file.writeString(Json.stringify(config, null, "\t"));
 		file.close();
+	}
+
+	public  static function checkConfigSort(a:CheckConfig, b:CheckConfig):Int {
+		if (a.type == b.type) return 0;
+		if (a.type < b.type) return -1;
+		return 1;
 	}
 
 	public static function makeCheckConfig(check:Check):CheckConfig {

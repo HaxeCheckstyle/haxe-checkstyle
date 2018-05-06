@@ -22,4 +22,14 @@ class AvoidStarImportCheck extends Check {
 			logPos('Using the ".*" form of import should be avoided', entry.pos);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
+	}
 }
