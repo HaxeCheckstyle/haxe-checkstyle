@@ -1,7 +1,7 @@
 package checkstyle.checks.type;
 
 @name("Type")
-@desc("Checks of type is specified or not for member variables.")
+@desc("Checks if type is specified or not for member variables.")
 class TypeCheck extends Check {
 
 	public var ignoreEnumAbstractValues:Bool;
@@ -26,5 +26,15 @@ class TypeCheck extends Check {
 
 	function error(name:String, pos:Position) {
 		logPos('Variable "${name}" type not specified', pos);
+	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
 	}
 }

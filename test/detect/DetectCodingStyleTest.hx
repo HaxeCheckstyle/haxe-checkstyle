@@ -7,11 +7,16 @@ import checkstyle.CheckFile;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
+import checkstyle.checks.coding.TraceCheck;
+import checkstyle.checks.comments.TODOCommentCheck;
+import checkstyle.checks.imports.AvoidStarImportCheck;
 import checkstyle.checks.modifier.RedundantModifierCheck;
 import checkstyle.checks.naming.ConstantNameCheck;
+import checkstyle.checks.type.TypeCheck;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 import checkstyle.checks.whitespace.IndentationCheck;
 import checkstyle.checks.whitespace.SeparatorWrapCheck;
+import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 import checkstyle.detect.DetectCodingStyle;
 
 import massive.munit.Assert;
@@ -99,6 +104,41 @@ class DetectCodingStyleTest {
 		Assert.areEqual("ConstantName", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$", props.format);
+	}
+
+	@Test
+	public function testDetectTrace() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TraceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("Trace", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectTODOComment() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TODOCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("TODOComment", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectAvoidStarImport() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new AvoidStarImportCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("AvoidStarImport", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectType() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TypeCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("Type", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectTrailingWhitespace() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TrailingWhitespaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("TrailingWhitespace", detectedChecks[0].type);
 	}
 
 	function buildCheckFile(src:String):CheckFile {

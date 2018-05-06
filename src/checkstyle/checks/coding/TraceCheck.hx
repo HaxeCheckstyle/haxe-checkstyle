@@ -28,4 +28,14 @@ class TraceCheck extends Check {
 			default: false;
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
+	}
 }

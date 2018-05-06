@@ -1,6 +1,7 @@
 ## dev branch / next version (2.x.x)
 - New `extendsConfigPath` field to config files fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
-- New experimental command line option `-detect <filename>` to generate a checkstyle configuration file based on a source folder [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409)
+- New experimental command line option `-detect <filename>` to generate a checkstyle configuration file based on a source folder [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409) + [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
+- Fixed sort order of detected checkstyle configuration [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
 - Refactored indentation check messages [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409)
 
 ## version 2.2.2
