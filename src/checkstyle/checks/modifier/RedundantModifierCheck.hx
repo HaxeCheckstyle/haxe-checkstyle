@@ -18,23 +18,27 @@ class RedundantModifierCheck extends Check {
 	}
 
 	override function actualRun() {
+		var forcePrivate:Bool = enforcePrivate;
+		var forcePublic:Bool = enforcePublic;
 		if (enforcePublicPrivate) {
-			enforcePrivate = true;
-			enforcePublic = true;
+			forcePrivate = true;
+			forcePublic = true;
 		}
-		forEachField(checkField);
+		forEachField(function(f:Field, p:ParentType) {
+			checkField(f, p, forcePrivate, forcePublic);
+		});
 	}
 
-	function checkField(f:Field, p:ParentType) {
+	function checkField(f:Field, p:ParentType, forcePrivate:Bool, forcePublic:Bool) {
 		var isDefaultPrivate = f.isDefaultPrivate(p);
 		var implicitAccess = isDefaultPrivate ? "private" : "public";
 		if (!f.access.contains(APublic) && !f.access.contains(APrivate)) {
-			if ((!isDefaultPrivate && enforcePublic) || (isDefaultPrivate && enforcePrivate)) {
+			if ((!isDefaultPrivate && forcePublic) || (isDefaultPrivate && forcePrivate)) {
 				logPos('Missing "$implicitAccess" keyword for "${f.name}"', f.pos);
 			}
 		}
 
-		if ((!enforcePrivate && isDefaultPrivate && f.access.contains(APrivate)) || (!enforcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
+		if ((!forcePrivate && isDefaultPrivate && f.access.contains(APrivate)) || (!forcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
 			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos);
 		}
 	}
@@ -43,7 +47,7 @@ class RedundantModifierCheck extends Check {
 		return [{
 			fixed: [],
 			properties: [{
-				propertyName: "enforcePublicPrivate",
+				propertyName: "enforcePrivate",
 				values: [true, false]
 			},
 			{
@@ -51,7 +55,7 @@ class RedundantModifierCheck extends Check {
 				values: [true, false]
 			},
 			{
-				propertyName: "enforcePrivate",
+				propertyName: "enforcePublicPrivate",
 				values: [true, false]
 			}]
 		}];

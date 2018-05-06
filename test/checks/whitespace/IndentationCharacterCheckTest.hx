@@ -10,6 +10,7 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCh
 		var check = new IndentationCharacterCheck();
 		check.severity = SeverityLevel.INFO;
 		assertMsg(check, TEST1, "Wrong indentation character (should be tab)");
+		assertMsg(check, SPACE_INDENTATION, "Wrong indentation character (should be tab)");
 	}
 
 	@Test
@@ -25,6 +26,7 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCh
 		check.severity = SeverityLevel.INFO;
 		check.character = SPACE;
 
+		assertNoMsg(check, SPACE_INDENTATION);
 		assertMsg(check, TEST3, "Wrong indentation character (should be space)");
 	}
 
@@ -64,6 +66,8 @@ abstract IndentationCharacterCheckTests(String) to String {
 		var a:Int;
 		public function new() {}
 	}";
+
+	var SPACE_INDENTATION = "class Test {\n  var a:Int;\n}";
 
 	var TEST3 = "
 	class Test {

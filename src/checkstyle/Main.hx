@@ -19,6 +19,7 @@ import haxe.Json;
 import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
+import haxe.io.Path;
 
 class Main {
 
@@ -349,12 +350,15 @@ class Main {
 	}
 
 	function detectCodingStyle(path:String) {
-		DetectCodingStyle.detectCodingStyle(info, buildFileList(), path);
+		var checks:Array<Check> = [];
+		for (checkInfo in info.checks()) {
+			if (checkInfo.isAlias) continue;
+			var check:Check = info.build(checkInfo.name);
+			checks.push(check);
+		}
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle(checks, buildFileList());
+		if (detectedChecks.length > 0) ConfigUtils.saveCheckConfigList(detectedChecks, path);
 		Sys.exit(0);
-	}
-
-	function pathJoin(s:String, t:String):String {
-		return s + "/" + t;
 	}
 
 	function start() {
@@ -403,7 +407,7 @@ class Main {
 		try {
 			if (FileSystem.isDirectory(path) && !isExcludedFromAll(path)) {
 				var nodes = FileSystem.readDirectory(path);
-				for (child in nodes) traverse(pathJoin(path, child), files);
+				for (child in nodes) traverse(Path.join([path, child]), files);
 			}
 			else if (~/(.hx)$/i.match(path) && !isExcludedFromAll(path)) {
 				files.push(path);

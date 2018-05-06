@@ -1,4 +1,5 @@
 import checks.CheckTestCase;
+import detect.DetectCodingStyleTest;
 import misc.ThreadTest;
 import misc.ConfigTest;
 import token.TokenTreeBuilderTest;
@@ -14,6 +15,7 @@ class TestSuite extends massive.munit.TestSuite {
 		CompileTime.importPackage("misc");
 
 		add(ConfigTest);
+		add(DetectCodingStyleTest);
 		add(ThreadTest);
 		add(TokenTreeBuilderTest);
 		add(TokenTreeBuilderParsingTest);

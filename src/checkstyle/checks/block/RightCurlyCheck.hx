@@ -165,7 +165,7 @@ class RightCurlyCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "option",
-				values: [SAME, ALONE_OR_SINGLELINE, ALONE]
+				values: [SAME, ALONE, ALONE_OR_SINGLELINE]
 			}]
 		}];
 	}

@@ -1,43 +1,26 @@
 package checkstyle.detect;
 
-import checkstyle.ChecksInfo;
 import checkstyle.Config;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 import checkstyle.utils.ConfigUtils;
 import checkstyle.reporter.ReporterManager;
 
-#if neko
-import neko.Lib;
-#elseif cpp
-import cpp.Lib;
-#else
-#end
-
 class DetectCodingStyle {
 
-	public static function detectCodingStyle(info:ChecksInfo, fileList:Array<CheckFile>, fileName:String) {
-
-		var checks:Array<Check> = [];
-
-		for (checkInfo in info.checks()) {
-			if (checkInfo.isAlias) continue;
-			var check:Check = info.build(checkInfo.name);
-			checks.push(check);
-		}
-
+	public static function detectCodingStyle(checks:Array<Check>, fileList:Array<CheckFile>):Array<CheckConfig> {
 		var detectedChecks:Array<CheckConfig> = [];
 		for (check in checks) detectCheck(check, detectedChecks, fileList);
 
-		if (detectedChecks.length <= 0) return;
-
-		ConfigUtils.saveCheckConfigList(detectedChecks, fileName);
+		return detectedChecks;
 	}
 
 	static function detectCheck(check:Check, detectedChecks:Array<CheckConfig>, fileList:Array<CheckFile>) {
 		var detectableInstances:DetectableInstances = check.detectableInstances();
 		if (detectableInstances.length <= 0) return;
 		printProgress(check.getModuleName() + ": ");
+
+		if (check.severity == IGNORE) check.severity = INFO;
 
 		for (instance in detectableInstances) {
 			for (fixedProp in instance.fixed) {
@@ -87,6 +70,8 @@ class DetectCodingStyle {
 
 		var checker:Checker = new Checker();
 		checker.addCheck(check);
+		checker.loadFileContent(file);
+		if (!checker.createContext(file)) return NO_CHANGE;
 
 		var lastCount:Int = -1;
 		var lowestCountValue:Any = null;
@@ -112,19 +97,18 @@ class DetectCodingStyle {
 	}
 
 	static function runCheck(checker:Checker, fileList:Array<CheckFile>):Int {
-
 		ReporterManager.INSTANCE.clear();
 		var reporter:DetectionReporter = new DetectionReporter();
 		ReporterManager.INSTANCE.addReporter(reporter);
-		checker.process(fileList, null);
-
+		checker.run();
 		return reporter.messageCount;
 	}
 
 	static function printProgress(text:String, nl:Bool = false) {
-		#if (neko || cpp)
-		if (nl) Lib.println(text);
-		else Lib.print(text);
+		#if unittest
+		return;
 		#end
+		if (nl) Sys.println(text);
+		else Sys.print(text);
 	}
 }
