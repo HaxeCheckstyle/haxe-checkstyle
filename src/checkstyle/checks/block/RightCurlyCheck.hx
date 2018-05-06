@@ -159,6 +159,16 @@ class RightCurlyCheck extends Check {
 			throw "exit";
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [SAME, ALONE, ALONE_OR_SINGLELINE]
+			}]
+		}];
+	}
 }
 
 @:enum

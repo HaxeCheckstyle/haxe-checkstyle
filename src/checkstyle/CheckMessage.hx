@@ -2,14 +2,6 @@ package checkstyle;
 
 import checkstyle.checks.Category;
 
-@:enum
-abstract SeverityLevel(String) from String {
-	var INFO = "INFO";
-	var WARNING = "WARNING";
-	var ERROR = "ERROR";
-	var IGNORE = "IGNORE";
-}
-
 typedef CheckMessage = {
 	var fileName:String;
 	var message:String;

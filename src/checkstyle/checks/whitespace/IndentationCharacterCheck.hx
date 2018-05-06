@@ -28,6 +28,16 @@ class IndentationCharacterCheck extends LineCheckBase {
 			if (!re.match(startText)) log('Wrong indentation character (should be ${character})', i + 1, 0);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "character",
+				values: [SPACE, TAB]
+			}]
+		}];
+	}
 }
 
 @:enum

@@ -2,7 +2,6 @@ package checkstyle;
 
 import checkstyle.ChecksInfo;
 import checkstyle.Config;
-import checkstyle.CheckMessage.SeverityLevel;
 import checkstyle.checks.Check;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
@@ -13,11 +12,14 @@ import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.ReporterManager;
 import checkstyle.errors.Error;
+import checkstyle.detect.DetectCodingStyle;
+import checkstyle.utils.ConfigUtils;
 import haxe.CallStack;
 import haxe.Json;
 import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
+import haxe.io.Path;
 
 class Main {
 
@@ -45,6 +47,7 @@ class Main {
 	var numberOfCheckerThreads:Int;
 	var overrideCheckerThreads:Int;
 	var disableThreads:Bool;
+	var detectConfig:String;
 	var seenConfigPaths:Array<String>;
 
 	function new() {
@@ -59,6 +62,7 @@ class Main {
 		excludePath = null;
 		numberOfCheckerThreads = 5;
 		overrideCheckerThreads = 0;
+		detectConfig = null;
 	}
 
 	function run(args:Array<String>) {
@@ -82,6 +86,7 @@ class Main {
 			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
 			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
 			@doc("Do not use checker threads") ["-nothreads"] => function () disableThreads = true,
+			@doc("Try to detect your coding style (experimental)") ["-detect"] => function (path) detectCodingStyle(path),
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -120,6 +125,7 @@ class Main {
 		loadConfig(configPath);
 
 		if (excludePath != null) loadExcludeConfig(excludePath);
+
 		start();
 	}
 
@@ -133,7 +139,7 @@ class Main {
 
 	public function parseAndValidateConfig(config:Config) {
 
-		validateAllowedFields(config, Reflect.fields(getEmptyConfig()), "Config");
+		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
 
 		if (!config.extendsConfigPath.isEmpty()) {
 			if (seenConfigPaths.contains(config.extendsConfigPath)) failWith("extendsConfig: config file loop detected!");
@@ -337,47 +343,22 @@ class Main {
 		Sys.exit(0);
 	}
 
-	function getEmptyConfig():Config {
-		return {
-			defaultSeverity: SeverityLevel.INFO,
-			extendsConfigPath: "",
-			numberOfCheckerThreads: 5,
-			baseDefines: [],
-			defineCombinations: [],
-			checks: [],
-			exclude: {}
-		};
-	}
-
 	function generateDefaultConfig(path) {
 		addAllChecks();
-		var propsNotAllowed:Array<String> = [
-			"moduleName", "severity", "type", "categories",
-			"points", "desc", "currentState", "skipOverStringStart",
-			"commentStartRE", "commentBlockEndRE", "stringStartRE",
-			"stringInterpolatedEndRE", "stringLiteralEndRE"
-		];
-		var config = getEmptyConfig();
-		for (check in checker.checks) {
-			var checkConfig:CheckConfig = {
-				type: check.getModuleName(),
-				props: {}
-			};
-			for (prop in Reflect.fields(check)) {
-				if (propsNotAllowed.contains(prop)) continue;
-				Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
-			}
-			config.checks.push(checkConfig);
-		}
-
-		var file = File.write(path, false);
-		file.writeString(Json.stringify(config, null, "\t"));
-		file.close();
+		ConfigUtils.saveConfig(checker, path);
 		Sys.exit(0);
 	}
 
-	function pathJoin(s:String, t:String):String {
-		return s + "/" + t;
+	function detectCodingStyle(path:String) {
+		var checks:Array<Check> = [];
+		for (checkInfo in info.checks()) {
+			if (checkInfo.isAlias) continue;
+			var check:Check = info.build(checkInfo.name);
+			checks.push(check);
+		}
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle(checks, buildFileList());
+		if (detectedChecks.length > 0) ConfigUtils.saveCheckConfigList(detectedChecks, path);
+		Sys.exit(0);
 	}
 
 	function start() {
@@ -386,15 +367,10 @@ class Main {
 			Sys.exit(0);
 		}
 
-		var files:Array<String> = [];
-		for (path in paths) traverse(path, files);
-		files.sortStrings();
+		var toProcess:Array<CheckFile> = buildFileList();
 
-		var i:Int = 0;
-		var toProcess:Array<CheckFile> = [for (file in files) { name:file, content:null, index:i++ }];
-
-		ReporterManager.INSTANCE.addReporter(createReporter(files.length));
-		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(files.length));
+		ReporterManager.INSTANCE.addReporter(createReporter(toProcess.length));
+		if (SHOW_PROGRESS) ReporterManager.INSTANCE.addReporter(new ProgressReporter(toProcess.length));
 		if (EXIT_CODE) ReporterManager.INSTANCE.addReporter(new ExitCodeReporter());
 
 		#if (neko || cpp)
@@ -418,11 +394,20 @@ class Main {
 		#end
 	}
 
+	function buildFileList():Array<CheckFile> {
+		var files:Array<String> = [];
+		for (path in paths) traverse(path, files);
+		files.sortStrings();
+
+		var i:Int = 0;
+		return [for (file in files) { name:file, content:null, index:i++ }];
+	}
+
 	function traverse(path:String, files:Array<String>) {
 		try {
 			if (FileSystem.isDirectory(path) && !isExcludedFromAll(path)) {
 				var nodes = FileSystem.readDirectory(path);
-				for (child in nodes) traverse(pathJoin(path, child), files);
+				for (child in nodes) traverse(Path.join([path, child]), files);
 			}
 			else if (~/(.hx)$/i.match(path) && !isExcludedFromAll(path)) {
 				files.push(path);

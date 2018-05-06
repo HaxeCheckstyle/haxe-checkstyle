@@ -1,6 +1,6 @@
 package checks.whitespace;
 
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.IndentationCheck;
 
 class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
@@ -10,16 +10,16 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_TAB_INDENT);
-		assertMsg(check, CORRECT_SPACE_INDENT, "Indentation mismatch: expected: 1, actual: 0");
+		assertMsg(check, CORRECT_SPACE_INDENT, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
 	}
 
 	@Test
 	public function testCorrectSpaceIndentation() {
 		var check = new IndentationCheck();
-		check.character = "  ";
+		check.character = cast "  ";
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_SPACE_INDENT);
-		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 1, actual: 0");
+		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: "  "[1], actual: no indentation');
 	}
 
 	@Test
@@ -27,7 +27,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
 
-		assertMsg(check, WRONG_CONDITIONAL, "Indentation mismatch: expected: 1, actual: 0");
+		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
 		check.ignoreConditionals = true;
 		assertNoMsg(check, WRONG_CONDITIONAL);
 		assertNoMsg(check, CORRECT_TAB_INDENT);
@@ -39,7 +39,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.severity = SeverityLevel.INFO;
 		check.ignoreComments = false;
 		assertNoMsg(check, CORRECT_COMMENTS);
-		assertMsg(check, CORRECT_TAB_INDENT, "Indentation mismatch: expected: 0, actual: 1");
+		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: no indentation, actual: "\\t"[1]');
 	}
 
 	@Test
@@ -49,16 +49,16 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, LARGER_WRAPPED_PARAMS);
 		assertNoMsg(check, EXACT_WRAPPED_PARAMS);
 		assertNoMsg(check, WRAPPED_STRING);
-		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
 		check.wrapPolicy = EXACT;
 		assertNoMsg(check, WRAPPED_STRING);
-		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 6");
-		assertMsg(check, NONE_WRAPPED_PARAMS, "Indentation mismatch: expected: 2, actual: 1");
+		assertMsg(check, LARGER_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]');
+		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
 
 		check.wrapPolicy = NONE;
 		assertNoMsg(check, NONE_WRAPPED_PARAMS);
-		assertMsg(check, LARGER_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 6");
-		assertMsg(check, EXACT_WRAPPED_PARAMS, "Indentation mismatch: expected: 1, actual: 2");
+		assertMsg(check, LARGER_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t\\t\\t\\t\\t"[6]');
+		assertMsg(check, EXACT_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]');
 	}
 }
 

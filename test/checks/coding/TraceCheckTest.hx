@@ -1,6 +1,6 @@
 package checks.coding;
 
-import checkstyle.CheckMessage.SeverityLevel;
+import checkstyle.SeverityLevel;
 import checkstyle.checks.coding.TraceCheck;
 
 class TraceCheckTest extends CheckTestCase<TraceCheckTests> {

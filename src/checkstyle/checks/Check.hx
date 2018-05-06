@@ -232,6 +232,10 @@ class Check {
 		}
 		return false;
 	}
+
+	public function detectableInstances():DetectableInstances {
+		return [];
+	}
 }
 
 enum CheckType {

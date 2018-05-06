@@ -135,6 +135,20 @@ class ConditionalCompilationCheck extends Check {
 		}
 		return -1;
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "policy",
+				values: [START_OF_LINE, ALIGNED]
+			},
+			{
+				propertyName: "allowSingleline",
+				values: [true, false]
+			}]
+		}];
+	}
 }
 
 @:enum

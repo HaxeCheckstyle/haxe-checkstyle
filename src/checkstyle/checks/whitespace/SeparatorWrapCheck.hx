@@ -1,5 +1,7 @@
 package checkstyle.checks.whitespace;
 
+import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
+
 @name("SeparatorWrap")
 @desc("Checks line wrapping with separators.")
 class SeparatorWrapCheck extends WrapCheckBase {
@@ -19,5 +21,15 @@ class SeparatorWrapCheck extends WrapCheckBase {
 
 		if (tokenList.length <= 0) return;
 		checkTokens(tokenList);
+	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+			}]
+		}];
 	}
 }
