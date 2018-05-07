@@ -140,7 +140,8 @@
 				"character": "tab",
 				"wrapPolicy": "larger",
 				"ignoreComments": true,
-				"ignoreConditionals": false
+				"ignoreConditionals": false,
+				"conditionalPolicy": "aligned"
 			},
 			"type": "Indentation"
 		},

@@ -31,6 +31,24 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.ignoreConditionals = true;
 		assertNoMsg(check, WRONG_CONDITIONAL);
 		assertNoMsg(check, CORRECT_TAB_INDENT);
+		check.ignoreConditionals = false;
+
+		check.conditionalPolicy = IGNORE;
+		assertNoMsg(check, WRONG_CONDITIONAL);
+		assertNoMsg(check, CORRECT_TAB_INDENT);
+
+		check.conditionalPolicy = FIXED_ZERO;
+		assertNoMsg(check, WRONG_CONDITIONAL);
+		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]');
+
+		check.conditionalPolicy = ALIGNED;
+		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertNoMsg(check, CORRECT_TAB_INDENT);
+
+		check.conditionalPolicy = ALIGNED_INCREASE;
+		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertNoMsg(check, CONDITIONAL_INCREASE);
+		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: "\\t\\t\\t\\t\\t"[5], actual: "\\t\\t\\t\\t"[4]');
 	}
 
 	@Test
@@ -205,6 +223,14 @@ class Test {
 #if php
 	var a:Int;
 #end
+	public function new() {}
+}";
+
+	var CONDITIONAL_INCREASE = "
+class Test {
+	#if php
+		var a:Int;
+	#end
 	public function new() {}
 }";
 

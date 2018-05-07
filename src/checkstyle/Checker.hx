@@ -124,7 +124,9 @@ class Checker {
 	}
 
 	function makeASTs() {
-		asts = [makeAST(baseDefines)];
+		asts = [];
+		var res = makeAST(baseDefines);
+		if (res != null) asts.push(res);
 		for (combination in defineCombinations) {
 			var res = makeAST(combination.concat(baseDefines));
 			if (res != null) asts.push(res);
@@ -195,6 +197,7 @@ class Checker {
 			makePosIndices();
 			makeTokens();
 			makeASTs();
+			if (asts.length <= 0) return false;
 			getTokenTree();
 		}
 		catch (e:Any) {

@@ -6,6 +6,7 @@ class IndentationCheck extends Check {
 
 	public var character:IndentationCheckCharacter;
 	public var ignoreConditionals:Bool;
+	public var conditionalPolicy:ConditionalIndentationPolicy;
 	public var ignoreComments:Bool;
 	public var wrapPolicy:WrappedIndentationPolicy;
 
@@ -15,6 +16,7 @@ class IndentationCheck extends Check {
 		ignoreConditionals = false;
 		ignoreComments = true;
 		wrapPolicy = LARGER;
+		conditionalPolicy = ALIGNED;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
@@ -22,6 +24,9 @@ class IndentationCheck extends Check {
 		var lineIndentation:Array<Int> = calcLineIndentation();
 		var wrappedStatements:Array<Bool> = calcWrapStatements();
 		var tolerateViolations:Array<Bool> = calcIgnoreLineIndentation();
+
+		var ignoreCond:Bool = ignoreConditionals;
+		if (conditionalPolicy == IGNORE) ignoreCond = true;
 
 		correctWrappedIndentation(lineIndentation, wrappedStatements);
 
@@ -34,7 +39,7 @@ class IndentationCheck extends Check {
 			// skip empty lines
 			if (~/^\s*$/.match(line)) continue;
 			// skip conditionals
-			if (ignoreConditionals && ~/^\s*#/.match(line)) continue;
+			if (ignoreCond && ~/^\s*#/.match(line)) continue;
 
 			var e = ~/^(\s*)/;
 			e.match(line);
@@ -87,17 +92,6 @@ class IndentationCheck extends Check {
 				lineIndentation[i]++;
 			}
 		}
-		var currentIndent:Int = 0;
-		for (i in 0...lineIndentation.length) {
-			var newIndent = lineIndentation[i];
-			if (newIndent == currentIndent) continue;
-			if (newIndent > currentIndent) {
-				currentIndent++;
-				lineIndentation[i] = currentIndent;
-				continue;
-			}
-			currentIndent = newIndent;
-		}
 	}
 
 	function calcLineIndentation():Array<Int> {
@@ -106,6 +100,11 @@ class IndentationCheck extends Check {
 		var searchFor:Array<TokenDef> = [
 			BrOpen,
 			BkOpen,
+			Sharp("if"),
+			Sharp("else"),
+			Sharp("elseif"),
+			Sharp("end"),
+			Sharp("error"),
 			Kwd(KwdIf),
 			Kwd(KwdElse),
 			Kwd(KwdFor),
@@ -138,6 +137,8 @@ class IndentationCheck extends Check {
 					// getter/setter 'default' has no childs
 					if (child == null) continue;
 					increaseRangeIndent(child.getPos(), lineIndentation);
+				case Sharp(_):
+					calcLineIndentationSharp(token, lineIndentation);
 				default:
 			}
 		}
@@ -157,6 +158,39 @@ class IndentationCheck extends Check {
 				var child:TokenTree = token.getFirstChild();
 				if (child.is(BrOpen)) return;
 				increaseIndentIfNextLine(token, child, lineIndentation);
+			default:
+		}
+	}
+
+	function calcLineIndentationSharp(token:TokenTree, lineIndentation:Array<Int>) {
+
+		var linePos:LinePos = checker.getLinePos(token.pos.min);
+		var line:String = checker.lines[linePos.line];
+		var prefix:String = line.substr(0, linePos.ofs + 1);
+		var isFirst:Bool = ~/^\s*#$/.match(prefix);
+
+		switch (conditionalPolicy) {
+			case IGNORE: return;
+			case FIXED_ZERO:
+				if (!isFirst) return;
+				lineIndentation[linePos.line] = 0;
+				return;
+			case ALIGNED: return;
+			case ALIGNED_INCREASE:
+		}
+
+		switch (token.tok) {
+			case Sharp("if"), Sharp("else"), Sharp("elseif"):
+				for (child in token.children) {
+					switch (child.tok) {
+						case Sharp(_):
+							increaseIndentBetween(token, child, lineIndentation);
+							return;
+						default:
+					}
+				}
+			case Sharp("end"):
+			case Sharp("error"):
 			default:
 		}
 	}
@@ -242,7 +276,10 @@ class IndentationCheck extends Check {
 	}
 
 	function increaseBlockIndent(blockStart:TokenTree, lineIndentation:Array<Int>) {
-		var blockEnd:TokenTree = blockStart.getLastChild();
+		increaseIndentBetween(blockStart, blockStart.getLastChild(), lineIndentation);
+	}
+
+	function increaseIndentBetween(blockStart:TokenTree, blockEnd:TokenTree, lineIndentation:Array<Int>) {
 		var start:Int = checker.getLinePos(blockStart.pos.min).line + 1;
 		var end:Int = checker.getLinePos(blockEnd.pos.min).line;
 		increaseIndent(lineIndentation, start, end);
@@ -290,6 +327,10 @@ class IndentationCheck extends Check {
 				]
 			},
 			{
+				propertyName: "conditionalPolicy",
+				values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
+			},
+			{
 				propertyName: "ignoreConditionals",
 				values: [true, false]
 			},
@@ -310,6 +351,14 @@ abstract WrappedIndentationPolicy(String) {
 	var NONE = "none";
 	var EXACT = "exact";
 	var LARGER = "larger";
+}
+
+@:enum
+abstract ConditionalIndentationPolicy(String) {
+	var IGNORE = "ignore";
+	var FIXED_ZERO = "fixed_zero";
+	var ALIGNED = "aligned";
+	var ALIGNED_INCREASE = "aligned_increase";
 }
 
 @:enum
