@@ -18,8 +18,8 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "added tests, improved support for vscode-checkstyle and bugfixes - see CHANGES.md",
-    "version": "2.2.2",
+    "releasenote": "added automatic coding style detection and added ability to extend configuration files - see CHANGES.md",
+    "version": "2.3.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
 
