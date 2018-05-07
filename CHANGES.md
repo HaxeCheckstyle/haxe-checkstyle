@@ -1,5 +1,9 @@
 ## dev branch / next version (2.x.x)
-- New `extendsConfigPath` field to config files fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
+
+
+## version 2.3.0 (2018-05-07)
+
+- New `extendsConfigPath` field to config files, fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
 - New experimental command line option `-detect <filename>` to generate a checkstyle configuration file based on a source folder [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409) + [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
 - Added `conditionalPolicy` to Indentation check [#411](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/411)
 - Fixed sort order of detected checkstyle configuration [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
@@ -7,7 +11,7 @@
 - Improved detection rate for `RightCurlyCheck` [#411](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/411)
 - Refactored indentation check messages [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409)
 
-## version 2.2.2
+## version 2.2.2 (2018-05-02)
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
 - Fixed token tree structure for `Sharp(If)` inside `Kwd(KwdCase)` [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
@@ -24,7 +28,7 @@
 - Removed `.` from default settings in `SeparatorWrapCheck` [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392) + [#403](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/403)
 
-## version 2.2.1
+## version 2.2.1 (2018-04-22)
 
 - New check IndentationCheck [#387](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/387)
 - New CHANGES.md
@@ -34,7 +38,7 @@
 - Updated formula for number of pre-parsed files [#386](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/386)
 - Removed conditional section for unittest [#181](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/181)
 
-## version 2.2.0
+## version 2.2.0 (2018-04-18)
 
 - Added support for Binop(OpIn) [#352](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/352) ([#359](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/359))
 - Added 1 parser and n checker threads ([#374](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/374))
