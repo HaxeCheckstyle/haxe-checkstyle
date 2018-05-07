@@ -44,6 +44,12 @@ haxelib install checkstyle
 haxelib run checkstyle -s src
 ```
 
+### Automatic detection of your coding style (experimental)
+
+```
+haxelib run checkstyle -s src -detect detectedCheckstyle.json
+```
+
 ### Reference
 
 [More information and reference](http://haxecheckstyle.github.io/docs).

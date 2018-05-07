@@ -1,24 +1,27 @@
 ## dev branch / next version (2.x.x)
 - New `extendsConfigPath` field to config files fixes [#401](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/401) ([#407](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/407) + [#408](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/408))
 - New experimental command line option `-detect <filename>` to generate a checkstyle configuration file based on a source folder [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409) + [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
+- Added `conditionalPolicy` to Indentation check
 - Fixed sort order of detected checkstyle configuration [#410](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/410)
+- Fixed null pointer exception when parsing fails on C++
+- Improved detection rate for `RightCurlyCheck`
 - Refactored indentation check messages [#409](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/409)
 
 ## version 2.2.2
 
 - Fixed handling of default setters/getters in indentation check [#391](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/391)
-- Fixed token tree structure for Sharp(If) inside Kwd(KwdCase) [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
+- Fixed token tree structure for `Sharp(If)` inside `Kwd(KwdCase)` [#394](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/394)
 - Fixed comments in function parameters [#395](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/395)
 - Fixed parser errors when handling block and object declarations, fixes [#396](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/396) ([#397](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/397))
-- Fixed BkOpen childs in token tree parser [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
+- Fixed `BkOpen` childs in token tree parser [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
 - Fixed bad offset crash with C++ build on Windows 10 [#398](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/398)
 - Fixed object declaration handling [#399](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/399)
 - Fixed false positives for files with UTF-8 characters when running as vscode-checkstyle [#402](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/402)
 - Fixed comments in typedefs [#404](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/404) + [#405](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/405)
-- Refactored content handling to use Bytes instead of String (should fix [#98](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/98)) [#402](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/402)
-- Added unittests for ParserQueue and CheckerPool [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
+- Refactored content handling to use `Bytes` instead of `String` (should fix [#98](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/98)) [#402](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/402)
+- Added unittests for `ParserQueue` and `CheckerPool` [#393](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/393)
 - Added unittests for TokenTree structure verification [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
-- Removed `.` from default settings in SeparatorWrapCheck [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
+- Removed `.` from default settings in `SeparatorWrapCheck` [#400](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/400)
 - Improved wrapped code detection [#392](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/392) + [#403](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/403)
 
 ## version 2.2.1
@@ -27,7 +30,7 @@
 - New CHANGES.md
 - Added a reset function for checks ([#279](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/279))
 - Added unittest for [#78](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/78)
-- Fixed XMLReporter output after introducing multithreading in 2.2.0 [#389](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/389)
+- Fixed `XMLReporter` output after introducing multithreading in 2.2.0 [#389](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/389)
 - Updated formula for number of pre-parsed files [#386](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/386)
 - Removed conditional section for unittest [#181](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/181)
 
@@ -39,7 +42,7 @@
   * use `-nothreads` to turn off threads and use old behaviour
   * use `numberOfCheckerThreads` in config file to set number of checker threads (see `resources/default-conmfig.json`)
 - Fixed allow same regex logic for "all" excludes, fixes [#361](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/361) ([#362](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/362))
-- Fixed altering position info in RightCurlyCheck ([#367](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/367))
+- Fixed altering position info in `RightCurlyCheck` ([#367](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/367))
 - Fixed multiple metadatas infront of statement ([#369](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/369))
 - Fixed C++ compilation ([#376](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/376))
 - Fixed coverage ([#378](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/378))

@@ -162,10 +162,39 @@ class RightCurlyCheck extends Check {
 
 	override public function detectableInstances():DetectableInstances {
 		return [{
-			fixed: [],
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					CLASS_DEF,
+					ENUM_DEF,
+					ABSTRACT_DEF,
+					TYPEDEF_DEF,
+					INTERFACE_DEF,
+					OBJECT_DECL,
+					FUNCTION,
+					FOR,
+					IF,
+					WHILE,
+					SWITCH,
+					TRY,
+					CATCH
+				]
+			}],
 			properties: [{
 				propertyName: "option",
-				values: [SAME, ALONE, ALONE_OR_SINGLELINE]
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+			}]
+		},
+		{
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					OBJECT_DECL
+				]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
 			}]
 		}];
 	}
