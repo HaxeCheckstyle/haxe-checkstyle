@@ -56,6 +56,12 @@ class WalkTypeNameDef {
 			WalkTypeNameDef.walkTypeNameDef(stream, dot);
 			return;
 		}
+		if (stream.is(Arrow)) {
+			var arrow:TokenTree = stream.consumeTokenDef(Arrow);
+			parent.addChild(arrow);
+			WalkTypeNameDef.walkTypeNameDef(stream, arrow);
+			return;
+		}
 		if (stream.is(Binop(OpLt))) WalkLtGt.walkLtGt(stream, parent);
 		if (stream.is(BkOpen)) WalkArrayAccess.walkArrayAccess(stream, parent);
 		WalkComment.walkComment(stream, parent);

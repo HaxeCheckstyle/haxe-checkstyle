@@ -38,6 +38,7 @@ class RightCurlyCheck extends Check {
 		for (brClose in allBrClose) {
 			if (isPosSuppressed(brClose.pos)) continue;
 			var brOpen:TokenTree = brClose.parent;
+			if ((brOpen == null) || (brOpen.pos == null)) continue;
 			if (filterParentToken(brOpen.parent)) continue;
 			check(brClose, isSingleLine(brOpen.pos.min, brClose.pos.max));
 		}

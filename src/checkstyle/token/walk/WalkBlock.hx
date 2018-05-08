@@ -25,7 +25,6 @@ class WalkBlock {
 						var child:TokenTree = stream.consumeToken();
 						openTok.addChild(child);
 					default: WalkStatement.walkStatement(stream, openTok);
-
 				}
 			}
 			openTok.addChild(stream.consumeTokenDef(BrClose));

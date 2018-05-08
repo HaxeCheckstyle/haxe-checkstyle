@@ -99,9 +99,9 @@ class CheckerThread {
 			return check.run(checker);
 		}
 		catch (e:Any) {
-			ReporterManager.INSTANCE.addCheckError(checker.file, e, check.getModuleName());
-			return [];
+			ErrorUtils.handleException(e, checker.file, check.getModuleName());
 		}
+		return [];
 	}
 
 	function checkForExclude(moduleName:String, checker:Checker):Bool {

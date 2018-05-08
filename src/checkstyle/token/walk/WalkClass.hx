@@ -43,10 +43,19 @@ class WalkClass {
 				case BrClose: break;
 				case Semicolon:
 					parent.addChild(stream.consumeToken());
-				default:
+				case Kwd(KwdPublic), Kwd(KwdPrivate), Kwd(KwdStatic), Kwd(KwdInline), Kwd(KwdMacro), Kwd(KwdOverride), Kwd(KwdDynamic):
 					tempStore.push(stream.consumeToken());
+				case Comment(_), CommentLine(_):
+					tempStore.push(stream.consumeToken());
+				default:
+					WalkStatement.walkStatement(stream, parent);
 			}
 		}
-		for (tok in tempStore) parent.addChild(tok);
+		for (tok in tempStore) {
+			switch (tok.tok) {
+				case Comment(_), CommentLine(_): parent.addChild(tok);
+				default: throw "invalid token tree structure";
+			}
+		}
 	}
 }

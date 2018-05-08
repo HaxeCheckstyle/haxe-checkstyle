@@ -6,19 +6,21 @@ import neko.vm.Mutex;
 import cpp.vm.Mutex;
 #end
 
-import haxe.CallStack;
-
 import checkstyle.CheckMessage;
 
 import checkstyle.checks.Category;
 
 class ReporterManager {
 	public static var INSTANCE:ReporterManager = new ReporterManager();
+	public static var SHOW_PARSE_ERRORS:Bool = false;
 
 	var reporters:Array<IReporter>;
 	var lock:Mutex;
 
 	function new () {
+		#if (debug || unittest)
+		SHOW_PARSE_ERRORS = true;
+		#end
 		clear();
 		lock = new Mutex();
 	}
@@ -51,16 +53,8 @@ class ReporterManager {
 		lock.release();
 	}
 
-	public function addParseError(f:CheckFile, e:Any) {
-		lock.acquire();
-		for (reporter in reporters) {
-			reporter.addMessage(getErrorMessage(e, f.name, "Parsing"));
-			reporter.fileFinish(f);
-		}
-		lock.release();
-	}
-
-	public function addCheckError(f:CheckFile, e:Any, name:String) {
+	public function addError(f:CheckFile, e:Any, name:String) {
+		if (!SHOW_PARSE_ERRORS) return;
 		lock.acquire();
 		for (reporter in reporters) reporter.addMessage(getErrorMessage(e, f.name, "Check " + name));
 		lock.release();
@@ -110,8 +104,8 @@ class ReporterManager {
 			moduleName:"Checker",
 			categories:[Category.STYLE],
 			points:1,
-			desc: "",
-			message:step + " failed: " + e + "\nStacktrace: " + CallStack.toString(CallStack.exceptionStack())
+			desc:"",
+			message:step + " failed: " + e + "\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues"
 		};
 	}
 }
