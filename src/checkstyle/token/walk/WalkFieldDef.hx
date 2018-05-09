@@ -35,10 +35,6 @@ class WalkFieldDef {
 			WalkStatement.walkStatement(stream, name);
 		}
 		switch (stream.token()) {
-			case Arrow:
-				var arrowTok:TokenTree = stream.consumeTokenDef(Arrow);
-				name.addChild(arrowTok);
-				walkFieldDef (stream, arrowTok);
 			case Comma:
 				name.addChild(stream.consumeTokenDef(Comma));
 			case Semicolon:

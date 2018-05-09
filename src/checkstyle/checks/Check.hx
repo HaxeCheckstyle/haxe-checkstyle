@@ -1,9 +1,5 @@
 package checkstyle.checks;
 
-#if debug
-import haxe.CallStack;
-#end
-
 class Check {
 
 	public var severity:SeverityLevel;
@@ -41,13 +37,7 @@ class Check {
 				actualRun();
 			}
 			catch (e:String) {
-				#if debug
-				Sys.println(e);
-				Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-				#end
-				#if unittest
-				throw e;
-				#end
+				ErrorUtils.handleException(e, checker.file, getModuleName());
 			}
 		}
 		return messages;

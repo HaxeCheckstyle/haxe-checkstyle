@@ -24,10 +24,19 @@ class WalkFile {
 				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdEnum), Kwd(KwdTypedef), Kwd(KwdAbstract):
 					WalkType.walkType(stream, parent, tempStore);
 					tempStore = [];
-				default:
+				case PClose, BrClose, BkClose, Semicolon, Comma:
+					parent.addChild(stream.consumeToken());
+				case Kwd(KwdExtern), Kwd(KwdPrivate), Kwd(KwdPublic):
 					tempStore.push(stream.consumeToken());
+				default:
+					WalkBlock.walkBlock(stream, parent);
 			}
 		}
-		for (stored in tempStore) parent.addChild(stored);
+		for (stored in tempStore) {
+			switch (stored.tok) {
+				case Kwd(KwdExtern), Kwd(KwdPrivate), Kwd(KwdPublic), At: throw "invalid token tree structure";
+				default: parent.addChild(stored);
+			}
+		}
 	}
 }

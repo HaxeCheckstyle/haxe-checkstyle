@@ -1,5 +1,7 @@
 package checkstyle.checks.block;
 
+import checkstyle.token.TokenTreeAccessHelper;
+
 @name("EmptyBlock")
 @desc("Checks for empty blocks. The policy to verify is specified using the property `option`.")
 class EmptyBlockCheck extends Check {
@@ -104,8 +106,9 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function checkForEmpty(brOpen:TokenTree) {
-		if (brOpen.children.length > 1) return;
-		var brClose:TokenTree = brOpen.children[0];
+		if ((brOpen.children == null) || (brOpen.children.length > 1)) return;
+		var brClose:TokenTree = TokenTreeAccessHelper.access(brOpen).firstChild().is(BrClose).token;
+		if (brClose == null) return;
 		if (brOpen.pos.max != brClose.pos.min) logPos('Empty block should be written as "{}"', brOpen.pos);
 	}
 }

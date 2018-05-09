@@ -12,6 +12,7 @@ class BlockTest extends CheckTestCase<BlockTests> {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
 		assertNoMsg(check, ISSUE_42);
 		assertNoMsg(check, ISSUE_42_MACRO);
+		assertNoMsg(check, CONDITIONAL_TEST);
 
 		var checkLeft:LeftCurlyCheck = new LeftCurlyCheck();
 		checkLeft.option = NL;
@@ -21,6 +22,7 @@ class BlockTest extends CheckTestCase<BlockTests> {
 		var checkRight:RightCurlyCheck = new RightCurlyCheck();
 		assertNoMsg(checkRight, ISSUE_42);
 		assertNoMsg(checkRight, ISSUE_42_MACRO);
+		assertNoMsg(checkRight, CONDITIONAL_TEST);
 	}
 
 	@Test
@@ -72,6 +74,28 @@ abstract BlockTests(String) to String {
 				while (true)
 					trace('');
 			}
+		}
+	}";
+
+	var CONDITIONAL_TEST = "
+	abstractAndClass Test {
+		#if false
+		function build() {
+		#else
+		function build2() {
+		#end
+		}
+
+		function test() {
+			#if debug
+			try {
+			#end
+
+			#if debug
+			catch(e) {
+				// nothing
+			}
+			#end
 		}
 	}";
 }

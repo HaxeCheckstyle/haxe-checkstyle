@@ -82,11 +82,13 @@ class Main {
 			@doc("List all available checks and exit") ["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters and exit") ["--list-reporters"] => function() listReporters(),
 			@doc("Generate a default config and exit") ["--default-config"] => function(path) generateDefaultConfig(path),
-			@doc("To omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
+			@doc("Omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
 			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
 			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
 			@doc("Do not use checker threads") ["-nothreads"] => function () disableThreads = true,
 			@doc("Try to detect your coding style (experimental)") ["-detect"] => function (path) detectCodingStyle(path),
+			@doc("Adds error messages for files that checkstyle fails to parse") ["-show-parser-errors"] => function ()
+				ReporterManager.SHOW_PARSE_ERRORS = true,
 			@doc("Show report [DEPRECATED]") ["-report"] => function() Sys.println("\n-report is no longer needed."),
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
@@ -117,15 +119,12 @@ class Main {
 		if (configPath == null && FileSystem.exists(DEFAULT_CONFIG) && !FileSystem.isDirectory(DEFAULT_CONFIG)) {
 			configPath = DEFAULT_CONFIG;
 		}
-
 		if (excludePath == null && FileSystem.exists(DEFAULT_EXCLUDE_CONFIG) && !FileSystem.isDirectory(DEFAULT_EXCLUDE_CONFIG)) {
 			excludePath = DEFAULT_EXCLUDE_CONFIG;
 		}
 
 		loadConfig(configPath);
-
 		if (excludePath != null) loadExcludeConfig(excludePath);
-
 		start();
 	}
 

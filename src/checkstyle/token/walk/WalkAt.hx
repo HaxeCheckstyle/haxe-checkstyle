@@ -42,4 +42,16 @@ class WalkAt {
 		if (stream.is(POpen)) WalkPOpen.walkPOpen(stream, name);
 		return atTok;
 	}
+
+	public static function walkAts(stream:TokenStream):Array<TokenTree> {
+		var tempStore:Array<TokenTree> = [];
+		var progress:TokenStreamProgress = new TokenStreamProgress(stream);
+		while (progress.streamHasChanged()) {
+			switch (stream.token()) {
+				case At: tempStore.push(WalkAt.walkAt(stream));
+				default:
+			}
+		}
+		return tempStore;
+	}
 }

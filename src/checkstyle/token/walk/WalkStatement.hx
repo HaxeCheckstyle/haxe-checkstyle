@@ -8,7 +8,6 @@ class WalkStatement {
 		var wantMore:Bool = true;
 
 		while (stream.is(At)) tempStore.push(WalkAt.walkAt(stream));
-
 		switch (stream.token()) {
 			case Binop(OpSub):
 				WalkBinopSub.walkBinopSub(stream, parent);
@@ -85,6 +84,14 @@ class WalkStatement {
 				}
 				var dblDotTok:TokenTree = stream.consumeToken();
 				parent.addChild(dblDotTok);
+				if (stream.is(Kwd(KwdNew))) {
+					WalkNew.walkNew(stream, dblDotTok);
+					return;
+				}
+				if (stream.is(Kwd(KwdFunction))) {
+					WalkFunction.walkFunction(stream, dblDotTok, WalkAt.walkAts(stream));
+					return;
+				}
 				WalkTypeNameDef.walkTypeNameDef(stream, dblDotTok);
 				if (stream.is(Binop(OpAssign))) {
 					walkStatement(stream, parent);
@@ -125,12 +132,6 @@ class WalkStatement {
 				WalkFor.walkFor(stream, parent);
 			case Kwd(KwdFunction):
 				WalkFunction.walkFunction(stream, parent, []);
-			case Kwd(KwdPackage), Kwd(KwdImport), Kwd(KwdUsing):
-				WalkPackageImport.walkPackageImport(stream, parent);
-			case Kwd(KwdExtends):
-				WalkExtends.walkExtends(stream, parent);
-			case Kwd(KwdImplements):
-				WalkImplements.walkImplements(stream, parent);
 			case Kwd(KwdClass):
 				WalkClass.walkClass(stream, parent, []);
 			case Kwd(KwdMacro), Kwd(KwdReturn):

@@ -20,6 +20,7 @@ class ReturnCountCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var functions = root.filter([Kwd(KwdFunction)], ALL);
 		for (fn in functions) {
+			if (fn.children == null) continue;
 			switch (fn.getFirstChild().tok) {
 				case Const(CIdent(name)):
 					if (ignoreFormatRE.match(name)) continue;

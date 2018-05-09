@@ -1,6 +1,5 @@
 package checkstyle;
 
-import haxe.CallStack;
 import haxeparser.HaxeParser;
 import haxeparser.HaxeLexer;
 import sys.io.File;
@@ -113,13 +112,7 @@ class Checker {
 			}
 		}
 		catch (e:Any) {
-			#if debug
-			Sys.println(e);
-			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-			#end
-			#if unittest
-			throw e;
-			#end
+			ErrorUtils.handleException(e, file, "makeTokens");
 		}
 	}
 
@@ -147,13 +140,7 @@ class Checker {
 			return parser.parse();
 		}
 		catch (e:Any) {
-			#if debug
-			Sys.println(e);
-			Sys.println("Stacktrace: " + CallStack.toString(CallStack.exceptionStack()));
-			#end
-			#if unittest
-			throw e;
-			#end
+			ErrorUtils.handleException(e, file, "makeAST [" + defines.join(",") + "]");
 		}
 		return null;
 	}
@@ -201,7 +188,7 @@ class Checker {
 			getTokenTree();
 		}
 		catch (e:Any) {
-			ReporterManager.INSTANCE.addParseError(file, e);
+			ErrorUtils.handleException(e, file, "createContext");
 			return false;
 		}
 		return true;
@@ -233,7 +220,7 @@ class Checker {
 			return check.run(this);
 		}
 		catch (e:Any) {
-			ReporterManager.INSTANCE.addCheckError(file, e, check.getModuleName());
+			ErrorUtils.handleException(e, file, check.getModuleName());
 			return [];
 		}
 	}

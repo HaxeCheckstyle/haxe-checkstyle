@@ -16,5 +16,8 @@ class WalkNew {
 			}
 		}
 		WalkPOpen.walkPOpen(stream, name);
+		if (stream.is(Dot)) {
+			WalkStatement.walkStatement(stream, name);
+		}
 	}
 }
