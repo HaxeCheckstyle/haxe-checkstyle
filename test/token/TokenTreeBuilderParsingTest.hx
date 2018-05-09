@@ -467,6 +467,8 @@ abstract TokenTreeBuilderParsingTests(String) to String {
 			checkInfos[names[i]] = {
 				name: names[i],
 				clazz: cl,
+				test: new Value(1),
+				test2: function() { return 1 },
 				isAlias: i > 0,
 				description: (i == 0) ? desc : desc + ' [DEPRECATED, use ' + names[0] + ' instead]'
 			};

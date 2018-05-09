@@ -47,9 +47,9 @@
 
 - Added support for Binop(OpIn) [#352](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/352) ([#359](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/359))
 - Added 1 parser and n checker threads ([#374](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/374))
-  * use `-checkerthreads n` to change number of checker threads (range:1-15 default: 5)
-  * use `-nothreads` to turn off threads and use old behaviour
-  * use `numberOfCheckerThreads` in config file to set number of checker threads (see `resources/default-conmfig.json`)
+  - use `-checkerthreads n` to change number of checker threads (range:1-15 default: 5)
+  - use `-nothreads` to turn off threads and use old behaviour
+  - use `numberOfCheckerThreads` in config file to set number of checker threads (see `resources/default-conmfig.json`)
 - Fixed allow same regex logic for "all" excludes, fixes [#361](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/361) ([#362](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/362))
 - Fixed altering position info in `RightCurlyCheck` ([#367](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/367))
 - Fixed multiple metadatas infront of statement ([#369](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/369))
