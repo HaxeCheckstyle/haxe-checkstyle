@@ -1,5 +1,7 @@
 package checkstyle.token.walk;
 
+import checkstyle.token.TokenTreeAccessHelper;
+
 class WalkClass {
 
 	public static function walkClass(stream:TokenStream, parent:TokenTree, prefixes:Array<TokenTree>) {
@@ -38,6 +40,7 @@ class WalkClass {
 					tempStore = [];
 				case Sharp(_):
 					WalkSharp.walkSharp(stream, parent, WalkClass.walkClassBody);
+					walkClassContinueAfterSharp(stream, parent);
 				case At:
 					tempStore.push(WalkAt.walkAt(stream));
 				case BrClose: break;
@@ -48,7 +51,7 @@ class WalkClass {
 				case Comment(_), CommentLine(_):
 					tempStore.push(stream.consumeToken());
 				default:
-					WalkStatement.walkStatement(stream, parent);
+					throw "invalid token tree structure";
 			}
 		}
 		for (tok in tempStore) {
@@ -57,5 +60,18 @@ class WalkClass {
 				default: throw "invalid token tree structure";
 			}
 		}
+	}
+
+	static function walkClassContinueAfterSharp(stream:TokenStream, parent:TokenTree) {
+		var brOpen:TokenTreeAccessHelper = TokenTreeAccessHelper
+			.access(parent)
+			.lastChild().is(Sharp("if"))
+			.lastOf(Kwd(KwdFunction))
+			.firstChild()
+			.lastChild()
+			.is(BrOpen);
+		if (brOpen.token == null) return;
+		if (brOpen.lastChild().is(BrClose).token != null) return;
+		WalkBlock.walkBlockContinue(stream, parent);
 	}
 }
