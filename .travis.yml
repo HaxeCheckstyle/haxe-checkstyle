@@ -3,22 +3,22 @@ git:
 
 language: haxe
 haxe:
-  - 3.4.7
-  - development
+	- 3.4.7
+	- development
 install:
-  - haxelib install haxeparser 3.3.0
-  - haxelib install compiletime 2.6.0
-  - haxelib install hxargs 3.0.2
-  - haxelib install mcover 2.1.1
-  - haxelib install munit
+	- haxelib install haxeparser 3.3.0
+	- haxelib install compiletime 2.6.0
+	- haxelib install hxargs 3.0.2
+	- haxelib install mcover 2.1.1
+	- haxelib install munit
 script:
-  - haxe buildAll.hxml
+	- haxe buildAll.hxml
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+	- bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
 dist: trusty
 
 matrix:
-  allow_failures:
-    - haxe: development
+	allow_failures:
+		- haxe: development

@@ -144,7 +144,7 @@ class IndentationCheck extends Check {
 	function calcLineIndentationBkOpen(token:TokenTree, lineIndentation:Array<Int>) {
 		var child:TokenTree = token.getFirstChild();
 		if (child == null) return;
-		if (child.is(BrOpen)) {
+		if ((child.is(BrOpen)) || (child.is(BkOpen))) {
 			// only indent once, if directly next to each other `[{`
 			if (token.pos.min + 1 == child.pos.min) return;
 		}

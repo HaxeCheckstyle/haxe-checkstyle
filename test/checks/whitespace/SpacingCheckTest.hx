@@ -1,7 +1,6 @@
 package checks.whitespace;
 
 import checkstyle.checks.whitespace.SpacingCheck;
-import checkstyle.checks.Directive;
 
 class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 
@@ -14,7 +13,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	@Test
 	public function testIfShouldNotContainSpace() {
 		var check = new SpacingCheck();
-		check.spaceIfCondition = Directive.SHOULD_NOT;
+		check.spaceIfCondition = SHOULD_NOT;
 
 		assertMsg(check, TEST1B, 'Space between "if" and "("');
 		assertNoMsg(check, TEST1A);
@@ -48,7 +47,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	@Test
 	public function testForShouldNotContainSpace() {
 		var check = new SpacingCheck();
-		check.spaceForLoop = Directive.SHOULD_NOT;
+		check.spaceForLoop = SHOULD_NOT;
 
 		assertMsg(check, TEST4B, 'Space between "for" and "("');
 		assertNoMsg(check, TEST4A);
@@ -63,7 +62,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	@Test
 	public function testWhileShouldNotContainSpace() {
 		var check = new SpacingCheck();
-		check.spaceWhileLoop = Directive.SHOULD_NOT;
+		check.spaceWhileLoop = SHOULD_NOT;
 
 		assertMsg(check, TEST5B, 'Space between "while" and "("');
 		assertNoMsg(check, TEST5A);
@@ -78,7 +77,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	@Test
 	public function testSwitchShouldNotContainSpace() {
 		var check = new SpacingCheck();
-		check.spaceSwitchCase = Directive.SHOULD_NOT;
+		check.spaceSwitchCase = SHOULD_NOT;
 
 		assertMsg(check, TEST6B, 'Space between "switch" and "("');
 		assertNoMsg(check, TEST6A);
@@ -93,7 +92,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	@Test
 	public function testCatchShouldNotContainSpace() {
 		var check = new SpacingCheck();
-		check.spaceCatch = Directive.SHOULD_NOT;
+		check.spaceCatch = SHOULD_NOT;
 
 		assertMsg(check, TEST7B, 'Space between "catch" and "("');
 		assertNoMsg(check, TEST7A);
@@ -104,7 +103,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 		var check = new SpacingCheck();
 		assertMsg(check, TEST8, 'No space between "if" and "("');
 
-		check.spaceIfCondition = Directive.SHOULD_NOT;
+		check.spaceIfCondition = SHOULD_NOT;
 		assertMsg(check, TEST8, 'Space between "if" and "("');
 	}
 }

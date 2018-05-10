@@ -114,4 +114,22 @@ class ReturnCheck extends Check {
 		}
 		else logPos('Return type not specified for method "${name}"', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "allowEmptyReturn",
+				values: [true, false]
+			},
+			{
+				propertyName: "enforceReturnTypeForAnonymous",
+				values: [true, false]
+			},
+			{
+				propertyName: "enforceReturnType",
+				values: [true, false]
+			}]
+		}];
+	}
 }

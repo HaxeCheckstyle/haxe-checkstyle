@@ -94,4 +94,37 @@ class EmptyLinesCheck extends LineCheckBase {
 	function logInfo(pos) {
 		log('Too many consecutive empty lines (> ${max})', pos, 0);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [{
+				propertyName: "max",
+				value: 1
+			}],
+			properties: [{
+				propertyName: "allowEmptyLineAfterSingleLineComment",
+				values: [false, true]
+			},
+			{
+				propertyName: "allowEmptyLineAfterMultiLineComment",
+				values: [false, true]
+			},
+			{
+				propertyName: "requireEmptyLineAfterPackage",
+				values: [true, false]
+			},
+			{
+				propertyName: "requireEmptyLineAfterClass",
+				values: [true, false]
+			},
+			{
+				propertyName: "requireEmptyLineAfterInterface",
+				values: [true, false]
+			},
+			{
+				propertyName: "requireEmptyLineAfterAbstract",
+				values: [true, false]
+			}]
+		}];
+	}
 }

@@ -44,4 +44,14 @@ class AnonymousCheck extends Check {
 	function error(name:String, pos:Position) {
 		logPos('Anonymous structure "${name}" found, use "typedef"', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
+	}
 }

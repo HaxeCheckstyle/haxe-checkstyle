@@ -27,4 +27,14 @@ class LineLengthCheck extends Check {
 			}
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 0...7) 8 * 10 + i * 10 * 2]
+			}]
+		}];
+	}
 }
