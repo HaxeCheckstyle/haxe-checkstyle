@@ -354,7 +354,7 @@ class IndentationCheck extends Check {
 			},
 			{
 				propertyName: "wrapPolicy",
-				values: [NONE, LARGER, EXACT]
+				values: [NONE, EXACT, LARGER]
 			}]
 		}];
 	}
