@@ -11,3 +11,7 @@ trim_trailing_whitespace = true
 [*.hx]
 end_of_line = lf
 charset = utf-8
+
+[.travis.yml]
+indent_style = space
+indent_size = 2
