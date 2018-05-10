@@ -29,4 +29,14 @@ class DynamicCheck extends Check {
 	function error(name:String, pos:Position) {
 		logPos('"${name}" type is "Dynamic"', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: ["INFO"]
+			}]
+		}];
+	}
 }

@@ -44,4 +44,22 @@ class MethodCountCheck extends Check {
 			return;
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "maxTotal",
+				values: [for (i in 0...21) (2 + i) * 5]
+			},
+			{
+				propertyName: "maxPrivate",
+				values: [for (i in 0...21) (2 + i) * 5]
+			},
+			{
+				propertyName: "maxPublic",
+				values: [for (i in 0...21) (2 + i) * 5]
+			}]
+		}];
+	}
 }

@@ -61,4 +61,22 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		}
 		return false;
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "dotPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "commaPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "semicolonPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}]
+		}];
+	}
 }

@@ -74,4 +74,18 @@ class MethodLengthCheck extends Check {
 	function warnFunctionLength(len:Int, name:String, pos:Position) {
 		logPos('Method `${name}` length is ${len} lines (max allowed is ${max})', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 0...17) 2 * 10 + i * 5]
+			},
+			{
+				propertyName: "countEmpty",
+				values: [true, false]
+			}]
+		}];
+	}
 }

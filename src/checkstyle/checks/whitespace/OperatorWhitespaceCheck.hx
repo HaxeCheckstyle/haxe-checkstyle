@@ -171,4 +171,50 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	override function violation(tok:TokenTree, policy:String) {
 		logPos('OperatorWhitespace policy "$policy" violated by "$tok"', tok.pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "assignOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "ternaryOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "arithmeticOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "unaryOpPolicy",
+				values: [INNER, NONE, IGNORE]
+			},
+			{
+				propertyName: "compareOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "bitwiseOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "boolOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "intervalOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "arrowPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			},
+			{
+				propertyName: "functionArgPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}]
+		}];
+	}
 }

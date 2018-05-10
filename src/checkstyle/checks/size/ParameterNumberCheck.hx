@@ -35,4 +35,18 @@ class ParameterNumberCheck extends Check {
 	function warnMaxParameter(name:String, pos:Position) {
 		logPos('Too many parameters for function: ${name} (> ${max})', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 4...15) i]
+			},
+			{
+				propertyName: "ignoreOverriddenMethods",
+				values: [true, false]
+			}]
+		}];
+	}
 }

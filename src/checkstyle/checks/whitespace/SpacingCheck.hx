@@ -1,8 +1,6 @@
 package checkstyle.checks.whitespace;
 
 import haxe.macro.Printer;
-import Type.ValueType;
-import checkstyle.checks.Directive;
 
 @name("Spacing")
 @desc("Spacing check on if, for, while, switch, try statements and around operators.")
@@ -10,11 +8,11 @@ class SpacingCheck extends Check {
 
 	public var spaceAroundBinop:Bool;
 	public var noSpaceAroundUnop:Bool;
-	public var spaceIfCondition:Directive;
-	public var spaceForLoop:Directive;
-	public var spaceWhileLoop:Directive;
-	public var spaceSwitchCase:Directive;
-	public var spaceCatch:Directive;
+	public var spaceIfCondition:SpacingPolicy;
+	public var spaceForLoop:SpacingPolicy;
+	public var spaceWhileLoop:SpacingPolicy;
+	public var spaceSwitchCase:SpacingPolicy;
+	public var spaceCatch:SpacingPolicy;
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -28,16 +26,6 @@ class SpacingCheck extends Check {
 		noSpaceAroundUnop = true;
 		ignoreRangeOperator = true;
 		categories = [Category.STYLE, Category.CLARITY];
-	}
-
-	override public function configureProperty(name:String, value:Any) {
-		var currentValue = Reflect.field(this, name);
-		switch (Type.typeof(currentValue)) {
-			case ValueType.TEnum(Directive):
-				Reflect.setField(this, name, DirectiveTools.fromAny(value));
-			case _:
-				super.configureProperty(name, value);
-		}
 	}
 
 	override function actualRun() {
@@ -91,7 +79,7 @@ class SpacingCheck extends Check {
 		});
 	}
 
-	function checkSpaceBetweenExpressions(name:String, e1:TokenTree, e2:TokenTree, directive:Directive) {
+	function checkSpaceBetweenExpressions(name:String, e1:TokenTree, e2:TokenTree, directive:SpacingPolicy) {
 		switch (directive) {
 			case ANY:
 			case SHOULD_NOT:
@@ -116,4 +104,53 @@ class SpacingCheck extends Check {
 	function unopString(uo:Unop):String {
 		return (new Printer()).printUnop(uo);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "spaceIfCondition",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "spaceForLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "spaceWhileLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "spaceWhileLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "spaceSwitchCase",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "spaceCatch",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			},
+			{
+				propertyName: "ignoreRangeOperator",
+				values: [true, false]
+			},
+			{
+				propertyName: "spaceAroundBinop",
+				values: [true, false]
+			},
+			{
+				propertyName: "noSpaceAroundUnop",
+				values: [true, false]
+			}]
+		}];
+	}
+}
+
+@:enum
+abstract SpacingPolicy(String) {
+	var SHOULD = "should";
+	var SHOULD_NOT = "should_not";
+	var ANY = "any";
 }

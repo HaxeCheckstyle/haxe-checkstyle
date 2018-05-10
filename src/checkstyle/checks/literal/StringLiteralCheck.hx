@@ -56,6 +56,20 @@ class StringLiteralCheck extends Check {
 				logPos('String "$s" uses single quotes instead of double quotes', pos);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "policy",
+				values: [DOUBLE_AND_INTERPOLATION, ONLY_SINGLE, ONLY_DOUBLE]
+			},
+			{
+				propertyName: "allowException",
+				values: [false, true]
+			}]
+		}];
+	}
 }
 
 @:enum

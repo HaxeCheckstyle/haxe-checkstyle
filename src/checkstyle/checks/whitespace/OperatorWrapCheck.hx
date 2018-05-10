@@ -1,5 +1,7 @@
 package checkstyle.checks.whitespace;
 
+import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
+
 @name("OperatorWrap")
 @desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {
@@ -94,5 +96,15 @@ class OperatorWrapCheck extends WrapCheckBase {
 
 		if (tokenList.length <= 0) return;
 		checkTokens(tokenList);
+	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+			}]
+		}];
 	}
 }

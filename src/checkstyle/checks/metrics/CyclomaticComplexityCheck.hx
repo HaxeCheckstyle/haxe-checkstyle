@@ -14,8 +14,8 @@ class CyclomaticComplexityCheck extends Check {
 	public function new() {
 		super(AST);
 		thresholds = [
-			{ severity : "WARNING", complexity : DEFAULT_COMPLEXITY_WARNING },
-			{ severity : "ERROR", complexity : DEFAULT_COMPLEXITY_ERROR }
+			{ severity : WARNING, complexity : DEFAULT_COMPLEXITY_WARNING },
+			{ severity : ERROR, complexity : DEFAULT_COMPLEXITY_ERROR }
 		];
 		categories = [Category.COMPLEXITY];
 		points = 13;
@@ -90,6 +90,31 @@ class CyclomaticComplexityCheck extends Check {
 	function notify(method:Target, complexity:Int, risk:Threshold) {
 		logPos('Method "${method.name}" is too complex (score: $complexity).', method.pos, risk.severity);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "thresholds",
+				values: [[
+					{ severity : WARNING, complexity : 6 },
+					{ severity : ERROR, complexity : 16 }
+				],
+				[
+					{ severity : WARNING, complexity : 11 },
+					{ severity : ERROR, complexity : 21 }
+				],
+				[
+					{ severity : WARNING, complexity : 16 },
+					{ severity : ERROR, complexity : 26 }
+				],
+				[
+					{ severity : WARNING, complexity : 21 },
+					{ severity : ERROR, complexity : 31 }
+				]]
+			}]
+		}];
+	}
 }
 
 typedef Target = {
@@ -99,6 +124,6 @@ typedef Target = {
 }
 
 typedef Threshold = {
-	var severity:String;
+	var severity:SeverityLevel;
 	var complexity:Int;
 }
