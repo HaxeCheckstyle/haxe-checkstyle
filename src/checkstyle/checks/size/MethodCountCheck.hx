@@ -24,23 +24,23 @@ class MethodCountCheck extends Check {
 		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdFunction)], FIRST);
 
 		if (acceptableTokens.length > maxTotal) {
-			log('Total number of methods is ${acceptableTokens.length} (max allowed is ${maxTotal})', 0, 0);
+			logPos('Total number of methods is ${acceptableTokens.length} (max allowed is $maxTotal)', acceptableTokens[maxTotal].pos);
 			return;
 		}
 
-		var privateCount = 0;
-		var publicCount = 0;
+		var privateTokens = [];
+		var publicTokens = [];
 		for (token in acceptableTokens) {
-			if (token.filter([Kwd(KwdPublic)], FIRST).length > 0) publicCount++;
-			else privateCount++;
+			if (token.filter([Kwd(KwdPublic)], FIRST).length > 0) publicTokens.push(token);
+			else privateTokens.push(token);
 		}
 
-		if (privateCount > maxPrivate) {
-			log('Number of private methods is ${privateCount} (max allowed is ${maxPrivate})', 0, 0);
+		if (privateTokens.length > maxPrivate) {
+			logPos('Number of private methods is ${privateTokens.length} (max allowed is $maxPrivate)', privateTokens[maxPrivate].pos);
 			return;
 		}
-		if (publicCount > maxPublic) {
-			log('Number of public methods is ${publicCount} (max allowed is ${maxPublic})', 0, 0);
+		if (publicTokens.length > maxPublic) {
+			logPos('Number of public methods is ${publicTokens.length} (max allowed is $maxPublic)', publicTokens[maxPublic].pos);
 			return;
 		}
 	}
@@ -50,15 +50,15 @@ class MethodCountCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "maxTotal",
-				values: [for (i in 0...21) (2 + i) * 5]
+				values: [for (i in 0...21) 10 + i * 5]
 			},
 			{
 				propertyName: "maxPrivate",
-				values: [for (i in 0...21) (2 + i) * 5]
+				values: [for (i in 0...21) 10 + i * 5]
 			},
 			{
 				propertyName: "maxPublic",
-				values: [for (i in 0...21) (2 + i) * 5]
+				values: [for (i in 0...21) 10 + i * 5]
 			}]
 		}];
 	}

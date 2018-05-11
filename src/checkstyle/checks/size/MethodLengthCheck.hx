@@ -80,7 +80,7 @@ class MethodLengthCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "max",
-				values: [for (i in 0...17) 2 * 10 + i * 5]
+				values: [for (i in 0...17) 20 + i * 5]
 			},
 			{
 				propertyName: "countEmpty",
