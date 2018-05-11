@@ -48,6 +48,7 @@ class DetectCodingStyle {
 	}
 
 	static function detectInFiles(check:Check, property:DetectablePropertyList, fileList:Array<CheckFile>):Bool {
+		var detectedValue:Any = null;
 		for (file in fileList) {
 			var result:DetectionResult = iterateProperty(check, property, file);
 			switch (result) {
@@ -55,7 +56,13 @@ class DetectCodingStyle {
 				case CHANGE_DETECTED(value):
 					check.configureProperty(property.propertyName, value);
 					return true;
+				case REDUCED_VALUE_LIST(value):
+					detectedValue = value;
 			}
+		}
+		if (detectedValue != null) {
+			check.configureProperty(property.propertyName, detectedValue);
+			return true;
 		}
 		return false;
 	}
@@ -78,7 +85,6 @@ class DetectCodingStyle {
 		var changed:Bool = false;
 		for (value in property.values) {
 			check.configureProperty(property.propertyName, value);
-			printProgress(".");
 			var count:Int = runCheck(checker, [file]);
 			if (lastCount == -1) {
 				lastCount = count;
@@ -86,13 +92,22 @@ class DetectCodingStyle {
 				continue;
 			}
 			if (count == lastCount) continue;
+			printProgress(".");
 			if (count < lastCount) {
 				lastCount = count;
 				lowestCountValue = value;
 			}
 			changed = true;
 		}
-		if (changed) return CHANGE_DETECTED(lowestCountValue);
+		if (changed) {
+			var index:Int = property.values.indexOf(lowestCountValue);
+			if (index <= 0) return CHANGE_DETECTED(lowestCountValue);
+			property.values = property.values.slice(index);
+			if (property.values.length > 2) {
+				return REDUCED_VALUE_LIST(lowestCountValue);
+			}
+			return CHANGE_DETECTED(lowestCountValue);
+		}
 		return NO_CHANGE;
 	}
 

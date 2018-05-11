@@ -33,7 +33,7 @@ class LineLengthCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "max",
-				values: [for (i in 0...7) 8 * 10 + i * 10 * 2]
+				values: [for (i in 0...7) 80 + i * 20]
 			}]
 		}];
 	}

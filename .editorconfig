@@ -12,6 +12,10 @@ trim_trailing_whitespace = true
 end_of_line = lf
 charset = utf-8
 
-[.travis.yml]
+[*.md]
+indent_style = space
+indent_size = 2
+
+[*.yml]
 indent_style = space
 indent_size = 2
