@@ -30,7 +30,7 @@ class FileLengthCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "max",
-				values: [for (i in 0...7) 800 + i * 200]
+				values: [for (i in 0...10) 400 + i * 200]
 			}]
 		}];
 	}

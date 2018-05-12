@@ -19,7 +19,7 @@ class AvoidStarImportCheck extends Check {
 		for (entry in importEntries) {
 			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], ALL);
 			if (stars.length <= 0) continue;
-			logPos('Using the ".*" form of import should be avoided', entry.pos);
+			logPos('Using the ".*" form of import should be avoided', entry.getPos());
 		}
 	}
 
