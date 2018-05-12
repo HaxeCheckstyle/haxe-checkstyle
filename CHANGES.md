@@ -5,6 +5,7 @@
 - Fixed handling of `Arrow` in type names in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Fixed handling of `Dot` after `KwdNew` in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Fixed line number reported for MethodCount check [#415](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/415)
+- Fixed position info for AvoidStarImport, Trace, UnnecessaryConstructor, UnusedLocalVar and UnusedImport checks [#416](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/416)
 - Improved automatic detection of coding style by not stopping at the first change in number of violations [#415](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/415)
 - Improved handling of file content and `class` parsing in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Refactored handling of internal errors (parsing and checks) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)

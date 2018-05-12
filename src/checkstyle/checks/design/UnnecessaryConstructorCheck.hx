@@ -28,7 +28,7 @@ class UnnecessaryConstructorCheck extends Check {
 			for (token in acceptableTokens) {
 				if (token.filter([Kwd(KwdNew)], FIRST, 2).length > 0) {
 					haveConstructor = true;
-					constructorPos = token.pos;
+					constructorPos = token.getPos();
 					continue;
 				}
 

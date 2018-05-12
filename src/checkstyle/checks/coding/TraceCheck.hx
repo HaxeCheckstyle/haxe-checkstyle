@@ -17,7 +17,7 @@ class TraceCheck extends Check {
 			if (filterTrace(tr.parent)) continue;
 			if (isPosSuppressed(tr.pos)) continue;
 
-			logPos("Trace detected", tr.pos);
+			logPos("Trace detected", tr.getPos());
 		}
 	}
 
