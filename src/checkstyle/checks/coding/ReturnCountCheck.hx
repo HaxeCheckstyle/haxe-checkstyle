@@ -45,4 +45,14 @@ class ReturnCountCheck extends Check {
 			default: GO_DEEPER;
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 2...20) i]
+			}]
+		}];
+	}
 }

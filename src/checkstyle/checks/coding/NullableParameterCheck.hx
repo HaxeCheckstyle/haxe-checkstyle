@@ -39,6 +39,16 @@ class NullableParameterCheck extends Check {
 	function formatArguments(opt:Bool, name:String, nullDefault:Bool):String {
 		return '"' + (opt ? "?" : "") + name + (nullDefault ? " = null" : "") + '"';
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [QUESTION_MARK, NULL_DEFAULT]
+			}]
+		}];
+	}
 }
 
 @:enum

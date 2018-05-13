@@ -50,4 +50,14 @@ class NestedIfDepthCheck extends Check {
 	function warnNestedIfDepth(depth:Int, pos:Position) {
 		logPos('Nested if-else depth is $depth (max allowed is ${max})', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 1...10) i]
+			}]
+		}];
+	}
 }

@@ -30,4 +30,18 @@ class InterfaceCheck extends Check {
 			if (!allowProperties && vars.length > 0) logPos("Properties are not allowed in interfaces", intr.pos);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "allowMarkerInterfaces",
+				values: [true, false]
+			},
+			{
+				propertyName: "allowProperties",
+				values: [true, false]
+			}]
+		}];
+	}
 }

@@ -56,4 +56,14 @@ class NestedTryDepthCheck extends Check {
 	function warnNestedTryDepth(depth:Int, pos:Position) {
 		logPos('Nested try depth is $depth (max allowed is ${max})', pos);
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 1...5) i]
+			}]
+		}];
+	}
 }

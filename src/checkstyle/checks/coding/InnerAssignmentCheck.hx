@@ -105,4 +105,14 @@ class InnerAssignmentCheck extends Check {
 
 		return false;
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "ignoreReturnAssignments",
+				values: [false, true]
+			}]
+		}];
+	}
 }

@@ -8,9 +8,21 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
+import checkstyle.checks.coding.HiddenFieldCheck;
+import checkstyle.checks.coding.InnerAssignmentCheck;
+import checkstyle.checks.coding.NestedForDepthCheck;
+import checkstyle.checks.coding.NestedIfDepthCheck;
+import checkstyle.checks.coding.NestedTryDepthCheck;
+import checkstyle.checks.coding.NullableParameterCheck;
+import checkstyle.checks.coding.ReturnCountCheck;
 import checkstyle.checks.coding.TraceCheck;
+import checkstyle.checks.coding.UnusedLocalVarCheck;
+import checkstyle.checks.design.EmptyPackageCheck;
+import checkstyle.checks.design.InterfaceCheck;
+import checkstyle.checks.design.UnnecessaryConstructorCheck;
 import checkstyle.checks.comments.TODOCommentCheck;
 import checkstyle.checks.imports.AvoidStarImportCheck;
+import checkstyle.checks.imports.UnusedImportCheck;
 import checkstyle.checks.literal.StringLiteralCheck;
 import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 import checkstyle.checks.modifier.RedundantModifierCheck;
@@ -79,10 +91,79 @@ class DetectCodingStyleTest {
 
 	// checkstyle.checks.coding
 	@Test
+	public function testDetectHiddenField() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new HiddenFieldCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("HiddenField", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isFalse(props.ignoreSetter);
+		Assert.isTrue(props.ignoreConstructorParameter);
+	}
+
+	@Test
+	public function testDetectInnerAssignment() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InnerAssignmentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		// ignored not enough data points
+		Assert.areEqual(0, detectedChecks.length);
+	}
+
+	@Test
+	public function testDetectNestedForDepth() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedForDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("NestedForDepth", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(2, props.max);
+	}
+
+	@Test
+	public function testDetectNestedIfDepth() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedIfDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("NestedIfDepth", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(2, props.max);
+	}
+
+	@Test
+	public function testDetectNestedTryDepth() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedTryDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("NestedTryDepth", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(2, props.max);
+	}
+
+	@Test
+	public function testDetectNullableParameter() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NullableParameterCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("NullableParameter", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual("questionMark", props.option);
+	}
+
+	@Test
+	public function testDetectReturnCount() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ReturnCountCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("ReturnCount", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(10, props.max);
+	}
+
+	@Test
 	public function testDetectTrace() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TraceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("Trace", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectUnusedLocalVar() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnusedLocalVarCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("UnusedLocalVar", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.comments
@@ -93,12 +174,46 @@ class DetectCodingStyleTest {
 		Assert.areEqual("TODOComment", detectedChecks[0].type);
 	}
 
+	// checkstyle.checks.design
+	@Test
+	public function testDetectEmptyPackage() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new EmptyPackageCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("EmptyPackage", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isTrue(props.enforceEmptyPackage);
+	}
+
+	@Test
+	public function testDetectInterface() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InterfaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("Interface", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isFalse(props.allowProperties);
+		Assert.isTrue(props.allowMarkerInterfaces);
+	}
+
+	@Test
+	public function testDetectUnnecessaryConstructor() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("UnnecessaryConstructor", detectedChecks[0].type);
+	}
+
 	// checkstyle.checks.imports
 	@Test
 	public function testDetectAvoidStarImport() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new AvoidStarImportCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("AvoidStarImport", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectUnusedImport() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnusedImportCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("UnusedImport", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.literal
@@ -158,8 +273,10 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectLineLength() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new LineLengthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		// ignored not enough data points
-		Assert.areEqual(0, detectedChecks.length);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("LineLength", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(100, props.max);
 	}
 
 	@Test
@@ -172,8 +289,11 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectMethodLength() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new MethodLengthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		// ignored not enough data points
-		Assert.areEqual(0, detectedChecks.length);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("MethodLength", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(35, props.max);
+		Assert.isFalse(props.countEmpty);
 	}
 
 	@Test
@@ -280,7 +400,7 @@ class DetectCodingStyleTest {
 		Assert.areEqual(WhitespacePolicy.IGNORE, props.functionArgPolicy);
 		Assert.areEqual(WhitespacePolicy.IGNORE, props.bitwiseOpPolicy);
 		Assert.areEqual(WhitespacePolicy.AROUND, props.arithmeticOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.compareOpPolicy);
+		Assert.areEqual(WhitespacePolicy.AROUND, props.compareOpPolicy);
 		Assert.areEqual(WhitespacePolicy.IGNORE, props.arrowPolicy);
 	}
 
@@ -301,7 +421,7 @@ class DetectCodingStyleTest {
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("after", props.commaPolicy);
 		Assert.areEqual("after", props.semicolonPolicy);
-		Assert.areEqual("none", props.dotPolicy);
+		Assert.areEqual("before", props.dotPolicy);
 	}
 
 	@Test
@@ -319,12 +439,12 @@ class DetectCodingStyleTest {
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("Spacing", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(SpacingPolicy.ANY, props.spaceIfCondition);
+		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceIfCondition);
 		Assert.isFalse(props.spaceAroundBinop);
-		Assert.areEqual(SpacingPolicy.ANY, props.spaceForLoop);
+		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceForLoop);
 		Assert.isFalse(props.ignoreRangeOperator);
-		Assert.areEqual(SpacingPolicy.ANY, props.spaceWhileLoop);
-		Assert.areEqual(SpacingPolicy.ANY, props.spaceCatch);
+		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceWhileLoop);
+		Assert.areEqual(SpacingPolicy.SHOULD_NOT, props.spaceCatch);
 		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceSwitchCase);
 		Assert.isFalse(props.noSpaceAroundUnop);
 	}
@@ -344,12 +464,14 @@ class DetectCodingStyleTest {
 @:enum
 abstract DetectCodingStyleTests(String) to String {
 	var SAMPLE_CODING_STYLE = "
-package checkstyle.test;
+package;
 
 import checkstyle.checks.Check;
 
 class Test {
 	static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
+	var param1:Int;
+
 	public function new(param1:Int, param2:String) {}
 
 	public function test(param1:Int, param2:String) {
@@ -360,29 +482,22 @@ class Test {
 		];
 		var x = values [ 1 ] +
 			values [ 2 ];
-		#if php
-		// comment
-		doSomething()
-			.withData(data);
-		#end
-
-		#if true doNothing(); #end
 	}
-	function test2(p1:Int, p2:String, p3:String, p4:Int, p5:String, p6:String) {
+	function test2(p1:Int, p2:String, p3:String, p4:Int = 1, ?p5:String, p6:String) {
 		// comment
 	}
 
 	function test3() {
 		switch (value) {
-			case 1:
-			case 2:
-			case 3:
-			case 4:
-			case 5:
-			case 6:
-			case 7:
-			case 8:
-			case 9:
+			case 1: return;
+			case 2: return;
+			case 3: return;
+			case 4: return;
+			case 5: return;
+			case 6: return;
+			case 7: return;
+			case 8: return;
+			case 9: return;
 		}
 		return;
 	}
@@ -392,13 +507,49 @@ class Test {
 	}
 
 	function test5() {
+		if (value == 1) {
+			if (true) {
+				if (false) {
+					doSomething();
+				}
+			}
+		}
+		for (i in items) {
+			for (j in items) {
+				while ((a = b) > 1) {
+					run(i, j);
+				}
+			}
+		}
+		try {
+			try {
+				try {
+					doSomethingRisky();
+				}
+				catch(e) {
+					tryAgain();
+				}
+			}
+			catch(e) {
+				tryAgain();
+			}
+		}
+		catch(e) {
+			giveUp();
+		}
 		return 1;
+	}
+
+	function test6() {
+		if ((a = b) > 0) return;
 	}
 }
 
 interface ITest {
 	public function test();
 }
+
+interface IMarker {}
 
 typedef Test2 =
 {
@@ -407,5 +558,20 @@ typedef Test2 =
 }
 
 typedef Test2 = {}
+
+class Test {
+	public function new() {
+		return b = c;
+	}
+	public function test(param1:Int, param2:String) {
+		#if php
+		// comment
+		doSomething()
+			.withData(data);
+		#end
+
+		#if true doNothing(); #end
+	}
+}
 ";
 }

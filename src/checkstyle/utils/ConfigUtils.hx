@@ -42,9 +42,15 @@ class ConfigUtils {
 		file.close();
 	}
 
-	public  static function checkConfigSort(a:CheckConfig, b:CheckConfig):Int {
+	public static function checkConfigSort(a:CheckConfig, b:CheckConfig):Int {
 		if (a.type == b.type) return 0;
 		if (a.type < b.type) return -1;
+		return 1;
+	}
+
+	public static function checkSort(a:Check, b:Check):Int {
+		if (a.getModuleName() == b.getModuleName()) return 0;
+		if (a.getModuleName() < b.getModuleName()) return -1;
 		return 1;
 	}
 

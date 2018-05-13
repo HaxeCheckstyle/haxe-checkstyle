@@ -97,4 +97,14 @@ class UnusedLocalVarCheck extends Check {
 		}
 		return GO_DEEPER;
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: [SeverityLevel.INFO]
+			}]
+		}];
+	}
 }
