@@ -9,6 +9,7 @@
 - Improved automatic detection of coding style by not stopping at the first change in number of violations [#415](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/415)
 - Improved handling of file content and `class` parsing in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Refactored handling of internal errors (parsing and checks) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
+- Cleanup command line options
 
 ## version 2.3.0 (2018-05-07)
 
