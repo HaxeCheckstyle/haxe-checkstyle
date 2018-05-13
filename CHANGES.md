@@ -1,7 +1,7 @@
 ## dev branch / next version (2.x.x)
 
 - New command line option `-show-parser-errors` to include parser errors into checkstyle results (default: off) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
-- Added more checks for automatic coding style detection [#414](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/414)
+- Added more checks for automatic coding style detection [#414](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/414) + [#417](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/417)
 - Fixed handling of `Arrow` in type names in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Fixed handling of `Dot` after `KwdNew` in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Fixed line number reported for MethodCount check [#415](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/415)
