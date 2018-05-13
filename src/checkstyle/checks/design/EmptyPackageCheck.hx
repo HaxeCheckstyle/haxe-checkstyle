@@ -26,4 +26,14 @@ class EmptyPackageCheck extends Check {
 			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max);
 		}
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "enforceEmptyPackage",
+				values: [true, false]
+			}]
+		}];
+	}
 }

@@ -181,4 +181,14 @@ class UnusedImportCheck extends Check {
 		}
 		return typeName == identName;
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: [SeverityLevel.INFO]
+			}]
+		}];
+	}
 }

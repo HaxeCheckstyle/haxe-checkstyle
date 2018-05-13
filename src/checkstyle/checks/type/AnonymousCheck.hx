@@ -50,7 +50,7 @@ class AnonymousCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "severity",
-				values: ["INFO"]
+				values: [SeverityLevel.INFO]
 			}]
 		}];
 	}

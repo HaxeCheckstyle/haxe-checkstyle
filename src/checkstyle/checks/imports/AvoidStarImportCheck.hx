@@ -28,7 +28,7 @@ class AvoidStarImportCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "severity",
-				values: ["INFO"]
+				values: [SeverityLevel.INFO]
 			}]
 		}];
 	}
