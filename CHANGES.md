@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+## version 2.3.1 (2018-05-16)
+
 - New command line option `-show-parser-errors` to include parser errors into checkstyle results (default: off) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Added more checks for automatic coding style detection [#414](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/414) + [#417](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/417)
 - Fixed handling of `Arrow` in type names in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
@@ -9,7 +11,7 @@
 - Improved automatic detection of coding style by not stopping at the first change in number of violations [#415](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/415)
 - Improved handling of file content and `class` parsing in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Refactored handling of internal errors (parsing and checks) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
-- Cleanup command line options
+- Cleanup command line options [#418](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/418)
 
 ## version 2.3.0 (2018-05-07)
 
