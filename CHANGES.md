@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+- Fixed handling of relative paths when using `extendsConfigPath`
+
 ## version 2.3.1 (2018-05-16)
 
 - New command line option `-show-parser-errors` to include parser errors into checkstyle results (default: off) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)

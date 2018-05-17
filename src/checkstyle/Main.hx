@@ -128,22 +128,30 @@ class Main {
 	}
 
 	public function loadConfig(path:String) {
+		path = getAbsoluteConfigPath(path, Sys.getCwd());
 		if (path != null && FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
 			seenConfigPaths.push(path);
-			parseAndValidateConfig(Json.parse(File.getContent(path)));
+			parseAndValidateConfig(Json.parse(File.getContent(path)), Path.directory(path));
 		}
 		else addAllChecks();
 	}
 
-	public function parseAndValidateConfig(config:Config) {
+	function getAbsoluteConfigPath(path:String, baseFolder:String):String {
+		if (path == null) return null;
+		if (Path.isAbsolute(path)) path;
+		return Path.join ([baseFolder, path]);
+	}
+
+	public function parseAndValidateConfig(config:Config, rootFolder:String) {
 
 		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
 
 		if (!config.extendsConfigPath.isEmpty()) {
-			if (seenConfigPaths.contains(config.extendsConfigPath)) failWith("extendsConfig: config file loop detected!");
-			seenConfigPaths.push(config.extendsConfigPath);
-			if (FileSystem.exists(config.extendsConfigPath) && !FileSystem.isDirectory(config.extendsConfigPath)) {
-				parseAndValidateConfig(Json.parse(File.getContent(config.extendsConfigPath)));
+			var path:String = getAbsoluteConfigPath(config.extendsConfigPath, rootFolder);
+			if (seenConfigPaths.contains(path)) failWith("extendsConfig: config file loop detected!");
+			seenConfigPaths.push(path);
+			if (FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
+				parseAndValidateConfig(Json.parse(File.getContent(path)), Path.directory(path));
 			}
 			else failWith('extendsConfig: Failed to load parent configuration file [${config.extendsConfigPath}]');
 		}

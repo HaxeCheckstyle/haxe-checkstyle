@@ -14,9 +14,11 @@ class ConfigTest {
 		Assert.isNotNull(main.checker.checks);
 		Assert.isTrue(main.checker.checks.length == 0);
 
-		main.parseAndValidateConfig({
-			extendsConfigPath: "checkstyle.json"
-		});
+		main.parseAndValidateConfig(
+			{
+				extendsConfigPath: "checkstyle.json"
+			},
+			"./");
 
 		Assert.isNotNull(main.checker.checks);
 		Assert.isTrue(main.checker.checks.length > 0);
