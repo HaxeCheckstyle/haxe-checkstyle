@@ -103,6 +103,8 @@ class BaseReporter implements IReporter {
 			sb.add(" ");
 		}
 		sb.add(": ");
+		sb.add(m.moduleName);
+		sb.add(" - ");
 		sb.add(BaseReporter.severityString(m.severity));
 		sb.add(": ");
 		sb.add(m.message);
