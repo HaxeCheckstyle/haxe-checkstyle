@@ -1,6 +1,7 @@
 package checkstyle.utils;
 
 import checkstyle.Checker;
+import checkstyle.ChecksInfo.CheckInfo;
 import checkstyle.config.Config;
 import checkstyle.config.CheckConfig;
 import checkstyle.checks.Check;
@@ -52,6 +53,12 @@ class ConfigUtils {
 	public static function checkSort(a:Check, b:Check):Int {
 		if (a.getModuleName() == b.getModuleName()) return 0;
 		if (a.getModuleName() < b.getModuleName()) return -1;
+		return 1;
+	}
+
+	public static function checkInfoSort(a:CheckInfo, b:CheckInfo):Int {
+		if (a.name == b.name) return 0;
+		if (a.name < b.name) return -1;
 		return 1;
 	}
 

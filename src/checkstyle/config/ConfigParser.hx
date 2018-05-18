@@ -202,7 +202,7 @@ class ConfigParser {
 
 	public function getSortedCheckInfos():Array<CheckInfo> {
 		var checks:Array<CheckInfo> = [for (check in info.checks()) check];
-		checks.sort(function(c1:CheckInfo, c2:CheckInfo):Int return (c1.name < c2.name) ? -1 : 1);
+		checks.sort(ConfigUtils.checkInfoSort);
 		return checks;
 	}
 
