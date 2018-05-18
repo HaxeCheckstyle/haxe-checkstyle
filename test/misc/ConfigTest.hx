@@ -2,25 +2,27 @@ package misc;
 
 import massive.munit.Assert;
 
-import checkstyle.Main;
+import checkstyle.config.ConfigParser;
 
 @:access(checkstyle)
 class ConfigTest {
 
 	@Test
 	public function testExtendsConfigPath() {
-		var main:Main = new Main();
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
 
-		Assert.isNotNull(main.checker.checks);
-		Assert.isTrue(main.checker.checks.length == 0);
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
 
-		main.parseAndValidateConfig(
+		configParser.parseAndValidateConfig(
 			{
 				extendsConfigPath: "checkstyle.json"
 			},
 			"./");
 
-		Assert.isNotNull(main.checker.checks);
-		Assert.isTrue(main.checker.checks.length > 0);
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length > 0);
 	}
 }

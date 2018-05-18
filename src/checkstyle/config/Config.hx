@@ -1,4 +1,4 @@
-package checkstyle;
+package checkstyle.config;
 
 typedef Config = {
 	@:optional var extendsConfigPath:String;
@@ -11,10 +11,3 @@ typedef Config = {
 	@:optional var checks:Array<CheckConfig>;
 	@:optional var exclude:ExcludeConfig;
 }
-
-typedef CheckConfig = {
-	var type:String;
-	@:optional var props:{};
-}
-
-typedef ExcludeConfig = {}

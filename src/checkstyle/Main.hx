@@ -1,8 +1,8 @@
 package checkstyle;
 
-import checkstyle.ChecksInfo;
-import checkstyle.Config;
 import checkstyle.checks.Check;
+import checkstyle.config.ConfigParser;
+import checkstyle.config.CheckConfig;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
@@ -11,7 +11,6 @@ import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.ReporterManager;
-import checkstyle.errors.Error;
 import checkstyle.detect.DetectCodingStyle;
 import checkstyle.utils.ConfigUtils;
 import haxe.CallStack;
@@ -37,37 +36,25 @@ class Main {
 	static var SHOW_MISSING_CHECKS:Bool = false;
 	static var exitCode:Int;
 
-	var info:ChecksInfo;
 	var checker:Checker;
-	var paths:Array<String>;
-	var allExcludes:Array<String>;
-	var excludesMap:Map<String, Array<String>>;
 	var configPath:String;
 	var excludePath:String;
-	var numberOfCheckerThreads:Int;
-	var overrideCheckerThreads:Int;
 	var disableThreads:Bool;
 	var detectConfig:String;
-	var seenConfigPaths:Array<String>;
+	var configParser:ConfigParser;
 
 	function new() {
-		info = new ChecksInfo();
-		checker = new Checker();
-		paths = [];
-		allExcludes = [];
-		seenConfigPaths = [];
-		excludesMap = new Map();
 		exitCode = 0;
 		configPath = null;
 		excludePath = null;
-		numberOfCheckerThreads = 5;
-		overrideCheckerThreads = 0;
 		detectConfig = null;
+		configParser = new ConfigParser(failWith);
+		checker = configParser.checker;
 	}
 
 	function run(args:Array<String>) {
 		var argHandler = Args.generate([
-			@doc("Set source path to process (multiple allowed)") ["-s", "--source"] => function(path:String) paths.push(path),
+			@doc("Set source path to process (multiple allowed)") ["-s", "--source"] => function(path:String) configParser.paths.push(path),
 			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
 			@doc("Set exclude file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
 			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
@@ -77,7 +64,7 @@ class Main {
 				TEXT_PATH = path;
 			},
 			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(style:String) STYLE = style,
-			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) overrideCheckerThreads = num,
+			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) configParser.overrideCheckerThreads = num,
 			@doc("Generate a default config and exit") ["-default-config", "--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("Try to detect your coding style (experimental)") ["-detect"] => function (path) detectCodingStyle(path),
 			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
@@ -102,14 +89,14 @@ class Main {
 			var defaultConfig:CodeclimateConfig = Json.parse(File.getContent("/config.json"));
 			if (defaultConfig.include_paths != null && defaultConfig.include_paths.length > 0) {
 				for (s in defaultConfig.include_paths) {
-					if (s != ".codeclimate.yml") paths.push("/code/" + s);
+					if (s != ".codeclimate.yml") configParser.paths.push("/code/" + s);
 				}
 			}
-			else paths.push("/code");
+			else configParser.paths.push("/code");
 
 			if (defaultConfig.config != null) configPath = defaultConfig.config;
 			if (defaultConfig.exclude != null) excludePath = defaultConfig.exclude;
-			if (paths.length > 0) processArgs();
+			if (configParser.paths.length > 0) processArgs();
 		}
 		else processArgs();
 	}
@@ -122,217 +109,14 @@ class Main {
 			excludePath = DEFAULT_EXCLUDE_CONFIG;
 		}
 
-		loadConfig(configPath);
-		if (excludePath != null) loadExcludeConfig(excludePath);
+		configParser.loadConfig(configPath);
+		if (excludePath != null) configParser.loadExcludeConfig(excludePath);
 		start();
 	}
 
-	public function loadConfig(path:String) {
-		path = getAbsoluteConfigPath(path, Sys.getCwd());
-		if (path != null && FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
-			seenConfigPaths.push(path);
-			parseAndValidateConfig(Json.parse(File.getContent(path)), Path.directory(path));
-		}
-		else addAllChecks();
-	}
-
-	function getAbsoluteConfigPath(path:String, baseFolder:String):String {
-		if (path == null) return null;
-		if (Path.isAbsolute(path)) path;
-		return Path.join ([baseFolder, path]);
-	}
-
-	public function parseAndValidateConfig(config:Config, rootFolder:String) {
-
-		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
-
-		if (!config.extendsConfigPath.isEmpty()) {
-			var path:String = getAbsoluteConfigPath(config.extendsConfigPath, rootFolder);
-			if (seenConfigPaths.contains(path)) failWith("extendsConfig: config file loop detected!");
-			seenConfigPaths.push(path);
-			if (FileSystem.exists(path) && !FileSystem.isDirectory(path)) {
-				parseAndValidateConfig(Json.parse(File.getContent(path)), Path.directory(path));
-			}
-			else failWith('extendsConfig: Failed to load parent configuration file [${config.extendsConfigPath}]');
-		}
-
-		if (config.exclude != null) parseExcludes(config.exclude);
-
-		if (config.checks != null) {
-			for (checkConf in config.checks) {
-				var check = createCheck(checkConf);
-				if (check != null) setCheckProperties(check, checkConf, config.defaultSeverity);
-			}
-		}
-
-		if (config.baseDefines != null) {
-			validateDefines(config.baseDefines);
-			checker.baseDefines = config.baseDefines;
-		}
-		if (config.defineCombinations != null) {
-			for (combination in config.defineCombinations) validateDefines(combination);
-			checker.defineCombinations = config.defineCombinations;
-		}
-		validateCheckerThreads(config.numberOfCheckerThreads);
-	}
-
-	public function loadExcludeConfig(path:String) {
-		var config = Json.parse(File.getContent(path));
-		parseExcludes(config);
-	}
-
-	function parseExcludes(config:ExcludeConfig) {
-		var excludes = Reflect.fields(config);
-		var pathType = Reflect.field(config, "path");
-		for (exclude in excludes) {
-			if (exclude == "path") continue;
-			createExcludeMapElement(exclude);
-			var excludeValues:Array<String> = Reflect.field(config, exclude);
-			if (excludeValues == null || excludeValues.length == 0) continue;
-			for (val in excludeValues) updateExcludes(exclude, val, pathType);
-		}
-	}
-
-	function createExcludeMapElement(exclude:String) {
-		if (excludesMap.get(exclude) == null) excludesMap.set(exclude, []);
-	}
-
-	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
-		if (pathType == null) {
-			addToExclude(exclude, val);
-		}
-		else {
-			if (pathType == RELATIVE_TO_SOURCE) {
-				for (path in paths) {
-					addNormalisedPathToExclude(exclude, path + ":" + val);
-				}
-			}
-			else {
-				addNormalisedPathToExclude(exclude, val);
-			}
-		}
-	}
-
-	function addNormalisedPathToExclude(exclude:String, path:String) {
-		var path = normalisePath(path);
-		addToExclude(exclude, path);
-	}
-
-	function normalisePath(path:String):String {
-		var slashes:EReg = ~/[\/\\]/g;
-		path = path.split(".").join(":");
-		path = slashes.replace(path, ":");
-		return path;
-	}
-
-	function addToExclude(exclude:String, value:String) {
-		if (exclude == "all") allExcludes.push(value);
-		else excludesMap.get(exclude).push(value);
-	}
-
-	function createCheck(checkConf:CheckConfig):Check {
-		var check:Check = info.build(checkConf.type);
-		if (check == null) {
-			Sys.stdout().writeString('Unknown check \'${checkConf.type}\'');
-			return null;
-		}
-		checker.addCheck(check);
-		return check;
-	}
-
-	function setCheckProperties(check:Check, checkConf:CheckConfig, defaultSeverity:SeverityLevel) {
-		validateAllowedFields(checkConf, ["type", "props"], check.getModuleName());
-		var props = (checkConf.props == null) ? [] : Reflect.fields(checkConf.props);
-		// use Type.getInstanceFields to make it work in c++ / profiler
-		var checkFields:Array<String> = Type.getInstanceFields(Type.getClass(check));
-		for (prop in props) {
-			var val = Reflect.field(checkConf.props, prop);
-			if (!checkFields.contains(prop)) {
-				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
-			}
-			try {
-				check.configureProperty(prop, val);
-			}
-			catch (e:Any) {
-				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
-				message += (Std.is(e, Error) ? (e:Error).message : Std.string(e));
-				failWith(message);
-			}
-		}
-		if (defaultSeverity != null && !props.contains("severity")) check.severity = defaultSeverity;
-	}
-
-	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
-		for (field in Reflect.fields(object)) {
-			if (!allowedFields.contains(field)) {
-				failWith(messagePrefix + " has unknown field '" + field + "'");
-			}
-		}
-	}
-
-	function validateDefines(defines:Array<String>) {
-		for (define in defines) {
-			if (define.split("=").length > 2) throw "Found a define with more than one = sign: '" + define + "'";
-		}
-	}
-
-	function validateCheckerThreads(checkerThreads:Null<Int>) {
-		if (checkerThreads != null) {
-			numberOfCheckerThreads = checkerThreads;
-		}
-		if (overrideCheckerThreads > 0) numberOfCheckerThreads = overrideCheckerThreads;
-		if (numberOfCheckerThreads <= 0) numberOfCheckerThreads = 5;
-		if (numberOfCheckerThreads > 15) numberOfCheckerThreads = 15;
-	}
-
-	function addAllChecks() {
-		for (check in getSortedCheckInfos()) {
-			if (!check.isAlias) checker.addCheck(info.build(check.name));
-		}
-	}
-
-	function getSortedCheckInfos():Array<CheckInfo> {
-		var checks:Array<CheckInfo> = [for (check in info.checks()) check];
-		checks.sort(function(c1:CheckInfo, c2:CheckInfo):Int return (c1.name < c2.name) ? -1 : 1);
-		return checks;
-	}
-
-	function listChecks() {
-		var count = 0;
-		for (check in getSortedCheckInfos()) {
-			Sys.println(check.name + ":");
-			Sys.println("  " + check.description + "\n");
-			if (~/\[DEPRECATED/.match(check.description)) continue;
-			count++;
-		}
-		Sys.println("Total: " + count + " checks");
-		Sys.exit(0);
-	}
-
-	function getCheckCount():Int {
-		var count = 0;
-		for (check in info.checks()) {
-			if (~/\[DEPRECATED/.match(check.description)) continue;
-			count++;
-		}
-		return count;
-	}
-
-	function getUsedCheckCount():Int {
-		var count = 0;
-		var list:Array<String> = [];
-		for (check in checker.checks) {
-			var name = Type.getClassName(Type.getClass(check));
-			if (list.indexOf(name) >= 0) continue;
-			list.push(name);
-			count++;
-		}
-		return count;
-	}
-
 	function createReporter(numFiles:Int):IReporter {
-		var totalChecks = getCheckCount();
-		var checksUsed = getUsedCheckCount();
+		var totalChecks = configParser.getCheckCount();
+		var checksUsed = configParser.getUsedCheckCount();
 		return switch (REPORT_TYPE) {
 			case "xml": new XMLReporter(numFiles, totalChecks, checksUsed, XML_PATH, STYLE, NO_STYLE);
 			case "json": new JSONReporter(numFiles, totalChecks, checksUsed, JSON_PATH, NO_STYLE);
@@ -340,6 +124,18 @@ class Main {
 			case "codeclimate": new CodeClimateReporter(numFiles, totalChecks, checksUsed, null, NO_STYLE);
 			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
 		}
+	}
+
+	function listChecks() {
+		var count = 0;
+		for (check in configParser.getSortedCheckInfos()) {
+			Sys.println(check.name + ":");
+			Sys.println("  " + check.description + "\n");
+			if (~/\[DEPRECATED/.match(check.description)) continue;
+			count++;
+		}
+		Sys.println("Total: " + count + " checks");
+		Sys.exit(0);
 	}
 
 	function listReporters() {
@@ -350,16 +146,16 @@ class Main {
 	}
 
 	function generateDefaultConfig(path) {
-		addAllChecks();
+		configParser.addAllChecks();
 		ConfigUtils.saveConfig(checker, path);
 		Sys.exit(0);
 	}
 
 	function detectCodingStyle(path:String) {
 		var checks:Array<Check> = [];
-		for (checkInfo in info.checks()) {
+		for (checkInfo in configParser.info.checks()) {
 			if (checkInfo.isAlias) continue;
-			var check:Check = info.build(checkInfo.name);
+			var check:Check = configParser.info.build(checkInfo.name);
 			checks.push(check);
 		}
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle(checks, buildFileList());
@@ -381,28 +177,28 @@ class Main {
 
 		#if (neko || cpp)
 		if (disableThreads) {
-			checker.process(toProcess, excludesMap);
+			checker.process(toProcess, configParser.excludesMap);
 		}
 		else {
 			ReporterManager.INSTANCE.start();
 			var parserQueue:ParserQueue = new ParserQueue(toProcess, checker);
-			var preParseCount:Int = numberOfCheckerThreads * 3;
+			var preParseCount:Int = configParser.numberOfCheckerThreads * 3;
 			if (preParseCount < 15) preParseCount = 15;
 			parserQueue.start(preParseCount);
-			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, excludesMap);
-			checkerPool.start(numberOfCheckerThreads);
+			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, configParser.excludesMap);
+			checkerPool.start(configParser.numberOfCheckerThreads);
 
 			while (!checkerPool.isFinished()) Sys.sleep(0.1);
 			ReporterManager.INSTANCE.finish();
 		}
 		#else
-		checker.process(toProcess, excludesMap);
+		checker.process(toProcess, configParser.excludesMap);
 		#end
 	}
 
 	function buildFileList():Array<CheckFile> {
 		var files:Array<String> = [];
-		for (path in paths) traverse(path, files);
+		for (path in configParser.paths) traverse(path, files);
 		files.sortStrings();
 
 		var i:Int = 0;
@@ -429,11 +225,11 @@ class Main {
 		if (offset > 0) {
 			path = path.substring(0, offset);
 		}
-		if (allExcludes.contains(path)) return true;
+		if (configParser.allExcludes.contains(path)) return true;
 
 		var slashes:EReg = ~/[\/\\]/g;
 		path = slashes.replace(path, ":");
-		for (exclude in allExcludes) {
+		for (exclude in configParser.allExcludes) {
 			var r = new EReg(exclude, "i");
 			if (r.match(path)) return true;
 		}
@@ -457,7 +253,7 @@ class Main {
 		for (check in checker.checks) {
 			configuredChecks.push(check.getModuleName());
 		}
-		for (check in info.checks()) {
+		for (check in configParser.info.checks()) {
 			if (configuredChecks.indexOf(check.name) >= 0) continue;
 			if (~/\[DEPRECATED/.match(check.description)) continue;
 			missingChecks.push(check);
@@ -504,10 +300,4 @@ typedef CodeclimateConfig = {
 	@:optional var include_paths:Array<String>;
 	@:optional var config:String;
 	@:optional var exclude:String;
-}
-
-@:enum
-abstract ExcludePath(String) {
-	var RELATIVE_TO_PROJECT = "RELATIVE_TO_PROJECT";
-	var RELATIVE_TO_SOURCE = "RELATIVE_TO_SOURCE";
 }

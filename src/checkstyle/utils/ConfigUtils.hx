@@ -1,7 +1,8 @@
 package checkstyle.utils;
 
-import checkstyle.Config;
 import checkstyle.Checker;
+import checkstyle.config.Config;
+import checkstyle.config.CheckConfig;
 import checkstyle.checks.Check;
 
 import haxe.Json;
