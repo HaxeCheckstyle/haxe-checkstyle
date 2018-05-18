@@ -2,7 +2,9 @@ package config;
 
 import massive.munit.Assert;
 
+import checkstyle.config.Config;
 import checkstyle.config.ConfigParser;
+import checkstyle.utils.ConfigUtils;
 
 class ConfigParserTest {
 
@@ -80,5 +82,23 @@ class ConfigParserTest {
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
 		Assert.areEqual(66, configParser.getUsedCheckCount());
+	}
+
+	@Test
+	public function testConfig() {
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
+
+		configParser.addAllChecks();
+		var config:Config = ConfigUtils.makeConfigFromChecker(configParser.checker);
+		config.numberOfCheckerThreads = 11;
+
+		configParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
+		configParser.parseAndValidateConfig(config, "");
+		Assert.areEqual(configParser.getCheckCount(), configParser.getUsedCheckCount());
+		Assert.areEqual(11, configParser.numberOfCheckerThreads);
 	}
 }

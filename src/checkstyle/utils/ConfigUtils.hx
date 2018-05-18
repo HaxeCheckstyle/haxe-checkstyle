@@ -25,23 +25,28 @@ class ConfigUtils {
 	}
 
 	public static function saveConfig(checker:Checker, path:String) {
-		var config = getEmptyConfig();
-		for (check in checker.checks) config.checks.push(makeCheckConfig(check));
-		ArraySort.sort(config.checks, checkConfigSort);
-
 		var file = File.write(path, false);
-		file.writeString(Json.stringify(config, null, "\t"));
+		file.writeString(Json.stringify(makeConfigFromChecker(checker), null, "\t"));
 		file.close();
 	}
 
 	public static function saveCheckConfigList(list:Array<CheckConfig>, path:String) {
-		var config = getEmptyConfig();
+		var file = File.write(path, false);
+		file.writeString(Json.stringify(makeConfigFromList(list), null, "\t"));
+		file.close();
+	}
+
+	public static function makeConfigFromChecker(checker:Checker):Config {
+		var list:Array<CheckConfig> = [];
+		for (check in checker.checks) list.push(makeCheckConfig(check));
+		return makeConfigFromList(list);
+	}
+
+	public static function makeConfigFromList(list:Array<CheckConfig>):Config {
+		var config:Config = getEmptyConfig();
 		config.checks = list;
 		ArraySort.sort(config.checks, checkConfigSort);
-
-		var file = File.write(path, false);
-		file.writeString(Json.stringify(config, null, "\t"));
-		file.close();
+		return config;
 	}
 
 	public static function checkConfigSort(a:CheckConfig, b:CheckConfig):Int {
