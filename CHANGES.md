@@ -1,5 +1,9 @@
 ## dev branch / next version (2.x.x)
 
+- Added check's names to text output [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
+- Fixed handling of relative paths when using `extendsConfigPath` [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
+- Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
+
 ## version 2.3.1 (2018-05-16)
 
 - New command line option `-show-parser-errors` to include parser errors into checkstyle results (default: off) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)

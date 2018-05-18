@@ -18,7 +18,7 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "improved automatic coding style detection and error handling - see CHANGES.md",
+    "releasenote": "improved automatic coding style detection and error handling - see CHANGES",
     "version": "2.3.1",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {

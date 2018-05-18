@@ -2,7 +2,7 @@ package detect;
 
 import byte.ByteData;
 
-import checkstyle.Config;
+import checkstyle.config.CheckConfig;
 import checkstyle.CheckFile;
 import checkstyle.SeverityLevel;
 import checkstyle.checks.block.ConditionalCompilationCheck;

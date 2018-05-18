@@ -1,6 +1,6 @@
 package checkstyle.detect;
 
-import checkstyle.Config;
+import checkstyle.config.CheckConfig;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
 import checkstyle.utils.ConfigUtils;

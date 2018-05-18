@@ -1,7 +1,9 @@
 package checkstyle.utils;
 
-import checkstyle.Config;
 import checkstyle.Checker;
+import checkstyle.ChecksInfo.CheckInfo;
+import checkstyle.config.Config;
+import checkstyle.config.CheckConfig;
 import checkstyle.checks.Check;
 
 import haxe.Json;
@@ -23,23 +25,28 @@ class ConfigUtils {
 	}
 
 	public static function saveConfig(checker:Checker, path:String) {
-		var config = getEmptyConfig();
-		for (check in checker.checks) config.checks.push(makeCheckConfig(check));
-		ArraySort.sort(config.checks, checkConfigSort);
-
 		var file = File.write(path, false);
-		file.writeString(Json.stringify(config, null, "\t"));
+		file.writeString(Json.stringify(makeConfigFromChecker(checker), null, "\t"));
 		file.close();
 	}
 
 	public static function saveCheckConfigList(list:Array<CheckConfig>, path:String) {
-		var config = getEmptyConfig();
+		var file = File.write(path, false);
+		file.writeString(Json.stringify(makeConfigFromList(list), null, "\t"));
+		file.close();
+	}
+
+	public static function makeConfigFromChecker(checker:Checker):Config {
+		var list:Array<CheckConfig> = [];
+		for (check in checker.checks) list.push(makeCheckConfig(check));
+		return makeConfigFromList(list);
+	}
+
+	public static function makeConfigFromList(list:Array<CheckConfig>):Config {
+		var config:Config = getEmptyConfig();
 		config.checks = list;
 		ArraySort.sort(config.checks, checkConfigSort);
-
-		var file = File.write(path, false);
-		file.writeString(Json.stringify(config, null, "\t"));
-		file.close();
+		return config;
 	}
 
 	public static function checkConfigSort(a:CheckConfig, b:CheckConfig):Int {
@@ -51,6 +58,12 @@ class ConfigUtils {
 	public static function checkSort(a:Check, b:Check):Int {
 		if (a.getModuleName() == b.getModuleName()) return 0;
 		if (a.getModuleName() < b.getModuleName()) return -1;
+		return 1;
+	}
+
+	public static function checkInfoSort(a:CheckInfo, b:CheckInfo):Int {
+		if (a.name == b.name) return 0;
+		if (a.name < b.name) return -1;
 		return 1;
 	}
 
