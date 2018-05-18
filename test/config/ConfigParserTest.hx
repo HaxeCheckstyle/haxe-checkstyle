@@ -7,6 +7,22 @@ import checkstyle.config.ConfigParser;
 class ConfigParserTest {
 
 	@Test
+	public function testCheckstyleConfig() {
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		configParser.loadConfig("checkstyle.json");
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length > 0);
+		Assert.isTrue(configParser.checker.checks.length != configParser.getCheckCount());
+	}
+
+	@Test
 	public function testExtendsConfigPath() {
 		var configParser:ConfigParser = new ConfigParser(function (message:String) {
 			Assert.fail(message);
