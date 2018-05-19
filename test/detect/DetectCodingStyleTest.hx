@@ -83,10 +83,13 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectRightCurly() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RightCurlyCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual(2, detectedChecks.length);
 		Assert.areEqual("RightCurly", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("aloneorsingle", props.option);
+		Assert.areEqual("RightCurly", detectedChecks[1].type);
+		var props = cast detectedChecks[1].props;
+		Assert.areEqual("same", props.option);
 	}
 
 	// checkstyle.checks.coding
@@ -482,6 +485,11 @@ class Test {
 		];
 		var x = values [ 1 ] +
 			values [ 2 ];
+		if (value) {
+			doSomething();
+		} else {
+			doSomethingElse();
+		}
 	}
 	function test2(p1:Int, p2:String, p3:String, p4:Int = 1, ?p5:String, p6:String) {
 		// comment

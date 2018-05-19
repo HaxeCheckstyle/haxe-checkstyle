@@ -2,6 +2,8 @@
 
 - Added check's names to text output [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Fixed handling of relative paths when using `extendsConfigPath` [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
+- Fixed reported position of Indentation check
+- Improved if / else detection of RightCurly check
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 
 ## version 2.3.1 (2018-05-16)
@@ -16,6 +18,7 @@
 - Improved handling of file content and `class` parsing in TokenTree [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Refactored handling of internal errors (parsing and checks) [#413](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/413)
 - Cleanup command line options [#418](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/418)
+- Removed `-report` command line option [#418](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/418)
 
 ## version 2.3.0 (2018-05-07)
 
