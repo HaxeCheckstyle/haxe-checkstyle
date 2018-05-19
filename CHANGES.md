@@ -2,8 +2,8 @@
 
 - Added check's names to text output [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Fixed handling of relative paths when using `extendsConfigPath` [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
-- Fixed reported position of Indentation check
-- Improved if / else detection of RightCurly check
+- Fixed reported position of Indentation check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
+- Improved if / else detection of RightCurly check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 
 ## version 2.3.1 (2018-05-16)
