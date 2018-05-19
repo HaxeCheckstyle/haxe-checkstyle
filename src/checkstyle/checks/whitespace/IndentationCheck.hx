@@ -46,11 +46,11 @@ class IndentationCheck extends Check {
 			var matched:String = e.matched(0);
 			var actual:Int = matched.split(splitChar).length - 1;
 			var expected:Int = lineIndentation[i];
-			logMsg(expected, actual, tolerateViolations[i], wrappedStatements[i], i);
+			logMsg(expected, actual, tolerateViolations[i], wrappedStatements[i], i, matched.length);
 		}
 	}
 
-	function logMsg(expected:Int, actual:Int, tolerate:Bool, wrapped:Bool, line:Int) {
+	function logMsg(expected:Int, actual:Int, tolerate:Bool, wrapped:Bool, line:Int, length:Int) {
 		if (actual == expected) return;
 		if (tolerate) return;
 		if (wrapped) {
@@ -63,7 +63,7 @@ class IndentationCheck extends Check {
 		}
 		var expectedText:String = buildReadableIndentCount(expected);
 		var actualText:String = buildReadableIndentCount(actual);
-		log('Indentation mismatch: expected: $expectedText, actual: $actualText', line + 1, 0);
+		log('Indentation mismatch: expected: $expectedText, actual: $actualText', line + 1, 0, length);
 	}
 
 	function buildReadableIndentCount(count:Int):String {

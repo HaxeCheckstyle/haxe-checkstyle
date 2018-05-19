@@ -174,11 +174,22 @@ class RightCurlyCheck extends Check {
 					OBJECT_DECL,
 					FUNCTION,
 					FOR,
-					IF,
 					WHILE,
 					SWITCH,
 					TRY,
 					CATCH
+				]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+			}]
+		},
+		{
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					IF,
 				]
 			}],
 			properties: [{
