@@ -7,6 +7,7 @@ import checkstyle.config.ConfigParser;
 import checkstyle.utils.ConfigUtils;
 
 class ConfigParserTest {
+	static inline var LOCAL_PATH:String = "./";
 
 	@Test
 	public function testCheckstyleConfig() {
@@ -37,7 +38,7 @@ class ConfigParserTest {
 			{
 				extendsConfigPath: "checkstyle.json"
 			},
-			"./");
+			LOCAL_PATH);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length > 0);
@@ -101,4 +102,45 @@ class ConfigParserTest {
 		Assert.areEqual(configParser.getCheckCount(), configParser.getUsedCheckCount());
 		Assert.areEqual(11, configParser.numberOfCheckerThreads);
 	}
+
+	@Test
+	public function testConfigVersion1() {
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		configParser.parseAndValidateConfig(
+			{
+				version: 1
+			},
+			LOCAL_PATH);
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+	}
+
+	@Test
+	public function testConfigWrongVersion() {
+		var failMessage:String = "";
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			failMessage = message;
+		});
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		configParser.parseAndValidateConfig(
+			{
+				version: 0
+			},
+			LOCAL_PATH);
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+		Assert.areEqual("configuration file has unknown version: 0", failMessage);
+	}
+
 }

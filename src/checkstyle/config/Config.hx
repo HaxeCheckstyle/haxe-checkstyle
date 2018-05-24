@@ -1,5 +1,7 @@
 package checkstyle.config;
 
+import checkstyle.SeverityLevel;
+
 typedef Config = {
 	@:optional var extendsConfigPath:String;
 	@:optional var defaultSeverity:SeverityLevel;
@@ -10,4 +12,5 @@ typedef Config = {
 	@:optional var numberOfCheckerThreads:Int;
 	@:optional var checks:Array<CheckConfig>;
 	@:optional var exclude:ExcludeConfig;
+	@:optional var version:Int;
 }
