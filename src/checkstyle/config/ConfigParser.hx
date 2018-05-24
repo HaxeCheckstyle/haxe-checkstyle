@@ -48,7 +48,7 @@ class ConfigParser {
 	function getAbsoluteConfigPath(path:String, baseFolder:String):String {
 		if (path == null) return null;
 		if (Path.isAbsolute(path)) return path;
-		return Path.join ([baseFolder, path]);
+		return Path.join([baseFolder, path]);
 	}
 
 	public function parseAndValidateConfig(config:Config, rootFolder:String) {
