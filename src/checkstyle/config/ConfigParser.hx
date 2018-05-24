@@ -47,13 +47,15 @@ class ConfigParser {
 
 	function getAbsoluteConfigPath(path:String, baseFolder:String):String {
 		if (path == null) return null;
-		if (Path.isAbsolute(path)) path;
+		if (Path.isAbsolute(path)) return path;
 		return Path.join ([baseFolder, path]);
 	}
 
 	public function parseAndValidateConfig(config:Config, rootFolder:String) {
 
 		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
+		if (config.version == null) config.version = 1;
+		if (config.version != 1) failWith('configuration file has unknown version: ${config.version}');
 
 		if (!config.extendsConfigPath.isEmpty()) {
 			var path:String = getAbsoluteConfigPath(config.extendsConfigPath, rootFolder);
@@ -91,10 +93,13 @@ class ConfigParser {
 	}
 
 	function parseExcludes(config:ExcludeConfig) {
+		if (config.version == null) config.version = 1;
+		if (config.version != 1) failWith('exclude configuration file has unknown version: ${config.version}');
+		var pathType = config.path;
 		var excludes = Reflect.fields(config);
-		var pathType = Reflect.field(config, "path");
 		for (exclude in excludes) {
 			if (exclude == "path") continue;
+			if (exclude == "version") continue;
 			createExcludeMapElement(exclude);
 			var excludeValues:Array<String> = Reflect.field(config, exclude);
 			if (excludeValues == null || excludeValues.length == 0) continue;

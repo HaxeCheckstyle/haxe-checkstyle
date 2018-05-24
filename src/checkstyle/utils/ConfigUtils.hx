@@ -20,7 +20,8 @@ class ConfigUtils {
 			baseDefines: [],
 			defineCombinations: [],
 			checks: [],
-			exclude: {}
+			exclude: {},
+			version: 1
 		};
 	}
 
