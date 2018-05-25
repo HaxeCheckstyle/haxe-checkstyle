@@ -27,7 +27,7 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install mcover 2.1.1
         - haxelib install munit
-        - sed 's/:3.3.0//' buildGlobal.hxml
+        - sed -i 's/:3.3.0//' buildGlobal.hxml
         - sed -i 's/DKToplevel/DKPattern/g' .haxelib/haxeparser/git/src/haxeparser/HaxeParser.hx
   allow_failures:
     - haxe: development
