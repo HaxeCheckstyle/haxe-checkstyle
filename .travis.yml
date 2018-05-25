@@ -2,14 +2,6 @@ git:
   depth: 1
 
 language: haxe
-haxe:
-  - 3.4.7
-  - development
-install:
-  - haxelib install compiletime 2.6.0
-  - haxelib install hxargs 3.0.2
-  - haxelib install mcover 2.1.1
-  - haxelib install munit
 script:
   - haxe buildAll.hxml
 
@@ -21,9 +13,19 @@ dist: trusty
 matrix:
   include:
     - haxe: 3.4.7
-      install: haxelib install haxeparser 3.3.0
+      install:
+        - haxelib install haxeparser 3.3.0
+        - haxelib install compiletime 2.6.0
+        - haxelib install hxargs 3.0.2
+        - haxelib install mcover 2.1.1
+        - haxelib install munit
     - haxe: development
-      install: haxelib git hxparse https://github.com/simn/hxparse.git
-      install: haxelib git haxeparser https://github.com/simn/haxeparser.git
+      install:
+        - haxelib git hxparse https://github.com/simn/hxparse.git
+        - haxelib git haxeparser https://github.com/simn/haxeparser.git
+        - haxelib install compiletime 2.6.0
+        - haxelib install hxargs 3.0.2
+        - haxelib install mcover 2.1.1
+        - haxelib install munit
   allow_failures:
     - haxe: development
