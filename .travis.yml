@@ -27,5 +27,6 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install mcover 2.1.1
         - haxelib install munit
+        - sed 's/:3.3.0//' buildGlobal.hxml
   allow_failures:
     - haxe: development
