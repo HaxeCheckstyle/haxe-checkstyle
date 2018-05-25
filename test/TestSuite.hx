@@ -1,6 +1,8 @@
 import checks.CheckTestCase;
 import detect.DetectCodingStyleTest;
+#if !eval
 import misc.ThreadTest;
+#end
 import config.ConfigParserTest;
 import token.TokenTreeBuilderTest;
 import token.TokenTreeBuilderParsingTest;
@@ -16,7 +18,9 @@ class TestSuite extends massive.munit.TestSuite {
 
 		add(ConfigParserTest);
 		add(DetectCodingStyleTest);
+		#if !eval
 		add(ThreadTest);
+		#end
 		add(TokenTreeBuilderTest);
 		add(TokenTreeBuilderParsingTest);
 		add(VerifyTokenTreeTest);

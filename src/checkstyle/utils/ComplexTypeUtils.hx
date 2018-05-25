@@ -143,6 +143,10 @@ class ComplexTypeUtils {
 				for (f in fields) walkField(f, cb);
 			case TOptional(t):
 				walkComplexType(t, name, pos, cb);
+			#if (haxe_ver >= 4.0)
+			case TNamed(n, t):
+				walkComplexType(t, n, pos, cb);
+			#end
 		}
 	}
 
@@ -183,7 +187,7 @@ class ComplexTypeUtils {
 			case EThrow(e): walkExpr(e, cb);
 			case ECast(e, t): walkExpr(e, cb);
 				if (t != null) walkComplexType(t, "", e.pos, cb);
-			case EDisplay(e, isCall): walkExpr(e, cb);
+			case EDisplay(e, displayKind): walkExpr(e, cb);
 			case EDisplayNew(t): walkTypePath(t, t.name, e.pos, cb);
 			case ETernary(econd, eif, eelse): walkExpr(econd, cb);
 				walkExpr(eif, cb);

@@ -4,6 +4,10 @@ package checkstyle;
 import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Thread;
+#elseif hl
+import cpp.hl.Thread;
+#else
+import checkstyle.utils.Thread;
 #end
 
 import checkstyle.checks.Check;
