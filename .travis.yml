@@ -19,10 +19,11 @@ sudo: false
 dist: trusty
 
 matrix:
-  - haxe: 3.4.7
-    install: haxelib install haxeparser 3.3.0
-  - haxe: development
-    install: haxelib git hxparse https://github.com/simn/hxparse.git
-    install: haxelib git haxeparser https://github.com/simn/haxeparser.git
+  include:
+    - haxe: 3.4.7
+      install: haxelib install haxeparser 3.3.0
+    - haxe: development
+      install: haxelib git hxparse https://github.com/simn/hxparse.git
+      install: haxelib git haxeparser https://github.com/simn/haxeparser.git
   allow_failures:
     - haxe: development
