@@ -142,6 +142,10 @@ class ExprUtils {
 				for (f in fields) walkField(f, cb);
 			case TOptional(t):
 				walkComplexType(t, cb);
+			#if (haxe_ver >= 4.0)
+			case TNamed(n, t):
+				walkComplexType(t, cb);
+			#end
 		}
 	}
 
@@ -183,7 +187,7 @@ class ExprUtils {
 			case EThrow(e): walkExpr(e, cb);
 			case ECast(e, t): walkExpr(e, cb);
 				if (t != null) walkComplexType(t, cb);
-			case EDisplay(e, isCall): walkExpr(e, cb);
+			case EDisplay(e, displayKind): walkExpr(e, cb);
 			case EDisplayNew(t): walkTypePath(t, cb);
 			case ETernary(econd, eif, eelse): walkExpr(econd, cb);
 				walkExpr(eif, cb);

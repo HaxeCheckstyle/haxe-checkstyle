@@ -6,6 +6,12 @@ import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Mutex;
 import cpp.vm.Thread;
+#elseif hl
+import cpp.hl.Mutex;
+import cpp.hl.Thread;
+#else
+import checkstyle.utils.Mutex;
+import checkstyle.utils.Thread;
 #end
 
 class ParserQueue {

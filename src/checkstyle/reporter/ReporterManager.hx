@@ -4,6 +4,10 @@ package checkstyle.reporter;
 import neko.vm.Mutex;
 #elseif cpp
 import cpp.vm.Mutex;
+#elseif hl
+import cpp.hl.Mutex;
+#else
+import checkstyle.utils.Mutex;
 #end
 
 import checkstyle.CheckMessage;
@@ -109,11 +113,3 @@ class ReporterManager {
 		};
 	}
 }
-
-#if (!neko && !cpp)
-class Mutex {
-	public function new() {}
-	public function acquire() {}
-	public function release() {}
-}
-#end

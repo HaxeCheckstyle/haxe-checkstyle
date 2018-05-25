@@ -66,6 +66,10 @@ abstract ModifierOrderCheckModifier(String) {
 	var OVERRIDE = "OVERRIDE";
 	var MACRO = "MACRO";
 	var DYNAMIC = "DYNAMIC";
+	#if (haxe_ver >= 4.0)
+	var EXTERN = "EXTERN";
+	var FINAL = "FINAL";
+	#end
 
 	@:from
 	public static function fromAccess(access:Access):ModifierOrderCheckModifier {
@@ -82,6 +86,12 @@ abstract ModifierOrderCheckModifier(String) {
 				MACRO;
 			case ADynamic:
 				DYNAMIC;
+			#if (haxe_ver >= 4.0)
+			case AExtern:
+				EXTERN;
+			case AFinal:
+				FINAL;
+			#end
 		}
 	}
 }
