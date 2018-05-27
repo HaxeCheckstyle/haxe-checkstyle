@@ -143,4 +143,36 @@ class ConfigParserTest {
 		Assert.areEqual("configuration file has unknown version: 0", failMessage);
 	}
 
+	@Test
+	public function testExcludeConfigVersion1() {
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			Assert.fail(message);
+		});
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		configParser.parseExcludes(
+			{
+				version: 1
+			});
+	}
+
+	@Test
+	public function testExcludeConfigWrongVersion() {
+		var failMessage:String = "";
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			failMessage = message;
+		});
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		configParser.parseExcludes(
+			{
+				version: 0
+			});
+
+		Assert.areEqual("exclude configuration file has unknown version: 0", failMessage);
+	}
 }

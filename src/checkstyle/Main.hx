@@ -3,6 +3,7 @@ package checkstyle;
 import checkstyle.checks.Check;
 import checkstyle.config.ConfigParser;
 import checkstyle.config.CheckConfig;
+import checkstyle.config.ExcludeManager;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
@@ -177,7 +178,7 @@ class Main {
 
 		#if (neko || cpp)
 		if (disableThreads) {
-			checker.process(toProcess, configParser.excludesMap);
+			checker.process(toProcess);
 		}
 		else {
 			ReporterManager.INSTANCE.start();
@@ -185,14 +186,14 @@ class Main {
 			var preParseCount:Int = configParser.numberOfCheckerThreads * 3;
 			if (preParseCount < 15) preParseCount = 15;
 			parserQueue.start(preParseCount);
-			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker, configParser.excludesMap);
+			var checkerPool:CheckerPool = new CheckerPool(parserQueue, checker);
 			checkerPool.start(configParser.numberOfCheckerThreads);
 
 			while (!checkerPool.isFinished()) Sys.sleep(0.1);
 			ReporterManager.INSTANCE.finish();
 		}
 		#else
-		checker.process(toProcess, configParser.excludesMap);
+		checker.process(toProcess);
 		#end
 	}
 
@@ -207,33 +208,17 @@ class Main {
 
 	function traverse(path:String, files:Array<String>) {
 		try {
-			if (FileSystem.isDirectory(path) && !isExcludedFromAll(path)) {
+			if (FileSystem.isDirectory(path) && !ExcludeManager.isExcludedFromAll(path)) {
 				var nodes = FileSystem.readDirectory(path);
 				for (child in nodes) traverse(Path.join([path, child]), files);
 			}
-			else if (~/(.hx)$/i.match(path) && !isExcludedFromAll(path)) {
+			else if (~/(.hx)$/i.match(path) && !ExcludeManager.isExcludedFromAll(path)) {
 				files.push(path);
 			}
 		}
 		catch (e:Any) {
 			Sys.println("\nPath " + path + " not found.");
 		}
-	}
-
-	function isExcludedFromAll(path:String):Bool {
-		var offset = path.indexOf(".hx");
-		if (offset > 0) {
-			path = path.substring(0, offset);
-		}
-		if (configParser.allExcludes.contains(path)) return true;
-
-		var slashes:EReg = ~/[\/\\]/g;
-		path = slashes.replace(path, ":");
-		for (exclude in configParser.allExcludes) {
-			var r = new EReg(exclude, "i");
-			if (r.match(path)) return true;
-		}
-		return false;
 	}
 
 	function failWith(message:String) {

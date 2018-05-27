@@ -62,7 +62,7 @@ class CheckTestCase<T:String> {
 
 		ReporterManager.INSTANCE.clear();
 		ReporterManager.INSTANCE.addReporter(reporter);
-		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}], null);
+		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}]);
 		return reporter.message;
 	}
 

@@ -2,12 +2,14 @@
 
 - Added check's names to text output [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Added version number to configuration file [#422](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/422)
+- Added ranges to exclude configuration, fixes [#120](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/120) ([#424](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/424))
 - Fixed handling of relative paths when using `extendsConfigPath` [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Fixed detection of absolute paths when using `extendsConfigPath` [#422](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/422)
 - Fixed reported position of Indentation check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Improved if / else detection of RightCurly check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Improved support for eval target and Haxe 4 [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423)
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
+- Refactored check exclusion handling [#424](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/424)
 
 ## version 2.3.1 (2018-05-16)
 
