@@ -23,7 +23,7 @@ matrix:
       install:
         - haxelib git hxparse https://github.com/simn/hxparse
         - haxelib git haxeparser https://github.com/simn/haxeparser
-        - haxelib git mcover https://github.com/massiveinteractive/mcover src
+        - haxelib git mcover https://github.com/massiveinteractive/mcover master src
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
         - haxelib install munit
