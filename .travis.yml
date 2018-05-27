@@ -28,5 +28,3 @@ matrix:
         - haxelib install mcover 2.1.1
         - haxelib install munit
         - sed -i 's/:3.3.0//' buildGlobal.hxml
-  allow_failures:
-    - haxe: development
