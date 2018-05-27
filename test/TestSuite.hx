@@ -4,6 +4,7 @@ import detect.DetectCodingStyleTest;
 import misc.ThreadTest;
 #end
 import config.ConfigParserTest;
+import config.ExcludeManagerTest;
 import token.TokenTreeBuilderTest;
 import token.TokenTreeBuilderParsingTest;
 import token.verify.VerifyTokenTreeTest;
@@ -17,6 +18,7 @@ class TestSuite extends massive.munit.TestSuite {
 		CompileTime.importPackage("misc");
 
 		add(ConfigParserTest);
+		add(ExcludeManagerTest);
 		add(DetectCodingStyleTest);
 		#if !eval
 		add(ThreadTest);

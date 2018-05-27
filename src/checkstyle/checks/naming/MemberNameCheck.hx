@@ -22,7 +22,8 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	override function checkEnumType(decl:TypeDef, d:Definition<EnumFlag, Array<EnumConstructor>>, pos:Position) {
 		if (!hasToken(ENUM)) return;
 		if (ignoreExtern && d.flags.contains(EExtern)) return;
-		if (!hasSuppressWarningsMeta(d.meta)) checkEnumFields(d.data);
+		if (isPosSuppressed(pos)) return;
+		checkEnumFields(d.data);
 	}
 
 	override function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {

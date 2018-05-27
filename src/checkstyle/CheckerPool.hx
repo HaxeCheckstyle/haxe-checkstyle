@@ -5,11 +5,9 @@ class CheckerPool {
 	var parserQueue:ParserQueue;
 	var templateChecker:Checker;
 	var threads:Array<CheckerThread>;
-	var excludesMap:Map<String, Array<String>>;
 
-	public function new(parserQueue:ParserQueue, templateChecker:Checker, excludesMap:Map<String, Array<String>>) {
+	public function new(parserQueue:ParserQueue, templateChecker:Checker) {
 		this.parserQueue = parserQueue;
-		this.excludesMap = excludesMap;
 		this.templateChecker = templateChecker;
 		threads = [];
 	}
@@ -18,7 +16,7 @@ class CheckerPool {
 		for (i in 0...count) {
 			var thread = new CheckerThread(parserQueue);
 			threads.push(thread);
-			thread.start(templateChecker, excludesMap);
+			thread.start(templateChecker);
 		}
 	}
 

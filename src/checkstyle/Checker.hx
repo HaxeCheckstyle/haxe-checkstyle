@@ -6,6 +6,9 @@ import sys.io.File;
 
 import checkstyle.checks.Check;
 
+import checkstyle.config.ExcludeManager;
+import checkstyle.config.ExcludeRange;
+
 import checkstyle.reporter.ReporterManager;
 
 import checkstyle.token.TokenTreeBuilder;
@@ -20,11 +23,11 @@ class Checker {
 	public var baseDefines:Array<String>;
 	public var defineCombinations:Array<Array<String>>;
 
-	var linesIdx:Array<LineIds>;
+	public var linesIdx:Array<LineIds>;
 	var lineSeparator:String;
 	var tokenTree:TokenTree;
 	public var asts:Array<Ast>;
-	public var excludes:Map<String, Array<String>>;
+	public var excludesRanges:Map<String, Array<ExcludeRange>>;
 
 	public function new() {
 		checks = [];
@@ -145,8 +148,7 @@ class Checker {
 		return null;
 	}
 
-	public function process(files:Array<CheckFile>, excludesMap:Map<String, Array<String>>) {
-		excludes = excludesMap;
+	public function process(files:Array<CheckFile>) {
 		var advanceFrame = function() {};
 		#if hxtelemetry
 		var hxt = new hxtelemetry.HxTelemetry();
@@ -186,6 +188,7 @@ class Checker {
 			makeASTs();
 			if (asts.length <= 0) return false;
 			getTokenTree();
+			excludesRanges = ExcludeManager.INSTANCE.getPosExcludes(this);
 		}
 		catch (e:Any) {
 			ErrorUtils.handleException(e, file, "createContext");
@@ -216,30 +219,13 @@ class Checker {
 
 	function runCheck(check:Check):Array<CheckMessage> {
 		try {
-			if (checkForExclude(check.getModuleName())) return [];
+			if (ExcludeManager.isExcludedFromCheck(file.name, check.getModuleName())) return [];
 			return check.run(this);
 		}
 		catch (e:Any) {
 			ErrorUtils.handleException(e, file, check.getModuleName());
 			return [];
 		}
-	}
-
-	function checkForExclude(moduleName:String):Bool {
-		if (excludes == null) return false;
-		var excludesForCheck:Array<String> = excludes.get(moduleName);
-		if (excludesForCheck == null || excludesForCheck.length == 0) return false;
-
-		var cls = file.name.substring(0, file.name.indexOf(".hx"));
-		if (excludesForCheck.contains(cls)) return true;
-
-		var slashes:EReg = ~/[\/\\]/g;
-		cls = slashes.replace(cls, ":");
-		for (exclude in excludesForCheck) {
-			var r = new EReg(exclude, "i");
-			if (r.match(cls)) return true;
-		}
-		return false;
 	}
 }
 

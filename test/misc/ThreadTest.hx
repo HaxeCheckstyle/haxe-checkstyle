@@ -64,7 +64,7 @@ class ThreadTest {
 		var parseQueue = new ParserQueue(files, checker);
 		parseQueue.start (1);
 
-		var checkerPool = new CheckerPool(parseQueue, checker, null);
+		var checkerPool = new CheckerPool(parseQueue, checker);
 		checkerPool.start (5);
 		Assert.isFalse(parseQueue.isFinished());
 		Assert.isFalse(checkerPool.isFinished());

@@ -1,5 +1,7 @@
 package checkstyle.checks;
 
+import checkstyle.config.ExcludeRange;
+
 class Check {
 
 	public var severity:SeverityLevel;
@@ -97,21 +99,7 @@ class Check {
 
 	function isCheckSuppressed(f:Field):Bool {
 		if (f == null) return false;
-		if (hasSuppressWarningsMeta(f.meta)) return true;
 		return isPosSuppressed(f.pos);
-	}
-
-	function hasSuppressWarningsMeta(m:Metadata):Bool {
-		if (m == null) return false;
-		var search = 'checkstyle:${getModuleName()}';
-		for (meta in m) {
-			if (meta.name != "SuppressWarnings") continue;
-			if (meta.params == null) continue;
-			for (param in meta.params) {
-				if (checkSuppressionConst(param, search)) return true;
-			}
-		}
-		return false;
 	}
 
 	function isLineSuppressed(i:Int):Bool {
@@ -129,53 +117,11 @@ class Check {
 	}
 
 	function isCharPosSuppressed(pos:Int):Bool {
-		if (checker.ast.decls == null) return false;
-		for (td in checker.ast.decls) {
-			switch (td.decl){
-				case EAbstract(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						if (hasSuppressWarningsMeta(d.meta)) return true;
-					}
-					for (field in d.data) {
-						if (pos > field.pos.max) continue;
-						if (pos < field.pos.min) continue;
-						return hasSuppressWarningsMeta(field.meta);
-					}
-				case EClass(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						if (hasSuppressWarningsMeta(d.meta)) return true;
-					}
-					for (field in d.data) {
-						if (pos > field.pos.max) continue;
-						if (pos < field.pos.min) continue;
-						return hasSuppressWarningsMeta(field.meta);
-					}
-				case EEnum(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						if (hasSuppressWarningsMeta(d.meta)) return true;
-					}
-					for (item in d.data) {
-						if (pos > item.pos.max) continue;
-						if (pos < item.pos.min) continue;
-						return hasSuppressWarningsMeta(item.meta);
-					}
-				case ETypedef(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) {
-						if (hasSuppressWarningsMeta(d.meta)) return true;
-					}
-					switch (d.data) {
-						case TAnonymous(fields):
-							for (field in fields) {
-								if (pos > field.pos.max) continue;
-								if (pos < field.pos.min) continue;
-								if (hasSuppressWarningsMeta(field.meta)) return true;
-								// typedef pos does not include body
-								return hasSuppressWarningsMeta(d.meta);
-							}
-						default:
-					}
-				default:
-			}
+		var ranges:Array<ExcludeRange> = checker.excludesRanges.get(getModuleName());
+		if (ranges == null) return false;
+		if (ranges.length <= 0) return false;
+		for (range in ranges) {
+			if ((range.charPosStart <= pos) && (range.charPosEnd >= pos)) return true;
 		}
 		return false;
 	}
