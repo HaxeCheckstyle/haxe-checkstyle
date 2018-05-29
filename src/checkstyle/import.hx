@@ -11,6 +11,7 @@ import checkstyle.token.TokenTree;
 import checkstyle.detect.DetectableInstances;
 
 import checkstyle.utils.ErrorUtils;
+
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 using checkstyle.utils.ExprUtils;

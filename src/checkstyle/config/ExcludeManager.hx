@@ -55,7 +55,7 @@ class ExcludeManager {
 	}
 
 	function matchFullExlude(fileName:String, exclude:ExcludeDefinition):Bool {
-		switch(exclude) {
+		switch (exclude) {
 			case FULL(filter): return filterFileName(fileName, filter);
 			case LINE(filter, line): return false;
 			case RANGE(filter, lineStart, lineEnd): return false;
@@ -80,7 +80,7 @@ class ExcludeManager {
 			var list:Array<ExcludeDefinition> = excludeMap.get(checkName);
 			if (list != null) {
 				for (exclude in list) {
-					switch(exclude) {
+					switch (exclude) {
 						case FULL(filter): continue;
 						case LINE(filter, line):
 							if (!filterFileName(checker.file.name, filter)) continue;
@@ -102,7 +102,7 @@ class ExcludeManager {
 		var posExcludes:Array<ExcludeRange> = [];
 
 		for (exclude in globalExclude) {
-			switch(exclude) {
+			switch (exclude) {
 				case FULL(filter): continue;
 				case LINE(filter, line):
 					if (!filterFileName(checker.file.name, filter)) continue;
@@ -138,7 +138,7 @@ class ExcludeManager {
 
 			var checkNames:Array<String> = [];
 			pOpen.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-				switch(token.tok) {
+				switch (token.tok) {
 					case Const(CString(name)):
 						if (!StringTools.startsWith(name, "checkstyle:")) return SKIP_SUBTREE;
 						checkNames.push(name.substr(11));

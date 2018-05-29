@@ -103,9 +103,7 @@ class Check {
 	}
 
 	function isLineSuppressed(i:Int):Bool {
-		var pos:Int = 0;
-		for (j in 0...i + 1) pos += checker.lines[j].length;
-		return isCharPosSuppressed(pos);
+		return isCharPosSuppressed(checker.linesIdx[i].l);
 	}
 
 	function isPosExtern(pos:Position):Bool {

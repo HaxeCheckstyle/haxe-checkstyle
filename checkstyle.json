@@ -82,6 +82,44 @@
         },
         {
             "props": {
+                "max": 1,
+                "beforePackage": "none",
+                "inFunction": "exact",
+                "afterPackage": "exact",
+                "betweenImports": "upto",
+                "afterImports": "exact",
+                "beforeUsing": "exact",
+                "betweenTypes": "exact",
+                "typeDefinition": "none",
+                "beforeFileEnd": "none",
+                "afterComment": "none",
+                "anywhereInFile": "upto",
+                "afterAbstractVars": "exact",
+                "beginAbstract": "none",
+                "betweenAbstractVars": "upto",
+                "betweenAbstractMethods": "exact",
+                "endAbstract": "none",
+                "beginClass": "upto",
+                "betweenClassStaticVars": "upto",
+                "afterClassStaticVars": "exact",
+                "betweenClassVars": "upto",
+                "afterClassVars": "exact",
+                "betweenClassMethods": "exact",
+                "endClass": "none",
+                "beginEnum": "none",
+                "betweenEnumFields": "none",
+                "endEnum": "none",
+                "beginInterface": "exact",
+                "betweenInterfaceFields": "upto",
+                "endInterface": "none",
+                "beginTypedef": "none",
+                "betweenTypedefFields": "none",
+                "endTypedef": "none"
+            },
+            "type": "ExtendedEmptyLines"
+        },
+        {
+            "props": {
                 "max": 2000
             },
             "type": "FileLength"
@@ -541,6 +579,9 @@
             "checkstyle/checks/block/EmptyBlockCheck",
             "checkstyle/checks/whitespace/EmptyLinesCheck",
             "checkstyle/token/walk/WalkStatement"
+        ],
+        "ExtendedEmptyLines": [
+            "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests"
         ],
         "LeftCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"

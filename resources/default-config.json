@@ -118,6 +118,44 @@
 		},
 		{
 			"props": {
+				"endClass": "none",
+				"endInterface": "none",
+				"afterImports": "exact",
+				"betweenTypes": "exact",
+				"afterClassVars": "exact",
+				"beginInterface": "exact",
+				"betweenInterfaceFields": "exact",
+				"betweenTypedefFields": "none",
+				"endAbstract": "none",
+				"afterComment": "none",
+				"beforePackage": "none",
+				"inFunction": "exact",
+				"betweenAbstractVars": "upto",
+				"max": 1,
+				"beginAbstract": "exact",
+				"betweenClassMethods": "exact",
+				"beginEnum": "none",
+				"betweenEnumFields": "none",
+				"betweenClassVars": "upto",
+				"betweenImports": "upto",
+				"endTypedef": "none",
+				"betweenClassStaticVars": "upto",
+				"afterClassStaticVars": "exact",
+				"anywhereInFile": "upto",
+				"afterPackage": "exact",
+				"endEnum": "none",
+				"beforeFileEnd": "none",
+				"betweenAbstractMethods": "exact",
+				"afterAbstractVars": "exact",
+				"typeDefinition": "none",
+				"beforeUsing": "exact",
+				"beginClass": "exact",
+				"beginTypedef": "none"
+			},
+			"type": "ExtendedEmptyLines"
+		},
+		{
+			"props": {
 				"max": 2000
 			},
 			"type": "FileLength"

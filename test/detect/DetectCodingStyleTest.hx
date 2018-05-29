@@ -38,6 +38,8 @@ import checkstyle.checks.type.ReturnCheck;
 import checkstyle.checks.type.TypeCheck;
 import checkstyle.checks.whitespace.ArrayAccessCheck;
 import checkstyle.checks.whitespace.EmptyLinesCheck;
+import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck;
+import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 import checkstyle.checks.whitespace.IndentationCheck;
 import checkstyle.checks.whitespace.OperatorWhitespaceCheck;
@@ -366,6 +368,47 @@ class DetectCodingStyleTest {
 		Assert.areEqual(1, props.max);
 		Assert.isFalse(props.requireEmptyLineAfterClass);
 		Assert.isTrue(props.allowEmptyLineAfterMultiLineComment);
+	}
+
+	@Test
+	public function testDetectExtendedEmptyLines() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ExtendedEmptyLinesCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("ExtendedEmptyLines", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(1, props.max);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.endClass);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.endInterface);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.afterImports);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.betweenTypes);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.afterClassVars);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.beginInterface);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenInterfaceFields);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.betweenTypedefFields);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.endAbstract);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.afterComment);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.beforePackage);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.inFunction);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenAbstractVars);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.beginAbstract);
+		Assert.areEqual(EmptyLinesPolicy.UPTO, props.betweenClassMethods);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.beginEnum);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenEnumFields);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenClassVars);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenImports);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.endTypedef);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenClassStaticVars);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.afterClassStaticVars);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.anywhereInFile);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.afterPackage);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.endEnum);
+		Assert.areEqual(EmptyLinesPolicy.EXACT, props.beforeFileEnd);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenAbstractMethods);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.afterAbstractVars);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.typeDefinition);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.beforeUsing);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.beginClass);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.beginTypedef);
 	}
 
 	@Test
