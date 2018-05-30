@@ -7,6 +7,7 @@ import checkstyle.checks.whitespace.ListOfEmptyLines.EmptyLineRange;
 class ExtendedEmptyLinesCheck extends Check {
 
 	public var max:Int;
+	public var skipSingleLineTypes:Bool;
 	public var beforePackage:EmptyLinesPolicy;
 	public var afterPackage:EmptyLinesPolicy;
 	public var betweenImports:EmptyLinesPolicy;
@@ -45,11 +46,13 @@ class ExtendedEmptyLinesCheck extends Check {
 	public var endTypedef:EmptyLinesPolicy;
 	public var betweenTypedefFields:EmptyLinesPolicy;
 
-	public var afterComment:EmptyLinesPolicy;
+	public var afterSingleLineComment:EmptyLinesPolicy;
+	public var afterMultiLineComment:EmptyLinesPolicy;
 
 	public function new() {
 		super(TOKEN);
 		max = 1;
+		skipSingleLineTypes = true;
 
 		beforePackage = NONE;
 		afterPackage = EXACT;
@@ -89,7 +92,8 @@ class ExtendedEmptyLinesCheck extends Check {
 		endTypedef = NONE;
 		betweenTypedefFields = NONE;
 
-		afterComment = NONE;
+		afterSingleLineComment = NONE;
+		afterMultiLineComment = NONE;
 
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -172,12 +176,17 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (type.previousSibling == null) {
 				continue;
 			}
-			var startLine:Int = checker.getLinePos(type.previousSibling.getPos().max).line;
+			var prevPos:Position = type.previousSibling.getPos();
+			if (skipSingleLineTypes && (checker.getLinePos(prevPos.min).line - checker.getLinePos(prevPos.max).line == 0)) continue;
+
+			var startLine:Int = checker.getLinePos(prevPos.max).line;
 			var endLine:Int = checker.getLinePos(type.getPos().min).line;
 			checkBetween(emptyLines, startLine, endLine, betweenTypes, "betweeen types");
 		}
 
 		for (type in types) {
+			var pos:Position = type.getPos();
+			if (skipSingleLineTypes && (checker.getLinePos(pos.min).line - checker.getLinePos(pos.max).line == 0)) continue;
 			switch (type.tok) {
 				case Kwd(KwdAbstract): checkAbstract(emptyLines, type);
 				case Kwd(KwdClass): checkClass(emptyLines, type);
@@ -244,7 +253,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		var start:Int = checker.getLinePos(brOpen.pos.max).line;
 		var end:Int = checker.getLinePos(brClose.pos.min).line;
 		if (start == end) return;
-		checkLines(emptyLines, beginPolicy, start + 1, start + 2, "after left curly");
+		checkLines(emptyLines, beginPolicy, start + 1, start + 1, "after left curly");
 		checkLines(emptyLines, endPolicy, end - 1, end - 1, "before right curly");
 		for (child in brOpen.children) {
 			switch (child.tok) {
@@ -322,6 +331,8 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function checkComments(emptyLines:ListOfEmptyLines) {
+		if ((afterMultiLineComment == IGNORE) && (afterSingleLineComment == IGNORE)) return;
+
 		var root:TokenTree = checker.getTokenTree();
 		var comments:Array<TokenTree> = root.filterCallback(function (tok:TokenTree, depth:Int):FilterResult {
 			return switch (tok.tok) {
@@ -334,7 +345,13 @@ class ExtendedEmptyLinesCheck extends Check {
 			var line:Int = checker.getLinePos(comment.pos.min).line;
 			if (!~/^\s*(\/\/|\/\*)/.match(checker.lines[line])) continue;
 			line = checker.getLinePos(comment.getPos().max).line + 1;
-			checkLines(emptyLines, afterComment, line, line, "after comment");
+			switch (comment.tok) {
+				case Comment(_):
+					checkLines(emptyLines, afterMultiLineComment, line, line, "after comment");
+				case CommentLine(_):
+					checkLines(emptyLines, afterSingleLineComment, line, line, "after comment");
+				default:
+			}
 		}
 	}
 
@@ -416,7 +433,10 @@ class ExtendedEmptyLinesCheck extends Check {
 				propertyName: "max",
 				value: 1
 			}],
-			properties: []
+			properties: [{
+				"propertyName": "skipSingleLineTypes",
+				"values": [false, true]
+			}]
 		}];
 
 		var props:Array<String> = [
@@ -426,7 +446,8 @@ class ExtendedEmptyLinesCheck extends Check {
 			"betweenClassVars", "betweenClassMethods", "beginAbstract", "endAbstract",
 			"afterAbstractVars", "betweenAbstractVars", "betweenAbstractMethods", "beginInterface",
 			"endInterface", "betweenInterfaceFields", "beginEnum", "endEnum", "betweenEnumFields",
-			"beginTypedef", "endTypedef", "betweenTypedefFields", "afterComment"
+			"beginTypedef", "endTypedef", "betweenTypedefFields", "afterSingleLineComment",
+			"afterMultiLineComment"
 		];
 
 		for (prop in props) {

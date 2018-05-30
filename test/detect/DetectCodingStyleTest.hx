@@ -377,6 +377,7 @@ class DetectCodingStyleTest {
 		Assert.areEqual("ExtendedEmptyLines", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual(1, props.max);
+		Assert.areEqual(true, props.skipSingleLineTypes);
 		Assert.areEqual(EmptyLinesPolicy.NONE, props.endClass);
 		Assert.areEqual(EmptyLinesPolicy.NONE, props.endInterface);
 		Assert.areEqual(EmptyLinesPolicy.EXACT, props.afterImports);
@@ -386,7 +387,8 @@ class DetectCodingStyleTest {
 		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenInterfaceFields);
 		Assert.areEqual(EmptyLinesPolicy.NONE, props.betweenTypedefFields);
 		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.endAbstract);
-		Assert.areEqual(EmptyLinesPolicy.NONE, props.afterComment);
+		Assert.areEqual(EmptyLinesPolicy.NONE, props.afterSingleLineComment);
+		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.afterMultiLineComment);
 		Assert.areEqual(EmptyLinesPolicy.EXACT, props.beforePackage);
 		Assert.areEqual(EmptyLinesPolicy.EXACT, props.inFunction);
 		Assert.areEqual(EmptyLinesPolicy.IGNORE, props.betweenAbstractVars);

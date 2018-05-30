@@ -83,6 +83,7 @@
         {
             "props": {
                 "max": 1,
+                "skipSingleLineTypes": true,
                 "beforePackage": "none",
                 "inFunction": "exact",
                 "afterPackage": "exact",
@@ -92,7 +93,8 @@
                 "betweenTypes": "exact",
                 "typeDefinition": "none",
                 "beforeFileEnd": "none",
-                "afterComment": "none",
+                "afterSingleLineComment": "none",
+                "afterMultiLineComment": "none",
                 "anywhereInFile": "upto",
                 "afterAbstractVars": "exact",
                 "beginAbstract": "none",
