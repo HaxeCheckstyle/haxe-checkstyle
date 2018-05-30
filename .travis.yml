@@ -21,12 +21,11 @@ matrix:
         - haxelib install munit
     - haxe: development
       install:
-        - haxelib git hxparse https://github.com/simn/hxparse.git
-        - haxelib git haxeparser https://github.com/simn/haxeparser.git
+        - haxelib git hxparse https://github.com/simn/hxparse
+        - haxelib git haxeparser https://github.com/simn/haxeparser
+        - haxelib git mcover https://github.com/massiveinteractive/mcover master src
+        - haxelib install mconsole
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
-        - haxelib install mcover 2.1.1
         - haxelib install munit
         - sed -i 's/:3.3.0//' buildGlobal.hxml
-  allow_failures:
-    - haxe: development
