@@ -32,7 +32,6 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 		assertNoMsg(check, TEST5);
 		check.enforceReturnTypeForAnonymous = true;
 		assertMsg(check, TEST5, MSG_NO_ANON_RETURN);
-
 	}
 
 	@Test

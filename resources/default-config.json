@@ -126,6 +126,7 @@
 				"betweenTypes": "exact",
 				"afterClassVars": "exact",
 				"beginInterface": "exact",
+				"afterLeftCurly": "none",
 				"betweenInterfaceFields": "exact",
 				"betweenTypedefFields": "none",
 				"endAbstract": "none",
@@ -151,6 +152,7 @@
 				"afterAbstractVars": "exact",
 				"typeDefinition": "none",
 				"beforeUsing": "exact",
+				"beforeRightCurly": "none",
 				"beginClass": "exact",
 				"beginTypedef": "none"
 			},

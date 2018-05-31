@@ -38,7 +38,7 @@ class ListOfEmptyLines {
 	function checkRangeUpto(range:EmptyLineRange, max:Int, line:Int):EmptyLineRange {
 		switch (range) {
 			case NONE: return NONE;
-			case SINGLE(l): if (max == 1) return NONE;
+			case SINGLE(l): if (max >= 1) return NONE;
 			case RANGE(rangeStart, rangeEnd): if (1 + rangeEnd - rangeStart <= max) return NONE;
 		};
 		return range;
@@ -125,7 +125,7 @@ class ListOfEmptyLines {
 	}
 
 	public function toString():String {
-		return lines.toString();
+		return lineRanges.toString();
 	}
 }
 

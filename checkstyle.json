@@ -583,7 +583,8 @@
             "checkstyle/token/walk/WalkStatement"
         ],
         "ExtendedEmptyLines": [
-            "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests"
+            "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests",
+            "checks/whitespace/ExtendedEmptyLinesCheckTest:ExtendedEmptyLinesCheckTests"
         ],
         "LeftCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"

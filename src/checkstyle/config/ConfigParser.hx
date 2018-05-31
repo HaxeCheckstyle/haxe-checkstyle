@@ -52,7 +52,6 @@ class ConfigParser {
 	}
 
 	public function parseAndValidateConfig(config:Config, rootFolder:String) {
-
 		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
 		if (config.version == null) config.version = 1;
 		if (config.version != 1) failWith('configuration file has unknown version: ${config.version}');
