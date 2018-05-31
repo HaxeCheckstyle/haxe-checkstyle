@@ -87,7 +87,11 @@ class ExtendedEmptyLinesCheck extends Check {
 
 		var lastImport:TokenTree = imports[imports.length - 1];
 		if (lastImport.nextSibling != null) {
-			checkBetweenToken(emptyLines, lastImport, lastImport.nextSibling, getPolicy(AFTERIMPORTS), "after imports/using");
+			switch (lastImport.nextSibling.tok) {
+				case Kwd(KwdAbstract), Kwd(KwdClass), Kwd(KwdEnum), Kwd(KwdInterface), Kwd(KwdTypedef):
+					checkBetweenToken(emptyLines, lastImport, lastImport.nextSibling, getPolicy(AFTERIMPORTS), "after imports/using");
+				default:
+			}
 		}
 
 		for (index in 1...imports.length) {
