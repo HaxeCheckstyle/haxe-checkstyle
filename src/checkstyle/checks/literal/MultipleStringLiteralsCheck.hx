@@ -67,5 +67,4 @@ class MultipleStringLiteralsCheck extends Check {
 			default: filterLiteral(token.parent);
 		}
 	}
-
 }

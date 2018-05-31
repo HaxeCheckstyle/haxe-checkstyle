@@ -82,6 +82,36 @@
         },
         {
             "props": {
+                "max": 1,
+                "skipSingleLineTypes": true,
+                "defaultPolicy": "none",
+                "exact": [
+                    "inFunction",
+                    "afterPackage",
+                    "afterImports",
+                    "beforeUsing",
+                    "betweenTypes",
+                    "afterAbstractVars",
+                    "betweenAbstractMethods",
+                    "afterClassStaticVars",
+                    "afterClassVars",
+                    "betweenClassMethods",
+                    "beginInterface"
+                ],
+                "upto": [
+                    "betweenImports",
+                    "anywhereInFile",
+                    "betweenAbstractVars",
+                    "beginClass",
+                    "betweenClassStaticVars",
+                    "betweenClassVars",
+                    "betweenInterfaceFields"
+                ]
+            },
+            "type": "ExtendedEmptyLines"
+        },
+        {
+            "props": {
                 "max": 2000
             },
             "type": "FileLength"
@@ -541,6 +571,10 @@
             "checkstyle/checks/block/EmptyBlockCheck",
             "checkstyle/checks/whitespace/EmptyLinesCheck",
             "checkstyle/token/walk/WalkStatement"
+        ],
+        "ExtendedEmptyLines": [
+            "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests",
+            "checks/whitespace/ExtendedEmptyLinesCheckTest:ExtendedEmptyLinesCheckTests"
         ],
         "LeftCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"

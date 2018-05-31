@@ -133,6 +133,7 @@ typedef WalkCB = TokenStream -> TokenTree -> Void;
 
 class SharpElseException {
 	public var token:TokenTree;
+
 	public function new (token:TokenTree) {
 		this.token = token;
 	}

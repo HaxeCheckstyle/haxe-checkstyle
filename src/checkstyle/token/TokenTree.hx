@@ -6,6 +6,7 @@ class TokenTree extends Token {
 
 	public var parent:TokenTree;
 	public var previousSibling:TokenTree;
+	public var nextSibling:TokenTree;
 	public var children:Array<TokenTree>;
 	public var index:Int;
 
@@ -21,7 +22,10 @@ class TokenTree extends Token {
 
 	public function addChild(child:TokenTree) {
 		if (children == null) children = [];
-		if (children.length > 0) child.previousSibling = children[children.length - 1];
+		if (children.length > 0) {
+			child.previousSibling = children[children.length - 1];
+			children[children.length - 1].nextSibling = child;
+		}
 		children.push(child);
 		child.parent = this;
 	}

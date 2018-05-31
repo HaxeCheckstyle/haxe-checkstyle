@@ -118,6 +118,19 @@
 		},
 		{
 			"props": {
+				"none": [],
+				"upto": [],
+				"defaultPolicy": "none",
+				"exact": [],
+				"max": 1,
+				"ignore": [],
+				"atleast": [],
+				"skipSingleLineTypes": true
+			},
+			"type": "ExtendedEmptyLines"
+		},
+		{
+			"props": {
 				"max": 2000
 			},
 			"type": "FileLength"

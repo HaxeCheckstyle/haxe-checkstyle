@@ -74,7 +74,7 @@ class ConfigUtils {
 			"points", "desc", "currentState", "skipOverStringStart",
 			"commentStartRE", "commentBlockEndRE", "stringStartRE",
 			"stringInterpolatedEndRE", "stringLiteralEndRE", "formatRE",
-			"skipOverInitialQuote", "messages", "checker"
+			"skipOverInitialQuote", "messages", "checker", "placemap"
 		];
 		var checkConfig:CheckConfig = {
 			type: check.getModuleName(),

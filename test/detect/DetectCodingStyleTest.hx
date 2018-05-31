@@ -38,6 +38,8 @@ import checkstyle.checks.type.ReturnCheck;
 import checkstyle.checks.type.TypeCheck;
 import checkstyle.checks.whitespace.ArrayAccessCheck;
 import checkstyle.checks.whitespace.EmptyLinesCheck;
+import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck;
+import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 import checkstyle.checks.whitespace.IndentationCheck;
 import checkstyle.checks.whitespace.OperatorWhitespaceCheck;
@@ -366,6 +368,17 @@ class DetectCodingStyleTest {
 		Assert.areEqual(1, props.max);
 		Assert.isFalse(props.requireEmptyLineAfterClass);
 		Assert.isTrue(props.allowEmptyLineAfterMultiLineComment);
+	}
+
+	@Test
+	public function testDetectExtendedEmptyLines() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ExtendedEmptyLinesCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("ExtendedEmptyLines", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(1, props.max);
+		Assert.areEqual(true, props.skipSingleLineTypes);
+		Assert.areEqual(EmptyLinesPolicy.UPTO, props.defaultPolicy);
 	}
 
 	@Test

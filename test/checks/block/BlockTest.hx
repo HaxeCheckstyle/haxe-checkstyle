@@ -40,7 +40,6 @@ class BlockTest extends CheckTestCase<BlockTests> {
 
 @:enum
 abstract BlockTests(String) to String {
-
 	var ISSUE_42 = "
 	abstractAndClass Macro
 	{

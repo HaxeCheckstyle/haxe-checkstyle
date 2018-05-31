@@ -247,7 +247,6 @@ class Main {
 			Sys.println("You have no checks missing from your configuration");
 		}
 		else {
-
 			Sys.println("The following checks are missing from your configuration:");
 			for (check in missingChecks) {
 				Sys.println(check.name + " - " + check.description);

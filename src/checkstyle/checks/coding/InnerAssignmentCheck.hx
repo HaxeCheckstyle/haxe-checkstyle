@@ -72,7 +72,6 @@ class InnerAssignmentCheck extends Check {
 		// - there are no other Binops apart from =
 		// - return is only statement inside block
 		// - it is inside of setter function
-
 		var allBinops:Array<TokenTree> = token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {

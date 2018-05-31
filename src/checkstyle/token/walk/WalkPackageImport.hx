@@ -15,7 +15,6 @@ class WalkPackageImport {
 	 *              |- Semicolon
 	 *
 	 */
-
 	public static function walkPackageImport(stream:TokenStream, parent:TokenTree) {
 		var newChild:TokenTree = null;
 		newChild = stream.consumeToken();

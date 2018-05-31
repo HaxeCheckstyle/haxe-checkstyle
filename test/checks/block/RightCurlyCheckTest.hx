@@ -585,5 +585,4 @@ abstract RightCurlyCheckTests(String) to String {
 	class Test {
 		var field = new Object({x:0});
 	}";
-
 }
