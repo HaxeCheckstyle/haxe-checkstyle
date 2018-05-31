@@ -7,6 +7,7 @@
 - Fixed handling of relative paths when using `extendsConfigPath` [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Fixed detection of absolute paths when using `extendsConfigPath` [#422](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/422)
 - Fixed reported position of Indentation check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
+- Fixed Haxe 4 compilation and reenabled Travis CI development build [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423) + [#425](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/425)
 - Improved if / else detection of RightCurly check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Improved support for eval target and Haxe 4 [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423)
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
