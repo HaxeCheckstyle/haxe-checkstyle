@@ -3,7 +3,7 @@ package checks.whitespace;
 import haxe.PosInfos;
 
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck;
-import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
+import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPlace;
 
 class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckTests> {
 
@@ -17,222 +17,237 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testBeforePackage() {
-		runChecks("beforePackage", " before package");
+		runChecks(BEFOREPACKAGE, " before package");
 	}
 
 	@Test
 	public function testAfterPackage() {
-		runChecks("afterPackage", " after package");
+		runChecks(AFTERPACKAGE, " after package");
 	}
 
 	@Test
 	public function testBetweenImports() {
-		runChecks("betweenImports", " between imports/using");
+		runChecks(BETWEENIMPORTS, " between imports/using");
 	}
 
 	@Test
 	public function testBeforeUsing() {
-		runChecks("beforeUsing", " between import and using");
+		runChecks(BEFOREUSING, " between import and using");
 	}
 
 	@Test
 	public function testAfterImports() {
-		runChecks("afterImports", " after imports/using");
+		runChecks(AFTERIMPORTS, " after imports/using");
 	}
 
 	@Test
 	public function testAnywhereInFile() {
-		runChecks("anywhereInFile", " anywhere in file", false);
+		runChecks(ANYWHEREINFILE, " anywhere in file", false);
 	}
 
 	@Test
 	public function testBetweenTypes() {
-		runChecks("betweenTypes", " between types");
+		runChecks(BETWEENTYPES, " between types");
 	}
 
 	@Test
 	public function testBeforeFileEnd() {
-		runChecks("beforeFileEnd", " before file end");
+		runChecks(BEFOREFILEEND, " before file end");
 	}
 
 	@Test
 	public function testInFunction() {
-		runChecks("inFunction", " inside functions", false);
+		runChecks(INFUNCTION, " inside functions", false);
 	}
 
 	@Test
 	public function testAfterLeftCurly() {
-		runChecks("afterLeftCurly", " after left curly");
+		runChecks(AFTERLEFTCURLY, " after left curly");
 	}
 
 	@Test
 	public function testBeforeRightCurly() {
-		runChecks("beforeRightCurly", " before right curly");
+		runChecks(BEFORERIGHTCURLY, " before right curly");
 	}
 
 	@Test
 	public function testTypeDefinition() {
-		runChecks("typeDefinition", " between type definition and left curly");
+		runChecks(TYPEDEFINITION, " between type definition and left curly");
 	}
 
 	@Test
 	public function testBeginClass() {
-		runChecks("beginClass", " after left curly");
+		runChecks(BEGINCLASS, " after left curly");
 	}
 
 	@Test
 	public function testEndClass() {
-		runChecks("endClass", " before right curly");
+		runChecks(ENDCLASS, " before right curly");
 	}
 
 	@Test
 	public function testAfterClassStaticVars() {
-		runChecks("afterClassStaticVars", " after class static vars");
+		runChecks(AFTERCLASSSTATICVARS, " after class static vars");
 	}
 
 	@Test
 	public function testAfterClassVars() {
-		runChecks("afterClassVars", " after class vars");
+		runChecks(AFTERCLASSVARS, " after class vars");
 	}
 
 	@Test
 	public function testBetweenClassStaticVars() {
-		runChecks("betweenClassStaticVars", " between class static vars");
+		runChecks(BETWEENCLASSSTATICVARS, " between class static vars");
 	}
 
 	@Test
 	public function testBetweenClassVars() {
-		runChecks("betweenClassVars", " between class vars");
+		runChecks(BETWEENCLASSVARS, " between class vars");
 	}
 
 	@Test
 	public function testBetweenClassMethods() {
-		runChecks("betweenClassMethods", " between class methods");
+		runChecks(BETWEENCLASSMETHODS, " between class methods");
 	}
 
 	@Test
 	public function testBeginInterface() {
-		runChecks("beginInterface", " after left curly");
+		runChecks(BEGININTERFACE, " after left curly");
 	}
 
 	@Test
 	public function testEndInterface() {
-		runChecks("endInterface", " before right curly");
+		runChecks(ENDINTERFACE, " before right curly");
 	}
 
 	@Test
 	public function testBetweenInterfaceFields() {
-		runChecks("betweenInterfaceFields", " between type fields", false);
+		runChecks(BETWEENINTERFACEFIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginEnum() {
-		runChecks("beginEnum", " after left curly");
+		runChecks(BEGINENUM, " after left curly");
 	}
 
 	@Test
 	public function testEndEnum() {
-		runChecks("endEnum", " before right curly");
+		runChecks(ENDENUM, " before right curly");
 	}
 
 	@Test
 	public function testBetweenEnumFields() {
-		runChecks("betweenEnumFields", " between type fields", false);
+		runChecks(BETWEENENUMFIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginTypedef() {
-		runChecks("beginTypedef", " after left curly");
+		runChecks(BEGINTYPEDEF, " after left curly");
 	}
 
 	@Test
 	public function testEndTypedef() {
-		runChecks("endTypedef", " before right curly");
+		runChecks(ENDTYPEDEF, " before right curly");
 	}
 
 	@Test
 	public function testBetweenTypedefFields() {
-		runChecks("betweenTypedefFields", " between type fields", false);
+		runChecks(BETWEENTYPEDEFFIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginAbstract() {
-		runChecks("beginAbstract", " after left curly");
+		runChecks(BEGINABSTRACT, " after left curly");
 	}
 
 	@Test
 	public function testEndAbstract() {
-		runChecks("endAbstract", " before right curly");
+		runChecks(ENDABSTRACT, " before right curly");
 	}
 
 	@Test
 	public function testAfterAbstractVArs() {
-		runChecks("afterAbstractVars", " after abstract vars");
+		runChecks(AFTERABSTRACTVARS, " after abstract vars");
 	}
 
 	@Test
 	public function testBetweenAbstractVars() {
-		runChecks("betweenAbstractVars", " between abstract vars");
+		runChecks(BETWEENABSTRACTVARS, " between abstract vars");
 	}
 
 	@Test
 	public function testBetweenAbstractMethods() {
-		runChecks("betweenAbstractMethods", " between abstract functions");
+		runChecks(BETWEENABSTRACTMETHODS, " between abstract functions");
 	}
 
 	@Test
 	public function testsingleLineComment() {
-		runChecks("afterSingleLineComment", " after comment");
+		runChecks(AFTERSINGLELINECOMMENT, " after comment");
 	}
 
 	@Test
 	public function testAfterMultiLineComment() {
-		runChecks("afterMultiLineComment", " after comment");
+		runChecks(AFTERMULTILINECOMMENT, " after comment");
 	}
 
-	function runChecks(fieldName:String, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
+	function runChecks(fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
 		var check:ExtendedEmptyLinesCheck = makeIgnoredCheck(1);
 		assertNoMsg(check, TEST_EXACT_1);
 		assertNoMsg(check, TEST_EXACT_2);
 		assertNoMsg(check, TEST_NONE);
 
-		Reflect.setField(check, fieldName, EXACT);
+		runChecksMax1(check, fieldName, postfix, hasFixedPosition, pos);
+		runChecksMax2(check, fieldName, postfix, hasFixedPosition, pos);
+	}
+
+	function runChecksMax1(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
+		check.max = 1;
+		check.exact = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
 		assertMsg(check, TEST_EXACT_2, MSG_EXACT_1 + postfix);
 		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_EXACT_1 + postfix);
 
-		Reflect.setField(check, fieldName, NONE);
+		check.exact = [];
+		check.none = [fieldName];
 		assertMsg(check, TEST_EXACT_1, MSG_NONE + postfix);
 		assertMsg(check, TEST_EXACT_2, MSG_NONE + postfix);
 		assertNoMsg(check, TEST_NONE);
 
-		Reflect.setField(check, fieldName, UPTO);
+		check.none = [];
+		check.upto = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
 		assertMsg(check, TEST_EXACT_2, MSG_UPTO_1 + postfix);
 		assertNoMsg(check, TEST_NONE);
 
-		Reflect.setField(check, fieldName, ATLEAST);
+		check.upto = [];
+		check.atleast = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
 		assertNoMsg(check, TEST_EXACT_2);
 		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_ATLEAST_1 + postfix);
+	}
 
+	function runChecksMax2(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
 		check.max = 2;
-		Reflect.setField(check, fieldName, EXACT);
+		check.atleast = [];
+		check.exact = [fieldName];
 		assertMsg(check, TEST_EXACT_1, MSG_EXACT_2 + postfix);
 		assertNoMsg(check, TEST_EXACT_2);
 		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_EXACT_2 + postfix);
 
-		Reflect.setField(check, fieldName, NONE);
+		check.exact = [];
+		check.none = [fieldName];
 		assertMsg(check, TEST_EXACT_1, MSG_NONE + postfix);
 		assertMsg(check, TEST_EXACT_2, MSG_NONE + postfix);
 		assertNoMsg(check, TEST_NONE);
 
-		Reflect.setField(check, fieldName, UPTO);
+		check.none = [];
+		check.upto = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
 		assertNoMsg(check, TEST_EXACT_2);
 		assertNoMsg(check, TEST_NONE);
 
-		Reflect.setField(check, fieldName, ATLEAST);
+		check.upto = [];
+		check.atleast = [fieldName];
 		assertMsg(check, TEST_EXACT_1, MSG_ATLEAST_2 + postfix);
 		assertNoMsg(check, TEST_EXACT_2);
 		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_ATLEAST_2 + postfix);
@@ -242,20 +257,12 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 		var check:ExtendedEmptyLinesCheck = new ExtendedEmptyLinesCheck();
 		check.max = max;
 		check.skipSingleLineTypes = skipSingleLineTypes;
-
-		var policies:Array<String> = [
-			"beforePackage", "afterPackage", "betweenImports", "beforeUsing", "afterImports",
-			"anywhereInFile", "betweenTypes", "beforeFileEnd", "inFunction", "afterLeftCurly", "beforeRightCurly", "typeDefinition",
-			"beginClass", "endClass", "afterClassStaticVars", "afterClassVars", "betweenClassStaticVars",
-			"betweenClassVars", "betweenClassMethods", "beginAbstract", "endAbstract",
-			"afterAbstractVars", "betweenAbstractVars", "betweenAbstractMethods", "beginInterface",
-			"endInterface", "betweenInterfaceFields", "beginEnum", "endEnum", "betweenEnumFields",
-			"beginTypedef", "endTypedef", "betweenTypedefFields", "afterSingleLineComment",
-			"afterMultiLineComment"
-		];
-		for (policy in policies) {
-			Reflect.setField(check, policy, EmptyLinesPolicy.IGNORE);
-		}
+		check.defaultPolicy = IGNORE;
+		check.ignore = [];
+		check.none = [];
+		check.exact = [];
+		check.upto = [];
+		check.atleast = [];
 		return check;
 	}
 }
