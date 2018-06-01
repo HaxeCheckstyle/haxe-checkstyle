@@ -44,7 +44,8 @@ class CodeClimateReporter extends BaseReporter {
 			}
 		};
 
-		Sys.print(Json.stringify(issue) + "\u0000");
+		Sys.print(Json.stringify(issue));
+		Sys.stdout().writeByte(0);
 	}
 
 	function getSeverity(severity:SeverityLevel):String {
