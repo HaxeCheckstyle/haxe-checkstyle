@@ -8,8 +8,8 @@
 - Fixed detection of absolute paths when using `extendsConfigPath` [#422](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/422)
 - Fixed reported position of Indentation check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Fixed Haxe 4 compilation and reenabled Travis CI development build [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423) + [#425](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/425)
-- Fixed Codeclimate reporter output for C++ target
-- Fixed segmentation fault when checking zero length files
+- Fixed Codeclimate reporter output for C++ target [#428](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/428)
+- Fixed segmentation fault when checking zero length files [#428](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/428)
 - Improved if / else detection of RightCurly check [#421](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/421)
 - Improved support for eval target and Haxe 4 [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423)
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
