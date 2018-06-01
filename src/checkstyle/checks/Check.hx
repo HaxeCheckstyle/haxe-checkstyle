@@ -103,6 +103,7 @@ class Check {
 	}
 
 	function isLineSuppressed(i:Int):Bool {
+		if (checker.linesIdx.length <= i) return false;
 		return isCharPosSuppressed(checker.linesIdx[i].l);
 	}
 
