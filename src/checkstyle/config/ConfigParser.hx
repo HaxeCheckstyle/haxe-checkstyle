@@ -117,18 +117,17 @@ class ConfigParser {
 			range = val.substr(index + 1);
 			val = val.substr(0, index);
 		}
-		if (pathType == null) {
-			addToExclude(exclude, val, range);
+		if ((pathType == null) || (pathType == cast "")) {
+			addNormalisedPathToExclude(exclude, val, range);
+			return;
 		}
-		else {
-			if (pathType == RELATIVE_TO_SOURCE) {
+		switch (pathType) {
+			case RELATIVE_TO_SOURCE:
 				for (path in paths) {
 					addNormalisedPathToExclude(exclude, path + ":" + val, range);
 				}
-			}
-			else {
+			case RELATIVE_TO_PROJECT:
 				addNormalisedPathToExclude(exclude, val, range);
-			}
 		}
 	}
 

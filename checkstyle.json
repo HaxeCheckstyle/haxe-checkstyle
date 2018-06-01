@@ -539,7 +539,7 @@
         }
     ],
     "exclude": {
-        "path": "RELATIVE_TO_SOURCE",
+        "path": "RELATIVE_TO_PROJECT",
         "all": [],
         "Dynamic": [
             "checkstyle/Main",
@@ -581,9 +581,6 @@
         ],
         "RightCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"
-        ],
-        "MethodCount": [
-            "checkstyle/token/TokenTreeBuilder"
         ],
         "MethodLength": [
             "checkstyle/checks/whitespace/WhitespaceAfterCheck",

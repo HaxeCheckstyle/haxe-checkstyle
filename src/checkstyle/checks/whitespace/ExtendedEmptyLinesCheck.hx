@@ -96,20 +96,25 @@ class ExtendedEmptyLinesCheck extends Check {
 
 		for (index in 1...imports.length) {
 			var imp:TokenTree = imports[index];
-			if (imp.previousSibling == null) continue;
+			var prev:TokenTree = imp.previousSibling;
+			if (prev == null) continue;
 			if (imp.is(Kwd(KwdUsing)))  {
-				if (imp.previousSibling.is(Kwd(KwdImport)))  {
-					checkBetweenToken(emptyLines, imp.previousSibling, imp, getPolicy(BEFOREUSING), "between import and using");
+				if (prev.is(Kwd(KwdImport)))  {
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFOREUSING), "between import and using");
 					continue;
 				}
 			}
 			else {
-				if (imp.previousSibling.is(Kwd(KwdUsing)))  {
-					checkBetweenToken(emptyLines, imp.previousSibling, imp, getPolicy(BEFOREUSING), "between import and using");
+				if (prev.is(Kwd(KwdUsing)))  {
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFOREUSING), "between import and using");
 					continue;
 				}
 			}
-			checkBetweenToken(emptyLines, imp.previousSibling, imp, getPolicy(BETWEENIMPORTS), "between imports/using");
+			switch (prev.tok) {
+				case Kwd(KwdImport), Kwd(KwdUsing), Comment(_), CommentLine(_):
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BETWEENIMPORTS), "between imports/using");
+				default:
+			}
 		}
 	}
 
