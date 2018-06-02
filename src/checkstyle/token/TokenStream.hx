@@ -26,7 +26,7 @@ class TokenStream {
 		var token:Token = tokens[current];
 		current++;
 		#if debugTokenTree
-		Sys.println (token);
+		Sys.println(token);
 		#end
 		return new TokenTree(token.tok, token.pos, current - 1);
 	}

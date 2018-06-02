@@ -280,6 +280,8 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		static var s2:String = 'xx';
 		var a:Int;
 		var b:String = 'x';
+		// var c:Int = 5;
+		var c:String = 'y';
 		function a() {
 			callA();
 			callB();
@@ -287,11 +289,17 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 				callC();
 			}
 		}
-		// test comment
 		function b() {
 			callA();
 			callB();
 		}
+		// test comment
+		// test comment
+		function c() {
+			callA();
+			callB();
+		}
+		// test comment
 	}
 	interface ITest {
 		function a();
@@ -307,12 +315,18 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 	@:enum
 	abstract Test(String) {
 		var val1 = 'test';
-		var val2 = 'test';
+		var val2 = 'test2';
+		// var val3 = 'test3';
+		var val4 = 'test4';
 		function test() {
 		}
 		function test2() {
 		}
+		// comment
+		function test3() {
+		}
 	}
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 	typedef Any = Dynamic;
 	typedef Struct = {
 		var fieldA:String;
@@ -345,6 +359,10 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 		var b:String = 'x';
 
+		// var c:Int = 5;
+
+		var c:String = 'y';
+
 		function a() {
 
 			callA();
@@ -359,8 +377,6 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 		}
 
-		// test comment
-
 		function b() {
 
 			callA();
@@ -368,6 +384,20 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 			callB();
 
 		}
+
+		// test comment
+
+		// test comment
+
+		function c() {
+
+			callA();
+
+			callB();
+
+		}
+
+		// test comment
 
 	}
 
@@ -404,6 +434,10 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 		var val2 = 'test';
 
+		// var val3 = 'test3';
+
+		var val4 = 'test4';
+
 		function test() {
 
 		}
@@ -412,7 +446,15 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 		}
 
+		// comment
+
+		function test3() {
+
+		}
+
 	}
+
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 
 	typedef Any = Dynamic;
 
@@ -467,6 +509,12 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		var b:String = 'x';
 
 
+		// var c:Int = 5;
+
+
+		var c:String = 'y';
+
+
 		function a() {
 
 
@@ -488,9 +536,6 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		}
 
 
-		// test comment
-
-
 		function b() {
 
 
@@ -501,6 +546,27 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 
 		}
+
+
+		// test comment
+
+
+		// test comment
+
+
+		function c() {
+
+
+			callA();
+
+
+			callB();
+
+
+		}
+
+
+		// test comment
 
 
 	}
@@ -554,6 +620,12 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		var val2 = 'test';
 
 
+		// var val3 = 'test3';
+
+
+		var val4 = 'test4';
+
+
 		function test() {
 
 
@@ -566,7 +638,19 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		}
 
 
+		// comment
+
+
+		function test3() {
+
+
+		}
+
+
 	}
+
+
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 
 
 	typedef Any = Dynamic;
