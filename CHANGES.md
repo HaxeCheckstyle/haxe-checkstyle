@@ -14,7 +14,7 @@
 - Improved support for eval target and Haxe 4 [#423](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/423)
 - Refactored configuration parser [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Refactored check exclusion handling [#424](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/424)
-- Refactored comment placement in token tree
+- Refactored comment placement in token tree [#429](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/429)
 - Cleanup `checkstyle.json` [#427](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/427)
 
 ## version 2.3.1 (2018-05-16)
