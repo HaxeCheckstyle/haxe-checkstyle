@@ -326,6 +326,7 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		function test3() {
 		}
 	}
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 	typedef Any = Dynamic;
 	typedef Struct = {
 		var fieldA:String;
@@ -452,6 +453,8 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		}
 
 	}
+
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 
 	typedef Any = Dynamic;
 
@@ -645,6 +648,9 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 
 	}
+
+
+	abstract OneOfTwo<T1, T2>(Dynamic) from T1 from T2 to T1 to T2 {}
 
 
 	typedef Any = Dynamic;

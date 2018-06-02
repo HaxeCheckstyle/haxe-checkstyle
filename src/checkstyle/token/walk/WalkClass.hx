@@ -54,11 +54,8 @@ class WalkClass {
 					throw "invalid token tree structure";
 			}
 		}
-		for (tok in tempStore) {
-			switch (tok.tok) {
-				case Comment(_), CommentLine(_): parent.addChild(tok);
-				default: throw "invalid token tree structure";
-			}
+		if (tempStore.length > 0) {
+			throw "invalid token tree structure";
 		}
 	}
 
