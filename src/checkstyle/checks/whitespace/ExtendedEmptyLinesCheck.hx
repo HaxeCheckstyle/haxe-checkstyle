@@ -194,12 +194,12 @@ class ExtendedEmptyLinesCheck extends Check {
 		checkType(emptyLines, typeToken, getPolicy(BEGINABSTRACT), getPolicy(ENDABSTRACT), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
 			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
 			var isVarChild:Bool = child.is(Kwd(KwdVar));
-			var isFuncNext:Bool = next.is(Kwd(KwdFunction));
-			var isVarNext:Bool = next.is(Kwd(KwdVar));
-
-			if (isFuncChild && isFuncNext) return makePolicyAndWhat(getPolicy(BETWEENABSTRACTMETHODS), "between abstract functions");
-			if (isVarChild && isFuncNext) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
-			if (isFuncChild && isVarNext) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
+			if (!isVarChild && !isFuncChild) return null;
+			var type:EmptyLinesFieldType = detectNextFieldType(next);
+			if (type == OTHER) return null;
+			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEENABSTRACTMETHODS), "between abstract functions");
+			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
+			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
 			return makePolicyAndWhat(getPolicy(BETWEENABSTRACTVARS), "between abstract vars");
 		});
 	}
@@ -220,12 +220,12 @@ class ExtendedEmptyLinesCheck extends Check {
 		checkType(emptyLines, typeToken, getPolicy(BEGINCLASS), getPolicy(ENDCLASS), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
 			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
 			var isVarChild:Bool = child.is(Kwd(KwdVar));
-			var isFuncNext:Bool = next.is(Kwd(KwdFunction));
-			var isVarNext:Bool = next.is(Kwd(KwdVar));
-
-			if (isFuncChild && isFuncNext) return makePolicyAndWhat(getPolicy(BETWEENCLASSMETHODS), "between class methods");
-			if (isVarChild && isFuncNext) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
-			if (isFuncChild && isVarNext) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
+			if (!isVarChild && !isFuncChild) return null;
+			var type:EmptyLinesFieldType = detectNextFieldType(next);
+			if (type == OTHER) return null;
+			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEENCLASSMETHODS), "between class methods");
+			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
+			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
 
 			var isStaticChild:Bool = (child.filter([Kwd(KwdStatic)], FIRST).length > 0);
 			var isStaticNext:Bool = (next.filter([Kwd(KwdStatic)], FIRST).length > 0);
@@ -234,6 +234,24 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (!isStaticChild && !isStaticNext) return makePolicyAndWhat(getPolicy(BETWEENCLASSVARS), "between class vars");
 			return makePolicyAndWhat(getPolicy(AFTERCLASSSTATICVARS), "after class static vars");
 		});
+	}
+
+	function detectNextFieldType(field:TokenTree):EmptyLinesFieldType {
+		if (field.is(Kwd(KwdFunction))) return FUNCTION;
+		if (field.is(Kwd(KwdVar))) return VAR;
+		if (!field.isComment()) return OTHER;
+
+		var after:TokenTree = field.nextSibling;
+		while (after != null) {
+			if (after.is(Kwd(KwdFunction))) return FUNCTION;
+			if (after.is(Kwd(KwdVar))) return VAR;
+			if (after.isComment()) {
+				after = after.nextSibling;
+				continue;
+			}
+			return OTHER;
+		}
+		return OTHER;
 	}
 
 	function checkType(emptyLines:ListOfEmptyLines,
@@ -476,6 +494,12 @@ abstract EmptyLinesPolicy(String) {
 	var EXACT = "exact";
 	var UPTO = "upto";
 	var ATLEAST = "atleast";
+}
+
+enum EmptyLinesFieldType {
+	VAR;
+	FUNCTION;
+	OTHER;
 }
 
 @:enum

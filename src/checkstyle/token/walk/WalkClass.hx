@@ -49,7 +49,7 @@ class WalkClass {
 				case Kwd(KwdPublic), Kwd(KwdPrivate), Kwd(KwdStatic), Kwd(KwdInline), Kwd(KwdMacro), Kwd(KwdOverride), Kwd(KwdDynamic):
 					tempStore.push(stream.consumeToken());
 				case Comment(_), CommentLine(_):
-					tempStore.push(stream.consumeToken());
+					parent.addChild(stream.consumeToken());
 				default:
 					throw "invalid token tree structure";
 			}

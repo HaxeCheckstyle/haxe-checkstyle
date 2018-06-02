@@ -20,6 +20,14 @@ class TokenTree extends Token {
 		return Type.enumEq(tokenDef, tok);
 	}
 
+	public function isComment():Bool {
+		if (tok == null) return false;
+		return switch (tok) {
+			case Comment(_), CommentLine(_): true;
+			default: false;
+		}
+	}
+
 	public function addChild(child:TokenTree) {
 		if (children == null) children = [];
 		if (children.length > 0) {
