@@ -18,8 +18,8 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "improved automatic coding style detection and error handling - see CHANGES",
-    "version": "2.3.1",
+    "releasenote": "new ExtendedEmptyLine check; refactored exclusion logic - see CHANGES",
+    "version": "2.4.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
 

@@ -1,6 +1,6 @@
 {
-    "name": "checkstyle",
-    "version": "2.3.1",
+    "name": "haxe-checkstyle",
+    "version": "2.4.0",
     "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
     "repository": {
         "type": "git",
@@ -17,13 +17,21 @@
         "cross"
     ],
     "author": {
-        "name": "Adi Reddy Mora",
-        "email": "adiinteractive@gmail.com"
+        "name": "Alexander Blum",
+        "email": "Alexander.Blum@gmail.com"
     },
+    "contributors": [{
+            "name": "Adi Reddy Mora"
+        },
+        {
+            "name": "Jens Fischer"
+        }
+    ],
     "dependencies": {
         "grunt": "latest",
         "grunt-cli": "latest"
     },
+    "bugs": "https://github.com/HaxeCheckstyle/haxe-checkstyle/issues",
     "license": "MIT",
     "devDependencies": {
         "grunt": "^0.4.5",

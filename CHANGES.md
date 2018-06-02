@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+## version 2.4.0 (2018-06-02)
+
 - New check ExtendedEmptyLines [#426](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/426) + [#427](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/427)
 - Added check's names to text output [#420](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/420)
 - Added version number to configuration file [#422](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/422)
