@@ -299,6 +299,7 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 			callA();
 			callB();
 		}
+		// test comment
 	}
 	interface ITest {
 		function a();
@@ -394,6 +395,8 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 			callB();
 
 		}
+
+		// test comment
 
 	}
 
@@ -558,6 +561,9 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 
 		}
+
+
+		// test comment
 
 
 	}
