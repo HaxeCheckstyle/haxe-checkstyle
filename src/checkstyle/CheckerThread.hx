@@ -4,9 +4,15 @@ package checkstyle;
 import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Thread;
+#elseif hl
+import cpp.hl.Thread;
+#else
+import checkstyle.utils.Thread;
 #end
 
 import checkstyle.checks.Check;
+
+import checkstyle.config.ExcludeManager;
 
 import checkstyle.reporter.ReporterManager;
 
@@ -16,7 +22,6 @@ class CheckerThread {
 	var parserQueue:ParserQueue;
 	var checks:Array<Check>;
 	var finished:Bool;
-	var excludes:Map<String, Array<String>>;
 
 	public function new(parserQueue:ParserQueue) {
 		this.parserQueue = parserQueue;
@@ -24,8 +29,7 @@ class CheckerThread {
 		checks = [];
 	}
 
-	public function start(templateChecker:Checker, excludesMap:Map<String, Array<String>>) {
-		excludes = excludesMap;
+	public function start(templateChecker:Checker) {
 		cloneChecks(templateChecker.checks);
 		Thread.create(runChecker);
 	}
@@ -95,30 +99,13 @@ class CheckerThread {
 
 	function runCheck(check:Check, checker:Checker):Array<CheckMessage> {
 		try {
-			if (checkForExclude(check.getModuleName(), checker)) return [];
+			if (ExcludeManager.isExcludedFromCheck(checker.file.name, check.getModuleName())) return [];
 			return check.run(checker);
 		}
 		catch (e:Any) {
 			ErrorUtils.handleException(e, checker.file, check.getModuleName());
 		}
 		return [];
-	}
-
-	function checkForExclude(moduleName:String, checker:Checker):Bool {
-		if (excludes == null) return false;
-		var excludesForCheck:Array<String> = excludes.get(moduleName);
-		if (excludesForCheck == null || excludesForCheck.length == 0) return false;
-
-		var cls = checker.file.name.substring(0, checker.file.name.indexOf(".hx"));
-		if (excludesForCheck.contains(cls)) return true;
-
-		var slashes:EReg = ~/[\/\\]/g;
-		cls = slashes.replace(cls, ":");
-		for (exclude in excludesForCheck) {
-			var r = new EReg(exclude, "i");
-			if (r.match(cls)) return true;
-		}
-		return false;
 	}
 
 	public function isFinished():Bool {

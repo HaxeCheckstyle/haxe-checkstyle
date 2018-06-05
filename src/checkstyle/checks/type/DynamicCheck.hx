@@ -18,10 +18,11 @@ class DynamicCheck extends Check {
 
 	function callbackComplexType(t:ComplexType, name:String, pos:Position) {
 		if (t == null) return;
-		if (isPosSuppressed(pos)) return;
 		switch (t) {
 			case TPath(p):
-				if (p.name == "Dynamic") error(name, pos);
+				if (p.name != "Dynamic") return;
+				if (isPosSuppressed(pos)) return;
+				error(name, pos);
 			default:
 		}
 	}

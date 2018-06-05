@@ -46,7 +46,7 @@ class ThreadTest {
 			var newChecker = parseQueue.nextFile();
 			if (newChecker == null) {
 				failCount++;
-				Sys.sleep(1);
+				Sys.sleep(1.0);
 				continue;
 			}
 			count++;
@@ -64,7 +64,7 @@ class ThreadTest {
 		var parseQueue = new ParserQueue(files, checker);
 		parseQueue.start (1);
 
-		var checkerPool = new CheckerPool(parseQueue, checker, null);
+		var checkerPool = new CheckerPool(parseQueue, checker);
 		checkerPool.start (5);
 		Assert.isFalse(parseQueue.isFinished());
 		Assert.isFalse(checkerPool.isFinished());
@@ -75,7 +75,7 @@ class ThreadTest {
 			if (failCount > 5) Assert.fail("parsing failed");
 			if (parseQueue.isFinished() && checkerPool.isFinished()) break;
 			failCount++;
-			Sys.sleep(1);
+			Sys.sleep(1.0);
 		}
 		Assert.isTrue(parseQueue.isFinished());
 		Assert.isTrue(checkerPool.isFinished());

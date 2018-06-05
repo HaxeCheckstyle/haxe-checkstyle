@@ -41,16 +41,6 @@ class CheckTestCase<T:String> {
 		Assert.areEqual(expected, msg, pos);
 	}
 
-	// function assertEquals<T>(expected:T, actual:T, ?c:PosInfos) {
-	// 	currentTest.done = true;
-	// 	if (actual != expected) {
-	// 		currentTest.success = false;
-	// 		currentTest.error = "\nexpected:\n\t'" + expected + "'\nactual:\n\t'" + actual + "'";
-	// 		currentTest.posInfos = c;
-	// 		throw currentTest;
-	// 	}
-	// }
-
 	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, ?pos:PosInfos):String {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independent checkMessage calls in a single test
@@ -62,7 +52,7 @@ class CheckTestCase<T:String> {
 
 		ReporterManager.INSTANCE.clear();
 		ReporterManager.INSTANCE.addReporter(reporter);
-		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}], null);
+		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}]);
 		return reporter.message;
 	}
 

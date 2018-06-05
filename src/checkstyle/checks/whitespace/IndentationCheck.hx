@@ -171,7 +171,6 @@ class IndentationCheck extends Check {
 	}
 
 	function calcLineIndentationSharp(token:TokenTree, lineIndentation:Array<Int>) {
-
 		var linePos:LinePos = checker.getLinePos(token.pos.min);
 		var line:String = checker.lines[linePos.line];
 		var prefix:String = line.substr(0, linePos.ofs + 1);

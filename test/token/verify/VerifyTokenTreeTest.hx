@@ -1,7 +1,5 @@
 package token.verify;
 
-// import haxe.PosInfos;
-
 import massive.munit.Assert;
 
 import haxeparser.Data;

@@ -68,7 +68,6 @@ class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTes
 
 @:enum
 abstract ConditionalCompilationTests(String) to String {
-
 	var ISSUE_76 = "
 	class Base {}
 

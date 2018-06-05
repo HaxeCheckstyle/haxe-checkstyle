@@ -24,7 +24,6 @@ class WalkVar {
 			if (stream.is(Binop(OpAssign))) {
 				WalkStatement.walkStatement(stream, name);
 			}
-			WalkComment.walkComment(stream, name);
 			if (stream.is(Comma)) {
 				var comma:TokenTree = stream.consumeTokenDef(Comma);
 				name.addChild(comma);

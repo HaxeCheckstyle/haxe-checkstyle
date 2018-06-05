@@ -49,7 +49,6 @@ class WalkTypeNameDef {
 	}
 
 	static function walkTypeNameDefContinue(stream:TokenStream, parent:TokenTree) {
-
 		if (stream.is(Dot)) {
 			var dot:TokenTree = stream.consumeTokenDef(Dot);
 			parent.addChild(dot);

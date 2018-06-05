@@ -23,11 +23,16 @@ class TestMain {
 		var client:MCoverPrintClient = new MCoverPrintClient();
 		var runner:TestRunner = new TestRunner(client);
 		runner.completionHandler = completionHandler;
+		#if (neko || cpp || hl)
 		EntryPoint.addThread(function() {
-			while (true) Sys.sleep(1);
+			while (true) Sys.sleep(1.0);
 		});
+		#end
 		runner.run(suites);
 		EntryPoint.run();
+		#if eval
+		setupCoverageReport();
+		#end
 	}
 
 	function completionHandler(success:Bool) {
@@ -51,7 +56,7 @@ class TestMain {
 
 			var missingStatements:Array<Statement> = cls.getMissingStatements();
 			for (stmt in missingStatements) {
-				for (line in stmt.lines) coverageData[line] = 0;
+				for (line in stmt.lines) coverageData[line + 1] = 0;
 			}
 			var missingBranches:Array<Branch> = cls.getMissingBranches();
 			for (branch in missingBranches) {

@@ -52,7 +52,6 @@ class ConfigParser {
 	}
 
 	public function parseAndValidateConfig(config:Config, rootFolder:String) {
-
 		validateAllowedFields(config, Reflect.fields(ConfigUtils.getEmptyConfig()), "Config");
 		if (config.version == null) config.version = 1;
 		if (config.version != 1) failWith('configuration file has unknown version: ${config.version}');
@@ -92,7 +91,7 @@ class ConfigParser {
 		parseExcludes(config);
 	}
 
-	function parseExcludes(config:ExcludeConfig) {
+	public function parseExcludes(config:ExcludeConfig) {
 		if (config.version == null) config.version = 1;
 		if (config.version != 1) failWith('exclude configuration file has unknown version: ${config.version}');
 		var pathType = config.path;
@@ -112,24 +111,29 @@ class ConfigParser {
 	}
 
 	function updateExcludes(exclude:String, val:String, pathType:ExcludePath) {
-		if (pathType == null) {
-			addToExclude(exclude, val);
+		var range:String = null;
+		var index:Int = val.lastIndexOf(":");
+		if (index > 0) {
+			range = val.substr(index + 1);
+			val = val.substr(0, index);
 		}
-		else {
-			if (pathType == RELATIVE_TO_SOURCE) {
+		if ((pathType == null) || (pathType == cast "")) {
+			addNormalisedPathToExclude(exclude, val, range);
+			return;
+		}
+		switch (pathType) {
+			case RELATIVE_TO_SOURCE:
 				for (path in paths) {
-					addNormalisedPathToExclude(exclude, path + ":" + val);
+					addNormalisedPathToExclude(exclude, path + ":" + val, range);
 				}
-			}
-			else {
-				addNormalisedPathToExclude(exclude, val);
-			}
+			case RELATIVE_TO_PROJECT:
+				addNormalisedPathToExclude(exclude, val, range);
 		}
 	}
 
-	function addNormalisedPathToExclude(exclude:String, path:String) {
+	function addNormalisedPathToExclude(exclude:String, path:String, range:String) {
 		var path = normalisePath(path);
-		addToExclude(exclude, path);
+		addToExclude(exclude, path, range);
 	}
 
 	function normalisePath(path:String):String {
@@ -139,9 +143,9 @@ class ConfigParser {
 		return path;
 	}
 
-	function addToExclude(exclude:String, value:String) {
-		if (exclude == "all") allExcludes.push(value);
-		else excludesMap.get(exclude).push(value);
+	function addToExclude(exclude:String, value:String, range:String) {
+		if (exclude == "all") ExcludeManager.addGlobalExclude(value, range);
+		else ExcludeManager.addConfigExclude(exclude, value, range);
 	}
 
 	function createCheck(checkConf:CheckConfig):Check {

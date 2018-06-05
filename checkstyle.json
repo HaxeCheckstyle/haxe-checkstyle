@@ -19,9 +19,6 @@
             "type": "CatchParameterName"
         },
         {
-            "type": "ConditionalCompilation"
-        },
-        {
             "props": {
                 "ignoreExtern": true,
                 "format": "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$"
@@ -82,6 +79,36 @@
         },
         {
             "type": "EmptyPackage"
+        },
+        {
+            "props": {
+                "max": 1,
+                "skipSingleLineTypes": true,
+                "defaultPolicy": "none",
+                "exact": [
+                    "inFunction",
+                    "afterPackage",
+                    "afterImports",
+                    "beforeUsing",
+                    "betweenTypes",
+                    "afterAbstractVars",
+                    "betweenAbstractMethods",
+                    "afterClassStaticVars",
+                    "afterClassVars",
+                    "betweenClassMethods",
+                    "beginInterface"
+                ],
+                "upto": [
+                    "betweenImports",
+                    "anywhereInFile",
+                    "betweenAbstractVars",
+                    "beginClass",
+                    "betweenClassStaticVars",
+                    "betweenClassVars",
+                    "betweenInterfaceFields"
+                ]
+            },
+            "type": "ExtendedEmptyLines"
         },
         {
             "props": {
@@ -512,7 +539,7 @@
         }
     ],
     "exclude": {
-        "path": "RELATIVE_TO_SOURCE",
+        "path": "RELATIVE_TO_PROJECT",
         "all": [],
         "Dynamic": [
             "checkstyle/Main",
@@ -545,14 +572,15 @@
             "checkstyle/checks/whitespace/EmptyLinesCheck",
             "checkstyle/token/walk/WalkStatement"
         ],
+        "ExtendedEmptyLines": [
+            "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests",
+            "checks/whitespace/ExtendedEmptyLinesCheckTest:ExtendedEmptyLinesCheckTests"
+        ],
         "LeftCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"
         ],
         "RightCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"
-        ],
-        "MethodCount": [
-            "checkstyle/token/TokenTreeBuilder"
         ],
         "MethodLength": [
             "checkstyle/checks/whitespace/WhitespaceAfterCheck",
