@@ -1,0 +1,3 @@
+buildGlobal.hxml
+-cp schema
+-x SchemaGenerator

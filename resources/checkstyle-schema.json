@@ -1,0 +1,3362 @@
+{
+    "id": "https://raw.githubusercontent.com/HaxeCheckstyle/haxe-checkstyle/dev/resources/checkstyle-schema.json",
+    "$ref": "#/definitions/Config",
+    "$schema": "http://json-schema.org/schema#",
+    "definitions": {
+        "HexadecimalLiteralCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "option": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "HexadecimalLiteral"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ERegLiteralCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ERegLiteral"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "NestedForDepthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "NestedForDepth"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DynamicCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Dynamic"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "UnusedImportCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "moduleTypeMap": {
+                            "type": "object",
+                            "propertyOrder": 1
+                        },
+                        "ignoreModules": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "UnusedImport"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "HiddenFieldCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignoreSetter": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "ignoreFormat": {
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "ignoreConstructorParameter": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "HiddenField"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "InterfaceCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "allowProperties": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "allowMarkerInterfaces": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Interface"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AvoidInlineConditionalsCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "AvoidInlineConditionals"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PublicAccessorCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "PublicAccessor"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "IndentationCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "character": {
+                            "enum": [
+                                "tab",
+                                " ",
+                                "  ",
+                                "   ",
+                                "    ",
+                                "     ",
+                                "      ",
+                                "       ",
+                                "        "
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "wrapPolicy": {
+                            "enum": [
+                                "none",
+                                "exact",
+                                "larger"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 4
+                        },
+                        "ignoreComments": {
+                            "type": "boolean",
+                            "propertyOrder": 3
+                        },
+                        "ignoreConditionals": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 5
+                        },
+                        "conditionalPolicy": {
+                            "enum": [
+                                "ignore",
+                                "fixed_zero",
+                                "aligned",
+                                "aligned_increase"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Indentation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "CyclomaticComplexityCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "thresholds": {
+                            "items": {
+                                "$ref": "#/definitions/Threshold"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "CyclomaticComplexity"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "OperatorWrapCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "OperatorWrap"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MethodNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MethodName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "StringLiteralCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "policy": {
+                            "enum": [
+                                "onlySingle",
+                                "onlyDouble",
+                                "doubleAndInterpolation"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "allowException": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "StringLiteral"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ListenerNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "listeners": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ListenerName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MemberNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MemberName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Threshold": {
+            "type": "object",
+            "properties": {
+                "complexity": {
+                    "type": "integer",
+                    "propertyOrder": 1
+                },
+                "severity": {
+                    "enum": [
+                        "INFO",
+                        "WARNING",
+                        "ERROR",
+                        "IGNORE"
+                    ],
+                    "type": "string",
+                    "propertyOrder": 0
+                }
+            },
+            "additionalProperties": false,
+            "required": [
+                "severity",
+                "complexity"
+            ]
+        },
+        "EmptyBlockCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "tokens": {
+                            "items": {
+                                "enum": [
+                                    "CLASS_DEF",
+                                    "ENUM_DEF",
+                                    "ABSTRACT_DEF",
+                                    "TYPEDEF_DEF",
+                                    "INTERFACE_DEF",
+                                    "OBJECT_DECL",
+                                    "FUNCTION",
+                                    "FOR",
+                                    "IF",
+                                    "WHILE",
+                                    "SWITCH",
+                                    "TRY",
+                                    "CATCH",
+                                    "REIFICATION"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "option": {
+                            "enum": [
+                                "empty",
+                                "text",
+                                "stmt"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "EmptyBlock"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ArrayAccessCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "spaceBefore": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "spaceInside": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ArrayAccess"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ReturnCountCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignoreFormat": {
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ReturnCount"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "NestedTryDepthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "NestedTryDepth"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "LeftCurlyCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "tokens": {
+                            "items": {
+                                "enum": [
+                                    "CLASS_DEF",
+                                    "ENUM_DEF",
+                                    "ABSTRACT_DEF",
+                                    "TYPEDEF_DEF",
+                                    "INTERFACE_DEF",
+                                    "OBJECT_DECL",
+                                    "FUNCTION",
+                                    "FOR",
+                                    "IF",
+                                    "WHILE",
+                                    "SWITCH",
+                                    "TRY",
+                                    "CATCH",
+                                    "REIFICATION",
+                                    "ARRAY_COMPREHENSION"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "ignoreEmptySingleline": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "option": {
+                            "enum": [
+                                "eol",
+                                "nl",
+                                "nlow"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "LeftCurly"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MagicNumberCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignoreNumbers": {
+                            "items": {
+                                "type": "number"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MagicNumber"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "LocalVariableNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "LocalVariableName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "IndentationCharacterCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "character": {
+                            "enum": [
+                                "tab",
+                                "space"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "ignorePattern": {
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "IndentationCharacter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MultipleVariableDeclarationsCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MultipleVariableDeclarations"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MultipleStringLiteralsCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "minLength": {
+                            "type": "integer",
+                            "propertyOrder": 1
+                        },
+                        "ignore": {
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "allowDuplicates": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MultipleStringLiterals"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "NullableParameterCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "option": {
+                            "enum": [
+                                "questionMark",
+                                "nullDefault"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "NullableParameter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "OperatorWhitespaceCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ternaryOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "unaryOpPolicy": {
+                            "enum": [
+                                "inner",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "boolOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 6
+                        },
+                        "intervalOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 7
+                        },
+                        "assignOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "functionArgPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 9
+                        },
+                        "bitwiseOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 5
+                        },
+                        "arithmeticOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        },
+                        "compareOpPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 4
+                        },
+                        "arrowPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 8
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 10
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "OperatorWhitespace"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ExtendedEmptyLinesCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "none": {
+                            "items": {
+                                "enum": [
+                                    "beforePackage",
+                                    "afterPackage",
+                                    "betweenImports",
+                                    "beforeUsing",
+                                    "afterImports",
+                                    "anywhereInFile",
+                                    "betweenTypes",
+                                    "beforeFileEnd",
+                                    "inFunction",
+                                    "afterLeftCurly",
+                                    "beforeRightCurly",
+                                    "typeDefinition",
+                                    "beginClass",
+                                    "endClass",
+                                    "afterClassStaticVars",
+                                    "afterClassVars",
+                                    "betweenClassStaticVars",
+                                    "betweenClassVars",
+                                    "betweenClassMethods",
+                                    "beginAbstract",
+                                    "endAbstract",
+                                    "afterAbstractVars",
+                                    "betweenAbstractVars",
+                                    "betweenAbstractMethods",
+                                    "beginInterface",
+                                    "endInterface",
+                                    "betweenInterfaceFields",
+                                    "beginEnum",
+                                    "endEnum",
+                                    "betweenEnumFields",
+                                    "beginTypedef",
+                                    "endTypedef",
+                                    "betweenTypedefFields",
+                                    "afterSingleLineComment",
+                                    "afterMultiLineComment"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 4
+                        },
+                        "upto": {
+                            "items": {
+                                "enum": [
+                                    "beforePackage",
+                                    "afterPackage",
+                                    "betweenImports",
+                                    "beforeUsing",
+                                    "afterImports",
+                                    "anywhereInFile",
+                                    "betweenTypes",
+                                    "beforeFileEnd",
+                                    "inFunction",
+                                    "afterLeftCurly",
+                                    "beforeRightCurly",
+                                    "typeDefinition",
+                                    "beginClass",
+                                    "endClass",
+                                    "afterClassStaticVars",
+                                    "afterClassVars",
+                                    "betweenClassStaticVars",
+                                    "betweenClassVars",
+                                    "betweenClassMethods",
+                                    "beginAbstract",
+                                    "endAbstract",
+                                    "afterAbstractVars",
+                                    "betweenAbstractVars",
+                                    "betweenAbstractMethods",
+                                    "beginInterface",
+                                    "endInterface",
+                                    "betweenInterfaceFields",
+                                    "beginEnum",
+                                    "endEnum",
+                                    "betweenEnumFields",
+                                    "beginTypedef",
+                                    "endTypedef",
+                                    "betweenTypedefFields",
+                                    "afterSingleLineComment",
+                                    "afterMultiLineComment"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 6
+                        },
+                        "defaultPolicy": {
+                            "enum": [
+                                "ignore",
+                                "none",
+                                "exact",
+                                "upto",
+                                "atleast"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "exact": {
+                            "items": {
+                                "enum": [
+                                    "beforePackage",
+                                    "afterPackage",
+                                    "betweenImports",
+                                    "beforeUsing",
+                                    "afterImports",
+                                    "anywhereInFile",
+                                    "betweenTypes",
+                                    "beforeFileEnd",
+                                    "inFunction",
+                                    "afterLeftCurly",
+                                    "beforeRightCurly",
+                                    "typeDefinition",
+                                    "beginClass",
+                                    "endClass",
+                                    "afterClassStaticVars",
+                                    "afterClassVars",
+                                    "betweenClassStaticVars",
+                                    "betweenClassVars",
+                                    "betweenClassMethods",
+                                    "beginAbstract",
+                                    "endAbstract",
+                                    "afterAbstractVars",
+                                    "betweenAbstractVars",
+                                    "betweenAbstractMethods",
+                                    "beginInterface",
+                                    "endInterface",
+                                    "betweenInterfaceFields",
+                                    "beginEnum",
+                                    "endEnum",
+                                    "betweenEnumFields",
+                                    "beginTypedef",
+                                    "endTypedef",
+                                    "betweenTypedefFields",
+                                    "afterSingleLineComment",
+                                    "afterMultiLineComment"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 5
+                        },
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "ignore": {
+                            "items": {
+                                "enum": [
+                                    "beforePackage",
+                                    "afterPackage",
+                                    "betweenImports",
+                                    "beforeUsing",
+                                    "afterImports",
+                                    "anywhereInFile",
+                                    "betweenTypes",
+                                    "beforeFileEnd",
+                                    "inFunction",
+                                    "afterLeftCurly",
+                                    "beforeRightCurly",
+                                    "typeDefinition",
+                                    "beginClass",
+                                    "endClass",
+                                    "afterClassStaticVars",
+                                    "afterClassVars",
+                                    "betweenClassStaticVars",
+                                    "betweenClassVars",
+                                    "betweenClassMethods",
+                                    "beginAbstract",
+                                    "endAbstract",
+                                    "afterAbstractVars",
+                                    "betweenAbstractVars",
+                                    "betweenAbstractMethods",
+                                    "beginInterface",
+                                    "endInterface",
+                                    "betweenInterfaceFields",
+                                    "beginEnum",
+                                    "endEnum",
+                                    "betweenEnumFields",
+                                    "beginTypedef",
+                                    "endTypedef",
+                                    "betweenTypedefFields",
+                                    "afterSingleLineComment",
+                                    "afterMultiLineComment"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 3
+                        },
+                        "atleast": {
+                            "items": {
+                                "enum": [
+                                    "beforePackage",
+                                    "afterPackage",
+                                    "betweenImports",
+                                    "beforeUsing",
+                                    "afterImports",
+                                    "anywhereInFile",
+                                    "betweenTypes",
+                                    "beforeFileEnd",
+                                    "inFunction",
+                                    "afterLeftCurly",
+                                    "beforeRightCurly",
+                                    "typeDefinition",
+                                    "beginClass",
+                                    "endClass",
+                                    "afterClassStaticVars",
+                                    "afterClassVars",
+                                    "betweenClassStaticVars",
+                                    "betweenClassVars",
+                                    "betweenClassMethods",
+                                    "beginAbstract",
+                                    "endAbstract",
+                                    "afterAbstractVars",
+                                    "betweenAbstractVars",
+                                    "betweenAbstractMethods",
+                                    "beginInterface",
+                                    "endInterface",
+                                    "betweenInterfaceFields",
+                                    "beginEnum",
+                                    "endEnum",
+                                    "betweenEnumFields",
+                                    "beginTypedef",
+                                    "endTypedef",
+                                    "betweenTypedefFields",
+                                    "afterSingleLineComment",
+                                    "afterMultiLineComment"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 7
+                        },
+                        "skipSingleLineTypes": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 8
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ExtendedEmptyLines"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Config": {
+            "type": "object",
+            "properties": {
+                "extendsConfigPath": {
+                    "type": "string",
+                    "propertyOrder": 0
+                },
+                "defineCombinations": {
+                    "items": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "type": "array",
+                    "propertyOrder": 3
+                },
+                "defaultSeverity": {
+                    "enum": [
+                        "INFO",
+                        "WARNING",
+                        "ERROR",
+                        "IGNORE"
+                    ],
+                    "type": "string",
+                    "propertyOrder": 1
+                },
+                "baseDefines": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array",
+                    "propertyOrder": 2
+                },
+                "version": {
+                    "minimum": 1,
+                    "type": "integer",
+                    "maximum": 1,
+                    "propertyOrder": 7
+                },
+                "exclude": {
+                    "propertyOrder": 6,
+                    "$ref": "#/definitions/ExcludeConfig"
+                },
+                "checks": {
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/AnonymousCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ArrayAccessCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ArrayLiteralCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/AvoidInlineConditionalsCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/AvoidStarImportCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/CatchParameterNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ConditionalCompilationCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ConstantNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/CyclomaticComplexityCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/DefaultComesLastCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/DynamicCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ERegLiteralCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/EmptyBlockCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/EmptyLinesCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/EmptyPackageCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ExtendedEmptyLinesCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/FileLengthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/HexadecimalLiteralCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/HiddenFieldCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/IndentationCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/IndentationCharacterCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/InnerAssignmentCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/InterfaceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/LeftCurlyCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/LineLengthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ListenerNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/LocalVariableNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MagicNumberCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MemberNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MethodCountCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MethodLengthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MethodNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ModifierOrderCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MultipleStringLiteralsCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/MultipleVariableDeclarationsCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/NeedBracesCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/NestedForDepthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/NestedIfDepthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/NestedTryDepthCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/NullableParameterCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/OperatorWhitespaceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/OperatorWrapCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ParameterNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ParameterNumberCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/PublicAccessorCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/RedundantModifierCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ReturnCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/ReturnCountCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/RightCurlyCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/SeparatorWhitespaceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/SeparatorWrapCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/SimplifyBooleanExpressionCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/SimplifyBooleanReturnCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/SpacingCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/StringLiteralCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TODOCommentCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TabForAligningCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TraceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TrailingWhitespaceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TypeCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TypeNameCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/UnnecessaryConstructorCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/UnusedImportCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/UnusedLocalVarCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/VariableInitialisationCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/WhitespaceAfterCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/WhitespaceAroundCheck"
+                            }
+                        ]
+                    },
+                    "type": "array",
+                    "propertyOrder": 5
+                },
+                "numberOfCheckerThreads": {
+                    "minimum": 1,
+                    "type": "integer",
+                    "maximum": 15,
+                    "propertyOrder": 4
+                }
+            },
+            "additionalProperties": false
+        },
+        "SpacingCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "spaceIfCondition": {
+                            "enum": [
+                                "should",
+                                "should_not",
+                                "any"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "spaceAroundBinop": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "spaceForLoop": {
+                            "enum": [
+                                "should",
+                                "should_not",
+                                "any"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        },
+                        "ignoreRangeOperator": {
+                            "type": "boolean",
+                            "propertyOrder": 7
+                        },
+                        "spaceWhileLoop": {
+                            "enum": [
+                                "should",
+                                "should_not",
+                                "any"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 4
+                        },
+                        "spaceCatch": {
+                            "enum": [
+                                "should",
+                                "should_not",
+                                "any"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 6
+                        },
+                        "spaceSwitchCase": {
+                            "enum": [
+                                "should",
+                                "should_not",
+                                "any"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 5
+                        },
+                        "noSpaceAroundUnop": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 8
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Spacing"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AvoidStarImportCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "AvoidStarImport"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TrailingWhitespaceCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "TrailingWhitespace"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "FileLengthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "FileLength"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "NestedIfDepthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "NestedIfDepth"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TODOCommentCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "TODOComment"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EmptyPackageCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "enforceEmptyPackage": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "EmptyPackage"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ConstantNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ConstantName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ParameterNumberCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "ignoreOverriddenMethods": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ParameterNumber"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ArrayLiteralCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ArrayLiteral"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TraceCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Trace"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "UnusedLocalVarCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "UnusedLocalVar"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "NeedBracesCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "allowSingleLineStatement": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "tokens": {
+                            "items": {
+                                "enum": [
+                                    "FUNCTION",
+                                    "FOR",
+                                    "IF",
+                                    "ELSE_IF",
+                                    "WHILE",
+                                    "DO_WHILE",
+                                    "CATCH"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "NeedBraces"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "LineLengthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "ignorePattern": {
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "LineLength"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "WhitespaceAroundCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "WhitespaceAround"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MethodLengthCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "countEmpty": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MethodLength"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SeparatorWhitespaceCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "commaPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "semicolonPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        },
+                        "dotPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "SeparatorWhitespace"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ParameterNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ParameterName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "UnnecessaryConstructorCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "UnnecessaryConstructor"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "RedundantModifierCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "enforcePrivate": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "enforcePublic": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "enforcePublicPrivate": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "RedundantModifier"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "DefaultComesLastCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "DefaultComesLast"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TypeNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "TypeName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SimplifyBooleanExpressionCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "SimplifyBooleanExpression"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ExcludeFilterList": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "MethodCountCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "maxPrivate": {
+                            "type": "integer",
+                            "propertyOrder": 1
+                        },
+                        "maxPublic": {
+                            "type": "integer",
+                            "propertyOrder": 2
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        },
+                        "maxTotal": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "MethodCount"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AnonymousCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Anonymous"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "CatchParameterNameCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "CatchParameterName"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "InnerAssignmentCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignoreReturnAssignments": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "InnerAssignment"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TypeCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignoreEnumAbstractValues": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Type"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "TabForAligningCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "ignorePattern": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "TabForAligning"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ModifierOrderCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "modifiers": {
+                            "items": {
+                                "enum": [
+                                    "PUBLIC_PRIVATE",
+                                    "INLINE",
+                                    "STATIC",
+                                    "OVERRIDE",
+                                    "MACRO",
+                                    "DYNAMIC"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ModifierOrder"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EmptyLinesCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "requireEmptyLineAfterPackage": {
+                            "type": "boolean",
+                            "propertyOrder": 3
+                        },
+                        "requireEmptyLineAfterInterface": {
+                            "type": "boolean",
+                            "propertyOrder": 5
+                        },
+                        "requireEmptyLineAfterAbstract": {
+                            "type": "boolean",
+                            "propertyOrder": 6
+                        },
+                        "allowEmptyLineAfterSingleLineComment": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "max": {
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
+                        "requireEmptyLineAfterClass": {
+                            "type": "boolean",
+                            "propertyOrder": 4
+                        },
+                        "allowEmptyLineAfterMultiLineComment": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 7
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "EmptyLines"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "VariableInitialisationCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "VariableInitialisation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SeparatorWrapCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "SeparatorWrap"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "SimplifyBooleanReturnCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "SimplifyBooleanReturn"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "RightCurlyCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "tokens": {
+                            "items": {
+                                "enum": [
+                                    "CLASS_DEF",
+                                    "ENUM_DEF",
+                                    "ABSTRACT_DEF",
+                                    "TYPEDEF_DEF",
+                                    "INTERFACE_DEF",
+                                    "OBJECT_DECL",
+                                    "FUNCTION",
+                                    "FOR",
+                                    "IF",
+                                    "WHILE",
+                                    "SWITCH",
+                                    "TRY",
+                                    "CATCH",
+                                    "REIFICATION",
+                                    "ARRAY_COMPREHENSION"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "option": {
+                            "enum": [
+                                "same",
+                                "alone",
+                                "aloneorsingle"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "RightCurly"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ReturnCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "enforceReturnTypeForAnonymous": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "allowEmptyReturn": {
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "enforceReturnType": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 3
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "Return"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ExcludeConfig": {
+            "type": "object",
+            "properties": {
+                "RightCurly": {
+                    "propertyOrder": 52,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "path": {
+                    "enum": [
+                        "RELATIVE_TO_PROJECT",
+                        "RELATIVE_TO_SOURCE"
+                    ],
+                    "type": "string",
+                    "propertyOrder": 0
+                },
+                "CatchParameterName": {
+                    "propertyOrder": 9,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "VariableInitialisation": {
+                    "propertyOrder": 68,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "HexadecimalLiteral": {
+                    "propertyOrder": 21,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MethodLength": {
+                    "propertyOrder": 34,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "HiddenField": {
+                    "propertyOrder": 22,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MethodCount": {
+                    "propertyOrder": 33,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "RedundantModifier": {
+                    "propertyOrder": 49,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "PublicAccessor": {
+                    "propertyOrder": 48,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "NestedIfDepth": {
+                    "propertyOrder": 41,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Interface": {
+                    "propertyOrder": 26,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ArrayAccess": {
+                    "propertyOrder": 5,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MagicNumber": {
+                    "propertyOrder": 31,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Spacing": {
+                    "propertyOrder": 57,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "UnusedImport": {
+                    "propertyOrder": 66,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "EmptyPackage": {
+                    "propertyOrder": 18,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "OperatorWhitespace": {
+                    "propertyOrder": 44,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "NeedBraces": {
+                    "propertyOrder": 39,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ParameterName": {
+                    "propertyOrder": 46,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "LineLength": {
+                    "propertyOrder": 28,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "EmptyLines": {
+                    "propertyOrder": 17,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MultipleVariableDeclarations": {
+                    "propertyOrder": 38,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ERegLiteral": {
+                    "propertyOrder": 15,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "AvoidInlineConditionals": {
+                    "propertyOrder": 7,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "WhitespaceAfter": {
+                    "propertyOrder": 69,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "FileLength": {
+                    "propertyOrder": 20,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "AvoidStarImport": {
+                    "propertyOrder": 8,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ModifierOrder": {
+                    "propertyOrder": 36,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ExtendedEmptyLines": {
+                    "propertyOrder": 19,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "version": {
+                    "minimum": 1,
+                    "type": "integer",
+                    "maximum": 1,
+                    "propertyOrder": 2
+                },
+                "SeparatorWrap": {
+                    "propertyOrder": 54,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "WhitespaceAround": {
+                    "propertyOrder": 70,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ListenerName": {
+                    "propertyOrder": 29,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "": {
+                    "propertyOrder": 3,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "CyclomaticComplexity": {
+                    "propertyOrder": 12,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "all": {
+                    "propertyOrder": 1,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "SimplifyBooleanExpression": {
+                    "propertyOrder": 55,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "SeparatorWhitespace": {
+                    "propertyOrder": 53,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "TrailingWhitespace": {
+                    "propertyOrder": 62,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Dynamic": {
+                    "propertyOrder": 14,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "LeftCurly": {
+                    "propertyOrder": 27,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ParameterNumber": {
+                    "propertyOrder": 47,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MethodName": {
+                    "propertyOrder": 35,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "UnusedLocalVar": {
+                    "propertyOrder": 67,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "IndentationCharacter": {
+                    "propertyOrder": 24,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ArrayLiteral": {
+                    "propertyOrder": 6,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MemberName": {
+                    "propertyOrder": 32,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "TypeName": {
+                    "propertyOrder": 64,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "InnerAssignment": {
+                    "propertyOrder": 25,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "UnnecessaryConstructor": {
+                    "propertyOrder": 65,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "MultipleStringLiterals": {
+                    "propertyOrder": 37,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Anonymous": {
+                    "propertyOrder": 4,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "NestedTryDepth": {
+                    "propertyOrder": 42,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "SimplifyBooleanReturn": {
+                    "propertyOrder": 56,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "TODOComment": {
+                    "propertyOrder": 59,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ConstantName": {
+                    "propertyOrder": 11,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Trace": {
+                    "propertyOrder": 61,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "NullableParameter": {
+                    "propertyOrder": 43,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "TabForAligning": {
+                    "propertyOrder": 60,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "EmptyBlock": {
+                    "propertyOrder": 16,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "NestedForDepth": {
+                    "propertyOrder": 40,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "StringLiteral": {
+                    "propertyOrder": 58,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ConditionalCompilation": {
+                    "propertyOrder": 10,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Type": {
+                    "propertyOrder": 63,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "OperatorWrap": {
+                    "propertyOrder": 45,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "ReturnCount": {
+                    "propertyOrder": 51,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Indentation": {
+                    "propertyOrder": 23,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "DefaultComesLast": {
+                    "propertyOrder": 13,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "Return": {
+                    "propertyOrder": 50,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "LocalVariableName": {
+                    "propertyOrder": 30,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ConditionalCompilationCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "policy": {
+                            "enum": [
+                                "startOfLine",
+                                "aligned"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "allowSingleline": {
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 2
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "ConditionalCompilation"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        },
+        "WhitespaceAfterCheck": {
+            "type": "object",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "properties": {
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "WhitespaceAfter"
+                    ],
+                    "type": "string"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

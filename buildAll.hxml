@@ -6,4 +6,8 @@ buildDebug.hxml
 
 --next
 
+buildSchema.hxml
+
+--next
+
 buildTest.hxml
