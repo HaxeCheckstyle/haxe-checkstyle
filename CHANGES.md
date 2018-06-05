@@ -1,6 +1,6 @@
 ## dev branch / next version (2.x.x)
 
-- Added JSON schemas for `checkstyle.json` and `checkstyle-exclude.json` file formats
+- Added JSON schemas for `checkstyle.json` and `checkstyle-exclude.json` file formats [#431](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/431)
 
 ## version 2.4.0 (2018-06-02)
 
