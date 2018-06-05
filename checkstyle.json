@@ -554,6 +554,7 @@
         ],
         "MultipleStringLiterals": [
             "checks",
+            "schema",
             "token"
         ],
         "CyclomaticComplexity": [
@@ -593,6 +594,9 @@
         ],
         "MemberName": [
             "checkstyle/Main"
+        ],
+        "UnusedLocalVar": [
+            "JsonSchemaGenerator"
         ]
     }
 }
