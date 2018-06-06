@@ -60,6 +60,19 @@ class CheckstyleSchemaGenerator {
 			case "ExcludeConfig.version":
 				fields.push({field: "minimum", expr: macro 1});
 				fields.push({field: "maximum", expr: macro 1});
+			case "ConstantName.tokens.items":
+				makeAnyOfAbstract(fields, "checkstyle.checks.naming.ConstantNameCheck.ConstantNameCheckToken", pos);
+			case "LocalVariableName.tokens.items":
+				fields.push({field: "type", expr: macro "string"});
+			case "MemberName.tokens.items":
+				makeAnyOfAbstract(fields, "checkstyle.checks.naming.MemberNameCheck.MemberNameCheckToken", pos);
+			case "MethodName.tokens.items":
+				makeAnyOfAbstract(fields, "checkstyle.checks.naming.MethodNameCheck.MethodNameCheckToken", pos);
+			case "ParameterName.tokens.items":
+				fields.push({field: "type", expr: macro "string"});
+			case "TypeName.tokens.items":
+				makeAnyOfAbstract(fields, "checkstyle.checks.naming.TypeNameCheck.TypeNameCheckToken", pos);
+
 			default:
 		}
 	}
@@ -104,23 +117,12 @@ class CheckstyleSchemaGenerator {
 						if (!refs.exists(name)) {
 							refs[name] = null;
 							var classFields:Array<ObjectDeclField> = [];
-							var fieldOrder:Int = 0;
-							for (field in fields.get()) {
-								switch (field.kind) {
-									case FVar(_):
-										if (field.isPublic) {
-											classFields.push ({
-												field: field.name,
-												expr: JsonSchemaGenerator.genSchema(field.type, typeName + "." + name, pos, null, refs, fieldOrder, null)
-											});
-											fieldOrder++;
-										}
-									default:
-								}
-							}
+							addSuperClassFields(typeName, classFields, cl.superClass, pos, refs);
+							addClassFields(typeName, classFields, fields.get(), pos, refs);
 							classFields.push({
 								field: "severity",
-								expr: JsonSchemaGenerator.genSchema(Context.getType("checkstyle.SeverityLevel"), typeName + ".severity", pos, null, refs, fieldOrder, null)
+								expr: JsonSchemaGenerator.genSchema(Context.getType("checkstyle.SeverityLevel"),
+									typeName + ".severity", pos, null, refs, classFields.length, null)
 							});
 
 							var props = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(classFields, -1, pos), null, [], -1, pos);
@@ -140,6 +142,36 @@ class CheckstyleSchemaGenerator {
 			default:
 		}
 		throw new Error("Cannot generate Json schema for type " + type, pos); // + type.toString(), pos);
+	}
+
+	static function addClassFields(typeName:String, classFields:Array<ObjectDeclField>, fields:Array<ClassField>, pos:Position, refs:DynamicAccess<Expr>) {
+		for (field in fields) {
+			switch (field.kind) {
+				case FVar(_):
+					if (field.isPublic) {
+						classFields.push ({
+							field: field.name,
+							expr: JsonSchemaGenerator.genSchema(field.type, typeName + "." + field.name, pos, null, refs, classFields.length, checkstyleFieldsCallback)
+						});
+					}
+				default:
+			}
+		}
+	}
+
+	static function addSuperClassFields(typeName:String,
+				classFields:Array<ObjectDeclField>,
+				superClass:Null<{t:Ref<ClassType>, params:Array<Type>}>,
+				pos:Position,
+				refs:DynamicAccess<Expr>) {
+		if (superClass == null) return;
+		if (superClass.t.get().name == "Check") return;
+		addClassFields(typeName, classFields, superClass.t.get().fields.get(), pos, refs);
+	}
+
+	static function makeAnyOfAbstract(fields:Array<ObjectDeclField>, type:String, pos:Position) {
+		var values:Expr = JsonSchemaGenerator.getAbstractEnumValues(macro $p{type.split(".")});
+		fields.push({field: "anyOf", expr: values});
 	}
 	#end
 }
