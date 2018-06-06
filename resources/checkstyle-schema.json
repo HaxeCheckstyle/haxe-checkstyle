@@ -405,6 +405,21 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "option": {
+                            "enum": [
+                                "eol",
+                                "nl"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -413,7 +428,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 2
                         }
                     },
                     "additionalProperties": false
@@ -433,6 +448,28 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "anyOf": [
+                                    "PUBLIC",
+                                    "PRIVATE",
+                                    "STATIC",
+                                    "NOTSTATIC",
+                                    "INLINE",
+                                    "NOTINLINE"
+                                ]
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -441,7 +478,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -541,6 +578,28 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "anyOf": [
+                                    "PUBLIC",
+                                    "PRIVATE",
+                                    "ENUM",
+                                    "CLASS",
+                                    "ABSTRACT",
+                                    "TYPEDEF"
+                                ]
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -549,7 +608,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -857,6 +916,21 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -865,7 +939,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -1963,6 +2037,24 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "anyOf": [
+                                    "INLINE",
+                                    "NOTINLINE"
+                                ]
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -1971,7 +2063,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -2327,6 +2419,21 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -2335,7 +2442,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -2451,6 +2558,27 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "ignoreExtern": {
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
+                        "format": {
+                            "type": "string",
+                            "propertyOrder": 0
+                        },
+                        "tokens": {
+                            "items": {
+                                "anyOf": [
+                                    "INTERFACE",
+                                    "CLASS",
+                                    "ENUM",
+                                    "ABSTRACT",
+                                    "TYPEDEF"
+                                ]
+                            },
+                            "type": "array",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -2459,7 +2587,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 3
                         }
                     },
                     "additionalProperties": false
@@ -2836,6 +2964,21 @@
                 "props": {
                     "type": "object",
                     "properties": {
+                        "tokens": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "propertyOrder": 0
+                        },
+                        "option": {
+                            "enum": [
+                                "eol",
+                                "nl"
+                            ],
+                            "type": "string",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -2844,7 +2987,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "propertyOrder": 0
+                            "propertyOrder": 2
                         }
                     },
                     "additionalProperties": false

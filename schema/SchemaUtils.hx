@@ -19,7 +19,7 @@ class SchemaUtils {
 			fields.push({field: "description", expr: macro structInfo.doc.trim()});
 		}
 		if (required.length > 0) {
-			var exprs:Array<Expr> = [for(req in required) macro $v{req}];
+			var exprs:Array<Expr> = [for (req in required) macro $v{req}];
 			fields.push({field: "required", expr: macro $a{exprs}});
 		}
 		return makeObjectDecl(fields, order, pos);

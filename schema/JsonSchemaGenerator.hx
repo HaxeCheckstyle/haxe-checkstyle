@@ -41,8 +41,7 @@ class JsonSchemaGenerator {
 		return main;
 	}
 
-	static function getAbstractEnumValues(typePath:Expr):Expr {
-		// trace (typePath);
+	public static function getAbstractEnumValues(typePath:Expr):Expr {
 		// Get the type from a given expression converted to string.
 		// This will work for identifiers and field access which is what we need,
 		// it will also consider local imports. If expression is not a valid type path or type is not found,
@@ -100,11 +99,14 @@ class JsonSchemaGenerator {
 					case [{pack: [], name: "Array"}, [elemType]]:
 						var fields:Array<ObjectDeclField> = [
 							{field: "type", expr: macro "array"},
-							{field: "items", expr: genSchema(elemType, typeName, pos, null, refs, -1, extendCB)}
+							{field: "items", expr: genSchema(elemType, typeName + ".items", pos, null, refs, -1, extendCB)}
 						];
 						if (extendCB != null) extendCB(fields, typeName, pos, refs);
 						return SchemaUtils.makeObjectDecl(fields, order, pos);
 					default:
+						var fields:Array<ObjectDeclField> = [];
+						if (extendCB != null) extendCB(fields, typeName, pos, refs);
+						if (fields.length > 0) return SchemaUtils.makeObjectDecl(fields, order, pos);
 				}
 
 			case TAbstract(_.get() => ab, params):

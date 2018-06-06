@@ -29,3 +29,6 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install munit
         - sed -i 's/:3.3.0//' buildGlobal.hxml
+  allow_failures:
+    - haxe: development
+

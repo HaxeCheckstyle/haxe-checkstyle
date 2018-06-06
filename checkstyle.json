@@ -414,13 +414,13 @@
         },
         {
             "props": {
-                "spaceIfCondition": true,
+                "spaceIfCondition": "should",
                 "spaceAroundBinop": true,
-                "spaceForLoop": true,
+                "spaceForLoop": "should",
                 "ignoreRangeOperator": true,
-                "spaceWhileLoop": true,
-                "spaceCatch": true,
-                "spaceSwitchCase": true,
+                "spaceWhileLoop": "should",
+                "spaceCatch": "should",
+                "spaceSwitchCase": "should",
                 "noSpaceAroundUnop": true
             },
             "type": "Spacing"
