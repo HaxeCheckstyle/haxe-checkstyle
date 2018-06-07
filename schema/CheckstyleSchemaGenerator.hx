@@ -50,7 +50,7 @@ class CheckstyleSchemaGenerator {
 				fields.push({field: "type", expr: macro "array"});
 				var anyFields:Array<ObjectDeclField> = [];
 				anyFields.push({field: "anyOf", expr: macro $a{checkExprs}});
-				fields.push({field: "items", expr: SchemaUtils.makeObjectDecl(anyFields, -1, pos)});
+				fields.push({field: "items", expr: SchemaUtils.makeObjectDecl(anyFields, null, -1, pos)});
 			case "Config.numberOfCheckerThreads":
 				fields.push({field: "minimum", expr: macro 1});
 				fields.push({field: "maximum", expr: macro 15});
@@ -125,18 +125,19 @@ class CheckstyleSchemaGenerator {
 									typeName + ".severity", pos, null, refs, classFields.length, null)
 							});
 
-							var props = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(classFields, -1, pos), null, [], -1, pos);
+							var doc:StructInfo = {name: name, doc: getDescMeta(cl.meta)};
+							var props = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(classFields, null, -1, pos), doc, [], -1, pos);
 							var checkName:Array<Expr> = [macro '$typeName'];
 							var typeExpr:Expr = macro $a{checkName};
-							var type = SchemaUtils.makeEnum(typeExpr, -1, pos);
+							var type = SchemaUtils.makeEnum(typeExpr, doc, -1, pos);
 							var checkFields:Array<ObjectDeclField> = [
 								{field: "type", expr: type},
 								{field: "props", expr: props},
 							];
-							var classExpr:Expr = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(checkFields, -1, pos), null, [], -1, pos);
+							var classExpr:Expr = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(checkFields, null, -1, pos), doc, [], -1, pos);
 							refs[name] = classExpr;
 						}
-						return SchemaUtils.makeObjectDecl([{ field: "@$__hx__$ref", expr: macro '#/definitions/${name}'}], order, pos);
+						return SchemaUtils.makeObjectDecl([{ field: "@$__hx__$ref", expr: macro '#/definitions/${name}'}], null, order, pos);
 					default:
 				}
 			default:
@@ -149,9 +150,10 @@ class CheckstyleSchemaGenerator {
 			switch (field.kind) {
 				case FVar(_):
 					if (field.isPublic) {
+						var doc:StructInfo = SchemaUtils.makeStructInfo(field.name, field.doc);
 						classFields.push ({
 							field: field.name,
-							expr: JsonSchemaGenerator.genSchema(field.type, typeName + "." + field.name, pos, null, refs, classFields.length, checkstyleFieldsCallback)
+							expr: JsonSchemaGenerator.genSchema(field.type, typeName + "." + field.name, pos, doc, refs, classFields.length, checkstyleFieldsCallback)
 						});
 					}
 				default:
@@ -171,7 +173,29 @@ class CheckstyleSchemaGenerator {
 
 	static function makeAnyOfAbstract(fields:Array<ObjectDeclField>, type:String, pos:Position) {
 		var values:Expr = JsonSchemaGenerator.getAbstractEnumValues(macro $p{type.split(".")});
-		fields.push({field: "anyOf", expr: values});
+		fields.push({field: "type", expr: macro "string"});
+		fields.push({field: "enum", expr: values});
+
+		var abstractType = Context.getType(type);
+
+		// Switch on the type and check if it's an abstract with @:enum metadata
+		// switch (type.follow(false)) {
+		switch (abstractType) {
+			case TAbstract(_.get() => ab, _) if (ab.meta.has(":enum")):
+				var doc:StructInfo = SchemaUtils.makeStructInfo(ab.name, ab.doc);
+				if (doc != null) fields.push({field: "description", expr: macro $v{StringTools.trim(doc.doc)}});
+			default:
+		}
+	}
+
+	static function getDescMeta(meta:MetaAccess):String {
+		var desc:Array<MetadataEntry> = meta.extract("desc");
+		if (desc == null) return null;
+		if (desc.length <= 0) return null;
+		return switch (desc[0].params[0].expr) {
+			case EConst(CString(doc)): doc;
+			default: null;
+		}
 	}
 	#end
 }

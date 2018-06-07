@@ -1,13 +1,27 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks that a local variable or a parameter does not shadow a field that is defined in the same class.
+ **/
 @name("HiddenField")
 @desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")
 class HiddenFieldCheck extends Check {
 
 	static inline var MAX_FIELD_LEVEL:Int = 3;
 
+	/**
+		allow constructor parameters to shadow field names
+	 **/
 	public var ignoreConstructorParameter:Bool;
+
+	/**
+		allow setters to shadow field names
+	 **/
 	public var ignoreSetter:Bool;
+
+	/**
+		ignore function names matching "ignoreFormat" regex
+	 **/
 	public var ignoreFormat:String;
 
 	public function new() {

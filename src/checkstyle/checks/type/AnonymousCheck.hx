@@ -1,5 +1,8 @@
 package checkstyle.checks.type;
 
+/**
+	Check to find any anonymous type structures used.
+ **/
 @name("Anonymous")
 @desc("Check to find any anonymous type structures used.")
 class AnonymousCheck extends Check {

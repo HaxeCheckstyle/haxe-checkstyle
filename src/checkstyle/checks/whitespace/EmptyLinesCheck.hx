@@ -1,15 +1,46 @@
 package checkstyle.checks.whitespace;
 
+/**
+	Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package,
+	single-line and multi-line comments and class/interface/abstract declarations.
+ **/
 @name("EmptyLines")
 @desc("Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.")
 class EmptyLinesCheck extends LineCheckBase {
 
+	/**
+		number of empty lines to allow
+	 **/
 	public var max:Int;
+
+	/**
+		allow empty lines after a single line comment
+	 **/
 	public var allowEmptyLineAfterSingleLineComment:Bool;
+
+	/**
+		allow empty lines after a mutli line comment
+	 **/
 	public var allowEmptyLineAfterMultiLineComment:Bool;
+
+	/**
+		require an empty line after package definition
+	 **/
 	public var requireEmptyLineAfterPackage:Bool;
+
+	/**
+		require an empty line after class keyword
+	 **/
 	public var requireEmptyLineAfterClass:Bool;
+
+	/**
+		require an empty line after interface keyword
+	 **/
 	public var requireEmptyLineAfterInterface:Bool;
+
+	/**
+		require an empty line after abstract keyword
+	 **/
 	public var requireEmptyLineAfterAbstract:Bool;
 
 	public function new() {

@@ -1,10 +1,20 @@
 package checkstyle.checks.design;
 
+/**
+	Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to "allowMarkerInterfaces".
+ **/
 @name("Interface")
 @desc("Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.")
 class InterfaceCheck extends Check {
 
+	/**
+		allows empty marker interfaces, or forbid their use
+	 **/
 	public var allowMarkerInterfaces:Bool;
+
+	/**
+		allow properties inside interface types
+	 **/
 	public var allowProperties:Bool;
 
 	public function new() {

@@ -1,10 +1,20 @@
 package checkstyle.checks.whitespace;
 
+/**
+	Checks for spaces before array access or inside array elements. Finds code like "a [0], a[ 0]", etc.
+ **/
 @name("ArrayAccess")
 @desc("Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.")
 class ArrayAccessCheck extends Check {
 
+	/**
+		set "spaceBefore" to false to detect space between array and "["
+	 */
 	public var spaceBefore:Bool;
+
+	/**
+		set to false to detect space between brackets ("[" + "]") and index
+	 */
 	public var spaceInside:Bool;
 
 	public function new() {

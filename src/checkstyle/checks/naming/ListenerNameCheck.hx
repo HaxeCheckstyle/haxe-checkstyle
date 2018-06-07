@@ -1,11 +1,22 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks the naming conventions of event listener functions specified using "listeners" property.
+ **/
 @name("ListenerName")
 @desc("Checks the naming conventions of event listener functions specified using `listeners` property.")
 class ListenerNameCheck extends Check {
 
+	/**
+		list of function names used to register listeners
+	 **/
 	public var listeners:Array<String>;
+
+	/**
+		regex name format
+	 **/
 	public var format:String;
+
 	var formatRE:EReg;
 
 	public function new() {

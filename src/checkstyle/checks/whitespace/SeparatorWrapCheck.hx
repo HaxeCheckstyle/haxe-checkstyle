@@ -2,6 +2,9 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 
+/**
+	Checks line wrapping with separators.
+ **/
 @name("SeparatorWrap")
 @desc("Checks line wrapping with separators.")
 class SeparatorWrapCheck extends WrapCheckBase {

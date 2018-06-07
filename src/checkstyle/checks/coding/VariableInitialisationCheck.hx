@@ -1,5 +1,8 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks for instance variables that are initialised at class level.
+ **/
 @name("VariableInitialisation")
 @desc("Checks for instance variables that are initialised at class level.")
 class VariableInitialisationCheck extends Check {

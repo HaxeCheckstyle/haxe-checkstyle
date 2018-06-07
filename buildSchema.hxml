@@ -1,3 +1,4 @@
 buildGlobal.hxml
 -cp schema
+-xml resources/schema.xml
 -x SchemaGenerator

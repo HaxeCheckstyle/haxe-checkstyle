@@ -1,5 +1,8 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks that instance variable names conform to a format specified by the "format" property.
+ **/
 @name("MemberName")
 @desc("Checks that instance variable names conform to a format specified by the `format` property.")
 class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
@@ -90,6 +93,15 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	}
 }
 
+/**
+	check applies to:
+	- PUBLIC = all public fields
+	- PRIVATE = all private fields
+	- ENUM = all enum fields
+	- CLASS = all class fields, use in combination with PUBLIC and PRIVATE to only match public/private class fields
+	- ABSTRACT = all abstract fields, use in combination with PUBLIC and PRIVATE to only match public/private abstract fields
+	- TYPEDEF = all typedef fields
+ **/
 @:enum
 abstract MemberNameCheckToken(String) {
 	var PUBLIC = "PUBLIC";

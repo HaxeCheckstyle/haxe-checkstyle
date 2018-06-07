@@ -1,5 +1,9 @@
 package checkstyle.checks.coding;
 
+/**
+	Check that the "default" is after all the cases in a "switch" statement. Haxe allows "default" anywhere within the "switch" statement.
+	But it is more readable if it comes after the last "case".
+ **/
 @name("DefaultComesLast")
 @desc("Check that the `default` is after all the cases in a `switch` statement. Haxe allows `default` anywhere within the `switch` statement. But it is more readable if it comes after the last `case`.")
 class DefaultComesLastCheck extends Check {

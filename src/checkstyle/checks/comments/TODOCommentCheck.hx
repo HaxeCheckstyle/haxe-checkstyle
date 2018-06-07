@@ -1,9 +1,15 @@
 package checkstyle.checks.comments;
 
+/**
+	A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.
+ **/
 @name("TODOComment")
 @desc("A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.")
 class TODOCommentCheck extends Check {
 
+	/**
+		regex todo comment format, defaults to "^\\s*(TODO|FIXME|HACK|XXX|BUG)"
+	 **/
 	public var format:String;
 
 	public function new() {

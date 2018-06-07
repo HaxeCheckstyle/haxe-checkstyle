@@ -2,6 +2,9 @@ package checkstyle.checks.naming;
 
 import checkstyle.detect.DetectableInstance;
 
+/**
+	Checks that the constants (static / static inline with initialisation) conform to a format specified by the "format" property.
+ **/
 @name("ConstantName")
 @desc("Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.")
 class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
@@ -76,6 +79,11 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 	}
 }
 
+/**
+	supports inline and non inline constants
+	- INLINE = "static inline var"
+	- NOTINLINE = "static var"
+ **/
 @:enum
 abstract ConstantNameCheckToken(String) {
 	var INLINE = "INLINE";

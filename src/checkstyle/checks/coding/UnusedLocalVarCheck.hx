@@ -2,6 +2,9 @@ package checkstyle.checks.coding;
 
 import checkstyle.utils.StringUtils;
 
+/**
+	Checks for unused local variables.
+ **/
 @name("UnusedLocalVar")
 @desc("Checks for unused local variables.")
 class UnusedLocalVarCheck extends Check {

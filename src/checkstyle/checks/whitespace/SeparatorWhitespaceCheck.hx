@@ -2,15 +2,41 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 
+/**
+	Checks that whitespace is present or absent around a separators.
+ **/
 @name("SeparatorWhitespace")
 @desc("Checks that whitespace is present or absent around a separators.")
 class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 
-	// .
+	/**
+		policy for "."
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var dotPolicy:WhitespacePolicy;
-	// ,
+
+	/**
+		policy for ","
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var commaPolicy:WhitespacePolicy;
-	// ;
+
+	/**
+		policy for ";"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var semicolonPolicy:WhitespacePolicy;
 
 	public function new() {

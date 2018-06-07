@@ -1,5 +1,8 @@
 package checkstyle.checks.literal;
 
+/**
+	Checks if the array is instantiated using [] which is shorter and cleaner, not with new.
+ **/
 @name("ArrayLiteral", "ArrayInstantiation")
 @desc("Checks if the array is instantiated using [] which is shorter and cleaner, not with new.")
 class ArrayLiteralCheck extends Check {

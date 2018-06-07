@@ -2,17 +2,66 @@ package checkstyle.checks.whitespace;
 
 import haxe.macro.Printer;
 
+/**
+	Spacing check on if, for, while, switch, try statements and around operators.
+ **/
 @name("Spacing")
 @desc("Spacing check on if, for, while, switch, try statements and around operators.")
 class SpacingCheck extends Check {
 
+	/**
+		require space around Binop operators ("+", "-", "/", etc.)
+	 **/
 	public var spaceAroundBinop:Bool;
+
+	/**
+		enforce no space around Unop operators ("++", "--", "!", "-", "~")
+	 **/
 	public var noSpaceAroundUnop:Bool;
+
+	/**
+		policy for if statements (space between "if" and "(")
+		- should = require space between statement and condition
+		- shouldNot = no space should between statement and condition
+		- any = ignored by space check
+	 **/
 	public var spaceIfCondition:SpacingPolicy;
+
+	/**
+		policy for for statements (space between "for" and "(")
+		- should = require space between statement and condition
+		- shouldNot = no space should between statement and condition
+		- any = ignored by space check
+	 **/
 	public var spaceForLoop:SpacingPolicy;
+
+	/**
+		policy for while statements (space between while" and "(")
+		- should = require space between statement and condition
+		- shouldNot = no space should between statement and condition
+		- any = ignored by space check
+	 **/
 	public var spaceWhileLoop:SpacingPolicy;
+
+	/**
+		policy for switch statements (space between "switch" and "(")
+		- should = require space between statement and condition
+		- shouldNot = no space should between statement and condition
+		- any = ignored by space check
+	 **/
 	public var spaceSwitchCase:SpacingPolicy;
+
+	/**
+		policy for catch statements (space between "catch" and "(")
+		- should = require space between statement and condition
+		- shouldNot = no space should between statement and condition
+		- any = ignored by space check
+	 **/
 	public var spaceCatch:SpacingPolicy;
+
+	/**
+		exclude range operator "..." from "spaceAroundBinop"
+	 */
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -148,6 +197,11 @@ class SpacingCheck extends Check {
 	}
 }
 
+/**
+	- should = require space between statement and condition
+	- shouldNot = no space should between statement and condition
+	- any = ignored by space check
+ **/
 @:enum
 abstract SpacingPolicy(String) {
 	var SHOULD = "should";

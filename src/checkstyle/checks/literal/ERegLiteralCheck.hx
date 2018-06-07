@@ -1,5 +1,8 @@
 package checkstyle.checks.literal;
 
+/**
+	Checks for usage of EReg literals (between ~/ and /) instead of new.
+ **/
 @name("ERegLiteral", "ERegInstantiation")
 @desc("Checks for usage of EReg literals (between ~/ and /) instead of new.")
 class ERegLiteralCheck extends Check {

@@ -1,11 +1,25 @@
 package checkstyle.checks.type;
 
+/**
+	Warns if Void is used for return or if return type is not specified when returning.
+ **/
 @name("Return")
 @desc("Warns if Void is used for return or if return type is not specified when returning.")
 class ReturnCheck extends Check {
 
+	/**
+		allows empty return which is mostly used to exit functions.
+	 **/
 	public var allowEmptyReturn:Bool;
+
+	/**
+		enforces return type for every function
+	 **/
 	public var enforceReturnType:Bool;
+
+	/**
+		enforces return type for anonymous functions
+	 **/
 	public var enforceReturnTypeForAnonymous:Bool;
 
 	public function new() {

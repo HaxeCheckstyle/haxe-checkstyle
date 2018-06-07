@@ -2,6 +2,9 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 
+/**
+	Checks line wrapping with operators.
+ **/
 @name("OperatorWrap")
 @desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {

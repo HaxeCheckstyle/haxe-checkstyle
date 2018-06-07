@@ -7,10 +7,12 @@
             "items": {
                 "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "description": "list of path filters, e.g.\n\t- full type names\n\t- names of individual folder or subfolders\n\t- partial folder or type names\n\n\teach line can have an additional range specification:\n\t- \":<linenumber>\" = only matches a specific line number - valid line number start at 1\n\t- \":<start>-<end>\" = matches line numbers from <start> to <end> (including both)\n\t- \":<identifier>\" = matches any line or block that has <identifier> name (Haxe keywords currently unsupported)"
         },
         "ExcludeConfig": {
             "type": "object",
+            "description": "defines filters to exclude folders, types or files from all or specific checks",
             "properties": {
                 "RightCurly": {
                     "propertyOrder": 52,
@@ -22,6 +24,7 @@
                         "RELATIVE_TO_SOURCE"
                     ],
                     "type": "string",
+                    "description": "filters excludes relative to\n\t- RELATIVE_TO_PROJECT = use project root\n\t- RELATIVE_TO_SOURCE = use path(s) specified via \"-s <path>\" command line switches",
                     "propertyOrder": 0
                 },
                 "CatchParameterName": {
@@ -140,6 +143,7 @@
                     "minimum": 1,
                     "type": "integer",
                     "maximum": 1,
+                    "description": "version number",
                     "propertyOrder": 2
                 },
                 "SeparatorWrap": {
@@ -163,6 +167,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "all": {
+                    "description": "exclude matching files from all checks",
                     "propertyOrder": 1,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },

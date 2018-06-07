@@ -3,11 +3,22 @@ package checkstyle.checks.imports;
 import checkstyle.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
 
+/**
+	Checks for unused or duplicate imports.
+ **/
 @name("UnusedImport")
 @desc("Checks for unused or duplicate imports.")
 class UnusedImportCheck extends Check {
 
+	/**
+		list of module names to ignore, any module from "ignoreModules" won't show up as unused in any file during a run
+	 **/
 	public var ignoreModules:Array<String>;
+
+	/**
+		modules that define multiple types may show up as unused, unless "moduleTypeMap" contains a mapping for it
+		e.g. "haxe.macro.Expr": ["ExprDef", "ComplexType"] - would allow "import haxe.macro.Expr;" even though you just use "ComplexType"
+	 **/
 	public var moduleTypeMap:Any;
 
 	public function new() {

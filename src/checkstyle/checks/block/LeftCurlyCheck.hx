@@ -1,11 +1,43 @@
 package checkstyle.checks.block;
 
+/**
+    Checks for the placement of left curly braces ("{") for code blocks. The policy to verify is specified using the property "option".
+ **/
 @name("LeftCurly")
 @desc("Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.")
 class LeftCurlyCheck extends Check {
 
+	/**
+	    matches only left curlys specified in tokens list:
+		- CLASS_DEF = class definition "class Test {}"
+		- ENUM_DEF = enum definition "enum Test {}"
+		- ABSTRACT_DEF = abstract definition "abstract Test {}"
+		- TYPEDEF_DEF = typdef definition "typedef Test = {}"
+		- INTERFACE_DEF = interface definition "interface Test {}"
+		- OBJECT_DECL = object declaration "{ x: 0, y: 0, z: 0}"
+		- FUNCTION = function body "funnction test () {}"
+		- FOR = for body "for (i in 0..10) {}"
+		- IF = if / else body "if (test) {} else {}"
+		- WHILE = while body "while (test) {}"
+		- SWITCH = switch / case body "switch (test) { case: {} default: {} }"
+		- TRY = try body "try {}"
+		- CATCH = catch body "catch (e:Dynamic) {}"
+		- REIFICATION = macro reification "$i{}"
+		- ARRAY_COMPREHENSION = array comprehension "[for (i in 0...10) {i * 2}]"
+	 **/
 	public var tokens:Array<LeftCurlyCheckToken>;
+
+	/**
+	    placement of left curly
+		- eol = should occur at end of line
+	    - nl = should occur on a new line
+		- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line
+	 */
 	public var option:LeftCurlyCheckOption;
+
+	/**
+	    allow single line blocks
+	 **/
 	public var ignoreEmptySingleline:Bool;
 
 	public function new() {

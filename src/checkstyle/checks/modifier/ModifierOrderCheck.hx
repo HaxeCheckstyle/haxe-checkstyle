@@ -2,10 +2,16 @@ package checkstyle.checks.modifier;
 
 import haxe.macro.PositionTools;
 
+/**
+	Checks that the order of modifiers conforms to the standards.
+ **/
 @name("ModifierOrder", "AccessOrder")
 @desc("Checks that the order of modifiers conforms to the standards.")
 class ModifierOrderCheck extends Check {
 
+	/**
+		order in which modifier should occur
+	 **/
 	public var modifiers:Array<ModifierOrderCheckModifier>;
 
 	public function new() {
@@ -58,6 +64,17 @@ class ModifierOrderCheck extends Check {
 	}
 }
 
+/**
+	list of modifiers
+	- PUBLIC_PRIVATE = public / private modifier
+	- INLINE = inline modifier
+	- STATIC = static modifier
+	- OVERRIDE = override modifier
+	- MACRO = macro modifier
+	- DYNAMIC = dynamic modifier
+	- EXTERN = extern modifier
+	- FINAL = final modifier
+ **/
 @:enum
 abstract ModifierOrderCheckModifier(String) {
 	var PUBLIC_PRIVATE = "PUBLIC_PRIVATE";

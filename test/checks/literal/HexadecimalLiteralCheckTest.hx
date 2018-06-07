@@ -17,7 +17,7 @@ class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckT
 	@Test
 	public function test3() {
 		var check = new HexadecimalLiteralCheck();
-		check.option = "lowerCase";
+		check.option = LOWER_CASE;
 		assertMsg(check, TEST3, "Bad hexadecimal literal, use lowerCase");
 	}
 }

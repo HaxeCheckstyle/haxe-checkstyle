@@ -3,8 +3,19 @@ package checkstyle.checks.naming;
 @ignore("Base class for name checks")
 class NameCheckBase<T> extends Check {
 
+	/**
+		regex name format
+	 **/
 	public var format:String;
+
+	/**
+		list of tokens to limit where names should conform to "format"
+	 **/
 	public var tokens:Array<T>;
+
+	/**
+		ignores names inside extern types
+	 **/
 	public var ignoreExtern:Bool;
 
 	var formatRE:EReg;

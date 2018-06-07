@@ -1,5 +1,8 @@
 package checkstyle.checks.modifier;
 
+/**
+	Checks for public accessors.
+ **/
 @name("PublicAccessor")
 @desc("Checks for public accessors.")
 class PublicAccessorCheck extends Check {

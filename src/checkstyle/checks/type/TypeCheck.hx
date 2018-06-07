@@ -1,9 +1,15 @@
 package checkstyle.checks.type;
 
+/**
+	Checks if type is specified or not for member variables.
+ **/
 @name("Type")
 @desc("Checks if type is specified or not for member variables.")
 class TypeCheck extends Check {
 
+	/**
+		ignores fields inside abstract enums
+	 **/
 	public var ignoreEnumAbstractValues:Bool;
 
 	public function new() {

@@ -5,12 +5,19 @@
     "definitions": {
         "HexadecimalLiteralCheck": {
             "type": "object",
+            "description": "Checks the letter case of hexadecimal literals.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the letter case of hexadecimal literals.",
                     "properties": {
                         "option": {
+                            "enum": [
+                                "upperCase",
+                                "lowerCase"
+                            ],
                             "type": "string",
+                            "description": "policy for hexadecimal literals\n\t    - upperCase = use uppercase for all letters\n\t    - lowerCase = use lowercase for all letters",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -21,6 +28,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -30,16 +38,19 @@
                     "enum": [
                         "HexadecimalLiteral"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the letter case of hexadecimal literals."
                 }
             },
             "additionalProperties": false
         },
         "ERegLiteralCheck": {
             "type": "object",
+            "description": "Checks for usage of EReg literals (between ~/ and /) instead of new.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for usage of EReg literals (between ~/ and /) instead of new.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -49,6 +60,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -58,19 +70,23 @@
                     "enum": [
                         "ERegLiteral"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for usage of EReg literals (between ~/ and /) instead of new."
                 }
             },
             "additionalProperties": false
         },
         "NestedForDepthCheck": {
             "type": "object",
+            "description": "Restricts nested loop blocks to a specified depth (default = 1).",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Restricts nested loop blocks to a specified depth (default = 1).",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of nested loops allowed\n\t\tsetting \"max\" to 1 allows one inner loop",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -81,6 +97,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -90,16 +107,19 @@
                     "enum": [
                         "NestedForDepth"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Restricts nested loop blocks to a specified depth (default = 1)."
                 }
             },
             "additionalProperties": false
         },
         "DynamicCheck": {
             "type": "object",
+            "description": "Checks for use of Dynamic type anywhere in the code.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for use of Dynamic type anywhere in the code.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -109,6 +129,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -118,19 +139,23 @@
                     "enum": [
                         "Dynamic"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for use of Dynamic type anywhere in the code."
                 }
             },
             "additionalProperties": false
         },
         "UnusedImportCheck": {
             "type": "object",
+            "description": "Checks for unused or duplicate imports.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for unused or duplicate imports.",
                     "properties": {
                         "moduleTypeMap": {
                             "type": "object",
+                            "description": "modules that define multiple types may show up as unused, unless \"moduleTypeMap\" contains a mapping for it\n\t\te.g. \"haxe.macro.Expr\": [\"ExprDef\", \"ComplexType\"] - would allow \"import haxe.macro.Expr;\" even though you just use \"ComplexType\"",
                             "propertyOrder": 1
                         },
                         "ignoreModules": {
@@ -138,6 +163,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list of module names to ignore, any module from \"ignoreModules\" won't show up as unused in any file during a run",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -148,6 +174,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -157,27 +184,33 @@
                     "enum": [
                         "UnusedImport"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for unused or duplicate imports."
                 }
             },
             "additionalProperties": false
         },
         "HiddenFieldCheck": {
             "type": "object",
+            "description": "Checks that a local variable or a parameter does not shadow a field that is defined in the same class.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that a local variable or a parameter does not shadow a field that is defined in the same class.",
                     "properties": {
                         "ignoreSetter": {
                             "type": "boolean",
+                            "description": "allow setters to shadow field names",
                             "propertyOrder": 1
                         },
                         "ignoreFormat": {
                             "type": "string",
+                            "description": "ignore function names matching \"ignoreFormat\" regex",
                             "propertyOrder": 2
                         },
                         "ignoreConstructorParameter": {
                             "type": "boolean",
+                            "description": "allow constructor parameters to shadow field names",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -188,6 +221,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -197,23 +231,28 @@
                     "enum": [
                         "HiddenField"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that a local variable or a parameter does not shadow a field that is defined in the same class."
                 }
             },
             "additionalProperties": false
         },
         "InterfaceCheck": {
             "type": "object",
+            "description": "Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.",
                     "properties": {
                         "allowProperties": {
                             "type": "boolean",
+                            "description": "allow properties inside interface types",
                             "propertyOrder": 1
                         },
                         "allowMarkerInterfaces": {
                             "type": "boolean",
+                            "description": "allows empty marker interfaces, or forbid their use",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -224,6 +263,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -233,16 +273,19 @@
                     "enum": [
                         "Interface"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`."
                 }
             },
             "additionalProperties": false
         },
         "AvoidInlineConditionalsCheck": {
             "type": "object",
+            "description": "Detects inline conditionals. Useful for developers who find inline conditionals hard to read and want forbid them.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Detects inline conditionals. Useful for developers who find inline conditionals hard to read and want forbid them.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -252,6 +295,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -261,16 +305,19 @@
                     "enum": [
                         "AvoidInlineConditionals"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Detects inline conditionals. Useful for developers who find inline conditionals hard to read and want forbid them."
                 }
             },
             "additionalProperties": false
         },
         "PublicAccessorCheck": {
             "type": "object",
+            "description": "Checks for public accessors.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for public accessors.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -280,6 +327,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -289,16 +337,19 @@
                     "enum": [
                         "PublicAccessor"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for public accessors."
                 }
             },
             "additionalProperties": false
         },
         "IndentationCheck": {
             "type": "object",
+            "description": "Checks correct indentation",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks correct indentation",
                     "properties": {
                         "character": {
                             "enum": [
@@ -313,6 +364,7 @@
                                 "        "
                             ],
                             "type": "string",
+                            "description": "character sequence to use for indentation\n\t\t- \"tab\" for using tabs\n\t\t- a string containing as many spaces as one indentation level requires",
                             "propertyOrder": 0
                         },
                         "wrapPolicy": {
@@ -322,14 +374,17 @@
                                 "larger"
                             ],
                             "type": "string",
+                            "description": "indentation of wrapped statements (= continued on next line)\n\t\t- none = wrapped statements must have the same indentation as parent\n\t\t- exact = wrapped statemenmts must have a +1 indentation in relation to parent\n\t\t- larger = wrapped statements must have a +1 or larger indentation in relation to parent",
                             "propertyOrder": 4
                         },
                         "ignoreComments": {
                             "type": "boolean",
+                            "description": "ignore indentation of comments",
                             "propertyOrder": 3
                         },
                         "ignoreConditionals": {
                             "type": "boolean",
+                            "description": "ignore indentation of conditionals (same as setting conditionalPolicy to ignore)",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -340,6 +395,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 5
                         },
                         "conditionalPolicy": {
@@ -350,6 +406,7 @@
                                 "aligned_increase"
                             ],
                             "type": "string",
+                            "description": "indentation of conditional statements\n\t\t- ignore = ignores conditioonals, same as \"ignoreConditionals\"\n\t\t- fixed_zero = contitionals have to start at the beginning of a line (only where conditional is the first statement)\n\t\t- aligned = align wih surrounding code\n\t\t- aligned_increase = align wih surrounding code and increase indentation of enclosed code by +1",
                             "propertyOrder": 2
                         }
                     },
@@ -359,22 +416,26 @@
                     "enum": [
                         "Indentation"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks correct indentation"
                 }
             },
             "additionalProperties": false
         },
         "CyclomaticComplexityCheck": {
             "type": "object",
+            "description": "Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property.",
                     "properties": {
                         "thresholds": {
                             "items": {
                                 "$ref": "#/definitions/Threshold"
                             },
                             "type": "array",
+                            "description": "list of thresholds that define which severity level to report when complexity of method is above its limit",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -385,6 +446,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -394,22 +456,26 @@
                     "enum": [
                         "CyclomaticComplexity"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property."
                 }
             },
             "additionalProperties": false
         },
         "OperatorWrapCheck": {
             "type": "object",
+            "description": "Checks line wrapping with operators.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks line wrapping with operators.",
                     "properties": {
                         "tokens": {
                             "items": {
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list mof wrapping tokens",
                             "propertyOrder": 0
                         },
                         "option": {
@@ -418,6 +484,7 @@
                                 "nl"
                             ],
                             "type": "string",
+                            "description": "policy for wrapping token\n\t\t- eol = wrapping token should be at end of line\n\t\t- nl = wrapping token should start a new line",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -428,6 +495,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -437,37 +505,45 @@
                     "enum": [
                         "OperatorWrap"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks line wrapping with operators."
                 }
             },
             "additionalProperties": false
         },
         "MethodNameCheck": {
             "type": "object",
+            "description": "Checks that method names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that method names conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
                             "items": {
-                                "anyOf": [
+                                "enum": [
                                     "PUBLIC",
                                     "PRIVATE",
                                     "STATIC",
                                     "NOTSTATIC",
                                     "INLINE",
                                     "NOTINLINE"
-                                ]
+                                ],
+                                "type": "string",
+                                "description": "check applies to:\n\t- PUBLIC = all public methods\n\t- PRIVATE = all private methods\n\t- STATIC = all static methods\n\t- NOTSTATIC = all non static methods\n\t- INLINE = all inline methods\n\t- NOTINLINE = all non-inline methods"
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -478,6 +554,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -487,16 +564,19 @@
                     "enum": [
                         "MethodName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that method names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "StringLiteralCheck": {
             "type": "object",
+            "description": "Checks for single or double quote string literals.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for single or double quote string literals.",
                     "properties": {
                         "policy": {
                             "enum": [
@@ -505,10 +585,12 @@
                                 "doubleAndInterpolation"
                             ],
                             "type": "string",
+                            "description": "policy for string literal use\n\t\t- onlySingle = enforce single quotes\n\t\t- onlyDouble = enforce double quotes, no interpolation allowed\n\t\t- doubleAndInterpolation = enforce double quotes, allow single quotes for interpolation",
                             "propertyOrder": 0
                         },
                         "allowException": {
                             "type": "boolean",
+                            "description": "\"allowException\" allows using single quotes in \"onlyDouble\" and \"doubleAndInterpolation\" mode, when string contains a double quote character.\n\t\tOr double quotes in \"onlySingle\" mode when string contains a single quote character, reducing the need to escape quotation marks.",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -519,6 +601,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -528,26 +611,31 @@
                     "enum": [
                         "StringLiteral"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for single or double quote string literals."
                 }
             },
             "additionalProperties": false
         },
         "ListenerNameCheck": {
             "type": "object",
+            "description": "Checks the naming conventions of event listener functions specified using `listeners` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the naming conventions of event listener functions specified using `listeners` property.",
                     "properties": {
                         "listeners": {
                             "items": {
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list of function names used to register listeners",
                             "propertyOrder": 0
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -558,6 +646,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -567,37 +656,45 @@
                     "enum": [
                         "ListenerName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the naming conventions of event listener functions specified using `listeners` property."
                 }
             },
             "additionalProperties": false
         },
         "MemberNameCheck": {
             "type": "object",
+            "description": "Checks that instance variable names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that instance variable names conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
                             "items": {
-                                "anyOf": [
+                                "enum": [
                                     "PUBLIC",
                                     "PRIVATE",
                                     "ENUM",
                                     "CLASS",
                                     "ABSTRACT",
                                     "TYPEDEF"
-                                ]
+                                ],
+                                "type": "string",
+                                "description": "check applies to:\n\t- PUBLIC = all public fields\n\t- PRIVATE = all private fields\n\t- ENUM = all enum fields\n\t- CLASS = all class fields, use in combination with PUBLIC and PRIVATE to only match public/private class fields\n\t- ABSTRACT = all abstract fields, use in combination with PUBLIC and PRIVATE to only match public/private abstract fields\n\t- TYPEDEF = all typedef fields"
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -608,6 +705,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -617,16 +715,19 @@
                     "enum": [
                         "MemberName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that instance variable names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "Threshold": {
             "type": "object",
+            "description": "threshold for code complexity",
             "properties": {
                 "complexity": {
                     "type": "integer",
+                    "description": "complexity value associated with \"severity\"",
                     "propertyOrder": 1
                 },
                 "severity": {
@@ -637,6 +738,7 @@
                         "IGNORE"
                     ],
                     "type": "string",
+                    "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                     "propertyOrder": 0
                 }
             },
@@ -648,9 +750,11 @@
         },
         "EmptyBlockCheck": {
             "type": "object",
+            "description": "Checks for empty blocks. The policy to verify is specified using the property `option`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for empty blocks. The policy to verify is specified using the property `option`.",
                     "properties": {
                         "tokens": {
                             "items": {
@@ -673,6 +777,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "matches only blocks specified in tokens list:\n\t\t- CLASS_DEF = class definition \"class Test {}\"\n\t\t- ENUM_DEF = enum definition \"enum Test {}\"\n\t\t- ABSTRACT_DEF = abstract definition \"abstract Test {}\"\n\t\t- TYPEDEF_DEF = typdef definition \"typedef Test = {}\"\n\t\t- INTERFACE_DEF = interface definition \"interface Test {}\"\n\t\t- OBJECT_DECL = object declaration \"{ x: 0, y: 0, z: 0}\"\n\t\t- FUNCTION = function body \"funnction test () {}\"\n\t\t- FOR = for body \"for (i in 0..10) {}\"\n\t\t- IF = if / else body \"if (test) {} else {}\"\n\t\t- WHILE = while body \"while (test) {}\"\n\t\t- SWITCH = switch / case body \"switch (test) { case: {} default: {} }\"\n\t\t- TRY = try body \"try {}\"\n\t\t- CATCH = catch body \"catch (e:Dynamic) {}\"\n\t\t- REIFICATION = macro reification \"$i{}\"",
                             "propertyOrder": 0
                         },
                         "option": {
@@ -682,6 +787,7 @@
                                 "stmt"
                             ],
                             "type": "string",
+                            "description": "for all empty blocks matched by tokens\n\t    - empty = allow empty blocks but enforce \"{}\" notation\n\t    - text = must contain something apart from whitespace (comment or statement)\n\t    - stmt = must contain at least one statement (that is not a comment)",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -692,6 +798,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -701,23 +808,28 @@
                     "enum": [
                         "EmptyBlock"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for empty blocks. The policy to verify is specified using the property `option`."
                 }
             },
             "additionalProperties": false
         },
         "ArrayAccessCheck": {
             "type": "object",
+            "description": "Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.",
                     "properties": {
                         "spaceBefore": {
                             "type": "boolean",
+                            "description": "set \"spaceBefore\" to false to detect space between array and \"[\"",
                             "propertyOrder": 0
                         },
                         "spaceInside": {
                             "type": "boolean",
+                            "description": "set to false to detect space between brackets (\"[\" + \"]\") and index",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -728,6 +840,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -737,23 +850,28 @@
                     "enum": [
                         "ArrayAccess"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc."
                 }
             },
             "additionalProperties": false
         },
         "ReturnCountCheck": {
             "type": "object",
+            "description": "Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.",
                     "properties": {
                         "ignoreFormat": {
                             "type": "string",
+                            "description": "ignore function names matching \"ignoreFormat\" regex",
                             "propertyOrder": 1
                         },
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of return calls a function may have",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -764,6 +882,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -773,19 +892,23 @@
                     "enum": [
                         "ReturnCount"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property."
                 }
             },
             "additionalProperties": false
         },
         "NestedTryDepthCheck": {
             "type": "object",
+            "description": "Restricts nested `try` blocks to a specified depth (default = 1).",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Restricts nested `try` blocks to a specified depth (default = 1).",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of nested try/catch statemenmts allowed\n\t\tsetting \"max\" to 1 allows one inner try/catch",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -796,6 +919,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -805,16 +929,19 @@
                     "enum": [
                         "NestedTryDepth"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Restricts nested `try` blocks to a specified depth (default = 1)."
                 }
             },
             "additionalProperties": false
         },
         "LeftCurlyCheck": {
             "type": "object",
+            "description": "Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.",
                     "properties": {
                         "tokens": {
                             "items": {
@@ -838,10 +965,12 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "matches only left curlys specified in tokens list:\n\t\t- CLASS_DEF = class definition \"class Test {}\"\n\t\t- ENUM_DEF = enum definition \"enum Test {}\"\n\t\t- ABSTRACT_DEF = abstract definition \"abstract Test {}\"\n\t\t- TYPEDEF_DEF = typdef definition \"typedef Test = {}\"\n\t\t- INTERFACE_DEF = interface definition \"interface Test {}\"\n\t\t- OBJECT_DECL = object declaration \"{ x: 0, y: 0, z: 0}\"\n\t\t- FUNCTION = function body \"funnction test () {}\"\n\t\t- FOR = for body \"for (i in 0..10) {}\"\n\t\t- IF = if / else body \"if (test) {} else {}\"\n\t\t- WHILE = while body \"while (test) {}\"\n\t\t- SWITCH = switch / case body \"switch (test) { case: {} default: {} }\"\n\t\t- TRY = try body \"try {}\"\n\t\t- CATCH = catch body \"catch (e:Dynamic) {}\"\n\t\t- REIFICATION = macro reification \"$i{}\"\n\t\t- ARRAY_COMPREHENSION = array comprehension \"[for (i in 0...10) {i * 2}]\"",
                             "propertyOrder": 0
                         },
                         "ignoreEmptySingleline": {
                             "type": "boolean",
+                            "description": "allow single line blocks",
                             "propertyOrder": 2
                         },
                         "option": {
@@ -851,6 +980,7 @@
                                 "nlow"
                             ],
                             "type": "string",
+                            "description": "placement of left curly\n\t\t- eol = should occur at end of line\n\t    - nl = should occur on a new line\n\t\t- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -861,6 +991,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -870,22 +1001,26 @@
                     "enum": [
                         "LeftCurly"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`."
                 }
             },
             "additionalProperties": false
         },
         "MagicNumberCheck": {
             "type": "object",
+            "description": "Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.",
                     "properties": {
                         "ignoreNumbers": {
                             "items": {
                                 "type": "number"
                             },
                             "type": "array",
+                            "description": "list of magic numbers to ignore during checks",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -896,6 +1031,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -905,23 +1041,28 @@
                     "enum": [
                         "MagicNumber"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers."
                 }
             },
             "additionalProperties": false
         },
         "LocalVariableNameCheck": {
             "type": "object",
+            "description": "Checks that the local variable names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that the local variable names conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
@@ -929,6 +1070,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -939,6 +1081,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -948,16 +1091,19 @@
                     "enum": [
                         "LocalVariableName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that the local variable names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "IndentationCharacterCheck": {
             "type": "object",
+            "description": "Checks indentation character (tab/space, default is tab).",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks indentation character (tab/space, default is tab).",
                     "properties": {
                         "character": {
                             "enum": [
@@ -965,10 +1111,12 @@
                                 "space"
                             ],
                             "type": "string",
+                            "description": "set indentation to\n\t\t- tab = tab\n\t\t- space = space",
                             "propertyOrder": 0
                         },
                         "ignorePattern": {
                             "type": "string",
+                            "description": "ignore lines that match regex",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -979,6 +1127,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -988,16 +1137,19 @@
                     "enum": [
                         "IndentationCharacter"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks indentation character (tab/space, default is tab)."
                 }
             },
             "additionalProperties": false
         },
         "MultipleVariableDeclarationsCheck": {
             "type": "object",
+            "description": "Checks that each variable declaration is in its own statement and on its own line.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that each variable declaration is in its own statement and on its own line.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -1007,6 +1159,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -1016,27 +1169,33 @@
                     "enum": [
                         "MultipleVariableDeclarations"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that each variable declaration is in its own statement and on its own line."
                 }
             },
             "additionalProperties": false
         },
         "MultipleStringLiteralsCheck": {
             "type": "object",
+            "description": "Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.",
                     "properties": {
                         "minLength": {
                             "type": "integer",
+                            "description": "string literals must be \"minLength\" or more characters before including them",
                             "propertyOrder": 1
                         },
                         "ignore": {
                             "type": "string",
+                            "description": "ignore string literals matching regex",
                             "propertyOrder": 2
                         },
                         "allowDuplicates": {
                             "type": "integer",
+                            "description": "number of occurrences to allow",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -1047,6 +1206,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -1056,16 +1216,19 @@
                     "enum": [
                         "MultipleStringLiterals"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant."
                 }
             },
             "additionalProperties": false
         },
         "NullableParameterCheck": {
             "type": "object",
+            "description": "Enforces a style for nullable parameters.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Enforces a style for nullable parameters.",
                     "properties": {
                         "option": {
                             "enum": [
@@ -1073,6 +1236,7 @@
                                 "nullDefault"
                             ],
                             "type": "string",
+                            "description": "nullable style to enforece\n\t\t- questionMark = nullable parameters should use \"?name:Type\"\n\t\t- nullDefault = nullable parameters should use \"name:Type = null\"",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -1083,6 +1247,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1092,16 +1257,19 @@
                     "enum": [
                         "NullableParameter"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Enforces a style for nullable parameters."
                 }
             },
             "additionalProperties": false
         },
         "OperatorWhitespaceCheck": {
             "type": "object",
+            "description": "Checks that whitespace is present or absent around a operators.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that whitespace is present or absent around a operators.",
                     "properties": {
                         "ternaryOpPolicy": {
                             "enum": [
@@ -1112,6 +1280,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"?:\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 2
                         },
                         "unaryOpPolicy": {
@@ -1121,6 +1290,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"++\", \"--\", \"!\", \"~\"\n\t\t- inner = enforce whitespace between unary operator and operand\n\t\t- none = enforce no whitespace between unary operator and operand\n\t\t- ignore = skip checks",
                             "propertyOrder": 1
                         },
                         "boolOpPolicy": {
@@ -1132,6 +1302,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"&&\", \"||\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 6
                         },
                         "intervalOpPolicy": {
@@ -1143,6 +1314,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"...\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 7
                         },
                         "assignOpPolicy": {
@@ -1154,6 +1326,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"=\", \"+=\", \"-=\", \"*=\", \"/=\", \"<<=\", \">>=\", \">>>=\", \"&=\", \"|=\", \"^=\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 0
                         },
                         "functionArgPolicy": {
@@ -1165,6 +1338,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"->\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 9
                         },
                         "bitwiseOpPolicy": {
@@ -1176,6 +1350,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"&\", \"|\", \"^\", \"<<\", \">>\", \">>>\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 5
                         },
                         "arithmeticOpPolicy": {
@@ -1187,6 +1362,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"+\", \"-\", \"*\", \"/\", \"%\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 3
                         },
                         "compareOpPolicy": {
@@ -1198,6 +1374,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"==\", \"!=\", \"<\", \"<=\", \">\", \">=\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 4
                         },
                         "arrowPolicy": {
@@ -1209,6 +1386,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \"=>\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 8
                         },
                         "severity": {
@@ -1219,6 +1397,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 10
                         }
                     },
@@ -1228,16 +1407,19 @@
                     "enum": [
                         "OperatorWhitespace"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that whitespace is present or absent around a operators."
                 }
             },
             "additionalProperties": false
         },
         "ExtendedEmptyLinesCheck": {
             "type": "object",
+            "description": "Checks for consecutive empty lines.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for consecutive empty lines.",
                     "properties": {
                         "none": {
                             "items": {
@@ -1278,9 +1460,11 @@
                                     "afterSingleLineComment",
                                     "afterMultiLineComment"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
                             },
                             "type": "array",
+                            "description": "list of places where no empty line is permitted",
                             "propertyOrder": 4
                         },
                         "upto": {
@@ -1322,9 +1506,11 @@
                                     "afterSingleLineComment",
                                     "afterMultiLineComment"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
                             },
                             "type": "array",
+                            "description": "list of places where up to \"max\" empty lines are permitted",
                             "propertyOrder": 6
                         },
                         "defaultPolicy": {
@@ -1336,6 +1522,7 @@
                                 "atleast"
                             ],
                             "type": "string",
+                            "description": "\"defaultPolicy\" applies to all places not in \"ignore\", \"none\", \"exact\", \"upto\" or \"atleast\"",
                             "propertyOrder": 2
                         },
                         "exact": {
@@ -1377,13 +1564,16 @@
                                     "afterSingleLineComment",
                                     "afterMultiLineComment"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
                             },
                             "type": "array",
+                            "description": "list of places where exactly \"max\" empty lines are required",
                             "propertyOrder": 5
                         },
                         "max": {
                             "type": "integer",
+                            "description": "number of empty lines to allow / enforce (used by \"exact\", \"upto\" and \"atleast\" policies)",
                             "propertyOrder": 0
                         },
                         "ignore": {
@@ -1425,9 +1615,11 @@
                                     "afterSingleLineComment",
                                     "afterMultiLineComment"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
                             },
                             "type": "array",
+                            "description": "list of places to ignore",
                             "propertyOrder": 3
                         },
                         "atleast": {
@@ -1469,13 +1661,16 @@
                                     "afterSingleLineComment",
                                     "afterMultiLineComment"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
                             },
                             "type": "array",
+                            "description": "list of places where at least \"max\" empty lines are required",
                             "propertyOrder": 7
                         },
                         "skipSingleLineTypes": {
                             "type": "boolean",
+                            "description": "skips single line type definitions",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -1486,6 +1681,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 8
                         }
                     },
@@ -1495,7 +1691,8 @@
                     "enum": [
                         "ExtendedEmptyLines"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for consecutive empty lines."
                 }
             },
             "additionalProperties": false
@@ -1505,6 +1702,7 @@
             "properties": {
                 "extendsConfigPath": {
                     "type": "string",
+                    "description": "Extend configuration from a master configuration file.\n\t\tChecks and excludes from both master and current configuration file form the final runtime configuration.\n\t\tThere is no shadowing or overwriting checks or excludes, Checkstyle runs every check regardless where it comes from.\n\t\tA master configuration file can have its own \"extendsConfigPath\" entry. Checkstyle will walk up the chain as long as it does not cycle.",
                     "propertyOrder": 0
                 },
                 "defineCombinations": {
@@ -1515,6 +1713,7 @@
                         "type": "array"
                     },
                     "type": "array",
+                    "description": "different define combinations to use (on top of \"baseDefines\")",
                     "propertyOrder": 3
                 },
                 "defaultSeverity": {
@@ -1525,6 +1724,7 @@
                         "IGNORE"
                     ],
                     "type": "string",
+                    "description": "Each check has a builtin severity level.\n\t\tSetting \"defaultSeverity\" applies its value to all checks that have no explicity \"severity\" field in their configuration\n\n\t\t@see checkstyle.SeverityLevel",
                     "propertyOrder": 1
                 },
                 "baseDefines": {
@@ -1532,12 +1732,14 @@
                         "type": "string"
                     },
                     "type": "array",
+                    "description": "defines that are always added",
                     "propertyOrder": 2
                 },
                 "version": {
                     "minimum": 1,
                     "type": "integer",
                     "maximum": 1,
+                    "description": "version number",
                     "propertyOrder": 7
                 },
                 "exclude": {
@@ -1757,6 +1959,7 @@
                     "minimum": 1,
                     "type": "integer",
                     "maximum": 15,
+                    "description": "Sets the number of checker threads, valid range is 1-15",
                     "propertyOrder": 4
                 }
             },
@@ -1764,9 +1967,11 @@
         },
         "SpacingCheck": {
             "type": "object",
+            "description": "Spacing check on if, for, while, switch, try statements and around operators.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Spacing check on if, for, while, switch, try statements and around operators.",
                     "properties": {
                         "spaceIfCondition": {
                             "enum": [
@@ -1775,10 +1980,12 @@
                                 "any"
                             ],
                             "type": "string",
+                            "description": "policy for if statements (space between \"if\" and \"(\")\n\t\t- should = require space between statement and condition\n\t\t- shouldNot = no space should between statement and condition\n\t\t- any = ignored by space check",
                             "propertyOrder": 2
                         },
                         "spaceAroundBinop": {
                             "type": "boolean",
+                            "description": "require space around Binop operators (\"+\", \"-\", \"/\", etc.)",
                             "propertyOrder": 0
                         },
                         "spaceForLoop": {
@@ -1788,10 +1995,12 @@
                                 "any"
                             ],
                             "type": "string",
+                            "description": "policy for for statements (space between \"for\" and \"(\")\n\t\t- should = require space between statement and condition\n\t\t- shouldNot = no space should between statement and condition\n\t\t- any = ignored by space check",
                             "propertyOrder": 3
                         },
                         "ignoreRangeOperator": {
                             "type": "boolean",
+                            "description": "exclude range operator \"...\" from \"spaceAroundBinop\"",
                             "propertyOrder": 7
                         },
                         "spaceWhileLoop": {
@@ -1801,6 +2010,7 @@
                                 "any"
                             ],
                             "type": "string",
+                            "description": "policy for while statements (space between while\" and \"(\")\n\t\t- should = require space between statement and condition\n\t\t- shouldNot = no space should between statement and condition\n\t\t- any = ignored by space check",
                             "propertyOrder": 4
                         },
                         "spaceCatch": {
@@ -1810,6 +2020,7 @@
                                 "any"
                             ],
                             "type": "string",
+                            "description": "policy for catch statements (space between \"catch\" and \"(\")\n\t\t- should = require space between statement and condition\n\t\t- shouldNot = no space should between statement and condition\n\t\t- any = ignored by space check",
                             "propertyOrder": 6
                         },
                         "spaceSwitchCase": {
@@ -1819,10 +2030,12 @@
                                 "any"
                             ],
                             "type": "string",
+                            "description": "policy for switch statements (space between \"switch\" and \"(\")\n\t\t- should = require space between statement and condition\n\t\t- shouldNot = no space should between statement and condition\n\t\t- any = ignored by space check",
                             "propertyOrder": 5
                         },
                         "noSpaceAroundUnop": {
                             "type": "boolean",
+                            "description": "enforce no space around Unop operators (\"++\", \"--\", \"!\", \"-\", \"~\")",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -1833,6 +2046,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 8
                         }
                     },
@@ -1842,16 +2056,19 @@
                     "enum": [
                         "Spacing"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Spacing check on if, for, while, switch, try statements and around operators."
                 }
             },
             "additionalProperties": false
         },
         "AvoidStarImportCheck": {
             "type": "object",
+            "description": "Checks for import statements that use the * notation and using directives.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for import statements that use the * notation and using directives.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -1861,6 +2078,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -1870,16 +2088,19 @@
                     "enum": [
                         "AvoidStarImport"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for import statements that use the * notation and using directives."
                 }
             },
             "additionalProperties": false
         },
         "TrailingWhitespaceCheck": {
             "type": "object",
+            "description": "Checks if there are any trailing white spaces.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks if there are any trailing white spaces.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -1889,6 +2110,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -1898,19 +2120,23 @@
                     "enum": [
                         "TrailingWhitespace"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks if there are any trailing white spaces."
                 }
             },
             "additionalProperties": false
         },
         "FileLengthCheck": {
             "type": "object",
+            "description": "Checks for long source files. If a source file becomes very long it is hard to understand. Therefore long classes should usually be refactored into several individual classes that focus on a specific task.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for long source files. If a source file becomes very long it is hard to understand. Therefore long classes should usually be refactored into several individual classes that focus on a specific task.",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of lines permitted per file (default: 2000)",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -1921,6 +2147,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1930,19 +2157,23 @@
                     "enum": [
                         "FileLength"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for long source files. If a source file becomes very long it is hard to understand. Therefore long classes should usually be refactored into several individual classes that focus on a specific task."
                 }
             },
             "additionalProperties": false
         },
         "NestedIfDepthCheck": {
             "type": "object",
+            "description": "Restricts nested `if-else` blocks to a specified depth (default = 1).",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Restricts nested `if-else` blocks to a specified depth (default = 1).",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of nested if statements allowed\n\t\tsetting \"max\" to 1 allows one if inside another",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -1953,6 +2184,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1962,19 +2194,23 @@
                     "enum": [
                         "NestedIfDepth"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Restricts nested `if-else` blocks to a specified depth (default = 1)."
                 }
             },
             "additionalProperties": false
         },
         "TODOCommentCheck": {
             "type": "object",
+            "description": "A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.",
                     "properties": {
                         "format": {
                             "type": "string",
+                            "description": "regex todo comment format, defaults to \"^\\\\s*(TODO|FIXME|HACK|XXX|BUG)\"",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -1985,6 +2221,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1994,19 +2231,23 @@
                     "enum": [
                         "TODOComment"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property."
                 }
             },
             "additionalProperties": false
         },
         "EmptyPackageCheck": {
             "type": "object",
+            "description": "Checks for empty package names.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for empty package names.",
                     "properties": {
                         "enforceEmptyPackage": {
                             "type": "boolean",
+                            "description": "enforce using a package declaration, even if it is empty",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2017,6 +2258,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2026,33 +2268,41 @@
                     "enum": [
                         "EmptyPackage"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for empty package names."
                 }
             },
             "additionalProperties": false
         },
         "ConstantNameCheck": {
             "type": "object",
+            "description": "Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
                             "items": {
-                                "anyOf": [
+                                "enum": [
                                     "INLINE",
                                     "NOTINLINE"
-                                ]
+                                ],
+                                "type": "string",
+                                "description": "supports inline and non inline constants\n\t- INLINE = \"static inline var\"\n\t- NOTINLINE = \"static var\""
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2063,6 +2313,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2072,19 +2323,23 @@
                     "enum": [
                         "ConstantName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "ParameterNumberCheck": {
             "type": "object",
+            "description": "Checks the number of parameters of a method.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the number of parameters of a method.",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of parameters per method (default: 7)",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2095,10 +2350,12 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         },
                         "ignoreOverriddenMethods": {
                             "type": "boolean",
+                            "description": "ignore methods with \"override\", only base class violates",
                             "propertyOrder": 1
                         }
                     },
@@ -2108,16 +2365,19 @@
                     "enum": [
                         "ParameterNumber"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the number of parameters of a method."
                 }
             },
             "additionalProperties": false
         },
         "ArrayLiteralCheck": {
             "type": "object",
+            "description": "Checks if the array is instantiated using [] which is shorter and cleaner, not with new.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks if the array is instantiated using [] which is shorter and cleaner, not with new.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2127,6 +2387,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2136,16 +2397,19 @@
                     "enum": [
                         "ArrayLiteral"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks if the array is instantiated using [] which is shorter and cleaner, not with new."
                 }
             },
             "additionalProperties": false
         },
         "TraceCheck": {
             "type": "object",
+            "description": "Checks for trace calls in code.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for trace calls in code.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2155,6 +2419,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2164,16 +2429,19 @@
                     "enum": [
                         "Trace"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for trace calls in code."
                 }
             },
             "additionalProperties": false
         },
         "UnusedLocalVarCheck": {
             "type": "object",
+            "description": "Checks for unused local variables.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for unused local variables.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2183,6 +2451,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2192,19 +2461,23 @@
                     "enum": [
                         "UnusedLocalVar"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for unused local variables."
                 }
             },
             "additionalProperties": false
         },
         "NeedBracesCheck": {
             "type": "object",
+            "description": "Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.",
                     "properties": {
                         "allowSingleLineStatement": {
                             "type": "boolean",
+                            "description": "allow / disallow use of single line statements without braces",
                             "propertyOrder": 1
                         },
                         "tokens": {
@@ -2221,6 +2494,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "matches only statements specified in tokens list:\n\n\t\t- FUNCTION = function body \"funnction test () {}\"\n\t\t- FOR = for body \"for (i in 0..10) {}\"\n\t\t- IF = if body \"if (test) {} else {}\"\n\t\t- ELSE_IF = if body \"if (test) {} else if {}\"\n\t\t- WHILE = while body \"while (test) {}\"\n\t\t- DO_WHILE = do…while body \"do {} while (test)\"\n\t\t- CATCH = catch body \"catch (e:Dynamic) {}\"",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2231,6 +2505,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2240,23 +2515,28 @@
                     "enum": [
                         "NeedBraces"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`."
                 }
             },
             "additionalProperties": false
         },
         "LineLengthCheck": {
             "type": "object",
+            "description": "Checks for long lines. Long lines are hard to read.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for long lines. Long lines are hard to read.",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of characters per line (default: 160)",
                             "propertyOrder": 0
                         },
                         "ignorePattern": {
                             "type": "string",
+                            "description": "ignore lines matching regex",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2267,6 +2547,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2276,22 +2557,26 @@
                     "enum": [
                         "LineLength"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for long lines. Long lines are hard to read."
                 }
             },
             "additionalProperties": false
         },
         "WhitespaceAroundCheck": {
             "type": "object",
+            "description": "Checks that a token is surrounded by whitespace.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that a token is surrounded by whitespace.",
                     "properties": {
                         "tokens": {
                             "items": {
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "supported list of tokens:\n\t\t\",\", \";\", \"(\", \")\", \"[\", \"]\", \"{\", \"}\", \":\", \".\", \"=\", \"+\", \"-\", \"*\", \"/\", \"%\", \">\", \"<\", \">=\", \"<=\", \"==\", \"!=\",\n\t\t\"&\", \"|\", \"^\", \"&&\", \"||\", \"<<\", \">>\", \">>>\", \"+=\", \"-=\", \"*=\", \"/=\", \"%=\", \"<<=\", \">>=\", \">>>=\", \"|=\", \"&=\",\n\t\t\"^=\", \"...\", \"=>\", \"!\", \"++\", \"--\",",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2302,6 +2587,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2311,23 +2597,28 @@
                     "enum": [
                         "WhitespaceAround"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that a token is surrounded by whitespace."
                 }
             },
             "additionalProperties": false
         },
         "MethodLengthCheck": {
             "type": "object",
+            "description": "Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.",
                     "properties": {
                         "max": {
                             "type": "integer",
+                            "description": "maximum number of lines per method (default: 50)",
                             "propertyOrder": 0
                         },
                         "countEmpty": {
                             "type": "boolean",
+                            "description": "maximum includes empty lines / should ignore empty lines",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2338,6 +2629,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2347,16 +2639,19 @@
                     "enum": [
                         "MethodLength"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task."
                 }
             },
             "additionalProperties": false
         },
         "SeparatorWhitespaceCheck": {
             "type": "object",
+            "description": "Checks that whitespace is present or absent around a separators.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that whitespace is present or absent around a separators.",
                     "properties": {
                         "commaPolicy": {
                             "enum": [
@@ -2367,6 +2662,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \",\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 1
                         },
                         "semicolonPolicy": {
@@ -2378,6 +2674,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \";\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 2
                         },
                         "dotPolicy": {
@@ -2389,6 +2686,7 @@
                                 "ignore"
                             ],
                             "type": "string",
+                            "description": "policy for \".\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2399,6 +2697,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2408,23 +2707,28 @@
                     "enum": [
                         "SeparatorWhitespace"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that whitespace is present or absent around a separators."
                 }
             },
             "additionalProperties": false
         },
         "ParameterNameCheck": {
             "type": "object",
+            "description": "Checks that parameter names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that parameter names conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
@@ -2432,6 +2736,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2442,6 +2747,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2451,16 +2757,19 @@
                     "enum": [
                         "ParameterName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that parameter names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "UnnecessaryConstructorCheck": {
             "type": "object",
+            "description": "Checks for unnecessary constructor in classes that contain only static methods or fields.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for unnecessary constructor in classes that contain only static methods or fields.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2470,6 +2779,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2479,27 +2789,33 @@
                     "enum": [
                         "UnnecessaryConstructor"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for unnecessary constructor in classes that contain only static methods or fields."
                 }
             },
             "additionalProperties": false
         },
         "RedundantModifierCheck": {
             "type": "object",
+            "description": "Checks for redundant modifiers.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for redundant modifiers.",
                     "properties": {
                         "enforcePrivate": {
                             "type": "boolean",
+                            "description": "enforce use of \"private\" modifiers",
                             "propertyOrder": 2
                         },
                         "enforcePublic": {
                             "type": "boolean",
+                            "description": "enforce use of \"public\" modifiers",
                             "propertyOrder": 1
                         },
                         "enforcePublicPrivate": {
                             "type": "boolean",
+                            "description": "enforce use of \"public\" and \"private\" modifiers\n\t\timplies enforcePublic and enforcePrivate",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2510,6 +2826,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2519,16 +2836,19 @@
                     "enum": [
                         "RedundantModifier"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for redundant modifiers."
                 }
             },
             "additionalProperties": false
         },
         "DefaultComesLastCheck": {
             "type": "object",
+            "description": "Check that the `default` is after all the cases in a `switch` statement. Haxe allows `default` anywhere within the `switch` statement. But it is more readable if it comes after the last `case`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Check that the `default` is after all the cases in a `switch` statement. Haxe allows `default` anywhere within the `switch` statement. But it is more readable if it comes after the last `case`.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2538,6 +2858,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2547,36 +2868,44 @@
                     "enum": [
                         "DefaultComesLast"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Check that the `default` is after all the cases in a `switch` statement. Haxe allows `default` anywhere within the `switch` statement. But it is more readable if it comes after the last `case`."
                 }
             },
             "additionalProperties": false
         },
         "TypeNameCheck": {
             "type": "object",
+            "description": "Checks that type names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that type names conform to a format specified by the `format` property.",
                     "properties": {
                         "ignoreExtern": {
                             "type": "boolean",
+                            "description": "ignores names inside extern types",
                             "propertyOrder": 2
                         },
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "tokens": {
                             "items": {
-                                "anyOf": [
+                                "enum": [
                                     "INTERFACE",
                                     "CLASS",
                                     "ENUM",
                                     "ABSTRACT",
                                     "TYPEDEF"
-                                ]
+                                ],
+                                "type": "string",
+                                "description": "check applies to:\n\t- INTERFACE = all interface types\n\t- CLASS = all class types\n\t- ENUM = all enum types\n\t- ABSTRACT = all abstract types\n\t- TYPEDEF = all typedef types"
                             },
                             "type": "array",
+                            "description": "list of tokens to limit where names should conform to \"format\"",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2587,6 +2916,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2596,16 +2926,19 @@
                     "enum": [
                         "TypeName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that type names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "SimplifyBooleanExpressionCheck": {
             "type": "object",
+            "description": "Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2615,6 +2948,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2624,7 +2958,8 @@
                     "enum": [
                         "SimplifyBooleanExpression"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc."
                 }
             },
             "additionalProperties": false
@@ -2633,20 +2968,25 @@
             "items": {
                 "type": "string"
             },
-            "type": "array"
+            "type": "array",
+            "description": "list of path filters, e.g.\n\t- full type names\n\t- names of individual folder or subfolders\n\t- partial folder or type names\n\n\teach line can have an additional range specification:\n\t- \":<linenumber>\" = only matches a specific line number - valid line number start at 1\n\t- \":<start>-<end>\" = matches line numbers from <start> to <end> (including both)\n\t- \":<identifier>\" = matches any line or block that has <identifier> name (Haxe keywords currently unsupported)"
         },
         "MethodCountCheck": {
             "type": "object",
+            "description": "Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.",
                     "properties": {
                         "maxPrivate": {
                             "type": "integer",
+                            "description": "maximum number of private functions permitted per file (default: 100)",
                             "propertyOrder": 1
                         },
                         "maxPublic": {
                             "type": "integer",
+                            "description": "maximum number of public functions permitted per file (default: 100)",
                             "propertyOrder": 2
                         },
                         "severity": {
@@ -2657,10 +2997,12 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         },
                         "maxTotal": {
                             "type": "integer",
+                            "description": "maximum number of functions permitted per file (default: 100)",
                             "propertyOrder": 0
                         }
                     },
@@ -2670,16 +3012,19 @@
                     "enum": [
                         "MethodCount"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total."
                 }
             },
             "additionalProperties": false
         },
         "AnonymousCheck": {
             "type": "object",
+            "description": "Check to find any anonymous type structures used.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Check to find any anonymous type structures used.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2689,6 +3034,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2698,19 +3044,23 @@
                     "enum": [
                         "Anonymous"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Check to find any anonymous type structures used."
                 }
             },
             "additionalProperties": false
         },
         "CatchParameterNameCheck": {
             "type": "object",
+            "description": "Checks that catch parameter names conform to a format specified by the `format` property.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that catch parameter names conform to a format specified by the `format` property.",
                     "properties": {
                         "format": {
                             "type": "string",
+                            "description": "regex name format",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2721,6 +3071,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2730,19 +3081,23 @@
                     "enum": [
                         "CatchParameterName"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that catch parameter names conform to a format specified by the `format` property."
                 }
             },
             "additionalProperties": false
         },
         "InnerAssignmentCheck": {
             "type": "object",
+            "description": "Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.",
                     "properties": {
                         "ignoreReturnAssignments": {
                             "type": "boolean",
+                            "description": "ignores assignments in return statements",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2753,6 +3108,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2762,19 +3118,23 @@
                     "enum": [
                         "InnerAssignment"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`."
                 }
             },
             "additionalProperties": false
         },
         "TypeCheck": {
             "type": "object",
+            "description": "Checks if type is specified or not for member variables.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks if type is specified or not for member variables.",
                     "properties": {
                         "ignoreEnumAbstractValues": {
                             "type": "boolean",
+                            "description": "ignores fields inside abstract enums",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2785,6 +3145,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2794,19 +3155,23 @@
                     "enum": [
                         "Type"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks if type is specified or not for member variables."
                 }
             },
             "additionalProperties": false
         },
         "TabForAligningCheck": {
             "type": "object",
+            "description": "Checks if there are any tabs in the middle of a line.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks if there are any tabs in the middle of a line.",
                     "properties": {
                         "ignorePattern": {
                             "type": "string",
+                            "description": "ignore linex matching regex",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2817,6 +3182,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2826,16 +3192,19 @@
                     "enum": [
                         "TabForAligning"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks if there are any tabs in the middle of a line."
                 }
             },
             "additionalProperties": false
         },
         "ModifierOrderCheck": {
             "type": "object",
+            "description": "Checks that the order of modifiers conforms to the standards.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks that the order of modifiers conforms to the standards.",
                     "properties": {
                         "modifiers": {
                             "items": {
@@ -2847,9 +3216,11 @@
                                     "MACRO",
                                     "DYNAMIC"
                                 ],
-                                "type": "string"
+                                "type": "string",
+                                "description": "list of modifiers\n\t- PUBLIC_PRIVATE = public / private modifier\n\t- INLINE = inline modifier\n\t- STATIC = static modifier\n\t- OVERRIDE = override modifier\n\t- MACRO = macro modifier\n\t- DYNAMIC = dynamic modifier\n\t- EXTERN = extern modifier\n\t- FINAL = final modifier"
                             },
                             "type": "array",
+                            "description": "order in which modifier should occur",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -2860,6 +3231,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2869,43 +3241,53 @@
                     "enum": [
                         "ModifierOrder"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks that the order of modifiers conforms to the standards."
                 }
             },
             "additionalProperties": false
         },
         "EmptyLinesCheck": {
             "type": "object",
+            "description": "Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.",
                     "properties": {
                         "requireEmptyLineAfterPackage": {
                             "type": "boolean",
+                            "description": "require an empty line after package definition",
                             "propertyOrder": 3
                         },
                         "requireEmptyLineAfterInterface": {
                             "type": "boolean",
+                            "description": "require an empty line after interface keyword",
                             "propertyOrder": 5
                         },
                         "requireEmptyLineAfterAbstract": {
                             "type": "boolean",
+                            "description": "require an empty line after abstract keyword",
                             "propertyOrder": 6
                         },
                         "allowEmptyLineAfterSingleLineComment": {
                             "type": "boolean",
+                            "description": "allow empty lines after a single line comment",
                             "propertyOrder": 1
                         },
                         "max": {
                             "type": "integer",
+                            "description": "number of empty lines to allow",
                             "propertyOrder": 0
                         },
                         "requireEmptyLineAfterClass": {
                             "type": "boolean",
+                            "description": "require an empty line after class keyword",
                             "propertyOrder": 4
                         },
                         "allowEmptyLineAfterMultiLineComment": {
                             "type": "boolean",
+                            "description": "allow empty lines after a mutli line comment",
                             "propertyOrder": 2
                         },
                         "severity": {
@@ -2916,6 +3298,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 7
                         }
                     },
@@ -2925,16 +3308,19 @@
                     "enum": [
                         "EmptyLines"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations."
                 }
             },
             "additionalProperties": false
         },
         "VariableInitialisationCheck": {
             "type": "object",
+            "description": "Checks for instance variables that are initialised at class level.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for instance variables that are initialised at class level.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -2944,6 +3330,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2953,22 +3340,26 @@
                     "enum": [
                         "VariableInitialisation"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for instance variables that are initialised at class level."
                 }
             },
             "additionalProperties": false
         },
         "SeparatorWrapCheck": {
             "type": "object",
+            "description": "Checks line wrapping with separators.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks line wrapping with separators.",
                     "properties": {
                         "tokens": {
                             "items": {
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "list mof wrapping tokens",
                             "propertyOrder": 0
                         },
                         "option": {
@@ -2977,6 +3368,7 @@
                                 "nl"
                             ],
                             "type": "string",
+                            "description": "policy for wrapping token\n\t\t- eol = wrapping token should be at end of line\n\t\t- nl = wrapping token should start a new line",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -2987,6 +3379,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2996,16 +3389,19 @@
                     "enum": [
                         "SeparatorWrap"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks line wrapping with separators."
                 }
             },
             "additionalProperties": false
         },
         "SimplifyBooleanReturnCheck": {
             "type": "object",
+            "description": "Checks for over-complicated boolean return statements.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for over-complicated boolean return statements.",
                     "properties": {
                         "severity": {
                             "enum": [
@@ -3015,6 +3411,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3024,16 +3421,19 @@
                     "enum": [
                         "SimplifyBooleanReturn"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for over-complicated boolean return statements."
                 }
             },
             "additionalProperties": false
         },
         "RightCurlyCheck": {
             "type": "object",
+            "description": "Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.",
                     "properties": {
                         "tokens": {
                             "items": {
@@ -3057,6 +3457,7 @@
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "matches only right curlys specified in tokens list:\n\t\t- CLASS_DEF = class definition \"class Test {}\"\n\t\t- ENUM_DEF = enum definition \"enum Test {}\"\n\t\t- ABSTRACT_DEF = abstract definition \"abstract Test {}\"\n\t\t- TYPEDEF_DEF = typdef definition \"typedef Test = {}\"\n\t\t- INTERFACE_DEF = interface definition \"interface Test {}\"\n\t\t- OBJECT_DECL = object declaration \"{ x: 0, y: 0, z: 0}\"\n\t\t- FUNCTION = function body \"funnction test () {}\"\n\t\t- FOR = for body \"for (i in 0..10) {}\"\n\t\t- IF = if / else body \"if (test) {} else {}\"\n\t\t- WHILE = while body \"while (test) {}\"\n\t\t- SWITCH = switch / case body \"switch (test) { case: {} default: {} }\"\n\t\t- TRY = try body \"try {}\"\n\t\t- CATCH = catch body \"catch (e:Dynamic) {}\"\n\t\t- REIFICATION = macro reification \"$i{}\"\n\t\t- ARRAY_COMPREHENSION = array comprehension \"[for (i in 0...10) {i * 2}]\"",
                             "propertyOrder": 0
                         },
                         "option": {
@@ -3066,6 +3467,7 @@
                                 "aloneorsingle"
                             ],
                             "type": "string",
+                            "description": "placement of right curly\n\t\t- same = right curly must be alone on a new line, except for \"} else\" and \"} catch\"\n\t\t- alone = alone on a new line\n\t\t- aloneorsingle = right curly can occur on same line as left curly or must be alone on a new line",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -3076,6 +3478,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -3085,27 +3488,33 @@
                     "enum": [
                         "RightCurly"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`."
                 }
             },
             "additionalProperties": false
         },
         "ReturnCheck": {
             "type": "object",
+            "description": "Warns if Void is used for return or if return type is not specified when returning.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Warns if Void is used for return or if return type is not specified when returning.",
                     "properties": {
                         "enforceReturnTypeForAnonymous": {
                             "type": "boolean",
+                            "description": "enforces return type for anonymous functions",
                             "propertyOrder": 2
                         },
                         "allowEmptyReturn": {
                             "type": "boolean",
+                            "description": "allows empty return which is mostly used to exit functions.",
                             "propertyOrder": 0
                         },
                         "enforceReturnType": {
                             "type": "boolean",
+                            "description": "enforces return type for every function",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -3116,6 +3525,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -3125,13 +3535,15 @@
                     "enum": [
                         "Return"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Warns if Void is used for return or if return type is not specified when returning."
                 }
             },
             "additionalProperties": false
         },
         "ExcludeConfig": {
             "type": "object",
+            "description": "defines filters to exclude folders, types or files from all or specific checks",
             "properties": {
                 "RightCurly": {
                     "propertyOrder": 52,
@@ -3143,6 +3555,7 @@
                         "RELATIVE_TO_SOURCE"
                     ],
                     "type": "string",
+                    "description": "filters excludes relative to\n\t- RELATIVE_TO_PROJECT = use project root\n\t- RELATIVE_TO_SOURCE = use path(s) specified via \"-s <path>\" command line switches",
                     "propertyOrder": 0
                 },
                 "CatchParameterName": {
@@ -3261,6 +3674,7 @@
                     "minimum": 1,
                     "type": "integer",
                     "maximum": 1,
+                    "description": "version number",
                     "propertyOrder": 2
                 },
                 "SeparatorWrap": {
@@ -3284,6 +3698,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "all": {
+                    "description": "exclude matching files from all checks",
                     "propertyOrder": 1,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
@@ -3428,9 +3843,11 @@
         },
         "ConditionalCompilationCheck": {
             "type": "object",
+            "description": "Checks placement and indentation of conditional compilation flags.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks placement and indentation of conditional compilation flags.",
                     "properties": {
                         "policy": {
                             "enum": [
@@ -3438,10 +3855,12 @@
                                 "aligned"
                             ],
                             "type": "string",
+                            "description": "indentation of conditional statements\n\t    - startOfLine = #if, #else, #elseif and #end must start at beginning of line\n\t    - aligned = indentation of #if, #else, #elseif and #end must match surrounding code\n\n\t\tBoth \"aligned\" and \"startOfLine\" will produce a message if conditional compilation flags are not on a separate line.\n\t\tAll #else, #elseif and #end flags must have the same indentation as their corresponding #if.",
                             "propertyOrder": 0
                         },
                         "allowSingleline": {
                             "type": "boolean",
+                            "description": "allows or prevents using single line conditional compilation flags.",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -3452,6 +3871,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -3461,22 +3881,26 @@
                     "enum": [
                         "ConditionalCompilation"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks placement and indentation of conditional compilation flags."
                 }
             },
             "additionalProperties": false
         },
         "WhitespaceAfterCheck": {
             "type": "object",
+            "description": "Checks for whitespace after a token.",
             "properties": {
                 "props": {
                     "type": "object",
+                    "description": "Checks for whitespace after a token.",
                     "properties": {
                         "tokens": {
                             "items": {
                                 "type": "string"
                             },
                             "type": "array",
+                            "description": "supported list of tokens:\n\t\t\",\", \";\", \"(\", \"[\", \"{\", \":\", \".\", \"=\", \"+\", \"-\", \"*\", \"/\", \"%\", \">\", \"<\", \">=\", \"<=\", \"==\", \"!=\",\n\t\t\"&\", \"|\", \"^\", \"&&\", \"||\", \"<<\", \">>\", \">>>\", \"+=\", \"-=\", \"*=\", \"/=\", \"%=\", \"<<=\", \">>=\", \">>>=\", \"|=\", \"&=\",\n\t\t\"^=\", \"...\", \"=>\", \"!\", \"++\", \"--\",",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -3487,6 +3911,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3496,7 +3921,8 @@
                     "enum": [
                         "WhitespaceAfter"
                     ],
-                    "type": "string"
+                    "type": "string",
+                    "description": "Checks for whitespace after a token."
                 }
             },
             "additionalProperties": false
