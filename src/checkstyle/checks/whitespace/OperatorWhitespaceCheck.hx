@@ -4,29 +4,109 @@ import checkstyle.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
 
+/**
+	Checks that whitespace is present or absent around a operators.
+ **/
 @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")
 class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
-	// =, +=, -=, *=, /=, <<=, >>=, >>>=, &=, |=, ^=
+	/**
+		policy for "=", "+=", "-=", "*=", "/=", "<<=", ">>=", ">>>=", "&=", "|=", "^="
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var assignOpPolicy:WhitespacePolicy;
-	// ++, --, !, ~
+
+	/**
+		policy for "++", "--", "!", "~"
+		- inner = enforce whitespace between unary operator and operand
+		- none = enforce no whitespace between unary operator and operand
+		- ignore = skip checks
+	 **/
 	public var unaryOpPolicy:WhitespaceUnaryPolicy;
-	// ?:
+
+	/**
+		policy for "?:"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var ternaryOpPolicy:WhitespacePolicy;
-	// +, -, *, /, %
+
+	/**
+		policy for "+", "-", "*", "/", "%"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var arithmeticOpPolicy:WhitespacePolicy;
-	// ==, !=, <, <=, >, >=
+
+	/**
+		policy for "==", "!=", "<", "<=", ">", ">="
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var compareOpPolicy:WhitespacePolicy;
-	// &, |, ^, <<, >>, >>>
+
+	/**
+		policy for "&", "|", "^", "<<", ">>", ">>>"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var bitwiseOpPolicy:WhitespacePolicy;
-	// &&, ||
+
+	/**
+		policy for "&&", "||"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var boolOpPolicy:WhitespacePolicy;
-	// ...
+
+	/**
+		policy for "..."
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var intervalOpPolicy:WhitespacePolicy;
-	// =>
+
+	/**
+		policy for "=>"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var arrowPolicy:WhitespacePolicy;
-	// ->
+
+	/**
+		policy for "->"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	 **/
 	public var functionArgPolicy:WhitespacePolicy;
 
 	public function new() {

@@ -85,6 +85,14 @@ class WhitespaceCheckBase extends Check {
 
 typedef WhitespacePolicyCheck = Bool -> Bool -> Void;
 
+/**
+	policy for whitespace
+	- around = enforce whitespace before and after operator
+	- before = enforce whitespace before and no whitespace after operator
+	- after = enforce no whitespace before and whitespace after operator
+	- none = enforce no whitespace before and after operator
+	- ignore = skip checks
+ */
 @:enum
 abstract WhitespacePolicy(String) {
 	var BEFORE = "before";
@@ -94,6 +102,12 @@ abstract WhitespacePolicy(String) {
 	var IGNORE = "ignore";
 }
 
+/**
+	policy for whitespace
+	- inner = enforce whitespace between unary operator and operand
+	- none = enforce no whitespace between unary operator and operand
+	- ignore = skip checks
+ **/
 @:enum
 abstract WhitespaceUnaryPolicy(String) {
 	var INNER = "inner";

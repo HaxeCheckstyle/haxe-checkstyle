@@ -1,5 +1,8 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks that parameter names conform to a format specified by the "format" property.
+ **/
 @name("ParameterName")
 @desc("Checks that parameter names conform to a format specified by the `format` property.")
 class ParameterNameCheck extends NameCheckBase<String> {

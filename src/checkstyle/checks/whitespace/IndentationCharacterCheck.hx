@@ -1,10 +1,22 @@
 package checkstyle.checks.whitespace;
 
+/**
+	Checks indentation character (tab/space, default is tab).
+ **/
 @name("IndentationCharacter")
 @desc("Checks indentation character (tab/space, default is tab).")
 class IndentationCharacterCheck extends LineCheckBase {
 
+	/**
+		set indentation to
+		- tab = tab
+		- space = space
+	 **/
 	public var character:IndentationCharacterCheckCharacter;
+
+	/**
+		ignore lines that match regex
+	 **/
 	public var ignorePattern:String;
 
 	public function new() {
@@ -40,6 +52,11 @@ class IndentationCharacterCheck extends LineCheckBase {
 	}
 }
 
+/**
+	indentation with
+	- tab = tabs
+	- space = space
+ **/
 @:enum
 abstract IndentationCharacterCheckCharacter(String) {
 	var TAB = "tab";

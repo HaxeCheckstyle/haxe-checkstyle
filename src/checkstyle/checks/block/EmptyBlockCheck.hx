@@ -2,11 +2,38 @@ package checkstyle.checks.block;
 
 import checkstyle.token.TokenTreeAccessHelper;
 
+/**
+    Checks for empty blocks. The policy to verify is specified using the property "option".
+ **/
 @name("EmptyBlock")
 @desc("Checks for empty blocks. The policy to verify is specified using the property `option`.")
 class EmptyBlockCheck extends Check {
 
+	/**
+	    matches only blocks specified in tokens list:
+		- CLASS_DEF = class definition "class Test {}"
+		- ENUM_DEF = enum definition "enum Test {}"
+		- ABSTRACT_DEF = abstract definition "abstract Test {}"
+		- TYPEDEF_DEF = typdef definition "typedef Test = {}"
+		- INTERFACE_DEF = interface definition "interface Test {}"
+		- OBJECT_DECL = object declaration "{ x: 0, y: 0, z: 0}"
+		- FUNCTION = function body "funnction test () {}"
+		- FOR = for body "for (i in 0..10) {}"
+		- IF = if / else body "if (test) {} else {}"
+		- WHILE = while body "while (test) {}"
+		- SWITCH = switch / case body "switch (test) { case: {} default: {} }"
+		- TRY = try body "try {}"
+		- CATCH = catch body "catch (e:Dynamic) {}"
+		- REIFICATION = macro reification "$i{}"
+	 **/
 	public var tokens:Array<EmptyBlockCheckToken>;
+
+	/**
+	    for all empty blocks matched by tokens
+	    - empty = allow empty blocks but enforce "{}" notation
+	    - text = must contain something apart from whitespace (comment or statement)
+	    - stmt = must contain at least one statement (that is not a comment)
+	 */
 	public var option:EmptyBlockCheckOption;
 
 	public function new() {

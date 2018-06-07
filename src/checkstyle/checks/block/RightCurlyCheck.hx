@@ -1,10 +1,38 @@
 package checkstyle.checks.block;
 
+/**
+	Checks the placement of right curly braces ("}") for code blocks. The policy to verify is specified using the property "option".
+ **/
 @name("RightCurly")
 @desc("Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.")
 class RightCurlyCheck extends Check {
 
+	/**
+	    matches only right curlys specified in tokens list:
+		- CLASS_DEF = class definition "class Test {}"
+		- ENUM_DEF = enum definition "enum Test {}"
+		- ABSTRACT_DEF = abstract definition "abstract Test {}"
+		- TYPEDEF_DEF = typdef definition "typedef Test = {}"
+		- INTERFACE_DEF = interface definition "interface Test {}"
+		- OBJECT_DECL = object declaration "{ x: 0, y: 0, z: 0}"
+		- FUNCTION = function body "funnction test () {}"
+		- FOR = for body "for (i in 0..10) {}"
+		- IF = if / else body "if (test) {} else {}"
+		- WHILE = while body "while (test) {}"
+		- SWITCH = switch / case body "switch (test) { case: {} default: {} }"
+		- TRY = try body "try {}"
+		- CATCH = catch body "catch (e:Dynamic) {}"
+		- REIFICATION = macro reification "$i{}"
+		- ARRAY_COMPREHENSION = array comprehension "[for (i in 0...10) {i * 2}]"
+	 **/
 	public var tokens:Array<RightCurlyCheckToken>;
+
+	/**
+	    placement of right curly
+		- same = right curly must be alone on a new line, except for "} else" and "} catch"
+		- alone = alone on a new line
+		- aloneorsingle = right curly can occur on same line as left curly or must be alone on a new line
+	 **/
 	public var option:RightCurlyCheckOption;
 
 	public function new() {

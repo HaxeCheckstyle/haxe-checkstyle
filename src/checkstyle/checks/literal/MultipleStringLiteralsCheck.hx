@@ -2,12 +2,27 @@ package checkstyle.checks.literal;
 
 import checkstyle.utils.StringUtils;
 
+/**
+	Checks for multiple occurrences of the same string literal within a single file.
+	Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.
+ **/
 @name("MultipleStringLiterals")
 @desc("Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.")
 class MultipleStringLiteralsCheck extends Check {
 
+	/**
+		number of occurrences to allow
+	 **/
 	public var allowDuplicates:Int;
+
+	/**
+		string literals must be "minLength" or more characters before including them
+	 */
 	public var minLength:Int;
+
+	/**
+		ignore string literals matching regex
+	 */
 	public var ignore:String;
 
 	var ignoreRE:EReg;

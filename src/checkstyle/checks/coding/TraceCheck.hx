@@ -1,5 +1,8 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks for trace calls in code.
+ **/
 @name("Trace")
 @desc("Checks for trace calls in code.")
 class TraceCheck extends Check {

@@ -1,10 +1,25 @@
 package checkstyle.checks.block;
 
+/**
+    Checks placement and indentation of conditional compilation flags.
+ **/
 @name("ConditionalCompilation")
 @desc("Checks placement and indentation of conditional compilation flags.")
 class ConditionalCompilationCheck extends Check {
 
+	/**
+	    indentation of conditional statements
+	    - startOfLine = #if, #else, #elseif and #end must start at beginning of line
+	    - aligned = indentation of #if, #else, #elseif and #end must match surrounding code
+
+		Both "aligned" and "startOfLine" will produce a message if conditional compilation flags are not on a separate line.
+		All #else, #elseif and #end flags must have the same indentation as their corresponding #if.
+	 **/
 	public var policy:ConditionalCompilationPolicy;
+
+	/**
+		allows or prevents using single line conditional compilation flags.
+	 **/
 	public var allowSingleline:Bool;
 
 	public function new() {
@@ -151,6 +166,11 @@ class ConditionalCompilationCheck extends Check {
 	}
 }
 
+/**
+    indentation of conditional statements
+    - startOfLine = #if, #else, #elseif and #end must start at beginning of line
+    - aligned = indentation of #if, #else, #elseif and #end must match surrounding code
+ */
 @:enum
 abstract ConditionalCompilationPolicy(String) {
 	var START_OF_LINE = "startOfLine";

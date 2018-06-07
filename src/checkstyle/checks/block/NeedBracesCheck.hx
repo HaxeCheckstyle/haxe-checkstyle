@@ -1,10 +1,29 @@
 package checkstyle.checks.block;
 
+/**
+	Checks for braces on function, if, for and while statements. It has an option to allow single line statements without
+	braces using property "allowSingleLineStatement" like "if (b) return 10;".
+ **/
 @name("NeedBraces")
 @desc("Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.")
 class NeedBracesCheck extends Check {
 
+	/**
+	    matches only statements specified in tokens list:
+
+		- FUNCTION = function body "funnction test () {}"
+		- FOR = for body "for (i in 0..10) {}"
+		- IF = if body "if (test) {} else {}"
+		- ELSE_IF = if body "if (test) {} else if {}"
+		- WHILE = while body "while (test) {}"
+		- DO_WHILE = do…while body "do {} while (test)"
+		- CATCH = catch body "catch (e:Dynamic) {}"
+	 **/
 	public var tokens:Array<NeedBracesCheckToken>;
+
+	/**
+		allow / disallow use of single line statements without braces
+	 **/
 	public var allowSingleLineStatement:Bool;
 
 	public function new() {

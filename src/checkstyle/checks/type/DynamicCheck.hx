@@ -2,6 +2,9 @@ package checkstyle.checks.type;
 
 import checkstyle.utils.ComplexTypeUtils;
 
+/**
+	Checks for use of Dynamic type anywhere in the code.
+ **/
 @name("Dynamic")
 @desc("Checks for use of Dynamic type anywhere in the code.")
 class DynamicCheck extends Check {

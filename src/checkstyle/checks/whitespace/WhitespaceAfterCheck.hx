@@ -2,10 +2,19 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.utils.TokenTreeCheckUtils;
 
+/**
+	Checks for whitespace after a token.
+ **/
 @name("WhitespaceAfter")
 @desc("Checks for whitespace after a token.")
 class WhitespaceAfterCheck extends Check {
 
+	/**
+		supported list of tokens:
+		",", ";", "(", "[", "{", ":", ".", "=", "+", "-", "*", "/", "%", ">", "<", ">=", "<=", "==", "!=",
+		"&", "|", "^", "&&", "||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "|=", "&=",
+		"^=", "...", "=>", "!", "++", "--",
+	 */
 	public var tokens:Array<String>;
 
 	public function new() {

@@ -2,18 +2,51 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.checks.whitespace.ListOfEmptyLines.EmptyLineRange;
 
+/**
+	Checks for consecutive empty lines.
+ **/
 @name("ExtendedEmptyLines")
 @desc("Checks for consecutive empty lines.")
 class ExtendedEmptyLinesCheck extends Check {
 
+	/**
+		number of empty lines to allow / enforce (used by "exact", "upto" and "atleast" policies)
+	 **/
 	public var max:Int;
+
+	/**
+		skips single line type definitions
+	 **/
 	public var skipSingleLineTypes:Bool;
 
+	/**
+		"defaultPolicy" applies to all places not in "ignore", "none", "exact", "upto" or "atleast"
+	 **/
 	public var defaultPolicy:EmptyLinesPolicy;
+
+	/**
+		list of places to ignore
+	 **/
 	public var ignore:Array<EmptyLinesPlace>;
+
+	/**
+		list of places where no empty line is permitted
+	 **/
 	public var none:Array<EmptyLinesPlace>;
+
+	/**
+		list of places where exactly "max" empty lines are required
+	 **/
 	public var exact:Array<EmptyLinesPlace>;
+
+	/**
+		list of places where up to "max" empty lines are permitted
+	 **/
 	public var upto:Array<EmptyLinesPlace>;
+
+	/**
+		list of places where at least "max" empty lines are required
+	 **/
 	public var atleast:Array<EmptyLinesPlace>;
 
 	var placemap:Map<EmptyLinesPlace, EmptyLinesPolicy>;
@@ -487,6 +520,14 @@ typedef PolicyAndWhat = {
 	var whatMsg:String;
 }
 
+/**
+	policy for empty lines
+	- ignore = ignores all entries
+	- none = no empty line permitted
+	- exact = exactly "max" empty line(s) required
+	- upto = up to "max" empty line(s) allowed (0 - "max")
+	- atleast = at least "max" empty lines required
+ **/
 @:enum
 abstract EmptyLinesPolicy(String) {
 	var IGNORE = "ignore";
@@ -502,6 +543,44 @@ enum EmptyLinesFieldType {
 	OTHER;
 }
 
+/**
+	empty line check supports the following places
+	- afterAbstractVars = after abstract var block
+	- afterClassStaticVars = after static class var block
+	- afterClassVars = after class var block
+	- afterImports = after all imports/usings
+	- afterLeftCurly = after left curly
+	- afterMultiLineComment = after multi line comment
+	- afterPackage = after package
+	- afterSingleLineComment = after single line comment
+	- anywhereInFile = anywhere in file
+	- beforePackage = before package
+	- beforeRightCurly = before right curly
+	- beforeUsing = before using block
+	- beginAbstract = after abstract left curly
+	- beginClass = after class left curly
+	- beginEnum = after enum left curly
+	- beforeFileEnd = before EOF
+	- beginInterface = after interface left curly
+	- beginTypedef = after typedef left curly
+	- betweenAbstractMethods = between abstract methods
+	- betweenAbstractVars = between abstract vars
+	- betweenClassMethods = between class methods
+	- betweenClassStaticVars = between static class vars
+	- betweenClassVars = between class vars
+	- betweenEnumFields = between enum fields
+	- betweenImports = between imports/usings
+	- betweenInterfaceFields = between interface fields
+	- betweenTypedefFields = between typedef fields
+	- betweenTypes = betgween two types
+	- endClass = before class right curly
+	- endAbstract = before abstract right curly
+	- endInterface = before interface right curly
+	- endEnum = before enum right curly
+	- endTypedef = before typedef right curly
+	- inFunction = anywhere inside function body
+	- typeDefinition = between type and left curly
+ **/
 @:enum
 abstract EmptyLinesPlace(String) {
 	var BEFOREPACKAGE = "beforePackage";

@@ -1,5 +1,8 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks for over-complicated boolean expressions. Finds code like "if (b == true), b || true, !false", etc.
+ **/
 @name("SimplifyBooleanExpression")
 @desc("Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.")
 class SimplifyBooleanExpressionCheck extends Check {

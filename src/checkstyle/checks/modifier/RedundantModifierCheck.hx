@@ -1,11 +1,27 @@
 package checkstyle.checks.modifier;
 
+/**
+	Checks for redundant modifiers.
+	Omitting the visibility modifier usually defaults the visibility to "private" in normal classes and "public" in interfaces and externs.
+ **/
 @name("RedundantModifier", "PublicPrivate")
 @desc("Checks for redundant modifiers.")
 class RedundantModifierCheck extends Check {
 
+	/**
+		enforce use of "public" and "private" modifiers
+		implies enforcePublic and enforcePrivate
+	 */
 	public var enforcePublicPrivate:Bool;
+
+	/**
+		enforce use of "public" modifiers
+	 */
 	public var enforcePublic:Bool;
+
+	/**
+		enforce use of "private" modifiers
+	 */
 	public var enforcePrivate:Bool;
 
 	public function new() {

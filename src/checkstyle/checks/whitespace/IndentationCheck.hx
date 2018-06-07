@@ -1,13 +1,44 @@
 package checkstyle.checks.whitespace;
 
+/**
+	Checks correct indentation
+ **/
 @name("Indentation")
 @desc("Checks correct indentation")
 class IndentationCheck extends Check {
 
+	/**
+	    character sequence to use for indentation
+		- "tab" for using tabs
+		- a string containing as many spaces as one indentation level requires
+	 **/
 	public var character:IndentationCheckCharacter;
+
+	/**
+	    ignore indentation of conditionals (same as setting conditionalPolicy to ignore)
+	 **/
 	public var ignoreConditionals:Bool;
+
+	/**
+	    indentation of conditional statements
+		- ignore = ignores conditioonals, same as "ignoreConditionals"
+		- fixed_zero = contitionals have to start at the beginning of a line (only where conditional is the first statement)
+		- aligned = align wih surrounding code
+		- aligned_increase = align wih surrounding code and increase indentation of enclosed code by +1
+	 */
 	public var conditionalPolicy:ConditionalIndentationPolicy;
+
+	/**
+	    ignore indentation of comments
+	 **/
 	public var ignoreComments:Bool;
+
+	/**
+		indentation of wrapped statements (= continued on next line)
+		- none = wrapped statements must have the same indentation as parent
+		- exact = wrapped statemenmts must have a +1 indentation in relation to parent
+		- larger = wrapped statements must have a +1 or larger indentation in relation to parent
+	 **/
 	public var wrapPolicy:WrappedIndentationPolicy;
 
 	public function new() {

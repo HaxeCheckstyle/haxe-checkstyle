@@ -3,8 +3,11 @@ import haxe.macro.Expr;
 
 class SchemaUtils {
 
-	public static function makeObjectDecl(fields:Array<ObjectDeclField>, order:Int, pos:Position):Expr {
+	public static function makeObjectDecl(fields:Array<ObjectDeclField>, structInfo:Null<StructInfo>, order:Int, pos:Position):Expr {
 		if (order >= 0) fields.push({field: "propertyOrder", expr: macro $v{order}});
+		if (structInfo != null && structInfo.doc != null) {
+			fields.push({field: "description", expr: macro $v{StringTools.trim(structInfo.doc)}});
+		}
 		return {pos: pos, expr: EObjectDecl(fields)};
 	}
 
@@ -14,22 +17,26 @@ class SchemaUtils {
 			{field: "properties", expr: props},
 			{field: "additionalProperties", expr: macro false}
 		];
-
-		if (structInfo != null && structInfo.doc != null) {
-			fields.push({field: "description", expr: macro structInfo.doc.trim()});
-		}
 		if (required.length > 0) {
 			var exprs:Array<Expr> = [for (req in required) macro $v{req}];
 			fields.push({field: "required", expr: macro $a{exprs}});
 		}
-		return makeObjectDecl(fields, order, pos);
+		return makeObjectDecl(fields, structInfo, order, pos);
 	}
 
-	public static function makeEnum(enumList:Expr, order:Int, pos:Position):Expr {
-		return makeObjectDecl([
-					{field: "type", expr: macro "string"},
-					{field: "enum", expr: enumList}
-				], order, pos);
+	public static function makeEnum(enumList:Expr, structInfo:Null<StructInfo>, order:Int, pos:Position):Expr {
+		var fields:Array<ObjectDeclField> = [
+			{field: "type", expr: macro "string"},
+			{field: "enum", expr: enumList}
+		];
+		return makeObjectDecl(fields, structInfo, order, pos);
+	}
+
+	public static function makeStructInfo(name:String, doc:String):Null<StructInfo> {
+		if (doc == null) return null;
+		doc = StringTools.trim(doc);
+		if (doc.length <= 0) return null;
+		return {name:name, doc:StringTools.trim(doc)};
 	}
 }
 #end

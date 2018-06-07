@@ -2,6 +2,9 @@ package checkstyle.checks.metrics;
 
 using Lambda;
 
+/**
+	Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using "thresholds" property.
+ **/
 @name("CyclomaticComplexity")
 @desc("Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property.")
 class CyclomaticComplexityCheck extends Check {
@@ -9,6 +12,9 @@ class CyclomaticComplexityCheck extends Check {
 	static var DEFAULT_COMPLEXITY_WARNING:Int = 20;
 	static var DEFAULT_COMPLEXITY_ERROR:Int = 25;
 
+	/**
+		list of thresholds that define which severity level to report when complexity of method is above its limit
+	 **/
 	public var thresholds:Array<Threshold>;
 
 	public function new() {
@@ -123,7 +129,13 @@ typedef Target = {
 	var pos:Position;
 }
 
+/**
+	threshold for code complexity
+ **/
 typedef Threshold = {
 	var severity:SeverityLevel;
+	/**
+		complexity value associated with "severity"
+	 **/
 	var complexity:Int;
 }

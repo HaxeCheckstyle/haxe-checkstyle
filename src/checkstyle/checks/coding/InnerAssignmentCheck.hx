@@ -1,9 +1,15 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks for assignments in subexpressions, such as in "if ((a=b) > 0) return;".
+ **/
 @name("InnerAssignment")
 @desc("Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.")
 class InnerAssignmentCheck extends Check {
 
+	/**
+		ignores assignments in return statements
+	 **/
 	public var ignoreReturnAssignments:Bool;
 
 	public function new() {

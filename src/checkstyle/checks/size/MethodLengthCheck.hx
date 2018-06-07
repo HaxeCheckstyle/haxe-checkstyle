@@ -1,12 +1,23 @@
 package checkstyle.checks.size;
 
+/**
+	Checks for long methods. If a method becomes very long it is hard to understand.
+	Therefore long methods should usually be refactored into several individual methods that focus on a specific task.
+ **/
 @name("MethodLength")
 @desc("Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.")
 class MethodLengthCheck extends Check {
 
 	static var DEFAULT_MAX_LENGTH:Int = 50;
 
+	/**
+		maximum number of lines per method (default: 50)
+	 **/
 	public var max:Int;
+
+	/**
+		maximum includes empty lines / should ignore empty lines
+	 **/
 	public var countEmpty:Bool;
 
 	public function new() {

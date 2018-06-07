@@ -1,9 +1,15 @@
 package checkstyle.checks.coding;
 
+/**
+	Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+**/
 @name("MagicNumber")
 @desc("Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.")
 class MagicNumberCheck extends Check {
 
+	/**
+		list of magic numbers to ignore during checks
+	 **/
 	public var ignoreNumbers:Array<Float>;
 
 	public function new() {

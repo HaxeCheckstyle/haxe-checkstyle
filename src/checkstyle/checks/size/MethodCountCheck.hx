@@ -1,13 +1,27 @@
 package checkstyle.checks.size;
 
+/**
+	Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.
+ **/
 @name("MethodCount")
 @desc("Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.")
 class MethodCountCheck extends Check {
 
 	static var DEFAULT_MAX_COUNT:Int = 100;
 
+	/**
+		maximum number of functions permitted per file (default: 100)
+	 **/
 	public var maxTotal:Int;
+
+	/**
+		maximum number of private functions permitted per file (default: 100)
+	 **/
 	public var maxPrivate:Int;
+
+	/**
+		maximum number of public functions permitted per file (default: 100)
+	 **/
 	public var maxPublic:Int;
 
 	public function new() {

@@ -1,5 +1,8 @@
 package checkstyle.checks.imports;
 
+/**
+	Checks for import statements that use the * notation and using directives.
+ **/
 @name("AvoidStarImport")
 @desc("Checks for import statements that use the * notation and using directives.")
 class AvoidStarImportCheck extends Check {

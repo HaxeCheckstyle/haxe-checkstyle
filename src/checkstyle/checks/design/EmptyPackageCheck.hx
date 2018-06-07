@@ -1,9 +1,15 @@
 package checkstyle.checks.design;
 
+/**
+	Checks for empty package names.
+ **/
 @name("EmptyPackage")
 @desc("Checks for empty package names.")
 class EmptyPackageCheck extends Check {
 
+	/**
+		enforce using a package declaration, even if it is empty
+	 **/
 	public var enforceEmptyPackage:Bool;
 
 	public function new() {

@@ -1,5 +1,8 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks that method names conform to a format specified by the "format" property.
+ **/
 @name("MethodName")
 @desc("Checks that method names conform to a format specified by the `format` property.")
 class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
@@ -54,6 +57,15 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 	}
 }
 
+/**
+	check applies to:
+	- PUBLIC = all public methods
+	- PRIVATE = all private methods
+	- STATIC = all static methods
+	- NOTSTATIC = all non static methods
+	- INLINE = all inline methods
+	- NOTINLINE = all non-inline methods
+ **/
 @:enum
 abstract MethodNameCheckToken(String) {
 	var PUBLIC = "PUBLIC";

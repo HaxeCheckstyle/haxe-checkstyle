@@ -1,12 +1,22 @@
 package checkstyle.checks.size;
 
+/**
+	Checks for long lines. Long lines are hard to read.
+ **/
 @name("LineLength")
 @desc("Checks for long lines. Long lines are hard to read.")
 class LineLengthCheck extends Check {
 
 	static var DEFAULT_MAX_LENGTH:Int = 160;
 
+	/**
+		maximum number of characters per line (default: 160)
+	 **/
 	public var max:Int;
+
+	/**
+		ignore lines matching regex
+	 **/
 	public var ignorePattern:String;
 
 	public function new() {

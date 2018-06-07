@@ -5,7 +5,16 @@ import checkstyle.utils.TokenTreeCheckUtils;
 @ignore("base class for OperatorWrap and SeparatorWrap")
 class WrapCheckBase extends Check {
 
+	/**
+		list mof wrapping tokens
+	 **/
 	public var tokens:Array<String>;
+
+	/**
+		policy for wrapping token
+		- eol = wrapping token should be at end of line
+		- nl = wrapping token should start a new line
+	 **/
 	public var option:WrapCheckBaseOption;
 
 	public function new() {
@@ -50,6 +59,11 @@ class WrapCheckBase extends Check {
 	}
 }
 
+/**
+	policy for wrapping token
+	- eol = wrapping token should be at end of line
+	- nl = wrapping token should start a new line
+ **/
 @:enum
 abstract WrapCheckBaseOption(String) {
 	var EOL = "eol";

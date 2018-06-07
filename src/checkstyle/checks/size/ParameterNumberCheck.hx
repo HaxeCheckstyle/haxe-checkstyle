@@ -1,12 +1,22 @@
 package checkstyle.checks.size;
 
+/**
+	Checks the number of parameters of a method.
+ **/
 @name("ParameterNumber")
 @desc("Checks the number of parameters of a method.")
 class ParameterNumberCheck extends Check {
 
 	static var DEFAULT_MAX_PARAMS:Int = 7;
 
+	/**
+		maximum number of parameters per method (default: 7)
+	 **/
 	public var max:Int;
+
+	/**
+		ignore methods with "override", only base class violates
+	 **/
 	public var ignoreOverriddenMethods:Bool;
 
 	public function new() {

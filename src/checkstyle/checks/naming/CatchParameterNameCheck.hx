@@ -1,9 +1,15 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks that catch parameter names conform to a format specified by the "format" property.
+ **/
 @name("CatchParameterName")
 @desc("Checks that catch parameter names conform to a format specified by the `format` property.")
 class CatchParameterNameCheck extends Check {
 
+	/**
+		regex name format
+	 **/
 	public var format:String;
 
 	public function new() {

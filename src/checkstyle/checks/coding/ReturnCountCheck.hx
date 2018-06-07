@@ -1,10 +1,20 @@
 package checkstyle.checks.coding;
 
+/**
+	Restricts the number of return statements in methods (2 by default). Ignores methods that matches "ignoreFormat" regex property.
+ **/
 @name("ReturnCount")
 @desc("Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.")
 class ReturnCountCheck extends Check {
 
+	/**
+		maximum number of return calls a function may have
+	 **/
 	public var max:Int;
+
+	/**
+		ignore function names matching "ignoreFormat" regex
+	 **/
 	public var ignoreFormat:String;
 
 	public function new() {

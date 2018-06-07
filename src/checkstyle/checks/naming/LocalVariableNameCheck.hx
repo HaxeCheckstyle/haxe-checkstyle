@@ -1,5 +1,8 @@
 package checkstyle.checks.naming;
 
+/**
+	Checks that the local variable names conform to a format specified by the "format" property.
+ **/
 @name("LocalVariableName")
 @desc("Checks that the local variable names conform to a format specified by the `format` property.")
 class LocalVariableNameCheck extends NameCheckBase<String> {
