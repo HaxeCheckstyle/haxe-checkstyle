@@ -56,7 +56,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		max = 1;
 		skipSingleLineTypes = true;
 
-		defaultPolicy = NONE;
+		defaultPolicy = UPTO;
 		ignore = [];
 		none = [];
 		exact = [];

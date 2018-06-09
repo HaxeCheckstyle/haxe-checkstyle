@@ -11,7 +11,7 @@ import checkstyle.config.ExcludeRange;
 
 import checkstyle.reporter.ReporterManager;
 
-import checkstyle.token.TokenTreeBuilder;
+import tokentree.TokenTreeBuilder;
 
 class Checker {
 

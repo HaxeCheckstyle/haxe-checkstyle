@@ -1,6 +1,6 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.utils.TokenTreeCheckUtils;
+import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	Checks for whitespace after a token.

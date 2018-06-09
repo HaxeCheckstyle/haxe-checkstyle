@@ -1,6 +1,6 @@
 package checkstyle.checks.block;
 
-import checkstyle.token.TokenTreeAccessHelper;
+import tokentree.TokenTreeAccessHelper;
 
 /**
     Checks for empty blocks. The policy to verify is specified using the property "option".

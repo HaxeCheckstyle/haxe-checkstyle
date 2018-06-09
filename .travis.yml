@@ -14,6 +14,7 @@ matrix:
   include:
     - haxe: 3.4.7
       install:
+        - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
@@ -21,6 +22,7 @@ matrix:
         - haxelib install munit
     - haxe: development
       install:
+        - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxparse https://github.com/simn/hxparse
         - haxelib git haxeparser https://github.com/simn/haxeparser
         - haxelib git mcover https://github.com/massiveinteractive/mcover master src
@@ -31,4 +33,3 @@ matrix:
         - sed -i 's/:3.3.0//' buildGlobal.hxml
   allow_failures:
     - haxe: development
-
