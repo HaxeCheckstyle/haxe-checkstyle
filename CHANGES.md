@@ -2,8 +2,8 @@
 
 - Added JSON schemas for `checkstyle.json` and `checkstyle-exclude.json` file formats [#431](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/431) +  [#432](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/432) + [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
 - Added code documentation [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
-- Changed default policy of ExtendedEmptyLines check to `upto`
-- Moved token tree into separate library
+- Changed default policy of ExtendedEmptyLines check to `upto` [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
+- Moved token tree into separate library [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
 
 ## version 2.4.0 (2018-06-02)
 
