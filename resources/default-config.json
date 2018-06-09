@@ -120,7 +120,7 @@
 			"props": {
 				"none": [],
 				"upto": [],
-				"defaultPolicy": "none",
+				"defaultPolicy": "upto",
 				"exact": [],
 				"max": 1,
 				"ignore": [],

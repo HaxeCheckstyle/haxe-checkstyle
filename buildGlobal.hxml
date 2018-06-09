@@ -4,3 +4,4 @@
 -lib haxeparser:3.3.0
 -lib compiletime:2.6.0
 -lib hxargs:3.0.2
+-lib tokentree

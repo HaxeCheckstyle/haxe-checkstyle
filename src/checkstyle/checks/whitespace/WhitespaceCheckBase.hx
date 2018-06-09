@@ -1,6 +1,6 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.utils.TokenTreeCheckUtils;
+import tokentree.utils.TokenTreeCheckUtils;
 
 @ignore("base class for OperatorWhitespace and SeparatorWhitespace")
 class WhitespaceCheckBase extends Check {

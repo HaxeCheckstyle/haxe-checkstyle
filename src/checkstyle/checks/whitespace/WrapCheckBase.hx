@@ -1,6 +1,6 @@
 package checkstyle.checks.whitespace;
 
-import checkstyle.utils.TokenTreeCheckUtils;
+import tokentree.utils.TokenTreeCheckUtils;
 
 @ignore("base class for OperatorWrap and SeparatorWrap")
 class WrapCheckBase extends Check {

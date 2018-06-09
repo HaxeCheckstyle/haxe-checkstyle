@@ -1,6 +1,6 @@
 package checkstyle.checks.imports;
 
-import checkstyle.utils.TokenTreeCheckUtils;
+import tokentree.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
 
 /**
