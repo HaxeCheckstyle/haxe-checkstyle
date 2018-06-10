@@ -29,7 +29,9 @@ class FileLengthCheck extends Check {
 				default:
 			}
 		}
-		if (checker.lines.length > max) log('File length is ${checker.lines.length} lines (max allowed is ${max})', checker.lines.length, 0);
+		if (checker.lines.length > max) {
+			log('File length is ${checker.lines.length} lines (max allowed is ${max})', checker.lines.length, 0, checker.lines.length, 0);
+		}
 	}
 
 	override public function detectableInstances():DetectableInstances {

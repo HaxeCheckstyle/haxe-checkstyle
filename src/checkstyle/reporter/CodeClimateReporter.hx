@@ -33,11 +33,11 @@ class CodeClimateReporter extends BaseReporter {
 				path: file,
 				positions: {
 					begin: {
-						line: m.line,
+						line: m.startLine,
 						column: m.startColumn
 					},
 					end: {
-						line: m.line,
+						line: m.endLine,
 						column: m.endColumn
 					}
 				}

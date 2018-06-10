@@ -91,7 +91,7 @@ class BaseReporter implements IReporter {
 		var sb:StringBuf = new StringBuf();
 		sb.add(m.fileName);
 		sb.add(":");
-		sb.add(m.line);
+		sb.add(m.startLine);
 		if (m.startColumn >= 0) {
 			var isRange = m.startColumn != m.endColumn;
 			sb.add(': character${isRange ? "s" : ""} ');

@@ -94,7 +94,7 @@ class IndentationCheck extends Check {
 		}
 		var expectedText:String = buildReadableIndentCount(expected);
 		var actualText:String = buildReadableIndentCount(actual);
-		log('Indentation mismatch: expected: $expectedText, actual: $actualText', line + 1, 0, length);
+		log('Indentation mismatch: expected: $expectedText, actual: $actualText', line + 1, 0, line + 1, length);
 	}
 
 	function buildReadableIndentCount(count:Int):String {

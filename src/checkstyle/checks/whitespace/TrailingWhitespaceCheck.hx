@@ -21,7 +21,7 @@ class TrailingWhitespaceCheck extends LineCheckBase {
 			if (endTextRange == null) continue;
 			var endText = line.substring(endTextRange.start, endTextRange.end);
 
-			if (re.match(endText)) log("Trailing whitespace", i + 1, line.length);
+			if (re.match(endText)) log("Trailing whitespace", i + 1, line.length, i + 1, line.length);
 		}
 	}
 

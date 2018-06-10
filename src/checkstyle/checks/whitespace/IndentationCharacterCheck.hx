@@ -37,7 +37,7 @@ class IndentationCharacterCheck extends LineCheckBase {
 			var startText = line.substring(startTextRange.start, startTextRange.end);
 
 			if (ignoreRE.match(line) || isLineSuppressed(i)) continue;
-			if (!re.match(startText)) log('Wrong indentation character (should be ${character})', i + 1, 0);
+			if (!re.match(startText)) log('Wrong indentation character (should be ${character})', i + 1, 0, i + 1, 0);
 		}
 	}
 

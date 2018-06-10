@@ -464,11 +464,10 @@ class ExtendedEmptyLinesCheck extends Check {
 			case NONE:
 			case SINGLE(line):
 				if (isLineSuppressed(line)) return;
-				log(formatMessage(policy, whatMsg), line + 1, 0);
+				log(formatMessage(policy, whatMsg), line + 1, 0, line + 1, 0);
 			case RANGE(start, end):
 				if (isLineSuppressed(start)) return;
-				var length:Int = checker.linesIdx[end].r - checker.linesIdx[start].l;
-				log(formatMessage(policy, whatMsg), start + 1, 0, length);
+				log(formatMessage(policy, whatMsg), start + 1, 0, end + 1, 0);
 		}
 	}
 

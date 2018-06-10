@@ -91,8 +91,9 @@ class ReporterManager {
 		return
 			message1.fileName == message2.fileName &&
 			message1.message == message2.message &&
-			message1.line == message2.line &&
+			message1.startLine == message2.startLine &&
 			message1.startColumn == message2.startColumn &&
+			message1.endLine == message2.endLine &&
 			message1.endColumn == message2.endColumn &&
 			message1.severity == message2.severity &&
 			message1.moduleName == message2.moduleName;
@@ -101,7 +102,8 @@ class ReporterManager {
 	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
 		return {
 			fileName:fileName,
-			line:1,
+			startLine:1,
+			endLine:1,
 			startColumn:0,
 			endColumn:0,
 			severity:ERROR,

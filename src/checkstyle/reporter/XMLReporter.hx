@@ -86,7 +86,7 @@ class XMLReporter extends BaseReporter {
 		var sb:StringBuf = new StringBuf();
 
 		sb.add("\t\t<error line=\"");
-		sb.add(m.line);
+		sb.add(m.startLine);
 		sb.add("\"");
 		if (m.startColumn >= 0) {
 			sb.add(" column=\"");

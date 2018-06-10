@@ -30,7 +30,7 @@ class TabForAligningCheck extends LineCheckBase {
 			for (range in ranges.filter(function(r):Bool return r.type == TEXT)) {
 				var re = range.start == 0 ? ~/\S[ ]*\t/ : ~/\t/;
 				var rangeText = line.substring(range.start, range.end);
-				if (re.match(rangeText)) log("Tab after non-space character, use space for aligning", i + 1, line.length);
+				if (re.match(rangeText)) log("Tab after non-space character, use space for aligning", i + 1, 0, i + 1, line.length);
 			}
 		}
 	}

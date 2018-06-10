@@ -8,7 +8,8 @@ module.exports = function(grunt) {
                     "haxelib install hxargs 3.0.2 && " +
                     "haxelib install compiletime 2.6.0 && " +
                     "haxelib install mcover 2.1.1 && " +
-                    "haxelib install munit"
+                    "haxelib install munit && " +
+                    "haxelib install tokentree"
             }
         },
 

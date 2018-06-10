@@ -91,16 +91,16 @@ class EmptyLinesCheck extends LineCheckBase {
 					if (end - start + 1 > max) logInfo(start);
 				}
 				if (requireEmptyLineAfterPackage && isLastLinePackage) {
-					log("Empty line required after package declaration", i + 1, 0);
+					log("Empty line required after package declaration", i + 1, 0, i + 1, 0);
 				}
 				if (requireEmptyLineAfterClass && isLastLineClass) {
-					log("Empty line required after class declaration", i + 1, 0);
+					log("Empty line required after class declaration", i + 1, 0, i + 1, 0);
 				}
 				if (requireEmptyLineAfterInterface && isLastLineInterface) {
-					log("Empty line required after interface declaration", i + 1, 0);
+					log("Empty line required after interface declaration", i + 1, 0, i + 1, 0);
 				}
 				if (requireEmptyLineAfterAbstract && isLastLineAbstract) {
-					log("Empty line required after abstract declaration", i + 1, 0);
+					log("Empty line required after abstract declaration", i + 1, 0, i + 1, 0);
 				}
 			}
 
@@ -118,12 +118,12 @@ class EmptyLinesCheck extends LineCheckBase {
 
 	function checkComment(i, start, regex) {
 		if (i > 0 && regex.match(checker.lines[i - 1].trim())) {
-			log("Empty line not allowed after comment(s)", start, 0);
+			log("Empty line not allowed after comment(s)", start + 1, 0, start + 1, 0);
 		}
 	}
 
 	function logInfo(pos) {
-		log('Too many consecutive empty lines (> ${max})', pos, 0);
+		log('Too many consecutive empty lines (> ${max})', pos + 1, 0, pos + 1, 0);
 	}
 
 	override public function detectableInstances():DetectableInstances {
