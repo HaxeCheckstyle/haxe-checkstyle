@@ -54,19 +54,27 @@ class Check {
 	}
 
 	public function logRange(msg:String, startPos:Int, endPos:Int, ?sev:SeverityLevel) {
-		var lp = checker.getLinePos(startPos);
-		var length = endPos - startPos;
-		log(msg, lp.line + 1, lp.ofs, lp.ofs + length, sev);
+		var lpStart = checker.getLinePos(startPos);
+		var lpEnd = checker.getLinePos(endPos);
+		var startColumn:Int = offsetToColumn(lpStart);
+		var endColumn:Int = offsetToColumn(lpEnd);
+		log(msg, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn, sev);
 	}
 
-	public function log(msg:String, l:Int, startColumn:Int, ?endColumn:Int, ?sev:SeverityLevel) {
-		if (endColumn == null) endColumn = startColumn;
+	function offsetToColumn(lp:LinePos):Int {
+		if (checker.lines.length <= lp.line) return lp.ofs;
+		var line:Bytes = Bytes.ofString(checker.lines[lp.line]);
+		return line.getString(0, lp.ofs).length;
+	}
+
+	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?sev:SeverityLevel) {
 		if (sev == null) sev = severity;
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
 			desc:desc,
-			line:l,
+			startLine:startLine,
+			endLine:endLine,
 			startColumn:startColumn,
 			endColumn:endColumn,
 			severity:sev,

@@ -27,7 +27,7 @@ class JSONReporter extends BaseReporter {
 
 	override public function addMessage(m:CheckMessage) {
 		var reportMessage:ReportMessage = {
-			line: m.line,
+			line: m.startLine,
 			column: m.startColumn,
 			severity: BaseReporter.severityString(m.severity),
 			message: m.message
