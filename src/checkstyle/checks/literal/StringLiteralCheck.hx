@@ -58,7 +58,7 @@ class StringLiteralCheck extends Check {
 			case ONLY_DOUBLE:
 				if (!singleQuote) return;
 				if (allowException && ~/"/.match(s)) return;
-				logPos('String "$s" uses single quotes instead of double quotes', pos,USE_DOUBLE_QUOTES);
+				logPos('String "$s" uses single quotes instead of double quotes', pos, USE_DOUBLE_QUOTES);
 			case ONLY_SINGLE:
 				if (singleQuote) return;
 				if (allowException && ~/'/.match(s)) return;
