@@ -2,8 +2,8 @@
 
 - Added JSON schemas for `checkstyle.json` and `checkstyle-exclude.json` file formats [#431](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/431) +  [#432](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/432) + [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
 - Added code documentation [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
-- Added message codes to help with vscode-checkstyle quickfixes
-- Added `TIntersection` handling
+- Added message codes to help with vscode-checkstyle quickfixes [#436](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/436)
+- Added `TIntersection` handling [#436](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/436)
 - Fixed reported character positions [#435](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/435)
 - Changed default policy of ExtendedEmptyLines check to `upto` [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
 - Moved token tree into separate library [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
