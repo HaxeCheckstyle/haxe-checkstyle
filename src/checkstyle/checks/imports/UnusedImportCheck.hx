@@ -60,17 +60,17 @@ class UnusedImportCheck extends Check {
 			if (ignoreModules.contains(moduleName)) continue;
 
 			if ((packageName != null) && (!hasMapping(moduleName)) && ('$packageName.$typeName' == moduleName)) {
-				logPos('Detected import "$moduleName" from same package "$packageName"', imp.getPos());
+				logPos('Detected import "$moduleName" from same package "$packageName"', imp.getPos(), SAME_PACKAGE);
 				continue;
 			}
 
 			if (!~/\./.match(moduleName)) {
-				logPos('Unnecessary toplevel import "$moduleName" detected', imp.getPos());
+				logPos('Unnecessary toplevel import "$moduleName" detected', imp.getPos(), TOPLEVEL_IMPORT);
 				continue;
 			}
 
 			if (seenModules.contains(moduleName)) {
-				logPos('Duplicate import "$moduleName" detected', imp.getPos());
+				logPos('Duplicate import "$moduleName" detected', imp.getPos(), DUPLICATE_IMPORT);
 				continue;
 			}
 			seenModules.push(moduleName);
@@ -90,7 +90,7 @@ class UnusedImportCheck extends Check {
 		var packageName:String = detectModuleName(packageToken[0]);
 		if (packageName == "") packageName = null;
 		if (packageToken.length > 1) {
-			logPos("Multiple package declarations found", packageToken[1].getPos());
+			logPos("Multiple package declarations found", packageToken[1].getPos(), MULTIPLE_PACKAGE);
 		}
 		return packageName;
 	}
@@ -154,7 +154,7 @@ class UnusedImportCheck extends Check {
 				if (checkName(typeName, moduleName, name)) return;
 			}
 		}
-		logPos('Unused import "$moduleName" detected', importTok.getPos());
+		logPos('Unused import "$moduleName" detected', importTok.getPos(), UNUSED_IMPORT);
 	}
 
 	function extractLiteralNames(text:String):Array<String> {
@@ -202,4 +202,13 @@ class UnusedImportCheck extends Check {
 			}]
 		}];
 	}
+}
+
+@:enum
+abstract UnusedImportCode(String) to String {
+	var UNUSED_IMPORT = "UnusedImport";
+	var TOPLEVEL_IMPORT = "ToplevelImport";
+	var SAME_PACKAGE = "SamePackage";
+	var DUPLICATE_IMPORT = "DuplicateImport";
+	var MULTIPLE_PACKAGE = "MultiplePackage";
 }

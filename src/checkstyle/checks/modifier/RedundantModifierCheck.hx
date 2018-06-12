@@ -48,14 +48,16 @@ class RedundantModifierCheck extends Check {
 	function checkField(f:Field, p:ParentType, forcePrivate:Bool, forcePublic:Bool) {
 		var isDefaultPrivate = f.isDefaultPrivate(p);
 		var implicitAccess = isDefaultPrivate ? "private" : "public";
+		var missingCode:String = isDefaultPrivate ? MISSING_PRIVATE : MISSING_PUBLIC;
+		var redundantCode:String = isDefaultPrivate ? REDUNDANT_PRIVATE : REDUNDANT_PUBLIC;
 		if (!f.access.contains(APublic) && !f.access.contains(APrivate)) {
 			if ((!isDefaultPrivate && forcePublic) || (isDefaultPrivate && forcePrivate)) {
-				logPos('Missing "$implicitAccess" keyword for "${f.name}"', f.pos);
+				logPos('Missing "$implicitAccess" keyword for "${f.name}"', f.pos, missingCode);
 			}
 		}
 
 		if ((!forcePrivate && isDefaultPrivate && f.access.contains(APrivate)) || (!forcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
-			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos);
+			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos, redundantCode);
 		}
 	}
 
@@ -76,4 +78,12 @@ class RedundantModifierCheck extends Check {
 			}]
 		}];
 	}
+}
+
+@:enum
+abstract RedundantModifierCode(String) to String {
+	var MISSING_PUBLIC = "MissingPublic";
+	var MISSING_PRIVATE = "MissingPrivate";
+	var REDUNDANT_PUBLIC = "RedundantPublic";
+	var REDUNDANT_PRIVATE = "RedundantPrivate";
 }
