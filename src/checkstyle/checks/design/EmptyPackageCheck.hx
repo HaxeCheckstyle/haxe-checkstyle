@@ -21,7 +21,7 @@ class EmptyPackageCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var packageTokens = root.filter([Kwd(KwdPackage)], ALL);
 		if (enforceEmptyPackage) {
-			if (packageTokens.length == 0) log("Missing package declaration", 1, 0, 1, 0);
+			if (packageTokens.length == 0) log("Missing package declaration", 1, 0, 1, 0, MISSING_PACKAGE);
 		}
 		else checkPackageNames(packageTokens);
 	}
@@ -29,7 +29,7 @@ class EmptyPackageCheck extends Check {
 	function checkPackageNames(entries:Array<TokenTree>) {
 		for (entry in entries) {
 			var firstChild = entry.getFirstChild();
-			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max);
+			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max, REDUNDANT_PACKAGE);
 		}
 	}
 
@@ -42,4 +42,10 @@ class EmptyPackageCheck extends Check {
 			}]
 		}];
 	}
+}
+
+@:enum
+abstract EmptyPackageCode(String) to String {
+	var MISSING_PACKAGE = "MissingPackage";
+	var REDUNDANT_PACKAGE = "RedundantPackage";
 }

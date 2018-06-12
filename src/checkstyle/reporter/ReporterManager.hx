@@ -91,6 +91,7 @@ class ReporterManager {
 		return
 			message1.fileName == message2.fileName &&
 			message1.message == message2.message &&
+			message1.code == message2.code &&
 			message1.startLine == message2.startLine &&
 			message1.startColumn == message2.startColumn &&
 			message1.endLine == message2.endLine &&
@@ -111,7 +112,8 @@ class ReporterManager {
 			categories:[Category.STYLE],
 			points:1,
 			desc:"",
-			message:step + " failed: " + e + "\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues"
+			code:'$e',
+			message:'$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues'
 		};
 	}
 }

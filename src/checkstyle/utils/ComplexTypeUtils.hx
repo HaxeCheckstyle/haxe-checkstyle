@@ -146,6 +146,8 @@ class ComplexTypeUtils {
 			#if (haxe_ver >= 4.0)
 			case TNamed(n, t):
 				walkComplexType(t, n, pos, cb);
+			case TIntersection(types):
+				for (t in types) walkComplexType(t, name, pos, cb);
 			#end
 		}
 	}

@@ -49,16 +49,16 @@ class Check {
 		throw "Unimplemented";
 	}
 
-	public function logPos(msg:String, pos:Position, ?sev:SeverityLevel) {
-		logRange(msg, pos.min, pos.max, sev);
+	public function logPos(msg:String, pos:Position, ?code:String, ?sev:SeverityLevel) {
+		logRange(msg, pos.min, pos.max, code, sev);
 	}
 
-	public function logRange(msg:String, startPos:Int, endPos:Int, ?sev:SeverityLevel) {
+	public function logRange(msg:String, startPos:Int, endPos:Int, ?code:String, ?sev:SeverityLevel) {
 		var lpStart = checker.getLinePos(startPos);
 		var lpEnd = checker.getLinePos(endPos);
 		var startColumn:Int = offsetToColumn(lpStart);
 		var endColumn:Int = offsetToColumn(lpEnd);
-		log(msg, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn, sev);
+		log(msg, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn, code, sev);
 	}
 
 	function offsetToColumn(lp:LinePos):Int {
@@ -67,11 +67,12 @@ class Check {
 		return line.getString(0, lp.ofs).length;
 	}
 
-	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?sev:SeverityLevel) {
+	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?code:String, ?sev:SeverityLevel) {
 		if (sev == null) sev = severity;
 		messages.push({
 			fileName:checker.file.name,
 			message:msg,
+			code:code,
 			desc:desc,
 			startLine:startLine,
 			endLine:endLine,

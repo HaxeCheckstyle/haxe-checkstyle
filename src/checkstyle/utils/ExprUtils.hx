@@ -145,6 +145,8 @@ class ExprUtils {
 			#if (haxe_ver >= 4.0)
 			case TNamed(n, t):
 				walkComplexType(t, cb);
+			case TIntersection(types):
+				for (t in types) walkComplexType(t, cb);
 			#end
 		}
 	}

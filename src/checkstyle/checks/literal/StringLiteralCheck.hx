@@ -58,16 +58,16 @@ class StringLiteralCheck extends Check {
 			case ONLY_DOUBLE:
 				if (!singleQuote) return;
 				if (allowException && ~/"/.match(s)) return;
-				logPos('String "$s" uses single quotes instead of double quotes', pos);
+				logPos('String "$s" uses single quotes instead of double quotes', pos,USE_DOUBLE_QUOTES);
 			case ONLY_SINGLE:
 				if (singleQuote) return;
 				if (allowException && ~/'/.match(s)) return;
-				logPos('String "$s" uses double quotes instead of single quotes', pos);
+				logPos('String "$s" uses double quotes instead of single quotes', pos, USE_SINGLE_QUOTES);
 			case DOUBLE_AND_INTERPOLATION:
 				if (!singleQuote) return;
 				if (StringUtils.isStringInterpolation(s, checker.file.content, pos)) return;
 				if (allowException && ~/"/.match(s)) return;
-				logPos('String "$s" uses single quotes instead of double quotes', pos);
+				logPos('String "$s" uses single quotes instead of double quotes', pos, USE_DOUBLE_QUOTES);
 		}
 	}
 
@@ -91,4 +91,10 @@ abstract StringLiteralPolicy(String) {
 	var ONLY_SINGLE = "onlySingle";
 	var ONLY_DOUBLE = "onlyDouble";
 	var DOUBLE_AND_INTERPOLATION = "doubleAndInterpolation";
+}
+
+@:enum
+abstract StringLiteralCode(String) to String {
+	var USE_DOUBLE_QUOTES = "UseDoubleQuotes";
+	var USE_SINGLE_QUOTES = "UseSingleQuotes";
 }
