@@ -4,6 +4,7 @@
 - Added code documentation [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
 - Added message codes to help with vscode-checkstyle quickfixes [#436](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/436)
 - Added `TIntersection` handling [#436](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/436)
+- Added `buildJS.hxml`
 - Fixed reported character positions [#435](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/435)
 - Changed default policy of ExtendedEmptyLines check to `upto` [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
 - Moved token tree into separate library [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)

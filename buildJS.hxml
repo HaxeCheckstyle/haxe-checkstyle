@@ -1,0 +1,10 @@
+-cp src
+-cp test
+-cp resources
+-lib haxeparser
+-lib compiletime:2.6.0
+-lib hxargs:3.0.2
+-lib tokentree
+-lib hxnodejs
+-main checkstyle.Main
+-js haxecheckstyle.js
