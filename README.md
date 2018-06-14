@@ -50,6 +50,10 @@ haxelib run checkstyle -s src
 haxelib run checkstyle -s src -detect detectedCheckstyle.json
 ```
 
+### VSCode integration
+
+There is a VSCode extension for haxe-checkstyle available in the VSCode marketplace. It is currently built with haxe-checkstyle v2.4.1 and tokentree v1.0.1. You can view the development version here: [vscode-checkstyle](https://github.com/vshaxe/vscode-checkstyle)
+
 ### Reference
 
 [More information and reference](http://haxecheckstyle.github.io/docs).

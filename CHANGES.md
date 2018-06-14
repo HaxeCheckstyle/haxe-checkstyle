@@ -10,6 +10,7 @@
 - Fixed reported character positions [#435](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/435)
 - Changed default policy of ExtendedEmptyLines check to `upto` [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
 - Moved token tree into separate library [#434](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/434)
+- Release of "Haxe Checkstyle" extension for vscode
 
 ## version 2.4.0 (2018-06-02)
 
