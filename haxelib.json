@@ -18,8 +18,8 @@
         "AlexHaxe",
         "Gama11"
     ],
-    "releasenote": "new ExtendedEmptyLine check; refactored exclusion logic - see CHANGES",
-    "version": "2.4.0",
+    "releasenote": "added json schemas for config files; changes and fixes in preparation of vscode-checkstyle - see CHANGES",
+    "version": "2.4.1",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {
 
