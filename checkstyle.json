@@ -553,7 +553,7 @@
             "token/TokenTreeBuilderParsingTest"
         ],
         "MultipleStringLiterals": [
-            "checks",
+            "xchecks",
             "schema",
             "token"
         ],
