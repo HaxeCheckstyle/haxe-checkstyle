@@ -553,15 +553,15 @@
             "token/TokenTreeBuilderParsingTest"
         ],
         "MultipleStringLiterals": [
-            "xchecks",
+            "checks",
             "schema",
             "token"
         ],
         "CyclomaticComplexity": [
-            "xcheckstyle/checks/Check",
-            "xcheckstyle/utils/ExprUtils",
-            "xcheckstyle/utils/ComplexTypeUtils",
-            "xcheckstyle/checks/metrics/CyclomaticComplexityCheck",
+            "checkstyle/checks/Check",
+            "checkstyle/utils/ExprUtils",
+            "checkstyle/utils/ComplexTypeUtils",
+            "checkstyle/checks/metrics/CyclomaticComplexityCheck",
             "checkstyle/checks/block/LeftCurlyCheck",
             "checkstyle/checks/block/RightCurlyCheck",
             "checkstyle/checks/naming/MethodNameCheck",
@@ -571,7 +571,7 @@
             "checkstyle/checks/whitespace/WhitespaceAroundCheck",
             "checkstyle/checks/block/EmptyBlockCheck",
             "checkstyle/checks/whitespace/EmptyLinesCheck",
-            "xcheckstyle/token/walk/WalkStatement"
+            "checkstyle/token/walk/WalkStatement"
         ],
         "ExtendedEmptyLines": [
             "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests",
