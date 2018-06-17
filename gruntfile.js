@@ -12,16 +12,8 @@ module.exports = function(grunt) {
                     "haxelib install tokentree"
             }
         },
-
         haxe: haxeOptions(),
-
-        zip: {
-            "haxe-checkstyle.zip": [
-                "src/**",
-                "resources/sample-config.json", "resources/logo.png", "resources/codeclimate_pr.png",
-                "haxelib.json", "run.n", "README.md", "CHANGES.md"
-            ]
-        }
+        zip: zipIt()
     });
 
     grunt.loadNpmTasks("grunt-haxe");
@@ -46,6 +38,20 @@ function haxeOptions() {
         },
         telemetry: {
             hxml: "buildTelemetry.hxml"
+        }
+    };
+}
+
+function zipIt() {
+    return {
+        release: {
+            src: [
+                "src/**",
+                "resources/sample-config.json", "resources/logo.png", "resources/codeclimate_pr.png",
+                "haxelib.json", "run.n", "README.md", "CHANGES.md", "LICENCE.md"
+            ],
+            dest: "haxe-checkstyle.zip",
+            compression: "DEFLATE",
         }
     };
 }

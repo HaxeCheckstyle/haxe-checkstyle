@@ -1,7 +1,5 @@
 package config;
 
-import massive.munit.Assert;
-
 import checkstyle.checks.type.DynamicCheck;
 import checkstyle.checks.type.ReturnCheck;
 

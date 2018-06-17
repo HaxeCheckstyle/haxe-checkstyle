@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+- Refactored `Checker.getLinePos` to use binary search, reduces runtime from O(N/2) to O(log N) [#439](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/439)
+
 ## version 2.4.1 (2018-06-14)
 
 - Added JSON schemas for `checkstyle.json` and `checkstyle-exclude.json` file formats [#431](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/431) +  [#432](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/432) + [#433](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/433)
