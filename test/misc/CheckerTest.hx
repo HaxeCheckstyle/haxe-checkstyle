@@ -40,13 +40,13 @@ class CheckerTest {
 		checkLinePos(checker, 0, 0, 0);
 		checkLinePos(checker, 50, 0, 50);
 		checkLinePos(checker, 100, 0, 100);
-		checkLinePos(checker, 150, 1, 50);
-		checkLinePos(checker, 250, 2, 50);
-		checkLinePos(checker, 350, 3, 50);
-		checkLinePos(checker, 450, 4, 50);
-		checkLinePos(checker, 550, 5, 50);
-		checkLinePos(checker, 650, 6, 50);
-		checkLinePos(checker, 750, 7, 50);
+		checkLinePos(checker, 150, 1, 49);
+		checkLinePos(checker, 250, 2, 49);
+		checkLinePos(checker, 350, 3, 49);
+		checkLinePos(checker, 450, 4, 49);
+		checkLinePos(checker, 550, 5, 49);
+		checkLinePos(checker, 650, 6, 49);
+		checkLinePos(checker, 750, 7, 49);
 		throwsBadOffset(checker, 801);
 		throwsBadOffset(checker, -100);
 	}
@@ -54,18 +54,18 @@ class CheckerTest {
 	function checkLinePos(checker:Checker, ofs:Int, expectedLine:Int, expectedOfs:Int, ?pos:PosInfos) {
 		var linePos:LinePos = checker.getLinePos(ofs);
 
-		Assert.isNotNull(linePos);
-		Assert.areEqual(expectedLine, linePos.line);
-		Assert.areEqual(expectedOfs, linePos.ofs);
+		Assert.isNotNull(linePos, pos);
+		Assert.areEqual(expectedLine, linePos.line, pos);
+		Assert.areEqual(expectedOfs, linePos.ofs, pos);
 	}
 
 	function throwsBadOffset(checker:Checker, ofs:Int, ?pos:PosInfos) {
 		try {
 			checker.getLinePos(ofs);
-			Assert.fail("line pos calculation should fail");
+			Assert.fail("line pos calculation should fail", pos);
 		}
 		catch (e:Any) {
-			Assert.areEqual("Bad offset", '$e');
+			Assert.areEqual("Bad offset", '$e', pos);
 		}
 	}
 }

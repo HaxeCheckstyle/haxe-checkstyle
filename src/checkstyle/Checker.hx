@@ -14,6 +14,7 @@ import checkstyle.reporter.ReporterManager;
 import tokentree.TokenTreeBuilder;
 
 class Checker {
+	static inline var BAD_OFFSET:String = "Bad offset";
 
 	public var file:CheckFile;
 	public var lines:Array<String>;
@@ -67,11 +68,11 @@ class Checker {
 	public function getLinePos(off:Int):LinePos {
 		var lowerBound:Int = 0;
 		var upperBound:Int = linesIdx.length - 1;
-		if (linesIdx.length <= 0) throw "Bad offset";
-		if (off < 0) throw "Bad offset";
-		if (off > linesIdx[upperBound].r) throw "Bad offset";
+		if (linesIdx.length <= 0) throw BAD_OFFSET;
+		if (off < 0) throw BAD_OFFSET;
+		if (off > linesIdx[upperBound].r) throw BAD_OFFSET;
 		while (true) {
-			if (lowerBound > upperBound) throw "Bad offset";
+			if (lowerBound > upperBound) throw BAD_OFFSET;
 			var center:Int = lowerBound + Math.floor((upperBound - lowerBound) / 2);
 			var matchLeft:Bool = linesIdx[center].l <= off;
 			var matchRight:Bool = linesIdx[center].r >= off;
@@ -85,7 +86,7 @@ class Checker {
 				continue;
 			}
 		}
-		throw "Bad offset";
+		throw BAD_OFFSET;
 	}
 
 	public function getString(off:Int, off2:Int):String {
