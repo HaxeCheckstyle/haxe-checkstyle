@@ -2,16 +2,12 @@ package checks;
 
 import byte.ByteData;
 
-import haxe.PosInfos;
-
 import checkstyle.CheckMessage;
 import checkstyle.CheckFile;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
-
-import massive.munit.Assert;
 
 class CheckTestCase<T:String> {
 

@@ -1,10 +1,11 @@
 import checks.CheckTestCase;
+import config.ConfigParserTest;
+import config.ExcludeManagerTest;
 import detect.DetectCodingStyleTest;
+import misc.CheckerTest;
 #if !eval
 import misc.ThreadTest;
 #end
-import config.ConfigParserTest;
-import config.ExcludeManagerTest;
 
 class TestSuite extends massive.munit.TestSuite {
 
@@ -14,6 +15,7 @@ class TestSuite extends massive.munit.TestSuite {
 		CompileTime.importPackage("checks");
 		CompileTime.importPackage("misc");
 
+		add(CheckerTest);
 		add(ConfigParserTest);
 		add(ExcludeManagerTest);
 		add(DetectCodingStyleTest);

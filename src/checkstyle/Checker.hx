@@ -33,6 +33,7 @@ class Checker {
 		checks = [];
 		baseDefines = [];
 		defineCombinations = [];
+		linesIdx = [];
 	}
 
 	public function addCheck(check:Check) {
@@ -64,8 +65,25 @@ class Checker {
 	}
 
 	public function getLinePos(off:Int):LinePos {
-		for (i in 0...linesIdx.length) {
-			if (linesIdx[i].l <= off && linesIdx[i].r >= off) return { line:i, ofs: off - linesIdx[i].l };
+		var lowerBound:Int = 0;
+		var upperBound:Int = linesIdx.length - 1;
+		if (linesIdx.length <= 0) throw "Bad offset";
+		if (off < 0) throw "Bad offset";
+		if (off > linesIdx[upperBound].r) throw "Bad offset";
+		while (true) {
+			if (lowerBound > upperBound) throw "Bad offset";
+			var center:Int = lowerBound + Math.floor((upperBound - lowerBound) / 2);
+			var matchLeft:Bool = linesIdx[center].l <= off;
+			var matchRight:Bool = linesIdx[center].r >= off;
+			if (matchLeft && matchRight) return { line: center, ofs: off - linesIdx[center].l };
+			if (matchLeft) {
+				lowerBound = center + 1;
+				continue;
+			}
+			if (matchRight) {
+				upperBound = center - 1;
+				continue;
+			}
 		}
 		throw "Bad offset";
 	}

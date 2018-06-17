@@ -53,8 +53,6 @@ import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 import checkstyle.detect.DetectCodingStyle;
 
-import massive.munit.Assert;
-
 class DetectCodingStyleTest {
 
 	// checkstyle.checks.block

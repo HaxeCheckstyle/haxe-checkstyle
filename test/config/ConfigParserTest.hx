@@ -1,7 +1,5 @@
 package config;
 
-import massive.munit.Assert;
-
 import checkstyle.config.Config;
 import checkstyle.config.ConfigParser;
 import checkstyle.utils.ConfigUtils;

@@ -6,6 +6,10 @@ buildDebug.hxml
 
 --next
 
+buildJS.hxml
+
+--next
+
 buildSchema.hxml
 
 --next

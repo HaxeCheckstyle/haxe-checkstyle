@@ -12,8 +12,6 @@ import checks.whitespace.IndentationCheckTest.IndentationCheckTests;
 
 import checks.CheckTestCase.TestReporter;
 
-import massive.munit.Assert;
-
 class ThreadTest {
 
 	static inline var FILE_NAME:String = "Test.hx";
