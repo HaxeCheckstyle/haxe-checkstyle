@@ -20,6 +20,7 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install mcover 2.1.1
         - haxelib install munit
+        - haxelib install hxnodejs
     - haxe: development
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
@@ -30,4 +31,5 @@ matrix:
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
         - haxelib install munit
+        - haxelib install hxnodejs
         - sed -i 's/:3.3.0//' buildGlobal.hxml
