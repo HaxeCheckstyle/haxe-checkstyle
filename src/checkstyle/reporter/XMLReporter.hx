@@ -6,10 +6,10 @@ class XMLReporter extends BaseReporter {
 
 	var messageCache:Map<String, Array<CheckMessage>>;
 
-	/*
-	* Solution from mustache.js
-	* https://github.com/janl/mustache.js/blob/master/mustache.js#L49
-	*/
+	/**
+		Solution from mustache.js
+		https://github.com/janl/mustache.js/blob/master/mustache.js#L49
+	**/
 	static var ENTITY_MAP:Map<String, String> = [
 		"&" => "&amp;",
 		"<" => "&lt;",

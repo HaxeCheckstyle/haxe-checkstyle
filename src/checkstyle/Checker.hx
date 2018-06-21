@@ -25,7 +25,7 @@ class Checker {
 	public var defineCombinations:Array<Array<String>>;
 
 	public var linesIdx:Array<LineIds>;
-	var lineSeparator:String;
+	public var lineSeparator:String;
 	var tokenTree:TokenTree;
 	public var asts:Array<Ast>;
 	public var excludesRanges:Map<String, Array<ExcludeRange>>;

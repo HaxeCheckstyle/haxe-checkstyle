@@ -9,12 +9,12 @@ class ArrayAccessCheck extends Check {
 
 	/**
 		set "spaceBefore" to false to detect space between array and "["
-	 */
+	 **/
 	public var spaceBefore:Bool;
 
 	/**
 		set to false to detect space between brackets ("[" + "]") and index
-	 */
+	 **/
 	public var spaceInside:Bool;
 
 	public function new() {

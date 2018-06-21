@@ -170,7 +170,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			Kwd(KwdEnum),
 			Kwd(KwdInterface),
 			Kwd(KwdTypedef)
-		], ALL);
+		], FIRST);
 
 		if (types.length <= 0) return;
 
@@ -209,12 +209,17 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([BETWEENTYPES])) return;
 		for (index in 1...types.length) {
 			var type:TokenTree = types[index];
-			if (type.previousSibling == null) {
-				continue;
+			var sibling:TokenTree = type.previousSibling;
+			var prevType:TokenTree = types[index - 1];
+			if ((sibling != null) && (sibling != prevType)) {
+				switch (sibling.tok) {
+					case Comment(_): type = sibling;
+					case CommentLine(_): type = sibling;
+					default:
+				}
 			}
-			var prevPos:Position = type.previousSibling.getPos();
+			var prevPos:Position = prevType.getPos();
 			if (skipSingleLineTypes && (checker.getLinePos(prevPos.min).line - checker.getLinePos(prevPos.max).line == 0)) continue;
-
 			var startLine:Int = checker.getLinePos(prevPos.max).line;
 			var endLine:Int = checker.getLinePos(type.getPos().min).line;
 			checkBetween(emptyLines, startLine, endLine, getPolicy(BETWEENTYPES), "between types");
@@ -251,6 +256,12 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored(places)) return;
 
 		checkType(emptyLines, typeToken, getPolicy(BEGINCLASS), getPolicy(ENDCLASS), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+			while (next != null) {
+				if (!next.isComment()) break;
+				next = next.nextSibling;
+			}
+			if (next == null) return null;
+
 			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
 			var isVarChild:Bool = child.is(Kwd(KwdVar));
 			if (!isVarChild && !isFuncChild) return null;
@@ -403,8 +414,10 @@ class ExtendedEmptyLinesCheck extends Check {
 			line = checker.getLinePos(comment.getPos().max).line + 1;
 			switch (comment.tok) {
 				case Comment(_):
+					if ((comment.nextSibling != null) && (comment.nextSibling.isComment())) continue;
 					checkLines(emptyLines, getPolicy(AFTERMULTILINECOMMENT), line, line, "after comment");
 				case CommentLine(_):
+					if ((comment.nextSibling != null) && (comment.nextSibling.isComment())) continue;
 					checkLines(emptyLines, getPolicy(AFTERSINGLELINECOMMENT), line, line, "after comment");
 				default:
 			}

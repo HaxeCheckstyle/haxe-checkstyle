@@ -1,5 +1,8 @@
 package checkstyle.checks.naming;
 
+/**
+	Base class for name checks
+ **/
 @ignore("Base class for name checks")
 class NameCheckBase<T> extends Check {
 

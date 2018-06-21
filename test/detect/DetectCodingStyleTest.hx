@@ -20,7 +20,9 @@ import checkstyle.checks.coding.UnusedLocalVarCheck;
 import checkstyle.checks.design.EmptyPackageCheck;
 import checkstyle.checks.design.InterfaceCheck;
 import checkstyle.checks.design.UnnecessaryConstructorCheck;
+import checkstyle.checks.comments.DocCommentStyleCheck;
 import checkstyle.checks.comments.TODOCommentCheck;
+import checkstyle.checks.comments.TypeDocCommentCheck;
 import checkstyle.checks.imports.AvoidStarImportCheck;
 import checkstyle.checks.imports.UnusedImportCheck;
 import checkstyle.checks.literal.StringLiteralCheck;
@@ -171,10 +173,30 @@ class DetectCodingStyleTest {
 
 	// checkstyle.checks.comments
 	@Test
+	public function testDetectDocCommentStyle() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new DocCommentStyleCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("DocCommentStyle", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual("twostars", props.startStyle);
+		Assert.areEqual("none", props.lineStyle);
+	}
+
+	@Test
 	public function testDetectTODOComment() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TODOCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("TODOComment", detectedChecks[0].type);
+	}
+
+	@Test
+	public function testDetectTypeDocComment() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TypeDocCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("TypeDocComment", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isNotNull(props.tokens);
+		Assert.areEqual(5, props.tokens.length);
 	}
 
 	// checkstyle.checks.design
@@ -396,7 +418,7 @@ class DetectCodingStyleTest {
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("tab", props.character);
 		Assert.isFalse(props.ignoreConditionals);
-		Assert.isFalse(props.ignoreComments);
+		Assert.isTrue(props.ignoreComments);
 		Assert.areEqual("exact", props.wrapPolicy);
 	}
 
@@ -482,6 +504,9 @@ package;
 
 import checkstyle.checks.Check;
 
+/**
+	code documentation
+ **/
 class Test {
 	static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
 	var param1:Int;

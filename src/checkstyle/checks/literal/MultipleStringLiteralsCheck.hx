@@ -17,12 +17,12 @@ class MultipleStringLiteralsCheck extends Check {
 
 	/**
 		string literals must be "minLength" or more characters before including them
-	 */
+	 **/
 	public var minLength:Int;
 
 	/**
 		ignore string literals matching regex
-	 */
+	 **/
 	public var ignore:String;
 
 	var ignoreRE:EReg;

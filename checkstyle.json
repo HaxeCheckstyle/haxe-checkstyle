@@ -43,6 +43,9 @@
             "type": "DefaultComesLast"
         },
         {
+            "type": "DocCommentStyle"
+        },
+        {
             "type": "Dynamic"
         },
         {
@@ -451,6 +454,15 @@
             "type": "Type"
         },
         {
+            "type": "TypeDocComment",
+            "props": {
+                "tokens": [
+                    "CLASS_DEF",
+                    "INTERFACE_DEF"
+                ]
+            }
+        },
+        {
             "props": {
                 "ignoreExtern": true,
                 "format": "^[A-Z]+[a-zA-Z0-9]*$"
@@ -594,6 +606,20 @@
         ],
         "MemberName": [
             "checkstyle/Main"
+        ],
+        "TypeDocComment": [
+            "checkstyle/Main",
+            "checkstyle/Checker",
+            "checkstyle/ChecksInfo",
+            "checkstyle/ParserQueue",
+            "checkstyle/checks/Check",
+            "config",
+            "detect",
+            "errors",
+            "reporter",
+            "schema",
+            "test",
+            "utils"
         ],
         "UnusedLocalVar": [
             "JsonSchemaGenerator"

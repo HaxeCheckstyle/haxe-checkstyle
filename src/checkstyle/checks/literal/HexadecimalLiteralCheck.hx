@@ -46,7 +46,7 @@ class HexadecimalLiteralCheck extends Check {
     policy for hexadecimal literals
     - upperCase = use uppercase for all letters
     - lowerCase = use lowercase for all letters
- */
+ **/
 @:enum
 abstract HexadecimalLiteralPolicy(String) {
 	var UPPER_CASE = "upperCase";

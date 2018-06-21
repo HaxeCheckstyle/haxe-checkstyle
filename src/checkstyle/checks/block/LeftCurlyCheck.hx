@@ -32,7 +32,7 @@ class LeftCurlyCheck extends Check {
 		- eol = should occur at end of line
 	    - nl = should occur on a new line
 		- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line
-	 */
+	 **/
 	public var option:LeftCurlyCheckOption;
 
 	/**
@@ -84,8 +84,8 @@ class LeftCurlyCheck extends Check {
 	}
 
 	/**
-	 * find effective parent token and check against configured tokens
-	 */
+		find effective parent token and check against configured tokens
+	 **/
 	function findParentToken(token:TokenTree):ParentToken {
 		if ((token == null) || (token.tok == null)) return {token:token, hasToken: false};
 		switch (token.tok) {

@@ -61,7 +61,7 @@ class SpacingCheck extends Check {
 
 	/**
 		exclude range operator "..." from "spaceAroundBinop"
-	 */
+	 **/
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {

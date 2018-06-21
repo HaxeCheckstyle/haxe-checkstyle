@@ -1,6 +1,9 @@
 package checkstyle.checks.whitespace;
 
-@ignore("base class line based whitespace checks")
+/**
+	base class for line based whitespace checks
+ **/
+@ignore("base class for line based whitespace checks")
 class LineCheckBase extends Check {
 
 	var currentState:RangeType;

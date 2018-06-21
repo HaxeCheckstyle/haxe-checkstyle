@@ -2,6 +2,9 @@ package checkstyle.checks.whitespace;
 
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 
+/**
+	holds list of empty lines and provides some helper functions
+ **/
 class ListOfEmptyLines {
 	var lines:Array<Int>;
 	var lineRanges:Array<EmptyLineRange>;
