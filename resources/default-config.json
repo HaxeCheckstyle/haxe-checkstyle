@@ -70,6 +70,13 @@
 			"type": "DefaultComesLast"
 		},
 		{
+			"props": {
+				"lineStyle": "none",
+				"startStyle": "twostars"
+			},
+			"type": "DocCommentStyle"
+		},
+		{
 			"props": {},
 			"type": "Dynamic"
 		},
@@ -522,6 +529,18 @@
 				"ignoreEnumAbstractValues": true
 			},
 			"type": "Type"
+		},
+		{
+			"props": {
+				"tokens": [
+					"ABSTRACT_DEF",
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"INTERFACE_DEF",
+					"TYPEDEF_DEF"
+				]
+			},
+			"type": "TypeDocComment"
 		},
 		{
 			"props": {

@@ -33,7 +33,7 @@ class EmptyBlockCheck extends Check {
 	    - empty = allow empty blocks but enforce "{}" notation
 	    - text = must contain something apart from whitespace (comment or statement)
 	    - stmt = must contain at least one statement (that is not a comment)
-	 */
+	 **/
 	public var option:EmptyBlockCheckOption;
 
 	public function new() {

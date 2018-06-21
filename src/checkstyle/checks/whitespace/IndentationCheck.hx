@@ -25,7 +25,7 @@ class IndentationCheck extends Check {
 		- fixed_zero = contitionals have to start at the beginning of a line (only where conditional is the first statement)
 		- aligned = align wih surrounding code
 		- aligned_increase = align wih surrounding code and increase indentation of enclosed code by +1
-	 */
+	 **/
 	public var conditionalPolicy:ConditionalIndentationPolicy;
 
 	/**

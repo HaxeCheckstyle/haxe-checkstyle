@@ -170,7 +170,7 @@ class ConditionalCompilationCheck extends Check {
     indentation of conditional statements
     - startOfLine = #if, #else, #elseif and #end must start at beginning of line
     - aligned = indentation of #if, #else, #elseif and #end must match surrounding code
- */
+ **/
 @:enum
 abstract ConditionalCompilationPolicy(String) {
 	var START_OF_LINE = "startOfLine";

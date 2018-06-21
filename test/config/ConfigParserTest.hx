@@ -69,7 +69,7 @@ class ConfigParserTest {
 			Assert.fail(message);
 		});
 
-		Assert.areEqual(67, configParser.getCheckCount());
+		Assert.areEqual(69, configParser.getCheckCount());
 	}
 
 	@Test
@@ -80,7 +80,7 @@ class ConfigParserTest {
 
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
-		Assert.areEqual(67, configParser.getUsedCheckCount());
+		Assert.areEqual(69, configParser.getUsedCheckCount());
 	}
 
 	@Test

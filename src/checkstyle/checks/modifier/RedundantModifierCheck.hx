@@ -11,17 +11,17 @@ class RedundantModifierCheck extends Check {
 	/**
 		enforce use of "public" and "private" modifiers
 		implies enforcePublic and enforcePrivate
-	 */
+	 **/
 	public var enforcePublicPrivate:Bool;
 
 	/**
 		enforce use of "public" modifiers
-	 */
+	 **/
 	public var enforcePublic:Bool;
 
 	/**
 		enforce use of "private" modifiers
-	 */
+	 **/
 	public var enforcePrivate:Bool;
 
 	public function new() {

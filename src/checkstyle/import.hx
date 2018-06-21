@@ -7,10 +7,12 @@ import haxeparser.Data;
 
 import checkstyle.Checker.LinePos;
 import checkstyle.SeverityLevel;
-import tokentree.TokenTree;
 import checkstyle.detect.DetectableInstances;
 
 import checkstyle.utils.ErrorUtils;
+
+import tokentree.TokenTree;
+import tokentree.TokenTreeAccessHelper;
 
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
