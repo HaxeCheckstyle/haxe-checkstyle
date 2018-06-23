@@ -4,6 +4,7 @@ import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 
 /**
 	holds list of empty lines and provides some helper functions
+	line numbers start at 0
  **/
 class ListOfEmptyLines {
 	var lines:Array<Int>;
@@ -14,10 +15,22 @@ class ListOfEmptyLines {
 		lineRanges = null;
 	}
 
+	/**
+		adds a new empty line number
+		@param line - line number of empty line
+	 **/
 	public function add(line:Int) {
 		lines.push(line);
 	}
 
+	/**
+		checks policy on a single empty line range
+		@param policy - empty lione policy to check
+		@param max - maximum number of empty lines
+		@param range - range to check
+		@param line - line to check
+		@return EmptyLineRange returns matching range or NONE
+	 **/
 	public function checkRange(policy:EmptyLinesPolicy, max:Int, range:EmptyLineRange, line:Int):EmptyLineRange {
 		switch (policy) {
 			case IGNORE: return NONE;
@@ -56,6 +69,14 @@ class ListOfEmptyLines {
 		return range;
 	}
 
+	/**
+		checks for empty lines between start and end using a policy
+		@param policy - policy to use
+		@param max - maximum number of empty lines
+		@param start - start line number (inclusive)
+		@param end - end line number (inclusive)
+		@return EmptyLineRange matching range or NONE
+	 **/
 	public function checkPolicySingleRange(policy:EmptyLinesPolicy, max:Int, start:Int, end:Int):EmptyLineRange {
 		if (start > end) throw "*** wrong order!! *** " + start + " " + end;
 		var range:Array<EmptyLineRange> = getRanges(start, end);
@@ -82,6 +103,12 @@ class ListOfEmptyLines {
 		return range[0];
 	}
 
+	/**
+		returns all emtpy line ranges between start and end line numbers
+		@param startLine - start line number (inclusive)
+		@param endLine - end line number (inclusive)
+		@return Array<EmptyLineRange> list of emtpy line ranges
+	 **/
 	public function getRanges(startLine:Int, endLine:Int):Array<EmptyLineRange> {
 		if (lineRanges == null) lineRanges = makeRanges();
 		var results:Array<EmptyLineRange> = [];

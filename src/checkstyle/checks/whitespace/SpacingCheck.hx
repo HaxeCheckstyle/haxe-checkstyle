@@ -129,6 +129,7 @@ class SpacingCheck extends Check {
 	}
 
 	function checkSpaceBetweenExpressions(name:String, e1:TokenTree, e2:TokenTree, directive:SpacingPolicy) {
+		if (e2 == null) return;
 		switch (directive) {
 			case ANY:
 			case SHOULD_NOT:

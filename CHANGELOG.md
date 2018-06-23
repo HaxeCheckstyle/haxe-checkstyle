@@ -1,8 +1,10 @@
 ## dev branch / next version (2.x.x)
 
 - New check DocCommentStyle [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
+- New check FieldDocComment [#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442)
 - New check TypeDocComment [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
 - Fixed handling of comments between types in ExtendedEmptyLines [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
+- Fixed unittest and coverage reporting for Haxe 4 [#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442)
 - Refactored `Checker.getLinePos` to use binary search, reduces runtime from O(N/2) to O(log N) [#439](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/439)
 
 ## version 2.4.1 (2018-06-14)

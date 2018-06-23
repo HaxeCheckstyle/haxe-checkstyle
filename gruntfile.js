@@ -48,7 +48,7 @@ function zipIt() {
             src: [
                 "src/**",
                 "resources/sample-config.json", "resources/logo.png", "resources/codeclimate_pr.png",
-                "haxelib.json", "run.n", "README.md", "CHANGES.md", "LICENCE.md"
+                "haxelib.json", "run.n", "README.md", "CHANGELOG.md", "LICENSE.md"
             ],
             dest: "haxe-checkstyle.zip",
             compression: "DEFLATE",
