@@ -61,6 +61,7 @@ class NeedBracesCheck extends Check {
 					checkIfChild(tok);
 				case Kwd(KwdElse):
 					var firstChild = tok.getFirstChild();
+					if (firstChild == null) continue;
 					if (firstChild.is(Kwd(KwdIf))) checkIfChild(firstChild);
 					else checkLastChild(tok);
 				case Kwd(KwdFunction):
@@ -147,6 +148,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	function checkNoBraces(parent:TokenTree, child:TokenTree) {
+		if ((parent == null) || (child == null)) return;
 		var minLine:LinePos = checker.getLinePos(parent.pos.min);
 		var maxLine:LinePos = checker.getLinePos(child.getPos().max);
 		var singleLine:Bool = (minLine.line == maxLine.line);
@@ -157,11 +159,11 @@ class NeedBracesCheck extends Check {
 		}
 		else {
 			if (singleLine) {
-				logPos('Body of "$parent" on same line', child.pos);
+				logPos('Body of "$parent" on same line', child.getPos());
 				return;
 			}
 		}
-		logPos('No braces used for body of "$parent"', child.pos);
+		logPos('No braces used for body of "$parent"', child.getPos());
 	}
 
 	function checkIfElseSingleline(parent:TokenTree, child:TokenTree):Bool {

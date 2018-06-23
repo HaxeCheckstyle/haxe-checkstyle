@@ -19,14 +19,15 @@ class ConfigParser {
 	public var overrideCheckerThreads:Int;
 	public var info:ChecksInfo;
 	public var checker:Checker;
+	public var validateMode:ConfigValidateMode;
 
 	var seenConfigPaths:Array<String>;
-	var failWith:String -> Void;
+	var failWithCallback:String -> Void;
 
 	public function new(failCallback:String -> Void) {
 		info = new ChecksInfo();
 		checker = new Checker();
-		failWith = failCallback;
+		failWithCallback = failCallback;
 
 		paths = [];
 		allExcludes = [];
@@ -34,6 +35,7 @@ class ConfigParser {
 		excludesMap = new Map();
 		numberOfCheckerThreads = 5;
 		overrideCheckerThreads = 0;
+		validateMode = STRICT;
 	}
 
 	public function loadConfig(path:String) {
@@ -151,7 +153,11 @@ class ConfigParser {
 	function createCheck(checkConf:CheckConfig):Check {
 		var check:Check = info.build(checkConf.type);
 		if (check == null) {
-			Sys.stdout().writeString('Unknown check \'${checkConf.type}\'');
+			switch (validateMode) {
+				case STRICT:
+					failWith('Unknown check "${checkConf.type}"');
+				case RELAXED:
+			}
 			return null;
 		}
 		checker.addCheck(check);
@@ -167,6 +173,7 @@ class ConfigParser {
 			var val = Reflect.field(checkConf.props, prop);
 			if (!checkFields.contains(prop)) {
 				failWith('Check ${check.getModuleName()} has no property named \'$prop\'');
+				continue;
 			}
 			try {
 				check.configureProperty(prop, val);
@@ -190,7 +197,7 @@ class ConfigParser {
 
 	function validateDefines(defines:Array<String>) {
 		for (define in defines) {
-			if (define.split("=").length > 2) throw "Found a define with more than one = sign: '" + define + "'";
+			if (define.split("=").length > 2) failWith("Found a define with more than one = sign: '" + define + "'");
 		}
 	}
 
@@ -235,4 +242,16 @@ class ConfigParser {
 		}
 		return count;
 	}
+
+	function failWith(msg:String) {
+		switch (validateMode) {
+			case STRICT: failWithCallback(msg);
+			case RELAXED:
+		}
+	}
+}
+
+enum ConfigValidateMode {
+	STRICT;
+	RELAXED;
 }

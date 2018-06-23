@@ -136,6 +136,7 @@ class IndentationCheck extends Check {
 			Sharp("elseif"),
 			Sharp("end"),
 			Sharp("error"),
+			Kwd(KwdFunction),
 			Kwd(KwdIf),
 			Kwd(KwdElse),
 			Kwd(KwdFor),
@@ -151,6 +152,8 @@ class IndentationCheck extends Check {
 					calcLineIndentationBkOpen(token, lineIndentation);
 				case BrOpen:
 					increaseBlockIndent(token, lineIndentation);
+				case Kwd(KwdFunction):
+					calcLineIndentationFunction(token, lineIndentation);
 				case Kwd(KwdIf), Kwd(KwdElse):
 					calcLineIndentationIf(token, lineIndentation);
 				case Kwd(KwdFor), Kwd(KwdDo), Kwd(KwdWhile):
@@ -180,6 +183,13 @@ class IndentationCheck extends Check {
 			if (token.pos.min + 1 == child.pos.min) return;
 		}
 		increaseBlockIndent(token, lineIndentation);
+	}
+
+	function calcLineIndentationFunction(token:TokenTree, lineIndentation:Array<Int>) {
+		var body:TokenTree = TokenTreeAccessHelper.access(token).firstChild().lastChild().token;
+		if (body == null) return;
+		if (body.is(BrOpen)) return;
+		increaseIndentIfNextLine(token, body, lineIndentation);
 	}
 
 	function calcLineIndentationIf(token:TokenTree, lineIndentation:Array<Int>) {

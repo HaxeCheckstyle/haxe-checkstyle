@@ -173,4 +173,36 @@ class ConfigParserTest {
 
 		Assert.areEqual("exclude configuration file has unknown version: 0", failMessage);
 	}
+
+	@Test
+	public function testValidateMode() {
+		var failMessage:String = "";
+		var configParser:ConfigParser = new ConfigParser(function (message:String) {
+			failMessage = message;
+		});
+		configParser.validateMode = RELAXED;
+
+		Assert.isNotNull(configParser.checker.checks);
+		Assert.isTrue(configParser.checker.checks.length == 0);
+
+		var config:Config = {
+				version: 0,
+				checks: [{
+					"type": "non existing check name"
+				},
+				{
+					"type": "Trace",
+					"props": {
+						"non_existing_property": 100
+					}
+				}]
+			};
+		configParser.parseAndValidateConfig(config, LOCAL_PATH);
+
+		Assert.areEqual("", failMessage);
+
+		configParser.validateMode = STRICT;
+		configParser.parseAndValidateConfig(config, LOCAL_PATH);
+		Assert.areEqual("Check Trace has no property named 'non_existing_property'", failMessage);
+	}
 }

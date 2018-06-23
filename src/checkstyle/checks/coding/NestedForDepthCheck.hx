@@ -56,7 +56,7 @@ class NestedForDepthCheck extends Check {
 	}
 
 	function warnNestedForDepth(depth:Int, pos:Position) {
-		logPos('Nested for depth is $depth (max allowed is ${max})', pos);
+		logPos('Nested loop depth is $depth (max allowed is ${max})', pos);
 	}
 
 	override public function detectableInstances():DetectableInstances {

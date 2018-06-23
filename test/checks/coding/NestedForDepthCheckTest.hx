@@ -13,7 +13,7 @@ class NestedForDepthCheckTest extends CheckTestCase<NestedForDepthCheckTests> {
 	@Test
 	public function testDefaultTooMany() {
 		var check = new NestedForDepthCheck();
-		assertMsg(check, TEST2, "Nested for depth is 2 (max allowed is 1)");
+		assertMsg(check, TEST2, "Nested loop depth is 2 (max allowed is 1)");
 	}
 
 	@Test
@@ -26,7 +26,7 @@ class NestedForDepthCheckTest extends CheckTestCase<NestedForDepthCheckTests> {
 
 		check.max = 0;
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, "Nested for depth is 1 (max allowed is 0)");
+		assertMsg(check, TEST2, "Nested loop depth is 1 (max allowed is 0)");
 	}
 }
 
