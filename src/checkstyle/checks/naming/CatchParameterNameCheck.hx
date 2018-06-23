@@ -24,7 +24,9 @@ class CatchParameterNameCheck extends Check {
 
 		for (tkn in catchTokens) {
 			for (item in tkn.children) {
-				switch (item.getFirstChild().tok) {
+				var child:TokenTree = item.getFirstChild();
+				if (child == null) continue;
+				switch (child.tok) {
 					case Const(CIdent(name)):
 						if (item.is(POpen)) {
 							if (!formatRE.match(name)) logPos('"$name" must match pattern "~/${format}/"', item.pos);

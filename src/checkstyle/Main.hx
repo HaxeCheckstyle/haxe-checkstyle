@@ -94,6 +94,7 @@ class Main {
 				}
 			}
 			else configParser.paths.push("/code");
+			configParser.validateMode = RELAXED;
 
 			if (defaultConfig.config != null) configPath = defaultConfig.config;
 			if (defaultConfig.exclude != null) excludePath = defaultConfig.exclude;

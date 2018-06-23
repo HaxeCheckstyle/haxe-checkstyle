@@ -10,6 +10,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_TAB_INDENT);
+		assertNoMsg(check, FUNCTION_BODY_NO_BRACES);
 		assertMsg(check, CORRECT_SPACE_INDENT, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
 	}
 
@@ -301,4 +302,10 @@ class Test {
 /*
  * test comment
  */";
+
+	var FUNCTION_BODY_NO_BRACES = "
+class Test {
+	public function toString()
+		return 'Test class';
+}";
 }
