@@ -237,6 +237,96 @@
             },
             "additionalProperties": false
         },
+        "FieldDocCommentCheck": {
+            "type": "object",
+            "description": "Checks code documentation on fields",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "description": "Checks code documentation on fields",
+                    "properties": {
+                        "requireParams": {
+                            "type": "boolean",
+                            "description": "ignores requires a `@param` tag for every parameter",
+                            "propertyOrder": 3
+                        },
+                        "fieldType": {
+                            "enum": [
+                                "VARS",
+                                "FUNCTIONS",
+                                "BOTH"
+                            ],
+                            "type": "string",
+                            "description": "only check fields of type\n\t\t- VARS = only var fields\n\t\t- FUNCTIONS = only functions;\n\t\t- BOTH = both vars and functions;",
+                            "propertyOrder": 1
+                        },
+                        "requireReturn": {
+                            "type": "boolean",
+                            "description": "ignores requires a `@return` tag",
+                            "propertyOrder": 4
+                        },
+                        "ignoreOverride": {
+                            "type": "boolean",
+                            "description": "ignores methods marked with override",
+                            "propertyOrder": 5
+                        },
+                        "tokens": {
+                            "items": {
+                                "enum": [
+                                    "ABSTRACT_DEF",
+                                    "CLASS_DEF",
+                                    "ENUM_DEF",
+                                    "INTERFACE_DEF",
+                                    "TYPEDEF_DEF"
+                                ],
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "description": "matches only comment docs for types specified in tokens list:\n\t\t- ABSTRACT_DEF = abstract definition \"abstract Test {}\"\n\t\t- CLASS_DEF = class definition \"class Test {}\"\n\t\t- ENUM_DEF = enum definition \"enum Test {}\"\n\t\t- INTERFACE_DEF = interface definition \"interface Test {}\"\n\t\t- TYPEDEF_DEF = typdef definition \"typedef Test = {}\"",
+                            "propertyOrder": 0
+                        },
+                        "modifier": {
+                            "enum": [
+                                "PUBLIC",
+                                "PRIVATE",
+                                "BOTH"
+                            ],
+                            "type": "string",
+                            "description": "only check fields matching modifier\n\t\t- PUBLIC = only public fields\n\t\t- PRIVATE = only private fields\n\t\t- BOTH = public and private fields",
+                            "propertyOrder": 2
+                        },
+                        "excludeNames": {
+                            "items": {
+                                "type": "string"
+                            },
+                            "type": "array",
+                            "description": "exclude field names from check - default: [\"new\", \"toString\"]",
+                            "propertyOrder": 6
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "propertyOrder": 7
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "FieldDocComment"
+                    ],
+                    "type": "string",
+                    "description": "Checks code documentation on fields"
+                }
+            },
+            "additionalProperties": false
+        },
         "InterfaceCheck": {
             "type": "object",
             "description": "Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.",
@@ -1853,6 +1943,9 @@
                             },
                             {
                                 "$ref": "#/definitions/ExtendedEmptyLinesCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/FieldDocCommentCheck"
                             },
                             {
                                 "$ref": "#/definitions/FileLengthCheck"
@@ -3653,7 +3746,7 @@
             "description": "defines filters to exclude folders, types or files from all or specific checks",
             "properties": {
                 "RightCurly": {
-                    "propertyOrder": 53,
+                    "propertyOrder": 54,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "path": {
@@ -3670,39 +3763,39 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "VariableInitialisation": {
-                    "propertyOrder": 70,
+                    "propertyOrder": 71,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "HexadecimalLiteral": {
-                    "propertyOrder": 22,
-                    "$ref": "#/definitions/ExcludeFilterList"
-                },
-                "MethodLength": {
-                    "propertyOrder": 35,
-                    "$ref": "#/definitions/ExcludeFilterList"
-                },
-                "HiddenField": {
                     "propertyOrder": 23,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
+                "MethodLength": {
+                    "propertyOrder": 36,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "HiddenField": {
+                    "propertyOrder": 24,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
                 "MethodCount": {
-                    "propertyOrder": 34,
+                    "propertyOrder": 35,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "RedundantModifier": {
-                    "propertyOrder": 50,
+                    "propertyOrder": 51,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "PublicAccessor": {
-                    "propertyOrder": 49,
+                    "propertyOrder": 50,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NestedIfDepth": {
-                    "propertyOrder": 42,
+                    "propertyOrder": 43,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Interface": {
-                    "propertyOrder": 27,
+                    "propertyOrder": 28,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ArrayAccess": {
@@ -3710,15 +3803,15 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MagicNumber": {
-                    "propertyOrder": 32,
+                    "propertyOrder": 33,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Spacing": {
-                    "propertyOrder": 58,
+                    "propertyOrder": 59,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "UnusedImport": {
-                    "propertyOrder": 68,
+                    "propertyOrder": 69,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "EmptyPackage": {
@@ -3726,19 +3819,19 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "OperatorWhitespace": {
-                    "propertyOrder": 45,
+                    "propertyOrder": 46,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NeedBraces": {
-                    "propertyOrder": 40,
+                    "propertyOrder": 41,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ParameterName": {
-                    "propertyOrder": 47,
+                    "propertyOrder": 48,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "LineLength": {
-                    "propertyOrder": 29,
+                    "propertyOrder": 30,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "EmptyLines": {
@@ -3746,11 +3839,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TypeDocComment": {
-                    "propertyOrder": 65,
+                    "propertyOrder": 66,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MultipleVariableDeclarations": {
-                    "propertyOrder": 39,
+                    "propertyOrder": 40,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ERegLiteral": {
@@ -3762,11 +3855,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "WhitespaceAfter": {
-                    "propertyOrder": 71,
+                    "propertyOrder": 72,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "FileLength": {
-                    "propertyOrder": 21,
+                    "propertyOrder": 22,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "AvoidStarImport": {
@@ -3774,7 +3867,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ModifierOrder": {
-                    "propertyOrder": 37,
+                    "propertyOrder": 38,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ExtendedEmptyLines": {
@@ -3789,15 +3882,15 @@
                     "propertyOrder": 2
                 },
                 "SeparatorWrap": {
-                    "propertyOrder": 55,
+                    "propertyOrder": 56,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "WhitespaceAround": {
-                    "propertyOrder": 72,
+                    "propertyOrder": 73,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ListenerName": {
-                    "propertyOrder": 30,
+                    "propertyOrder": 31,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "": {
@@ -3814,15 +3907,15 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SimplifyBooleanExpression": {
-                    "propertyOrder": 56,
+                    "propertyOrder": 57,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SeparatorWhitespace": {
-                    "propertyOrder": 54,
+                    "propertyOrder": 55,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TrailingWhitespace": {
-                    "propertyOrder": 63,
+                    "propertyOrder": 64,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Dynamic": {
@@ -3830,23 +3923,23 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "LeftCurly": {
-                    "propertyOrder": 28,
+                    "propertyOrder": 29,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ParameterNumber": {
-                    "propertyOrder": 48,
+                    "propertyOrder": 49,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MethodName": {
-                    "propertyOrder": 36,
+                    "propertyOrder": 37,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "UnusedLocalVar": {
-                    "propertyOrder": 69,
+                    "propertyOrder": 70,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "IndentationCharacter": {
-                    "propertyOrder": 25,
+                    "propertyOrder": 26,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ArrayLiteral": {
@@ -3854,23 +3947,23 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MemberName": {
-                    "propertyOrder": 33,
+                    "propertyOrder": 34,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TypeName": {
-                    "propertyOrder": 66,
-                    "$ref": "#/definitions/ExcludeFilterList"
-                },
-                "InnerAssignment": {
-                    "propertyOrder": 26,
-                    "$ref": "#/definitions/ExcludeFilterList"
-                },
-                "UnnecessaryConstructor": {
                     "propertyOrder": 67,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
+                "InnerAssignment": {
+                    "propertyOrder": 27,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "UnnecessaryConstructor": {
+                    "propertyOrder": 68,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
                 "MultipleStringLiterals": {
-                    "propertyOrder": 38,
+                    "propertyOrder": 39,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Anonymous": {
@@ -3878,15 +3971,15 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NestedTryDepth": {
-                    "propertyOrder": 43,
+                    "propertyOrder": 44,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SimplifyBooleanReturn": {
-                    "propertyOrder": 57,
+                    "propertyOrder": 58,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TODOComment": {
-                    "propertyOrder": 60,
+                    "propertyOrder": 61,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ConstantName": {
@@ -3897,16 +3990,20 @@
                     "propertyOrder": 14,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
+                "FieldDocComment": {
+                    "propertyOrder": 21,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
                 "Trace": {
-                    "propertyOrder": 62,
+                    "propertyOrder": 63,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NullableParameter": {
-                    "propertyOrder": 44,
+                    "propertyOrder": 45,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TabForAligning": {
-                    "propertyOrder": 61,
+                    "propertyOrder": 62,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "EmptyBlock": {
@@ -3914,11 +4011,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NestedForDepth": {
-                    "propertyOrder": 41,
+                    "propertyOrder": 42,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "StringLiteral": {
-                    "propertyOrder": 59,
+                    "propertyOrder": 60,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ConditionalCompilation": {
@@ -3926,19 +4023,19 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Type": {
-                    "propertyOrder": 64,
+                    "propertyOrder": 65,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "OperatorWrap": {
-                    "propertyOrder": 46,
+                    "propertyOrder": 47,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ReturnCount": {
-                    "propertyOrder": 52,
+                    "propertyOrder": 53,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Indentation": {
-                    "propertyOrder": 24,
+                    "propertyOrder": 25,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "DefaultComesLast": {
@@ -3946,11 +4043,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Return": {
-                    "propertyOrder": 51,
+                    "propertyOrder": 52,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "LocalVariableName": {
-                    "propertyOrder": 31,
+                    "propertyOrder": 32,
                     "$ref": "#/definitions/ExcludeFilterList"
                 }
             },

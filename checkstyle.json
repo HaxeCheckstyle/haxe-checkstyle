@@ -114,6 +114,14 @@
             "type": "ExtendedEmptyLines"
         },
         {
+            "type": "FieldDocComment",
+            "props": {
+                "tokens": [
+                    "CLASS_DEF"
+                ]
+            }
+        },
+        {
             "props": {
                 "max": 2000
             },
@@ -588,6 +596,20 @@
         "ExtendedEmptyLines": [
             "checks/whitespace/EmptyLinesCheckTest:EmptyLinesCheckTests",
             "checks/whitespace/ExtendedEmptyLinesCheckTest:ExtendedEmptyLinesCheckTests"
+        ],
+        "FieldDocComment": [
+            "checkstyle/Main",
+            "checkstyle/Checker",
+            "checkstyle/ChecksInfo",
+            "checkstyle/ParserQueue",
+            "checkstyle/checks/Check",
+            "config",
+            "detect",
+            "errors",
+            "reporter",
+            "schema",
+            "test",
+            "utils"
         ],
         "LeftCurly": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"

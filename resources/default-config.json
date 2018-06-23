@@ -138,6 +138,27 @@
 		},
 		{
 			"props": {
+				"requireParams": true,
+				"fieldType": "BOTH",
+				"requireReturn": true,
+				"ignoreOverride": true,
+				"tokens": [
+					"ABSTRACT_DEF",
+					"CLASS_DEF",
+					"ENUM_DEF",
+					"INTERFACE_DEF",
+					"TYPEDEF_DEF"
+				],
+				"modifier": "PUBLIC",
+				"excludeNames": [
+					"new",
+					"toString"
+				]
+			},
+			"type": "FieldDocComment"
+		},
+		{
+			"props": {
 				"max": 2000
 			},
 			"type": "FileLength"

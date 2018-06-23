@@ -21,6 +21,7 @@ import checkstyle.checks.design.EmptyPackageCheck;
 import checkstyle.checks.design.InterfaceCheck;
 import checkstyle.checks.design.UnnecessaryConstructorCheck;
 import checkstyle.checks.comments.DocCommentStyleCheck;
+import checkstyle.checks.comments.FieldDocCommentCheck;
 import checkstyle.checks.comments.TODOCommentCheck;
 import checkstyle.checks.comments.TypeDocCommentCheck;
 import checkstyle.checks.imports.AvoidStarImportCheck;
@@ -180,6 +181,22 @@ class DetectCodingStyleTest {
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("twostars", props.startStyle);
 		Assert.areEqual("none", props.lineStyle);
+	}
+
+	@Test
+	public function testDetectFieldDocComment() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FieldDocCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("FieldDocComment", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isNotNull(props.tokens);
+		Assert.areEqual(5, props.tokens.length);
+		Assert.isFalse(props.requireParams);
+		Assert.isFalse(props.requireReturn);
+		Assert.isNotNull(props.excludeNames);
+		Assert.areEqual(2, props.excludeNames.length);
+		Assert.areEqual(FUNCTIONS, props.fieldType);
+		Assert.areEqual(PUBLIC, props.modifier);
 	}
 
 	@Test
@@ -510,9 +527,21 @@ import checkstyle.checks.Check;
 class Test {
 	static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
 	var param1:Int;
+	/**
+		code documentation
+	 **/
+	public var param2:Int;
+	public var param3:Int;
+	public var param4:Int;
 
+	/**
+		code documentation
+	 **/
 	public function new(param1:Int, param2:String) {}
 
+	/**
+		code documentation
+	 **/
 	public function test(param1:Int, param2:String) {
 		var values =  [
 			1,
@@ -527,10 +556,16 @@ class Test {
 			doSomethingElse();
 		}
 	}
+	/**
+		code documentation
+	 **/
 	function test2(p1:Int, p2:String, p3:String, p4:Int = 1, ?p5:String, p6:String) {
 		// comment
 	}
 
+	/**
+		code documentation
+	 **/
 	function test3() {
 		switch (value) {
 			case 1: return;
@@ -590,6 +625,9 @@ class Test {
 }
 
 interface ITest {
+	/**
+		code documentation
+	 **/
 	public function test();
 }
 
@@ -607,6 +645,9 @@ class Test {
 	public function new() {
 		return b = c;
 	}
+	/**
+		code documentation
+	 **/
 	public function test(param1:Int, param2:String) {
 		#if php
 		// comment
