@@ -1,14 +1,16 @@
 ## dev branch / next version (2.x.x)
 
 - New check DocCommentStyle [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
-- New check FieldDocComment [#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442)
+- New check FieldDocComment, fixes [#87](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/87) ([#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442) + )
 - New check TypeDocComment [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
 - Added relaxed mode to ConfigParser, fixes [#441](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/441) ([#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443))
 - Fixed handling of comments between types in ExtendedEmptyLines [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
 - Fixed unittest and coverage reporting for Haxe 4 [#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442)
 - Fixed indentation calculation for functions bodys without curly braces [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
 - Fixed segmentaion faults in NeedBraces and CatchParameterName checks [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
+- Fixed reported position of EmptyBlock check
 - Changed message of NestedForLoop check [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
+- Changed autodetection for nested for/if/try checks to start at zero
 - Refactored `Checker.getLinePos` to use binary search, reduces runtime from O(N/2) to O(log N) [#439](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/439)
 
 ## version 2.4.1 (2018-06-14)

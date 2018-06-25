@@ -187,25 +187,78 @@ class FieldDocCommentCheck extends Check {
 	function checkParams(fieldName:String, token:TokenTree, docToken:TokenTree, text:String) {
 		var popenToken:TokenTree = TokenTreeAccessHelper.access(token).firstChild().firstOf(POpen).token;
 		if (popenToken == null) return;
+		var params:Array<String> = [];
 		if (popenToken.children != null) {
 			for (child in popenToken.children) {
 				switch (child.tok) {
-					case Const(CIdent(ident)): checkParam(fieldName, ident, docToken, text);
+					case Const(CIdent(ident)): params.push(ident);
 					default:
 				}
 			}
 		}
+		checkParamsAndOrder(fieldName, params, docToken, text);
 	}
 
-	function checkParam(fieldName:String, name:String, docToken:TokenTree, text:String) {
-		var search:String = '@param $name ';
-		if (text.indexOf(search) >= 0) return;
-		logPos('Documentation for parameter "$name" of field "$fieldName" missing', docToken.pos);
+	function checkParamsAndOrder(fieldName:String, params:Array<String>, docToken:TokenTree, text:String) {
+		if (params.length <= 0) return;
+		var lines:Array<String> = text.split(checker.lineSeparator);
+		if (lines.length < 3) {
+			logMissingParams(fieldName, params, docToken);
+			return;
+		}
+		var paramOrder:Array<Int> = [];
+		var missingParams:Array<String> = [];
+		for (param in params) {
+			var search:String = '@param $param ';
+			var index:Int = 0;
+			var found:Bool = false;
+			while (index < lines.length) {
+				var line:String = lines[index++];
+				var pos:Int = line.indexOf(search);
+				if (pos >= 0) {
+					paramOrder.push(index);
+					var desc:String = line.substr(pos + search.length);
+					found = !~/^[\-\s]*$/.match(desc);
+					break;
+				}
+			}
+			if (!found) missingParams.push(param);
+		}
+		if (missingParams.length > 0) logMissingParams(fieldName, missingParams, docToken);
+		else checkParamOrder(fieldName, params, paramOrder, docToken);
+	}
+
+	function checkParamOrder(fieldName:String, params:Array<String>, paramOrder:Array<Int>, docToken:TokenTree) {
+		var start:Int = 0;
+		for (index in 0...paramOrder.length) {
+			var value:Int = paramOrder[index];
+			if (value > start) {
+				start = value;
+				continue;
+			}
+			var param:String = params[index];
+			logPos('Incorrect order of documentation for parameter "$param" of field "$fieldName"', docToken.pos);
+		}
+	}
+
+	function logMissingParams(fieldName:String, params:Array<String>, docToken:TokenTree) {
+		for (param in params) logPos('Documentation for parameter "$param" of field "$fieldName" missing', docToken.pos);
 	}
 
 	function checkReturn(name:String, docToken:TokenTree, text:String) {
 		var search:String = "@return ";
-		if (text.indexOf(search) >= 0) return;
+		var pos:Int = text.indexOf(search);
+		if (pos < 0) {
+			logPos('Documentation for return value of field "$name" missing', docToken.pos);
+			return;
+		}
+		var desc:String = text.substr(pos + search.length);
+		var lines:Array<String> = desc.split(checker.lineSeparator);
+		if (lines.length < 0) {
+			logPos('Documentation for return value of field "$name" missing', docToken.pos);
+			return;
+		}
+		if (!~/^[\-\s]*$/.match(lines[0])) return;
 		logPos('Documentation for return value of field "$name" missing', docToken.pos);
 	}
 

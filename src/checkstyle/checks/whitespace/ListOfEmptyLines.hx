@@ -25,7 +25,7 @@ class ListOfEmptyLines {
 
 	/**
 		checks policy on a single empty line range
-		@param policy - empty lione policy to check
+		@param policy - empty line policy to check
 		@param max - maximum number of empty lines
 		@param range - range to check
 		@param line - line to check
