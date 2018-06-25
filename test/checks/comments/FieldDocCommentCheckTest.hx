@@ -118,12 +118,32 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, MISSING_PARAM);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
+		assertNoMsg(check, WRONG_PARAM_ORDER);
+		assertNoMsg(check, NO_PARAM_TEXT);
 
 		check.requireParams = true;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
+		assertMsg(check, WRONG_PARAM_ORDER, 'Incorrect order of documentation for parameter "param2" of field "func8"');
+		assertMsg(check, NO_PARAM_TEXT, MSG_DOC_PARAM1_FUNC8);
+	}
+
+	@Test
+	public function testRequireReturn() {
+		var check = new FieldDocCommentCheck();
+		check.requireReturn = false;
+		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
+		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
+		assertNoMsg(check, MISSING_RETURN);
+		assertNoMsg(check, EMPTY_RETURN);
+
+		check.requireReturn = true;
+		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
+		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
+		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
+		assertMsg(check, EMPTY_RETURN, MSG_DOC_RETURN_FUNC8);
 	}
 
 	@Test
@@ -344,6 +364,40 @@ abstract FieldDocCommentCheckTests(String) to String {
 			comment
 		 **/
 		var field1:String;
+	}
+	";
+
+	var WRONG_PARAM_ORDER = "
+	class Test2 {
+		/**
+			comment
+			@param param2 - param2
+			@param param1 - param1
+			@return value
+		 **/
+		public function func8(param1:String, param2:String):String {}
+	}
+	";
+
+	var NO_PARAM_TEXT = "
+	class Test2 {
+		/**
+			comment
+			@param param1 -
+			@return value
+		 **/
+		public function func8(param1:String):String {}
+	}
+	";
+
+	var EMPTY_RETURN = "
+	class Test2 {
+		/**
+			comment
+			@param param1 - param1
+			@return
+		 **/
+		public function func8(param1:String):String {}
 	}
 	";
 }

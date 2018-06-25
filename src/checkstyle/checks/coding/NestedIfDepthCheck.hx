@@ -63,7 +63,7 @@ class NestedIfDepthCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "max",
-				values: [for (i in 1...10) i]
+				values: [for (i in 0...10) i]
 			}]
 		}];
 	}
