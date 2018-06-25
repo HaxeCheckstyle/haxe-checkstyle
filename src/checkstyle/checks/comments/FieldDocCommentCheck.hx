@@ -202,10 +202,6 @@ class FieldDocCommentCheck extends Check {
 	function checkParamsAndOrder(fieldName:String, params:Array<String>, docToken:TokenTree, text:String) {
 		if (params.length <= 0) return;
 		var lines:Array<String> = text.split(checker.lineSeparator);
-		if (lines.length < 3) {
-			logMissingParams(fieldName, params, docToken);
-			return;
-		}
 		var paramOrder:Array<Int> = [];
 		var missingParams:Array<String> = [];
 		for (param in params) {
