@@ -1151,6 +1151,43 @@
             },
             "additionalProperties": false
         },
+        "RedundantAccessMetaCheck": {
+            "type": "object",
+            "description": "Checks for redundant @:access metadata",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "description": "Checks for redundant @:access metadata",
+                    "properties": {
+                        "prohibitMeta": {
+                            "type": "boolean",
+                            "description": "switches behaviour of check to\n\t\t- false = look for redundant access modifications\n\t\t- true = to discourage its use everywhere",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "RedundantAccessMeta"
+                    ],
+                    "type": "string",
+                    "description": "Checks for redundant @:access metadata"
+                }
+            },
+            "additionalProperties": false
+        },
         "MagicNumberCheck": {
             "type": "object",
             "description": "Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.",
@@ -2033,6 +2070,12 @@
                             },
                             {
                                 "$ref": "#/definitions/PublicAccessorCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/RedundantAccessMetaCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/RedundantAllowMetaCheck"
                             },
                             {
                                 "$ref": "#/definitions/RedundantModifierCheck"
@@ -3250,6 +3293,43 @@
             },
             "additionalProperties": false
         },
+        "RedundantAllowMetaCheck": {
+            "type": "object",
+            "description": "Checks for redundant @:allow metadata",
+            "properties": {
+                "props": {
+                    "type": "object",
+                    "description": "Checks for redundant @:allow metadata",
+                    "properties": {
+                        "prohibitMeta": {
+                            "type": "boolean",
+                            "description": "switches behaviour of check to\n\t\t- false = look for redundant access modifications\n\t\t- true = to discourage its use everywhere",
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "type": "string",
+                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "propertyOrder": 1
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "type": {
+                    "enum": [
+                        "RedundantAllowMeta"
+                    ],
+                    "type": "string",
+                    "description": "Checks for redundant @:allow metadata"
+                }
+            },
+            "additionalProperties": false
+        },
         "CatchParameterNameCheck": {
             "type": "object",
             "description": "Checks that catch parameter names conform to a format specified by the `format` property.",
@@ -3746,7 +3826,7 @@
             "description": "defines filters to exclude folders, types or files from all or specific checks",
             "properties": {
                 "RightCurly": {
-                    "propertyOrder": 54,
+                    "propertyOrder": 56,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "path": {
@@ -3763,7 +3843,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "VariableInitialisation": {
-                    "propertyOrder": 71,
+                    "propertyOrder": 73,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "HexadecimalLiteral": {
@@ -3783,7 +3863,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "RedundantModifier": {
-                    "propertyOrder": 51,
+                    "propertyOrder": 53,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "PublicAccessor": {
@@ -3807,11 +3887,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Spacing": {
-                    "propertyOrder": 59,
+                    "propertyOrder": 61,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "UnusedImport": {
-                    "propertyOrder": 69,
+                    "propertyOrder": 71,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "EmptyPackage": {
@@ -3839,7 +3919,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TypeDocComment": {
-                    "propertyOrder": 66,
+                    "propertyOrder": 68,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MultipleVariableDeclarations": {
@@ -3855,7 +3935,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "WhitespaceAfter": {
-                    "propertyOrder": 72,
+                    "propertyOrder": 74,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "FileLength": {
@@ -3882,11 +3962,11 @@
                     "propertyOrder": 2
                 },
                 "SeparatorWrap": {
-                    "propertyOrder": 56,
+                    "propertyOrder": 58,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "WhitespaceAround": {
-                    "propertyOrder": 73,
+                    "propertyOrder": 75,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ListenerName": {
@@ -3907,19 +3987,23 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SimplifyBooleanExpression": {
-                    "propertyOrder": 57,
+                    "propertyOrder": 59,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SeparatorWhitespace": {
-                    "propertyOrder": 55,
+                    "propertyOrder": 57,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TrailingWhitespace": {
-                    "propertyOrder": 64,
+                    "propertyOrder": 66,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Dynamic": {
                     "propertyOrder": 15,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "RedundantAccessMeta": {
+                    "propertyOrder": 51,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "LeftCurly": {
@@ -3935,7 +4019,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "UnusedLocalVar": {
-                    "propertyOrder": 70,
+                    "propertyOrder": 72,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "IndentationCharacter": {
@@ -3951,7 +4035,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TypeName": {
-                    "propertyOrder": 67,
+                    "propertyOrder": 69,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "InnerAssignment": {
@@ -3959,11 +4043,15 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "UnnecessaryConstructor": {
-                    "propertyOrder": 68,
+                    "propertyOrder": 70,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "MultipleStringLiterals": {
                     "propertyOrder": 39,
+                    "$ref": "#/definitions/ExcludeFilterList"
+                },
+                "RedundantAllowMeta": {
+                    "propertyOrder": 52,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Anonymous": {
@@ -3975,11 +4063,11 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "SimplifyBooleanReturn": {
-                    "propertyOrder": 58,
+                    "propertyOrder": 60,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TODOComment": {
-                    "propertyOrder": 61,
+                    "propertyOrder": 63,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ConstantName": {
@@ -3995,7 +4083,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Trace": {
-                    "propertyOrder": 63,
+                    "propertyOrder": 65,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "NullableParameter": {
@@ -4003,7 +4091,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "TabForAligning": {
-                    "propertyOrder": 62,
+                    "propertyOrder": 64,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "EmptyBlock": {
@@ -4015,7 +4103,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "StringLiteral": {
-                    "propertyOrder": 60,
+                    "propertyOrder": 62,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ConditionalCompilation": {
@@ -4023,7 +4111,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Type": {
-                    "propertyOrder": 65,
+                    "propertyOrder": 67,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "OperatorWrap": {
@@ -4031,7 +4119,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "ReturnCount": {
-                    "propertyOrder": 53,
+                    "propertyOrder": 55,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Indentation": {
@@ -4043,7 +4131,7 @@
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "Return": {
-                    "propertyOrder": 52,
+                    "propertyOrder": 54,
                     "$ref": "#/definitions/ExcludeFilterList"
                 },
                 "LocalVariableName": {

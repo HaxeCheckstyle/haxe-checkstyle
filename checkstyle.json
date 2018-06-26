@@ -373,6 +373,12 @@
             "type": "RedundantModifier"
         },
         {
+            "type": "RedundantAllowMeta"
+        },
+        {
+            "type": "RedundantAccessMeta"
+        },
+        {
             "props": {
                 "allowEmptyReturn": true,
                 "enforceReturnType": false

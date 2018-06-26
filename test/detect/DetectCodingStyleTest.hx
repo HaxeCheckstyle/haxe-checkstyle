@@ -27,6 +27,8 @@ import checkstyle.checks.comments.TypeDocCommentCheck;
 import checkstyle.checks.imports.AvoidStarImportCheck;
 import checkstyle.checks.imports.UnusedImportCheck;
 import checkstyle.checks.literal.StringLiteralCheck;
+import checkstyle.checks.meta.RedundantAccessMetaCheck;
+import checkstyle.checks.meta.RedundantAllowMetaCheck;
 import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 import checkstyle.checks.modifier.RedundantModifierCheck;
 import checkstyle.checks.naming.ConstantNameCheck;
@@ -267,6 +269,25 @@ class DetectCodingStyleTest {
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("onlySingle", props.policy);
 		Assert.isTrue(props.allowException);
+	}
+
+	// checkstyle.checks.meta
+	@Test
+	public function testDetectRedundantAccessMeta() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantAccessMetaCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("RedundantAccessMeta", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isFalse(props.prohibitMeta);
+	}
+
+	@Test
+	public function testDetectRedundantAllowMeta() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantAllowMetaCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("RedundantAllowMeta", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.isFalse(props.prohibitMeta);
 	}
 
 	// checkstyle.checks.metrics
