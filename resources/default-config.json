@@ -438,6 +438,18 @@
 		},
 		{
 			"props": {
+				"prohibitMeta": false
+			},
+			"type": "RedundantAccessMeta"
+		},
+		{
+			"props": {
+				"prohibitMeta": false
+			},
+			"type": "RedundantAllowMeta"
+		},
+		{
+			"props": {
 				"enforcePrivate": false,
 				"enforcePublic": false,
 				"enforcePublicPrivate": false
