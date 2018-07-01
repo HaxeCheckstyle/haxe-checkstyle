@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+## version 2.4.2 (2018-07-01)
+
 - New check DocCommentStyle [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
 - New check FieldDocComment, fixes [#87](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/87) ([#442](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/442) + [#444](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/444))
 - New check TypeDocComment [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
