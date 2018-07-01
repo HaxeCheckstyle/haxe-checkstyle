@@ -11,6 +11,7 @@
 - Fixed indentation calculation for functions bodys without curly braces [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
 - Fixed segmentaion faults in NeedBraces and CatchParameterName checks [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
 - Fixed reported position of EmptyBlock check [#444](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/444)
+- Fixed BrOpen detection in NeedBraces check [#446](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/446)
 - Changed message of NestedForLoop check [#443](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/443)
 - Changed autodetection for nested for/if/try checks to start at zero [#444](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/444)
 - Refactored `Checker.getLinePos` to use binary search, reduces runtime from O(N/2) to O(log N) [#439](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/439)
