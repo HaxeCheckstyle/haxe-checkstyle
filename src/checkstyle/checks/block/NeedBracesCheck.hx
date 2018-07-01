@@ -67,7 +67,7 @@ class NeedBracesCheck extends Check {
 				case Kwd(KwdFunction):
 					checkFunctionChild(tok);
 				case Kwd(KwdDo):
-					checkDoWhileChild(tok);
+					checkLastChild(tok);
 				case Kwd(KwdWhile):
 					checkWhileChild(tok);
 				default:
@@ -94,57 +94,35 @@ class NeedBracesCheck extends Check {
 	function checkFunctionChild(token:TokenTree) {
 		if (token == null || !token.hasChildren()) return;
 
-		var lastChild:TokenTree = token.getLastChild();
-		switch (lastChild.tok) {
-			case Const(CIdent(_)), Kwd(KwdNew):
-				if (!lastChild.hasChildren()) return;
-				lastChild = lastChild.getLastChild();
-			default:
+		var accessHelper:TokenTreeAccessHelper;
+		if (token.children.length == 1) {
+			accessHelper = TokenTreeAccessHelper.access(token).firstChild();
 		}
-		switch (lastChild.tok) {
-			case BrOpen:
-				return;
-			case Semicolon:
-				return;
-			default:
-				checkNoBraces(token, lastChild);
+		else {
+			accessHelper = TokenTreeAccessHelper.access(token);
 		}
-	}
+		// function bodies
+		var lastChild:TokenTree = accessHelper.firstOf(BrOpen).token;
+		if (lastChild != null) return;
+		// interfaces
+		lastChild = accessHelper.firstOf(Semicolon).token;
+		if (lastChild != null) return;
+		lastChild = accessHelper.lastChild().token;
 
-	function checkDoWhileChild(token:TokenTree) {
-		if (token == null || !token.hasChildren()) return;
-
-		var lastChild:TokenTree = token.getLastChild();
-		var expr:TokenTree = lastChild.previousSibling;
-		switch (expr.tok) {
-			case BrOpen:
-				return;
-			default:
-				checkNoBraces(token, lastChild);
-		}
+		checkNoBraces(token, lastChild);
 	}
 
 	function checkWhileChild(token:TokenTree) {
 		if (token == null || !token.hasChildren() || Type.enumEq(token.parent.tok, Kwd(KwdDo))) return;
-		var lastChild:TokenTree = token.getLastChild();
-		switch (lastChild.tok) {
-			case BrOpen:
-				return;
-			default:
-				checkNoBraces(token, lastChild);
-		}
+		checkLastChild(token);
 	}
 
 	function checkLastChild(token:TokenTree) {
 		if (token == null || !token.hasChildren()) return;
-
-		var lastChild:TokenTree = token.getLastChild();
-		switch (lastChild.tok) {
-			case BrOpen:
-				return;
-			default:
-				checkNoBraces(token, lastChild);
-		}
+		var lastChild:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BrOpen).token;
+		if (lastChild != null) return;
+		lastChild = TokenTreeAccessHelper.access(token).lastChild().token;
+		checkNoBraces(token, lastChild);
 	}
 
 	function checkNoBraces(parent:TokenTree, child:TokenTree) {

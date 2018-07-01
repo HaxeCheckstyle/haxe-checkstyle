@@ -15,6 +15,9 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	static inline var MSG_SAME_LINE_FOR:String = 'Body of "for" on same line';
 	static inline var MSG_SAME_LINE_WHILE:String = 'Body of "while" on same line';
 
+	static inline var MSG_SAME_LINE_FUNCTION:String = 'Body of "function" on same line';
+	static inline var MSG_SAME_LINE_DO_WHILE:String = 'Body of "do" on same line';
+
 	@Test
 	public function testCorrectBraces() {
 		var check = new NeedBracesCheck();
@@ -28,6 +31,8 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
 		assertNoMsg(check, INTERFACE_DEF);
+		assertNoMsg(check, ANON_FUNCTION);
+		assertNoMsg(check, ANON_FUNCTION_NO_BRACES);
 	}
 
 	@Test
@@ -176,6 +181,62 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
+	}
+
+	@Test
+	public function testTokenFunction() {
+		var check = new NeedBracesCheck();
+		check.tokens = [FUNCTION];
+
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST11);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, ANON_FUNCTION);
+		assertNoMsg(check, ANON_FUNCTION_NO_BRACES);
+
+		check.allowSingleLineStatement = false;
+		assertNoMsg(check, ANON_FUNCTION);
+		assertMsg(check, ANON_FUNCTION_NO_BRACES, MSG_SAME_LINE_FUNCTION);
+	}
+
+	@Test
+	public function testTokenDoWhile() {
+		var check = new NeedBracesCheck();
+		check.tokens = [DO_WHILE];
+
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST11);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, DO_WHILE);
+		assertNoMsg(check, DO_WHILE_NO_BRACES);
+
+		check.allowSingleLineStatement = false;
+		assertNoMsg(check, DO_WHILE);
+		assertMsg(check, DO_WHILE_NO_BRACES, MSG_SAME_LINE_DO_WHILE);
 	}
 }
 
@@ -346,12 +407,12 @@ abstract NeedBracesCheckTests(String) to String {
 	var TEST15 = "
 	class Test {
 		public function test(a:Bool, b:Bool) {
-		   if (a) {
+			if (a) {
 
-		   }
-		   else if (!b) {
+			}
+			else if (!b) {
 
-		   }
+			}
 		}
 	}";
 
@@ -368,5 +429,38 @@ abstract NeedBracesCheckTests(String) to String {
 	var INTERFACE_DEF = "
 	interface Test {
 		function test();
+	}";
+
+	var ANON_FUNCTION = "
+	abstractAndClass Test {
+		function test() {
+			doSomething(function() {
+				doIt();
+			}, false);
+		}
+	}";
+
+	var ANON_FUNCTION_NO_BRACES = "
+	abstractAndClass Test {
+		function test() {
+			doSomething(function() doIt(), false);
+		}
+	}";
+
+	var DO_WHILE = "
+	class Test {
+		function test() {
+			do {
+				return i;
+			}
+			while (true);
+		}
+	}";
+
+	var DO_WHILE_NO_BRACES = "
+	class Test {
+		function test() {
+			do return i while (true);
+		}
 	}";
 }
