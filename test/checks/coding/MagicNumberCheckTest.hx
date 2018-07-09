@@ -43,6 +43,8 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 	public function testEnumAbstract() {
 		var check = new MagicNumberCheck();
 		assertNoMsg(check, ENUM_ABSTRACT);
+		assertNoMsg(check, ENUM_ABSTRACT_WITH_CLASS);
+		assertNoMsg(check, HAXE4_ENUM_ABSTRACT);
 	}
 }
 
@@ -102,6 +104,27 @@ abstract MagicNumberCheckTests(String) to String {
 
 	var ENUM_ABSTRACT = "
 	@:enum abstract Style(Int) {
+		var BOLD = 1;
+		var RED = 91;
+		var BLUE = 94;
+		var MAGENTA = 95;
+	}";
+
+	var ENUM_ABSTRACT_WITH_CLASS = "
+	@:enum abstract Style(Int) {
+		var BOLD = 1;
+		var RED = 91;
+		var BLUE = 94;
+		var MAGENTA = 95;
+	}
+
+	class Test {
+		static inline var VAL = 5;
+	}
+	";
+
+	var HAXE4_ENUM_ABSTRACT = "
+	enum abstract Style(Int) {
 		var BOLD = 1;
 		var RED = 91;
 		var BLUE = 94;

@@ -1,5 +1,7 @@
 ## dev branch / next version (2.x.x)
 
+- Fixed enum abstract detection in MagixNumber check, fixes [#104](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/104)
+
 ## version 2.4.2 (2018-07-01)
 
 - New check DocCommentStyle [#440](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/440)
