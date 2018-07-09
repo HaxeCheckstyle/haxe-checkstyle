@@ -13,6 +13,7 @@ import checkstyle.utils.ErrorUtils;
 
 import tokentree.TokenTree;
 import tokentree.TokenTreeAccessHelper;
+import tokentree.utils.TokenTreeCheckUtils;
 
 using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;

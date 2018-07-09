@@ -20,16 +20,16 @@ class MagicNumberCheck extends Check {
 	}
 
 	override function actualRun() {
-		var ignore = false;
-		forEachField(function(field, parent) {
-			ignore = (parent.kind == ENUM_ABSTRACT);
-			return;
-		});
-
-		if (ignore) return;
-
 		var root:TokenTree = checker.getTokenTree();
-		var allNumbers:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+		var allTypes:Array<TokenTree> = root.filter([Kwd(KwdAbstract), Kwd(KwdClass), Kwd(KwdEnum), Kwd(KwdInterface), Kwd(KwdTypedef)], FIRST);
+		for (type in allTypes) {
+			if (TokenTreeCheckUtils.isTypeEnumAbstract(type)) continue;
+			checkForNumbers(type);
+		}
+	}
+
+	function checkForNumbers(parent:TokenTree) {
+		var allNumbers:Array<TokenTree> = parent.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
 				case Const(CInt(_)): FOUND_GO_DEEPER;
