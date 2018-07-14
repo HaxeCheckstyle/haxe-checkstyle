@@ -270,7 +270,6 @@ class IndentationCheck extends Check {
 		var searchFor:Array<TokenDef> = [
 			POpen,
 			Dot,
-			Kwd(KwdReturn),
 			Kwd(KwdCase),
 			Binop(OpAssign),
 			Binop(OpAssignOp(OpShr)),
