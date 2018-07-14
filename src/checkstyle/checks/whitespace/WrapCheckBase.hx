@@ -36,7 +36,7 @@ class WrapCheckBase extends Check {
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
-			if (TokenTreeCheckUtils.isTypedefExtension(tok)) continue;
+			if (TokenTreeCheckUtils.isOpGtTypedefExtension(tok)) continue;
 			if (TokenTreeCheckUtils.isTypeParameter(tok)) continue;
 			if (TokenTreeCheckUtils.isImportMult(tok)) continue;
 			if (TokenTreeCheckUtils.filterOpSub(tok)) continue;
