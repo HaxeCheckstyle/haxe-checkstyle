@@ -292,6 +292,13 @@ class IndentationCheck extends Check {
 			var child:TokenTree = token.getFirstChild();
 			if (child == null) continue;
 			if (token.is(Dot)) pos = token.parent.getPos();
+			if (token.is(POpen)) {
+				var pClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(PClose).token;
+				if (pClose != null) {
+					var prev:Token = checker.tokens[pClose.index - 1];
+					pos.max = prev.pos.max;
+				}
+			}
 			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
