@@ -68,9 +68,11 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, LARGER_WRAPPED_PARAMS);
 		assertNoMsg(check, EXACT_WRAPPED_PARAMS);
 		assertNoMsg(check, WRAPPED_STRING);
+		assertNoMsg(check, CORRECT_PCLOSE_WRAPPING_ISSUE_450);
 		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
 		check.wrapPolicy = EXACT;
 		assertNoMsg(check, WRAPPED_STRING);
+		assertNoMsg(check, CORRECT_PCLOSE_WRAPPING_ISSUE_450);
 		assertMsg(check, LARGER_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]');
 		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
 
@@ -307,5 +309,14 @@ class Test {
 class Test {
 	public function toString()
 		return 'Test class';
+}";
+
+	var CORRECT_PCLOSE_WRAPPING_ISSUE_450 = "
+class Test {
+	public function new(
+		param4:Int
+	) {
+		doSomething();
+	}
 }";
 }
