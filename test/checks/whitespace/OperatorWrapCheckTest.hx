@@ -12,6 +12,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 		var check = new OperatorWrapCheck();
 		assertNoMsg(check, CORRECT_EOL_WRAP);
 		assertNoMsg(check, TYPE_PARAM);
+		assertNoMsg(check, TYPEDEF_EXTENSION);
 		assertNoMsg(check, NEGATIVE_VARS);
 		assertNoMsg(check, NEG_OPERATOR);
 	}
@@ -76,6 +77,15 @@ abstract OperatorWrapCheckTests(String) to String {
 		{
 			trace('test');
 		}
+	}";
+
+	var TYPEDEF_EXTENSION = "
+	typedef Cord {
+		x:Int
+	}
+	typedef Point {
+		> Cord,
+		y:Int
 	}";
 
 	var NEGATIVE_VARS = "
