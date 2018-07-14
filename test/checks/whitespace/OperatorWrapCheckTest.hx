@@ -80,10 +80,7 @@ abstract OperatorWrapCheckTests(String) to String {
 	}";
 
 	var TYPEDEF_EXTENSION = "
-	typedef Cord {
-		x:Int
-	}
-	typedef Point {
+	typedef Point = {
 		> Cord,
 		y:Int
 	}";
