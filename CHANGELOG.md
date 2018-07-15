@@ -2,6 +2,10 @@
 
 - Fixed enum abstract detection in MagixNumber check, fixes [#104](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/104) ([#449](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/449))
 - Fixed indentation of `)`, fixes [#450](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/450) ([#451](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/451))
+- Fixed typedef extension (Haxe 3.x) [#452](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/452)
+- Fixed parentheses with dot [#454](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/454)
+- Fixed double for [#455](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/455)
+- Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 
 ## version 2.4.2 (2018-07-01)
 
