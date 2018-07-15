@@ -11,6 +11,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_TAB_INDENT);
 		assertNoMsg(check, FUNCTION_BODY_NO_BRACES);
+		assertNoMsg(check, CORRECT_DOUBLE_FOR);
 		assertMsg(check, CORRECT_SPACE_INDENT, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
 	}
 
@@ -317,6 +318,25 @@ class Test {
 		param4:Int
 	) {
 		doSomething();
+	}
+}";
+
+	var CORRECT_DOUBLE_FOR = "
+class Test {
+	public function new() {
+		var arr = [
+			for (i in 0...4) [
+				for (i2 in 0...4) 5
+			]
+		];
+		for (i in 0...4)
+			for (i2 in 0...4)
+				switch (5) {
+					case 1:
+						doSomething();
+					default:
+						doSomething();
+				}
 	}
 }";
 }
