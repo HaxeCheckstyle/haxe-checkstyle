@@ -88,7 +88,7 @@ class ReporterManager {
 	}
 
 	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
-		return
+		return (
 			message1.fileName == message2.fileName &&
 			message1.message == message2.message &&
 			message1.code == message2.code &&
@@ -97,7 +97,8 @@ class ReporterManager {
 			message1.endLine == message2.endLine &&
 			message1.endColumn == message2.endColumn &&
 			message1.severity == message2.severity &&
-			message1.moduleName == message2.moduleName;
+			message1.moduleName == message2.moduleName
+		);
 	}
 
 	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
