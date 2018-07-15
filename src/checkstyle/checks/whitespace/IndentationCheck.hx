@@ -249,7 +249,13 @@ class IndentationCheck extends Check {
 				var child:TokenTree = token.getLastChild();
 				if (child == null) return;
 				if (child.is(BrOpen)) return;
-				increaseIndentIfNextLine(token, child, lineIndentation);
+				if (child.is(BkOpen)) return;
+				while (child.getLastChild() != null) {
+					child = child.getLastChild();
+				}
+				var start = checker.getLinePos(token.pos.min).line + 1;
+				var end = checker.getLinePos(child.pos.min).line + 1;
+				increaseIndent(lineIndentation, start, end);
 			case Kwd(KwdDo):
 				var child:TokenTree = token.getFirstChild();
 				if (child == null) return;
