@@ -187,6 +187,9 @@ long comment
 		builder
 			.create
 			.something();
+		graphics.fillRect(
+			x, y, w, h
+		);
 	}
 }
 /*

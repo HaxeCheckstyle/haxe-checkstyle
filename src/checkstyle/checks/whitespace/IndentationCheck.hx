@@ -296,7 +296,14 @@ class IndentationCheck extends Check {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
 			if (child == null) continue;
-			if (token.is(Dot)) pos = token.parent.getPos();
+			if (token.is(Dot)) {
+				var linePos:LinePos = checker.getLinePos(token.pos.min);
+				var line:String = checker.lines[linePos.line];
+				var prefix:String = line.substr(0, linePos.ofs + 1);
+				var isFirst:Bool = ~/^\s*\.$/.match(prefix);
+				if (!isFirst) continue;
+				pos = token.parent.getPos();
+			}
 			if (token.is(POpen)) {
 				var pClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(PClose).token;
 				if (pClose != null) {
