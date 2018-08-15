@@ -276,6 +276,7 @@ class IndentationCheck extends Check {
 		var searchFor:Array<TokenDef> = [
 			POpen,
 			Dot,
+			Kwd(KwdReturn),
 			Kwd(KwdCase),
 			Binop(OpAssign),
 			Binop(OpAssignOp(OpShr)),
@@ -296,6 +297,14 @@ class IndentationCheck extends Check {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
 			if (child == null) continue;
+
+			if (token.is(Kwd(KwdReturn))) {
+				var linePos:LinePos = checker.getLinePos(token.pos.min);
+				var line:String = checker.lines[linePos.line];
+				var isLast:Bool = ~/return\s*$/.match(line);
+				if (!isLast) continue;
+				pos = token.parent.getPos();
+			}
 			if (token.is(Dot)) {
 				var linePos:LinePos = checker.getLinePos(token.pos.min);
 				var line:String = checker.lines[linePos.line];
