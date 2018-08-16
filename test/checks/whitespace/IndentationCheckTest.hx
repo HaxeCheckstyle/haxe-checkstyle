@@ -190,6 +190,9 @@ long comment
 		graphics.fillRect(
 			x, y, w, h
 		);
+		return g.func(
+			something
+		);
 		g.func = func(
 			something
 		);
@@ -229,6 +232,10 @@ long comment
       c:3
     }];
     #end
+    return
+      g.func(
+        something
+      );
   }
 }";
 
