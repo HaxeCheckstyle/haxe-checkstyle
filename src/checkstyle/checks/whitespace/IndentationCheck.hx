@@ -297,9 +297,9 @@ class IndentationCheck extends Check {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
 			if (child == null) continue;
-      var linePos:LinePos = checker.getLinePos(token.pos.min);
-      var line:String = checker.lines[linePos.line];
-      switch (token.tok) {
+			var linePos:LinePos = checker.getLinePos(token.pos.min);
+			var line:String = checker.lines[linePos.line];
+			switch (token.tok) {
 				case Kwd(KwdReturn):
 					var isLast:Bool = ~/return\s*$/.match(line);
 					if (!isLast) continue;
@@ -323,8 +323,8 @@ class IndentationCheck extends Check {
 						var prev:Token = checker.tokens[pClose.index - 1];
 						pos.max = prev.pos.max;
 					}
-      	default:
-      }
+				default:
+      		}
 			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
