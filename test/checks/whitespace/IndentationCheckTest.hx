@@ -190,6 +190,13 @@ long comment
 		graphics.fillRect(
 			x, y, w, h
 		);
+		g.func = func(
+			something
+		);
+		g.func =
+			func(
+				something
+			);
 	}
 }
 /*
