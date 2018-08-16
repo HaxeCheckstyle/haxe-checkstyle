@@ -186,17 +186,17 @@ class ConfigParserTest {
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		var config:Config = {
-				version: 0,
-				checks: [{
-					"type": "non existing check name"
-				},
-				{
-					"type": "Trace",
-					"props": {
-						"non_existing_property": 100
-					}
-				}]
-			};
+			version: 0,
+			checks: [{
+				"type": "non existing check name"
+			},
+			{
+				"type": "Trace",
+				"props": {
+					"non_existing_property": 100
+				}
+			}]
+		};
 		configParser.parseAndValidateConfig(config, LOCAL_PATH);
 
 		Assert.areEqual("", failMessage);

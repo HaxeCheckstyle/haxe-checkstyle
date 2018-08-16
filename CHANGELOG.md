@@ -5,6 +5,8 @@
 - Fixed typedef extension (Haxe 3.x) [#452](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/452)
 - Fixed parentheses with dot [#454](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/454)
 - Fixed double for [#455](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/455)
+- Fixed indentation in brackets [#456](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/456)
+- Fixed return indentation [#457](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/457)
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 
 ## version 2.4.2 (2018-07-01)

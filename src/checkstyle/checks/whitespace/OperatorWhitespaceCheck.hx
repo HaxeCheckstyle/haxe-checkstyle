@@ -158,11 +158,11 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	function checkUnaryOps(root:TokenTree) {
 		if ((unaryOpPolicy == null) || (unaryOpPolicy == IGNORE)) return;
 		var tokens:Array<TokenTree> = root.filter([
-				Unop(OpNegBits),
-				Unop(OpNot),
-				Unop(OpIncrement),
-				Unop(OpDecrement)
-			], ALL);
+			Unop(OpNegBits),
+			Unop(OpNot),
+			Unop(OpIncrement),
+			Unop(OpDecrement)
+		], ALL);
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
