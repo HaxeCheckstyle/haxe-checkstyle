@@ -324,7 +324,7 @@ class IndentationCheck extends Check {
 						pos.max = prev.pos.max;
 					}
 				default:
-      		}
+			}
 			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
