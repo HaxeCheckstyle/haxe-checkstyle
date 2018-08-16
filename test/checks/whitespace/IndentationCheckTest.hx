@@ -193,6 +193,13 @@ long comment
 		return g.func(
 			something
 		);
+		g.func = func(
+			something
+		);
+		g.func =
+			func(
+				something
+			);
 	}
 }
 /*

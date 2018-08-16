@@ -297,29 +297,34 @@ class IndentationCheck extends Check {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
 			if (child == null) continue;
-
-			if (token.is(Kwd(KwdReturn))) {
-				var linePos:LinePos = checker.getLinePos(token.pos.min);
-				var line:String = checker.lines[linePos.line];
-				var isLast:Bool = ~/return\s*$/.match(line);
-				if (!isLast) continue;
-				pos = token.parent.getPos();
-			}
-			if (token.is(Dot)) {
-				var linePos:LinePos = checker.getLinePos(token.pos.min);
-				var line:String = checker.lines[linePos.line];
-				var prefix:String = line.substr(0, linePos.ofs + 1);
-				var isFirst:Bool = ~/^\s*\.$/.match(prefix);
-				if (!isFirst) continue;
-				pos = token.parent.getPos();
-			}
-			if (token.is(POpen)) {
-				var pClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(PClose).token;
-				if (pClose != null) {
-					var prev:Token = checker.tokens[pClose.index - 1];
-					pos.max = prev.pos.max;
-				}
-			}
+      var linePos:LinePos = checker.getLinePos(token.pos.min);
+      var line:String = checker.lines[linePos.line];
+      switch (token.tok) {
+				case Kwd(KwdReturn):
+					var isLast:Bool = ~/return\s*$/.match(line);
+					if (!isLast) continue;
+					pos = token.parent.getPos();
+				case Binop(OpAssign):
+					var isLast:Bool = ~/=\s*$/.match(line);
+					if (!isLast) continue;
+					var nextLine:String = checker.lines[linePos.line + 1];
+					if (nextLine == null) continue;
+					var isBracketOnly:Bool = ~/^\s*[[({<]$/.match(nextLine);
+					if (isBracketOnly) continue;
+					pos = token.parent.getPos();
+				case Dot:
+					var prefix:String = line.substr(0, linePos.ofs + 1);
+					var isFirst:Bool = ~/^\s*\.$/.match(prefix);
+					if (!isFirst) continue;
+					pos = token.parent.getPos();
+				case POpen:
+					var pClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(PClose).token;
+					if (pClose != null) {
+						var prev:Token = checker.tokens[pClose.index - 1];
+						pos.max = prev.pos.max;
+					}
+      	default:
+      }
 			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
