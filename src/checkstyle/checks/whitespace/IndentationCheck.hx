@@ -152,9 +152,6 @@ class IndentationCheck extends Check {
 					calcLineIndentationBkOpen(token, lineIndentation);
 				case BrOpen:
 					var brClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BrClose).token;
-					if (brClose == null) {
-						brClose = token.getLastChild();
-					}
 					increaseBlockIndent(token, brClose, lineIndentation);
 				case Kwd(KwdFunction):
 					calcLineIndentationFunction(token, lineIndentation);
@@ -187,9 +184,6 @@ class IndentationCheck extends Check {
 			if (token.pos.min + 1 == child.pos.min) return;
 		}
 		var bkClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BkClose).token;
-		if (bkClose == null) {
-			bkClose = token.getLastChild();
-		}
 		increaseBlockIndent(token, bkClose, lineIndentation);
 	}
 
@@ -370,6 +364,9 @@ class IndentationCheck extends Check {
 	}
 
 	function increaseBlockIndent(blockStart:TokenTree, blockEnd:TokenTree, lineIndentation:Array<Int>) {
+		if (blockEnd == null) {
+			blockEnd = blockStart.getLastChild();
+		}
 		increaseIndentBetween(blockStart, blockEnd, lineIndentation);
 	}
 
