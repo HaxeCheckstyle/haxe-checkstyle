@@ -32,7 +32,13 @@ class TestMain {
 
 	function completionHandler(success:Bool) {
 		setupCoverageReport();
+		#if eval
+		if (!success) {
+			Sys.exit(1);
+		}
+		#else
 		Sys.exit(success ? 0 : 1);
+		#end
 	}
 
 	function setupCoverageReport() {
