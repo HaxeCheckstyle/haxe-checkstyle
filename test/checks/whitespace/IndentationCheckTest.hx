@@ -12,6 +12,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, CORRECT_TAB_INDENT);
 		assertNoMsg(check, FUNCTION_BODY_NO_BRACES);
 		assertNoMsg(check, CORRECT_DOUBLE_FOR);
+		assertNoMsg(check, CORRECT_ARROW_INDENT);
 		assertMsg(check, CORRECT_SPACE_INDENT, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
 	}
 
@@ -354,6 +355,22 @@ class Test {
 					default:
 						doSomething();
 				}
+	}
+}";
+
+	var CORRECT_ARROW_INDENT = "
+class Test {
+	function run(args:Array<String>) {
+		var argHandler = Args.generate([
+			@doc('Set reporter output path') ['-p', '--path'] => function(path:String) {
+				XML_PATH = path;
+				JSON_PATH = path;
+				TEXT_PATH = path;
+			},
+			@doc('Adds error messages for files that checkstyle fails to parse') ['-show-parser-errors'] => function ()
+				ReporterManager.SHOW_PARSE_ERRORS = true,
+			_ => function(arg:String) failWith('Unknown command: ' + arg)
+		]);
 	}
 }";
 }

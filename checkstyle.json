@@ -626,7 +626,8 @@
         "MethodLength": [
             "checkstyle/checks/whitespace/WhitespaceAfterCheck",
             "checkstyle/checks/whitespace/WhitespaceAroundCheck",
-            "checkstyle/checks/whitespace/EmptyLinesCheck",
+			"checkstyle/checks/whitespace/EmptyLinesCheck",
+			"checkstyle/checks/whitespace/IndentationCheck",
             "checkstyle/token/walk/WalkStatement"
         ],
         "NestedForDepth": [
