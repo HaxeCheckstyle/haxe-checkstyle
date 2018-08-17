@@ -151,7 +151,8 @@ class IndentationCheck extends Check {
 				case BkOpen:
 					calcLineIndentationBkOpen(token, lineIndentation);
 				case BrOpen:
-					increaseBlockIndent(token, lineIndentation);
+					var brClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BrClose).token;
+					increaseBlockIndent(token, brClose, lineIndentation);
 				case Kwd(KwdFunction):
 					calcLineIndentationFunction(token, lineIndentation);
 				case Kwd(KwdIf), Kwd(KwdElse):
@@ -182,7 +183,8 @@ class IndentationCheck extends Check {
 			// only indent once, if directly next to each other `[{`
 			if (token.pos.min + 1 == child.pos.min) return;
 		}
-		increaseBlockIndent(token, lineIndentation);
+		var bkClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BkClose).token;
+		increaseBlockIndent(token, bkClose, lineIndentation);
 	}
 
 	function calcLineIndentationFunction(token:TokenTree, lineIndentation:Array<Int>) {
@@ -279,6 +281,7 @@ class IndentationCheck extends Check {
 			Kwd(KwdReturn),
 			Kwd(KwdCase),
 			Binop(OpAssign),
+			Binop(OpArrow),
 			Binop(OpAssignOp(OpShr)),
 			Binop(OpAssignOp(OpAdd)),
 			Binop(OpAssignOp(OpSub)),
@@ -360,8 +363,11 @@ class IndentationCheck extends Check {
 		return ignoreIndentation;
 	}
 
-	function increaseBlockIndent(blockStart:TokenTree, lineIndentation:Array<Int>) {
-		increaseIndentBetween(blockStart, blockStart.getLastChild(), lineIndentation);
+	function increaseBlockIndent(blockStart:TokenTree, blockEnd:TokenTree, lineIndentation:Array<Int>) {
+		if (blockEnd == null) {
+			blockEnd = blockStart.getLastChild();
+		}
+		increaseIndentBetween(blockStart, blockEnd, lineIndentation);
 	}
 
 	function increaseIndentBetween(blockStart:TokenTree, blockEnd:TokenTree, lineIndentation:Array<Int>) {
