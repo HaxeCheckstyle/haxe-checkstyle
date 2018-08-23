@@ -19,4 +19,5 @@ using checkstyle.utils.ArrayUtils;
 using checkstyle.utils.FieldUtils;
 using checkstyle.utils.ExprUtils;
 using checkstyle.utils.StringUtils;
+using tokentree.TokenTreeAccessHelper;
 using StringTools;

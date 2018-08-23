@@ -1,7 +1,5 @@
 package checkstyle.checks.block;
 
-import tokentree.TokenTreeAccessHelper;
-
 /**
     Checks for empty blocks. The policy to verify is specified using the property "option".
  **/
@@ -112,10 +110,20 @@ class EmptyBlockCheck extends Check {
 			logPos("Empty block should contain a comment or a statement", brOpen.getPos());
 			return;
 		}
+		var lastChild:TokenTree = brOpen.getLastChild();
+		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)){
+			logPos("Empty block should contain a comment or a statement", brOpen.getPos());
+			return;
+		}
 	}
 
 	function checkForStatement(brOpen:TokenTree) {
 		if (brOpen.children.length == 1) {
+			logPos("Empty block should contain a statement", brOpen.getPos());
+			return;
+		}
+		var lastChild:TokenTree = brOpen.getLastChild();
+		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)){
 			logPos("Empty block should contain a statement", brOpen.getPos());
 			return;
 		}
@@ -124,6 +132,7 @@ class EmptyBlockCheck extends Check {
 			switch (child.tok) {
 				case Comment(_), CommentLine(_):
 				case BrClose:
+					break;
 				default:
 					onlyComments = false;
 					break;
@@ -133,8 +142,18 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function checkForEmpty(brOpen:TokenTree) {
-		if ((brOpen.children == null) || (brOpen.children.length > 1)) return;
-		var brClose:TokenTree = TokenTreeAccessHelper.access(brOpen).firstChild().is(BrClose).token;
+		if (brOpen.children == null) return;
+		if (brOpen.children.length <= 0) return;
+
+		var lastChild:TokenTree = brOpen.getLastChild();
+		if (brOpen.access().lastChild().is(Semicolon).exists()) {
+			if (brOpen.children.length > 2) return;
+		}
+		else {
+			if (brOpen.children.length > 1) return;
+		}
+
+		var brClose:TokenTree = brOpen.access().firstChild().is(BrClose).token;
 		if (brClose == null) return;
 		if (brOpen.pos.max != brClose.pos.min) logPos('Empty block should be written as "{}"', brOpen.getPos());
 	}
