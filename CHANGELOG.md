@@ -8,7 +8,7 @@
 - Fixed indentation in brackets [#456](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/456)
 - Fixed return indentation [#457](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/457)
 - Fixed indentation of arrow [#459](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/459)
-- Fixed position change of semicolon
+- Fixed position change of semicolon [#460](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/460)
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 
 ## version 2.4.2 (2018-07-01)
