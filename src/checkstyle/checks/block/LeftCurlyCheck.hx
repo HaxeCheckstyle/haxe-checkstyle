@@ -79,7 +79,7 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function isSingleLine(brOpen:TokenTree):Bool {
-		var brClose:TokenTree = brOpen.getLastChild();
+		var brClose:TokenTree = brOpen.access().firstOf(BrClose).token;
 		return (brClose != null && brOpen.pos.max == brClose.pos.min);
 	}
 

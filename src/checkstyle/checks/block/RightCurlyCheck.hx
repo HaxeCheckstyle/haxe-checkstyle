@@ -171,7 +171,7 @@ class RightCurlyCheck extends Check {
 			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), "Right curly should not be on same line as left curly", curlyPos);
 			if (singleLine) return;
 
-			var curlyAlone:Bool = ~/^\s*\}[\)\],;\s]*(|\/\/.*)$/.match(line);
+			var curlyAlone:Bool = ~/^\s*\}(|\..*|\).*|\].*|,\s*|;\s*)(|\/\/.*)$/.match(line);
 			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", curlyPos);
