@@ -12,7 +12,7 @@
 - Fixed indentation of arrow [#459](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/459)
 - Fixed position change of semicolon [#460](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/460)
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
-- Changed to use formatter
+- Changed to use formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
 
 ## version 2.4.2 (2018-07-01)
 
