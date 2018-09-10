@@ -4,11 +4,10 @@ import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 
 /**
 	Checks that whitespace is present or absent around a separators.
- **/
+**/
 @name("SeparatorWhitespace")
 @desc("Checks that whitespace is present or absent around a separators.")
 class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
-
 	/**
 		policy for "."
 		- around = enforce whitespace before and after operator
@@ -16,7 +15,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var dotPolicy:WhitespacePolicy;
 
 	/**
@@ -26,7 +25,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var commaPolicy:WhitespacePolicy;
 
 	/**
@@ -36,7 +35,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var semicolonPolicy:WhitespacePolicy;
 
 	public function new() {
@@ -57,7 +56,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	override function violation(tok:TokenTree, policy:String) {
-		if (isWrapped(tok, cast (policy, WhitespacePolicy))) return;
+		if (isWrapped(tok, cast(policy, WhitespacePolicy))) return;
 		logPos('SeparatorWhitespace policy "$policy" violated by "$tok"', tok.pos);
 	}
 
@@ -89,20 +88,24 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "dotPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
+		return [
 			{
-				propertyName: "commaPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "semicolonPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "dotPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "commaPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "semicolonPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					}
+				]
+			}
+		];
 	}
 }

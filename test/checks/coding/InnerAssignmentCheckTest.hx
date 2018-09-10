@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.InnerAssignmentCheck;
 
 class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> {
-
 	static inline var MSG_INNER_ASSIGNMENT:String = "Inner assignment detected";
 
 	@Test
@@ -27,7 +26,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 	}
 
 	@Test
-	public function testIgnoreReturnAssignments () {
+	public function testIgnoreReturnAssignments() {
 		var check = new InnerAssignmentCheck();
 		check.ignoreReturnAssignments = true;
 		assertNoMsg(check, IF_EXPR);
@@ -57,21 +56,18 @@ abstract InnerAssignmentCheckTests(String) to String {
 			if ((a=b) > 0) return;
 		}
 	}";
-
 	var IF_EXPR = "
 	abstractAndClass Test {
 		public function new() {
 			if (a==b) a=b;
 		}
 	}";
-
 	var IF_RETURN_EXPR = "
 	abstractAndClass Test {
 		public function new() {
 			if (a==b) return a=b;
 		}
 	}";
-
 	var WHILE_COND = "
 	abstractAndClass Test {
 		public function new() {
@@ -81,7 +77,6 @@ abstract InnerAssignmentCheckTests(String) to String {
 			while ((a=b) > 0) b = c;
 		}
 	}";
-
 	var WHILE_COND_RETURN = "
 	abstractAndClass Test {
 		public function new() {
@@ -90,13 +85,11 @@ abstract InnerAssignmentCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var METHOD_DEF = "
 	abstractAndClass Test {
 		public function new(a:Null<Int> = 1, b:String = 'test', c = []) {
 		}
 	}";
-
 	var MEMBER_DEF = "
 	abstractAndClass Test {
 		var a:Null<Int> = 1;
@@ -106,7 +99,6 @@ abstract InnerAssignmentCheckTests(String) to String {
 		public function new() {
 		}
 	}";
-
 	var SWITCH = "
 	class Test {
 		public function new() {
@@ -117,7 +109,6 @@ abstract InnerAssignmentCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var BRACELESS_ANON_FUNC_ISSUE_113 = "
 	class Test {
 		public function foo() {
@@ -125,8 +116,7 @@ abstract InnerAssignmentCheckTests(String) to String {
 			trace(function() b = true);
 		}
 	}";
-
-	var SETTER_GETTER_ISSUE_259  = "
+	var SETTER_GETTER_ISSUE_259 = "
 	class Test {
 		@:isVar
 		public var value(get, set) : String;
@@ -134,28 +124,23 @@ abstract InnerAssignmentCheckTests(String) to String {
 		private function set_value(value : String) : String { return this.value = value; }
 		private function set_value(value : String) : String return this.value = value;
 	}";
-
-	var INCORRECT_SETTER_GETTER_MULTIPLE_STATEMENTS_ISSUE_259  = "
+	var INCORRECT_SETTER_GETTER_MULTIPLE_STATEMENTS_ISSUE_259 = "
 	class Test {
 		private function set_value(value : String) : String { StringTools.trim(value); return this.value = value; }
 	}";
-
-	var INCORRECT_SETTER_GETTER_MULTIPLE_BINOP_ISSUE_259  = "
+	var INCORRECT_SETTER_GETTER_MULTIPLE_BINOP_ISSUE_259 = "
 	class Test {
 		private function set_value(value : String) : String { return this.value = value + 1; }
 	}";
-
-	var INCORRECT_SETTER_GETTER_UNOP_ISSUE_259  = "
+	var INCORRECT_SETTER_GETTER_UNOP_ISSUE_259 = "
 	class Test {
 		private function set_value(value : Int) : Int { return this.value = ++value; }
 	}";
-
-	var INCORRECT_SETTER_GETTER_ARRAY_ACCESS_ISSUE_259  = "
+	var INCORRECT_SETTER_GETTER_ARRAY_ACCESS_ISSUE_259 = "
 	class Test {
 		private function set_value(value : Array<String>) : String { return this.value = value[0]; }
 	}";
-
-	var INCORRECT_SETTER_GETTER_CALL_ISSUE_259  = "
+	var INCORRECT_SETTER_GETTER_CALL_ISSUE_259 = "
 	class Test {
 		private function set_value(value : String) : String { return this.value = StringTools.trim(value); }
 	}";

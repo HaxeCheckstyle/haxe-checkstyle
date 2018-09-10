@@ -1,14 +1,13 @@
 package checkstyle.checks.block;
 
 /**
-    Checks for the placement of left curly braces ("{") for code blocks. The policy to verify is specified using the property "option".
- **/
+	Checks for the placement of left curly braces ("{") for code blocks. The policy to verify is specified using the property "option".
+**/
 @name("LeftCurly")
 @desc("Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.")
 class LeftCurlyCheck extends Check {
-
 	/**
-	    matches only left curlys specified in tokens list:
+		matches only left curlys specified in tokens list:
 		- CLASS_DEF = class definition "class Test {}"
 		- ENUM_DEF = enum definition "enum Test {}"
 		- ABSTRACT_DEF = abstract definition "abstract Test {}"
@@ -24,20 +23,20 @@ class LeftCurlyCheck extends Check {
 		- CATCH = catch body "catch (e:Dynamic) {}"
 		- REIFICATION = macro reification "$i{}"
 		- ARRAY_COMPREHENSION = array comprehension "[for (i in 0...10) {i * 2}]"
-	 **/
+	**/
 	public var tokens:Array<LeftCurlyCheckToken>;
 
 	/**
-	    placement of left curly
+		placement of left curly
 		- eol = should occur at end of line
-	    - nl = should occur on a new line
+		- nl = should occur on a new line
 		- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line
-	 **/
+	**/
 	public var option:LeftCurlyCheckOption;
 
 	/**
-	    allow single line blocks
-	 **/
+		allow single line blocks
+	**/
 	public var ignoreEmptySingleline:Bool;
 
 	public function new() {
@@ -48,7 +47,7 @@ class LeftCurlyCheck extends Check {
 			ABSTRACT_DEF,
 			TYPEDEF_DEF,
 			INTERFACE_DEF,
-				//OBJECT_DECL, // => allow inline object declarations
+			// OBJECT_DECL, // => allow inline object declarations
 			FUNCTION,
 			FOR,
 			IF,
@@ -85,9 +84,9 @@ class LeftCurlyCheck extends Check {
 
 	/**
 		find effective parent token and check against configured tokens
-	 **/
+	**/
 	function findParentToken(token:TokenTree):ParentToken {
-		if ((token == null) || (token.tok == null)) return {token:token, hasToken: false};
+		if ((token == null) || (token.tok == null)) return {token: token, hasToken: false};
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return {token: token, hasToken: hasToken(CLASS_DEF)};
@@ -138,7 +137,7 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function findParentTokenDblDot(token:TokenTree):ParentToken {
-		if ((token == null) || (token.tok == null)) return {token:token, hasToken: false};
+		if ((token == null) || (token.tok == null)) return {token: token, hasToken: false};
 		switch (token.tok) {
 			case Kwd(KwdCase), Kwd(KwdDefault):
 				return {token: token, hasToken: hasToken(SWITCH)};
@@ -148,8 +147,7 @@ class LeftCurlyCheck extends Check {
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
 					switch (token.parent.parent.tok) {
-						case Kwd(KwdTypedef):
-							return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+						case Kwd(KwdTypedef): return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
 						default:
 					}
 				}
@@ -227,48 +225,54 @@ class LeftCurlyCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [{
-				propertyName: "tokens",
-				value: [
-					CLASS_DEF,
-					ENUM_DEF,
-					ABSTRACT_DEF,
-					INTERFACE_DEF,
-					FUNCTION,
-					FOR,
-					IF,
-					WHILE,
-					SWITCH,
-					TRY,
-					CATCH
+		return [
+			{
+				fixed: [
+					{
+						propertyName: "tokens",
+						value: [
+							CLASS_DEF,
+							ENUM_DEF,
+							ABSTRACT_DEF,
+							INTERFACE_DEF,
+							FUNCTION,
+							FOR,
+							IF,
+							WHILE,
+							SWITCH,
+							TRY,
+							CATCH
+						]
+					}
+				],
+				properties: [
+					{
+						propertyName: "option",
+						values: [EOL, NLOW, NL]
+					},
+					{
+						propertyName: "ignoreEmptySingleline",
+						values: [true, false]
+					}
 				]
-			}],
-			properties: [{
-				propertyName: "option",
-				values: [EOL, NLOW, NL]
 			},
 			{
-				propertyName: "ignoreEmptySingleline",
-				values: [true, false]
-			}]
-		},
-		{
-			fixed: [{
-				propertyName: "tokens",
-				value: [
-					TYPEDEF_DEF,
+				fixed: [{
+					propertyName: "tokens",
+					value: [TYPEDEF_DEF]
+				}],
+				properties: [
+					{
+						propertyName: "option",
+						values: [EOL, NLOW, NL]
+					},
+					{
+						propertyName: "ignoreEmptySingleline",
+						values: [true, false]
+					}
 				]
-			}],
-			properties: [{
-				propertyName: "option",
-				values: [EOL, NLOW, NL]
-			},
-			{
-				propertyName: "ignoreEmptySingleline",
-				values: [true, false]
-			}]
-		}];
+			}
+		];
 	}
 }
 
@@ -284,7 +288,6 @@ abstract LeftCurlyCheckToken(String) {
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
 	var TYPEDEF_DEF = "TYPEDEF_DEF";
 	var INTERFACE_DEF = "INTERFACE_DEF";
-
 	var OBJECT_DECL = "OBJECT_DECL";
 	var FUNCTION = "FUNCTION";
 	var FOR = "FOR";

@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.comments.TODOCommentCheck;
 
 class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
-
 	@Test
 	public function testTODO() {
 		var check = new TODOCommentCheck();
@@ -62,37 +61,31 @@ abstract TODOCommentCheckTests(String) to String {
 		// TODO: remove test
 		public override function test() {}
 	}";
-
 	var TEST2 = "
 	class Test {
 		// FIXME remove test
 		public override function test() {}
 	}";
-
 	var TEST3 = "
 	class Test {
 		// HACK remove test
 		public override function test() {}
 	}";
-
 	var TEST4 = "
 	class Test {
 		// BUG #171: remove test
 		public override function test() {}
 	}";
-
 	var TEST5 = "
 	class Test {
 		// XXX remove test
 		public override function test() {}
 	}";
-
 	var TEST6 = "
 	class Test {
 		var a:String = 'TODO: remove test';
 		public override function test() {}
 	}";
-
 	var TEST7 = "
 	class Test {
 		function test() {

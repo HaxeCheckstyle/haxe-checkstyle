@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.LocalVariableNameCheck;
 
 class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new LocalVariableNameCheck();
@@ -78,21 +77,18 @@ abstract LocalVariableNameCheckTests(String) to String {
 			var Count1:Int;
 		};
 	}";
-
 	var TEST1 = "
 	class Test {
 		public function test() {
 			var Count:Int = 1;
 		}
 	}";
-
 	var TEST3 = "
 	typedef Test = {
 		public function test() {
 			var Count:Int;
 		}
 	}";
-
 	var TEST4 = "
 	extern class Test {
 		public function test() {

@@ -2,26 +2,25 @@ package checkstyle.checks.coding;
 
 /**
 	Checks that a local variable or a parameter does not shadow a field that is defined in the same class.
- **/
+**/
 @name("HiddenField")
 @desc("Checks that a local variable or a parameter does not shadow a field that is defined in the same class.")
 class HiddenFieldCheck extends Check {
-
 	static inline var MAX_FIELD_LEVEL:Int = 3;
 
 	/**
 		allow constructor parameters to shadow field names
-	 **/
+	**/
 	public var ignoreConstructorParameter:Bool;
 
 	/**
 		allow setters to shadow field names
-	 **/
+	**/
 	public var ignoreSetter:Bool;
 
 	/**
 		ignore function names matching "ignoreFormat" regex
-	 **/
+	**/
 	public var ignoreFormat:String;
 
 	public function new() {
@@ -59,8 +58,10 @@ class HiddenFieldCheck extends Check {
 		if (methodName.is(Kwd(KwdNew)) && ignoreConstructorParameter) return;
 		if (ignoreSetter && isSetterFunction(methodName, memberNames)) return;
 		switch (methodName.tok) {
-			case Const(CIdent(name)): if (ignoreFormatRE.match(name)) return;
-			case Kwd(KwdNew): if (ignoreFormatRE.match("new")) return;
+			case Const(CIdent(name)):
+				if (ignoreFormatRE.match(name)) return;
+			case Kwd(KwdNew):
+				if (ignoreFormatRE.match("new")) return;
 			default:
 		}
 
@@ -136,7 +137,8 @@ class HiddenFieldCheck extends Check {
 		for (member in varFields) {
 			if (!member.hasChildren()) continue;
 			switch (member.children[0].tok) {
-				case Const(CIdent(name)): memberNames.push(name);
+				case Const(CIdent(name)):
+					memberNames.push(name);
 				default:
 			}
 		}
@@ -144,16 +146,20 @@ class HiddenFieldCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "ignoreConstructorParameter",
-				values: [true, false]
-			},
+		return [
 			{
-				propertyName: "ignoreSetter",
-				values: [true, false]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "ignoreConstructorParameter",
+						values: [true, false]
+					},
+					{
+						propertyName: "ignoreSetter",
+						values: [true, false]
+					}
+				]
+			}
+		];
 	}
 }

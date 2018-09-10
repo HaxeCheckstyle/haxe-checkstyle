@@ -2,11 +2,10 @@ package checkstyle.checks.whitespace;
 
 /**
 	Checks if there are any trailing white spaces.
- **/
+**/
 @name("TrailingWhitespace")
 @desc("Checks if there are any trailing white spaces.")
 class TrailingWhitespaceCheck extends LineCheckBase {
-
 	public function new() {
 		super();
 		severity = SeverityLevel.IGNORE;

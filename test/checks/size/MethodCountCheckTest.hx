@@ -3,7 +3,6 @@ package checks.size;
 import checkstyle.checks.size.MethodCountCheck;
 
 class MethodCountCheckTest extends CheckTestCase<MethodCountCheckTests> {
-
 	@Test
 	public function testTotal() {
 		var check = new MethodCountCheck();
@@ -136,7 +135,6 @@ abstract MethodCountCheckTests(String) to String {
 		public function test100() {}
 		public function test101() {}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		function test1() {}
@@ -149,7 +147,6 @@ abstract MethodCountCheckTests(String) to String {
 		static inline function test8() {}
 		public static inline function test9() {}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		public function test1() {}

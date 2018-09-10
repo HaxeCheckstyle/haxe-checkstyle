@@ -22,7 +22,6 @@ import sys.io.File;
 import haxe.io.Path;
 
 class Main {
-
 	static var DEFAULT_CONFIG:String = "checkstyle.json";
 	static var DEFAULT_EXCLUDE_CONFIG:String = "checkstyle-exclude.json";
 	static var REPORT_TYPE:String = "text";
@@ -55,28 +54,44 @@ class Main {
 
 	function run(args:Array<String>) {
 		var argHandler = Args.generate([
-			@doc("Set source path to process (multiple allowed)") ["-s", "--source"] => function(path:String) configParser.paths.push(path),
-			@doc("Set config file (default: checkstyle.json)") ["-c", "--config"] => function(path:String) configPath = path,
-			@doc("Set exclude file (default: checkstyle-exclude.json)") ["-e", "--exclude"] => function(path:String) excludePath = path,
-			@doc("Set reporter (xml, json or text, default: text)") ["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
-			@doc("Set reporter output path") ["-p", "--path"] => function(path:String) {
+			@doc("Set source path to process (multiple allowed)")
+			["-s", "--source"] => function(path:String) configParser.paths.push(path),
+			@doc("Set config file (default: checkstyle.json)")
+			["-c", "--config"] => function(path:String) configPath = path,
+			@doc("Set exclude file (default: checkstyle-exclude.json)")
+			["-e", "--exclude"] => function(path:String) excludePath = path,
+			@doc("Set reporter (xml, json or text, default: text)")
+			["-r", "--reporter"] => function(name:String) REPORT_TYPE = name,
+			@doc("Set reporter output path")
+			["-p", "--path"] => function(path:String) {
 				XML_PATH = path;
 				JSON_PATH = path;
 				TEXT_PATH = path;
 			},
-			@doc("Set reporter style (XSLT)") ["-x", "--xslt"] => function(style:String) STYLE = style,
-			@doc("Sets the number of checker threads") ["-checkerthreads"] => function (num:Int) configParser.overrideCheckerThreads = num,
-			@doc("Generate a default config and exit") ["-default-config", "--default-config"] => function(path) generateDefaultConfig(path),
-			@doc("Try to detect your coding style (experimental)") ["-detect"] => function (path) detectCodingStyle(path),
-			@doc("Return number of failed checks in exitcode") ["-exitcode"] => function() EXIT_CODE = true,
-			@doc("List all available checks and exit") ["-list-checks", "--list-checks"] => function() listChecks(),
-			@doc("List all available reporters and exit") ["-list-reporters", "--list-reporters"] => function() listReporters(),
-			@doc("Omit styling in output summary") ["-nostyle"] => function() NO_STYLE = true,
-			@doc("Do not use checker threads") ["-nothreads"] => function () disableThreads = true,
-			@doc("Show percentage progress") ["-progress"] => function() SHOW_PROGRESS = true,
-			@doc("Show checks missing from active config") ["-show-missing-checks"] => function () SHOW_MISSING_CHECKS = true,
-			@doc("Adds error messages for files that checkstyle fails to parse") ["-show-parser-errors"] => function ()
-				ReporterManager.SHOW_PARSE_ERRORS = true,
+			@doc("Set reporter style (XSLT)")
+			["-x", "--xslt"] => function(style:String) STYLE = style,
+			@doc("Sets the number of checker threads")
+			["-checkerthreads"] => function(num:Int) configParser.overrideCheckerThreads = num,
+			@doc("Generate a default config and exit")
+			["-default-config", "--default-config"] => function(path) generateDefaultConfig(path),
+			@doc("Try to detect your coding style (experimental)")
+			["-detect"] => function(path) detectCodingStyle(path),
+			@doc("Return number of failed checks in exitcode")
+			["-exitcode"] => function() EXIT_CODE = true,
+			@doc("List all available checks and exit")
+			["-list-checks", "--list-checks"] => function() listChecks(),
+			@doc("List all available reporters and exit")
+			["-list-reporters", "--list-reporters"] => function() listReporters(),
+			@doc("Omit styling in output summary")
+			["-nostyle"] => function() NO_STYLE = true,
+			@doc("Do not use checker threads")
+			["-nothreads"] => function() disableThreads = true,
+			@doc("Show percentage progress")
+			["-progress"] => function() SHOW_PROGRESS = true,
+			@doc("Show checks missing from active config")
+			["-show-missing-checks"] => function() SHOW_MISSING_CHECKS = true,
+			@doc("Adds error messages for files that checkstyle fails to parse")
+			["-show-parser-errors"] => function() ReporterManager.SHOW_PARSE_ERRORS = true,
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
@@ -120,11 +135,17 @@ class Main {
 		var totalChecks = configParser.getCheckCount();
 		var checksUsed = configParser.getUsedCheckCount();
 		return switch (REPORT_TYPE) {
-			case "xml": new XMLReporter(numFiles, totalChecks, checksUsed, XML_PATH, STYLE, NO_STYLE);
-			case "json": new JSONReporter(numFiles, totalChecks, checksUsed, JSON_PATH, NO_STYLE);
-			case "text": new TextReporter(numFiles, totalChecks, checksUsed, TEXT_PATH, NO_STYLE);
-			case "codeclimate": new CodeClimateReporter(numFiles, totalChecks, checksUsed, null, NO_STYLE);
-			default: failWith('Unknown reporter: $REPORT_TYPE'); null;
+			case "xml":
+				new XMLReporter(numFiles, totalChecks, checksUsed, XML_PATH, STYLE, NO_STYLE);
+			case "json":
+				new JSONReporter(numFiles, totalChecks, checksUsed, JSON_PATH, NO_STYLE);
+			case "text":
+				new TextReporter(numFiles, totalChecks, checksUsed, TEXT_PATH, NO_STYLE);
+			case "codeclimate":
+				new CodeClimateReporter(numFiles, totalChecks, checksUsed, null, NO_STYLE);
+			default:
+				failWith('Unknown reporter: $REPORT_TYPE');
+				null;
 		}
 	}
 
@@ -204,7 +225,9 @@ class Main {
 		files.sortStrings();
 
 		var i:Int = 0;
-		return [for (file in files) { name:file, content:null, index:i++ }];
+		return [
+			for (file in files) {name: file, content: null, index: i++}
+		];
 	}
 
 	function traverse(path:String, files:Array<String>) {

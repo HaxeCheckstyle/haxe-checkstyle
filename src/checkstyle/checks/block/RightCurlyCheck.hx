@@ -2,13 +2,12 @@ package checkstyle.checks.block;
 
 /**
 	Checks the placement of right curly braces ("}") for code blocks. The policy to verify is specified using the property "option".
- **/
+**/
 @name("RightCurly")
 @desc("Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.")
 class RightCurlyCheck extends Check {
-
 	/**
-	    matches only right curlys specified in tokens list:
+		matches only right curlys specified in tokens list:
 		- CLASS_DEF = class definition "class Test {}"
 		- ENUM_DEF = enum definition "enum Test {}"
 		- ABSTRACT_DEF = abstract definition "abstract Test {}"
@@ -24,15 +23,15 @@ class RightCurlyCheck extends Check {
 		- CATCH = catch body "catch (e:Dynamic) {}"
 		- REIFICATION = macro reification "$i{}"
 		- ARRAY_COMPREHENSION = array comprehension "[for (i in 0...10) {i * 2}]"
-	 **/
+	**/
 	public var tokens:Array<RightCurlyCheckToken>;
 
 	/**
-	    placement of right curly
+		placement of right curly
 		- same = right curly must be alone on a new line, except for "} else" and "} catch"
 		- alone = alone on a new line
 		- aloneorsingle = right curly can occur on same line as left curly or must be alone on a new line
-	 **/
+	**/
 	public var option:RightCurlyCheckOption;
 
 	public function new() {
@@ -67,8 +66,19 @@ class RightCurlyCheck extends Check {
 			if (isPosSuppressed(brClose.pos)) continue;
 			var brOpen:TokenTree = brClose.parent;
 			if ((brOpen == null) || (brOpen.pos == null)) continue;
+			var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(brOpen);
+			switch (type) {
+				case BLOCK:
+				case TYPEDEFDECL:
+					if (!hasToken(TYPEDEF_DEF)) {
+						continue;
+					}
+				case OBJECTDECL:
+				case ANONTYPE:
+				case UNKNOWN:
+			}
 			if (filterParentToken(brOpen.parent)) continue;
-			check(brClose, isSingleLine(brOpen.pos.min, brClose.pos.max));
+			check(brClose, type, isSingleLine(brOpen.pos.min, brClose.pos.max));
 		}
 	}
 
@@ -82,7 +92,7 @@ class RightCurlyCheck extends Check {
 			case Kwd(KwdAbstract):
 				return !hasToken(ABSTRACT_DEF);
 			case Kwd(KwdTypedef):
-				return !hasToken(TYPEDEF_DEF);
+				return false;
 			case Kwd(KwdEnum):
 				return !hasToken(ENUM_DEF);
 			case Kwd(KwdFunction):
@@ -103,19 +113,12 @@ class RightCurlyCheck extends Check {
 			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault):
 				return !hasToken(SWITCH);
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
-				return !hasToken(OBJECT_DECL);
+				return false;
 			case Dollar(_):
 				return !hasToken(REIFICATION);
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
-				if ((token.parent != null) && (token.parent.parent != null)) {
-					switch (token.parent.parent.tok) {
-						case Kwd(KwdTypedef):
-							return !hasToken(TYPEDEF_DEF);
-						default:
-					}
-				}
-				return !hasToken(OBJECT_DECL);
+				return false;
 			default:
 				return filterParentToken(token.parent);
 		}
@@ -130,10 +133,10 @@ class RightCurlyCheck extends Check {
 		}
 	}
 
-	function check(token:TokenTree, singleLine:Bool) {
+	function check(token:TokenTree, type:BrOpenType, singleLine:Bool) {
 		var lineNum:Int = checker.getLinePos(token.pos.min).line;
 		var line:String = checker.lines[lineNum];
-		checkRightCurly(line, singleLine, token.pos);
+		checkRightCurly(line, type, singleLine, token.pos);
 	}
 
 	function isSingleLine(start:Int, end:Int):Bool {
@@ -143,7 +146,7 @@ class RightCurlyCheck extends Check {
 		return startLine == endLine;
 	}
 
-	function checkRightCurly(line:String, singleLine:Bool, pos:Position) {
+	function checkRightCurly(line:String, type:BrOpenType, singleLine:Bool, pos:Position) {
 		try {
 			var curlyPos:Position = {file: pos.file, min: pos.min, max: pos.max};
 			var eof:Bool = false;
@@ -171,11 +174,19 @@ class RightCurlyCheck extends Check {
 			logErrorIf(singleLine && (option != ALONE_OR_SINGLELINE), "Right curly should not be on same line as left curly", curlyPos);
 			if (singleLine) return;
 
-			var curlyAlone:Bool = ~/^\s*\}(|\..*|\).*|\].*|,\s*|;\s*)(|\/\/.*)$/.match(line);
+			var curlyAlone:Bool = false;
+
+			switch (type) {
+				case BLOCK, TYPEDEFDECL, UNKNOWN:
+					curlyAlone = ~/^\s*\}(|\..*|\).*|\].*|,\s*|;\s*)(|\/\/.*)$/.match(line);
+				case OBJECTDECL, ANONTYPE:
+					curlyAlone = ~/^\s*\}(|\..*|\).*|\].*|,.*|;\s*)(|\/\/.*)$/.match(line);
+			}
 			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", curlyPos);
-			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', curlyPos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")',
+				curlyPos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
@@ -190,53 +201,53 @@ class RightCurlyCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [{
-				propertyName: "tokens",
-				value: [
-					CLASS_DEF,
-					ENUM_DEF,
-					ABSTRACT_DEF,
-					TYPEDEF_DEF,
-					INTERFACE_DEF,
-					OBJECT_DECL,
-					FUNCTION,
-					FOR,
-					WHILE,
-					SWITCH,
-					TRY,
-					CATCH
-				]
-			}],
-			properties: [{
-				propertyName: "option",
-				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-			}]
-		},
-		{
-			fixed: [{
-				propertyName: "tokens",
-				value: [
-					IF,
-				]
-			}],
-			properties: [{
-				propertyName: "option",
-				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-			}]
-		},
-		{
-			fixed: [{
-				propertyName: "tokens",
-				value: [
-					OBJECT_DECL
-				]
-			}],
-			properties: [{
-				propertyName: "option",
-				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-			}]
-		}];
+		return [
+			{
+				fixed: [
+					{
+						propertyName: "tokens",
+						value: [
+							CLASS_DEF,
+							ENUM_DEF,
+							ABSTRACT_DEF,
+							TYPEDEF_DEF,
+							INTERFACE_DEF,
+							OBJECT_DECL,
+							FUNCTION,
+							FOR,
+							WHILE,
+							SWITCH,
+							TRY,
+							CATCH
+						]
+					}
+				],
+				properties: [{
+					propertyName: "option",
+					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+				}]
+			},
+			{
+				fixed: [{
+					propertyName: "tokens",
+					value: [IF]
+				}],
+				properties: [{
+					propertyName: "option",
+					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+				}]
+			},
+			{
+				fixed: [{
+					propertyName: "tokens",
+					value: [OBJECT_DECL]
+				}],
+				properties: [{
+					propertyName: "option",
+					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+				}]
+			}
+		];
 	}
 }
 
@@ -247,7 +258,6 @@ abstract RightCurlyCheckToken(String) {
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
 	var TYPEDEF_DEF = "TYPEDEF_DEF";
 	var INTERFACE_DEF = "INTERFACE_DEF";
-
 	var OBJECT_DECL = "OBJECT_DECL";
 	var FUNCTION = "FUNCTION";
 	var FOR = "FOR";

@@ -17,7 +17,7 @@
                                 "lowerCase"
                             ],
                             "type": "string",
-                            "description": "policy for hexadecimal literals\n\t    - upperCase = use uppercase for all letters\n\t    - lowerCase = use lowercase for all letters",
+                            "description": "policy for hexadecimal literals\n\t\t- upperCase = use uppercase for all letters\n\t\t- lowerCase = use lowercase for all letters",
                             "propertyOrder": 0
                         },
                         "severity": {
@@ -28,7 +28,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -60,7 +60,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -97,7 +97,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -129,7 +129,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -174,7 +174,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -221,7 +221,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -311,7 +311,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 7
                         }
                     },
@@ -353,7 +353,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -385,7 +385,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -417,7 +417,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -485,7 +485,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 5
                         },
                         "conditionalPolicy": {
@@ -536,7 +536,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -585,7 +585,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -644,7 +644,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -691,7 +691,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -736,7 +736,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -795,7 +795,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -828,7 +828,7 @@
                         "IGNORE"
                     ],
                     "type": "string",
-                    "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                    "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                     "propertyOrder": 0
                 }
             },
@@ -877,7 +877,7 @@
                                 "stmt"
                             ],
                             "type": "string",
-                            "description": "for all empty blocks matched by tokens\n\t    - empty = allow empty blocks but enforce \"{}\" notation\n\t    - text = must contain something apart from whitespace (comment or statement)\n\t    - stmt = must contain at least one statement (that is not a comment)",
+                            "description": "for all empty blocks matched by tokens\n\t\t- empty = allow empty blocks but enforce \"{}\" notation\n\t\t- text = must contain something apart from whitespace (comment or statement)\n\t\t- stmt = must contain at least one statement (that is not a comment)",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -888,7 +888,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -930,7 +930,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -972,7 +972,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -1026,7 +1026,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -1063,7 +1063,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1124,7 +1124,7 @@
                                 "nlow"
                             ],
                             "type": "string",
-                            "description": "placement of left curly\n\t\t- eol = should occur at end of line\n\t    - nl = should occur on a new line\n\t\t- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line",
+                            "description": "placement of left curly\n\t\t- eol = should occur at end of line\n\t\t- nl = should occur on a new line\n\t\t- nlow = should occur at end of line unless in wrapped code, then it should occur on a new line",
                             "propertyOrder": 1
                         },
                         "severity": {
@@ -1135,7 +1135,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -1172,7 +1172,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1212,7 +1212,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1262,7 +1262,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -1308,7 +1308,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -1340,7 +1340,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -1387,7 +1387,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -1428,7 +1428,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -1578,7 +1578,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 10
                         }
                     },
@@ -1639,7 +1639,9 @@
                                     "endTypedef",
                                     "betweenTypedefFields",
                                     "afterSingleLineComment",
-                                    "afterMultiLineComment"
+                                    "afterMultiLineComment",
+                                    "beforeSingleLineComment",
+                                    "beforeMultiLineComment"
                                 ],
                                 "type": "string",
                                 "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
@@ -1685,7 +1687,9 @@
                                     "endTypedef",
                                     "betweenTypedefFields",
                                     "afterSingleLineComment",
-                                    "afterMultiLineComment"
+                                    "afterMultiLineComment",
+                                    "beforeSingleLineComment",
+                                    "beforeMultiLineComment"
                                 ],
                                 "type": "string",
                                 "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
@@ -1743,7 +1747,9 @@
                                     "endTypedef",
                                     "betweenTypedefFields",
                                     "afterSingleLineComment",
-                                    "afterMultiLineComment"
+                                    "afterMultiLineComment",
+                                    "beforeSingleLineComment",
+                                    "beforeMultiLineComment"
                                 ],
                                 "type": "string",
                                 "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
@@ -1794,7 +1800,9 @@
                                     "endTypedef",
                                     "betweenTypedefFields",
                                     "afterSingleLineComment",
-                                    "afterMultiLineComment"
+                                    "afterMultiLineComment",
+                                    "beforeSingleLineComment",
+                                    "beforeMultiLineComment"
                                 ],
                                 "type": "string",
                                 "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
@@ -1840,7 +1848,9 @@
                                     "endTypedef",
                                     "betweenTypedefFields",
                                     "afterSingleLineComment",
-                                    "afterMultiLineComment"
+                                    "afterMultiLineComment",
+                                    "beforeSingleLineComment",
+                                    "beforeMultiLineComment"
                                 ],
                                 "type": "string",
                                 "description": "empty line check supports the following places\n\t- afterAbstractVars = after abstract var block\n\t- afterClassStaticVars = after static class var block\n\t- afterClassVars = after class var block\n\t- afterImports = after all imports/usings\n\t- afterLeftCurly = after left curly\n\t- afterMultiLineComment = after multi line comment\n\t- afterPackage = after package\n\t- afterSingleLineComment = after single line comment\n\t- anywhereInFile = anywhere in file\n\t- beforePackage = before package\n\t- beforeRightCurly = before right curly\n\t- beforeUsing = before using block\n\t- beginAbstract = after abstract left curly\n\t- beginClass = after class left curly\n\t- beginEnum = after enum left curly\n\t- beforeFileEnd = before EOF\n\t- beginInterface = after interface left curly\n\t- beginTypedef = after typedef left curly\n\t- betweenAbstractMethods = between abstract methods\n\t- betweenAbstractVars = between abstract vars\n\t- betweenClassMethods = between class methods\n\t- betweenClassStaticVars = between static class vars\n\t- betweenClassVars = between class vars\n\t- betweenEnumFields = between enum fields\n\t- betweenImports = between imports/usings\n\t- betweenInterfaceFields = between interface fields\n\t- betweenTypedefFields = between typedef fields\n\t- betweenTypes = betgween two types\n\t- endClass = before class right curly\n\t- endAbstract = before abstract right curly\n\t- endInterface = before interface right curly\n\t- endEnum = before enum right curly\n\t- endTypedef = before typedef right curly\n\t- inFunction = anywhere inside function body\n\t- typeDefinition = between type and left curly"
@@ -1862,7 +1872,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 8
                         }
                     },
@@ -2242,7 +2252,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 8
                         }
                     },
@@ -2274,7 +2284,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2306,7 +2316,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2343,7 +2353,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2380,7 +2390,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2417,7 +2427,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2454,7 +2464,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2509,7 +2519,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2546,7 +2556,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         },
                         "ignoreOverriddenMethods": {
@@ -2583,7 +2593,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2615,7 +2625,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2647,7 +2657,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -2701,7 +2711,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2743,7 +2753,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2783,7 +2793,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -2825,7 +2835,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -2893,7 +2903,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2943,7 +2953,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -2975,7 +2985,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3022,7 +3032,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -3054,7 +3064,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3112,7 +3122,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -3144,7 +3154,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3193,7 +3203,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         },
                         "maxTotal": {
@@ -3230,7 +3240,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3277,7 +3287,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3314,7 +3324,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3351,7 +3361,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3388,7 +3398,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3425,7 +3435,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3462,7 +3472,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3511,7 +3521,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },
@@ -3578,7 +3588,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 7
                         }
                     },
@@ -3610,7 +3620,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3659,7 +3669,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -3691,7 +3701,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 0
                         }
                     },
@@ -3758,7 +3768,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -3805,7 +3815,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 3
                         }
                     },
@@ -4155,7 +4165,7 @@
                                 "aligned"
                             ],
                             "type": "string",
-                            "description": "indentation of conditional statements\n\t    - startOfLine = #if, #else, #elseif and #end must start at beginning of line\n\t    - aligned = indentation of #if, #else, #elseif and #end must match surrounding code\n\n\t\tBoth \"aligned\" and \"startOfLine\" will produce a message if conditional compilation flags are not on a separate line.\n\t\tAll #else, #elseif and #end flags must have the same indentation as their corresponding #if.",
+                            "description": "indentation of conditional statements\n\t\t- startOfLine = #if, #else, #elseif and #end must start at beginning of line\n\t\t- aligned = indentation of #if, #else, #elseif and #end must match surrounding code\n\n\t\tBoth \"aligned\" and \"startOfLine\" will produce a message if conditional compilation flags are not on a separate line.\n\t\tAll #else, #elseif and #end flags must have the same indentation as their corresponding #if.",
                             "propertyOrder": 0
                         },
                         "allowSingleline": {
@@ -4171,7 +4181,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 2
                         }
                     },
@@ -4211,7 +4221,7 @@
                                 "IGNORE"
                             ],
                             "type": "string",
-                            "description": "sets gravity of reported violations:\n    - IGNORE = do not report violations, violations do not appear anywhere in output\n    - INFO = all violations have info / lowest priority\n    - WARNING = all violations have warning / medium priority\n    - ERROR = all violations have error / highest priority",
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "propertyOrder": 1
                         }
                     },

@@ -3,7 +3,6 @@ package checks.literal;
 import checkstyle.checks.literal.ERegLiteralCheck;
 
 class ERegLiteralCheckTest extends CheckTestCase<ERegLiteralCheckTests> {
-
 	@Test
 	public function testCorrectEReg() {
 		assertNoMsg(new ERegLiteralCheck(), TEST2);
@@ -31,19 +30,16 @@ abstract ERegLiteralCheckTests(String) to String {
 	abstractAndClass Test {
 		var _reg:EReg = new EReg('test', 'i');
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		var _reg:EReg = ~/test/i;
 	}";
-
 	var ISSUE_43 = "
 	abstractAndClass Test {
 		function test() {
 			cast (Type.createInstance(Array, []));
 		}
 	}";
-
 	var REGEX_WITH_STRING_INTERPOLATION = "
 	abstractAndClass Test {
 		var regex = new EReg('^${pattern}$', 'ig');

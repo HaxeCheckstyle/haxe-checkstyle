@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.NestedTryDepthCheck;
 
 class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
-
 	@Test
 	public function testDefault() {
 		var check = new NestedTryDepthCheck();
@@ -64,7 +63,6 @@ abstract NestedTryDepthCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test1() {

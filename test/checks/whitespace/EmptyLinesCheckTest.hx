@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.EmptyLinesCheck;
 
 class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
-
 	static inline var MSG_TOO_MANY:String = "Too many consecutive empty lines (> 1)";
 	static inline var MSG_AFTER_COMMENT:String = "Empty line not allowed after comment(s)";
 
@@ -89,7 +88,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 
 	}";
-
 	var TEST2 = "
 	class Test {
 
@@ -123,7 +121,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 
@@ -134,7 +131,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 		}
 	}";
-
 	var TEST4 = "
 	class Test {
 
@@ -144,7 +140,6 @@ abstract EmptyLinesCheckTests(String) to String {
 			var b:Int;
 		}
 	}";
-
 	var TEST5 = "
 	class Test {
 
@@ -152,7 +147,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 		var a:Int;
 	}";
-
 	var TEST6 = "
 	class Test {
 
@@ -162,7 +156,6 @@ abstract EmptyLinesCheckTests(String) to String {
 
 		var a:Int;
 	}";
-
 	var TEST7 = "
 	class Test {
 
@@ -174,27 +167,23 @@ abstract EmptyLinesCheckTests(String) to String {
 			var b:Int;
 		}
 	}";
-
 	var TEST8 = "
 	package pack;
 	using StringTools;
 
 	class Test {}";
-
 	var TEST9 = "
 	package pack;
 
 	using StringTools;
 
 	class Test {}";
-
 	var TEST10 = "
 	class Test {
 		public function new() {
 			var b:Int;
 		}
 	}";
-
 	var TEST11 = "
 	class Test {
 
@@ -202,7 +191,6 @@ abstract EmptyLinesCheckTests(String) to String {
 			var b:Int;
 		}
 	}";
-
 	var TEST12 = "
 	class Test
 	{
@@ -211,38 +199,32 @@ abstract EmptyLinesCheckTests(String) to String {
 			var b:Int;
 		}
 	}";
-
 	var TEST13 = "
 	interface Test {
 		var b:Int;
 	}";
-
 	var TEST14 = "
 	interface Test {
 
 		function test():Void;
 
 	}";
-
 	var TEST15 = "
 	interface Test
 	{
 
 		function test():Void;
 	}";
-
 	var TEST16 = "
 	abstract Test(Int) {
 		var A = 10;
 	}";
-
 	var TEST17 = "
 	abstract Test(Int) {
 
 		var A = 10;
 
 	}";
-
 	var TEST18 = "
 	abstract Test(Int)
 	{

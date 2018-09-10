@@ -13,7 +13,6 @@ import cpp.hl.Thread;
 import checkstyle.utils.Mutex;
 import checkstyle.utils.Thread;
 #end
-
 class ParserQueue {
 	static inline var SLEEP_TIME:Float = 0.1;
 
@@ -44,7 +43,7 @@ class ParserQueue {
 				Sys.sleep(SLEEP_TIME);
 				continue;
 			}
-			var file = files.shift ();
+			var file = files.shift();
 			var checker:Checker = new Checker();
 			checker.baseDefines = templateChecker.baseDefines;
 			checker.defineCombinations = templateChecker.defineCombinations;

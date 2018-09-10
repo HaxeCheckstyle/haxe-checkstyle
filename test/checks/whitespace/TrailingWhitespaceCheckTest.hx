@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 
 class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckTests> {
-
 	@Test
 	public function test() {
 		var check = new TrailingWhitespaceCheck();

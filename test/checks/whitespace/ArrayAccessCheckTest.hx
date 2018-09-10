@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.ArrayAccessCheck;
 
 class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
-
 	@Test
 	public function testSpaceBefore() {
 		assertMsg(new ArrayAccessCheck(), TEST1, "Space between array and [");
@@ -46,7 +45,6 @@ abstract ArrayAccessCheckTests(String) to String {
 			a [0] = 1;
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 
@@ -56,7 +54,6 @@ abstract ArrayAccessCheckTests(String) to String {
 			a[ 0] = 1;
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 
@@ -66,7 +63,6 @@ abstract ArrayAccessCheckTests(String) to String {
 			a[0 ] = 1;
 		}
 	}";
-
 	var TEST4 = "
 	class Test {
 
@@ -76,7 +72,6 @@ abstract ArrayAccessCheckTests(String) to String {
 			a[ 0 ] = 1;
 		}
 	}";
-
 	var TEST5 = "
 	class Test {
 

@@ -1,11 +1,8 @@
 import haxe.EntryPoint;
 import haxe.Json;
-
 import sys.io.File;
 import sys.io.FileOutput;
-
 import massive.munit.TestRunner;
-
 import mcover.coverage.munit.client.MCoverPrintClient;
 import mcover.coverage.data.CoverageResult;
 import mcover.coverage.data.Statement;
@@ -15,7 +12,6 @@ import mcover.coverage.MCoverage;
 using StringTools;
 
 class TestMain {
-
 	public function new() {
 		var suites:Array<Class<massive.munit.TestSuite>> = [TestSuite];
 
@@ -42,7 +38,7 @@ class TestMain {
 	}
 
 	function setupCoverageReport() {
-		var report = { coverage: {} };
+		var report = {coverage: {}};
 		var classes = MCoverage.getLogger().coverage.getClasses();
 		for (cls in classes) {
 			var coverageData:Array<LineCoverageResult> = [null];

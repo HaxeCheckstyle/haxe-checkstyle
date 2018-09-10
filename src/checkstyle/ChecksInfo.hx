@@ -3,7 +3,6 @@ package checkstyle;
 import checkstyle.checks.Check;
 
 class ChecksInfo {
-
 	var checkInfos:Map<String, CheckInfo>;
 
 	public function new() {

@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.OperatorWrapCheck;
 
 class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
-
 	static inline var MSG_PLUS_EOL:String = 'Token "+" must be at the end of the line';
 	static inline var MSG_GT_NL:String = 'Token ">" must be on a new line';
 
@@ -54,7 +53,6 @@ abstract OperatorWrapCheckTests(String) to String {
 			trace('test');
 		}
 	}";
-
 	var CORRECT_NL_WRAP_PLUS = "
 	class Test {
 		function test() {
@@ -62,7 +60,6 @@ abstract OperatorWrapCheckTests(String) to String {
 				+ test2;
 		}
 	}";
-
 	var CORRECT_NL_WRAP_GT = "
 	class Test {
 		function test() {
@@ -70,7 +67,6 @@ abstract OperatorWrapCheckTests(String) to String {
 				< b;
 		}
 	}";
-
 	var TYPE_PARAM = "
 	class Test {
 		function foo():Array<Int>
@@ -78,13 +74,11 @@ abstract OperatorWrapCheckTests(String) to String {
 			trace('test');
 		}
 	}";
-
 	var TYPEDEF_EXTENSION = "
 	typedef Point = {
 		> Cord,
 		y:Int
 	}";
-
 	var NEGATIVE_VARS = "
 	class Test {
 		function test() {
@@ -99,7 +93,6 @@ abstract OperatorWrapCheckTests(String) to String {
 			while(true);
 		}
 	}";
-
 	var NEG_OPERATOR = "
 	class Test {
 		function test() {

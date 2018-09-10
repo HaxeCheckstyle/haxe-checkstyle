@@ -3,7 +3,6 @@ package checks.type;
 import checkstyle.checks.type.ReturnCheck;
 
 class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
-
 	static inline var MSG_VOID_RETURN:String = 'Redundant "Void" for method "test"';
 	static inline var MSG_NOT_TEST1_RETURN:String = 'Return type not specified for method "test1"';
 	static inline var MSG_NOT_TEST2_RETURN:String = 'Return type not specified for method "test2"';
@@ -115,7 +114,6 @@ abstract ReturnCheckTests(String) to String {
 	abstractAndClass Test {
 		public function test():Void {}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test1() {
@@ -124,7 +122,6 @@ abstract ReturnCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST2A = "
 	abstractAndClass Test {
 		public function test1() {
@@ -134,7 +131,6 @@ abstract ReturnCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST2B = "
 	abstractAndClass Test {
 		public function test1() {
@@ -146,7 +142,6 @@ abstract ReturnCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		public function test2() {
@@ -154,14 +149,12 @@ abstract ReturnCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var TEST4 = "
 	abstractAndClass Test {
 		public function test3():Void {
 			return;
 		}
 	}";
-
 	var TEST5 = "
 	abstractAndClass Test {
 		public function test4() {
@@ -171,12 +164,10 @@ abstract ReturnCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var TEST6 = "
 	extern class Test {
 		function test4():Void;
 	}";
-
 	var TEST_FOR = "
 	abstractAndClass Test {
 		public function test1() {
@@ -185,7 +176,6 @@ abstract ReturnCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST_WHILE = "
 	abstractAndClass Test {
 		public function test1() {
@@ -194,12 +184,10 @@ abstract ReturnCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var INTERFACE = "
 	interface Test {
 		public function test1();
 	}";
-
 	var CORRECT_RETURN_ANONYMOUS = "
 	abstractAndClass Test {
 		public function test7() {
@@ -209,7 +197,6 @@ abstract ReturnCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var CORRECT_RETURN = "
 	abstractAndClass Test {
 		public function test1():Int {

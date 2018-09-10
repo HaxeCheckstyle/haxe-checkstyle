@@ -2,25 +2,25 @@ package checkstyle.checks.comments;
 
 /**
 	Checks code documentation style (/** vs /*)
- **/
+**/
 @name("DocCommentStyle")
 @desc("Checks code documentation style (/**…**/ vs /*…*/)")
 class DocCommentStyleCheck extends Check {
-
 	/**
-	    Defines how doc comments should start / end:
+		Defines how doc comments should start / end:
 		- ignore = accepts any start / end
 		- onestar = /*
 		- twostar = /**
-	 **/
+	**/
 	public var startStyle:DocCommentStyle;
+
 	/**
 		Defines how each doc comments line should start:
 		- ignore = accepts any line prefix
 		- none =
 		- onestar = *
 		- twostar = **
-	 **/
+	**/
 	public var lineStyle:DocCommentStyle;
 
 	public function new() {
@@ -46,7 +46,8 @@ class DocCommentStyleCheck extends Check {
 			var prevToken:TokenTree = token.previousSibling;
 			if (prevToken == null) continue;
 			switch (prevToken.tok) {
-				case Comment(text): checkCommentStyle(prevToken, text);
+				case Comment(text):
+					checkCommentStyle(prevToken, text);
 				default:
 			}
 		}
@@ -85,27 +86,31 @@ class DocCommentStyleCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "startStyle",
-				values: [ONE_STAR, TWO_STARS]
-			},
+		return [
 			{
-				propertyName: "lineStyle",
-				values: [NONE, ONE_STAR, TWO_STARS]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "startStyle",
+						values: [ONE_STAR, TWO_STARS]
+					},
+					{
+						propertyName: "lineStyle",
+						values: [NONE, ONE_STAR, TWO_STARS]
+					}
+				]
+			}
+		];
 	}
 }
 
 /**
-    styles for comment lines and start / stop:
+	styles for comment lines and start / stop:
 	- ignore = accepts any line prefix
 	- none =
 	- onestar = *
 	- twostar = **
- **/
+**/
 @:enum
 abstract DocCommentStyle(String) {
 	var IGNORE = "ignore";

@@ -4,7 +4,6 @@ import checks.CheckTestCase;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class ExtensionsTest extends CheckTestCase<ExtensionsTests> {
-
 	@Test
 	public function testExtensions() {
 		assertNoMsg(new IndentationCharacterCheck(), TEST1);

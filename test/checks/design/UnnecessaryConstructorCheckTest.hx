@@ -3,7 +3,6 @@ package checks.design;
 import checkstyle.checks.design.UnnecessaryConstructorCheck;
 
 class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstructorCheckTests> {
-
 	@Test
 	public function testWithConstructor() {
 		assertMsg(new UnnecessaryConstructorCheck(), TEST1, "Unnecessary constructor found");
@@ -56,7 +55,6 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 		public static function walkFile() {}
 		static function test() {}
 	}";
-
 	var TEST2 = "
 	class Test {
 		static var a:Int = 1;
@@ -64,7 +62,6 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 		public static function walkFile() {}
 		static function test() {}
 	}";
-
 	var TEST3 = "
 	class Test {
 		var loc:Float;
@@ -77,7 +74,6 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 
 		static function test() {}
 	}";
-
 	var TEST4 = "
 	class Test {
 		var loc:Float;
@@ -92,7 +88,6 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 
 		public function test2(){}
 	}";
-
 	var TEST5 = "
 	class Test {
 		public function new() {}
@@ -100,12 +95,10 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 		static var a:Int = 1;
 		static inline var b:Int = 1;
 	}";
-
 	var TEST6 = "
 	class Test {
 		public function new() {}
 	}";
-
 	var TEST_STATIC_ONLY_WITH_NEW = "
 	class Test
 	{
@@ -116,7 +109,6 @@ abstract UnnecessaryConstructorCheckTests(String) to String {
 			VAR1 = new String();
 		}
 	}";
-
 	var TEST_CHILD_CLASS = "
 	class Test extends Base
 	{

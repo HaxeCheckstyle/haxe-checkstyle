@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.ListenerNameCheck;
 
 class ListenerNameCheckTest extends CheckTestCase<ListenerNameCheckTests> {
-
 	@Test
 	public function testCorrectListenerName() {
 		assertNoMsg(new ListenerNameCheck(), TEST);
@@ -28,7 +27,6 @@ abstract ListenerNameCheckTests(String) to String {
 
 		function _onUpdate() {}
 	}";
-
 	var TEST1 = "
 	abstractAndClass Test {
 		var a:Stage;

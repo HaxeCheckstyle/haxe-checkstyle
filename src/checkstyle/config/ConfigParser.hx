@@ -11,7 +11,6 @@ import sys.io.File;
 import haxe.io.Path;
 
 class ConfigParser {
-
 	public var paths:Array<String>;
 	public var excludesMap:Map<String, Array<String>>;
 	public var allExcludes:Array<String>;
@@ -180,7 +179,7 @@ class ConfigParser {
 			}
 			catch (e:Any) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
-				message += (Std.is(e, Error) ? (e:Error).message : Std.string(e));
+				message += (Std.is(e, Error) ? (e : Error).message : Std.string(e));
 				failWith(message);
 			}
 		}
@@ -245,7 +244,8 @@ class ConfigParser {
 
 	function failWith(msg:String) {
 		switch (validateMode) {
-			case STRICT: failWithCallback(msg);
+			case STRICT:
+				failWithCallback(msg);
 			case RELAXED:
 		}
 	}

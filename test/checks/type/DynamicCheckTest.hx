@@ -3,7 +3,6 @@ package checks.type;
 import checkstyle.checks.type.DynamicCheck;
 
 class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
-
 	@Test
 	public function testNoDynamic() {
 		var check = new DynamicCheck();
@@ -108,26 +107,22 @@ abstract DynamicCheckTests(String) to String {
 
 	@SuppressWarnings('checkstyle:Dynamic')
 	typedef Test3b = Array<Dynamic>;";
-
 	var TEST1 = "
 	class Test {
 		public var Count:Dynamic = 1;
 		public function test() {
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		var Count:Int = 1;
 		public function test():Dynamic {
 		}
 	}";
-
 	var TEST3 = "
 	typedef Test = {
 		var Count:Dynamic;
 	}";
-
 	var TEST4 = "
 	extern class Test {
 		var Count:Int = 1;
@@ -135,7 +130,6 @@ abstract DynamicCheckTests(String) to String {
 		public function test(param:Dynamic) {
 		}
 	}";
-
 	var TEST5 = "
 	class Test {
 		var Count:Int = 1;
@@ -143,10 +137,8 @@ abstract DynamicCheckTests(String) to String {
 			var test:Dynamic = null;
 		}
 	}";
-
 	var TEST6 = "
 	typedef Test = String -> Dynamic;";
-
 	var ISSUE_43 = "
 	class Test {
 		function test() {

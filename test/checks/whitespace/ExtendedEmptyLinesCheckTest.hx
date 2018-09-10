@@ -1,12 +1,10 @@
 package checks.whitespace;
 
 import haxe.PosInfos;
-
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck;
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPlace;
 
 class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckTests> {
-
 	static inline var MSG_NONE:String = "should not have empty line(s)";
 	static inline var MSG_EXACT_1:String = "should have exactly 1 empty line";
 	static inline var MSG_EXACT_2:String = "should have exactly 2 empty lines";
@@ -17,177 +15,187 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testBeforePackage() {
-		runChecks(BEFOREPACKAGE, " before package");
+		runChecks(BEFORE_PACKAGE, " before package");
 	}
 
 	@Test
 	public function testAfterPackage() {
-		runChecks(AFTERPACKAGE, " after package");
+		runChecks(AFTER_PACKAGE, " after package");
 	}
 
 	@Test
 	public function testBetweenImports() {
-		runChecks(BETWEENIMPORTS, " between imports/using");
+		runChecks(BETWEEN_IMPORTS, " between imports/using");
 	}
 
 	@Test
 	public function testBeforeUsing() {
-		runChecks(BEFOREUSING, " between import and using");
+		runChecks(BEFORE_USING, " between import and using");
 	}
 
 	@Test
 	public function testAfterImports() {
-		runChecks(AFTERIMPORTS, " after imports/using");
+		runChecks(AFTER_IMPORTS, " after imports/using");
 	}
 
 	@Test
 	public function testAnywhereInFile() {
-		runChecks(ANYWHEREINFILE, " anywhere in file", false);
+		runChecks(ANYWHERE_IN_FILE, " anywhere in file", false);
 	}
 
 	@Test
 	public function testBetweenTypes() {
-		runChecks(BETWEENTYPES, " between types");
+		runChecks(BETWEEN_TYPES, " between types");
 	}
 
 	@Test
 	public function testBeforeFileEnd() {
-		runChecks(BEFOREFILEEND, " before file end");
+		runChecks(BEFORE_FILE_END, " before file end");
 	}
 
 	@Test
 	public function testInFunction() {
-		runChecks(INFUNCTION, " inside functions", false);
+		runChecks(IN_FUNCTION, " inside functions", false);
 	}
 
 	@Test
 	public function testAfterLeftCurly() {
-		runChecks(AFTERLEFTCURLY, " after left curly");
+		runChecks(AFTER_LEFT_CURLY, " after left curly");
 	}
 
 	@Test
 	public function testBeforeRightCurly() {
-		runChecks(BEFORERIGHTCURLY, " before right curly");
+		runChecks(BEFORE_RIGHT_CURLY, " before right curly");
 	}
 
 	@Test
 	public function testTypeDefinition() {
-		runChecks(TYPEDEFINITION, " between type definition and left curly");
+		runChecks(TYPE_DEFINITION, " between type definition and left curly");
 	}
 
 	@Test
 	public function testBeginClass() {
-		runChecks(BEGINCLASS, " after left curly");
+		runChecks(BEGIN_CLASS, " after left curly");
 	}
 
 	@Test
 	public function testEndClass() {
-		runChecks(ENDCLASS, " before right curly");
+		runChecks(END_CLASS, " before right curly");
 	}
 
 	@Test
 	public function testAfterClassStaticVars() {
-		runChecks(AFTERCLASSSTATICVARS, " after class static vars");
+		runChecks(AFTER_CLASS_STATIC_VARS, " after class static vars");
 	}
 
 	@Test
 	public function testAfterClassVars() {
-		runChecks(AFTERCLASSVARS, " after class vars");
+		runChecks(AFTER_CLASS_VARS, " after class vars");
 	}
 
 	@Test
 	public function testBetweenClassStaticVars() {
-		runChecks(BETWEENCLASSSTATICVARS, " between class static vars");
+		runChecks(BETWEEN_CLASS_STATIC_VARS, " between class static vars");
 	}
 
 	@Test
 	public function testBetweenClassVars() {
-		runChecks(BETWEENCLASSVARS, " between class vars");
+		runChecks(BETWEEN_CLASS_VARS, " between class vars");
 	}
 
 	@Test
 	public function testBetweenClassMethods() {
-		runChecks(BETWEENCLASSMETHODS, " between class methods");
+		runChecks(BETWEEN_CLASS_METHODS, " between class methods");
 	}
 
 	@Test
 	public function testBeginInterface() {
-		runChecks(BEGININTERFACE, " after left curly");
+		runChecks(BEGIN_INTERFACE, " after left curly");
 	}
 
 	@Test
 	public function testEndInterface() {
-		runChecks(ENDINTERFACE, " before right curly");
+		runChecks(END_INTERFACE, " before right curly");
 	}
 
 	@Test
 	public function testBetweenInterfaceFields() {
-		runChecks(BETWEENINTERFACEFIELDS, " between type fields", false);
+		runChecks(BETWEEN_INTERFACE_FIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginEnum() {
-		runChecks(BEGINENUM, " after left curly");
+		runChecks(BEGIN_ENUM, " after left curly");
 	}
 
 	@Test
 	public function testEndEnum() {
-		runChecks(ENDENUM, " before right curly");
+		runChecks(END_ENUM, " before right curly");
 	}
 
 	@Test
 	public function testBetweenEnumFields() {
-		runChecks(BETWEENENUMFIELDS, " between type fields", false);
+		runChecks(BETWEEN_ENUM_FIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginTypedef() {
-		runChecks(BEGINTYPEDEF, " after left curly");
+		runChecks(BEGIN_TYPEDEF, " after left curly");
 	}
 
 	@Test
 	public function testEndTypedef() {
-		runChecks(ENDTYPEDEF, " before right curly");
+		runChecks(END_TYPEDEF, " before right curly");
 	}
 
 	@Test
 	public function testBetweenTypedefFields() {
-		runChecks(BETWEENTYPEDEFFIELDS, " between type fields", false);
+		runChecks(BETWEEN_TYPEDEF_FIELDS, " between type fields", false);
 	}
 
 	@Test
 	public function testBeginAbstract() {
-		runChecks(BEGINABSTRACT, " after left curly");
+		runChecks(BEGIN_ABSTRACT, " after left curly");
 	}
 
 	@Test
 	public function testEndAbstract() {
-		runChecks(ENDABSTRACT, " before right curly");
+		runChecks(END_ABSTRACT, " before right curly");
 	}
 
 	@Test
 	public function testAfterAbstractVArs() {
-		runChecks(AFTERABSTRACTVARS, " after abstract vars");
+		runChecks(AFTER_ABSTRACT_VARS, " after abstract vars");
 	}
 
 	@Test
 	public function testBetweenAbstractVars() {
-		runChecks(BETWEENABSTRACTVARS, " between abstract vars");
+		runChecks(BETWEEN_ABSTRACT_VARS, " between abstract vars");
 	}
 
 	@Test
 	public function testBetweenAbstractMethods() {
-		runChecks(BETWEENABSTRACTMETHODS, " between abstract functions");
+		runChecks(BETWEEN_ABSTRACT_METHODS, " between abstract functions");
 	}
 
 	@Test
-	public function testsingleLineComment() {
-		runChecks(AFTERSINGLELINECOMMENT, " after comment");
+	public function testBeforeSingleLineComment() {
+		runChecks(BEFORE_SINGLELINE_COMMENT, " before comment");
+	}
+
+	@Test
+	public function testBeforeMultiLineComment() {
+		runChecks(BEFORE_MULTILINE_COMMENT, " before comment");
+	}
+
+	@Test
+	public function testAfterSingleLineComment() {
+		runChecks(AFTER_SINGLELINE_COMMENT, " after comment");
 	}
 
 	@Test
 	public function testAfterMultiLineComment() {
-		runChecks(AFTERMULTILINECOMMENT, " after comment");
+		runChecks(AFTER_MULTILINE_COMMENT, " after comment");
 	}
 
 	function runChecks(fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
@@ -333,7 +341,6 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		var fieldB:Int;
 		var fieldC:Any;
 	}";
-
 	var TEST_EXACT_1 = "
 	package checkstyle;
 
@@ -470,7 +477,6 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 	}
 	";
-
 	var TEST_EXACT_2 = "
 
 	package checkstyle;

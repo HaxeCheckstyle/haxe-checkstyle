@@ -5,20 +5,19 @@ import haxe.io.Path;
 
 /**
 	Checks for unused or duplicate imports.
- **/
+**/
 @name("UnusedImport")
 @desc("Checks for unused or duplicate imports.")
 class UnusedImportCheck extends Check {
-
 	/**
 		list of module names to ignore, any module from "ignoreModules" won't show up as unused in any file during a run
-	 **/
+	**/
 	public var ignoreModules:Array<String>;
 
 	/**
 		modules that define multiple types may show up as unused, unless "moduleTypeMap" contains a mapping for it
 		e.g. "haxe.macro.Expr": ["ExprDef", "ComplexType"] - would allow "import haxe.macro.Expr;" even though you just use "ComplexType"
-	 **/
+	**/
 	public var moduleTypeMap:Any;
 
 	public function new() {
@@ -48,7 +47,7 @@ class UnusedImportCheck extends Check {
 			switch (token.tok) {
 				case Const(CString(text)):
 					if (checker.getString(token.pos.min, token.pos.min + 1) != "'") return GO_DEEPER;
-					if (~/\$\{[^\}]+\.[^\}]+\}/.match (text)) return FOUND_GO_DEEPER;
+					if (~/\$\{[^\}]+\.[^\}]+\}/.match(text)) return FOUND_GO_DEEPER;
 				default:
 			}
 			return GO_DEEPER;
@@ -100,10 +99,12 @@ class UnusedImportCheck extends Check {
 
 		while (true) {
 			switch (token.tok) {
-				case Binop(OpMult): return null;
+				case Binop(OpMult):
+					return null;
 				case Kwd(KwdImport):
 				case Kwd(KwdPackage):
-				case Semicolon: return moduleName.toString();
+				case Semicolon:
+					return moduleName.toString();
 				#if (haxe_ver < 4.0)
 				case Kwd(KwdIn):
 					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
@@ -116,7 +117,8 @@ class UnusedImportCheck extends Check {
 				case Const(CIdent("as")):
 					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" as ");
-				default: moduleName.add(token.toString());
+				default:
+					moduleName.add(token.toString());
 			}
 			token = token.getFirstChild();
 		}
@@ -127,10 +129,12 @@ class UnusedImportCheck extends Check {
 		var lastName:String = null;
 		while (true) {
 			switch (token.tok) {
-				case Binop(OpMult): return null;
+				case Binop(OpMult):
+					return null;
 				case Const(CIdent(name)):
 					lastName = name;
-				case Semicolon: return lastName;
+				case Semicolon:
+					return lastName;
 				default:
 			}
 			token = token.getFirstChild();
@@ -143,9 +147,12 @@ class UnusedImportCheck extends Check {
 			var name:String = ident.toString();
 			if (!checkName(typeName, moduleName, name)) continue;
 			switch (ident.parent.tok) {
-				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef): continue;
-				case Dot: continue;
-				default: return;
+				case Kwd(KwdClass), Kwd(KwdInterface), Kwd(KwdAbstract), Kwd(KwdEnum), Kwd(KwdTypedef):
+					continue;
+				case Dot:
+					continue;
+				default:
+					return;
 			}
 		}
 		for (literal in stringLiterals) {
@@ -194,13 +201,15 @@ class UnusedImportCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }
 

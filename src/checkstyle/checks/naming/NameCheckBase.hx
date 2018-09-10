@@ -2,23 +2,22 @@ package checkstyle.checks.naming;
 
 /**
 	Base class for name checks
- **/
+**/
 @ignore("Base class for name checks")
 class NameCheckBase<T> extends Check {
-
 	/**
 		regex name format
-	 **/
+	**/
 	public var format:String;
 
 	/**
 		list of tokens to limit where names should conform to "format"
-	 **/
+	**/
 	public var tokens:Array<T>;
 
 	/**
 		ignores names inside extern types
-	 **/
+	**/
 	public var ignoreExtern:Bool;
 
 	var formatRE:EReg;
@@ -36,7 +35,7 @@ class NameCheckBase<T> extends Check {
 	}
 
 	override function actualRun() {
-		formatRE = new EReg (format, "");
+		formatRE = new EReg(format, "");
 		checkClassFields();
 	}
 

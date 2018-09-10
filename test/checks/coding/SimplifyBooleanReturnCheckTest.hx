@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.SimplifyBooleanReturnCheck;
 
 class SimplifyBooleanReturnCheckTest extends CheckTestCase<SimplifyBooleanReturnCheckTests> {
-
 	static inline var MSG_SIMPLIFY:String = "Conditional logic can be removed";
 
 	@Test
@@ -32,7 +31,6 @@ abstract SimplifyBooleanReturnCheckTests(String) to String {
 			else return true;
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		function test() {
@@ -40,7 +38,6 @@ abstract SimplifyBooleanReturnCheckTests(String) to String {
 			return a;
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		function test() {

@@ -3,7 +3,6 @@ package checks.literal;
 import checkstyle.checks.literal.HexadecimalLiteralCheck;
 
 class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckTests> {
-
 	@Test
 	public function test1() {
 		assertMsg(new HexadecimalLiteralCheck(), TEST1, "Bad hexadecimal literal, use upperCase");
@@ -28,12 +27,10 @@ abstract HexadecimalLiteralCheckTests(String) to String {
 	abstractAndClass Test {
 		var clr = 0xffffff;
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		var clr = 0x0033FF;
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		var clr = 0x0033FF;

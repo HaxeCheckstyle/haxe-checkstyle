@@ -3,7 +3,6 @@ package checkstyle.checks;
 import checkstyle.config.ExcludeRange;
 
 class Check {
-
 	public var severity:SeverityLevel;
 	public var type(default, null):CheckType;
 	public var categories:Array<Category>;
@@ -70,18 +69,18 @@ class Check {
 	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?code:String, ?sev:SeverityLevel) {
 		if (sev == null) sev = severity;
 		messages.push({
-			fileName:checker.file.name,
-			message:msg,
-			code:code,
-			desc:desc,
-			startLine:startLine,
-			endLine:endLine,
-			startColumn:startColumn,
-			endColumn:endColumn,
-			severity:sev,
-			moduleName:getModuleName(),
-			categories:categories,
-			points:points
+			fileName: checker.file.name,
+			message: msg,
+			code: code,
+			desc: desc,
+			startLine: startLine,
+			endLine: endLine,
+			startColumn: startColumn,
+			endColumn: endColumn,
+			severity: sev,
+			moduleName: getModuleName(),
+			categories: categories,
+			points: points
 		});
 	}
 
@@ -137,7 +136,7 @@ class Check {
 	function isCharPosExtern(pos:Int):Bool {
 		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
-			switch (td.decl){
+			switch (td.decl) {
 				case EAbstract(d):
 				case EClass(d):
 					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(HExtern);

@@ -3,7 +3,6 @@ package checks.comments;
 import checkstyle.checks.comments.FieldDocCommentCheck;
 
 class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> {
-
 	static inline var MSG_DOC_FUNC8:String = 'Field "func8" should have documentation';
 	static inline var MSG_DOC_FUNC4:String = 'Field "func4" should have documentation';
 	static inline var MSG_DOC_PARAM1_FUNC8:String = 'Documentation for parameter "param1" of field "func8" missing';
@@ -231,7 +230,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function toString():String {}
 	}
 	";
-
 	var NO_CLASS_FIELDS_COMMENTED = "
 	class Test2 {
 		var field1:String;
@@ -248,7 +246,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		override public function func9(param1:String):String {}
 	}
 	";
-
 	var ONLY_PUBLIC_CLASS_FIELDS_COMMENTED = "
 	class Test2 {
 		var field1:String;
@@ -265,7 +262,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var ONLY_PRIVATE_CLASS_FIELDS_COMMENTED = "
 	class Test2 {
 		/**
@@ -282,7 +278,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var EMPTY_COMMENT = "
 	class Test2 {
 		/*
@@ -297,7 +292,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8():Void {}
 	}
 	";
-
 	var EMPTY_COMMENT_3 = "
 	class Test2 {
 		/**
@@ -306,7 +300,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8():Void {}
 	}
 	";
-
 	var MISSING_RETURN = "
 	class Test2 {
 		/**
@@ -316,7 +309,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var MISSING_PARAM = "
 	class Test2 {
 		/**
@@ -326,7 +318,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var ABSTRACT = "
 	abstract Test(String) {
 		/**
@@ -337,7 +328,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var ENUM = "
 	enum Test {
 		/**
@@ -346,7 +336,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		FIELD1;
 	}
 	";
-
 	var INTERFACE = "
 	interface Test {
 		/**
@@ -357,7 +346,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String;
 	}
 	";
-
 	var TYPEDEF = "
 	typedef Test = {
 		/**
@@ -366,7 +354,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		var field1:String;
 	}
 	";
-
 	var WRONG_PARAM_ORDER = "
 	class Test2 {
 		/**
@@ -378,7 +365,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String, param2:String):String {}
 	}
 	";
-
 	var NO_PARAM_TEXT = "
 	class Test2 {
 		/**
@@ -389,7 +375,6 @@ abstract FieldDocCommentCheckTests(String) to String {
 		public function func8(param1:String):String {}
 	}
 	";
-
 	var EMPTY_RETURN = "
 	class Test2 {
 		/**

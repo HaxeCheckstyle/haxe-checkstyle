@@ -4,11 +4,10 @@ import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 
 /**
 	Checks line wrapping with operators.
- **/
+**/
 @name("OperatorWrap")
 @desc("Checks line wrapping with operators.")
 class OperatorWrapCheck extends WrapCheckBase {
-
 	public function new() {
 		super();
 		tokens = [
@@ -102,12 +101,16 @@ class OperatorWrapCheck extends WrapCheckBase {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "option",
-				values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [
+					{
+						propertyName: "option",
+						values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+					}
+				]
+			}
+		];
 	}
 }

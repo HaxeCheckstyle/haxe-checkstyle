@@ -4,49 +4,48 @@ import checkstyle.checks.whitespace.ListOfEmptyLines.EmptyLineRange;
 
 /**
 	Checks for consecutive empty lines.
- **/
+**/
 @name("ExtendedEmptyLines")
 @desc("Checks for consecutive empty lines.")
 class ExtendedEmptyLinesCheck extends Check {
-
 	/**
 		number of empty lines to allow / enforce (used by "exact", "upto" and "atleast" policies)
-	 **/
+	**/
 	public var max:Int;
 
 	/**
 		skips single line type definitions
-	 **/
+	**/
 	public var skipSingleLineTypes:Bool;
 
 	/**
 		"defaultPolicy" applies to all places not in "ignore", "none", "exact", "upto" or "atleast"
-	 **/
+	**/
 	public var defaultPolicy:EmptyLinesPolicy;
 
 	/**
 		list of places to ignore
-	 **/
+	**/
 	public var ignore:Array<EmptyLinesPlace>;
 
 	/**
 		list of places where no empty line is permitted
-	 **/
+	**/
 	public var none:Array<EmptyLinesPlace>;
 
 	/**
 		list of places where exactly "max" empty lines are required
-	 **/
+	**/
 	public var exact:Array<EmptyLinesPlace>;
 
 	/**
 		list of places where up to "max" empty lines are permitted
-	 **/
+	**/
 	public var upto:Array<EmptyLinesPlace>;
 
 	/**
 		list of places where at least "max" empty lines are required
-	 **/
+	**/
 	public var atleast:Array<EmptyLinesPlace>;
 
 	var placemap:Map<EmptyLinesPlace, EmptyLinesPolicy>;
@@ -68,11 +67,11 @@ class ExtendedEmptyLinesCheck extends Check {
 
 	function buildPolicyMap() {
 		placemap = new Map<EmptyLinesPlace, EmptyLinesPolicy>();
-		for (place in ignore) placemap.set (place, IGNORE);
-		for (place in none) placemap.set (place, NONE);
-		for (place in exact) placemap.set (place, EXACT);
-		for (place in upto) placemap.set (place, UPTO);
-		for (place in atleast) placemap.set (place, ATLEAST);
+		for (place in ignore) placemap.set(place, IGNORE);
+		for (place in none) placemap.set(place, NONE);
+		for (place in exact) placemap.set(place, EXACT);
+		for (place in upto) placemap.set(place, UPTO);
+		for (place in atleast) placemap.set(place, ATLEAST);
 	}
 
 	function getPolicy(place:EmptyLinesPlace):EmptyLinesPolicy {
@@ -110,19 +109,19 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function checkPackages(emptyLines:ListOfEmptyLines) {
-		if (isIgnored([BEFOREPACKAGE, AFTERPACKAGE])) return;
+		if (isIgnored([BEFORE_PACKAGE, AFTER_PACKAGE])) return;
 
 		var root:TokenTree = checker.getTokenTree();
 		var packages:Array<TokenTree> = root.filter([Kwd(KwdPackage)], ALL);
 
 		for (pack in packages) {
-			checkBetweenToken(emptyLines, null, pack, getPolicy(BEFOREPACKAGE), "before package");
-			checkBetweenToken(emptyLines, pack, pack.nextSibling, getPolicy(AFTERPACKAGE), "after package");
+			checkBetweenToken(emptyLines, null, pack, getPolicy(BEFORE_PACKAGE), "before package");
+			checkBetweenToken(emptyLines, pack, pack.nextSibling, getPolicy(AFTER_PACKAGE), "after package");
 		}
 	}
 
 	function checkImports(emptyLines:ListOfEmptyLines) {
-		if (isIgnored([AFTERIMPORTS, BEFOREUSING, BETWEENIMPORTS])) return;
+		if (isIgnored([AFTER_IMPORTS, BEFORE_USING, BETWEEN_IMPORTS])) return;
 
 		var root:TokenTree = checker.getTokenTree();
 		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport), Kwd(KwdUsing)], ALL);
@@ -133,7 +132,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (lastImport.nextSibling != null) {
 			switch (lastImport.nextSibling.tok) {
 				case Kwd(KwdAbstract), Kwd(KwdClass), Kwd(KwdEnum), Kwd(KwdInterface), Kwd(KwdTypedef):
-					checkBetweenToken(emptyLines, lastImport, lastImport.nextSibling, getPolicy(AFTERIMPORTS), "after imports/using");
+					checkBetweenToken(emptyLines, lastImport, lastImport.nextSibling, getPolicy(AFTER_IMPORTS), "after imports/using");
 				default:
 			}
 		}
@@ -142,21 +141,21 @@ class ExtendedEmptyLinesCheck extends Check {
 			var imp:TokenTree = imports[index];
 			var prev:TokenTree = imp.previousSibling;
 			if (prev == null) continue;
-			if (imp.is(Kwd(KwdUsing)))  {
-				if (prev.is(Kwd(KwdImport)))  {
-					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFOREUSING), "between import and using");
+			if (imp.is(Kwd(KwdUsing))) {
+				if (prev.is(Kwd(KwdImport))) {
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFORE_USING), "between import and using");
 					continue;
 				}
 			}
 			else {
-				if (prev.is(Kwd(KwdUsing)))  {
-					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFOREUSING), "between import and using");
+				if (prev.is(Kwd(KwdUsing))) {
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFORE_USING), "between import and using");
 					continue;
 				}
 			}
 			switch (prev.tok) {
 				case Kwd(KwdImport), Kwd(KwdUsing), Comment(_), CommentLine(_):
-					checkBetweenToken(emptyLines, prev, imp, getPolicy(BETWEENIMPORTS), "between imports/using");
+					checkBetweenToken(emptyLines, prev, imp, getPolicy(BETWEEN_IMPORTS), "between imports/using");
 				default:
 			}
 		}
@@ -180,25 +179,27 @@ class ExtendedEmptyLinesCheck extends Check {
 			var pos:Position = type.getPos();
 			if (skipSingleLineTypes && (checker.getLinePos(pos.min).line - checker.getLinePos(pos.max).line == 0)) continue;
 			switch (type.tok) {
-				case Kwd(KwdAbstract): checkAbstract(emptyLines, type);
-				case Kwd(KwdClass): checkClass(emptyLines, type);
+				case Kwd(KwdAbstract):
+					checkAbstract(emptyLines, type);
+				case Kwd(KwdClass):
+					checkClass(emptyLines, type);
 				case Kwd(KwdEnum):
-					if (isIgnored([BEGINENUM, ENDENUM, BETWEENENUMFIELDS, TYPEDEFINITION])) continue;
+					if (isIgnored([BEGIN_ENUM, END_ENUM, BETWEEN_ENUM_FIELDS, TYPE_DEFINITION])) continue;
 
-					checkType(emptyLines, type, getPolicy(BEGINENUM), getPolicy(ENDENUM), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
-						return makePolicyAndWhat(getPolicy(BETWEENENUMFIELDS), "between type fields");
+					checkType(emptyLines, type, getPolicy(BEGIN_ENUM), getPolicy(END_ENUM), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						return makePolicyAndWhat(getPolicy(BETWEEN_ENUM_FIELDS), "between type fields");
 					});
 				case Kwd(KwdInterface):
-					if (isIgnored([BEGININTERFACE, ENDINTERFACE, BETWEENINTERFACEFIELDS, TYPEDEFINITION])) continue;
+					if (isIgnored([BEGIN_INTERFACE, END_INTERFACE, BETWEEN_INTERFACE_FIELDS, TYPE_DEFINITION])) continue;
 
-					checkType(emptyLines, type, getPolicy(BEGININTERFACE), getPolicy(ENDINTERFACE), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
-						return makePolicyAndWhat(getPolicy(BETWEENINTERFACEFIELDS), "between type fields");
+					checkType(emptyLines, type, getPolicy(BEGIN_INTERFACE), getPolicy(END_INTERFACE), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						return makePolicyAndWhat(getPolicy(BETWEEN_INTERFACE_FIELDS), "between type fields");
 					});
 				case Kwd(KwdTypedef):
-					if (isIgnored([BEGINTYPEDEF, ENDTYPEDEF, BETWEENTYPEDEFFIELDS, TYPEDEFINITION])) continue;
+					if (isIgnored([BEGIN_TYPEDEF, END_TYPEDEF, BETWEEN_TYPEDEF_FIELDS, TYPE_DEFINITION])) continue;
 
-					checkType(emptyLines, type, getPolicy(BEGINTYPEDEF), getPolicy(ENDTYPEDEF), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
-						return makePolicyAndWhat(getPolicy(BETWEENTYPEDEFFIELDS), "between type fields");
+					checkType(emptyLines, type, getPolicy(BEGIN_TYPEDEF), getPolicy(END_TYPEDEF), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						return makePolicyAndWhat(getPolicy(BETWEEN_TYPEDEF_FIELDS), "between type fields");
 					});
 				default:
 			}
@@ -206,15 +207,17 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function checkBetweenTypes(emptyLines:ListOfEmptyLines, types:Array<TokenTree>) {
-		if (isIgnored([BETWEENTYPES])) return;
+		if (isIgnored([BETWEEN_TYPES])) return;
 		for (index in 1...types.length) {
 			var type:TokenTree = types[index];
 			var sibling:TokenTree = type.previousSibling;
 			var prevType:TokenTree = types[index - 1];
 			if ((sibling != null) && (sibling != prevType)) {
 				switch (sibling.tok) {
-					case Comment(_): type = sibling;
-					case CommentLine(_): type = sibling;
+					case Comment(_):
+						type = sibling;
+					case CommentLine(_):
+						type = sibling;
 					default:
 				}
 			}
@@ -222,40 +225,49 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (skipSingleLineTypes && (checker.getLinePos(prevPos.min).line - checker.getLinePos(prevPos.max).line == 0)) continue;
 			var startLine:Int = checker.getLinePos(prevPos.max).line;
 			var endLine:Int = checker.getLinePos(type.getPos().min).line;
-			checkBetween(emptyLines, startLine, endLine, getPolicy(BETWEENTYPES), "between types");
+			checkBetween(emptyLines, startLine, endLine, getPolicy(BETWEEN_TYPES), "between types");
 		}
 	}
 
 	function checkAbstract(emptyLines:ListOfEmptyLines, typeToken:TokenTree) {
-		if (isIgnored([BEGINABSTRACT, ENDABSTRACT, BETWEENABSTRACTMETHODS, AFTERABSTRACTVARS, BETWEENABSTRACTVARS, TYPEDEFINITION])) return;
+		if (isIgnored([
+			BEGIN_ABSTRACT,
+			END_ABSTRACT,
+			BETWEEN_ABSTRACT_METHODS,
+			AFTER_ABSTRACT_VARS,
+			BETWEEN_ABSTRACT_VARS,
+			TYPE_DEFINITION
+		])) {
+			return;
+		}
 
-		checkType(emptyLines, typeToken, getPolicy(BEGINABSTRACT), getPolicy(ENDABSTRACT), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+		checkType(emptyLines, typeToken, getPolicy(BEGIN_ABSTRACT), getPolicy(END_ABSTRACT), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
 			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
 			var isVarChild:Bool = child.is(Kwd(KwdVar));
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
-			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEENABSTRACTMETHODS), "between abstract functions");
-			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
-			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTERABSTRACTVARS), "after abstract vars");
-			return makePolicyAndWhat(getPolicy(BETWEENABSTRACTVARS), "between abstract vars");
+			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEEN_ABSTRACT_METHODS), "between abstract functions");
+			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTER_ABSTRACT_VARS), "after abstract vars");
+			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTER_ABSTRACT_VARS), "after abstract vars");
+			return makePolicyAndWhat(getPolicy(BETWEEN_ABSTRACT_VARS), "between abstract vars");
 		});
 	}
 
 	function checkClass(emptyLines:ListOfEmptyLines, typeToken:TokenTree) {
 		var places:Array<EmptyLinesPlace> = [
-			BEGINCLASS,
-			ENDCLASS,
-			BETWEENCLASSMETHODS,
-			AFTERCLASSVARS,
-			BETWEENCLASSSTATICVARS,
-			BETWEENCLASSVARS,
-			AFTERCLASSSTATICVARS,
-			TYPEDEFINITION
+			BEGIN_CLASS,
+			END_CLASS,
+			BETWEEN_CLASS_METHODS,
+			AFTER_CLASS_VARS,
+			BETWEEN_CLASS_STATIC_VARS,
+			BETWEEN_CLASS_VARS,
+			AFTER_CLASS_STATIC_VARS,
+			TYPE_DEFINITION
 		];
 		if (isIgnored(places)) return;
 
-		checkType(emptyLines, typeToken, getPolicy(BEGINCLASS), getPolicy(ENDCLASS), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+		checkType(emptyLines, typeToken, getPolicy(BEGIN_CLASS), getPolicy(END_CLASS), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
 			while (next != null) {
 				if (!next.isComment()) break;
 				next = next.nextSibling;
@@ -267,16 +279,16 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
-			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEENCLASSMETHODS), "between class methods");
-			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
-			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTERCLASSVARS), "after class vars");
+			if (isFuncChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_METHODS), "between class methods");
+			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
+			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
 
 			var isStaticChild:Bool = (child.filter([Kwd(KwdStatic)], FIRST).length > 0);
 			var isStaticNext:Bool = (next.filter([Kwd(KwdStatic)], FIRST).length > 0);
 
-			if (isStaticChild && isStaticNext) return makePolicyAndWhat(getPolicy(BETWEENCLASSSTATICVARS), "between class static vars");
-			if (!isStaticChild && !isStaticNext) return makePolicyAndWhat(getPolicy(BETWEENCLASSVARS), "between class vars");
-			return makePolicyAndWhat(getPolicy(AFTERCLASSSTATICVARS), "after class static vars");
+			if (isStaticChild && isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_STATIC_VARS), "between class static vars");
+			if (!isStaticChild && !isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_VARS), "between class vars");
+			return makePolicyAndWhat(getPolicy(AFTER_CLASS_STATIC_VARS), "after class static vars");
 		});
 	}
 
@@ -298,14 +310,11 @@ class ExtendedEmptyLinesCheck extends Check {
 		return OTHER;
 	}
 
-	function checkType(emptyLines:ListOfEmptyLines,
-						typeToken:TokenTree,
-						beginPolicy:EmptyLinesPolicy,
-						endPolicy:EmptyLinesPolicy,
-						fieldPolicyProvider:FieldPolicyProvider) {
+	function checkType(emptyLines:ListOfEmptyLines, typeToken:TokenTree, beginPolicy:EmptyLinesPolicy, endPolicy:EmptyLinesPolicy,
+			fieldPolicyProvider:FieldPolicyProvider) {
 		var brOpen = findTypeBrOpen(typeToken);
 		if (brOpen == null) return;
-		checkBetweenToken(emptyLines, typeToken, brOpen, getPolicy(TYPEDEFINITION), "between type definition and left curly");
+		checkBetweenToken(emptyLines, typeToken, brOpen, getPolicy(TYPE_DEFINITION), "between type definition and left curly");
 		var brClose:TokenTree = brOpen.getLastChild();
 		var start:Int = checker.getLinePos(brOpen.pos.max).line;
 		var end:Int = checker.getLinePos(brClose.pos.min).line;
@@ -320,7 +329,15 @@ class ExtendedEmptyLinesCheck extends Check {
 				default:
 					var next:TokenTree = child.nextSibling;
 					if (next == null) continue;
-					if (next.is(BrClose)) continue;
+					switch (next.tok) {
+						case BrClose:
+							continue;
+						case CommentLine(_):
+							continue;
+						case Comment(_):
+							continue;
+						default:
+					}
 					var policyAndWhat:PolicyAndWhat = fieldPolicyProvider(child, next);
 					if (policyAndWhat == null) continue;
 					checkBetweenFullToken(emptyLines, child, next, policyAndWhat.policy, policyAndWhat.whatMsg);
@@ -330,7 +347,7 @@ class ExtendedEmptyLinesCheck extends Check {
 
 	function findTypeBrOpen(parent:TokenTree):TokenTree {
 		if (parent == null) return null;
-		var brOpens:Array<TokenTree> = parent.filterCallback(function (tok:TokenTree, depth:Int):FilterResult {
+		var brOpens:Array<TokenTree> = parent.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 			return switch (tok.tok) {
 				case BrOpen: FOUND_SKIP_SUBTREE;
 				default: GO_DEEPER;
@@ -341,18 +358,20 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function checkFile(emptyLines:ListOfEmptyLines) {
-		if (isIgnored([ANYWHEREINFILE, BEFOREFILEEND])) return;
+		if (isIgnored([ANYWHERE_IN_FILE, BEFORE_FILE_END])) return;
 
 		var ranges:Array<EmptyLineRange> = emptyLines.getRanges(0, checker.lines.length);
 		for (range in ranges) {
 			var line:Int = 0;
 			switch (range) {
 				case NONE:
-				case SINGLE(l): line = l;
-				case RANGE(start, end): line = end;
+				case SINGLE(l):
+					line = l;
+				case RANGE(start, end):
+					line = end;
 			}
-			var result:EmptyLineRange = emptyLines.checkRange(getPolicy(ANYWHEREINFILE), max, range, line);
-			logEmptyRange(getPolicy(ANYWHEREINFILE), "anywhere in file", result);
+			var result:EmptyLineRange = emptyLines.checkRange(getPolicy(ANYWHERE_IN_FILE), max, range, line);
+			logEmptyRange(getPolicy(ANYWHERE_IN_FILE), "anywhere in file", result);
 		}
 
 		var range:EmptyLineRange = NONE;
@@ -366,12 +385,12 @@ class ExtendedEmptyLinesCheck extends Check {
 					if (end == checker.lines.length - 1) range = lastRange;
 			}
 		}
-		var result:EmptyLineRange = emptyLines.checkRange(getPolicy(BEFOREFILEEND), max, range, checker.lines.length - 1);
-		logEmptyRange(getPolicy(BEFOREFILEEND), "before file end", result);
+		var result:EmptyLineRange = emptyLines.checkRange(getPolicy(BEFORE_FILE_END), max, range, checker.lines.length - 1);
+		logEmptyRange(getPolicy(BEFORE_FILE_END), "before file end", result);
 	}
 
 	function checkFunctions(emptyLines:ListOfEmptyLines) {
-		if (isIgnored([INFUNCTION, AFTERLEFTCURLY, BEFORERIGHTCURLY])) return;
+		if (isIgnored([IN_FUNCTION, AFTER_LEFT_CURLY, BEFORE_RIGHT_CURLY])) return;
 
 		var root:TokenTree = checker.getTokenTree();
 		var funcs:Array<TokenTree> = root.filter([Kwd(KwdFunction)], ALL);
@@ -382,7 +401,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			var pos:Position = func.getPos();
 			var start:Int = checker.getLinePos(pos.min).line;
 			var end:Int = checker.getLinePos(pos.max).line;
-			checkLines(emptyLines, getPolicy(INFUNCTION), start, end, "inside functions", true);
+			checkLines(emptyLines, getPolicy(IN_FUNCTION), start, end, "inside functions", true);
 
 			var brOpen:Array<TokenTree> = func.filter([BrOpen], ALL);
 			for (open in brOpen) {
@@ -391,17 +410,24 @@ class ExtendedEmptyLinesCheck extends Check {
 				var start:Int = checker.getLinePos(open.pos.max).line;
 				var end:Int = checker.getLinePos(close.pos.min).line;
 				if (start == end) continue;
-				checkLines(emptyLines, getPolicy(AFTERLEFTCURLY), start + 1, start + 1, "after left curly");
-				checkLines(emptyLines, getPolicy(BEFORERIGHTCURLY), end - 1, end - 1, "before right curly");
+				checkLines(emptyLines, getPolicy(AFTER_LEFT_CURLY), start + 1, start + 1, "after left curly");
+				checkLines(emptyLines, getPolicy(BEFORE_RIGHT_CURLY), end - 1, end - 1, "before right curly");
 			}
 		}
 	}
 
 	function checkComments(emptyLines:ListOfEmptyLines) {
-		if (isIgnored([AFTERMULTILINECOMMENT, AFTERSINGLELINECOMMENT])) return;
+		if (isIgnored([
+			AFTER_MULTILINE_COMMENT,
+			AFTER_SINGLELINE_COMMENT,
+			BEFORE_MULTILINE_COMMENT,
+			BEFORE_SINGLELINE_COMMENT
+		])) {
+			return;
+		}
 
 		var root:TokenTree = checker.getTokenTree();
-		var comments:Array<TokenTree> = root.filterCallback(function (tok:TokenTree, depth:Int):FilterResult {
+		var comments:Array<TokenTree> = root.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 			return switch (tok.tok) {
 				case Comment(_): FOUND_SKIP_SUBTREE;
 				case CommentLine(_): FOUND_SKIP_SUBTREE;
@@ -411,14 +437,24 @@ class ExtendedEmptyLinesCheck extends Check {
 		for (comment in comments) {
 			var line:Int = checker.getLinePos(comment.pos.min).line;
 			if (!~/^\s*(\/\/|\/\*)/.match(checker.lines[line])) continue;
-			line = checker.getLinePos(comment.getPos().max).line + 1;
+			var prevLine:Int = checker.getLinePos(comment.getPos().min).line - 1;
+			var nextLine:Int = checker.getLinePos(comment.getPos().max).line + 1;
 			switch (comment.tok) {
 				case Comment(_):
-					if ((comment.nextSibling != null) && (comment.nextSibling.isComment())) continue;
-					checkLines(emptyLines, getPolicy(AFTERMULTILINECOMMENT), line, line, "after comment");
+					if ((comment.previousSibling != null) && (!comment.previousSibling.isComment())) {
+						checkLines(emptyLines, getPolicy(BEFORE_MULTILINE_COMMENT), prevLine, prevLine, "before comment");
+					}
+					if ((comment.nextSibling == null) || (!comment.nextSibling.isComment())) {
+						checkLines(emptyLines, getPolicy(AFTER_MULTILINE_COMMENT), nextLine, nextLine, "after comment");
+					}
+
 				case CommentLine(_):
-					if ((comment.nextSibling != null) && (comment.nextSibling.isComment())) continue;
-					checkLines(emptyLines, getPolicy(AFTERSINGLELINECOMMENT), line, line, "after comment");
+					if ((comment.previousSibling != null) && (!comment.previousSibling.isComment())) {
+						checkLines(emptyLines, getPolicy(BEFORE_SINGLELINE_COMMENT), prevLine, prevLine, "before comment");
+					}
+					if ((comment.nextSibling == null) || (!comment.nextSibling.isComment())) {
+						checkLines(emptyLines, getPolicy(AFTER_SINGLELINE_COMMENT), nextLine, nextLine, "after comment");
+					}
 				default:
 			}
 		}
@@ -497,31 +533,37 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [{
-				propertyName: "max",
-				value: 1
-			}],
-			properties: [{
-				"propertyName": "skipSingleLineTypes",
-				"values": [false, true]
-			},
+		return [
 			{
-				"propertyName": "defaultPolicy",
-				"values": ["none", "exact", "upto", "atleast", "ignore"]
-			},
-			{
-				"propertyName": "none",
-				"values": [[
-					BEFOREPACKAGE,
-					BETWEENIMPORTS,
-					BEFOREUSING,
-					TYPEDEFINITION,
-					AFTERLEFTCURLY,
-					BEFORERIGHTCURLY
-				]]
-			}]
-		}];
+				fixed: [{
+					propertyName: "max",
+					value: 1
+				}],
+				properties: [
+					{
+						"propertyName": "skipSingleLineTypes",
+						"values": [false, true]
+					},
+					{
+						"propertyName": "defaultPolicy",
+						"values": ["none", "exact", "upto", "atleast", "ignore"]
+					},
+					{
+						"propertyName": "none",
+						"values": [
+							[
+								BEFORE_PACKAGE,
+								BETWEEN_IMPORTS,
+								BEFORE_USING,
+								TYPE_DEFINITION,
+								AFTER_LEFT_CURLY,
+								BEFORE_RIGHT_CURLY
+							]
+						]
+					}
+				]
+			}
+		];
 	}
 }
 
@@ -539,7 +581,7 @@ typedef PolicyAndWhat = {
 	- exact = exactly "max" empty line(s) required
 	- upto = up to "max" empty line(s) allowed (0 - "max")
 	- atleast = at least "max" empty lines required
- **/
+**/
 @:enum
 abstract EmptyLinesPolicy(String) {
 	var IGNORE = "ignore";
@@ -592,49 +634,44 @@ enum EmptyLinesFieldType {
 	- endTypedef = before typedef right curly
 	- inFunction = anywhere inside function body
 	- typeDefinition = between type and left curly
- **/
+**/
 @:enum
 abstract EmptyLinesPlace(String) {
-	var BEFOREPACKAGE = "beforePackage";
-	var AFTERPACKAGE = "afterPackage";
-	var BETWEENIMPORTS = "betweenImports";
-	var BEFOREUSING = "beforeUsing";
-	var AFTERIMPORTS = "afterImports";
-
-	var ANYWHEREINFILE = "anywhereInFile";
-	var BETWEENTYPES = "betweenTypes";
-	var BEFOREFILEEND = "beforeFileEnd";
-	var INFUNCTION = "inFunction";
-	var AFTERLEFTCURLY = "afterLeftCurly";
-	var BEFORERIGHTCURLY = "beforeRightCurly";
-	var TYPEDEFINITION = "typeDefinition";
-
-	var BEGINCLASS = "beginClass";
-	var ENDCLASS = "endClass";
-	var AFTERCLASSSTATICVARS = "afterClassStaticVars";
-	var AFTERCLASSVARS = "afterClassVars";
-	var BETWEENCLASSSTATICVARS = "betweenClassStaticVars";
-	var BETWEENCLASSVARS = "betweenClassVars";
-	var BETWEENCLASSMETHODS = "betweenClassMethods";
-
-	var BEGINABSTRACT = "beginAbstract";
-	var ENDABSTRACT = "endAbstract";
-	var AFTERABSTRACTVARS = "afterAbstractVars";
-	var BETWEENABSTRACTVARS = "betweenAbstractVars";
-	var BETWEENABSTRACTMETHODS = "betweenAbstractMethods";
-
-	var BEGININTERFACE = "beginInterface";
-	var ENDINTERFACE = "endInterface";
-	var BETWEENINTERFACEFIELDS = "betweenInterfaceFields";
-
-	var BEGINENUM = "beginEnum";
-	var ENDENUM = "endEnum";
-	var BETWEENENUMFIELDS = "betweenEnumFields";
-
-	var BEGINTYPEDEF = "beginTypedef";
-	var ENDTYPEDEF = "endTypedef";
-	var BETWEENTYPEDEFFIELDS = "betweenTypedefFields";
-
-	var AFTERSINGLELINECOMMENT = "afterSingleLineComment";
-	var AFTERMULTILINECOMMENT = "afterMultiLineComment";
+	var BEFORE_PACKAGE = "beforePackage";
+	var AFTER_PACKAGE = "afterPackage";
+	var BETWEEN_IMPORTS = "betweenImports";
+	var BEFORE_USING = "beforeUsing";
+	var AFTER_IMPORTS = "afterImports";
+	var ANYWHERE_IN_FILE = "anywhereInFile";
+	var BETWEEN_TYPES = "betweenTypes";
+	var BEFORE_FILE_END = "beforeFileEnd";
+	var IN_FUNCTION = "inFunction";
+	var AFTER_LEFT_CURLY = "afterLeftCurly";
+	var BEFORE_RIGHT_CURLY = "beforeRightCurly";
+	var TYPE_DEFINITION = "typeDefinition";
+	var BEGIN_CLASS = "beginClass";
+	var END_CLASS = "endClass";
+	var AFTER_CLASS_STATIC_VARS = "afterClassStaticVars";
+	var AFTER_CLASS_VARS = "afterClassVars";
+	var BETWEEN_CLASS_STATIC_VARS = "betweenClassStaticVars";
+	var BETWEEN_CLASS_VARS = "betweenClassVars";
+	var BETWEEN_CLASS_METHODS = "betweenClassMethods";
+	var BEGIN_ABSTRACT = "beginAbstract";
+	var END_ABSTRACT = "endAbstract";
+	var AFTER_ABSTRACT_VARS = "afterAbstractVars";
+	var BETWEEN_ABSTRACT_VARS = "betweenAbstractVars";
+	var BETWEEN_ABSTRACT_METHODS = "betweenAbstractMethods";
+	var BEGIN_INTERFACE = "beginInterface";
+	var END_INTERFACE = "endInterface";
+	var BETWEEN_INTERFACE_FIELDS = "betweenInterfaceFields";
+	var BEGIN_ENUM = "beginEnum";
+	var END_ENUM = "endEnum";
+	var BETWEEN_ENUM_FIELDS = "betweenEnumFields";
+	var BEGIN_TYPEDEF = "beginTypedef";
+	var END_TYPEDEF = "endTypedef";
+	var BETWEEN_TYPEDEF_FIELDS = "betweenTypedefFields";
+	var AFTER_SINGLELINE_COMMENT = "afterSingleLineComment";
+	var AFTER_MULTILINE_COMMENT = "afterMultiLineComment";
+	var BEFORE_SINGLELINE_COMMENT = "beforeSingleLineComment";
+	var BEFORE_MULTILINE_COMMENT = "beforeMultiLineComment";
 }

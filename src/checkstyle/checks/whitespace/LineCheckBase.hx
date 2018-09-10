@@ -2,13 +2,11 @@ package checkstyle.checks.whitespace;
 
 /**
 	base class for line based whitespace checks
- **/
+**/
 @ignore("base class for line based whitespace checks")
 class LineCheckBase extends Check {
-
 	var currentState:RangeType;
 	var skipOverInitialQuote:Bool;
-
 	var commentStartRE:EReg;
 	var commentBlockEndRE:EReg;
 	var stringStartRE:EReg;
@@ -41,7 +39,7 @@ class LineCheckBase extends Check {
 				case STRING(isInterpolated): handleStringState(line, ranges, currentStart, isInterpolated);
 			};
 		}
-		if (line.length == 0) ranges.push({ type: currentState, start: 0, end: 0 });
+		if (line.length == 0) ranges.push({type: currentState, start: 0, end: 0});
 		return ranges;
 	}
 
@@ -53,7 +51,7 @@ class LineCheckBase extends Check {
 
 		if (foundCommentStart && commentStart < stringStart) {
 			if (commentStart > currentStart) {
-				ranges.push({ type: currentState, start: currentStart, end: commentStart });
+				ranges.push({type: currentState, start: currentStart, end: commentStart});
 			}
 
 			currentState = COMMENT(commentStartRE.matched(1) == "*");
@@ -61,7 +59,7 @@ class LineCheckBase extends Check {
 		}
 		else if (foundStringStart && stringStart < commentStart) {
 			if (stringStart > currentStart) {
-				ranges.push({ type: currentState, start: currentStart, end: stringStart });
+				ranges.push({type: currentState, start: currentStart, end: stringStart});
 			}
 
 			skipOverInitialQuote = true;
@@ -69,7 +67,7 @@ class LineCheckBase extends Check {
 			return stringStart;
 		}
 		else {
-			ranges.push({ type: currentState, start: currentStart, end: line.length });
+			ranges.push({type: currentState, start: currentStart, end: line.length});
 
 			return line.length;
 		}
@@ -78,13 +76,13 @@ class LineCheckBase extends Check {
 	function handleCommentState(line:String, ranges:Array<Range>, currentStart:Int, isBlock:Bool):Int {
 		if (isBlock && commentBlockEndRE.matchSub(line, currentStart)) {
 			var commentEnd = commentBlockEndRE.matchedPos().pos + 2;
-			ranges.push({ type: currentState, start: currentStart, end: commentEnd });
+			ranges.push({type: currentState, start: currentStart, end: commentEnd});
 
 			currentState = TEXT;
 			return commentEnd;
 		}
 		else {
-			ranges.push({ type: currentState, start: currentStart, end: line.length });
+			ranges.push({type: currentState, start: currentStart, end: line.length});
 
 			if (!isBlock) currentState = TEXT;
 			return line.length;
@@ -98,13 +96,13 @@ class LineCheckBase extends Check {
 		if (re.match(line.substring(adjustedStart))) {
 			var matchedPos = re.matchedPos();
 			var stringEnd = adjustedStart + matchedPos.pos + matchedPos.len;
-			ranges.push({ type: currentState, start: currentStart, end: stringEnd });
+			ranges.push({type: currentState, start: currentStart, end: stringEnd});
 
 			currentState = TEXT;
 			return stringEnd;
 		}
 		else {
-			ranges.push({ type: currentState, start: currentStart, end: line.length });
+			ranges.push({type: currentState, start: currentStart, end: line.length});
 
 			return line.length;
 		}

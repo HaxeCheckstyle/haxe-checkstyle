@@ -4,26 +4,18 @@ import haxe.macro.PositionTools;
 
 /**
 	Checks that the order of modifiers conforms to the standards.
- **/
+**/
 @name("ModifierOrder", "AccessOrder")
 @desc("Checks that the order of modifiers conforms to the standards.")
 class ModifierOrderCheck extends Check {
-
 	/**
 		order in which modifier should occur
-	 **/
+	**/
 	public var modifiers:Array<ModifierOrderCheckModifier>;
 
 	public function new() {
 		super(AST);
-		modifiers = [
-			MACRO,
-			OVERRIDE,
-			PUBLIC_PRIVATE,
-			STATIC,
-			INLINE,
-			DYNAMIC
-		];
+		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC];
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
@@ -74,7 +66,7 @@ class ModifierOrderCheck extends Check {
 	- DYNAMIC = dynamic modifier
 	- EXTERN = extern modifier
 	- FINAL = final modifier
- **/
+**/
 @:enum
 abstract ModifierOrderCheckModifier(String) {
 	var PUBLIC_PRIVATE = "PUBLIC_PRIVATE";
@@ -91,23 +83,15 @@ abstract ModifierOrderCheckModifier(String) {
 	@:from
 	public static function fromAccess(access:Access):ModifierOrderCheckModifier {
 		return switch (access) {
-			case APublic, APrivate:
-				PUBLIC_PRIVATE;
-			case AStatic:
-				STATIC;
-			case AInline:
-				INLINE;
-			case AOverride:
-				OVERRIDE;
-			case AMacro:
-				MACRO;
-			case ADynamic:
-				DYNAMIC;
+			case APublic, APrivate: PUBLIC_PRIVATE;
+			case AStatic: STATIC;
+			case AInline: INLINE;
+			case AOverride: OVERRIDE;
+			case AMacro: MACRO;
+			case ADynamic: DYNAMIC;
 			#if (haxe_ver >= 4.0)
-			case AExtern:
-				EXTERN;
-			case AFinal:
-				FINAL;
+			case AExtern: EXTERN;
+			case AFinal: FINAL;
 			#end
 		}
 	}

@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.OperatorWhitespaceCheck;
 
 class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckTests> {
-
 	static inline var MSG_EQUALS:String = 'OperatorWhitespace policy "around" violated by "="';
 	static inline var MSG_EQUALS_BEFORE:String = 'OperatorWhitespace policy "before" violated by "="';
 	static inline var MSG_EQUALS_AFTER:String = 'OperatorWhitespace policy "after" violated by "="';
@@ -238,64 +237,53 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		Thursday;
 		Friday; Weekend(day:String);
 	}";
-
 	var NO_WHITESPACE_OBJECT_DECL = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var x={ x: 100, y: 100,z: 20 };
 		}
 	}";
-
 	var NO_WHITESPACE_TYPEDEF = "
 	typedef Test ={
 		x:Int,
 		y:Int,z:Int
 	}";
-
 	var NO_WHITESPACE_VAR_INIT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>=[];
 		}
 	}";
-
 	var NO_WHITESPACE_GT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>= [];
 		}
 	}";
-
 	var ISSUE_58 = "
 	class Test {
 		public function new() {
 			var x:Int, y:Int;
 		}
 	}";
-
 	var ISSUE_59 = "
 	typedef Test=Int
 	";
-
 	var ISSUE_63 = "
 	typedef Test =#if true Int #else String #end
 	";
-
 	var ISSUE_70 = "
 		import haxe.macro.*;
 	";
-
 	var ISSUE_71 = "
 		class Test {
 		function foo<T, X>() {
 			trace((null : Array<Int, String>));
 		}
 	}";
-
 	var ISSUE_72 = "
 	abstract Test<T>(Array<T>) {}
 	";
-
 	var ISSUE_77 = "
 	// comment
 	class Test // comment
@@ -308,11 +296,9 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		} // comment
 	} // comment
 	";
-
 	var ISSUE_80 = "
 	interface Test implements Dynamic {}
 	";
-
 	var ISSUE_81 = "
 	class Test {
 		function foo() {
@@ -320,13 +306,11 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			do ++a while (true);
 		}
 	}";
-
 	var ISSUE_98 = "
 	class Test {
 		// °öäüßÖÄÜ@łĸŋđđðſðæµ”“„¢«»Ø→↓←Ŧ¶€Ł}][{¬½¼³²
 		var test:Int = 0;
 	}";
-
 	var MINUS_CONSTANT = "
 	class Test {
 		function test() {
@@ -339,12 +323,10 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			return -1;
 		}
 	}";
-
 	var CONDITIONAL_STAR_IMPORT_ISSUE_160 = "
 	#if macro
 		import haxe.macro.*;
 	#end";
-
 	var CONDITIONAL_ELSEIF_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;
@@ -360,7 +342,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		#end
 	#end
 	import haxe.macro.Type;";
-
 	var CONDITIONAL_ELSE_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;
@@ -368,7 +349,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		import haxe.macro.*;
 	#end
 	import haxe.macro.Type;";
-
 	var NEGATIVE_VARS = "
 	class Test {
 		function test() {
@@ -385,7 +365,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			return -a;
 		}
 	}";
-
 	var NEGATIVE_NUMS = "
 	class Test {
 		function test() {
@@ -401,7 +380,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			for (a in [-1, -2]) -18 + 2;
 		}
 	}";
-
 	var OPGT = "
 	class Test {
 		function test() {
@@ -410,7 +388,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			if (a >>> b > c) return a >>>= b;
 		}
 	}";
-
 	var UNARY_NO_WHITESPACE = "
 	class Test {
 		function test() {
@@ -423,7 +400,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			return !( a++ );
 		}
 	}";
-
 	var UNARY_INNER_WHITESPACE = "
 	class Test {
 		function test() {
@@ -432,7 +408,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			return ! (a ++);
 		}
 	}";
-
 	var INTERVAL_NO_WHITESPACE = "
 	class Test {
 		function test() {
@@ -440,7 +415,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			for (i in a...b) trace(i);
 		}
 	}";
-
 	var INTERVAL_WHITESPACE = "
 	class Test {
 		function test() {
@@ -448,39 +422,32 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			for (i in a ... b) trace(i);
 		}
 	}";
-
 	var FUNC_ARG_WHITESPACE = "
 	typedef Test = Int -> String -> Array<Int>;
 	";
-
 	var FUNC_ARG_NO_WHITESPACE = "
 	typedef Test = Int->String->Array<Int>;
 	";
-
 	var MAP_WHITESPACE = "
 	class Test {
 		var test = ['key' => 'value', 'key2' => 'value2'];
 	}";
-
 	var MAP_NO_WHITESPACE = "
 	class Test {
 		var test = ['key'=>'value', 'key2'=>'value2'];
 	}";
-
 	var TERNARY_WHITESPACE = "
 	class Test {
 		function test() {
 			x = a ? b : c;
 		}
 	}";
-
 	var TERNARY_NO_WHITESPACE = "
 	class Test {
 		function test() {
 			x = a?b:c;
 		}
 	}";
-
 	var MACRO_TYPES = "
 	class Test {
 		function test() {
@@ -490,7 +457,6 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 			return macro $e + $e;
 		}
 	}";
-
 	var MACRO_NOT = "
 	#if !macro
 	@:autoBuild(some.BuildMacro.build())
@@ -499,14 +465,12 @@ abstract OperatorWhitespaceCheckTests(String) to String {
 		function test() {
 		}
 	}";
-
 	var BITWISE_NEG = "
 	class Test {
 		function test() {
 			var test = ~test;
 		}
 	}";
-
 	var BITWISE_NEG_WRONG = "
 	class Test {
 		function test() {

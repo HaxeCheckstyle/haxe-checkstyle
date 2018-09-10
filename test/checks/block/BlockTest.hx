@@ -6,7 +6,6 @@ import checkstyle.checks.block.RightCurlyCheck;
 
 // tests for blocks using multiple check classes
 class BlockTest extends CheckTestCase<BlockTests> {
-
 	@Test
 	public function testBlockFormatIssue42() {
 		var check:EmptyBlockCheck = new EmptyBlockCheck();
@@ -52,7 +51,6 @@ abstract BlockTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_42_MACRO = "
 	abstractAndClass Macro
 	{
@@ -65,7 +63,6 @@ abstract BlockTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_42_MACRO_EOL = "
 	abstractAndClass Macro {
 		function build() {
@@ -75,7 +72,6 @@ abstract BlockTests(String) to String {
 			}
 		}
 	}";
-
 	var CONDITIONAL_TEST = "
 	abstractAndClass Test {
 		#if false

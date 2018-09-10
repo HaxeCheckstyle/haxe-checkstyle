@@ -2,18 +2,17 @@ package checkstyle.checks.naming;
 
 /**
 	Checks that the local variable names conform to a format specified by the "format" property.
- **/
+**/
 @name("LocalVariableName")
 @desc("Checks that the local variable names conform to a format specified by the `format` property.")
 class LocalVariableNameCheck extends NameCheckBase<String> {
-
 	public function new() {
 		super();
 		format = "^[a-z][a-zA-Z0-9]*$";
 	}
 
 	override function actualRun() {
-		formatRE = new EReg (format, "");
+		formatRE = new EReg(format, "");
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				case EVars(vars):

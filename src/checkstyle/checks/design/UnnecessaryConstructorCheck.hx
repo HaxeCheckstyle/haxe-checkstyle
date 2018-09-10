@@ -2,11 +2,10 @@ package checkstyle.checks.design;
 
 /**
 	Checks for unnecessary constructor in classes that contain only static methods or fields.
- **/
+**/
 @name("UnnecessaryConstructor")
 @desc("Checks for unnecessary constructor in classes that contain only static methods or fields.")
 class UnnecessaryConstructorCheck extends Check {
-
 	public function new() {
 		super(TOKEN);
 		categories = [Category.BUG_RISK];
@@ -20,10 +19,7 @@ class UnnecessaryConstructorCheck extends Check {
 			if (extendsBaseClass(cls)) {
 				continue;
 			}
-			var acceptableTokens:Array<TokenTree> = cls.filter([
-				Kwd(KwdFunction),
-				Kwd(KwdVar)
-			], FIRST);
+			var acceptableTokens:Array<TokenTree> = cls.filter([Kwd(KwdFunction), Kwd(KwdVar)], FIRST);
 
 			var haveConstructor:Bool = false;
 			var staticTokens:Int = 0;
@@ -58,12 +54,14 @@ class UnnecessaryConstructorCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

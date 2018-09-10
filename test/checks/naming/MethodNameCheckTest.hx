@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.MethodNameCheck;
 
 class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new MethodNameCheck();
@@ -146,14 +145,12 @@ abstract MethodNameCheckTests(String) to String {
 		function test() {};
 		function testName() {};
 	}";
-
 	var TEST1 = "
 	abstractAndClass Test {
 		static public function Test() {}
 		public function Test2() {}
 		static inline public function Test3() {}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		static public function Test() {}
@@ -161,17 +158,14 @@ abstract MethodNameCheckTests(String) to String {
 		public function Test2() {}
 		function Test3() {}
 	}";
-
 	var TEST3 = "
 	typedef Test = {
 		public function Test() {}
 	}";
-
 	var TEST4 = "
 	extern class Test {
 		public function Test() {}
 	}";
-
 	var TEST5 = "
 	abstractAndClass Test {
 		static function Test() {}

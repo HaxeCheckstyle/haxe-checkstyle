@@ -3,18 +3,15 @@ package checks.block;
 import checkstyle.checks.block.NeedBracesCheck;
 
 class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
-
 	static inline var PREFIX:String = "No braces used for body of ";
 	static inline var MSG_IF:String = PREFIX + '"if"';
 	static inline var MSG_ELSE:String = PREFIX + '"else"';
 	static inline var MSG_FOR:String = PREFIX + '"for"';
 	static inline var MSG_WHILE:String = PREFIX + '"while"';
-
 	static inline var MSG_SAME_LINE_IF:String = 'Body of "if" on same line';
 	static inline var MSG_SAME_LINE_ELSE:String = 'Body of "else" on same line';
 	static inline var MSG_SAME_LINE_FOR:String = 'Body of "for" on same line';
 	static inline var MSG_SAME_LINE_WHILE:String = 'Body of "while" on same line';
-
 	static inline var MSG_SAME_LINE_FUNCTION:String = 'Body of "function" on same line';
 	static inline var MSG_SAME_LINE_DO_WHILE:String = 'Body of "do" on same line';
 
@@ -278,7 +275,6 @@ abstract NeedBracesCheckTests(String) to String {
 				return;
 		}
 	}";
-
 	var TEST1 = "
 	class Test {
 		function test() {
@@ -286,7 +282,6 @@ abstract NeedBracesCheckTests(String) to String {
 				return;
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		function test() {
@@ -295,7 +290,6 @@ abstract NeedBracesCheckTests(String) to String {
 				return;
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 		function test() {
@@ -307,7 +301,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST4 = "
 	class Test {
 		function test() {
@@ -316,7 +309,6 @@ abstract NeedBracesCheckTests(String) to String {
 				z:3 };
 		}
 	}";
-
 	var TEST5 = "
 	class Test {
 		function test() {
@@ -325,7 +317,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST6 = "
 	class Test {
 		function test() {
@@ -334,7 +325,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST7 = "
 	class Test {
 		function test() {
@@ -342,7 +332,6 @@ abstract NeedBracesCheckTests(String) to String {
 				return i;
 		}
 	}";
-
 	var TEST8 = "
 	class Test {
 		function test() {
@@ -351,21 +340,18 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST9 = "
 	class Test {
 		function test() {
 			for (i in 0....10) return i;
 		}
 	}";
-
 	var TEST10 = "
 	class Test {
 		function test() {
 			if (true) return;
 		}
 	}";
-
 	var TEST11 = "
 	class Test {
 		function test() {
@@ -374,7 +360,6 @@ abstract NeedBracesCheckTests(String) to String {
 			else return;
 		}
 	}";
-
 	var TEST12 = "
 	class Test {
 		function test() {
@@ -384,7 +369,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST13 = "
 	class Test {
 		function test() {
@@ -392,7 +376,6 @@ abstract NeedBracesCheckTests(String) to String {
 			else if (false) { return; }
 		}
 	}";
-
 	var TEST14 = "
 	class Test {
 		function test() {
@@ -403,7 +386,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST15 = "
 	class Test {
 		public function test(a:Bool, b:Bool) {
@@ -415,7 +397,6 @@ abstract NeedBracesCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST16 = "
 	class Test {
 		function test() {
@@ -425,12 +406,10 @@ abstract NeedBracesCheckTests(String) to String {
 			else return;
 		}
 	}";
-
 	var INTERFACE_DEF = "
 	interface Test {
 		function test();
 	}";
-
 	var ANON_FUNCTION = "
 	abstractAndClass Test {
 		function test() {
@@ -439,14 +418,12 @@ abstract NeedBracesCheckTests(String) to String {
 			}, false);
 		}
 	}";
-
 	var ANON_FUNCTION_NO_BRACES = "
 	abstractAndClass Test {
 		function test() {
 			doSomething(function() doIt(), false);
 		}
 	}";
-
 	var DO_WHILE = "
 	class Test {
 		function test() {
@@ -456,7 +433,6 @@ abstract NeedBracesCheckTests(String) to String {
 			while (true);
 		}
 	}";
-
 	var DO_WHILE_NO_BRACES = "
 	class Test {
 		function test() {

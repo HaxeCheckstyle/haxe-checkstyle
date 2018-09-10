@@ -3,7 +3,6 @@ package checks.imports;
 import checkstyle.checks.imports.AvoidStarImportCheck;
 
 class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> {
-
 	static inline var MSG_STAR_IMPORT:String = 'Using the ".*" form of import should be avoided';
 
 	@Test
@@ -36,7 +35,6 @@ abstract AvoidStarImportCheckTests(String) to String {
 	class Test {
 		public function new() {}
 	}";
-
 	var STAR_IMPORT = "
 	package haxe.checkstyle;
 
@@ -49,12 +47,10 @@ abstract AvoidStarImportCheckTests(String) to String {
 	class Test {
 		public function new() {}
 	}";
-
 	var CONDITIONAL_STAR_IMPORT_ISSUE_160 = "
 	#if macro
 		import haxe.macro.*;
 	#end";
-
 	var CONDITIONAL_ELSEIF_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;
@@ -70,7 +66,6 @@ abstract AvoidStarImportCheckTests(String) to String {
 		#end
 	#end
 	import haxe.macro.Type;";
-
 	var CONDITIONAL_ELSE_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;

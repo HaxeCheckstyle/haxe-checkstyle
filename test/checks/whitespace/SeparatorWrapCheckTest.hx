@@ -3,9 +3,7 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.SeparatorWrapCheck;
 
 class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
-
 	static inline var MSG_COMMA_EOL:String = 'Token "," must be at the end of the line';
-
 	static inline var MSG_COMMA_NL:String = 'Token "," must be on a new line';
 	static inline var MSG_DOT_NL:String = 'Token "." must be on a new line';
 
@@ -85,7 +83,6 @@ abstract SeparatorWrapCheckTests(String) to String {
 		y:Int,
 		z:Int
 	}";
-
 	var CORRECT_NOWRAP = "
 	package checkstyle.tests;
 
@@ -98,14 +95,12 @@ abstract SeparatorWrapCheckTests(String) to String {
 	}
 
 	typedef Test = { x:Int, y:Int, z:Int }";
-
 	var NL_WRAP_FUNC = "
 	class Test {
 		function test(param1:String
 				, param2:String) {
 		}
 	}";
-
 	var NL_WRAP_OBJECT_DECL = "
 	class Test {
 		function test(param1:String, param2:String) {
@@ -114,12 +109,10 @@ abstract SeparatorWrapCheckTests(String) to String {
 				, z: 20 };
 		}
 	}";
-
 	var NOWRAP_ARRAY = "
 	class Test {
 		var test:Array<String>=[1, 2, 3, 4];
 	}";
-
 	var EOL_WRAP_ARRAY = "
 	class Test {
 		var test:Array<String>=[1,
@@ -127,7 +120,6 @@ abstract SeparatorWrapCheckTests(String) to String {
 			3,
 			4];
 	}";
-
 	var NL_WRAP_ARRAY = "
 	class Test {
 		var test:Array<String>=[1
@@ -135,14 +127,12 @@ abstract SeparatorWrapCheckTests(String) to String {
 			, 3
 			, 4];
 	}";
-
 	var NOWRAP_CALL = "
 	class Test {
 		function test(a:String) {
 			a.substr(0, 10);
 		}
 	}";
-
 	var EOL_WRAP_CALL = "
 	class Test {
 		function test(a:String) {
@@ -151,7 +141,6 @@ abstract SeparatorWrapCheckTests(String) to String {
 				substr(0, 10);
 		}
 	}";
-
 	var NL_WRAP_CALL = "
 	class Test {
 		function test(a:String) {
@@ -159,7 +148,6 @@ abstract SeparatorWrapCheckTests(String) to String {
 				.substr(0, 10);
 		}
 	}";
-
 	var EOL_WRAP_IMPORT = "
 	package checkstyle.
 			tests;
@@ -167,13 +155,11 @@ abstract SeparatorWrapCheckTests(String) to String {
 			macro.
 			Expr;
 	";
-
 	var NOWRAP_IMPORT = "
 	package checkstyle.tests;
 
 	import haxe.macro.Expr;
 	";
-
 	var NL_WRAP_IMPORT = "
 	package checkstyle
 			.tests;

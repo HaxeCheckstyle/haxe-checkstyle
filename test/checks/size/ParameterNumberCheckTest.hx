@@ -3,7 +3,6 @@ package checks.size;
 import checkstyle.checks.size.ParameterNumberCheck;
 
 class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> {
-
 	@Test
 	public function testNoParams() {
 		var check = new ParameterNumberCheck();
@@ -69,7 +68,6 @@ abstract ParameterNumberCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test1(param1:Int,
@@ -82,7 +80,6 @@ abstract ParameterNumberCheckTests(String) to String {
 			return 3;
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		override public function test2(param1:Int,
@@ -96,7 +93,6 @@ abstract ParameterNumberCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var TEST4 = "
 	abstractAndClass Test {
 		public function test3(param1:Int,
@@ -105,7 +101,6 @@ abstract ParameterNumberCheckTests(String) to String {
 			return;
 		}
 	}";
-
 	var TEST5 = "
 	interface ITest {
 		public function test4(param1:Int,

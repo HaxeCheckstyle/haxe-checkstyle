@@ -2,11 +2,10 @@ package checkstyle.checks.coding;
 
 /**
 	Checks that each variable declaration is in its own statement and on its own line.
- **/
+**/
 @name("MultipleVariableDeclarations")
 @desc("Checks that each variable declaration is in its own statement and on its own line.")
 class MultipleVariableDeclarationsCheck extends Check {
-
 	public function new() {
 		super(TOKEN);
 		categories = [Category.STYLE, Category.CLARITY, Category.COMPLEXITY];

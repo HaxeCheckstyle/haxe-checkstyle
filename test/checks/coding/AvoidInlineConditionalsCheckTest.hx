@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.coding.AvoidInlineConditionalsCheck;
 
 class AvoidInlineConditionalsCheckTest extends CheckTestCase<AvoidInlineConditionalsTests> {
-
 	@Test
 	public function testInlineCondition() {
 		var check = new AvoidInlineConditionalsCheck();

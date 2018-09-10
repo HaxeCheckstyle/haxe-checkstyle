@@ -1,7 +1,6 @@
 package checks;
 
 import byte.ByteData;
-
 import checkstyle.CheckMessage;
 import checkstyle.CheckFile;
 import checkstyle.reporter.IReporter;
@@ -10,7 +9,6 @@ import checkstyle.Checker;
 import checkstyle.checks.Check;
 
 class CheckTestCase<T:String> {
-
 	static inline var FILE_NAME:String = "Test.hx";
 
 	var checker:Checker;
@@ -48,7 +46,7 @@ class CheckTestCase<T:String> {
 
 		ReporterManager.INSTANCE.clear();
 		ReporterManager.INSTANCE.addReporter(reporter);
-		checker.process([{name:fileName, content:ByteData.ofString(src), index:0}]);
+		checker.process([{name: fileName, content: ByteData.ofString(src), index: 0}]);
 		return reporter.message;
 	}
 
@@ -60,7 +58,6 @@ class CheckTestCase<T:String> {
 }
 
 class TestReporter implements IReporter {
-
 	public var message:String;
 
 	public function new() {

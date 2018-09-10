@@ -3,13 +3,12 @@ package checkstyle.checks.block;
 /**
 	Checks for braces on function, if, for and while statements. It has an option to allow single line statements without
 	braces using property "allowSingleLineStatement" like "if (b) return 10;".
- **/
+**/
 @name("NeedBraces")
 @desc("Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.")
 class NeedBracesCheck extends Check {
-
 	/**
-	    matches only statements specified in tokens list:
+		matches only statements specified in tokens list:
 
 		- FUNCTION = function body "funnction test () {}"
 		- FOR = for body "for (i in 0..10) {}"
@@ -18,12 +17,12 @@ class NeedBracesCheck extends Check {
 		- WHILE = while body "while (test) {}"
 		- DO_WHILE = do…while body "do {} while (test)"
 		- CATCH = catch body "catch (e:Dynamic) {}"
-	 **/
+	**/
 	public var tokens:Array<NeedBracesCheckToken>;
 
 	/**
 		allow / disallow use of single line statements without braces
-	 **/
+	**/
 	public var allowSingleLineStatement:Bool;
 
 	public function new() {
@@ -94,22 +93,26 @@ class NeedBracesCheck extends Check {
 	function checkFunctionChild(token:TokenTree) {
 		if (token == null || !token.hasChildren()) return;
 
-		var accessHelper:TokenTreeAccessHelper;
+		var body:TokenTree = token;
 		if (token.children.length == 1) {
-			accessHelper = TokenTreeAccessHelper.access(token).firstChild();
+			body = token.getFirstChild();
 		}
-		else {
-			accessHelper = TokenTreeAccessHelper.access(token);
+		body = TokenTreeAccessHelper.access(body).firstOf(POpen).token;
+		if ((body == null) || (body.nextSibling == null)) {
+			return;
 		}
-		// function bodies
-		var lastChild:TokenTree = accessHelper.firstOf(BrOpen).token;
-		if (lastChild != null) return;
-		// interfaces
-		lastChild = accessHelper.firstOf(Semicolon).token;
-		if (lastChild != null) return;
-		lastChild = accessHelper.lastChild().token;
-
-		checkNoBraces(token, lastChild);
+		body = body.nextSibling;
+		if (body.is(DblDot)) {
+			var lastChild:TokenTree = TokenTreeCheckUtils.getLastToken(token);
+			if (lastChild.is(Semicolon)) {
+				return;
+			}
+			body = body.nextSibling;
+		}
+		if ((body == null) || (body.is(BrOpen))) {
+			return;
+		}
+		checkNoBraces(token, body);
 	}
 
 	function checkWhileChild(token:TokenTree) {

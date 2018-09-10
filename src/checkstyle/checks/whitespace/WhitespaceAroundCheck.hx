@@ -4,17 +4,16 @@ import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	Checks that a token is surrounded by whitespace.
- **/
+**/
 @name("WhitespaceAround")
 @desc("Checks that a token is surrounded by whitespace.")
 class WhitespaceAroundCheck extends Check {
-
 	/**
 		supported list of tokens:
 		",", ";", "(", ")", "[", "]", "{", "}", ":", ".", "=", "+", "-", "*", "/", "%", ">", "<", ">=", "<=", "==", "!=",
 		"&", "|", "^", "&&", "||", "<<", ">>", ">>>", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=", "|=", "&=",
 		"^=", "...", "=>", "!", "++", "--",
-	 **/
+	**/
 	public var tokens:Array<String>;
 
 	public function new() {

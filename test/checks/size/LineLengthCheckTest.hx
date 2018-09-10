@@ -3,7 +3,6 @@ package checks.size;
 import checkstyle.checks.size.LineLengthCheck;
 
 class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
-
 	@Test
 	public function testDefaultLineLength() {
 		assertMsg(new LineLengthCheck(), TEST1, "Line is longer than 160 characters (found 178)");
@@ -31,7 +30,6 @@ abstract LineLengthCheckTests(String) to String {
 			var s = 'LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST LONG LINE TEST';
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		public function new() {
@@ -46,7 +44,6 @@ abstract LineLengthCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 		public function new() {

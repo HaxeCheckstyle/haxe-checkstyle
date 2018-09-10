@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.SeparatorWhitespaceCheck;
 
 class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceCheckTests> {
-
 	static inline var MSG_AFTER:String = 'SeparatorWhitespace policy "after" violated by ","';
 
 	@Test
@@ -83,7 +82,6 @@ abstract SeparatorWhitespaceCheckTests(String) to String {
 		Thursday;
 		Friday; Weekend(day:String);
 	}";
-
 	var COMMA_WHITESPACE_NONE = "
 	typedef Test = { x:Int,y:Int,z:Int }
 	typedef Test2 = { x:Int,
@@ -93,7 +91,6 @@ abstract SeparatorWhitespaceCheckTests(String) to String {
 		,y:Int
 		,z:Int }
 	";
-
 	var WHITESPACE_AROUND = "
 	typedef Test = { x:String , y:Int , z:Int }
 	class Test2 {

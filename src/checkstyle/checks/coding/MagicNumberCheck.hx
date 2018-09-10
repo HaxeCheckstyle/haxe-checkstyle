@@ -6,10 +6,9 @@ package checkstyle.checks.coding;
 @name("MagicNumber")
 @desc("Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.")
 class MagicNumberCheck extends Check {
-
 	/**
 		list of magic numbers to ignore during checks
-	 **/
+	**/
 	public var ignoreNumbers:Array<Float>;
 
 	public function new() {
@@ -21,7 +20,13 @@ class MagicNumberCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allTypes:Array<TokenTree> = root.filter([Kwd(KwdAbstract), Kwd(KwdClass), Kwd(KwdEnum), Kwd(KwdInterface), Kwd(KwdTypedef)], FIRST);
+		var allTypes:Array<TokenTree> = root.filter([
+			Kwd(KwdAbstract),
+			Kwd(KwdClass),
+			Kwd(KwdEnum),
+			Kwd(KwdInterface),
+			Kwd(KwdTypedef)
+		], FIRST);
 		for (type in allTypes) {
 			if (TokenTreeCheckUtils.isTypeEnumAbstract(type)) continue;
 			checkForNumbers(type);
@@ -59,9 +64,7 @@ class MagicNumberCheck extends Check {
 		if ((token == null) || (token.tok == null)) return true;
 		return switch (token.tok) {
 			case At: false;
-			case Kwd(KwdVar):
-				if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false;
-				else true;
+			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false; else true;
 			default: filterNumber(token.parent);
 		}
 	}

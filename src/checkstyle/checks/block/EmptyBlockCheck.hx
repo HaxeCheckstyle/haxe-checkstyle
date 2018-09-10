@@ -1,14 +1,13 @@
 package checkstyle.checks.block;
 
 /**
-    Checks for empty blocks. The policy to verify is specified using the property "option".
- **/
+	Checks for empty blocks. The policy to verify is specified using the property "option".
+**/
 @name("EmptyBlock")
 @desc("Checks for empty blocks. The policy to verify is specified using the property `option`.")
 class EmptyBlockCheck extends Check {
-
 	/**
-	    matches only blocks specified in tokens list:
+		matches only blocks specified in tokens list:
 		- CLASS_DEF = class definition "class Test {}"
 		- ENUM_DEF = enum definition "enum Test {}"
 		- ABSTRACT_DEF = abstract definition "abstract Test {}"
@@ -23,15 +22,15 @@ class EmptyBlockCheck extends Check {
 		- TRY = try body "try {}"
 		- CATCH = catch body "catch (e:Dynamic) {}"
 		- REIFICATION = macro reification "$i{}"
-	 **/
+	**/
 	public var tokens:Array<EmptyBlockCheckToken>;
 
 	/**
-	    for all empty blocks matched by tokens
-	    - empty = allow empty blocks but enforce "{}" notation
-	    - text = must contain something apart from whitespace (comment or statement)
-	    - stmt = must contain at least one statement (that is not a comment)
-	 **/
+		for all empty blocks matched by tokens
+		- empty = allow empty blocks but enforce "{}" notation
+		- text = must contain something apart from whitespace (comment or statement)
+		- stmt = must contain at least one statement (that is not a comment)
+	**/
 	public var option:EmptyBlockCheckOption;
 
 	public function new() {
@@ -66,10 +65,14 @@ class EmptyBlockCheck extends Check {
 			if (isPosSuppressed(brOpen.pos)) continue;
 			if (filterParentToken(brOpen.parent)) continue;
 			switch (option) {
-				case TEXT: checkForText(brOpen);
-				case STATEMENT: checkForStatement(brOpen);
-				case EMPTY: checkForEmpty(brOpen);
-				default: checkForText(brOpen);
+				case TEXT:
+					checkForText(brOpen);
+				case STATEMENT:
+					checkForStatement(brOpen);
+				case EMPTY:
+					checkForEmpty(brOpen);
+				default:
+					checkForText(brOpen);
 			}
 		}
 	}
@@ -77,20 +80,34 @@ class EmptyBlockCheck extends Check {
 	function filterParentToken(token:TokenTree):Bool {
 		if ((token == null) || (token.tok == null)) return false;
 		switch (token.tok) {
-			case Kwd(KwdClass): return !hasToken(CLASS_DEF);
-			case Kwd(KwdInterface): return !hasToken(INTERFACE_DEF);
-			case Kwd(KwdAbstract): return !hasToken(ABSTRACT_DEF);
-			case Kwd(KwdTypedef): return !hasToken(TYPEDEF_DEF);
-			case Kwd(KwdEnum): return !hasToken(ENUM_DEF);
-			case Kwd(KwdFunction): return !hasToken(FUNCTION);
-			case Kwd(KwdIf), Kwd(KwdElse): return !hasToken(IF);
-			case Kwd(KwdFor): return !hasToken(FOR);
-			case Kwd(KwdWhile): return !hasToken(WHILE);
-			case Kwd(KwdTry): return !hasToken(TRY);
-			case Kwd(KwdCatch): return !hasToken(CATCH);
-			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault): return !hasToken(SWITCH);
-			case POpen, BkOpen, BrOpen, Kwd(KwdReturn): return !hasToken(OBJECT_DECL);
-			case Dollar(_): return !hasToken(REIFICATION);
+			case Kwd(KwdClass):
+				return !hasToken(CLASS_DEF);
+			case Kwd(KwdInterface):
+				return !hasToken(INTERFACE_DEF);
+			case Kwd(KwdAbstract):
+				return !hasToken(ABSTRACT_DEF);
+			case Kwd(KwdTypedef):
+				return !hasToken(TYPEDEF_DEF);
+			case Kwd(KwdEnum):
+				return !hasToken(ENUM_DEF);
+			case Kwd(KwdFunction):
+				return !hasToken(FUNCTION);
+			case Kwd(KwdIf), Kwd(KwdElse):
+				return !hasToken(IF);
+			case Kwd(KwdFor):
+				return !hasToken(FOR);
+			case Kwd(KwdWhile):
+				return !hasToken(WHILE);
+			case Kwd(KwdTry):
+				return !hasToken(TRY);
+			case Kwd(KwdCatch):
+				return !hasToken(CATCH);
+			case Kwd(KwdSwitch), Kwd(KwdCase), Kwd(KwdDefault):
+				return !hasToken(SWITCH);
+			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
+				return !hasToken(OBJECT_DECL);
+			case Dollar(_):
+				return !hasToken(REIFICATION);
 			case Binop(OpAssign):
 				// could be OBJECT_DECL or TYPEDEF_DEF
 				if ((token.parent != null) && (token.parent.parent != null)) {
@@ -111,7 +128,7 @@ class EmptyBlockCheck extends Check {
 			return;
 		}
 		var lastChild:TokenTree = brOpen.getLastChild();
-		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)){
+		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)) {
 			logPos("Empty block should contain a comment or a statement", brOpen.getPos());
 			return;
 		}
@@ -123,7 +140,7 @@ class EmptyBlockCheck extends Check {
 			return;
 		}
 		var lastChild:TokenTree = brOpen.getLastChild();
-		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)){
+		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)) {
 			logPos("Empty block should contain a statement", brOpen.getPos());
 			return;
 		}

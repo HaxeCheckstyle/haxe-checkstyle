@@ -4,11 +4,10 @@ import checkstyle.utils.StringUtils;
 
 /**
 	Checks for unused local variables.
- **/
+**/
 @name("UnusedLocalVar")
 @desc("Checks for unused local variables.")
 class UnusedLocalVarCheck extends Check {
-
 	public function new() {
 		super(TOKEN);
 	}
@@ -68,8 +67,7 @@ class UnusedLocalVarCheck extends Check {
 			}
 			return switch (tok.tok) {
 				case Const(CIdent(n)):
-					if (n == name) FOUND_GO_DEEPER;
-					else GO_DEEPER;
+					if (n == name) FOUND_GO_DEEPER; else GO_DEEPER;
 				case Const(CString(s)):
 					checkStringInterpolation(tok, name, s);
 				default: GO_DEEPER;
@@ -102,12 +100,14 @@ class UnusedLocalVarCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

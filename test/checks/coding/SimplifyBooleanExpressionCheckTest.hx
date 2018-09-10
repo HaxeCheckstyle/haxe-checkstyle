@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.SimplifyBooleanExpressionCheck;
 
 class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanExpressionCheckTests> {
-
 	static inline var MSG_SIMPLIFY:String = "Boolean expression can be simplified";
 
 	@Test
@@ -35,7 +34,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (bvar == true) {}
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		function test() {
@@ -43,7 +41,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (bvar || true) {}
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		function test() {
@@ -51,7 +48,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (bvar != true) {}
 		}
 	}";
-
 	var TEST4 = "
 	abstractAndClass Test {
 		function test() {
@@ -59,7 +55,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (!false) {}
 		}
 	}";
-
 	var TEST5 = "
 	abstractAndClass Test {
 		function test() {
@@ -67,7 +62,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (bvar) {}
 		}
 	}";
-
 	var TEST6 = "
 	abstractAndClass Test {
 		function test() {
@@ -75,7 +69,6 @@ abstract SimplifyBooleanExpressionCheckTests(String) to String {
 			if (!bvar) {}
 		}
 	}";
-
 	var TEST7 = "
 	abstractAndClass Test {
 		@SuppressWarnings('checkstyle:SimplifyBooleanExpression')

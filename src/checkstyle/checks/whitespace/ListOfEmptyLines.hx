@@ -5,7 +5,7 @@ import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 /**
 	holds list of empty lines and provides some helper functions
 	line numbers start at 0
- **/
+**/
 class ListOfEmptyLines {
 	var lines:Array<Int>;
 	var lineRanges:Array<EmptyLineRange>;
@@ -18,7 +18,7 @@ class ListOfEmptyLines {
 	/**
 		adds a new empty line number
 		@param line - line number of empty line
-	 **/
+	**/
 	public function add(line:Int) {
 		lines.push(line);
 	}
@@ -30,41 +30,55 @@ class ListOfEmptyLines {
 		@param range - range to check
 		@param line - line to check
 		@return EmptyLineRange returns matching range or NONE
-	 **/
+	**/
 	public function checkRange(policy:EmptyLinesPolicy, max:Int, range:EmptyLineRange, line:Int):EmptyLineRange {
 		switch (policy) {
-			case IGNORE: return NONE;
-			case NONE: return range;
-			case EXACT: return checkRangeExact(range, max, line);
-			case UPTO: return checkRangeUpto(range, max, line);
-			case ATLEAST: return checkRangeAtLeast(range, max, line);
+			case IGNORE:
+				return NONE;
+			case NONE:
+				return range;
+			case EXACT:
+				return checkRangeExact(range, max, line);
+			case UPTO:
+				return checkRangeUpto(range, max, line);
+			case ATLEAST:
+				return checkRangeAtLeast(range, max, line);
 		}
 		return range;
 	}
 
 	function checkRangeExact(range:EmptyLineRange, max:Int, line:Int):EmptyLineRange {
 		switch (range) {
-			case NONE: return SINGLE(line);
-			case SINGLE(l): if (max == 1) return NONE;
-			case RANGE(rangeStart, rangeEnd): if (1 + rangeEnd - rangeStart == max) return NONE;
+			case NONE:
+				return SINGLE(line);
+			case SINGLE(l):
+				if (max == 1) return NONE;
+			case RANGE(rangeStart, rangeEnd):
+				if (1 + rangeEnd - rangeStart == max) return NONE;
 		}
 		return range;
 	}
 
 	function checkRangeUpto(range:EmptyLineRange, max:Int, line:Int):EmptyLineRange {
 		switch (range) {
-			case NONE: return NONE;
-			case SINGLE(l): if (max >= 1) return NONE;
-			case RANGE(rangeStart, rangeEnd): if (1 + rangeEnd - rangeStart <= max) return NONE;
+			case NONE:
+				return NONE;
+			case SINGLE(l):
+				if (max >= 1) return NONE;
+			case RANGE(rangeStart, rangeEnd):
+				if (1 + rangeEnd - rangeStart <= max) return NONE;
 		};
 		return range;
 	}
 
 	function checkRangeAtLeast(range:EmptyLineRange, max:Int, line:Int):EmptyLineRange {
 		switch (range) {
-			case NONE: return SINGLE(line);
-			case SINGLE(l): if (max == 1) return NONE;
-			case RANGE(rangeStart, rangeEnd): if (1 + rangeEnd - rangeStart >= max) return NONE;
+			case NONE:
+				return SINGLE(line);
+			case SINGLE(l):
+				if (max == 1) return NONE;
+			case RANGE(rangeStart, rangeEnd):
+				if (1 + rangeEnd - rangeStart >= max) return NONE;
 		};
 		return range;
 	}
@@ -76,13 +90,14 @@ class ListOfEmptyLines {
 		@param start - start line number (inclusive)
 		@param end - end line number (inclusive)
 		@return EmptyLineRange matching range or NONE
-	 **/
+	**/
 	public function checkPolicySingleRange(policy:EmptyLinesPolicy, max:Int, start:Int, end:Int):EmptyLineRange {
 		if (start > end) throw "*** wrong order!! *** " + start + " " + end;
 		var range:Array<EmptyLineRange> = getRanges(start, end);
 
 		switch (policy) {
-			case IGNORE: return NONE;
+			case IGNORE:
+				return NONE;
 			case NONE:
 				if (range.length == 0) return NONE;
 				return range[0];
@@ -108,7 +123,7 @@ class ListOfEmptyLines {
 		@param startLine - start line number (inclusive)
 		@param endLine - end line number (inclusive)
 		@return Array<EmptyLineRange> list of emtpy line ranges
-	 **/
+	**/
 	public function getRanges(startLine:Int, endLine:Int):Array<EmptyLineRange> {
 		if (lineRanges == null) lineRanges = makeRanges();
 		var results:Array<EmptyLineRange> = [];
@@ -137,19 +152,19 @@ class ListOfEmptyLines {
 				continue;
 			}
 			if (current == start) {
-				results.push (SINGLE(start));
+				results.push(SINGLE(start));
 			}
 			else {
-				results.push (RANGE(start, current));
+				results.push(RANGE(start, current));
 			}
 			start = val;
 			current = val;
 		}
 		if (current == start) {
-			results.push (SINGLE(start));
+			results.push(SINGLE(start));
 		}
 		else {
-			results.push (RANGE(start, current));
+			results.push(RANGE(start, current));
 		}
 		return results;
 	}

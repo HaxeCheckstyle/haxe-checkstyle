@@ -2,16 +2,15 @@ package checkstyle.checks.literal;
 
 /**
 	Checks the letter case of hexadecimal literals.
- **/
+**/
 @name("HexadecimalLiteral", "HexadecimalLiterals")
 @desc("Checks the letter case of hexadecimal literals.")
 class HexadecimalLiteralCheck extends Check {
-
 	/**
-	    policy for hexadecimal literals
-	    - upperCase = use uppercase for all letters
-	    - lowerCase = use lowercase for all letters
-     **/
+		policy for hexadecimal literals
+		- upperCase = use uppercase for all letters
+		- lowerCase = use lowercase for all letters
+	**/
 	public var option:HexadecimalLiteralPolicy;
 
 	public function new() {
@@ -23,8 +22,9 @@ class HexadecimalLiteralCheck extends Check {
 
 	override function actualRun() {
 		checker.ast.walkFile(function(e:Expr) {
-			switch (e.expr){
-				case EConst(CInt(s)): checkString(s, e.pos);
+			switch (e.expr) {
+				case EConst(CInt(s)):
+					checkString(s, e.pos);
 				default:
 			}
 		});
@@ -43,10 +43,10 @@ class HexadecimalLiteralCheck extends Check {
 }
 
 /**
-    policy for hexadecimal literals
-    - upperCase = use uppercase for all letters
-    - lowerCase = use lowercase for all letters
- **/
+	policy for hexadecimal literals
+	- upperCase = use uppercase for all letters
+	- lowerCase = use lowercase for all letters
+**/
 @:enum
 abstract HexadecimalLiteralPolicy(String) {
 	var UPPER_CASE = "upperCase";

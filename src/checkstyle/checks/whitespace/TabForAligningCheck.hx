@@ -2,14 +2,13 @@ package checkstyle.checks.whitespace;
 
 /**
 	Checks if there are any tabs in the middle of a line.
- **/
+**/
 @name("TabForAligning")
 @desc("Checks if there are any tabs in the middle of a line.")
 class TabForAligningCheck extends LineCheckBase {
-
 	/**
 		ignore linex matching regex
-	 **/
+	**/
 	public var ignorePattern:String;
 
 	public function new() {

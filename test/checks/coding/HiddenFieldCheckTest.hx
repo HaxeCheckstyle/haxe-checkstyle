@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.HiddenFieldCheck;
 
 class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
-
 	@Test
 	public function testCorrectHidden() {
 		var check = new HiddenFieldCheck();
@@ -89,7 +88,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			var field2:String = '';
 		}
 	}";
-
 	var HIDDEN_FIELDS_CONSTRUCTOR = "
 	class Test {
 		var field1:Int;
@@ -98,7 +96,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			this.field1 = field1;
 		}
 	}";
-
 	var HIDDEN_FIELDS_CONSTRUCTOR_VAR = "
 	class Test {
 		var field1:Int;
@@ -108,7 +105,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			var field2:String = 'test';
 		}
 	}";
-
 	var HIDDEN_FIELDS_SETTER = "
 	class Test {
 		var field1:Int;
@@ -120,7 +116,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			field2 = field2;
 		}
 	}";
-
 	var HIDDEN_FIELDS_FUNC = "
 	class Test {
 		var field1:Int;
@@ -129,7 +124,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			field2 = field1;
 		}
 	}";
-
 	var HIDDEN_FIELDS_MAIN = "
 	class Test {
 		var field1:Int;
@@ -138,7 +132,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			var field2:String = 'test';
 		}
 	}";
-
 	var HIDDEN_FIELDS_FOR = "
 	class Test {
 		var field1:Int;
@@ -147,7 +140,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			for (field1 in []) trace(field1);
 		}
 	}";
-
 	var HIDDEN_FIELDS_FUNC_WITH_COMMENT = "
 	class Test {
 		var field1:Int;
@@ -156,7 +148,6 @@ abstract HiddenFieldCheckTests(String) to String {
 			field2 = field1;
 		}
 	}";
-
 	var HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT = "
 	class Test {
 		var field1:Int;

@@ -2,11 +2,10 @@ package checkstyle.checks.coding;
 
 /**
 	Checks for over-complicated boolean return statements.
- **/
+**/
 @name("SimplifyBooleanReturn")
 @desc("Checks for over-complicated boolean return statements.")
 class SimplifyBooleanReturnCheck extends Check {
-
 	public function new() {
 		super(TOKEN);
 		categories = [Category.COMPLEXITY];

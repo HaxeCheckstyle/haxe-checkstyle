@@ -4,16 +4,13 @@ import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 
 /**
 	Checks line wrapping with separators.
- **/
+**/
 @name("SeparatorWrap")
 @desc("Checks line wrapping with separators.")
 class SeparatorWrapCheck extends WrapCheckBase {
-
 	public function new() {
 		super();
-		tokens = [
-			",",
-		];
+		tokens = [","];
 	}
 
 	override function actualRun() {
@@ -27,12 +24,16 @@ class SeparatorWrapCheck extends WrapCheckBase {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "option",
-				values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [
+					{
+						propertyName: "option",
+						values: [WrapCheckBaseOption.EOL, WrapCheckBaseOption.NL]
+					}
+				]
+			}
+		];
 	}
 }

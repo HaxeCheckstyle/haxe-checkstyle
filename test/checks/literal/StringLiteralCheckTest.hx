@@ -3,7 +3,6 @@ package checks.literal;
 import checkstyle.checks.literal.StringLiteralCheck;
 
 class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
-
 	@Test
 	public function testOnlySingleQuote() {
 		var check = new StringLiteralCheck();
@@ -93,7 +92,6 @@ abstract StringLiteralCheckTests(String) to String {
 			c = 'test';
 		}
 	}";
-
 	var SINGLE_QUOTE_WITH_EXCEPTION = "
 	class Test {
 		static var a:String = 'check';
@@ -103,7 +101,6 @@ abstract StringLiteralCheckTests(String) to String {
 			c = \"test 'xml' \";
 		}
 	}";
-
 	var DOUBLE_QUOTE = '
 	class Test {
 		static var a:String = "check";
@@ -112,7 +109,6 @@ abstract StringLiteralCheckTests(String) to String {
 			c = "test";
 		}
 	}';
-
 	var DOUBLE_QUOTE_WITH_EXCEPTION = '
 	class Test {
 		static var a:String = "check";
@@ -122,7 +118,6 @@ abstract StringLiteralCheckTests(String) to String {
 			c = \'test "xml" \';
 		}
 	}';
-
 	var INTERPOLATION = "
 	class Test {
 		function foo() {
@@ -142,7 +137,6 @@ abstract StringLiteralCheckTests(String) to String {
 			trace('$value is ${i++} $i');
 		}
 	}";
-
 	var NO_INTERPOLATION = "
 	class Test {
 		function foo() {

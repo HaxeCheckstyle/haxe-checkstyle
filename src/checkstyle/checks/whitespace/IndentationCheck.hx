@@ -2,35 +2,34 @@ package checkstyle.checks.whitespace;
 
 /**
 	Checks correct indentation
- **/
+**/
 @name("Indentation")
 @desc("Checks correct indentation")
 class IndentationCheck extends Check {
-
 	/**
-	    character sequence to use for indentation
+		character sequence to use for indentation
 		- "tab" for using tabs
 		- a string containing as many spaces as one indentation level requires
-	 **/
+	**/
 	public var character:IndentationCheckCharacter;
 
 	/**
-	    ignore indentation of conditionals (same as setting conditionalPolicy to ignore)
-	 **/
+		ignore indentation of conditionals (same as setting conditionalPolicy to ignore)
+	**/
 	public var ignoreConditionals:Bool;
 
 	/**
-	    indentation of conditional statements
+		indentation of conditional statements
 		- ignore = ignores conditioonals, same as "ignoreConditionals"
 		- fixed_zero = contitionals have to start at the beginning of a line (only where conditional is the first statement)
 		- aligned = align wih surrounding code
 		- aligned_increase = align wih surrounding code and increase indentation of enclosed code by +1
-	 **/
+	**/
 	public var conditionalPolicy:ConditionalIndentationPolicy;
 
 	/**
-	    ignore indentation of comments
-	 **/
+		ignore indentation of comments
+	**/
 	public var ignoreComments:Bool;
 
 	/**
@@ -38,7 +37,7 @@ class IndentationCheck extends Check {
 		- none = wrapped statements must have the same indentation as parent
 		- exact = wrapped statemenmts must have a +1 indentation in relation to parent
 		- larger = wrapped statements must have a +1 or larger indentation in relation to parent
-	 **/
+	**/
 	public var wrapPolicy:WrappedIndentationPolicy;
 
 	public function new() {
@@ -220,12 +219,14 @@ class IndentationCheck extends Check {
 		var isFirst:Bool = ~/^\s*#$/.match(prefix);
 
 		switch (conditionalPolicy) {
-			case IGNORE: return;
+			case IGNORE:
+				return;
 			case FIXED_ZERO:
 				if (!isFirst) return;
 				lineIndentation[linePos.line] = 0;
 				return;
-			case ALIGNED: return;
+			case ALIGNED:
+				return;
 			case ALIGNED_INCREASE:
 		}
 
@@ -403,39 +404,43 @@ class IndentationCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "character",
-				values: [
-					TAB,
-					EIGHT_SPACES,
-					SEVEN_SPACES,
-					SIX_SPACES,
-					FIVE_SPACES,
-					FOUR_SPACES,
-					THREE_SPACES,
-					TWO_SPACES,
-					ONE_SPACE
+		return [
+			{
+				fixed: [],
+				properties: [
+					{
+						propertyName: "character",
+						values: [
+							TAB,
+							EIGHT_SPACES,
+							SEVEN_SPACES,
+							SIX_SPACES,
+							FIVE_SPACES,
+							FOUR_SPACES,
+							THREE_SPACES,
+							TWO_SPACES,
+							ONE_SPACE
+						]
+					},
+					{
+						propertyName: "conditionalPolicy",
+						values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
+					},
+					{
+						propertyName: "ignoreConditionals",
+						values: [true, false]
+					},
+					{
+						propertyName: "ignoreComments",
+						values: [true, false]
+					},
+					{
+						propertyName: "wrapPolicy",
+						values: [NONE, EXACT, LARGER]
+					}
 				]
-			},
-			{
-				propertyName: "conditionalPolicy",
-				values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
-			},
-			{
-				propertyName: "ignoreConditionals",
-				values: [true, false]
-			},
-			{
-				propertyName: "ignoreComments",
-				values: [true, false]
-			},
-			{
-				propertyName: "wrapPolicy",
-				values: [NONE, EXACT, LARGER]
-			}]
-		}];
+			}
+		];
 	}
 }
 

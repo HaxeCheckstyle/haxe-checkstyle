@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.DefaultComesLastCheck;
 
 class DefaultComesLastCheckTest extends CheckTestCase<DefaultComesLastCheckTests> {
-
 	static inline var MSG:String = 'Default should be last label in the "switch"';
 
 	@Test
@@ -36,7 +35,6 @@ abstract DefaultComesLastCheckTests(String) to String {
         	}
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 
@@ -49,7 +47,6 @@ abstract DefaultComesLastCheckTests(String) to String {
         	}
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 

@@ -3,7 +3,6 @@ package checks.type;
 import checkstyle.checks.type.TypeCheck;
 
 class TypeCheckTest extends CheckTestCase<TypeCheckTests> {
-
 	@Test
 	public function testClassVar() {
 		assertMsg(new TypeCheck(), TEST1, 'Variable "_a" type not specified');
@@ -34,18 +33,15 @@ abstract TypeCheckTests(String) to String {
 		@SuppressWarnings('checkstyle:Type')
 		var _b;
 	}";
-
 	var TEST2 = "
 	class Test {
 		static inline var A = 1;
 	}";
-
 	var TEST3 = "
 	@:enum
 	abstract Test(Int) {
 		var VALUE = 0;
 	}";
-
 	var TEST4 = "
 	@:enum
 	abstract Test(Int) {

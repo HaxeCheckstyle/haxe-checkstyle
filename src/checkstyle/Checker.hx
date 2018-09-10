@@ -3,14 +3,10 @@ package checkstyle;
 import haxeparser.HaxeParser;
 import haxeparser.HaxeLexer;
 import sys.io.File;
-
 import checkstyle.checks.Check;
-
 import checkstyle.config.ExcludeManager;
 import checkstyle.config.ExcludeRange;
-
 import checkstyle.reporter.ReporterManager;
-
 import tokentree.TokenTreeBuilder;
 
 class Checker {
@@ -23,10 +19,11 @@ class Checker {
 	public var checks:Array<Check>;
 	public var baseDefines:Array<String>;
 	public var defineCombinations:Array<Array<String>>;
-
 	public var linesIdx:Array<LineIds>;
 	public var lineSeparator:String;
+
 	var tokenTree:TokenTree;
+
 	public var asts:Array<Ast>;
 	public var excludesRanges:Map<String, Array<ExcludeRange>>;
 
@@ -56,13 +53,13 @@ class Checker {
 
 		for (i in 0...code.length) {
 			if (code.get(i) == 0x0A) {
-				linesIdx.push({l:last, r:i});
+				linesIdx.push({l: last, r: i});
 				last = i + 1;
 				left = false;
 			}
 			left = true;
 		}
-		if (left) linesIdx.push({l:last, r:code.length});
+		if (left) linesIdx.push({l: last, r: code.length});
 	}
 
 	public function getLinePos(off:Int):LinePos {
@@ -76,7 +73,7 @@ class Checker {
 			var center:Int = lowerBound + Math.floor((upperBound - lowerBound) / 2);
 			var matchLeft:Bool = linesIdx[center].l <= off;
 			var matchRight:Bool = linesIdx[center].r >= off;
-			if (matchLeft && matchRight) return { line: center, ofs: off - linesIdx[center].l };
+			if (matchLeft && matchRight) return {line: center, ofs: off - linesIdx[center].l};
 			if (matchLeft) {
 				lowerBound = center + 1;
 				continue;
@@ -111,7 +108,7 @@ class Checker {
 				return;
 			}
 		}
-		//default
+		// default
 		lineSeparator = "\n";
 	}
 
