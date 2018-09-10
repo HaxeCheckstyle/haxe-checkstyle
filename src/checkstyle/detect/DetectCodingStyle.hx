@@ -8,7 +8,6 @@ import checkstyle.reporter.ReporterManager;
 import haxe.ds.ArraySort;
 
 class DetectCodingStyle {
-
 	public static function detectCodingStyle(checks:Array<Check>, fileList:Array<CheckFile>):Array<CheckConfig> {
 		var detectedChecks:Array<CheckConfig> = [];
 		ArraySort.sort(checks, ConfigUtils.checkSort);

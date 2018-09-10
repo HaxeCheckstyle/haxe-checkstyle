@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.ConstantNameCheck;
 
 class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new ConstantNameCheck();
@@ -84,14 +83,12 @@ abstract ConstantNameCheckTests(String) to String {
 		@SuppressWarnings('checkstyle:ConstantName')
 		static var count7:Int = 1;
 	}";
-
 	var TEST1 = "
 	class Test {
 		static var Count:Int = 1;
 		public function test() {
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		static inline var Count:Int = 1;
@@ -99,7 +96,6 @@ abstract ConstantNameCheckTests(String) to String {
 			var Count:Int;
 		}
 	}";
-
 	var TEST3 = "
 	extern class Test {
 		static var Count:Int = 1;

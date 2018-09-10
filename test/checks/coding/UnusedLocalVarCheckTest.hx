@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.UnusedLocalVarCheck;
 
 class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
-
 	static inline var MSG_UNUSED_VAR_INDEX:String = "Unused local variable index";
 
 	@Test
@@ -42,7 +41,6 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			});
 		}
 	}";
-
 	var UNUSED_INDEX = "
 	abstractAndClass Test {
 		// index
@@ -51,7 +49,6 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			var index:Int;
 		}
 	}";
-
 	var UNUSED_INDEX2 = "
 	abstractAndClass Test {
 		public function a() {
@@ -60,7 +57,6 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			});
 		}
 	}";
-
 	var STRING_INTERPOLATION = "
 	abstractAndClass Test {
 		function a() {
@@ -75,7 +71,6 @@ abstract UnusedLocalVarCheckTests(String) to String {
 			trace ('${index4}');
 		}
 	}";
-
 	var STRING_INTERPOLATION_UNUSED = "
 	abstractAndClass Test {
 		function a() {

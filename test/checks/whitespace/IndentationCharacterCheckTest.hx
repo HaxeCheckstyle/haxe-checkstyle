@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCheckTests> {
-
 	@Test
 	public function testWrongIndentation() {
 		var check = new IndentationCharacterCheck();
@@ -60,20 +59,16 @@ abstract IndentationCharacterCheckTests(String) to String {
 		 static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
 		public function new() {}
 	}";
-
 	var TEST2 = "
 	class Test {
 		var a:Int;
 		public function new() {}
 	}";
-
 	var SPACE_INDENTATION = "class Test {\n  var a:Int;\n}";
-
 	var TEST3 = "
 	class Test {
 		public function new() {}
 	}";
-
 	var TEST4 = "
 	class Test {
 		public function new() {
@@ -83,21 +78,18 @@ abstract IndentationCharacterCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST5_1 = "
 	class Test {
 		public function new() {
 			// breaking comment with quote '
 		}
 	}";
-
 	var TEST5_2 = "
 	class Test {
 		public function new() {
 		  // bad indentation here
 		}
 	}";
-
 	var TEST6 = "
 	class Test {
 		public function new() {

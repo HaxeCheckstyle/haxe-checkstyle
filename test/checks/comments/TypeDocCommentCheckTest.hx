@@ -3,7 +3,6 @@ package checks.comments;
 import checkstyle.checks.comments.TypeDocCommentCheck;
 
 class TypeDocCommentCheckTest extends CheckTestCase<TypeDocCommentCheckTests> {
-
 	@Test
 	public function testDefault() {
 		var check = new TypeDocCommentCheck();
@@ -82,7 +81,6 @@ abstract TypeDocCommentCheckTests(String) to String {
 	 **/
 	typedef TTest = {}
 	";
-
 	var EMPTY_COMMENTS = "
 	/**
 
@@ -109,7 +107,6 @@ abstract TypeDocCommentCheckTests(String) to String {
 	 **/
 	typedef TTest = {}
 	";
-
 	var EMPTY_COMMENTS_2 = "
 	/**
 	 **/
@@ -131,7 +128,6 @@ abstract TypeDocCommentCheckTests(String) to String {
 	 **/
 	typedef TTest = {}
 	";
-
 	var EMPTY_COMMENTS_3 = "
 	/*
 
@@ -158,7 +154,6 @@ abstract TypeDocCommentCheckTests(String) to String {
 	 */
 	typedef TTest = {}
 	";
-
 	var NO_COMMENTS = "
 	abstract ATest {}
 	class CTest {}

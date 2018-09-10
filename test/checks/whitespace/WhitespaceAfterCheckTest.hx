@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.WhitespaceAfterCheck;
 
 class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> {
-
 	static inline var MSG_COMMA:String = 'No whitespace after ","';
 	static inline var MSG_EQUALS:String = 'No whitespace after "="';
 	static inline var MSG_GREATER:String = 'No whitespace after ">"';
@@ -82,66 +81,55 @@ abstract WhitespaceAfterCheckTests(String) to String {
 		Thursday;
 		Friday; Weekend(day:String);
 	}";
-
 	var NO_WHITESPACE_FUNC = "
 	class Test {
 		function test(param1:String,param2:String) {
 		}
 	}";
-
 	var NO_WHITESPACE_OBJECT_DECL = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var x={ x: 100, y: 100,z: 20 };
 		}
 	}";
-
 	var NO_WHITESPACE_TYPEDEF = "
 	typedef Test ={
 		x:Int,
 		y:Int,z:Int
 	}";
-
 	var NO_WHITESPACE_VAR_INIT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>=[];
 		}
 	}";
-
 	var NO_WHITESPACE_GT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>= [];
 		}
 	}";
-
 	var ISSUE_57 = "
 	class Test {
 		public function new() {
 			trace(#if true cast #end 'text');
 		}
 	}";
-
 	var ISSUE_58 = "
 	class Test {
 		public function new() {
 			var x:Int, y:Int;
 		}
 	}";
-
 	var ISSUE_59 = "
 	typedef Test = Int
 	";
-
 	var ISSUE_63 = "
 	typedef Test = #if true Int #else String #end
 	";
-
 	var ISSUE_64 = "
 	class Test #if true extends Base #end {}
 	";
-
 	var ISSUE_65 = "
 	class Test {
 		function foo() {
@@ -151,12 +139,10 @@ abstract WhitespaceAfterCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_66 = "
 	class Test {
 		public inline function new<T>() {}
 	}";
-
 	var ISSUE_67 = "
 	extern class Promise<T>
 	{
@@ -164,7 +150,6 @@ abstract WhitespaceAfterCheckTests(String) to String {
 		@:overload(function<T>(thenable : Thenable<T>) : Promise<T> {})
 		static function resolve<T>( value : T ) : Promise<T>;
 	}";
-
 	var NEGATIVE_VARS = "
 	class Test {
 		function test() {
@@ -180,7 +165,6 @@ abstract WhitespaceAfterCheckTests(String) to String {
 			for (a in [-1, -2]) -a + 2;
 		}
 	}";
-
 	var ISSUE_239 = "
 	#if def1
 		#if def2
@@ -196,12 +180,10 @@ abstract WhitespaceAfterCheckTests(String) to String {
 #end
 	}
 	";
-
 	var ISSUE_244 = "
 	class Foo {
 		var list = ['screenX' #if def , 'screenY' #end];
 	}";
-
 	var ISSUE_245 = "
 	class Foo {
 		function foo() {

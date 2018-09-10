@@ -9,11 +9,8 @@ import cpp.hl.Thread;
 #else
 import checkstyle.utils.Thread;
 #end
-
 import checkstyle.checks.Check;
-
 import checkstyle.config.ExcludeManager;
-
 import checkstyle.reporter.ReporterManager;
 
 class CheckerThread {
@@ -38,14 +35,22 @@ class CheckerThread {
 		checks = [];
 
 		var propsNotAllowed:Array<String> = [
-			"moduleName",  "type", "categories",
-			"points", "desc", "currentState", "skipOverStringStart",
-			"commentStartRE", "commentBlockEndRE", "stringStartRE",
-			"stringInterpolatedEndRE", "stringLiteralEndRE"
+			"moduleName",
+			"type",
+			"categories",
+			"points",
+			"desc",
+			"currentState",
+			"skipOverStringStart",
+			"commentStartRE",
+			"commentBlockEndRE",
+			"stringStartRE",
+			"stringInterpolatedEndRE",
+			"stringLiteralEndRE"
 		];
 
 		for (check in templateChecks) {
-			var newCheck = Type.createInstance (Type.getClass(check), []);
+			var newCheck = Type.createInstance(Type.getClass(check), []);
 
 			for (prop in Reflect.fields(check)) {
 				if (propsNotAllowed.contains(prop)) continue;

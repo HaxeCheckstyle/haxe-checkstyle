@@ -2,14 +2,13 @@ package checkstyle.checks.type;
 
 /**
 	Checks if type is specified or not for member variables.
- **/
+**/
 @name("Type")
 @desc("Checks if type is specified or not for member variables.")
 class TypeCheck extends Check {
-
 	/**
 		ignores fields inside abstract enums
-	 **/
+	**/
 	public var ignoreEnumAbstractValues:Bool;
 
 	public function new() {
@@ -35,12 +34,14 @@ class TypeCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

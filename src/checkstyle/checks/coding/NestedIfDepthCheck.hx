@@ -2,15 +2,14 @@ package checkstyle.checks.coding;
 
 /**
 	Restricts nested "if-else" blocks to a specified depth (default = 1).
- **/
+**/
 @name("NestedIfDepth")
 @desc("Restricts nested `if-else` blocks to a specified depth (default = 1).")
 class NestedIfDepthCheck extends Check {
-
 	/**
 		maximum number of nested if statements allowed
 		setting "max" to 1 allows one if inside another
-	 **/
+	**/
 	public var max:Int;
 
 	public function new() {

@@ -3,7 +3,6 @@ package checks.size;
 import checkstyle.checks.size.MethodLengthCheck;
 
 class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
-
 	@Test
 	public function testWrongMethodLength() {
 		assertMsg(new MethodLengthCheck(), TEST1, "Method `test` length is 354 lines (max allowed is 50)");
@@ -52,7 +51,6 @@ abstract MethodLengthCheckTests(String) to String {
 			\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test() {
@@ -63,7 +61,6 @@ abstract MethodLengthCheckTests(String) to String {
 			trace('TEST');
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		public function test() {

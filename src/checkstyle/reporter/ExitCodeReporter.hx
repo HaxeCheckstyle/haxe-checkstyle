@@ -1,7 +1,6 @@
 package checkstyle.reporter;
 
 class ExitCodeReporter implements IReporter {
-
 	var failCheckCount:Int;
 
 	public function new() {

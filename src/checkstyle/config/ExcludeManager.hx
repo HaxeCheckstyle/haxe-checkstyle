@@ -36,15 +36,15 @@ class ExcludeManager {
 		return IDENTIFIER(filter, range);
 	}
 
-	public static function isExcludedFromAll(fileName: String):Bool {
+	public static function isExcludedFromAll(fileName:String):Bool {
 		return INSTANCE.checkFileExcluded(fileName, INSTANCE.globalExclude);
 	}
 
-	public static function isExcludedFromCheck(fileName: String, checkName:String):Bool {
+	public static function isExcludedFromCheck(fileName:String, checkName:String):Bool {
 		return INSTANCE.checkFileExcluded(fileName, INSTANCE.excludeMap.get(checkName));
 	}
 
-	function checkFileExcluded(fileName: String, list:Array<ExcludeDefinition>):Bool {
+	function checkFileExcluded(fileName:String, list:Array<ExcludeDefinition>):Bool {
 		if (list == null) return false;
 		for (exclude in list) {
 			if (matchFullExlude(fileName, exclude)) {
@@ -56,10 +56,14 @@ class ExcludeManager {
 
 	function matchFullExlude(fileName:String, exclude:ExcludeDefinition):Bool {
 		switch (exclude) {
-			case FULL(filter): return filterFileName(fileName, filter);
-			case LINE(filter, line): return false;
-			case RANGE(filter, lineStart, lineEnd): return false;
-			case IDENTIFIER(filter, name): return false;
+			case FULL(filter):
+				return filterFileName(fileName, filter);
+			case LINE(filter, line):
+				return false;
+			case RANGE(filter, lineStart, lineEnd):
+				return false;
+			case IDENTIFIER(filter, name):
+				return false;
 		}
 	}
 
@@ -81,7 +85,8 @@ class ExcludeManager {
 			if (list != null) {
 				for (exclude in list) {
 					switch (exclude) {
-						case FULL(filter): continue;
+						case FULL(filter):
+							continue;
 						case LINE(filter, line):
 							if (!filterFileName(checker.file.name, filter)) continue;
 							posExcludes.push(makeLinesExcludeRange(checker, checkName, line - 1, line));
@@ -103,7 +108,8 @@ class ExcludeManager {
 
 		for (exclude in globalExclude) {
 			switch (exclude) {
-				case FULL(filter): continue;
+				case FULL(filter):
+					continue;
 				case LINE(filter, line):
 					if (!filterFileName(checker.file.name, filter)) continue;
 					for (check in checker.checks) {
@@ -143,7 +149,8 @@ class ExcludeManager {
 						if (!StringTools.startsWith(name, "checkstyle:")) return SKIP_SUBTREE;
 						checkNames.push(name.substr(11));
 						return SKIP_SUBTREE;
-					default: return GO_DEEPER;
+					default:
+						return GO_DEEPER;
 				}
 			});
 			for (name in checkNames) {
@@ -157,7 +164,7 @@ class ExcludeManager {
 		var map:Map<String, Array<ExcludeRange>> = new Map<String, Array<ExcludeRange>>();
 		for (range in list) {
 			var rangeList:Array<ExcludeRange> = map.get(range.checkName);
-			if (rangeList == null ) {
+			if (rangeList == null) {
 				rangeList = [];
 			}
 			rangeList.push(range);

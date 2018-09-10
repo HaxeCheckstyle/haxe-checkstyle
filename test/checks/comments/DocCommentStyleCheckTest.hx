@@ -3,7 +3,6 @@ package checks.comments;
 import checkstyle.checks.comments.DocCommentStyleCheck;
 
 class DocCommentStyleCheckTest extends CheckTestCase<DocCommentStyleCheckTests> {
-
 	static inline var MSG_SHOULD_USE_ONE_STAR:String = "Comment should use '/*…*/'";
 	static inline var MSG_SHOULD_USE_TWO_STARS:String = "Comment should use '/**…**/'";
 	static inline var MSG_SHOULD_NOT_START_WITH_STAR:String = "Comment lines should not start with '*'";
@@ -57,35 +56,30 @@ abstract DocCommentStyleCheckTests(String) to String {
 	 **/
 	class Test {}
 	";
-
 	var ONE_STAR_NO_STAR_ONE_STAR = "
 	/*
 		comment
 	 */
 	class Test {}
 	";
-
 	var ONE_STAR_ONE_STAR_ONE_STAR = "
 	/*
 	 * comment
 	 */
 	class Test {}
 	";
-
 	var TWO_STAR_ONE_STAR_TWO_STAR = "
 	/**
 	 * comment
 	 **/
 	class Test {}
 	";
-
 	var TWO_STAR_TWO_STARS_TWO_STAR = "
 	/**
 	 ** comment
 	 **/
 	class Test {}
 	";
-
 	var MANY_STARS_NO_STAR_MANY_STARS = "
 	/******************
 		comment

@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.ParameterNameCheck;
 
 class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new ParameterNameCheck();
@@ -70,31 +69,26 @@ abstract ParameterNameCheckTests(String) to String {
 		function test(param1:Int, paramName:String) {
 		}
 	}";
-
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test(Count:Int) {
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test() {
 		}
 	}";
-
 	var TEST3 = "
 	typedef Test = {
 		function test(param1:Int, ParamName:String) {
 		}
 	}";
-
 	var TEST4 = "
 	extern class Test {
 		public function test(Param1:Int) {
 		}
 	}";
-
 	var TEST5 = "
 	enum Test {
 		VALUE(ParamName:String);

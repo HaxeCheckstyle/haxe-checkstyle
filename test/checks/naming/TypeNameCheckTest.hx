@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.TypeNameCheck;
 
 class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
-
 	static inline var FORMAT_CLASS:String = "^C[A-Z][a-z]*$";
 
 	@Test
@@ -125,20 +124,16 @@ abstract TypeNameCheckTests(String) to String {
 		var count1:Int;
 		var count2:String;
 	}";
-
 	var TEST1 = "
 	abstractAndClass CTest {
 	}";
-
 	var TEST2 = "
 	interface Test {
 	}";
-
 	var TEST3 = "
 	typedef TTest = {
 		var Count:Int;
 	}";
-
 	var TEST4 = "
 	extern class TEST1 {
 		var Count:Int = 1;
@@ -146,12 +141,10 @@ abstract TypeNameCheckTests(String) to String {
 		public function test() {
 		}
 	}";
-
 	var TEST5 = "
 	enum EnumTest {
 		VALUE;
 	}";
-
 	var TEST6 = "
 	class Test_ {
 	}";

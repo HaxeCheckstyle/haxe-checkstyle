@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.TabForAligningCheck;
 
 class TabForAligningCheckTest extends CheckTestCase<TabForAligningCheckTests> {
-
 	@Test
 	public function testTab() {
 		var check = new TabForAligningCheck();
@@ -27,7 +26,6 @@ abstract TabForAligningCheckTests(String) to String {
 		static inline var TAB_FOR_ALIGNING_TEST:Int = 	1;
 
 	}";
-
 	var TEST2 = "
 	class Test {
 		public function test() {

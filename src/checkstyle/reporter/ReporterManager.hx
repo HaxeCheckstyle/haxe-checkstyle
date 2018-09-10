@@ -9,9 +9,7 @@ import cpp.hl.Mutex;
 #else
 import checkstyle.utils.Mutex;
 #end
-
 import checkstyle.CheckMessage;
-
 import checkstyle.checks.Category;
 
 class ReporterManager {
@@ -21,7 +19,7 @@ class ReporterManager {
 	var reporters:Array<IReporter>;
 	var lock:Mutex;
 
-	function new () {
+	function new() {
 		#if (debug || unittest)
 		SHOW_PARSE_ERRORS = true;
 		#end
@@ -88,6 +86,7 @@ class ReporterManager {
 	}
 
 	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
+		// @formatter:off
 		return (
 			message1.fileName == message2.fileName &&
 			message1.message == message2.message &&
@@ -99,22 +98,23 @@ class ReporterManager {
 			message1.severity == message2.severity &&
 			message1.moduleName == message2.moduleName
 		);
+		// @formatter:on
 	}
 
 	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
 		return {
-			fileName:fileName,
-			startLine:1,
-			endLine:1,
-			startColumn:0,
-			endColumn:0,
-			severity:ERROR,
-			moduleName:"Checker",
-			categories:[Category.STYLE],
-			points:1,
-			desc:"",
-			code:'$e',
-			message:'$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues'
+			fileName: fileName,
+			startLine: 1,
+			endLine: 1,
+			startColumn: 0,
+			endColumn: 0,
+			severity: ERROR,
+			moduleName: "Checker",
+			categories: [Category.STYLE],
+			points: 1,
+			desc: "",
+			code: '$e',
+			message: '$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues'
 		};
 	}
 }

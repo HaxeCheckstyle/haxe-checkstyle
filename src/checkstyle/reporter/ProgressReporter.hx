@@ -1,7 +1,6 @@
 package checkstyle.reporter;
 
 class ProgressReporter implements IReporter {
-
 	var lineLength:Int;
 	var numFiles:Int;
 

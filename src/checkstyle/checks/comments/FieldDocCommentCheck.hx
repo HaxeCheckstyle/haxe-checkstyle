@@ -4,60 +4,59 @@ import checkstyle.checks.comments.TypeDocCommentCheck.TypeDocCommentToken;
 
 /**
 	Checks code documentation on type level
- **/
+**/
 @name("FieldDocComment")
 @desc("Checks code documentation on fields")
 class FieldDocCommentCheck extends Check {
-
 	/**
-	    matches only comment docs for types specified in tokens list:
+		matches only comment docs for types specified in tokens list:
 		- ABSTRACT_DEF = abstract definition "abstract Test {}"
 		- CLASS_DEF = class definition "class Test {}"
 		- ENUM_DEF = enum definition "enum Test {}"
 		- INTERFACE_DEF = interface definition "interface Test {}"
 		- TYPEDEF_DEF = typdef definition "typedef Test = {}"
-	 **/
+	**/
 	public var tokens:Array<TypeDocCommentToken>;
+
 	/**
 		only check fields of type
 		- VARS = only var fields
 		- FUNCTIONS = only functions;
 		- BOTH = both vars and functions;
-	 **/
+	**/
 	public var fieldType:FieldDocCommentType;
+
 	/**
 		only check fields matching modifier
 		- PUBLIC = only public fields
 		- PRIVATE = only private fields
 		- BOTH = public and private fields
-	 **/
+	**/
 	public var modifier:FieldDocCommentModifier;
+
 	/**
 		ignores requires a `@param` tag for every parameter
-	 **/
+	**/
 	public var requireParams:Bool;
+
 	/**
 		ignores requires a `@return` tag
-	 **/
+	**/
 	public var requireReturn:Bool;
+
 	/**
 		ignores methods marked with override
-	 **/
+	**/
 	public var ignoreOverride:Bool;
+
 	/**
 		exclude field names from check - default: ["new", "toString"]
-	 **/
+	**/
 	public var excludeNames:Array<String>;
 
 	public function new() {
 		super(TOKEN);
-		tokens = [
-			ABSTRACT_DEF,
-			CLASS_DEF,
-			ENUM_DEF,
-			INTERFACE_DEF,
-			TYPEDEF_DEF
-		];
+		tokens = [ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF];
 		fieldType = BOTH;
 		modifier = PUBLIC;
 		requireParams = true;
@@ -95,10 +94,14 @@ class FieldDocCommentCheck extends Check {
 
 	function isDefaultPublic(token:TokenTree):Bool {
 		switch (token.tok) {
-			case Kwd(KwdAbstract): return true;
-			case Kwd(KwdInterface): return true;
-			case Kwd(KwdTypedef): return true;
-			default: return false;
+			case Kwd(KwdAbstract):
+				return true;
+			case Kwd(KwdInterface):
+				return true;
+			case Kwd(KwdTypedef):
+				return true;
+			default:
+				return false;
 		}
 	}
 
@@ -114,7 +117,8 @@ class FieldDocCommentCheck extends Check {
 			return;
 		}
 		switch (prevToken.tok) {
-			case Comment(text): checkComment(name, token, prevToken, text);
+			case Comment(text):
+				checkComment(name, token, prevToken, text);
 			default:
 		}
 	}
@@ -132,8 +136,10 @@ class FieldDocCommentCheck extends Check {
 		var isPublic:Bool = defaultPublic;
 		for (modToken in modifierList) {
 			switch (modToken.tok) {
-				case Kwd(KwdPublic): isPublic = true;
-				case Kwd(KwdPrivate): isPublic = false;
+				case Kwd(KwdPublic):
+					isPublic = true;
+				case Kwd(KwdPrivate):
+					isPublic = false;
 				default:
 			}
 		}
@@ -145,9 +151,12 @@ class FieldDocCommentCheck extends Check {
 		var nameTok:TokenTree = TokenTreeAccessHelper.access(token).firstChild().token;
 		if (nameTok == null) return "<unknown>";
 		switch (nameTok.tok) {
-			case Const(CIdent(text)): return text;
-			case Kwd(KwdNew): return "new";
-			default: return "<unknown>";
+			case Const(CIdent(text)):
+				return text;
+			case Kwd(KwdNew):
+				return "new";
+			default:
+				return "<unknown>";
 		}
 	}
 
@@ -165,13 +174,14 @@ class FieldDocCommentCheck extends Check {
 		if ((firstLine == "") || (firstLine == "*")) logPos('Documentation for field "$name" should have at least one extra line of text', docToken.pos);
 
 		switch (token.tok) {
-			case Kwd(KwdFunction): checkFunctionComment(name, token, docToken, text);
+			case Kwd(KwdFunction):
+				checkFunctionComment(name, token, docToken, text);
 			default:
 		}
 	}
 
 	function checkFunctionComment(name:String, token:TokenTree, docToken:TokenTree, text:String) {
-		if (requireParams) checkParams (name, token, docToken, text);
+		if (requireParams) checkParams(name, token, docToken, text);
 		if (!requireReturn) return;
 
 		var access:TokenTreeAccessHelper = TokenTreeAccessHelper.access(token).firstChild().firstOf(DblDot);
@@ -191,7 +201,8 @@ class FieldDocCommentCheck extends Check {
 		if (popenToken.children != null) {
 			for (child in popenToken.children) {
 				switch (child.tok) {
-					case Const(CIdent(ident)): params.push(ident);
+					case Const(CIdent(ident)):
+						params.push(ident);
 					default:
 				}
 			}
@@ -259,37 +270,41 @@ class FieldDocCommentCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "tokens",
-				values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
-			},
+		return [
 			{
-				propertyName: "excludeNames",
-				values: [["new", "toString"]]
-			},
-			{
-				propertyName: "modifier",
-				values: [PUBLIC, BOTH, PRIVATE]
-			},
-			{
-				propertyName: "fieldType",
-				values: [BOTH, FUNCTIONS, VARS]
-			},
-			{
-				propertyName: "requireParams",
-				values: [true, false]
-			},
-			{
-				propertyName: "requireReturn",
-				values: [true, false]
-			},
-			{
-				propertyName: "ignoreOverride",
-				values: [false, true]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "tokens",
+						values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
+					},
+					{
+						propertyName: "excludeNames",
+						values: [["new", "toString"]]
+					},
+					{
+						propertyName: "modifier",
+						values: [PUBLIC, BOTH, PRIVATE]
+					},
+					{
+						propertyName: "fieldType",
+						values: [BOTH, FUNCTIONS, VARS]
+					},
+					{
+						propertyName: "requireParams",
+						values: [true, false]
+					},
+					{
+						propertyName: "requireReturn",
+						values: [true, false]
+					},
+					{
+						propertyName: "ignoreOverride",
+						values: [false, true]
+					}
+				]
+			}
+		];
 	}
 }
 
@@ -298,7 +313,7 @@ class FieldDocCommentCheck extends Check {
 	- VARS = only var fields
 	- FUNCTIONS = only functions;
 	- BOTH = both vars and functions;
- **/
+**/
 @:enum
 abstract FieldDocCommentType(String) {
 	var VARS = "VARS";
@@ -311,7 +326,7 @@ abstract FieldDocCommentType(String) {
 	- PUBLIC = only public fields
 	- PRIVATE = only private fields
 	- BOTH = public and private fields
- **/
+**/
 @:enum
 abstract FieldDocCommentModifier(String) {
 	var PUBLIC = "PUBLIC";

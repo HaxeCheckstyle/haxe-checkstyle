@@ -3,7 +3,6 @@ package checks.design;
 import checkstyle.checks.design.EmptyPackageCheck;
 
 class EmptyPackageCheckTest extends CheckTestCase<EmptyPackageCheckTests> {
-
 	@Test
 	public function testEmptyPackage() {
 		assertMsg(new EmptyPackageCheck(), TEST1, "Found empty package");
@@ -34,14 +33,12 @@ abstract EmptyPackageCheckTests(String) to String {
 	class Test {
 		public function new() {}
 	}";
-
 	var TEST2 = "
 	package checks.test;
 
 	class Test {
 		public function new() {}
 	}";
-
 	var TEST3 = "
 	class Test {
 		public function new() {}

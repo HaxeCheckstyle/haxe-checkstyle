@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.coding.TraceCheck;
 
 class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
-
 	static inline var MSG_TRACE_DETECTED:String = "Trace detected";
 
 	@Test
@@ -39,14 +38,12 @@ abstract TraceCheckTests(String) to String {
 			trace('test');
 		}
 	}";
-
 	var TRACE_VAR = "
 	abstractAndClass Test {
 		function a(x) {
 			trace(x);
 		}
 	}";
-
 	var TRACE_SUPPRESSED = "
 	abstractAndClass Test {
 		@SuppressWarnings('checkstyle:Trace')
@@ -55,13 +52,11 @@ abstract TraceCheckTests(String) to String {
 			trace('test');
 		}
 	}";
-
 	var TRACE_FUNCTION = "
 	abstractAndClass Test {
 		function trace(x) {
 		}
 	}";
-
 	var CUSTOM_TRACE = "
 	abstractAndClass Test {
 		function equals() {

@@ -2,30 +2,23 @@ package checkstyle.checks.comments;
 
 /**
 	Checks code documentation on type level
- **/
+**/
 @name("TypeDocComment")
 @desc("Checks code documentation on type level")
 class TypeDocCommentCheck extends Check {
-
 	/**
-	    matches only comment docs for types specified in tokens list:
+		matches only comment docs for types specified in tokens list:
 		- ABSTRACT_DEF = abstract definition "abstract Test {}"
 		- CLASS_DEF = class definition "class Test {}"
 		- ENUM_DEF = enum definition "enum Test {}"
 		- INTERFACE_DEF = interface definition "interface Test {}"
 		- TYPEDEF_DEF = typdef definition "typedef Test = {}"
-	 **/
+	**/
 	public var tokens:Array<TypeDocCommentToken>;
 
 	public function new() {
 		super(TOKEN);
-		tokens = [
-			ABSTRACT_DEF,
-			CLASS_DEF,
-			ENUM_DEF,
-			INTERFACE_DEF,
-			TYPEDEF_DEF
-		];
+		tokens = [ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF];
 	}
 
 	function hasToken(token:TypeDocCommentToken):Bool {
@@ -51,7 +44,8 @@ class TypeDocCommentCheck extends Check {
 				continue;
 			}
 			switch (prevToken.tok) {
-				case Comment(text): checkComment(name, prevToken, text);
+				case Comment(text):
+					checkComment(name, prevToken, text);
 				default:
 			}
 		}
@@ -61,8 +55,10 @@ class TypeDocCommentCheck extends Check {
 		var nameTok:TokenTree = TokenTreeAccessHelper.access(token).firstChild().token;
 		if (nameTok == null) return "<unknown>";
 		switch (nameTok.tok) {
-			case Const(CIdent(text)): return text;
-			default: return "<unknown>";
+			case Const(CIdent(text)):
+				return text;
+			default:
+				return "<unknown>";
 		}
 	}
 
@@ -81,13 +77,17 @@ class TypeDocCommentCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "tokens",
-				values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [
+					{
+						propertyName: "tokens",
+						values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
+					}
+				]
+			}
+		];
 	}
 }
 

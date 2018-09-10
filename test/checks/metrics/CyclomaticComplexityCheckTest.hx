@@ -3,20 +3,13 @@ package checks.metrics;
 import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 
 class CyclomaticComplexityCheckTest extends CheckTestCase<CyclomaticComplexityCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new CyclomaticComplexityCheck();
-		check.thresholds = [
-			{ severity : "WARNING", complexity : 1 },
-			{ severity : "ERROR", complexity : 2 }
-		];
+		check.thresholds = [{severity: "WARNING", complexity: 1}, {severity: "ERROR", complexity: 2}];
 		assertMsg(check, TEST, 'Method "test" is too complex (score: 2).');
 
-		check.thresholds = [
-			{ severity : "IGNORE", complexity : 1 },
-			{ severity : "IGNORE", complexity : 2 }
-		];
+		check.thresholds = [{severity: "IGNORE", complexity: 1}, {severity: "IGNORE", complexity: 2}];
 		assertNoMsg(check, TEST);
 	}
 }

@@ -3,7 +3,6 @@ package checks.naming;
 import checkstyle.checks.naming.CatchParameterNameCheck;
 
 class CatchParameterNameCheckTest extends CheckTestCase<CatchParameterNameCheckTests> {
-
 	@Test
 	public function testCorrectNaming() {
 		var check = new CatchParameterNameCheck();
@@ -35,7 +34,6 @@ abstract CatchParameterNameCheckTests(String) to String {
 			catch(e:String) {}
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		public function test() {

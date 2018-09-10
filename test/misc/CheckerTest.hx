@@ -3,7 +3,6 @@ package misc;
 import checkstyle.Checker;
 
 class CheckerTest {
-
 	@Test
 	public function testEmptyLinesIdx() {
 		var checker:Checker = new Checker();

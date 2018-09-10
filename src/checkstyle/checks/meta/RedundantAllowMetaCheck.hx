@@ -2,7 +2,7 @@ package checkstyle.checks.meta;
 
 /**
 	Checks for redundant @:allow metadata
- **/
+**/
 @name("RedundantAllowMeta")
 @desc("Checks for redundant @:allow metadata")
 class RedundantAllowMetaCheck extends RedundantAccessMetaBase {

@@ -1,9 +1,7 @@
 package checkstyle.reporter;
 
 class XMLReporter extends BaseReporter {
-
 	var style:String;
-
 	var messageCache:Map<String, Array<CheckMessage>>;
 
 	/**
@@ -18,7 +16,6 @@ class XMLReporter extends BaseReporter {
 		"'" => "&#39;",
 		"/" => "&#x2F;"
 	];
-
 	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
 
 	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {
@@ -104,9 +101,12 @@ class XMLReporter extends BaseReporter {
 		sb.add("\"/>\n");
 
 		switch (m.severity) {
-			case ERROR: errors++;
-			case WARNING: warnings++;
-			case INFO: infos++;
+			case ERROR:
+				errors++;
+			case WARNING:
+				warnings++;
+			case INFO:
+				infos++;
 			default:
 		}
 

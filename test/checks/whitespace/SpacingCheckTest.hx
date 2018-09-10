@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.SpacingCheck;
 
 class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
-
 	@Test
 	public function testIfShouldContainSpace() {
 		assertMsg(new SpacingCheck(), TEST1A, 'No space between "if" and "("');
@@ -116,28 +115,24 @@ abstract SpacingCheckTests(String) to String {
 			if(true) {}
 		}
 	}";
-
 	var TEST1B = "
 	class Test {
 		public function test() {
 			if (true) {}
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		public function test() {
 			var a = a+1;
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 		public function test() {
 			var a = a ++;
 		}
 	}";
-
 	var TEST4A = "
 	class Test {
 		public function test() {
@@ -146,7 +141,6 @@ abstract SpacingCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST4B = "
 	class Test {
 		public function test() {
@@ -155,21 +149,18 @@ abstract SpacingCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST5A = "
 	class Test {
 		public function test() {
 			while(true) {}
 		}
 	}";
-
 	var TEST5B = "
 	class Test {
 		public function test() {
 			while (true) {}
 		}
 	}";
-
 	var TEST6A = "
 	class Test {
 		public function test() {
@@ -179,7 +170,6 @@ abstract SpacingCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST6B = "
 	class Test {
 		public function test() {
@@ -189,7 +179,6 @@ abstract SpacingCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST7A = "
 	class Test {
 		public function test() {
@@ -197,7 +186,6 @@ abstract SpacingCheckTests(String) to String {
 			catch(e:Dynamic) {}
 		}
 	}";
-
 	var TEST7B = "
 	class Test {
 		public function test() {
@@ -205,7 +193,6 @@ abstract SpacingCheckTests(String) to String {
 			catch (e:Dynamic) {}
 		}
 	}";
-
 	var TEST8 = "
 	class Test {
 		public function test() {

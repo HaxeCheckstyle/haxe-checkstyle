@@ -2,15 +2,14 @@ package checkstyle.checks.meta;
 
 /**
 	Checks for redundant @:allow metadata
- **/
+**/
 @ignore("Base class for name checks")
 class RedundantAccessMetaBase extends Check {
-
 	/**
 		switches behaviour of check to
 		- false = look for redundant access modifications
 		- true = to discourage its use everywhere
-	 **/
+	**/
 	public var prohibitMeta:Bool;
 
 	var metaName:String;
@@ -30,10 +29,14 @@ class RedundantAccessMetaBase extends Check {
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			var target:TokenTree = TokenTreeAccessHelper.access(token)
-				.firstChild().is(DblDot)
-				.firstChild().is(Const(CIdent(metaName)))
-				.firstChild().is(POpen)
-				.firstChild().token;
+				.firstChild()
+				.is(DblDot)
+				.firstChild()
+				.is(Const(CIdent(metaName)))
+				.firstChild()
+				.is(POpen)
+				.firstChild()
+				.token;
 
 			if (target == null) continue;
 			if (prohibitMeta) {
@@ -43,10 +46,10 @@ class RedundantAccessMetaBase extends Check {
 			var parent:TokenTree = token.parent;
 			if (parent == null) continue;
 			var info:RedundantAccessMetaInfo = {
-				name:getTargetName(target),
-				ident:parent.toString(),
-				token:token,
-				pos:parent.getPos()
+				name: getTargetName(target),
+				ident: parent.toString(),
+				token: token,
+				pos: parent.getPos()
 			};
 			if (filerParent(parent, info)) continue;
 			checkAndAdd(infos, info);
@@ -82,12 +85,14 @@ class RedundantAccessMetaBase extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

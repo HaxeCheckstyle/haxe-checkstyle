@@ -3,7 +3,6 @@ package checks.design;
 import checkstyle.checks.design.InterfaceCheck;
 
 class InterfaceCheckTest extends CheckTestCase<InterfaceCheckTests> {
-
 	static inline var PROPERTIES_MSG:String = "Properties are not allowed in interfaces";
 	static inline var MARKER_MSG:String = "Marker interfaces are not allowed";
 
@@ -43,15 +42,12 @@ abstract InterfaceCheckTests(String) to String {
 	interface IComponentController {
 		var a:Int = 1;
 	}";
-
 	var TEST2 = "
 	interface IComponentController {}";
-
 	var TEST3 = "
 	interface IComponentController {
 		function init():Void;
 	}";
-
 	var TEST4 = "
 	interface IComponentController {
 		var a:Int;

@@ -3,7 +3,6 @@ package checks.type;
 import checkstyle.checks.type.AnonymousCheck;
 
 class AnonymousCheckTest extends CheckTestCase<AnonymousCheckTests> {
-
 	@Test
 	public function testAnonymousStructureClassVar() {
 		assertMsg(new AnonymousCheck(), TEST1, 'Anonymous structure "anonymous" found, use "typedef"');
@@ -21,7 +20,6 @@ abstract AnonymousCheckTests(String) to String {
 	abstractAndClass Test {
 		var anonymous:{a:Int, b:Int};
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function new() {

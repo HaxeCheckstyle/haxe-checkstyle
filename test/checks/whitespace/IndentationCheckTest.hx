@@ -4,7 +4,6 @@ import checkstyle.SeverityLevel;
 import checkstyle.checks.whitespace.IndentationCheck;
 
 class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
-
 	@Test
 	public function testCorrectTabIndentation() {
 		var check = new IndentationCheck();
@@ -207,7 +206,6 @@ long comment
 	comment
 */
 ";
-
 	var CORRECT_SPACE_INDENT = "
 class Test {
   static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;
@@ -239,7 +237,6 @@ long comment
       );
   }
 }";
-
 	var WRONG_CONDITIONAL = "
 class Test {
 #if php
@@ -247,7 +244,6 @@ class Test {
 #end
 	public function new() {}
 }";
-
 	var CONDITIONAL_INCREASE = "
 class Test {
 	#if php
@@ -255,7 +251,6 @@ class Test {
 	#end
 	public function new() {}
 }";
-
 	var LARGER_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
@@ -271,7 +266,6 @@ class Test {
 		doSomething();
 	}
 }";
-
 	var EXACT_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
@@ -281,7 +275,6 @@ class Test {
 		doSomething();
 	}
 }";
-
 	var NONE_WRAPPED_PARAMS = "
 class Test {
 	public function new(param1:Int,
@@ -291,7 +284,6 @@ class Test {
 		doSomething();
 	}
 }";
-
 	var WRAPPED_STRING = "
 class Test {
 	public function test() {
@@ -301,7 +293,6 @@ test
 test';
 	}
 }";
-
 	var CORRECT_COMMENTS = "
 class Test {
 	// comment
@@ -323,13 +314,11 @@ class Test {
 /*
  * test comment
  */";
-
 	var FUNCTION_BODY_NO_BRACES = "
 class Test {
 	public function toString()
 		return 'Test class';
 }";
-
 	var CORRECT_PCLOSE_WRAPPING_ISSUE_450 = "
 class Test {
 	public function new(
@@ -338,7 +327,6 @@ class Test {
 		doSomething();
 	}
 }";
-
 	var CORRECT_DOUBLE_FOR = "
 class Test {
 	public function new() {
@@ -357,7 +345,6 @@ class Test {
 				}
 	}
 }";
-
 	var CORRECT_ARROW_INDENT = "
 class Test {
 	function run(args:Array<String>) {

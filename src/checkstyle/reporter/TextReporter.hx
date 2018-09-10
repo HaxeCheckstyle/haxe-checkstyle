@@ -3,14 +3,15 @@ package checkstyle.reporter;
 import haxe.io.Output;
 
 class TextReporter extends BaseReporter {
-
 	override public function addMessage(m:CheckMessage) {
 		var sb:StringBuf = getMessage(m);
 		var output:Output = Sys.stderr();
 
 		switch (m.severity) {
-			case ERROR: errors++;
-			case WARNING: warnings++;
+			case ERROR:
+				errors++;
+			case WARNING:
+				warnings++;
 			case INFO:
 				infos++;
 				output = Sys.stdout();

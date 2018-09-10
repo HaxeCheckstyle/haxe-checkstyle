@@ -4,19 +4,18 @@ import haxe.macro.Printer;
 
 /**
 	Spacing check on if, for, while, switch, try statements and around operators.
- **/
+**/
 @name("Spacing")
 @desc("Spacing check on if, for, while, switch, try statements and around operators.")
 class SpacingCheck extends Check {
-
 	/**
 		require space around Binop operators ("+", "-", "/", etc.)
-	 **/
+	**/
 	public var spaceAroundBinop:Bool;
 
 	/**
 		enforce no space around Unop operators ("++", "--", "!", "-", "~")
-	 **/
+	**/
 	public var noSpaceAroundUnop:Bool;
 
 	/**
@@ -24,7 +23,7 @@ class SpacingCheck extends Check {
 		- should = require space between statement and condition
 		- shouldNot = no space should between statement and condition
 		- any = ignored by space check
-	 **/
+	**/
 	public var spaceIfCondition:SpacingPolicy;
 
 	/**
@@ -32,7 +31,7 @@ class SpacingCheck extends Check {
 		- should = require space between statement and condition
 		- shouldNot = no space should between statement and condition
 		- any = ignored by space check
-	 **/
+	**/
 	public var spaceForLoop:SpacingPolicy;
 
 	/**
@@ -40,7 +39,7 @@ class SpacingCheck extends Check {
 		- should = require space between statement and condition
 		- shouldNot = no space should between statement and condition
 		- any = ignored by space check
-	 **/
+	**/
 	public var spaceWhileLoop:SpacingPolicy;
 
 	/**
@@ -48,7 +47,7 @@ class SpacingCheck extends Check {
 		- should = require space between statement and condition
 		- shouldNot = no space should between statement and condition
 		- any = ignored by space check
-	 **/
+	**/
 	public var spaceSwitchCase:SpacingPolicy;
 
 	/**
@@ -56,12 +55,12 @@ class SpacingCheck extends Check {
 		- should = require space between statement and condition
 		- shouldNot = no space should between statement and condition
 		- any = ignored by space check
-	 **/
+	**/
 	public var spaceCatch:SpacingPolicy;
 
 	/**
 		exclude range operator "..." from "spaceAroundBinop"
-	 **/
+	**/
 	public var ignoreRangeOperator:Bool;
 
 	public function new() {
@@ -79,13 +78,7 @@ class SpacingCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([
-			Kwd(KwdIf),
-			Kwd(KwdFor),
-			Kwd(KwdWhile),
-			Kwd(KwdSwitch),
-			Kwd(KwdCatch)
-		], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf), Kwd(KwdFor), Kwd(KwdWhile), Kwd(KwdSwitch), Kwd(KwdCatch)], ALL);
 
 		for (token in acceptableTokens) {
 			var firstChild:TokenTree = token.getFirstChild();
@@ -156,45 +149,49 @@ class SpacingCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "spaceIfCondition",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
+		return [
 			{
-				propertyName: "spaceForLoop",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
-			{
-				propertyName: "spaceWhileLoop",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
-			{
-				propertyName: "spaceWhileLoop",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
-			{
-				propertyName: "spaceSwitchCase",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
-			{
-				propertyName: "spaceCatch",
-				values: [SHOULD, SHOULD_NOT, ANY]
-			},
-			{
-				propertyName: "ignoreRangeOperator",
-				values: [true, false]
-			},
-			{
-				propertyName: "spaceAroundBinop",
-				values: [true, false]
-			},
-			{
-				propertyName: "noSpaceAroundUnop",
-				values: [true, false]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "spaceIfCondition",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "spaceForLoop",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "spaceWhileLoop",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "spaceWhileLoop",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "spaceSwitchCase",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "spaceCatch",
+						values: [SHOULD, SHOULD_NOT, ANY]
+					},
+					{
+						propertyName: "ignoreRangeOperator",
+						values: [true, false]
+					},
+					{
+						propertyName: "spaceAroundBinop",
+						values: [true, false]
+					},
+					{
+						propertyName: "noSpaceAroundUnop",
+						values: [true, false]
+					}
+				]
+			}
+		];
 	}
 }
 
@@ -202,7 +199,7 @@ class SpacingCheck extends Check {
 	- should = require space between statement and condition
 	- shouldNot = no space should between statement and condition
 	- any = ignored by space check
- **/
+**/
 @:enum
 abstract SpacingPolicy(String) {
 	var SHOULD = "should";

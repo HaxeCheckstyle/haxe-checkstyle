@@ -6,11 +6,10 @@ import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
 
 /**
 	Checks that whitespace is present or absent around a operators.
- **/
+**/
 @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")
 class OperatorWhitespaceCheck extends WhitespaceCheckBase {
-
 	/**
 		policy for "=", "+=", "-=", "*=", "/=", "<<=", ">>=", ">>>=", "&=", "|=", "^="
 		- around = enforce whitespace before and after operator
@@ -18,7 +17,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var assignOpPolicy:WhitespacePolicy;
 
 	/**
@@ -26,7 +25,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- inner = enforce whitespace between unary operator and operand
 		- none = enforce no whitespace between unary operator and operand
 		- ignore = skip checks
-	 **/
+	**/
 	public var unaryOpPolicy:WhitespaceUnaryPolicy;
 
 	/**
@@ -36,7 +35,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var ternaryOpPolicy:WhitespacePolicy;
 
 	/**
@@ -46,7 +45,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var arithmeticOpPolicy:WhitespacePolicy;
 
 	/**
@@ -56,7 +55,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var compareOpPolicy:WhitespacePolicy;
 
 	/**
@@ -66,7 +65,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var bitwiseOpPolicy:WhitespacePolicy;
 
 	/**
@@ -76,7 +75,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var boolOpPolicy:WhitespacePolicy;
 
 	/**
@@ -86,7 +85,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var intervalOpPolicy:WhitespacePolicy;
 
 	/**
@@ -96,7 +95,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var arrowPolicy:WhitespacePolicy;
 
 	/**
@@ -106,7 +105,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
-	 **/
+	**/
 	public var functionArgPolicy:WhitespacePolicy;
 
 	public function new() {
@@ -140,29 +139,24 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkAssignOps(root:TokenTree) {
 		checkTokens(root, [
-				Binop(OpAssign),
-				Binop(OpAssignOp(OpAdd)),
-				Binop(OpAssignOp(OpSub)),
-				Binop(OpAssignOp(OpMult)),
-				Binop(OpAssignOp(OpDiv)),
-				Binop(OpAssignOp(OpMod)),
-				Binop(OpAssignOp(OpShl)),
-				Binop(OpAssignOp(OpShr)),
-				Binop(OpAssignOp(OpUShr)),
-				Binop(OpAssignOp(OpOr)),
-				Binop(OpAssignOp(OpAnd)),
-				Binop(OpAssignOp(OpXor))
-			], assignOpPolicy);
+			Binop(OpAssign),
+			Binop(OpAssignOp(OpAdd)),
+			Binop(OpAssignOp(OpSub)),
+			Binop(OpAssignOp(OpMult)),
+			Binop(OpAssignOp(OpDiv)),
+			Binop(OpAssignOp(OpMod)),
+			Binop(OpAssignOp(OpShl)),
+			Binop(OpAssignOp(OpShr)),
+			Binop(OpAssignOp(OpUShr)),
+			Binop(OpAssignOp(OpOr)),
+			Binop(OpAssignOp(OpAnd)),
+			Binop(OpAssignOp(OpXor))
+		], assignOpPolicy);
 	}
 
 	function checkUnaryOps(root:TokenTree) {
 		if ((unaryOpPolicy == null) || (unaryOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([
-			Unop(OpNegBits),
-			Unop(OpNot),
-			Unop(OpIncrement),
-			Unop(OpDecrement)
-		], ALL);
+		var tokens:Array<TokenTree> = root.filter([Unop(OpNegBits), Unop(OpNot), Unop(OpIncrement), Unop(OpDecrement)], ALL);
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
@@ -185,42 +179,33 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	function checkArithmeticOps(root:TokenTree) {
-		checkTokens(root, [
-				Binop(OpAdd),
-				Binop(OpSub),
-				Binop(OpMult),
-				Binop(OpDiv),
-				Binop(OpMod)
-			], arithmeticOpPolicy);
+		checkTokens(root, [Binop(OpAdd), Binop(OpSub), Binop(OpMult), Binop(OpDiv), Binop(OpMod)], arithmeticOpPolicy);
 	}
 
 	function checkCompareOps(root:TokenTree) {
 		checkTokens(root, [
-				Binop(OpGt),
-				Binop(OpLt),
-				Binop(OpGte),
-				Binop(OpLte),
-				Binop(OpEq),
-				Binop(OpNotEq)
-			], compareOpPolicy);
+			Binop(OpGt),
+			Binop(OpLt),
+			Binop(OpGte),
+			Binop(OpLte),
+			Binop(OpEq),
+			Binop(OpNotEq)
+		], compareOpPolicy);
 	}
 
 	function checkBitwiseOps(root:TokenTree) {
 		checkTokens(root, [
-				Binop(OpAnd),
-				Binop(OpOr),
-				Binop(OpXor),
-				Binop(OpShl),
-				Binop(OpShr),
-				Binop(OpUShr)
-			], bitwiseOpPolicy);
+			Binop(OpAnd),
+			Binop(OpOr),
+			Binop(OpXor),
+			Binop(OpShl),
+			Binop(OpShr),
+			Binop(OpUShr)
+		], bitwiseOpPolicy);
 	}
 
 	function checkBoolOps(root:TokenTree) {
-		checkTokens(root, [
-				Binop(OpBoolAnd),
-				Binop(OpBoolOr)
-			], boolOpPolicy);
+		checkTokens(root, [Binop(OpBoolAnd), Binop(OpBoolOr)], boolOpPolicy);
 	}
 
 	function checkIntervalOps(root:TokenTree) {
@@ -253,48 +238,52 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "assignOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
+		return [
 			{
-				propertyName: "ternaryOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "arithmeticOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "unaryOpPolicy",
-				values: [INNER, NONE, IGNORE]
-			},
-			{
-				propertyName: "compareOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "bitwiseOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "boolOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "intervalOpPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "arrowPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			},
-			{
-				propertyName: "functionArgPolicy",
-				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "assignOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "ternaryOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "arithmeticOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "unaryOpPolicy",
+						values: [INNER, NONE, IGNORE]
+					},
+					{
+						propertyName: "compareOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "bitwiseOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "boolOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "intervalOpPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "arrowPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "functionArgPolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					}
+				]
+			}
+		];
 	}
 }

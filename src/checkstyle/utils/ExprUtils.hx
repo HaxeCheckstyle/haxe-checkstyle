@@ -1,13 +1,12 @@
 package checkstyle.utils;
 
 class ExprUtils {
-
-	public static function walkFile(file:{ pack:Array<String>, decls:Array<TypeDecl> }, cb:Expr -> Void) {
+	public static function walkFile(file:{pack:Array<String>, decls:Array<TypeDecl>}, cb:Expr -> Void) {
 		for (decl in file.decls) walkTypeDecl(decl, cb);
 	}
 
 	public static function walkTypeDecl(td:TypeDecl, cb:Expr -> Void) {
-		switch (td.decl){
+		switch (td.decl) {
 			case EClass(d):
 				walkClass(d, cb);
 			case EEnum(d):
@@ -36,7 +35,8 @@ class ExprUtils {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
 			switch (f) {
-				case HExtends(t) | HImplements(t): walkTypePath(t, cb);
+				case HExtends(t) | HImplements(t):
+					walkTypePath(t, cb);
 				default:
 			}
 		}
@@ -57,7 +57,8 @@ class ExprUtils {
 		walkCommonDefinition(d, cb);
 		for (f in d.flags) {
 			switch (f) {
-				case AFromType(ct) | AToType(ct) | AIsType(ct): walkComplexType(ct, cb);
+				case AFromType(ct) | AToType(ct) | AIsType(ct):
+					walkComplexType(ct, cb);
 				default:
 			}
 		}
@@ -74,9 +75,11 @@ class ExprUtils {
 	public static function walkTypePath(tp:TypePath, cb:Expr -> Void) {
 		if (tp.params != null) {
 			for (p in tp.params) {
-				switch (p){
-					case TPType(t): walkComplexType(t, cb);
-					case TPExpr(e): walkExpr(e, cb);
+				switch (p) {
+					case TPType(t):
+						walkComplexType(t, cb);
+					case TPExpr(e):
+						walkExpr(e, cb);
 				}
 			}
 		}
@@ -114,7 +117,7 @@ class ExprUtils {
 	}
 
 	public static function walkField(f:Field, cb:Expr -> Void) {
-		switch (f.kind){
+		switch (f.kind) {
 			case FVar(t, e):
 				if (t != null) walkComplexType(t, cb);
 				if (e != null) walkExpr(e, cb);
@@ -128,8 +131,9 @@ class ExprUtils {
 
 	public static function walkComplexType(t:ComplexType, cb:Expr -> Void) {
 		if (t == null) return;
-		switch (t){
-			case TPath(p): walkTypePath(p, cb);
+		switch (t) {
+			case TPath(p):
+				walkTypePath(p, cb);
 			case TFunction(args, ret):
 				for (a in args) walkComplexType(a, cb);
 				walkComplexType(ret, cb);
@@ -153,48 +157,79 @@ class ExprUtils {
 
 	public static function walkExpr(e:Expr, cb:Expr -> Void) {
 		cb(e);
-		switch (e.expr){
+		switch (e.expr) {
 			case EConst(c):
-			case EArray(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
-			case EBinop(op, e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
-			case EField(e, field): walkExpr(e, cb);
-			case EParenthesis(e): walkExpr(e, cb);
-			case EObjectDecl(fields): for (f in fields) walkExpr(f.expr, cb);
-			case EArrayDecl(values): for (v in values) walkExpr(v, cb);
-			case ECall(e, params): walkExpr(e, cb);
+			case EArray(e1, e2):
+				walkExpr(e1, cb);
+				walkExpr(e2, cb);
+			case EBinop(op, e1, e2):
+				walkExpr(e1, cb);
+				walkExpr(e2, cb);
+			case EField(e, field):
+				walkExpr(e, cb);
+			case EParenthesis(e):
+				walkExpr(e, cb);
+			case EObjectDecl(fields):
+				for (f in fields) walkExpr(f.expr, cb);
+			case EArrayDecl(values):
+				for (v in values) walkExpr(v, cb);
+			case ECall(e, params):
+				walkExpr(e, cb);
 				for (p in params) walkExpr(p, cb);
-			case ENew(t, params): walkTypePath(t, cb);
+			case ENew(t, params):
+				walkTypePath(t, cb);
 				for (p in params) walkExpr(p, cb);
-			case EUnop(op, postFix, e): walkExpr(e, cb);
-			case EVars(vars): for (v in vars) walkVar(v, cb);
-			case EFunction(name, f): walkFunction(f, cb);
-			case EBlock(exprs): for (e in exprs) walkExpr(e, cb);
-			case EFor(it, expr): walkExpr(it, cb); walkExpr(expr, cb);
+			case EUnop(op, postFix, e):
+				walkExpr(e, cb);
+			case EVars(vars):
+				for (v in vars) walkVar(v, cb);
+			case EFunction(name, f):
+				walkFunction(f, cb);
+			case EBlock(exprs):
+				for (e in exprs) walkExpr(e, cb);
+			case EFor(it, expr):
+				walkExpr(it, cb);
+				walkExpr(expr, cb);
 			#if (haxe_ver < 4.0)
-			case EIn(e1, e2): walkExpr(e1, cb); walkExpr(e2, cb);
+			case EIn(e1, e2):
+				walkExpr(e1, cb);
+				walkExpr(e2, cb);
 			#end
-			case EIf(econd, eif, eelse): walkExpr(econd, cb);
+			case EIf(econd, eif, eelse):
+				walkExpr(econd, cb);
 				walkExpr(eif, cb);
 				if (eelse != null) walkExpr(eelse, cb);
-			case EWhile(econd, e, normalWhile): walkExpr(econd, cb); walkExpr(e, cb);
-			case ESwitch(e, cases, edef): walkExpr(e, cb);
+			case EWhile(econd, e, normalWhile):
+				walkExpr(econd, cb);
+				walkExpr(e, cb);
+			case ESwitch(e, cases, edef):
+				walkExpr(e, cb);
 				for (c in cases) walkCase(c, cb);
 				if (edef != null && edef.expr != null) walkExpr(edef, cb);
-			case ETry(e, catches): walkExpr(e, cb);
+			case ETry(e, catches):
+				walkExpr(e, cb);
 				for (c in catches) walkCatch(c, cb);
-			case EReturn(e): if (e != null) walkExpr(e, cb);
+			case EReturn(e):
+				if (e != null) walkExpr(e, cb);
 			case EBreak:
 			case EContinue:
-			case EUntyped(e): walkExpr(e, cb);
-			case EThrow(e): walkExpr(e, cb);
-			case ECast(e, t): walkExpr(e, cb);
+			case EUntyped(e):
+				walkExpr(e, cb);
+			case EThrow(e):
+				walkExpr(e, cb);
+			case ECast(e, t):
+				walkExpr(e, cb);
 				if (t != null) walkComplexType(t, cb);
-			case EDisplay(e, displayKind): walkExpr(e, cb);
-			case EDisplayNew(t): walkTypePath(t, cb);
-			case ETernary(econd, eif, eelse): walkExpr(econd, cb);
+			case EDisplay(e, displayKind):
+				walkExpr(e, cb);
+			case EDisplayNew(t):
+				walkTypePath(t, cb);
+			case ETernary(econd, eif, eelse):
+				walkExpr(econd, cb);
 				walkExpr(eif, cb);
 				walkExpr(eelse, cb);
-			case ECheckType(e, t): walkExpr(e, cb);
+			case ECheckType(e, t):
+				walkExpr(e, cb);
 				walkComplexType(t, cb);
 			case EMeta(s, e):
 				if (s.params != null) for (mp in s.params) walkExpr(mp, cb);

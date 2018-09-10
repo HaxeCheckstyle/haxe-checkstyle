@@ -5,13 +5,11 @@ import checkstyle.ChecksInfo.CheckInfo;
 import checkstyle.config.Config;
 import checkstyle.config.CheckConfig;
 import checkstyle.checks.Check;
-
 import haxe.Json;
 import haxe.ds.ArraySort;
 import sys.io.File;
 
 class ConfigUtils {
-
 	public static function getEmptyConfig():Config {
 		return {
 			defaultSeverity: SeverityLevel.INFO,
@@ -70,11 +68,25 @@ class ConfigUtils {
 
 	public static function makeCheckConfig(check:Check):CheckConfig {
 		var propsNotAllowed:Array<String> = [
-			"moduleName", "severity", "type", "categories",
-			"points", "desc", "currentState", "skipOverStringStart",
-			"commentStartRE", "commentBlockEndRE", "stringStartRE",
-			"stringInterpolatedEndRE", "stringLiteralEndRE", "formatRE",
-			"skipOverInitialQuote", "messages", "checker", "placemap", "metaName"
+			"moduleName",
+			"severity",
+			"type",
+			"categories",
+			"points",
+			"desc",
+			"currentState",
+			"skipOverStringStart",
+			"commentStartRE",
+			"commentBlockEndRE",
+			"stringStartRE",
+			"stringInterpolatedEndRE",
+			"stringLiteralEndRE",
+			"formatRE",
+			"skipOverInitialQuote",
+			"messages",
+			"checker",
+			"placemap",
+			"metaName"
 		];
 		var checkConfig:CheckConfig = {
 			type: check.getModuleName(),

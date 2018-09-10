@@ -3,7 +3,6 @@ package checks.literal;
 import checkstyle.checks.literal.ArrayLiteralCheck;
 
 class ArrayLiteralCheckTest extends CheckTestCase<ArrayLiteralCheckTests> {
-
 	@Test
 	public function testWrongArrayInstantiation() {
 		assertMsg(new ArrayLiteralCheck(), TEST1, 'Bad array instantiation, use the array literal notation "[]" which is shorter and cleaner');
@@ -21,7 +20,6 @@ abstract ArrayLiteralCheckTests(String) to String {
 	abstractAndClass Test {
 		var _arr:Array<Int> = new Array<Int>();
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		var _arr:Array<Int> = [];

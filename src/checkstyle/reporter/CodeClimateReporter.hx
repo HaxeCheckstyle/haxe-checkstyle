@@ -5,7 +5,6 @@ import haxe.Json;
 using StringTools;
 
 class CodeClimateReporter extends BaseReporter {
-
 	static inline var INFO:String = "info";
 	static inline var NORMAL:String = "normal";
 	static inline var CRITICAL:String = "critical";
@@ -29,7 +28,7 @@ class CodeClimateReporter extends BaseReporter {
 			severity: getSeverity(m.severity),
 			categories: m.categories,
 			remediation_points: m.points * REMEDIATION_BASE,
-			location:{
+			location: {
 				path: file,
 				positions: {
 					begin: {

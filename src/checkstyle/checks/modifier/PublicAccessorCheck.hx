@@ -2,11 +2,10 @@ package checkstyle.checks.modifier;
 
 /**
 	Checks for public accessors.
- **/
+**/
 @name("PublicAccessor")
 @desc("Checks for public accessors.")
 class PublicAccessorCheck extends Check {
-
 	public function new() {
 		super(AST);
 		categories = [Category.STYLE, Category.CLARITY];

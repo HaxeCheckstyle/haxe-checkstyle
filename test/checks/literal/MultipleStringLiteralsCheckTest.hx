@@ -3,7 +3,6 @@ package checks.literal;
 import checkstyle.checks.literal.MultipleStringLiteralsCheck;
 
 class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLiteralsCheckTests> {
-
 	@Test
 	public function testAllowedMultipleStringLiterals() {
 		var check = new MultipleStringLiteralsCheck();
@@ -55,7 +54,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			c = 'test';
 		}
 	}";
-
 	var CONSTANT_NOT_COUNTED = "
 	class Test {
 		static var a:String = 'xml';
@@ -64,7 +62,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			b = 'xml';
 		}
 	}";
-
 	var THREE_XML = "
 	class Test {
 		var a:String = 'xml';
@@ -72,7 +69,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			a = 'xml';
 		}
 	}";
-
 	var THREE_SPACE = "
 	class Test {
 		var a:String = '   ';
@@ -80,7 +76,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			a = '   ';
 		}
 	}";
-
 	var THREE_XML_SWITCH = "
 	class Test {
 		var a:String = 'xml';
@@ -91,7 +86,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLE_CHARS = "
 	class Test {
 		public function new() {
@@ -99,7 +93,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			b = 'b' + 'b' + 'a' + 'b' + 'b';
 		}
 	}";
-
 	var OBJECT_FIELD_KEYS_ISSUE_116 = "
 	class Test {
 		function foo() {
@@ -116,7 +109,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			];
 		}
 	}";
-
 	var OBJECT_FIELD_VALUES_ISSUE_116 = "
 	class Test {
 		function foo() {
@@ -128,7 +120,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			];
 		}
 	}";
-
 	var INTERPOLATION_ISSUE_109 = "
 	class Test {
 		function foo() {
@@ -148,7 +139,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			trace('$value is ${i++} $i');
 		}
 	}";
-
 	var NO_INTERPOLATION_ISSUE_109 = "
 	class Test {
 		function foo() {
@@ -156,7 +146,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			trace('value $$is i');
 		}
 	}";
-
 	var NO_INTERPOLATION_AT_START_ISSUE_109 = "
 	class Test {
 		function foo() {
@@ -164,7 +153,6 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			trace('$$is i');
 		}
 	}";
-
 	var EXAGGERATION_ISSUE_318 = "
 	class Test {
 		function foo() {
@@ -174,8 +162,7 @@ abstract MultipleStringLiteralsCheckTests(String) to String {
 			System.storage.remove('user.name');
 		}
 	}";
-
-	var SUPPRESSION  = "
+	var SUPPRESSION = "
 	class Test {
 		function foo() {
 			name = new Value<String>(System.storage.get('user.name'), function(to, _) System.storage.set('user.name', to));

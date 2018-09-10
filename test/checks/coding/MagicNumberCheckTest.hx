@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.MagicNumberCheck;
 
 class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
-
 	@Test
 	public function testNoMagicNumber() {
 		var check = new MagicNumberCheck();
@@ -59,41 +58,35 @@ abstract MagicNumberCheckTests(String) to String {
 			d = 2;
 		}
 	}";
-
 	var INT_NUMBER_ASSIGN = "
 	abstractAndClass Test {
 		public function new() {
 			a = 5;
 		}
 	}";
-
 	var NEGATIVE_INT_NUMBER_ASSIGN = "
 	abstractAndClass Test {
 		public function new() {
 			a = -2;
 		}
 	}";
-
 	var FLOAT_NUMBER_ASSIGN = "
 	abstractAndClass Test {
 		public function new() {
 			a = 5.0;
 		}
 	}";
-
 	var INT_NUMBER_IF = "
 	abstractAndClass Test {
 		public function new() {
 			if (a > 5) return;
 		}
 	}";
-
 	var INT_NUMBER_FUNCTION = "
 	abstractAndClass Test {
 		public function new(a:Int = 10) {
 		}
 	}";
-
 	var ALLOWED_MAGIC_NUMBER = "
 	abstractAndClass Test {
 		static inline var VAL = 5;
@@ -101,7 +94,6 @@ abstract MagicNumberCheckTests(String) to String {
 			a = VAL;
 		}
 	}";
-
 	var ENUM_ABSTRACT = "
 	@:enum abstract Style(Int) {
 		var BOLD = 1;
@@ -109,7 +101,6 @@ abstract MagicNumberCheckTests(String) to String {
 		var BLUE = 94;
 		var MAGENTA = 95;
 	}";
-
 	var ENUM_ABSTRACT_WITH_CLASS = "
 	@:enum abstract Style(Int) {
 		var BOLD = 1;
@@ -122,7 +113,6 @@ abstract MagicNumberCheckTests(String) to String {
 		static inline var VAL = 5;
 	}
 	";
-
 	var HAXE4_ENUM_ABSTRACT = "
 	enum abstract Style(Int) {
 		var BOLD = 1;

@@ -4,7 +4,6 @@ import checks.CheckTestCase;
 import checkstyle.checks.coding.NullableParameterCheck;
 
 class NullableParameterCheckTest extends CheckTestCase<NullableParameterCheckTests> {
-
 	@Test
 	function testQuestionMark() {
 		var check = new NullableParameterCheck();
@@ -38,27 +37,22 @@ abstract NullableParameterCheckTests(String) to String {
 	class Test {
 		function foo(arg:Int) {}
 	}";
-
 	var DEFAULT = "
 	class Test {
 		function foo(arg:Int = 0) {}
 	}";
-
 	var NULL_DEFAULT = "
 	class Test {
 		function foo(arg:Int = null) {}
 	}";
-
 	var OPTIONAL = "
 	class Test {
 		function foo(?arg:Int) {}
 	}";
-
 	var OPTIONAL_WITH_NULL_DEFAULT = "
 	class Test {
 		function foo(?arg:Int = null) {}
 	}";
-
 	var OPTIONAL_WITH_NON_NULL_DEFAULT = "
 	class Test {
 		function foo(?arg:Int = 0) {}

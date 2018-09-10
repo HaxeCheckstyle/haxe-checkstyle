@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.ReturnCountCheck;
 
 class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
-
 	@Test
 	public function testReturnCount() {
 		assertMsg(new ReturnCountCheck(), TEST1, "Return count is 3 (max allowed is 2)");
@@ -50,7 +49,6 @@ abstract ReturnCountCheckTests(String) to String {
 			return 3;
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		function a() {
@@ -60,7 +58,6 @@ abstract ReturnCountCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		@SuppressWarnings('checkstyle:ReturnCount')
@@ -72,7 +69,6 @@ abstract ReturnCountCheckTests(String) to String {
 			else return 3;
 		}
 	}";
-
 	var TEST4 = "
 	abstractAndClass Test {
 		function a() {
@@ -82,7 +78,6 @@ abstract ReturnCountCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST5 = "
 	abstractAndClass Test {
 		function equals() {
@@ -91,7 +86,6 @@ abstract ReturnCountCheckTests(String) to String {
 			return 3;
 		}
 	}";
-
 	var RETURN_IN_CLOSURE = "
 	abstractAndClass Test {
 		function equals() {
@@ -100,7 +94,6 @@ abstract ReturnCountCheckTests(String) to String {
 			return a() + b();
 		}
 	}";
-
 	var RETURN_IN_CLOSURE_2 = "
 	abstractAndClass Test {
 		function equals() {

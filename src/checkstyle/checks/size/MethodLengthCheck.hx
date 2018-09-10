@@ -3,21 +3,20 @@ package checkstyle.checks.size;
 /**
 	Checks for long methods. If a method becomes very long it is hard to understand.
 	Therefore long methods should usually be refactored into several individual methods that focus on a specific task.
- **/
+**/
 @name("MethodLength")
 @desc("Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.")
 class MethodLengthCheck extends Check {
-
 	static var DEFAULT_MAX_LENGTH:Int = 50;
 
 	/**
 		maximum number of lines per method (default: 50)
-	 **/
+	**/
 	public var max:Int;
 
 	/**
 		maximum includes empty lines / should ignore empty lines
-	 **/
+	**/
 	public var countEmpty:Bool;
 
 	public function new() {
@@ -33,14 +32,14 @@ class MethodLengthCheck extends Check {
 	}
 
 	function searchField(f:Field, _) {
-		switch (f.kind){
+		switch (f.kind) {
 			case FFun(ff):
 				checkMethod(f);
 			default:
 		}
 
 		f.walkField(function(e) {
-			switch (e.expr){
+			switch (e.expr) {
 				case EFunction(name, ff):
 					checkFunction(e);
 				default:
@@ -62,10 +61,11 @@ class MethodLengthCheck extends Check {
 		var lmin = lp.line;
 		var lmax = checker.getLinePos(f.pos.max).line;
 		var fname = "(anonymous)";
-		switch (f.expr){
+		switch (f.expr) {
 			case EFunction(name, ff):
 				if (name != null) fname = name;
-			default: throw "EFunction only";
+			default:
+				throw "EFunction only";
 		}
 
 		var len = getLineCount(lmin, lmax);
@@ -87,16 +87,20 @@ class MethodLengthCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "max",
-				values: [for (i in 0...17) 20 + i * 5]
-			},
+		return [
 			{
-				propertyName: "countEmpty",
-				values: [true, false]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "max",
+						values: [for (i in 0...17) 20 + i * 5]
+					},
+					{
+						propertyName: "countEmpty",
+						values: [true, false]
+					}
+				]
+			}
+		];
 	}
 }

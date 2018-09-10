@@ -2,19 +2,18 @@ package checkstyle.checks.coding;
 
 /**
 	Restricts the number of return statements in methods (2 by default). Ignores methods that matches "ignoreFormat" regex property.
- **/
+**/
 @name("ReturnCount")
 @desc("Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.")
 class ReturnCountCheck extends Check {
-
 	/**
 		maximum number of return calls a function may have
-	 **/
+	**/
 	public var max:Int;
 
 	/**
 		ignore function names matching "ignoreFormat" regex
-	 **/
+	**/
 	public var ignoreFormat:String;
 
 	public function new() {
@@ -49,8 +48,7 @@ class ReturnCountCheck extends Check {
 		return switch (token.tok) {
 			case Kwd(KwdFunction):
 				// top node is always a function node
-				if (depth == 0) GO_DEEPER;
-				else SKIP_SUBTREE;
+				if (depth == 0) GO_DEEPER; else SKIP_SUBTREE;
 			case Kwd(KwdReturn): FOUND_SKIP_SUBTREE;
 			default: GO_DEEPER;
 		}

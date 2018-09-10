@@ -3,7 +3,6 @@ package checks.modifier;
 import checkstyle.checks.modifier.PublicAccessorCheck;
 
 class PublicAccessorCheckTest extends CheckTestCase<PublicAccessorCheckTests> {
-
 	static inline var ERROR:String = "Accessor method should not be public";
 
 	@Test
@@ -29,32 +28,26 @@ abstract PublicAccessorCheckTests(String) to String {
 		public function _set_test() {}
 		public function _get_test() {}
 	}";
-
 	var PUBLIC_GETTER = "
 	abstractAndClass Test {
 		public function get_test() {}
 	}";
-
 	var PUBLIC_SETTER = "
 	abstractAndClass Test {
 		override inline public function set_test() {}
 	}";
-
 	var IMPLICITLY_PUBLIC_GETTER = "
 	@:publicFields class Test {
 		function get_test() {}
 	}";
-
 	var IMPLICITLY_PUBLIC_SETTER = "
 	@:publicFields class Test {
 		function set_test() {}
 	}";
-
 	var INTERFACE_PUBLIC_GETTER = "
 	interface ITest {
 		function get_test() {}
 	}";
-
 	var INTERFACE_PUBLIC_SETTER = "
 	interface ITest {
 		function set_test() {}

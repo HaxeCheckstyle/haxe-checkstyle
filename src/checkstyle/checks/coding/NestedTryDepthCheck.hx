@@ -2,15 +2,14 @@ package checkstyle.checks.coding;
 
 /**
 	Restricts nested "try" blocks to a specified depth (default = 1).
- **/
+**/
 @name("NestedTryDepth")
 @desc("Restricts nested `try` blocks to a specified depth (default = 1).")
 class NestedTryDepthCheck extends Check {
-
 	/**
 		maximum number of nested try/catch statemenmts allowed
 		setting "max" to 1 allows one inner try/catch
-	 **/
+	**/
 	public var max:Int;
 
 	public function new() {

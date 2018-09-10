@@ -4,10 +4,9 @@ import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	base class for OperatorWhitespace and SeparatorWhitespace
- **/
+**/
 @ignore("base class for OperatorWhitespace and SeparatorWhitespace")
 class WhitespaceCheckBase extends Check {
-
 	public function new() {
 		super(TOKEN);
 
@@ -95,7 +94,7 @@ typedef WhitespacePolicyCheck = Bool -> Bool -> Void;
 	- after = enforce no whitespace before and whitespace after operator
 	- none = enforce no whitespace before and after operator
 	- ignore = skip checks
- **/
+**/
 @:enum
 abstract WhitespacePolicy(String) {
 	var BEFORE = "before";
@@ -110,7 +109,7 @@ abstract WhitespacePolicy(String) {
 	- inner = enforce whitespace between unary operator and operand
 	- none = enforce no whitespace between unary operator and operand
 	- ignore = skip checks
- **/
+**/
 @:enum
 abstract WhitespaceUnaryPolicy(String) {
 	var INNER = "inner";

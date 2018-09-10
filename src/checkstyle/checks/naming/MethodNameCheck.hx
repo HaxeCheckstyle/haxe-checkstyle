@@ -2,11 +2,10 @@ package checkstyle.checks.naming;
 
 /**
 	Checks that method names conform to a format specified by the "format" property.
- **/
+**/
 @name("MethodName")
 @desc("Checks that method names conform to a format specified by the `format` property.")
 class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
-
 	public function new() {
 		super();
 		format = "^[a-z][a-zA-Z0-9]*$";
@@ -65,7 +64,7 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 	- NOTSTATIC = all non static methods
 	- INLINE = all inline methods
 	- NOTINLINE = all non-inline methods
- **/
+**/
 @:enum
 abstract MethodNameCheckToken(String) {
 	var PUBLIC = "PUBLIC";

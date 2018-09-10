@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.NestedIfDepthCheck;
 
 class NestedIfDepthCheckTest extends CheckTestCase<NestedIfDepthCheckTests> {
-
 	@Test
 	public function testDefault() {
 		var check = new NestedIfDepthCheck();
@@ -58,7 +57,6 @@ abstract NestedIfDepthCheckTests(String) to String {
 			return 3;
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test1(param:Int) {

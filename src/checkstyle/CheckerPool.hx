@@ -1,7 +1,6 @@
 package checkstyle;
 
 class CheckerPool {
-
 	var parserQueue:ParserQueue;
 	var templateChecker:Checker;
 	var threads:Array<CheckerThread>;

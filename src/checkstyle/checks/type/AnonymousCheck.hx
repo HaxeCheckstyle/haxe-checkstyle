@@ -2,11 +2,10 @@ package checkstyle.checks.type;
 
 /**
 	Check to find any anonymous type structures used.
- **/
+**/
 @name("Anonymous")
 @desc("Check to find any anonymous type structures used.")
 class AnonymousCheck extends Check {
-
 	public function new() {
 		super(AST);
 		categories = [Category.STYLE, Category.CLARITY, Category.BUG_RISK, Category.COMPLEXITY];
@@ -29,13 +28,12 @@ class AnonymousCheck extends Check {
 
 	function checkLocalVars() {
 		checker.ast.walkFile(function(e) {
-			switch (e.expr){
+			switch (e.expr) {
 				case EVars(vars):
 					for (v in vars) {
 						if (v.type == null) continue;
 						switch (v.type) {
-							case TAnonymous(fields):
-								error(v.name, e.pos);
+							case TAnonymous(fields): error(v.name, e.pos);
 							default:
 						}
 					}
@@ -49,12 +47,14 @@ class AnonymousCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

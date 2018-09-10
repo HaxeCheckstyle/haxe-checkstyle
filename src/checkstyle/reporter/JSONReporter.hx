@@ -3,7 +3,6 @@ package checkstyle.reporter;
 import haxe.Json;
 
 class JSONReporter extends BaseReporter {
-
 	var jsonReport:GlobalReport;
 	var fileReport:FileReport;
 
@@ -35,9 +34,12 @@ class JSONReporter extends BaseReporter {
 		fileReport.messages.push(reportMessage);
 
 		switch (m.severity) {
-			case ERROR: errors++;
-			case WARNING: warnings++;
-			case INFO: infos++;
+			case ERROR:
+				errors++;
+			case WARNING:
+				warnings++;
+			case INFO:
+				infos++;
 			default:
 		}
 

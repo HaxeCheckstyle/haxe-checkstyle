@@ -76,7 +76,8 @@
             "props": {
                 "max": 1,
                 "requireEmptyLineAfterAbstract": false,
-                "requireEmptyLineAfterClass": false
+				"requireEmptyLineAfterClass": false,
+				"requireEmptyLineAfterInterface": false
             },
             "type": "EmptyLines"
         },
@@ -99,16 +100,18 @@
                     "afterClassStaticVars",
                     "afterClassVars",
                     "betweenClassMethods",
-                    "beginInterface"
+					"beforeMultiLineComment"
                 ],
                 "upto": [
                     "betweenImports",
                     "anywhereInFile",
                     "betweenAbstractVars",
                     "beginClass",
+					"beginInterface",
                     "betweenClassStaticVars",
                     "betweenClassVars",
-                    "betweenInterfaceFields"
+					"betweenInterfaceFields",
+					"beforeSingleLineComment"
                 ]
             },
             "type": "ExtendedEmptyLines"
@@ -624,11 +627,15 @@
             "checkstyle/checks/metrics/CyclomaticComplexityCheck"
         ],
         "MethodLength": [
+            "checkstyle/checks/metrics/CyclomaticComplexityCheck",
             "checkstyle/checks/whitespace/WhitespaceAfterCheck",
             "checkstyle/checks/whitespace/WhitespaceAroundCheck",
 			"checkstyle/checks/whitespace/EmptyLinesCheck",
 			"checkstyle/checks/whitespace/IndentationCheck",
-            "checkstyle/token/walk/WalkStatement"
+            "checkstyle/token/walk/WalkStatement",
+            "checkstyle/utils/ExprUtils",
+            "checkstyle/utils/ComplexTypeUtils",
+            "checkstyle/Main"
         ],
         "NestedForDepth": [
             "TestMain"

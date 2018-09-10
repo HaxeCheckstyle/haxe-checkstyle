@@ -6,12 +6,10 @@ import sys.io.File;
 import sys.io.FileOutput;
 
 class BaseReporter implements IReporter {
-
 	var errors:Int;
 	var warnings:Int;
 	var infos:Int;
 	var total:Int;
-
 	var report:StringBuf;
 	var file:FileOutput;
 	var numFiles:Int;
@@ -55,6 +53,7 @@ class BaseReporter implements IReporter {
 		total = errors + warnings + infos;
 
 		if (total > 0) {
+			// @formatter:off
 			Sys.println(
 				styleText("\nTotal Issues: " + total + " (", Style.BOLD) +
 				styleText("Errors: " + errors, Style.RED) +
@@ -63,6 +62,7 @@ class BaseReporter implements IReporter {
 				styleText(", ", Style.BOLD) +
 				styleText("Infos: " + infos, Style.BLUE) +
 				styleText(")", Style.BOLD));
+			// @formatter:on
 		}
 		else Sys.println(styleText("No issues found.", Style.BOLD));
 	}

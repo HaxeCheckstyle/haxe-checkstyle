@@ -3,7 +3,6 @@ package checks.block;
 import checkstyle.checks.block.RightCurlyCheck;
 
 class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
-
 	static inline var MSG_ALONE:String = "Right curly should be alone on a new line";
 	static inline var MSG_NOT_SAME_LINE:String = "Right curly should not be on same line as left curly";
 	static inline var MSG_SAME_LINE:String = 'Right curly should be on same line as following block (e.g. "} else" or "} catch")';
@@ -260,14 +259,12 @@ abstract RightCurlyCheckTests(String) to String {
 			{ return; }
 		}
 	}";
-
 	var SINGLELINE_IF = "
 	class Test {
 		function test() {
 			if (true) { return; } else { return; }
 		}
 	}";
-
 	var SAMELINE_IF = "
 	class Test {
 		function test() {
@@ -278,7 +275,6 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var ALONE_IF = "
 	class Test {
 		function test() {
@@ -290,26 +286,22 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_FUNCTION = "
 	class Test {
 		function test() { trace ('test'); }
 	}";
-
 	var ALONE_FUNCTION = "
 	class Test {
 		function test() {
 			trace ('test');
 		}
 	}";
-
 	var SINGLELINE_FOR = "
 	class Test {
 		function test() {
 			for (i in 0...100) { trace ('$i'); }
 		}
 	}";
-
 	var ALONE_FOR = "
 	class Test {
 		function test() {
@@ -318,14 +310,12 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_WHILE = "
 	class Test {
 		function test() {
 			while (true) { trace ('test'); }
 		}
 	}";
-
 	var ALONE_WHILE = "
 	class Test {
 		function test() {
@@ -334,14 +324,12 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_TRY_CATCH = "
 	class Test {
 		function test() {
 			try { trace ('test'); } catch (e:Dynamic) {}
 		}
 	}";
-
 	var SAMELINE_TRY_CATCH = "
 	class Test {
 		function test() {
@@ -351,7 +339,6 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var ALONE_TRY_CATCH = "
 	class Test {
 		function test() {
@@ -362,41 +349,33 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_INTERFACE = "
 	interface Test { function test(); }";
-
 	var ALONE_INTERFACE = "
 	interface Test {
 		function test();
 	}";
-
 	var SINGLELINE_CLASS = "
 	class Test { function test() {}; }";
-
 	var ALONE_CLASS = "
 	class Test {
 		function test() {
 		};
 	}";
-
 	var SINGLELINE_TYPEDEF = "
 	typedef Test = { x:Int, y:Int, z:Int }";
-
 	var ALONE_TYPEDEF = "
 	typedef Test = {
 		x:Int,
 		y:Int,
 		z:Int
 	}";
-
 	var SINGLELINE_SWITCH = "
 	class Test {
 		function test(val:Bool) {
 			switch (val) { case true: return; default: trace(val); }
 		}
 	}";
-
 	var ALONE_SWITCH = "
 	class Test {
 		function test() {
@@ -408,7 +387,6 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_CASE = "
 	class Test {
 		function test(val:Bool) {
@@ -419,7 +397,6 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var ALONE_CASE = "
 	class Test {
 		function test() {
@@ -436,14 +413,12 @@ abstract RightCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var SINGLELINE_OBJECT = "
 	class Test {
 		function test(val:Bool) {
 			var p = { x:100, y: 10, z: 2 };
 		}
 	}";
-
 	var ALONE_OBJECT = "
 	class Test {
 		function test() {
@@ -454,10 +429,8 @@ abstract RightCurlyCheckTests(String) to String {
 			};
 		}
 	}";
-
 	var SINGLELINE_ABSTRACT = "
 	abstract Test(String) { @:from public static function fromString(value:String) { return new Test('Hello $value'); } }";
-
 	var ALONE_ABSTRACT = "
 	abstract Test(String) {
 		@:from
@@ -465,10 +438,8 @@ abstract RightCurlyCheckTests(String) to String {
 			return new Test('Hello $value');
 		}
 	}";
-
 	var SINGLELINE_ENUM = "
 	enum Test { Monday; Tuesday; Wednesday; Thursday; Friday; Weekend(day:String); }";
-
 	var ALONE_ENUM = "
 	enum Test {
 		Monday;
@@ -478,7 +449,6 @@ abstract RightCurlyCheckTests(String) to String {
 		Friday;
 		Weekend(day:String);
 	}";
-
 	var SINGLELINE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
@@ -491,7 +461,6 @@ abstract RightCurlyCheckTests(String) to String {
 				{ x:200, y: 50, z: 2 }];
 		}
 	}";
-
 	var SAMELINE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
@@ -519,7 +488,6 @@ abstract RightCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
-
 	var ALONE_NESTED_OBJECT = "
 	class Test {
 		public function test() {
@@ -549,7 +517,6 @@ abstract RightCurlyCheckTests(String) to String {
 			];
 		}
 	}";
-
 	var MACRO_REIFICATION = "
 	class Test {
 		public function test(val:Int) {
@@ -558,7 +525,6 @@ abstract RightCurlyCheckTests(String) to String {
 			var e = macro ${str}.toLowerCase();
 		}
 	}";
-
 	var ARRAY_COMPREHENSION_ISSUE_114 = "
 	class Test {
 		public function foo() {
@@ -566,7 +532,6 @@ abstract RightCurlyCheckTests(String) to String {
 			[for (x in 0...10) for (y in 0...10) {x:x, y:y}];
 		}
 	}";
-
 	var ARRAY_COMPREHENSION_2_ISSUE_114 = "
 	class Test {
 		public function foo() {
@@ -580,7 +545,6 @@ abstract RightCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
-
 	var CONSTRUCTOR_OBJECT_DECL_ISSUE_152 = "
 	class Test {
 		var field = new Object({x:0});

@@ -3,7 +3,6 @@ package checkstyle.utils;
 #if debug
 import haxe.CallStack;
 #end
-
 import checkstyle.reporter.ReporterManager;
 
 class ErrorUtils {

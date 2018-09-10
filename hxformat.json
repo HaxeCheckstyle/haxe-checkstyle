@@ -1,0 +1,45 @@
+{
+	"sameLine": {
+		"caseBody": "next",
+		"tryCatch": "next",
+		"ifBody": "same",
+		"ifElse": "next",
+		"elseBody": "same",
+		"forBody": "same",
+		"whileBody": "same",
+		"comprehensionFor": "same"
+	},
+	"emptyLines": {
+		"finalNewline": false,
+		"interfaceEmptyLines": {
+			"beginType": 1
+		}
+	},
+	"wrapping": {
+		"arrayWrap": {
+			"rules": [
+				{
+					"conditions": [{"cond": "totalItemLength <= n", "value": 80}],
+					"type": "noWrap"
+				},
+				{
+					"conditions": [{"cond": "itemCount >= n", "value": 10}],
+					"type": "onePerLine"
+				},
+				{
+					"conditions": [{"cond": "anyItemLength >= n", "value": 30}],
+					"type": "onePerLine"
+				},
+				{
+					"conditions": [{"cond": "itemCount >= n", "value": 4}],
+					"type": "onePerLine"
+				}
+			]
+		}
+	},
+	"whitespace": {
+		"arrowFunctionsPolicy": "around",
+		"functionTypeHaxe3Policy": "around",
+		"functionTypeHaxe4Policy": "around"
+	}
+}

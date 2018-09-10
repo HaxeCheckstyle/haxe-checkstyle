@@ -3,7 +3,6 @@ package checks.block;
 import checkstyle.checks.block.LeftCurlyCheck;
 
 class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
-
 	static inline var MSG_EOL:String = "Left curly should be at EOL (only line break or comment after curly)";
 	static inline var MSG_NL:String = "Left curly should be on new line (only whitespace before curly)";
 	static inline var MSG_NL_SPLIT:String = "Left curly should be on new line (previous expression is split over multiple lines)";
@@ -173,7 +172,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST1 = "
 	class Test {
 		function test() {
@@ -183,7 +181,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST2 = "
 	class Test {
 		function test() {
@@ -195,7 +192,6 @@ abstract LeftCurlyCheckTests(String) to String {
 				return;
 		}
 	}";
-
 	var TEST3 = "
 	class Test {
 		function test()
@@ -208,7 +204,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST4 = "
 	class Test {
 		function test() {
@@ -217,7 +212,6 @@ abstract LeftCurlyCheckTests(String) to String {
 				z:3 };
 		}
 	}";
-
 	var TEST5 = "
 	class Test {
 		function test() {
@@ -227,7 +221,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST6 = "
 	class Test {
 		function test() {
@@ -236,14 +229,12 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST7 = "
 	class Test {
 		function test() {
 			while (true) { return i; }
 		}
 	}";
-
 	var TEST8 = "
 	class Test {
 		function test() {
@@ -252,14 +243,12 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST9 = "
 	class Test {
 		function test() {
 			for (i in 0....10) return i;
 		}
 	}";
-
 	var TEST10 = "
 	class Test
 	{
@@ -267,14 +256,12 @@ abstract LeftCurlyCheckTests(String) to String {
 			if (true) return;
 		}
 	}";
-
 	var TEST12 = "
 	class Test {
 		function test() {
 			var struct = {x:10, y:10, z:20};
 		}
 	}";
-
 	var TEST13 = "
 	class Test
 	{
@@ -293,7 +280,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST14 = "
 	typedef Test = {
 		x:Int,
@@ -301,7 +287,6 @@ abstract LeftCurlyCheckTests(String) to String {
 		z:Int,
 		point:{x:Int, y:Int, z:Int}
 	}";
-
 	var TEST15 = "
 	class Test
 	{
@@ -315,7 +300,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST16 = "
 	class Test {
 		public function test(val:Int,
@@ -329,7 +313,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST17 = "
 	class Test {
 		public function test(val:Int, val2:Int):String
@@ -341,7 +324,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST18 = "
 	class Test {
 		public function test(val:Int,
@@ -354,7 +336,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var TEST19 = "
 	class Test {
 		public function test(val:Int,
@@ -367,7 +348,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var NL_CASEBLOCK = "
 	class Test
 	{
@@ -384,7 +364,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var EOL_CASEBLOCK = "
 	class Test {
 		public function test(val:Int,
@@ -397,7 +376,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var NLOW_CASEBLOCK = "
 	class Test {
 		public function test(val:Int,
@@ -413,7 +391,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var MACRO_REIFICATION = "
 	class Test {
 		public function test(val:Int) {
@@ -422,16 +399,13 @@ abstract LeftCurlyCheckTests(String) to String {
 			var e = macro ${str}.toLowerCase();
 		}
 	}";
-
 	var NO_FIELDS_CLASS = "
 	class Test {}
 	";
-
 	var NO_FIELDS_MACRO = "
 	class Test {
 		var definition = macro class Font extends flash.text.Font {};
 	}";
-
 	var ISSUE_97 = "
 	class Test {
 		function foo() {
@@ -458,7 +432,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			}
 		}
 	}";
-
 	var ARRAY_COMPREHENSION_ISSUE_114 = "
 	class Test {
 		public function foo() {
@@ -466,7 +439,6 @@ abstract LeftCurlyCheckTests(String) to String {
 			[for (x in 0...10) for (y in 0...10) {x:x, y:y}];
 		}
 	}";
-
 	var ARRAY_COMPREHENSION_2_ISSUE_114 = "
 	class Test {
 		public function foo() {
@@ -480,7 +452,6 @@ abstract LeftCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
-
 	var ARRAY_COMPREHENSION_NLOW_ISSUE_114 = "
 	class Test {
 		public function foo() {
@@ -493,7 +464,6 @@ abstract LeftCurlyCheckTests(String) to String {
 				}];
 		}
 	}";
-
 	var SINGLELINE_ISSUE_153 = "
 	class Test<T:String, A> {
 		var positionMap = new Map<Int, {x:Bool, y:Bool}>();
@@ -501,7 +471,6 @@ abstract LeftCurlyCheckTests(String) to String {
 	}
 
 	class Empty {}";
-
 	var ABSTRACT = "
 	abstract MyAbstract(Int) from Int to Int {
 	  inline function new(i:Int) {

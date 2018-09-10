@@ -3,7 +3,6 @@ package checks.coding;
 import checkstyle.checks.coding.MultipleVariableDeclarationsCheck;
 
 class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariableDeclarationsCheckTests> {
-
 	static inline var MSG_MULTI_VAR_COMMA:String = "Each variable declaration must be in its own statement";
 	static inline var MSG_MULTI_VAR:String = "Only one variable definition per line allowed";
 
@@ -33,14 +32,12 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 			var d,e = 2;
 		}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		function a() {
 			var d,e,f;
 		}
 	}";
-
 	var TEST3 = "
 	abstractAndClass Test {
 		function a() {
@@ -49,7 +46,6 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 			var f; var g;
 		}
 	}";
-
 	var TEST4 = "
 	abstractAndClass Test {
 		function a() {
@@ -57,7 +53,6 @@ abstract MultipleVariableDeclarationsCheckTests(String) to String {
 			var e = 2;
 		}
 	}";
-
 	var TEST5 = "
 	abstractAndClass Test {
 		function foo() {

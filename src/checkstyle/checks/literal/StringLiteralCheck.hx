@@ -4,23 +4,22 @@ import checkstyle.utils.StringUtils;
 
 /**
 	Checks for single or double quote string literals.
- **/
+**/
 @name("StringLiteral")
 @desc("Checks for single or double quote string literals.")
 class StringLiteralCheck extends Check {
-
 	/**
 		policy for string literal use
 		- onlySingle = enforce single quotes
 		- onlyDouble = enforce double quotes, no interpolation allowed
 		- doubleAndInterpolation = enforce double quotes, allow single quotes for interpolation
-	 **/
+	**/
 	public var policy:StringLiteralPolicy;
 
 	/**
 		"allowException" allows using single quotes in "onlyDouble" and "doubleAndInterpolation" mode, when string contains a double quote character.
 		Or double quotes in "onlySingle" mode when string contains a single quote character, reducing the need to escape quotation marks.
-	 **/
+	**/
 	public var allowException:Bool;
 
 	public function new() {
@@ -72,17 +71,21 @@ class StringLiteralCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "policy",
-				values: [DOUBLE_AND_INTERPOLATION, ONLY_SINGLE, ONLY_DOUBLE]
-			},
+		return [
 			{
-				propertyName: "allowException",
-				values: [false, true]
-			}]
-		}];
+				fixed: [],
+				properties: [
+					{
+						propertyName: "policy",
+						values: [DOUBLE_AND_INTERPOLATION, ONLY_SINGLE, ONLY_DOUBLE]
+					},
+					{
+						propertyName: "allowException",
+						values: [false, true]
+					}
+				]
+			}
+		];
 	}
 }
 

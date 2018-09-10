@@ -3,7 +3,6 @@ package checks.size;
 import checkstyle.checks.size.FileLengthCheck;
 
 class FileLengthCheckTest extends CheckTestCase<FileLengthCheckTests> {
-
 	@Test
 	public function testCorrectLineCount() {
 		assertNoMsg(new FileLengthCheck(), TEST2000);
@@ -78,7 +77,6 @@ abstract FileLengthCheckTests(String) to String {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n             // 2000
 	}"; // 2001
-
 	var TEST2000 = "\n
 	class Test {
 		public function new() {
@@ -125,7 +123,6 @@ abstract FileLengthCheckTests(String) to String {
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n               // 1999
 	}"; // 2000
-
 	var TEST41 = "\n
 	class Test {
 		public function new() {
@@ -133,7 +130,6 @@ abstract FileLengthCheckTests(String) to String {
 		//                10                   20                   30                   40                 49 //  6
 		\n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n\n\n\n\n\n\n \n\n\n\n                                // 40
 	}";
-
 	var TEST42 = "\n
 	@SuppressWarnings('checkstyle:FileLength')
 	class Test {

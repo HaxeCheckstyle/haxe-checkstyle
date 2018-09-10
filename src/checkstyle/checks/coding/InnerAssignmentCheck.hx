@@ -2,14 +2,13 @@ package checkstyle.checks.coding;
 
 /**
 	Checks for assignments in subexpressions, such as in "if ((a=b) > 0) return;".
- **/
+**/
 @name("InnerAssignment")
 @desc("Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.")
 class InnerAssignmentCheck extends Check {
-
 	/**
 		ignores assignments in return statements
-	 **/
+	**/
 	public var ignoreReturnAssignments:Bool;
 
 	public function new() {
@@ -105,19 +104,22 @@ class InnerAssignmentCheck extends Check {
 		switch (parent.tok) {
 			case Const(CIdent(name)):
 				if (!StringTools.startsWith(name, "set_")) return true;
-			default: return true;
+			default:
+				return true;
 		}
 
 		return false;
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "ignoreReturnAssignments",
-				values: [false, true]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "ignoreReturnAssignments",
+					values: [false, true]
+				}]
+			}
+		];
 	}
 }

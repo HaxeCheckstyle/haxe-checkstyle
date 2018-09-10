@@ -3,7 +3,6 @@ package checkstyle.detect;
 import checkstyle.reporter.IReporter;
 
 class DetectionReporter implements IReporter {
-
 	public var messageCount:Int;
 
 	public function new() {

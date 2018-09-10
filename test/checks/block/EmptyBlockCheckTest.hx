@@ -3,7 +3,6 @@ package checks.block;
 import checkstyle.checks.block.EmptyBlockCheck;
 
 class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
-
 	static inline var MSG_EMPTY_BLOCK:String = 'Empty block should be written as "{}"';
 	static inline var MSG_EMPTY_BLOCK_SHOULD_CONTAIN:String = "Empty block should contain a comment or a statement";
 	static inline var MSG_EMPTY_BLOCK_CONTAIN_STATEMENT:String = "Empty block should contain a statement";
@@ -94,41 +93,35 @@ abstract EmptyBlockCheckTests(String) to String {
 		public function test() {
 		}
 	}";
-
 	var EMPTY_BLOCK_WHITESPACE = "
 	class Test {
 		public function new(){
 
 		}
 	}";
-
 	var BLOCK_WITH_STATEMENT = "
 	class Test {
 		public function new() { var a:Int;
 
 		}
 	}";
-
 	var BLOCK_WITH_STATEMENT2 = "
 	class Test {
 		public function new() {
 			var a:Int; }
 	}";
-
 	var BLOCK_WITH_COMMENT = "
 	class Test {
 		public function new() {
 			// comment
 		}
 	}";
-
 	var EMPTY_OBJECT_DECL = "
 	class Test {
 		public function new() {
 			var a = {};
 		}
 	}";
-
 	var EMPTY_OBJECT_DECL_WHITESPACE = "
 	class Test {
 		public function new() {
@@ -136,7 +129,6 @@ abstract EmptyBlockCheckTests(String) to String {
 			};
 		}
 	}";
-
 	var OBJECT_DECL_WITH_COMMENT = "
 	class Test {
 		public function new() {
@@ -145,7 +137,6 @@ abstract EmptyBlockCheckTests(String) to String {
 			};
 		}
 	}";
-
 	var OBJECT_DECL_WITH_COMMENT2 = "
 	class Test {
 		public function new() { /* comment
@@ -154,7 +145,6 @@ abstract EmptyBlockCheckTests(String) to String {
 			};
 		}
 	}";
-
 	var NESTED_OBJECT_DECL = "
 	class Test {
 		public function new() {
@@ -167,7 +157,6 @@ abstract EmptyBlockCheckTests(String) to String {
 			};
 		}
 	}";
-
 	var MACRO_REIFICATION_ISSUE_149 = "
 	class Macro
 	{

@@ -2,11 +2,10 @@ package checkstyle.checks.coding;
 
 /**
 	Checks for trace calls in code.
- **/
+**/
 @name("Trace")
 @desc("Checks for trace calls in code.")
 class TraceCheck extends Check {
-
 	public function new() {
 		super(TOKEN);
 		severity = SeverityLevel.IGNORE;
@@ -33,12 +32,14 @@ class TraceCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [{
-			fixed: [],
-			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
-			}]
-		}];
+		return [
+			{
+				fixed: [],
+				properties: [{
+					propertyName: "severity",
+					values: [SeverityLevel.INFO]
+				}]
+			}
+		];
 	}
 }

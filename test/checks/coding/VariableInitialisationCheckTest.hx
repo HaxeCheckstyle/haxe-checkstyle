@@ -3,11 +3,9 @@ package checks.coding;
 import checkstyle.checks.coding.VariableInitialisationCheck;
 
 class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisationCheckTests> {
-
 	@Test
 	public function testVar() {
-		assertMsg(new VariableInitialisationCheck(), TEST1,
-			'Invalid variable "_a" initialisation (move initialisation to constructor or function)');
+		assertMsg(new VariableInitialisationCheck(), TEST1, 'Invalid variable "_a" initialisation (move initialisation to constructor or function)');
 	}
 
 	@Test
@@ -32,14 +30,12 @@ abstract VariableInitialisationCheckTests(String) to String {
 
 		public function new() {}
 	}";
-
 	var TEST2 = "
 	abstractAndClass Test {
 		static inline var TEST:Int = 1;
 
 		public function new() {}
 	}";
-
 	var TEST3 = "
 	@:enum
 	abstract Test(Int) {

@@ -3,7 +3,6 @@ package checks.whitespace;
 import checkstyle.checks.whitespace.WhitespaceAroundCheck;
 
 class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests> {
-
 	static inline var MSG_EQUALS:String = 'No whitespace around "="';
 
 	@Test
@@ -89,64 +88,53 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		Thursday;
 		Friday; Weekend(day:String);
 	}";
-
 	var NO_WHITESPACE_OBJECT_DECL = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var x={ x: 100, y: 100,z: 20 };
 		}
 	}";
-
 	var NO_WHITESPACE_TYPEDEF = "
 	typedef Test ={
 		x:Int,
 		y:Int,z:Int
 	}";
-
 	var NO_WHITESPACE_VAR_INIT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>=[];
 		}
 	}";
-
 	var NO_WHITESPACE_GT = "
 	class Test {
 		function test(param1:String, param2:String) {
 			var test:Array<String>= [];
 		}
 	}";
-
 	var ISSUE_58 = "
 	class Test {
 		public function new() {
 			var x:Int, y:Int;
 		}
 	}";
-
 	var ISSUE_59 = "
 	typedef Test=Int
 	";
-
 	var ISSUE_63 = "
 	typedef Test =#if true Int #else String #end
 	";
-
 	var ISSUE_70 = "
 		import haxe.macro.*;
 	";
-
 	var ISSUE_71 = "
 		class Test {
 		function foo<T, X>() {
 			trace((null : Array<Int, String>));
 		}
 	}";
-
 	var ISSUE_72 = "
 	abstract Test<T>(Array<T>) {}
 	";
-
 	var ISSUE_77 = "
 	// comment
 	class Test // comment
@@ -159,11 +147,9 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		} // comment
 	} // comment
 	";
-
 	var ISSUE_80 = "
 	interface Test implements Dynamic {}
 	";
-
 	var ISSUE_81 = "
 	class Test {
 		function foo() {
@@ -171,13 +157,11 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			do ++a while (true);
 		}
 	}";
-
 	var ISSUE_98 = "
 	class Test {
 		// °öäüßÖÄÜ@łĸŋđđðſðæµ”“„¢«»Ø→↓←Ŧ¶€Ł}][{¬½¼³²
 		var test:Int = 0;
 	}";
-
 	var MINUS_CONSTANT = "
 	class Test {
 		function test() {
@@ -190,12 +174,10 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			return -1;
 		}
 	}";
-
 	var CONDITIONAL_STAR_IMPORT_ISSUE_160 = "
 	#if macro
 		import haxe.macro.*;
 	#end";
-
 	var CONDITIONAL_ELSEIF_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;
@@ -211,7 +193,6 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		#end
 	#end
 	import haxe.macro.Type;";
-
 	var CONDITIONAL_ELSE_STAR_IMPORT = "
 	#if macro
 		import haxe.macro.Type;
@@ -219,7 +200,6 @@ abstract WhitespaceAroundCheckTests(String) to String {
 		import haxe.macro.*;
 	#end
 	import haxe.macro.Type;";
-
 	var NEGATIVE_VARS = "
 	class Test {
 		function test() {
@@ -236,7 +216,6 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			return -a;
 		}
 	}";
-
 	var NEGATIVE_NUMS = "
 	class Test {
 		function test() {
@@ -252,7 +231,6 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			for (a in [-1, -2]) -18 + 2;
 		}
 	}";
-
 	var OPGT = "
 	class Test {
 		function test() {
@@ -261,7 +239,6 @@ abstract WhitespaceAroundCheckTests(String) to String {
 			if (a >>> b > c) return a >>>= b;
 		}
 	}";
-
 	var ISSUE_78 = "
 	#if true
 	@:forward

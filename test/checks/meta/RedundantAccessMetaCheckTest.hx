@@ -3,7 +3,6 @@ package checks.meta;
 import checkstyle.checks.meta.RedundantAccessMetaCheck;
 
 class RedundantAccessMetaCheckTest extends CheckTestCase<RedundantAccessMetaCheckTests> {
-
 	@Test
 	public function testRedundantAccess() {
 		var check = new RedundantAccessMetaCheck();
@@ -42,7 +41,6 @@ abstract RedundantAccessMetaCheckTests(String) to String {
 		@:access(pack.age.Test2)
 		function test() {}
 	}";
-
 	var REDUNDANT_ACCESS = "
 	@:access(pack.age.Test)
 	abstractAndClass Test {
@@ -50,7 +48,6 @@ abstract RedundantAccessMetaCheckTests(String) to String {
 		@:access(pack.age.Test)
 		function test() {}
 	}";
-
 	var REDUNDANT_ACCESS_PACKAGE = "
 	@:access(pack.age)
 	abstractAndClass Test {

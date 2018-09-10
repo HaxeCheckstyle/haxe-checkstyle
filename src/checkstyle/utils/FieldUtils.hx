@@ -1,7 +1,6 @@
 package checkstyle.utils;
 
 class FieldUtils {
-
 	public static function isPublic(f:Field, p:ParentType):Bool {
 		if (f.access.contains(APublic)) return true;
 		if (f.access.contains(APrivate)) return false;
@@ -49,13 +48,13 @@ class FieldUtils {
 		switch (decl) {
 			case EClass(d):
 				var kind = d.flags.contains(HInterface) ? INTERFACE : CLASS;
-				return {decl:decl, kind:kind};
+				return {decl: decl, kind: kind};
 			case EAbstract(a):
 				var metaName = #if (haxeparser > "3.2.0") ":enum" #else ":kwdenum" #end;
 				var kind = a.meta.hasMeta(metaName) ? ENUM_ABSTRACT : ABSTRACT;
-				return {decl:decl, kind:kind};
+				return {decl: decl, kind: kind};
 			case ETypedef(d):
-				return return {decl:decl, kind:TYPEDEF};
+				return return {decl: decl, kind: TYPEDEF};
 			default:
 				return null;
 		}

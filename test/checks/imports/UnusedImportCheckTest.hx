@@ -3,7 +3,6 @@ package checks.imports;
 import checkstyle.checks.imports.UnusedImportCheck;
 
 class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
-
 	static inline var MSG_UNUSED:String = 'Unused import "haxe.checkstyle.Check3" detected';
 	static inline var MSG_NAME_REUSED:String = 'Unused import "haxe.checkstyle.Check" detected';
 	static inline var MSG_DUPLICATE:String = 'Duplicate import "haxe.checkstyle.Check2" detected';
@@ -49,10 +48,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertMsg(check, UNUSED_IMPORT_TYPE_MAP, MSG_UNUSED_TYPEMAP);
 
 		check.moduleTypeMap = {
-			"checkstyle.checks.Checker": [
-				"CheckBase",
-				"UnusedImportCheck"
-			]
+			"checkstyle.checks.Checker": ["CheckBase", "UnusedImportCheck"]
 		};
 		assertNoMsg(check, SAME_PACKAGE_TYPE_MAP);
 		assertNoMsg(check, IMPORT_TYPE_MAP);
@@ -103,7 +99,6 @@ abstract UnusedImportCheckTests(String) to String {
 			trace ('${Check5.debug()} ${blah.xxx}');
 		}
 	}";
-
 	var IMPORT_NOT_USED = "
 	package checkstyle.test;
 
@@ -118,7 +113,6 @@ abstract UnusedImportCheckTests(String) to String {
 			Check2.test();
 		}
 	}";
-
 	var DUPLICATE_IMPORT = "
 	package checkstyle.test;
 
@@ -133,7 +127,6 @@ abstract UnusedImportCheckTests(String) to String {
 			Check2.test();
 		}
 	}";
-
 	var IMPORT_NAME_REUSED = "
 	package checkstyle.test;
 
@@ -157,7 +150,6 @@ abstract UnusedImportCheckTests(String) to String {
 	}
 
 	typedef Check = Dynamic; ";
-
 	var TOP_LEVEL_IMPORT = "
 	package checkstyle.test;
 
@@ -168,7 +160,6 @@ abstract UnusedImportCheckTests(String) to String {
 		public function new() {
 		}
 	}";
-
 	var IMPORT_BASE_CLASS = "
 	package checkstyle.test;
 
@@ -179,7 +170,6 @@ abstract UnusedImportCheckTests(String) to String {
 
 		public function new() {}
 	}";
-
 	var IMPORT_AS = "
 	package checkstyle.test;
 
@@ -187,21 +177,18 @@ abstract UnusedImportCheckTests(String) to String {
 	import haxe.checkstyle.Check2 in Base2;
 
 	class Test extends Base implements Base2 {}";
-
 	var UNUSED_IMPORT_AS = "
 	package checkstyle.test;
 
 	import haxe.checkstyle.Check as Base;
 
 	class Test {}";
-
 	var UNUSED_IMPORT_IN = "
 	package checkstyle.test;
 
 	import haxe.checkstyle.Check in Base;
 
 	abstractAndClass Test {}";
-
 	var IMPORT_IN_STATIC_FUNC = "
 	import String.fromCharCode in f;
 
@@ -211,7 +198,6 @@ abstract UnusedImportCheckTests(String) to String {
 			var c1 = f(65);
 		}
 	}";
-
 	var UNUSED_IMPORT_IN_STATIC_FUNC = "
 	import String.fromCharCode in f;
 
@@ -219,7 +205,6 @@ abstract UnusedImportCheckTests(String) to String {
 
 		static function main() {}
 	}";
-
 	var SAME_PACKAGE_IMPORT = "
 	package checkstyle.checks;
 
@@ -232,7 +217,6 @@ abstract UnusedImportCheckTests(String) to String {
 			return new UnusedImportCheck ();
 		}
 	}";
-
 	var SAME_PACKAGE_TYPE_MAP = "
 	package checkstyle.checks;
 
@@ -244,7 +228,6 @@ abstract UnusedImportCheckTests(String) to String {
 			return new UnusedImportCheck ();
 		}
 	}";
-
 	var IMPORT_TYPE_MAP = "
 	package checkstyle.test;
 
@@ -256,7 +239,6 @@ abstract UnusedImportCheckTests(String) to String {
 			return new UnusedImportCheck ();
 		}
 	}";
-
 	var UNUSED_IMPORT_TYPE_MAP = "
 	package checkstyle.test;
 
@@ -268,7 +250,6 @@ abstract UnusedImportCheckTests(String) to String {
 			return new OtherCheck ();
 		}
 	}";
-
 	var STRING_INTERPOL = "
 	package checkstyle.test;
 

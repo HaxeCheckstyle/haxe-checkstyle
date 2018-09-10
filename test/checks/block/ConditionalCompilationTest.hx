@@ -3,7 +3,6 @@ package checks.block;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 
 class ConditionalCompilationTest extends CheckTestCase<ConditionalCompilationTests> {
-
 	static inline var MSG_START_OF_LINE:String = "#if should start at beginning of line";
 	static inline var MSG_NOT_ALIGNED:String = "Indentation of #if should match surrounding lines";
 	static inline var MSG_NO_SINGLELINE:String = "Single line #if…(#else/#elseif)…#end not allowed";
@@ -79,7 +78,6 @@ abstract ConditionalCompilationTests(String) to String {
 	#end
 	{
 	}";
-
 	var ISSUE_79 = "
 	class Test {
 		function foo() {
@@ -93,7 +91,6 @@ abstract ConditionalCompilationTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_79_WRONG_INDENT = "
 	class Test {
 		function foo() {
@@ -106,7 +103,6 @@ abstract ConditionalCompilationTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_79_WHITESPACE_BEFORE = "
 	class Test {
 		function foo() { #if true
@@ -117,7 +113,6 @@ abstract ConditionalCompilationTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_79_WHITESPACE_AFTER = "
 	class Test {
 		function foo() {
@@ -128,7 +123,6 @@ abstract ConditionalCompilationTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_76_START_OF_LINE = "
 	class Base {}
 
@@ -140,7 +134,6 @@ abstract ConditionalCompilationTests(String) to String {
 #end
 	{
 	}";
-
 	var ISSUE_79_START_OF_LINE = "
 	class Test {
 		function foo() {
@@ -153,7 +146,6 @@ abstract ConditionalCompilationTests(String) to String {
 			}
 		}
 	}";
-
 	var ISSUE_252 = "
 	class Foo {
 		var library = new #if haxe3 Map<String, #else Hash <#end String>();

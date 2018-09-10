@@ -1,7 +1,6 @@
 package detect;
 
 import byte.ByteData;
-
 import checkstyle.config.CheckConfig;
 import checkstyle.CheckFile;
 import checkstyle.SeverityLevel;
@@ -59,7 +58,6 @@ import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 import checkstyle.detect.DetectCodingStyle;
 
 class DetectCodingStyleTest {
-
 	// checkstyle.checks.block
 	@Test
 	public function testDetectConditionalCompilation() {
@@ -531,7 +529,7 @@ class DetectCodingStyleTest {
 	}
 
 	function buildCheckFile(src:String):CheckFile {
-		return {name:"Test.hx", content:ByteData.ofString(src), index:0};
+		return {name: "Test.hx", content: ByteData.ofString(src), index: 0};
 	}
 }
 
