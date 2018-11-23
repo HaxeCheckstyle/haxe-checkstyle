@@ -3,7 +3,12 @@ git:
 
 language: haxe
 script:
-  - haxe buildAll.hxml
+  - haxe build.hxml
+  - haxe buildDebug.hxml
+  - haxe buildJS.hxml
+  - haxe buildSchema.hxml
+  - haxe buildTest.hxml -D codecov_json
+
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
@@ -19,14 +24,14 @@ matrix:
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
-        - haxelib install mcover 2.1.1
+        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
         - haxelib install munit
     - haxe: development
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxparse https://github.com/simn/hxparse
         - haxelib git haxeparser https://github.com/simn/haxeparser
-        - haxelib git mcover https://github.com/AlexHaxe/mcover.git support-eval src
+        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
         - haxelib git munit https://github.com/AlexHaxe/MassiveUnit.git support-eval src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib install mlib

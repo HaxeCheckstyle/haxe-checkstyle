@@ -35,6 +35,27 @@
 					"type": "onePerLine"
 				}
 			]
+		},
+		"callParameter": {
+			"defaultWrap": "noWrap",
+			"rules": [
+				{
+					"conditions": [{"cond": "itemCount <= n", "value": 7}],
+					"type": "fillLine"
+				},
+				{
+					"conditions": [{"cond": "totalItemLength >= n", "value": 140}],
+					"type": "onePerLineAfterFirst"
+				},
+				{
+					"conditions": [{"cond": "anyItemLength >= n", "value": 120}],
+					"type": "onePerLineAfterFirst"
+				},
+				{
+					"conditions": [{"cond": "lineLength >= n", "value": 140}],
+					"type": "onePerLineAfterFirst"
+				}
+			]
 		}
 	},
 	"whitespace": {
