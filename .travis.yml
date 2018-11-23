@@ -7,8 +7,7 @@ script:
   - haxe buildDebug.hxml
   - haxe buildJS.hxml
   - haxe buildSchema.hxml
-  - haxe buildTest.hxml -D codecov_json
-
+  - haxe -D codecov_json buildTest.hxml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
