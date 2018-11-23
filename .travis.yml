@@ -24,8 +24,9 @@ matrix:
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
-        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
+        - haxelib install mconsole
         - haxelib install munit
+        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
     - haxe: development
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
