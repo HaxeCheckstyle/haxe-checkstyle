@@ -32,7 +32,7 @@ matrix:
         - haxelib git hxparse https://github.com/simn/hxparse
         - haxelib git haxeparser https://github.com/simn/haxeparser
         - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
-        - haxelib git munit https://github.com/AlexHaxe/MassiveUnit.git support-eval src
+        - haxelib git munit https://github.com/AlexHaxe/MassiveUnit.git master src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib install mlib
         - haxelib install mconsole
