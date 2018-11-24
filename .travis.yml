@@ -39,5 +39,3 @@ matrix:
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
         - sed -i 's/:3.3.0//' buildGlobal.hxml
-  allow_failures:
-    - haxe: development
