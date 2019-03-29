@@ -66,6 +66,8 @@ class UnusedLocalVarCheck extends Check {
 				}
 			}
 			return switch (tok.tok) {
+				case Dollar(n):
+					if (n == name) FOUND_GO_DEEPER; else GO_DEEPER;
 				case Const(CIdent(n)):
 					if (n == name) FOUND_GO_DEEPER; else GO_DEEPER;
 				case Const(CString(s)):

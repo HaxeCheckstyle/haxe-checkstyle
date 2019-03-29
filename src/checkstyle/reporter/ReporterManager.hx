@@ -1,11 +1,15 @@
 package checkstyle.reporter;
 
-#if neko
+#if ((haxe_ver >= 4.0) && (neko || macro || cpp || hl || java))
+import sys.thread.Mutex;
+#elseif neko
 import neko.vm.Mutex;
 #elseif cpp
 import cpp.vm.Mutex;
 #elseif hl
 import cpp.hl.Mutex;
+#elseif cpp
+import java.vm.Mutex;
 #else
 import checkstyle.utils.Mutex;
 #end
@@ -86,19 +90,15 @@ class ReporterManager {
 	}
 
 	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
-		// @formatter:off
-		return (
-			message1.fileName == message2.fileName &&
-			message1.message == message2.message &&
-			message1.code == message2.code &&
-			message1.startLine == message2.startLine &&
-			message1.startColumn == message2.startColumn &&
-			message1.endLine == message2.endLine &&
-			message1.endColumn == message2.endColumn &&
-			message1.severity == message2.severity &&
-			message1.moduleName == message2.moduleName
-		);
-		// @formatter:on
+		return (message1.fileName == message2.fileName
+			&& message1.message == message2.message
+			&& message1.code == message2.code
+			&& message1.startLine == message2.startLine
+			&& message1.startColumn == message2.startColumn
+			&& message1.endLine == message2.endLine
+			&& message1.endColumn == message2.endColumn
+			&& message1.severity == message2.severity
+			&& message1.moduleName == message2.moduleName);
 	}
 
 	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {

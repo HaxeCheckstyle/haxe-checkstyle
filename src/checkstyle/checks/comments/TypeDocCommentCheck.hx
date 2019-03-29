@@ -34,18 +34,17 @@ class TypeDocCommentCheck extends Check {
 		if (hasToken(INTERFACE_DEF)) tokenList.push(Kwd(KwdInterface));
 		if (hasToken(TYPEDEF_DEF)) tokenList.push(Kwd(KwdTypedef));
 		var docTokens = root.filter(tokenList, ALL);
-
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;
-			var prevToken:TokenTree = token.previousSibling;
 			var name:String = getTypeName(token);
-			if (prevToken == null || !prevToken.isComment()) {
+			var docToken:Null<TokenTree> = findDocToken(token);
+			if (docToken == null) {
 				logPos('Type "$name" should have documentation', token.pos);
 				continue;
 			}
-			switch (prevToken.tok) {
+			switch (docToken.tok) {
 				case Comment(text):
-					checkComment(name, prevToken, text);
+					checkComment(name, docToken, text);
 				default:
 			}
 		}
@@ -60,6 +59,36 @@ class TypeDocCommentCheck extends Check {
 			default:
 				return "<unknown>";
 		}
+	}
+
+	function findDocToken(token:TokenTree):Null<TokenTree> {
+		if (token.previousSibling == null) {
+			return null;
+		}
+		var docToken:Null<TokenTree> = token.previousSibling;
+		while (docToken != null) {
+			switch (docToken.tok) {
+				case Sharp(s):
+					var notAllowed:Array<TokenTree> = docToken.filter([
+						Kwd(KwdAbstract),
+						Kwd(KwdClass),
+						Kwd(KwdEnum),
+						Kwd(KwdInterface),
+						Kwd(KwdTypedef),
+						Kwd(KwdImport),
+						Kwd(KwdUsing)
+					], FIRST);
+					if (notAllowed.length > 0) {
+						return null;
+					}
+					docToken = docToken.previousSibling;
+				case Comment(s):
+					return docToken;
+				default:
+					return null;
+			}
+		}
+		return null;
 	}
 
 	function checkComment(name:String, token:TokenTree, text:String) {

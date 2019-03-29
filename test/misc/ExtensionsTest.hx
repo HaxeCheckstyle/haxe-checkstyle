@@ -1,6 +1,6 @@
 package misc;
 
-import checks.CheckTestCase;
+import checkstyle.checks.CheckTestCase;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 
 class ExtensionsTest extends CheckTestCase<ExtensionsTests> {

@@ -1,6 +1,6 @@
 package checkstyle.utils;
 
-#if (!neko && !cpp && !hl)
+#if (!neko && !cpp && !hl && !java)
 class Mutex {
 	public function new() {}
 

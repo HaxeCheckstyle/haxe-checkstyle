@@ -152,6 +152,19 @@ class IndentationCheck extends Check {
 				case BrOpen:
 					var brClose:TokenTree = TokenTreeAccessHelper.access(token).firstOf(BrClose).token;
 					increaseBlockIndent(token, brClose, lineIndentation);
+					switch (token.parent.tok) {
+						case BkOpen:
+							continue;
+						default:
+					}
+				// var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(token);
+				// switch (type) {
+				// 	case BLOCK:
+				// 	case TYPEDEFDECL:
+				// 	case OBJECTDECL:
+				// 	case ANONTYPE:
+				// 	case UNKNOWN:
+				// }
 				case Kwd(KwdFunction):
 					calcLineIndentationFunction(token, lineIndentation);
 				case Kwd(KwdIf), Kwd(KwdElse):
@@ -351,8 +364,16 @@ class IndentationCheck extends Check {
 			switch (token.tok) {
 				case Const(CString(_)):
 					ignoreRange(token.getPos(), ignoreIndentation);
-				case Comment(_):
-					if (ignoreComments) ignoreRange(token.getPos(), ignoreIndentation, false);
+				case Comment(text):
+					if (ignoreComments) {
+						ignoreRange(token.getPos(), ignoreIndentation, false);
+						continue;
+					}
+					var startLine:Int = checker.getLinePos(token.pos.min).line;
+					var endLine:Int = checker.getLinePos(token.pos.max).line;
+					for (index in (startLine + 1)...endLine) {
+						ignoreIndentation[index] = true;
+					}
 				case CommentLine(_):
 					if (!ignoreComments) continue;
 					var lineIndex:Int = checker.getLinePos(token.pos.min).line;

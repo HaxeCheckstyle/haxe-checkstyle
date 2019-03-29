@@ -1,11 +1,15 @@
 package checkstyle;
 
-#if neko
+#if ((haxe_ver >= 4.0) && (neko || macro || cpp || hl || java))
+import sys.thread.Thread;
+#elseif neko
 import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Thread;
 #elseif hl
 import cpp.hl.Thread;
+#elseif java
+import java.hl.Thread;
 #else
 import checkstyle.utils.Thread;
 #end

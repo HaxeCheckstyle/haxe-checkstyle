@@ -182,11 +182,11 @@ class RightCurlyCheck extends Check {
 				case OBJECTDECL, ANONTYPE:
 					curlyAlone = ~/^\s*\}(|\..*|\).*|\].*|,.*|;\s*)(|\/\/.*)$/.match(line);
 			}
-			logErrorIf(!curlyAlone && (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
+			logErrorIf(!curlyAlone
+				&& (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", curlyPos);
-			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")',
-				curlyPos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', curlyPos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing

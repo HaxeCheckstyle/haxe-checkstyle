@@ -19,6 +19,8 @@ class UnnecessaryConstructorCheck extends Check {
 			if (extendsBaseClass(cls)) {
 				continue;
 			}
+			if (isPosSuppressed(cls.pos)) continue;
+
 			var acceptableTokens:Array<TokenTree> = cls.filter([Kwd(KwdFunction), Kwd(KwdVar)], FIRST);
 
 			var haveConstructor:Bool = false;
