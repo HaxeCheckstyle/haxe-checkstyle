@@ -1,7 +1,7 @@
-import checks.CheckTestCase;
-import config.ConfigParserTest;
-import config.ExcludeManagerTest;
-import detect.DetectCodingStyleTest;
+import checkstyle.checks.CheckTestCase;
+import checkstyle.config.ConfigParserTest;
+import checkstyle.config.ExcludeManagerTest;
+import checkstyle.detect.DetectCodingStyleTest;
 import misc.CheckerTest;
 #if !eval
 import misc.ThreadTest;
@@ -11,7 +11,7 @@ class TestSuite extends massive.munit.TestSuite {
 	public function new() {
 		super();
 
-		CompileTime.importPackage("checks");
+		CompileTime.importPackage("checkstyle.checks");
 		CompileTime.importPackage("misc");
 
 		add(CheckerTest);

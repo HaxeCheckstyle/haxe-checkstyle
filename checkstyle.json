@@ -311,7 +311,9 @@
                 "boolOpPolicy": "around",
                 "intervalOpPolicy": "none",
                 "arrowPolicy": "around",
-                "functionArgPolicy": "around"
+                "oldFunctionTypePolicy": "around",
+                "newFunctionTypePolicy": "around",
+                "arrowFunctionPolicy": "around"
             },
             "type": "OperatorWhitespace"
         },
@@ -319,8 +321,6 @@
             "props": {
                 "tokens": [
                     "=",
-                    "+",
-                    "-",
                     "*",
                     "/",
                     "%",
@@ -333,8 +333,6 @@
                     "&",
                     "|",
                     "^",
-                    "&&",
-                    "||",
                     "<<",
                     ">>",
                     ">>>",
@@ -359,6 +357,17 @@
             "type": "OperatorWrap"
         },
         {
+            "props": {
+                "tokens": [
+                    "+",
+                    "-",
+                    "&&",
+                    "||"
+                ],
+                "option": "nl"
+            },
+            "type": "OperatorWrap"
+        },        {
             "props": {
                 "ignoreExtern": true,
                 "format": "^(_|[a-z][a-zA-Z0-9]*$)"
@@ -628,6 +637,7 @@
         ],
         "MethodLength": [
             "checkstyle/checks/metrics/CyclomaticComplexityCheck",
+            "checkstyle/checks/whitespace/OperatorWhitespaceCheck",
             "checkstyle/checks/whitespace/WhitespaceAfterCheck",
             "checkstyle/checks/whitespace/WhitespaceAroundCheck",
 			"checkstyle/checks/whitespace/EmptyLinesCheck",

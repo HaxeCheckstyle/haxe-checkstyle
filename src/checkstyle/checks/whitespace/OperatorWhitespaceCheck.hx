@@ -99,14 +99,34 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	public var arrowPolicy:WhitespacePolicy;
 
 	/**
-		policy for "->"
+		policy for arrow functions "(i) -> i + 2"
 		- around = enforce whitespace before and after operator
 		- before = enforce whitespace before and no whitespace after operator
 		- after = enforce no whitespace before and whitespace after operator
 		- none = enforce no whitespace before and after operator
 		- ignore = skip checks
 	**/
-	public var functionArgPolicy:WhitespacePolicy;
+	public var arrowFunctionPolicy:WhitespacePolicy;
+
+	/**
+		policy for old haxe function type "Int -> Void"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	**/
+	public var oldFunctionTypePolicy:WhitespacePolicy;
+
+	/**
+		policy for new haxe function type "(param:Int) -> Void"
+		- around = enforce whitespace before and after operator
+		- before = enforce whitespace before and no whitespace after operator
+		- after = enforce no whitespace before and whitespace after operator
+		- none = enforce no whitespace before and after operator
+		- ignore = skip checks
+	**/
+	public var newFunctionTypePolicy:WhitespacePolicy;
 
 	public function new() {
 		super();
@@ -119,7 +139,9 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 		boolOpPolicy = AROUND;
 		intervalOpPolicy = NONE;
 		arrowPolicy = AROUND;
-		functionArgPolicy = AROUND;
+		arrowFunctionPolicy = AROUND;
+		oldFunctionTypePolicy = AROUND;
+		newFunctionTypePolicy = AROUND;
 	}
 
 	override function actualRun() {
@@ -228,9 +250,24 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	function checkFunctionArg(root:TokenTree) {
-		if ((functionArgPolicy == null) || (functionArgPolicy == IGNORE)) return;
+		if (((arrowFunctionPolicy == null) || (arrowFunctionPolicy == IGNORE))
+			&& ((oldFunctionTypePolicy == null) || (oldFunctionTypePolicy == IGNORE))
+			&& ((newFunctionTypePolicy == null) || (newFunctionTypePolicy == IGNORE))) {
+			return;
+		}
 		var tokens:Array<TokenTree> = root.filter([Arrow], ALL);
-		checkTokenList(tokens, functionArgPolicy);
+		for (token in tokens) {
+			if (isPosSuppressed(token.pos)) continue;
+			var type:ArrowType = TokenTreeCheckUtils.getArrowType(token);
+			switch (type) {
+				case ARROW_FUNCTION:
+					checkWhitespace(token, arrowFunctionPolicy);
+				case FUNCTION_TYPE_HAXE3:
+					checkWhitespace(token, oldFunctionTypePolicy);
+				case FUNCTION_TYPE_HAXE4:
+					checkWhitespace(token, newFunctionTypePolicy);
+			}
+		}
 	}
 
 	override function violation(tok:TokenTree, policy:String) {
@@ -279,7 +316,15 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
 					},
 					{
-						propertyName: "functionArgPolicy",
+						propertyName: "oldFunctionTypePolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "newFunctionTypePolicy",
+						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+					},
+					{
+						propertyName: "arrowFunctionPolicy",
 						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
 					}
 				]

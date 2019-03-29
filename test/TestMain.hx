@@ -45,5 +45,3 @@ class TestMain {
 		new TestMain();
 	}
 }
-
-typedef LineCoverageResult = Dynamic;

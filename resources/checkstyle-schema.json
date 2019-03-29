@@ -1452,6 +1452,18 @@
                     "type": "object",
                     "description": "Checks that whitespace is present or absent around a operators.",
                     "properties": {
+                        "newFunctionTypePolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "description": "policy for new haxe function type \"(param:Int) -> Void\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
+                            "propertyOrder": 11
+                        },
                         "ternaryOpPolicy": {
                             "enum": [
                                 "before",
@@ -1473,6 +1485,18 @@
                             "type": "string",
                             "description": "policy for \"++\", \"--\", \"!\", \"~\"\n\t\t- inner = enforce whitespace between unary operator and operand\n\t\t- none = enforce no whitespace between unary operator and operand\n\t\t- ignore = skip checks",
                             "propertyOrder": 1
+                        },
+                        "oldFunctionTypePolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "description": "policy for old haxe function type \"Int -> Void\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
+                            "propertyOrder": 10
                         },
                         "boolOpPolicy": {
                             "enum": [
@@ -1509,18 +1533,6 @@
                             "type": "string",
                             "description": "policy for \"=\", \"+=\", \"-=\", \"*=\", \"/=\", \"<<=\", \">>=\", \">>>=\", \"&=\", \"|=\", \"^=\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
                             "propertyOrder": 0
-                        },
-                        "functionArgPolicy": {
-                            "enum": [
-                                "before",
-                                "after",
-                                "around",
-                                "none",
-                                "ignore"
-                            ],
-                            "type": "string",
-                            "description": "policy for \"->\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
-                            "propertyOrder": 9
                         },
                         "bitwiseOpPolicy": {
                             "enum": [
@@ -1579,7 +1591,19 @@
                             ],
                             "type": "string",
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
-                            "propertyOrder": 10
+                            "propertyOrder": 12
+                        },
+                        "arrowFunctionPolicy": {
+                            "enum": [
+                                "before",
+                                "after",
+                                "around",
+                                "none",
+                                "ignore"
+                            ],
+                            "type": "string",
+                            "description": "policy for arrow functions \"(i) -> i + 2\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
+                            "propertyOrder": 9
                         }
                     },
                     "additionalProperties": false

@@ -55,7 +55,8 @@ class RedundantModifierCheck extends Check {
 			}
 		}
 
-		if ((!forcePrivate && isDefaultPrivate && f.access.contains(APrivate)) || (!forcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
+		if ((!forcePrivate && isDefaultPrivate && f.access.contains(APrivate))
+			|| (!forcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
 			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos, redundantCode);
 		}
 	}

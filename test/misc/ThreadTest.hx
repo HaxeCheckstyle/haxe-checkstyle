@@ -7,8 +7,8 @@ import checkstyle.Checker;
 import checkstyle.ParserQueue;
 import checkstyle.CheckerPool;
 import checkstyle.checks.whitespace.IndentationCheck;
-import checks.whitespace.IndentationCheckTest.IndentationCheckTests;
-import checks.CheckTestCase.TestReporter;
+import checkstyle.checks.whitespace.IndentationCheckTest.IndentationCheckTests;
+import checkstyle.checks.CheckTestCase.TestReporter;
 
 class ThreadTest {
 	static inline var FILE_NAME:String = "Test.hx";

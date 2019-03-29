@@ -55,13 +55,13 @@ class BaseReporter implements IReporter {
 		if (total > 0) {
 			// @formatter:off
 			Sys.println(
-				styleText("\nTotal Issues: " + total + " (", Style.BOLD) +
-				styleText("Errors: " + errors, Style.RED) +
-				styleText(", ", Style.BOLD) +
-				styleText("Warnings: " + warnings, Style.MAGENTA) +
-				styleText(", ", Style.BOLD) +
-				styleText("Infos: " + infos, Style.BLUE) +
-				styleText(")", Style.BOLD));
+				styleText("\nTotal Issues: " + total + " (", Style.BOLD)
+				+ styleText("Errors: " + errors, Style.RED)
+				+ styleText(", ", Style.BOLD)
+				+ styleText("Warnings: " + warnings, Style.MAGENTA)
+				+ styleText(", ", Style.BOLD)
+				+ styleText("Infos: " + infos, Style.BLUE)
+				+ styleText(")", Style.BOLD));
 			// @formatter:on
 		}
 		else Sys.println(styleText("No issues found.", Style.BOLD));

@@ -23,15 +23,17 @@ class Checker {
 	public var lineSeparator:String;
 
 	var tokenTree:TokenTree;
+	var allowFailingAST:Bool;
 
 	public var asts:Array<Ast>;
 	public var excludesRanges:Map<String, Array<ExcludeRange>>;
 
-	public function new() {
+	public function new(allowFailingAST:Bool = false) {
 		checks = [];
 		baseDefines = [];
 		defineCombinations = [];
 		linesIdx = [];
+		this.allowFailingAST = allowFailingAST;
 	}
 
 	public function addCheck(check:Check) {
@@ -159,7 +161,9 @@ class Checker {
 			return parser.parse();
 		}
 		catch (e:Any) {
-			ErrorUtils.handleException(e, file, "makeAST [" + defines.join(",") + "]");
+			if (!allowFailingAST) {
+				ErrorUtils.handleException(e, file, "makeAST [" + defines.join(",") + "]");
+			}
 		}
 		return null;
 	}
@@ -202,7 +206,7 @@ class Checker {
 			makePosIndices();
 			makeTokens();
 			makeASTs();
-			if (asts.length <= 0) return false;
+			// if (asts.length <= 0) return false;
 			getTokenTree();
 			excludesRanges = ExcludeManager.INSTANCE.getPosExcludes(this);
 		}

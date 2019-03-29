@@ -361,16 +361,18 @@
 		},
 		{
 			"props": {
+				"newFunctionTypePolicy": "around",
 				"ternaryOpPolicy": "around",
 				"unaryOpPolicy": "none",
+				"oldFunctionTypePolicy": "around",
 				"boolOpPolicy": "around",
 				"intervalOpPolicy": "none",
 				"assignOpPolicy": "around",
-				"functionArgPolicy": "around",
 				"bitwiseOpPolicy": "around",
 				"arithmeticOpPolicy": "around",
 				"compareOpPolicy": "around",
-				"arrowPolicy": "around"
+				"arrowPolicy": "around",
+				"arrowFunctionPolicy": "around"
 			},
 			"type": "OperatorWhitespace"
 		},
