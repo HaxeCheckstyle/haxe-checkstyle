@@ -4,6 +4,6 @@ buildGlobal.hxml
 -lib munit
 -lib test-adapter
 -D unittest
--debug
+# -debug
 --macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
 -x TestMain
