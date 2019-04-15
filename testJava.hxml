@@ -1,0 +1,13 @@
+buildGlobal.hxml
+-cp test
+-lib mcover
+-lib munit
+-lib test-adapter
+-D unittest
+# -debug
+--macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
+
+-java out
+-main TestMain
+
+-cmd java -jar out/TestMain.jar

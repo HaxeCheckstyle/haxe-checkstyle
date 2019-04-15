@@ -8,6 +8,7 @@ script:
   - haxe buildJS.hxml
   - haxe buildSchema.hxml
   - haxe -D codecov_json buildTest.hxml
+  - haxe testJava.hxml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
@@ -21,6 +22,7 @@ matrix:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib git json2object https://github.com/elnabo/json2object
+        - haxelib install hxjava
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
@@ -37,6 +39,7 @@ matrix:
         - haxelib git munit https://github.com/AlexHaxe/MassiveUnit.git master src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib git json2object https://github.com/elnabo/json2object
+        - haxelib install hxjava
         - haxelib install mlib
         - haxelib install mconsole
         - haxelib install compiletime 2.6.0
