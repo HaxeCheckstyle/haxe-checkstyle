@@ -6,8 +6,6 @@ import sys.thread.Mutex;
 import neko.vm.Mutex;
 #elseif cpp
 import cpp.vm.Mutex;
-#elseif hl
-import cpp.hl.Mutex;
 #elseif java
 import java.vm.Mutex;
 #else

@@ -6,10 +6,8 @@ import sys.thread.Thread;
 import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Thread;
-#elseif hl
-import cpp.hl.Thread;
 #elseif java
-import java.hl.Thread;
+import java.vm.Thread;
 #else
 import checkstyle.utils.Thread;
 #end
