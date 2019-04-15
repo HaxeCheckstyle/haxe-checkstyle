@@ -8,7 +8,7 @@ import neko.vm.Mutex;
 import cpp.vm.Mutex;
 #elseif hl
 import cpp.hl.Mutex;
-#elseif cpp
+#elseif java
 import java.vm.Mutex;
 #else
 import checkstyle.utils.Mutex;
