@@ -326,7 +326,7 @@ class IndentationCheck extends Check {
 					if (!isLast) continue;
 					var nextLine:String = checker.lines[linePos.line + 1];
 					if (nextLine == null) continue;
-					var isBracketOnly:Bool = ~/^\s*[[({<]$/.match(nextLine);
+					var isBracketOnly:Bool = ~/^\s*[\[\(\{<]$/.match(nextLine);
 					if (isBracketOnly) continue;
 					pos = token.parent.getPos();
 				case Dot:
@@ -425,43 +425,35 @@ class IndentationCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "character",
-						values: [
-							TAB,
-							EIGHT_SPACES,
-							SEVEN_SPACES,
-							SIX_SPACES,
-							FIVE_SPACES,
-							FOUR_SPACES,
-							THREE_SPACES,
-							TWO_SPACES,
-							ONE_SPACE
-						]
-					},
-					{
-						propertyName: "conditionalPolicy",
-						values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
-					},
-					{
-						propertyName: "ignoreConditionals",
-						values: [true, false]
-					},
-					{
-						propertyName: "ignoreComments",
-						values: [true, false]
-					},
-					{
-						propertyName: "wrapPolicy",
-						values: [NONE, EXACT, LARGER]
-					}
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "character",
+				values: [
+					TAB,
+					EIGHT_SPACES,
+					SEVEN_SPACES,
+					SIX_SPACES,
+					FIVE_SPACES,
+					FOUR_SPACES,
+					THREE_SPACES,
+					TWO_SPACES,
+					ONE_SPACE
 				]
-			}
-		];
+			}, {
+					propertyName: "conditionalPolicy",
+					values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
+				}, {
+					propertyName: "ignoreConditionals",
+					values: [true, false]
+				}, {
+					propertyName: "ignoreComments",
+					values: [true, false]
+				}, {
+					propertyName: "wrapPolicy",
+					values: [NONE, EXACT, LARGER]
+				}]
+		}];
 	}
 }
 

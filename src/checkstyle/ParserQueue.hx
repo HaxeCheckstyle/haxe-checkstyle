@@ -9,12 +9,9 @@ import neko.vm.Thread;
 #elseif cpp
 import cpp.vm.Mutex;
 import cpp.vm.Thread;
-#elseif hl
-import cpp.hl.Mutex;
-import cpp.hl.Thread;
 #elseif java
-import java.hl.Mutex;
-import java.hl.Thread;
+import java.vm.Mutex;
+import java.vm.Thread;
 #else
 import checkstyle.utils.Mutex;
 import checkstyle.utils.Thread;

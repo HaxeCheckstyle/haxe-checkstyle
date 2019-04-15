@@ -14,6 +14,7 @@
 - Fixed position change of semicolon [#460](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/460)
 - Fixed TypeDocCommentCheck with conditionals, fixes [#465](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/465) ([#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467))
 - Fixed suppression of UnnecessaryConstructor, fixes [#466](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/466) ([#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467))
+- Fixed Java regexp issue in IndentationCheck ([#468](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/468))
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 - Changed to use formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
 - Refactored coverage reporting [#462](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/462)
