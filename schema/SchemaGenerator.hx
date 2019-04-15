@@ -3,7 +3,6 @@ import haxe.io.Path;
 import sys.io.File;
 
 class SchemaGenerator {
-
 	public static function main() {
 		#if (haxe_ver < 4.0)
 		var exludeConfig = CheckstyleSchemaGenerator.generate("checkstyle.config.ExcludeConfig",

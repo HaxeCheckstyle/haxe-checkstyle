@@ -1,10 +1,6 @@
 package checkstyle.utils;
 
 class StringUtils {
-	public static inline function contains(s:String, c:String):Bool {
-		return s.indexOf(c) != -1;
-	}
-
 	public static function isStringInterpolation(s:String, fileContent:byte.ByteData, pos:Position):Bool {
 		var code:Bytes = cast fileContent;
 		var quote:String = code.sub(pos.min, 1).toString();
@@ -13,7 +9,7 @@ class StringUtils {
 		return regex.match(s);
 	}
 
-	public static function isEmpty(s:String):Bool {
+	public static function isEmpty(s:Null<String>):Bool {
 		return (s == null) || (s.length <= 0);
 	}
 }

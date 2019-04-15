@@ -209,6 +209,7 @@
 		},
 		{
 			"props": {
+				"ignoreSingleline": false,
 				"tokens": [
 					"CLASS_DEF",
 					"ENUM_DEF",

@@ -30,6 +30,16 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 		check.countEmpty = false;
 		assertMsg(check, TEST3, "Method `test` length is 14 lines (max allowed is 10)");
 	}
+
+	@Test
+	public function testSuppress() {
+		var check = new MethodLengthCheck();
+		check.max = 50;
+		assertNoMsg(check, SUPPRESS);
+
+		check.max = 5;
+		assertNoMsg(check, SUPPRESS);
+	}
 }
 
 @:enum
@@ -77,6 +87,23 @@ abstract MethodLengthCheckTests(String) to String {
 			// comment
 		}
 
+		@SuppressWarnings('checkstyle:MethodLength')
+		public function test1() {
+			trace('TEST');
+
+			trace('TEST');
+
+			trace('TEST');
+
+			trace('TEST');
+
+			trace('TEST');
+
+			trace('TEST');
+		}
+	}";
+	var SUPPRESS = "
+	abstractAndClass Test {
 		@SuppressWarnings('checkstyle:MethodLength')
 		public function test1() {
 			trace('TEST');
