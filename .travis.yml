@@ -2,13 +2,6 @@ git:
   depth: 1
 
 language: haxe
-script:
-  - haxe build.hxml
-  - haxe buildDebug.hxml
-  - haxe buildJS.hxml
-  - haxe buildSchema.hxml
-  - haxe -D codecov_json buildTest.hxml
-  - haxe testJava.hxml
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
@@ -30,6 +23,12 @@ matrix:
         - haxelib install munit
         - haxelib install test-adapter
         - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
+      script:
+        - haxe build.hxml
+        - haxe buildDebug.hxml
+        - haxe buildJS.hxml
+        - haxe buildSchema.hxml
+        - haxe -D codecov_json buildTest.hxml
     - haxe: development
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
@@ -46,3 +45,10 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install test-adapter
         - sed -i 's/:3.3.0//' buildGlobal.hxml
+      script:
+        - haxe build.hxml
+        - haxe buildDebug.hxml
+        - haxe buildJS.hxml
+        - haxe buildSchema.hxml
+        - haxe -D codecov_json buildTest.hxml
+        - haxe testJava.hxml
