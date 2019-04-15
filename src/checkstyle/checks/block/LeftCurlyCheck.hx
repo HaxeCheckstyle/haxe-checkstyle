@@ -35,9 +35,14 @@ class LeftCurlyCheck extends Check {
 	public var option:LeftCurlyCheckOption;
 
 	/**
-		allow single line blocks
+		allow empty single line blocks
 	**/
 	public var ignoreEmptySingleline:Bool;
+
+	/**
+		allow single line blocks
+	**/
+	public var ignoreSingleline:Bool;
 
 	public function new() {
 		super(TOKEN);
@@ -58,6 +63,7 @@ class LeftCurlyCheck extends Check {
 		];
 		option = EOL;
 		ignoreEmptySingleline = true;
+		ignoreSingleline = false;
 	}
 
 	function hasToken(token:LeftCurlyCheckToken):Bool {
@@ -70,16 +76,32 @@ class LeftCurlyCheck extends Check {
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;
-			if (ignoreEmptySingleline && isSingleLine(brOpen)) continue;
+			if (skipSingleLine(brOpen)) continue;
+			var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(brOpen);
+			switch (type) {
+				case BLOCK:
+				case TYPEDEFDECL:
+					if (!hasToken(TYPEDEF_DEF)) continue;
+				case OBJECTDECL:
+					if (!hasToken(OBJECT_DECL)) continue;
+				case ANONTYPE:
+					if (!hasToken(ANON_TYPE)) continue;
+				case UNKNOWN:
+			}
 			var parent:ParentToken = findParentToken(brOpen.parent);
 			if (!parent.hasToken) continue;
 			check(brOpen, isParentWrapped(parent.token, brOpen));
 		}
 	}
 
-	function isSingleLine(brOpen:TokenTree):Bool {
+	function skipSingleLine(brOpen:TokenTree):Bool {
 		var brClose:TokenTree = brOpen.access().firstOf(BrClose).token;
-		return (brClose != null && brOpen.pos.max == brClose.pos.min);
+		if (brClose == null) return false;
+		if (ignoreEmptySingleline && (brOpen.pos.max == brClose.pos.min)) return true;
+		var lStart:Int = checker.getLinePos(brOpen.pos.min).line;
+		var lEnd:Int = checker.getLinePos(brClose.pos.min).line;
+		if (ignoreSingleline && lStart == lEnd) return true;
+		return false;
 	}
 
 	/**
@@ -118,7 +140,7 @@ class LeftCurlyCheck extends Check {
 			case Kwd(KwdCase):
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			case DblDot:
-				return findParentTokenDblDot(token.parent);
+				return findParentTokenDblDot(token);
 			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
 			case Dollar(_):
@@ -138,22 +160,22 @@ class LeftCurlyCheck extends Check {
 
 	function findParentTokenDblDot(token:TokenTree):ParentToken {
 		if ((token == null) || (token.tok == null)) return {token: token, hasToken: false};
-		switch (token.tok) {
-			case Kwd(KwdCase), Kwd(KwdDefault):
+		var type:ColonType = TokenTreeCheckUtils.getColonType(token);
+		switch (type) {
+			case SWITCH_CASE:
 				return {token: token, hasToken: hasToken(SWITCH)};
-			case POpen, BkOpen, BrOpen, Kwd(KwdReturn):
+			case TYPE_HINT:
+				return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+			case TYPE_CHECK:
+				return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
+			case TERNARY:
+				return {token: token, hasToken: false};
+			case OBJECT_LITERAL:
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
-			case Binop(OpAssign):
-				// could be OBJECT_DECL or TYPEDEF_DEF
-				if ((token.parent != null) && (token.parent.parent != null)) {
-					switch (token.parent.parent.tok) {
-						case Kwd(KwdTypedef): return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
-						default:
-					}
-				}
-				return {token: token, hasToken: hasToken(OBJECT_DECL)};
-			default:
-				return findParentTokenDblDot(token.parent);
+			case AT:
+				return {token: token, hasToken: false};
+			case UNKNOWN:
+				return {token: token, hasToken: false};
 		}
 	}
 
@@ -253,6 +275,10 @@ class LeftCurlyCheck extends Check {
 					{
 						propertyName: "ignoreEmptySingleline",
 						values: [true, false]
+					},
+					{
+						propertyName: "ignoreSingleline",
+						values: [true, false]
 					}
 				]
 			},
@@ -268,6 +294,10 @@ class LeftCurlyCheck extends Check {
 					},
 					{
 						propertyName: "ignoreEmptySingleline",
+						values: [true, false]
+					},
+					{
+						propertyName: "ignoreSingleline",
 						values: [true, false]
 					}
 				]
@@ -288,6 +318,7 @@ abstract LeftCurlyCheckToken(String) {
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
 	var TYPEDEF_DEF = "TYPEDEF_DEF";
 	var INTERFACE_DEF = "INTERFACE_DEF";
+	var ANON_TYPE = "ANON_TYPE";
 	var OBJECT_DECL = "OBJECT_DECL";
 	var FUNCTION = "FUNCTION";
 	var FOR = "FOR";

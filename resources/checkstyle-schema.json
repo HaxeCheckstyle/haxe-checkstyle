@@ -1087,6 +1087,11 @@
                     "type": "object",
                     "description": "Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.",
                     "properties": {
+                        "ignoreSingleline": {
+                            "type": "boolean",
+                            "description": "allow single line blocks",
+                            "propertyOrder": 3
+                        },
                         "tokens": {
                             "items": {
                                 "enum": [
@@ -1095,6 +1100,7 @@
                                     "ABSTRACT_DEF",
                                     "TYPEDEF_DEF",
                                     "INTERFACE_DEF",
+                                    "ANON_TYPE",
                                     "OBJECT_DECL",
                                     "FUNCTION",
                                     "FOR",
@@ -1114,7 +1120,7 @@
                         },
                         "ignoreEmptySingleline": {
                             "type": "boolean",
-                            "description": "allow single line blocks",
+                            "description": "allow empty single line blocks",
                             "propertyOrder": 2
                         },
                         "option": {
@@ -1136,7 +1142,7 @@
                             ],
                             "type": "string",
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
-                            "propertyOrder": 3
+                            "propertyOrder": 4
                         }
                     },
                     "additionalProperties": false

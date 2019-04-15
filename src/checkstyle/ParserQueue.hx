@@ -1,6 +1,6 @@
 package checkstyle;
 
-#if ((haxe_ver >= 4.0) && (neko || macro || cpp || hl || java))
+#if ((haxe_ver >= 4.0) && (neko || macro || eval || cpp || hl || java))
 import sys.thread.Mutex;
 import sys.thread.Thread;
 #elseif neko

@@ -11,6 +11,7 @@
 	},
 	"emptyLines": {
 		"finalNewline": false,
+		"lineCommentsBetweenFunctions":"none",
 		"interfaceEmptyLines": {
 			"beginType": 1
 		}

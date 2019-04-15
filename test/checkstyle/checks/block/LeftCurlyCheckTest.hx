@@ -21,6 +21,8 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertNoMsg(check, ABSTRACT);
+		assertNoMsg(check, NESTED_OBJECT_LITERAL);
+		assertNoMsg(check, WRAPPED_FUNCTION);
 	}
 
 	@Test
@@ -47,6 +49,10 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 
 		check.tokens = [OBJECT_DECL];
 		assertMsg(check, TEST4, MSG_NL);
+		assertNoMsg(check, TEST14);
+		assertMsg(check, NESTED_OBJECT_LITERAL, MSG_NL);
+
+		check.tokens = [TYPEDEF_DEF];
 		assertMsg(check, TEST14, MSG_NL);
 
 		check.tokens = [IF];
@@ -82,6 +88,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, TEST17, MSG_NLOW);
 		assertMsg(check, TEST18, MSG_NL_SPLIT);
 		assertMsg(check, TEST19, MSG_NL_SPLIT);
+		assertMsg(check, WRAPPED_FUNCTION, MSG_NL_SPLIT);
 	}
 
 	@Test
@@ -107,7 +114,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 	@Test
 	public function testArrayComprehension() {
 		var check = new LeftCurlyCheck();
-		check.tokens = [ARRAY_COMPREHENSION];
+		check.tokens = [ARRAY_COMPREHENSION, OBJECT_DECL];
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
 
@@ -283,7 +290,9 @@ abstract LeftCurlyCheckTests(String) to String {
 		x:Int,
 		y:Int,
 		z:Int,
-		point:{x:Int, y:Int, z:Int}
+		point:{
+			x:Int, y:Int, z:Int
+		}
 	}";
 	var TEST15 = "
 	class Test
@@ -381,10 +390,9 @@ abstract LeftCurlyCheckTests(String) to String {
 		{
 			switch(val) {
 				case (true ||
-					!false):
-				{
-					// do nothing
-				}
+					!false): {
+						// do nothing
+					}
 				default:
 			}
 		}
@@ -474,5 +482,20 @@ abstract LeftCurlyCheckTests(String) to String {
 	  inline function new(i:Int) {
 		this = i;
 	  }
+	}";
+	var NESTED_OBJECT_LITERAL = "
+	class Test {
+		function test() {
+			var struct = {origin:{x:10, y:10, z:20}, rotation:10};
+		}
+	}";
+	var WRAPPED_FUNCTION = "
+	class Test {
+		static function addSuperClassFields(typeName:String, classFields:Array<ObjectDeclField>, superClass:Null<{t:Ref<ClassType>, params:Array<Type>}>,
+				pos:Position, refs:DynamicAccess<Expr>) {
+			if (superClass == null) return;
+			if (superClass.t.get().name == 'Check') return;
+			addClassFields(typeName, classFields, superClass.t.get().fields.get(), pos, refs);
+		}
 	}";
 }
