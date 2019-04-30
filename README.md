@@ -27,7 +27,7 @@ When everything is set up, Code Climate automatically runs Haxe Checkstyle for y
 
 The current number of issues can be tracked via a badge:
 
-[![Code Climate](https://img.shields.io/codeclimate/issues/github/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
+[![Code Climate](https://img.shields.io/codeclimate/issues/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
 
 Immediate results, right in your pull requests.
 
