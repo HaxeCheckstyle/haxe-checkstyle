@@ -3,8 +3,8 @@
 ## dev branch / next version (2.x.x)
 
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)
-- Added `afterDocCommentField` to ExtendedEmptyLinesCheck
-- Added thread support for eval target
+- Added `afterDocCommentField` to ExtendedEmptyLinesCheck ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
+- Added thread support for eval target ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Fixed enum abstract detection in MagixNumber check, fixes [#104](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/104) ([#449](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/449))
 - Fixed indentation of `)`, fixes [#450](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/450) ([#451](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/451))
 - Fixed typedef extension (Haxe 3.x) [#452](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/452)
@@ -17,7 +17,7 @@
 - Fixed TypeDocCommentCheck with conditionals, fixes [#465](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/465) ([#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467))
 - Fixed suppression of UnnecessaryConstructor, fixes [#466](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/466) ([#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467))
 - Fixed Java regexp issue in IndentationCheck ([#468](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/468))
-- Fixed empty lines between types with conditionals
+- Fixed empty lines between types with conditionals ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 - Changed to use formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
 - Refactored coverage reporting [#462](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/462)
