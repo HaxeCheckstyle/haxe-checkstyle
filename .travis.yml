@@ -30,6 +30,7 @@ matrix:
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
         - haxelib install mconsole
+        - haxelib install mlib
         - haxelib install test-adapter
     - haxe: development
       install:
