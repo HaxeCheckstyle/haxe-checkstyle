@@ -100,7 +100,8 @@
                     "afterClassStaticVars",
                     "afterClassVars",
                     "betweenClassMethods",
-					"beforeMultiLineComment"
+					"beforeMultiLineComment",
+					"afterDocCommentField"
                 ],
                 "upto": [
                     "betweenImports",

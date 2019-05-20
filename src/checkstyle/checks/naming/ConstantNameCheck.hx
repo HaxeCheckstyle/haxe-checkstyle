@@ -51,32 +51,26 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 				propertyName: "tokens",
 				value: [INLINE]
 			}],
-			properties: [
-				{
-					propertyName: "format",
-					values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
-				},
-				{
-					propertyName: "ignoreExtern",
-					values: [true, false]
-				}
-			]
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			}, {
+				propertyName: "ignoreExtern",
+				values: [true, false]
+			}]
 		};
 		var instanceNotInline:DetectableInstance = {
 			fixed: [{
 				propertyName: "tokens",
 				value: [NOTINLINE]
 			}],
-			properties: [
-				{
-					propertyName: "format",
-					values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
-				},
-				{
-					propertyName: "ignoreExtern",
-					values: [true, false]
-				}
-			]
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			}, {
+				propertyName: "ignoreExtern",
+				values: [true, false]
+			}]
 		}
 		return [instanceInline, instanceNotInline];
 	}

@@ -60,7 +60,8 @@ class DetectCodingStyleTest {
 	// checkstyle.checks.block
 	@Test
 	public function testDetectConditionalCompilation() {
-		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()],
+			[buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("ConditionalCompilation", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
@@ -237,7 +238,8 @@ class DetectCodingStyleTest {
 
 	@Test
 	public function testDetectUnnecessaryConstructor() {
-		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()],
+			[buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("UnnecessaryConstructor", detectedChecks[0].type);
 	}

@@ -106,17 +106,13 @@ class TypeDocCommentCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "tokens",
-						values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "tokens",
+				values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
+			}]
+		}];
 	}
 }
 

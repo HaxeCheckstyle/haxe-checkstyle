@@ -270,41 +270,31 @@ class FieldDocCommentCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "tokens",
-						values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
-					},
-					{
-						propertyName: "excludeNames",
-						values: [["new", "toString"]]
-					},
-					{
-						propertyName: "modifier",
-						values: [PUBLIC, BOTH, PRIVATE]
-					},
-					{
-						propertyName: "fieldType",
-						values: [BOTH, FUNCTIONS, VARS]
-					},
-					{
-						propertyName: "requireParams",
-						values: [true, false]
-					},
-					{
-						propertyName: "requireReturn",
-						values: [true, false]
-					},
-					{
-						propertyName: "ignoreOverride",
-						values: [false, true]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "tokens",
+				values: [[ABSTRACT_DEF, CLASS_DEF, ENUM_DEF, INTERFACE_DEF, TYPEDEF_DEF]]
+			}, {
+				propertyName: "excludeNames",
+				values: [["new", "toString"]]
+			}, {
+				propertyName: "modifier",
+				values: [PUBLIC, BOTH, PRIVATE]
+			}, {
+				propertyName: "fieldType",
+				values: [BOTH, FUNCTIONS, VARS]
+			}, {
+				propertyName: "requireParams",
+				values: [true, false]
+			}, {
+				propertyName: "requireReturn",
+				values: [true, false]
+			}, {
+				propertyName: "ignoreOverride",
+				values: [false, true]
+			}]
+		}];
 	}
 }
 

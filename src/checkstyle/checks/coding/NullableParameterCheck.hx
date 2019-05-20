@@ -48,15 +48,13 @@ class NullableParameterCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [{
-					propertyName: "option",
-					values: [QUESTION_MARK, NULL_DEFAULT]
-				}]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "option",
+				values: [QUESTION_MARK, NULL_DEFAULT]
+			}]
+		}];
 	}
 }
 

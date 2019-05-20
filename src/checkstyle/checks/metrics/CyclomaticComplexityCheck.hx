@@ -108,22 +108,18 @@ class CyclomaticComplexityCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "thresholds",
-						values: [
-							[{severity: WARNING, complexity: 6}, {severity: ERROR, complexity: 16}],
-							[{severity: WARNING, complexity: 11}, {severity: ERROR, complexity: 21}],
-							[{severity: WARNING, complexity: 16}, {severity: ERROR, complexity: 26}],
-							[{severity: WARNING, complexity: 21}, {severity: ERROR, complexity: 31}]
-						]
-					}
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "thresholds",
+				values: [
+					[{severity: WARNING, complexity: 6}, {severity: ERROR, complexity: 16}],
+					[{severity: WARNING, complexity: 11}, {severity: ERROR, complexity: 21}],
+					[{severity: WARNING, complexity: 16}, {severity: ERROR, complexity: 26}],
+					[{severity: WARNING, complexity: 21}, {severity: ERROR, complexity: 31}]
 				]
-			}
-		];
+			}]
+		}];
 	}
 }
 

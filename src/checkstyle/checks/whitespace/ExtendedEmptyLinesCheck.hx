@@ -174,7 +174,6 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (types.length <= 0) return;
 
 		checkBetweenTypes(emptyLines, types);
-
 		for (type in types) {
 			var pos:Position = type.getPos();
 			if (skipSingleLineTypes && (checker.getLinePos(pos.min).line - checker.getLinePos(pos.max).line == 0)) continue;
@@ -185,25 +184,36 @@ class ExtendedEmptyLinesCheck extends Check {
 					checkClass(emptyLines, type);
 				case Kwd(KwdEnum):
 					if (isIgnored([BEGIN_ENUM, END_ENUM, BETWEEN_ENUM_FIELDS, TYPE_DEFINITION])) continue;
-
 					checkType(emptyLines, type, getPolicy(BEGIN_ENUM), getPolicy(END_ENUM), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						if (hasDocComment(child)) {
+							return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
+						}
 						return makePolicyAndWhat(getPolicy(BETWEEN_ENUM_FIELDS), "between type fields");
 					});
 				case Kwd(KwdInterface):
 					if (isIgnored([BEGIN_INTERFACE, END_INTERFACE, BETWEEN_INTERFACE_FIELDS, TYPE_DEFINITION])) continue;
-
 					checkType(emptyLines, type, getPolicy(BEGIN_INTERFACE), getPolicy(END_INTERFACE), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						if (hasDocComment(child)) {
+							return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
+						}
 						return makePolicyAndWhat(getPolicy(BETWEEN_INTERFACE_FIELDS), "between type fields");
 					});
 				case Kwd(KwdTypedef):
 					if (isIgnored([BEGIN_TYPEDEF, END_TYPEDEF, BETWEEN_TYPEDEF_FIELDS, TYPE_DEFINITION])) continue;
-
 					checkType(emptyLines, type, getPolicy(BEGIN_TYPEDEF), getPolicy(END_TYPEDEF), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+						if (hasDocComment(child)) {
+							return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
+						}
 						return makePolicyAndWhat(getPolicy(BETWEEN_TYPEDEF_FIELDS), "between type fields");
 					});
 				default:
 			}
 		}
+	}
+
+	function hasDocComment(token:TokenTree):Bool {
+		var docToken:TokenTree = TokenTreeCheckUtils.getDocComment(token);
+		return (docToken != null);
 	}
 
 	function checkBetweenTypes(emptyLines:ListOfEmptyLines, types:Array<TokenTree>) {
@@ -212,12 +222,17 @@ class ExtendedEmptyLinesCheck extends Check {
 			var type:TokenTree = types[index];
 			var sibling:TokenTree = type.previousSibling;
 			var prevType:TokenTree = types[index - 1];
-			if ((sibling != null) && (sibling != prevType)) {
+			if (sibling == null) {
+				continue;
+			}
+			if (sibling != prevType) {
 				switch (sibling.tok) {
 					case Comment(_):
 						type = sibling;
 					case CommentLine(_):
 						type = sibling;
+					case Sharp(_):
+						continue;
 					default:
 				}
 			}
@@ -242,6 +257,9 @@ class ExtendedEmptyLinesCheck extends Check {
 		}
 
 		checkType(emptyLines, typeToken, getPolicy(BEGIN_ABSTRACT), getPolicy(END_ABSTRACT), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+			if (hasDocComment(child)) {
+				return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
+			}
 			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
 			var isVarChild:Bool = child.is(Kwd(KwdVar));
 			if (!isVarChild && !isFuncChild) return null;
@@ -268,6 +286,9 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored(places)) return;
 
 		checkType(emptyLines, typeToken, getPolicy(BEGIN_CLASS), getPolicy(END_CLASS), function(child:TokenTree, next:TokenTree):PolicyAndWhat {
+			if (hasDocComment(child)) {
+				return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
+			}
 			while (next != null) {
 				if (!next.isComment()) break;
 				next = next.nextSibling;
@@ -533,37 +554,29 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [{
-					propertyName: "max",
-					value: 1
-				}],
-				properties: [
-					{
-						"propertyName": "skipSingleLineTypes",
-						"values": [false, true]
-					},
-					{
-						"propertyName": "defaultPolicy",
-						"values": ["none", "exact", "upto", "atleast", "ignore"]
-					},
-					{
-						"propertyName": "none",
-						"values": [
-							[
-								BEFORE_PACKAGE,
-								BETWEEN_IMPORTS,
-								BEFORE_USING,
-								TYPE_DEFINITION,
-								AFTER_LEFT_CURLY,
-								BEFORE_RIGHT_CURLY
-							]
-						]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [{
+				propertyName: "max",
+				value: 1
+			}],
+			properties: [{
+				"propertyName": "skipSingleLineTypes",
+				"values": [false, true]
+			}, {
+				"propertyName": "defaultPolicy",
+				"values": ["none", "exact", "upto", "atleast", "ignore"]
+			}, {
+				"propertyName": "none",
+				"values": [[
+					BEFORE_PACKAGE,
+					BETWEEN_IMPORTS,
+					BEFORE_USING,
+					TYPE_DEFINITION,
+					AFTER_LEFT_CURLY,
+					BEFORE_RIGHT_CURLY
+				]]
+			}]
+		}];
 	}
 }
 
@@ -674,4 +687,5 @@ abstract EmptyLinesPlace(String) {
 	var AFTER_MULTILINE_COMMENT = "afterMultiLineComment";
 	var BEFORE_SINGLELINE_COMMENT = "beforeSingleLineComment";
 	var BEFORE_MULTILINE_COMMENT = "beforeMultiLineComment";
+	var AFTER_DOC_COMMENT_FIELD = "afterDocCommentField";
 }

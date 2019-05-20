@@ -16,6 +16,7 @@ class XMLReporter extends BaseReporter {
 		"'" => "&#39;",
 		"/" => "&#x2F;"
 	];
+
 	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
 
 	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {

@@ -33,15 +33,13 @@ class EmptyPackageCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [{
-					propertyName: "enforceEmptyPackage",
-					values: [true, false]
-				}]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "enforceEmptyPackage",
+				values: [true, false]
+			}]
+		}];
 	}
 }
 

@@ -52,20 +52,15 @@ class ArrayAccessCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "spaceBefore",
-						values: [true, false]
-					},
-					{
-						propertyName: "spaceInside",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "spaceBefore",
+				values: [true, false]
+			}, {
+				propertyName: "spaceInside",
+				values: [true, false]
+			}]
+		}];
 	}
 }

@@ -56,14 +56,12 @@ class UnnecessaryConstructorCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [{
-					propertyName: "severity",
-					values: [SeverityLevel.INFO]
-				}]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "severity",
+				values: [SeverityLevel.INFO]
+			}]
+		}];
 	}
 }

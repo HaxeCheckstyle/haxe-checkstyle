@@ -87,20 +87,15 @@ class MethodLengthCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "max",
-						values: [for (i in 0...17) 20 + i * 5]
-					},
-					{
-						propertyName: "countEmpty",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 0...17) 20 + i * 5]
+			}, {
+				propertyName: "countEmpty",
+				values: [true, false]
+			}]
+		}];
 	}
 }
