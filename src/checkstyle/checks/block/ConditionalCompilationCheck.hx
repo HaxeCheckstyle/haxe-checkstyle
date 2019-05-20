@@ -151,21 +151,16 @@ class ConditionalCompilationCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "policy",
-						values: [START_OF_LINE, ALIGNED]
-					},
-					{
-						propertyName: "allowSingleline",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "policy",
+				values: [START_OF_LINE, ALIGNED]
+			}, {
+				propertyName: "allowSingleline",
+				values: [true, false]
+			}]
+		}];
 	}
 }
 

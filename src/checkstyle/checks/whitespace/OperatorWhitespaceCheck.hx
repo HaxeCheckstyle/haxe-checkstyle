@@ -275,60 +275,45 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "assignOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "ternaryOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "arithmeticOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "unaryOpPolicy",
-						values: [INNER, NONE, IGNORE]
-					},
-					{
-						propertyName: "compareOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "bitwiseOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "boolOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "intervalOpPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "arrowPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "oldFunctionTypePolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "newFunctionTypePolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					},
-					{
-						propertyName: "arrowFunctionPolicy",
-						values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "assignOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "ternaryOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "arithmeticOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "unaryOpPolicy",
+				values: [INNER, NONE, IGNORE]
+			}, {
+				propertyName: "compareOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "bitwiseOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "boolOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "intervalOpPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "arrowPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "oldFunctionTypePolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "newFunctionTypePolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}, {
+				propertyName: "arrowFunctionPolicy",
+				values: [BEFORE, AFTER, AROUND, NONE, IGNORE]
+			}]
+		}];
 	}
 }

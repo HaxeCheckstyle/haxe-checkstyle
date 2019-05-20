@@ -86,21 +86,16 @@ class DocCommentStyleCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "startStyle",
-						values: [ONE_STAR, TWO_STARS]
-					},
-					{
-						propertyName: "lineStyle",
-						values: [NONE, ONE_STAR, TWO_STARS]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "startStyle",
+				values: [ONE_STAR, TWO_STARS]
+			}, {
+				propertyName: "lineStyle",
+				values: [NONE, ONE_STAR, TWO_STARS]
+			}]
+		}];
 	}
 }
 

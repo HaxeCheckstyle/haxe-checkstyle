@@ -71,21 +71,16 @@ class StringLiteralCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "policy",
-						values: [DOUBLE_AND_INTERPOLATION, ONLY_SINGLE, ONLY_DOUBLE]
-					},
-					{
-						propertyName: "allowException",
-						values: [false, true]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "policy",
+				values: [DOUBLE_AND_INTERPOLATION, ONLY_SINGLE, ONLY_DOUBLE]
+			}, {
+				propertyName: "allowException",
+				values: [false, true]
+			}]
+		}];
 	}
 }
 

@@ -247,62 +247,49 @@ class LeftCurlyCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [
-					{
-						propertyName: "tokens",
-						value: [
-							CLASS_DEF,
-							ENUM_DEF,
-							ABSTRACT_DEF,
-							INTERFACE_DEF,
-							FUNCTION,
-							FOR,
-							IF,
-							WHILE,
-							SWITCH,
-							TRY,
-							CATCH
-						]
-					}
-				],
-				properties: [
-					{
-						propertyName: "option",
-						values: [EOL, NLOW, NL]
-					},
-					{
-						propertyName: "ignoreEmptySingleline",
-						values: [true, false]
-					},
-					{
-						propertyName: "ignoreSingleline",
-						values: [true, false]
-					}
+		return [{
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					CLASS_DEF,
+					ENUM_DEF,
+					ABSTRACT_DEF,
+					INTERFACE_DEF,
+					FUNCTION,
+					FOR,
+					IF,
+					WHILE,
+					SWITCH,
+					TRY,
+					CATCH
 				]
-			},
-			{
-				fixed: [{
-					propertyName: "tokens",
-					value: [TYPEDEF_DEF]
-				}],
-				properties: [
-					{
-						propertyName: "option",
-						values: [EOL, NLOW, NL]
-					},
-					{
-						propertyName: "ignoreEmptySingleline",
-						values: [true, false]
-					},
-					{
-						propertyName: "ignoreSingleline",
-						values: [true, false]
-					}
-				]
-			}
-		];
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [EOL, NLOW, NL]
+			}, {
+				propertyName: "ignoreEmptySingleline",
+				values: [true, false]
+			}, {
+				propertyName: "ignoreSingleline",
+				values: [true, false]
+			}]
+		}, {
+			fixed: [{
+				propertyName: "tokens",
+				value: [TYPEDEF_DEF]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [EOL, NLOW, NL]
+			}, {
+				propertyName: "ignoreEmptySingleline",
+				values: [true, false]
+			}, {
+				propertyName: "ignoreSingleline",
+				values: [true, false]
+			}]
+		}];
 	}
 }
 

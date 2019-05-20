@@ -6,7 +6,15 @@ language: haxe
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 sudo: false
-dist: trusty
+dist: xenial
+
+script:
+  - haxe build.hxml
+  - haxe buildDebug.hxml
+  - haxe buildJS.hxml
+  - haxe buildSchema.hxml
+  - haxe -D codecov_json buildTest.hxml
+  - haxe testJava.hxml
 
 matrix:
   include:
@@ -15,27 +23,21 @@ matrix:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib git json2object https://github.com/elnabo/json2object
+        - haxelib git mcover https://github.com/AlexHaxe/mcover haxe_4_thread src
+        - haxelib git munit https://github.com/AlexHaxe/MassiveUnit haxe_4_thread src
         - haxelib install hxjava
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
         - haxelib install mconsole
-        - haxelib install munit
         - haxelib install test-adapter
-        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
-      script:
-        - haxe build.hxml
-        - haxe buildDebug.hxml
-        - haxe buildJS.hxml
-        - haxe buildSchema.hxml
-        - haxe -D codecov_json buildTest.hxml
     - haxe: development
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxparse https://github.com/simn/hxparse
         - haxelib git haxeparser https://github.com/simn/haxeparser
-        - haxelib git mcover https://github.com/AlexHaxe/mcover add_lcov_printclient src
-        - haxelib git munit https://github.com/AlexHaxe/MassiveUnit.git master src
+        - haxelib git mcover https://github.com/AlexHaxe/mcover haxe_4_thread src
+        - haxelib git munit https://github.com/AlexHaxe/MassiveUnit haxe_4_thread src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib git json2object https://github.com/elnabo/json2object
         - haxelib install hxjava
@@ -45,10 +47,3 @@ matrix:
         - haxelib install hxargs 3.0.2
         - haxelib install test-adapter
         - sed -i 's/:3.3.0//' buildGlobal.hxml
-      script:
-        - haxe build.hxml
-        - haxe buildDebug.hxml
-        - haxe buildJS.hxml
-        - haxe buildSchema.hxml
-        - haxe -D codecov_json buildTest.hxml
-        - haxe testJava.hxml

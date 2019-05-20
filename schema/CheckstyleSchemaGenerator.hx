@@ -120,12 +120,7 @@ class CheckstyleSchemaGenerator {
 							addClassFields(typeName, classFields, fields.get(), pos, refs);
 							classFields.push({
 								field: "severity",
-								expr: JsonSchemaGenerator.genSchema(Context.getType("checkstyle.SeverityLevel"),
-									typeName
-									+ ".severity",
-									pos,
-									null,
-									refs,
+								expr: JsonSchemaGenerator.genSchema(Context.getType("checkstyle.SeverityLevel"), typeName + ".severity", pos, null, refs,
 									classFields.length,
 									null)
 							});
@@ -155,14 +150,7 @@ class CheckstyleSchemaGenerator {
 						var doc:StructInfo = SchemaUtils.makeStructInfo(field.name, field.doc);
 						classFields.push({
 							field: field.name,
-							expr: JsonSchemaGenerator.genSchema(field.type,
-								typeName
-								+ "."
-								+ field.name,
-								pos,
-								doc,
-								refs,
-								classFields.length,
+							expr: JsonSchemaGenerator.genSchema(field.type, typeName + "." + field.name, pos, doc, refs, classFields.length,
 								checkstyleFieldsCallback)
 						});
 					}

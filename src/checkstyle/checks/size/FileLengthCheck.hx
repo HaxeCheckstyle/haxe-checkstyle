@@ -35,14 +35,12 @@ class FileLengthCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [{
-					propertyName: "max",
-					values: [for (i in 0...10) 400 + i * 200]
-				}]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 0...10) 400 + i * 200]
+			}]
+		}];
 	}
 }

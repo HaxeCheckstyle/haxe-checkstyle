@@ -46,20 +46,15 @@ class ParameterNumberCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "max",
-						values: [for (i in 4...15) i]
-					},
-					{
-						propertyName: "ignoreOverriddenMethods",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "max",
+				values: [for (i in 4...15) i]
+			}, {
+				propertyName: "ignoreOverriddenMethods",
+				values: [true, false]
+			}]
+		}];
 	}
 }

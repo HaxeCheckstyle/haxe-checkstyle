@@ -33,6 +33,7 @@ typedef Config = {
 		Sets the number of checker threads, valid range is 1-15
 	**/
 	@:optional var numberOfCheckerThreads:Int;
+
 	@:optional var checks:Array<CheckConfig>;
 	@:optional var exclude:ExcludeConfig;
 

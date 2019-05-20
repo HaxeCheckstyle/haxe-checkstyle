@@ -148,20 +148,15 @@ class HiddenFieldCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "ignoreConstructorParameter",
-						values: [true, false]
-					},
-					{
-						propertyName: "ignoreSetter",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "ignoreConstructorParameter",
+				values: [true, false]
+			}, {
+				propertyName: "ignoreSetter",
+				values: [true, false]
+			}]
+		}];
 	}
 }

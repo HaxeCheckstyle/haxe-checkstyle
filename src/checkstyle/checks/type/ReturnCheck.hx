@@ -129,24 +129,18 @@ class ReturnCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "allowEmptyReturn",
-						values: [true, false]
-					},
-					{
-						propertyName: "enforceReturnTypeForAnonymous",
-						values: [true, false]
-					},
-					{
-						propertyName: "enforceReturnType",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "allowEmptyReturn",
+				values: [true, false]
+			}, {
+				propertyName: "enforceReturnTypeForAnonymous",
+				values: [true, false]
+			}, {
+				propertyName: "enforceReturnType",
+				values: [true, false]
+			}]
+		}];
 	}
 }

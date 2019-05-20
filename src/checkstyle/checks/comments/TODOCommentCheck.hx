@@ -31,14 +31,12 @@ class TODOCommentCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [{
-					propertyName: "format",
-					values: ["^\\s*(TODO|FIXME|HACK|XXX|BUG)"]
-				}]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "format",
+				values: ["^\\s*(TODO|FIXME|HACK|XXX|BUG)"]
+			}]
+		}];
 	}
 }

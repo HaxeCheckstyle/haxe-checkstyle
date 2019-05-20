@@ -62,25 +62,19 @@ class RedundantModifierCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "enforcePrivate",
-						values: [true, false]
-					},
-					{
-						propertyName: "enforcePublic",
-						values: [true, false]
-					},
-					{
-						propertyName: "enforcePublicPrivate",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "enforcePrivate",
+				values: [true, false]
+			}, {
+				propertyName: "enforcePublic",
+				values: [true, false]
+			}, {
+				propertyName: "enforcePublicPrivate",
+				values: [true, false]
+			}]
+		}];
 	}
 }
 

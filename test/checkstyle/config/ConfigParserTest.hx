@@ -177,17 +177,14 @@ class ConfigParserTest {
 
 		var config:Config = {
 			version: 0,
-			checks: [
-				{
-					"type": "non existing check name"
-				},
-				{
-					"type": "Trace",
-					"props": {
-						"non_existing_property": 100
-					}
+			checks: [{
+				"type": "non existing check name"
+			}, {
+				"type": "Trace",
+				"props": {
+					"non_existing_property": 100
 				}
-			]
+			}]
 		};
 		configParser.parseAndValidateConfig(config, LOCAL_PATH);
 

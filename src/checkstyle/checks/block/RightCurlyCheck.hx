@@ -186,7 +186,8 @@ class RightCurlyCheck extends Check {
 				&& (option == ALONE_OR_SINGLELINE || option == ALONE), "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(curlyAlone && needsSameOption, "Right curly should be alone on a new line", curlyPos);
 			logErrorIf(needsSameOption && (option != SAME), "Right curly must not be on same line as following block", curlyPos);
-			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")', curlyPos);
+			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")',
+				curlyPos);
 		}
 		catch (e:String) {
 			// one of the error messages fired -> do nothing
@@ -201,53 +202,47 @@ class RightCurlyCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [
-					{
-						propertyName: "tokens",
-						value: [
-							CLASS_DEF,
-							ENUM_DEF,
-							ABSTRACT_DEF,
-							TYPEDEF_DEF,
-							INTERFACE_DEF,
-							OBJECT_DECL,
-							FUNCTION,
-							FOR,
-							WHILE,
-							SWITCH,
-							TRY,
-							CATCH
-						]
-					}
-				],
-				properties: [{
-					propertyName: "option",
-					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-				}]
-			},
-			{
-				fixed: [{
-					propertyName: "tokens",
-					value: [IF]
-				}],
-				properties: [{
-					propertyName: "option",
-					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-				}]
-			},
-			{
-				fixed: [{
-					propertyName: "tokens",
-					value: [OBJECT_DECL]
-				}],
-				properties: [{
-					propertyName: "option",
-					values: [ALONE_OR_SINGLELINE, ALONE, SAME]
-				}]
-			}
-		];
+		return [{
+			fixed: [{
+				propertyName: "tokens",
+				value: [
+					CLASS_DEF,
+					ENUM_DEF,
+					ABSTRACT_DEF,
+					TYPEDEF_DEF,
+					INTERFACE_DEF,
+					OBJECT_DECL,
+					FUNCTION,
+					FOR,
+					WHILE,
+					SWITCH,
+					TRY,
+					CATCH
+				]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+			}]
+		}, {
+			fixed: [{
+				propertyName: "tokens",
+				value: [IF]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+			}]
+		}, {
+			fixed: [{
+				propertyName: "tokens",
+				value: [OBJECT_DECL]
+			}],
+			properties: [{
+				propertyName: "option",
+				values: [ALONE_OR_SINGLELINE, ALONE, SAME]
+			}]
+		}];
 	}
 }
 

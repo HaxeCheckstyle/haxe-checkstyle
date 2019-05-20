@@ -149,49 +149,37 @@ class SpacingCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "spaceIfCondition",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "spaceForLoop",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "spaceWhileLoop",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "spaceWhileLoop",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "spaceSwitchCase",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "spaceCatch",
-						values: [SHOULD, SHOULD_NOT, ANY]
-					},
-					{
-						propertyName: "ignoreRangeOperator",
-						values: [true, false]
-					},
-					{
-						propertyName: "spaceAroundBinop",
-						values: [true, false]
-					},
-					{
-						propertyName: "noSpaceAroundUnop",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "spaceIfCondition",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "spaceForLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "spaceWhileLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "spaceWhileLoop",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "spaceSwitchCase",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "spaceCatch",
+				values: [SHOULD, SHOULD_NOT, ANY]
+			}, {
+				propertyName: "ignoreRangeOperator",
+				values: [true, false]
+			}, {
+				propertyName: "spaceAroundBinop",
+				values: [true, false]
+			}, {
+				propertyName: "noSpaceAroundUnop",
+				values: [true, false]
+			}]
+		}];
 	}
 }
 

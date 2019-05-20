@@ -342,7 +342,6 @@ class IndentationCheck extends Check {
 					}
 				default:
 			}
-			if (child.is(BkOpen)) continue;
 			ignoreRange(pos, wrapped);
 		}
 		return wrapped;
@@ -441,18 +440,18 @@ class IndentationCheck extends Check {
 					ONE_SPACE
 				]
 			}, {
-					propertyName: "conditionalPolicy",
-					values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
-				}, {
-					propertyName: "ignoreConditionals",
-					values: [true, false]
-				}, {
-					propertyName: "ignoreComments",
-					values: [true, false]
-				}, {
-					propertyName: "wrapPolicy",
-					values: [NONE, EXACT, LARGER]
-				}]
+				propertyName: "conditionalPolicy",
+				values: [FIXED_ZERO, ALIGNED, ALIGNED_INCREASE, IGNORE]
+			}, {
+				propertyName: "ignoreConditionals",
+				values: [true, false]
+			}, {
+				propertyName: "ignoreComments",
+				values: [true, false]
+			}, {
+				propertyName: "wrapPolicy",
+				values: [NONE, EXACT, LARGER]
+			}]
 		}];
 	}
 }

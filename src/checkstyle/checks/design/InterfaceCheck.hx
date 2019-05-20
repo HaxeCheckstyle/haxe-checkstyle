@@ -41,20 +41,15 @@ class InterfaceCheck extends Check {
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		return [
-			{
-				fixed: [],
-				properties: [
-					{
-						propertyName: "allowMarkerInterfaces",
-						values: [true, false]
-					},
-					{
-						propertyName: "allowProperties",
-						values: [true, false]
-					}
-				]
-			}
-		];
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "allowMarkerInterfaces",
+				values: [true, false]
+			}, {
+				propertyName: "allowProperties",
+				values: [true, false]
+			}]
+		}];
 	}
 }
