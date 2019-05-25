@@ -16,9 +16,15 @@ class WhitespaceAfterCheck extends Check {
 	**/
 	public var tokens:Array<String>;
 
+	/**
+		no violoation for missing whitespace after trailing commas
+	**/
+	public var allowTrailingComma:Bool;
+
 	public function new() {
 		super(TOKEN);
 		tokens = [",", ";"];
+		allowTrailingComma = false;
 	}
 
 	function hasToken(token:String):Bool {
@@ -94,6 +100,17 @@ class WhitespaceAfterCheck extends Check {
 
 			var contentAfter:String = checker.getString(tok.pos.max, tok.pos.max + 1);
 			if (~/^(\s|)$/.match(contentAfter)) continue;
+			if (allowTrailingComma) {
+				switch (tok.tok) {
+					case Comma:
+						switch (contentAfter) {
+							case "]", ")", "}":
+								continue;
+							default:
+						}
+					default:
+				}
+			}
 
 			logPos('No whitespace after "$tok"', tok.pos);
 		}

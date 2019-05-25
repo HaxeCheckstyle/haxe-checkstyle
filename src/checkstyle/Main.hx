@@ -96,6 +96,8 @@ class Main {
 		]);
 
 		if (args.length == 0) {
+			var version:String = CheckstyleVersion.getCheckstyleVersion();
+			Sys.println('Haxe Checkstyle v${version}');
 			Sys.println(argHandler.getDoc());
 			Sys.exit(0);
 		}
