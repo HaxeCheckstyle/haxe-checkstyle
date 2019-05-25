@@ -499,6 +499,7 @@
 			"props": {
 				"commaPolicy": "after",
 				"semicolonPolicy": "after",
+				"allowTrailingComma": false,
 				"dotPolicy": "none"
 			},
 			"type": "SeparatorWhitespace"
@@ -610,7 +611,8 @@
 				"tokens": [
 					",",
 					";"
-				]
+				],
+				"allowTrailingComma": false
 			},
 			"type": "WhitespaceAfter"
 		},

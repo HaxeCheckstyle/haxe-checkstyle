@@ -28,6 +28,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		assertMsg(check, NO_WHITESPACE_FUNC, MSG_COMMA);
 		assertMsg(check, NO_WHITESPACE_OBJECT_DECL, MSG_COMMA);
 		assertMsg(check, NO_WHITESPACE_TYPEDEF, MSG_COMMA);
+		assertMsg(check, TRAILING_COMMA, MSG_COMMA);
 	}
 
 	@Test
@@ -52,6 +53,14 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 		var check = new WhitespaceAfterCheck();
 		check.tokens = ["-"];
 		assertNoMsg(check, NEGATIVE_VARS);
+	}
+
+	@Test
+	public function testTrailingComma() {
+		var check = new WhitespaceAfterCheck();
+		assertMsg(check, TRAILING_COMMA, MSG_COMMA);
+		check.allowTrailingComma = true;
+		assertNoMsg(check, TRAILING_COMMA);
 	}
 }
 
@@ -186,6 +195,13 @@ abstract WhitespaceAfterCheckTests(String) to String {
 	class Foo {
 		function foo() {
 			var a = 4, b;
+		}
+	}";
+	var TRAILING_COMMA = "
+	class Foo {
+		function foo() {
+			var a = [1, 2, 3];
+			var b = [1, 2, 3,];
 		}
 	}";
 }

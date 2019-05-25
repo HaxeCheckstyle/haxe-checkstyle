@@ -36,7 +36,7 @@ class BaseReporter implements IReporter {
 		infos = 0;
 		total = 0;
 
-		var version = CompileTime.parseJsonFile("package.json").version;
+		var version = CheckstyleVersion.getCheckstyleVersion();
 
 		Sys.println("");
 		var fileString = (numFiles == 1) ? "file" : "files";

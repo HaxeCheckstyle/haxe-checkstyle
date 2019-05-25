@@ -29,6 +29,11 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 	public var commaPolicy:WhitespacePolicy;
 
 	/**
+		no violoation for missing whitespace after trailing commas
+	**/
+	public var allowTrailingComma:Bool;
+
+	/**
 		policy for ";"
 		- around = enforce whitespace before and after operator
 		- before = enforce whitespace before and no whitespace after operator
@@ -43,6 +48,7 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		dotPolicy = NONE;
 		commaPolicy = AFTER;
 		semicolonPolicy = AFTER;
+		allowTrailingComma = false;
 
 		categories = [Category.STYLE, Category.CLARITY];
 	}
@@ -53,6 +59,29 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 		checkTokens(root, [Dot], dotPolicy);
 		checkTokens(root, [Comma], commaPolicy);
 		checkTokens(root, [Semicolon], semicolonPolicy);
+	}
+
+	override function adjustPolicy(token:TokenTree, policy:WhitespacePolicy):WhitespacePolicy {
+		switch (token.tok) {
+			case Comma:
+				if (allowTrailingComma) {
+					var contentAfter:String = checker.getString(token.pos.max, token.pos.max + 1);
+					switch (contentAfter) {
+						case "]", ")", "}":
+							switch (policy) {
+								case AFTER:
+									return NONE;
+								case AROUND:
+									return BEFORE;
+								case BEFORE, NONE, IGNORE:
+									return policy;
+							}
+						default:
+					}
+				}
+			default:
+		}
+		return policy;
 	}
 
 	override function violation(tok:TokenTree, policy:String) {

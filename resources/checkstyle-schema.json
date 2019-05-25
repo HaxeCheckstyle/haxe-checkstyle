@@ -2916,6 +2916,11 @@
                             ],
                             "type": "string",
                             "description": "policy for \";\"\n\t\t- around = enforce whitespace before and after operator\n\t\t- before = enforce whitespace before and no whitespace after operator\n\t\t- after = enforce no whitespace before and whitespace after operator\n\t\t- none = enforce no whitespace before and after operator\n\t\t- ignore = skip checks",
+                            "propertyOrder": 3
+                        },
+                        "allowTrailingComma": {
+                            "type": "boolean",
+                            "description": "no violoation for missing whitespace after trailing commas",
                             "propertyOrder": 2
                         },
                         "dotPolicy": {
@@ -2939,7 +2944,7 @@
                             ],
                             "type": "string",
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
-                            "propertyOrder": 3
+                            "propertyOrder": 4
                         }
                     },
                     "additionalProperties": false
@@ -4248,6 +4253,11 @@
                             "description": "supported list of tokens:\n\t\t\",\", \";\", \"(\", \"[\", \"{\", \":\", \".\", \"=\", \"+\", \"-\", \"*\", \"/\", \"%\", \">\", \"<\", \">=\", \"<=\", \"==\", \"!=\",\n\t\t\"&\", \"|\", \"^\", \"&&\", \"||\", \"<<\", \">>\", \">>>\", \"+=\", \"-=\", \"*=\", \"/=\", \"%=\", \"<<=\", \">>=\", \">>>=\", \"|=\", \"&=\",\n\t\t\"^=\", \"...\", \"=>\", \"!\", \"++\", \"--\",",
                             "propertyOrder": 0
                         },
+                        "allowTrailingComma": {
+                            "type": "boolean",
+                            "description": "no violoation for missing whitespace after trailing commas",
+                            "propertyOrder": 1
+                        },
                         "severity": {
                             "enum": [
                                 "INFO",
@@ -4257,7 +4267,7 @@
                             ],
                             "type": "string",
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
-                            "propertyOrder": 1
+                            "propertyOrder": 2
                         }
                     },
                     "additionalProperties": false

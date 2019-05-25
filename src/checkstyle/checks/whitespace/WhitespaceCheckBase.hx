@@ -25,8 +25,12 @@ class WhitespaceCheckBase extends Check {
 			if (TokenTreeCheckUtils.isImportMult(token)) continue;
 			if (TokenTreeCheckUtils.isTypeParameter(token)) continue;
 			if (TokenTreeCheckUtils.filterOpSub(token)) continue;
-			checkWhitespace(token, policy);
+			checkWhitespace(token, adjustPolicy(token, policy));
 		}
+	}
+
+	function adjustPolicy(token:TokenTree, policy:WhitespacePolicy):WhitespacePolicy {
+		return policy;
 	}
 
 	function checkWhitespace(tok:TokenTree, policy:WhitespacePolicy) {
