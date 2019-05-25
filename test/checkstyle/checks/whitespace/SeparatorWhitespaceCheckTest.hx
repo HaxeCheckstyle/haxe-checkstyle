@@ -42,6 +42,14 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 		assertNoMsg(check, COMMA_WHITESPACE_NONE);
 		assertNoMsg(check, WHITESPACE_AROUND);
 	}
+
+	@Test
+	public function testTrailingComma() {
+		var check = new SeparatorWhitespaceCheck();
+		assertMsg(check, TRAILING_COMMA, MSG_AFTER);
+		check.allowTrailingComma = true;
+		assertNoMsg(check, TRAILING_COMMA);
+	}
 }
 
 @:enum
@@ -98,4 +106,11 @@ abstract SeparatorWhitespaceCheckTests(String) to String {
 		}
 	}
 	";
+	var TRAILING_COMMA = "
+	class Foo {
+		function foo() {
+			var a = [1, 2, 3];
+			var b = [1, 2, 3,];
+		}
+	}";
 }

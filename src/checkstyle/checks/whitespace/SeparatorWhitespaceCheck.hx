@@ -69,16 +69,12 @@ class SeparatorWhitespaceCheck extends WhitespaceCheckBase {
 					switch (contentAfter) {
 						case "]", ")", "}":
 							switch (policy) {
-								case BEFORE:
-									return BEFORE;
 								case AFTER:
 									return NONE;
 								case AROUND:
 									return BEFORE;
-								case NONE:
-									return NONE;
-								case IGNORE:
-									return IGNORE;
+								case BEFORE, NONE, IGNORE:
+									return policy;
 							}
 						default:
 					}
