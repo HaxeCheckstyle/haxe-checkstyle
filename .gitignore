@@ -25,3 +25,4 @@ haxecheckstyle.js
 display.hxml
 core
 .unittest
+lcov.info

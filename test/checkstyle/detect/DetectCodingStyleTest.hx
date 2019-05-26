@@ -4,6 +4,7 @@ import byte.ByteData;
 import checkstyle.config.CheckConfig;
 import checkstyle.CheckFile;
 import checkstyle.SeverityLevel;
+import checkstyle.checks.block.BlockBreakingConditionalCheck;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
@@ -58,6 +59,14 @@ import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 
 class DetectCodingStyleTest {
 	// checkstyle.checks.block
+	@Test
+	public function testBlockBreakingConditional() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new BlockBreakingConditionalCheck()],
+			[buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("BlockBreakingConditional", detectedChecks[0].type);
+	}
+
 	@Test
 	public function testDetectConditionalCompilation() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()],
