@@ -3,6 +3,7 @@
 ## dev branch / next version (2.x.x)
 
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)
+- New check BlockBreakingConditional
 - Added `afterDocCommentField` to ExtendedEmptyLinesCheck ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Added thread support for eval target ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Added `allowTrailingComma` to SeparatorWhitespaceCheck and WhitespaceAfterCheck ([#470](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/470))

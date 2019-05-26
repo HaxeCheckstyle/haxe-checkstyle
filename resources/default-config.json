@@ -30,6 +30,10 @@
 			"type": "AvoidStarImport"
 		},
 		{
+			"props": {},
+			"type": "BlockBreakingConditional"
+		},
+		{
 			"props": {
 				"format": "^(e|t|ex|[a-z][a-z][a-zA-Z]+)$"
 			},
