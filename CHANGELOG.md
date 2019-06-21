@@ -22,6 +22,7 @@
 - Fixed suppression of UnnecessaryConstructor, fixes [#466](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/466) ([#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467))
 - Fixed Java regexp issue in IndentationCheck ([#468](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/468))
 - Fixed empty lines between types with conditionals ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
+- Fixed empty lines before comments with conditionals
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
 - Changed to use formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
 - Refactored coverage reporting [#462](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/462)
