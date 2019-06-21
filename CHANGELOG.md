@@ -4,9 +4,11 @@
 
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)
 - New check BlockBreakingConditional ([#471](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/471))
+- New check InlineFinal
 - Added `afterDocCommentField` to ExtendedEmptyLinesCheck ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Added thread support for eval target ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Added `allowTrailingComma` to SeparatorWhitespaceCheck and WhitespaceAfterCheck ([#470](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/470))
+- Added `FINAL` to ModifierOrder check
 - Fixed enum abstract detection in MagixNumber check, fixes [#104](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/104) ([#449](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/449))
 - Fixed indentation of `)`, fixes [#450](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/450) ([#451](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/451))
 - Fixed typedef extension (Haxe 3.x) [#452](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/452)

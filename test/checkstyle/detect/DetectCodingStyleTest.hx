@@ -30,6 +30,7 @@ import checkstyle.checks.literal.StringLiteralCheck;
 import checkstyle.checks.meta.RedundantAccessMetaCheck;
 import checkstyle.checks.meta.RedundantAllowMetaCheck;
 import checkstyle.checks.metrics.CyclomaticComplexityCheck;
+import checkstyle.checks.modifier.InlineFinalCheck;
 import checkstyle.checks.modifier.RedundantModifierCheck;
 import checkstyle.checks.naming.ConstantNameCheck;
 import checkstyle.checks.size.FileLengthCheck;
@@ -312,6 +313,15 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.modifier
+	#if (haxe_ver >= 4.0)
+	@Test
+	public function testDetectInlineFinal() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InlineFinalCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("InlineFinal", detectedChecks[0].type);
+	}
+	#end
+
 	@Test
 	public function testDetectRedundantModifier() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantModifierCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
