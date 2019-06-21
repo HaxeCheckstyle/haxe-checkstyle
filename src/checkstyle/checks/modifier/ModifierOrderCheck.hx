@@ -15,7 +15,7 @@ class ModifierOrderCheck extends Check {
 
 	public function new() {
 		super(AST);
-		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC];
+		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC, FINAL];
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 

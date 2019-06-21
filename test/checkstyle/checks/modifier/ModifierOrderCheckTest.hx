@@ -7,6 +7,9 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
 		assertNoMsg(check, TEST1);
+		#if (haxe_ver >= 4.0)
+		assertNoMsg(check, TEST_FINAL);
+		#end
 	}
 
 	@Test
@@ -78,5 +81,9 @@ abstract ModifierOrderCheckTests(String) to String {
 	var TEST8 = "
 	abstractAndClass Test {
 		inline public var test(default,null):String=0;
+	}";
+	var TEST_FINAL = "
+	abstractAndClass Test {
+		public inline final test:String=0;
 	}";
 }
