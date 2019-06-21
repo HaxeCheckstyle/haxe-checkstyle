@@ -462,7 +462,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			var nextLine:Int = checker.getLinePos(comment.getPos().max).line + 1;
 			switch (comment.tok) {
 				case Comment(_):
-					if ((comment.previousSibling != null) && (!comment.previousSibling.isComment())) {
+					if (checkPreviousSiblingComment(comment.previousSibling)) {
 						checkLines(emptyLines, getPolicy(BEFORE_MULTILINE_COMMENT), prevLine, prevLine, "before comment");
 					}
 					if ((comment.nextSibling == null) || (!comment.nextSibling.isComment())) {
@@ -470,7 +470,7 @@ class ExtendedEmptyLinesCheck extends Check {
 					}
 
 				case CommentLine(_):
-					if ((comment.previousSibling != null) && (!comment.previousSibling.isComment())) {
+					if (checkPreviousSiblingComment(comment.previousSibling)) {
 						checkLines(emptyLines, getPolicy(BEFORE_SINGLELINE_COMMENT), prevLine, prevLine, "before comment");
 					}
 					if ((comment.nextSibling == null) || (!comment.nextSibling.isComment())) {
@@ -479,6 +479,30 @@ class ExtendedEmptyLinesCheck extends Check {
 				default:
 			}
 		}
+	}
+
+	function checkPreviousSiblingComment(token:TokenTree):Bool {
+		if ((token == null) || (token.tok == null)) {
+			return false;
+		}
+		switch (token.tok) {
+			case Comment(_), CommentLine(_):
+				return false;
+			case Sharp(_):
+				return false;
+			case POpen, Const(CIdent(_)):
+				var parent:Null<TokenTree> = token.parent;
+				if ((parent != null) && (parent.tok != null)) {
+					switch (parent.tok) {
+						case Sharp(_):
+							return false;
+						default:
+					}
+				}
+
+			default:
+		}
+		return true;
 	}
 
 	function checkLines(emptyLines:ListOfEmptyLines, policy:EmptyLinesPolicy, start:Int, end:Int, whatMsg:String, tolerateEmptyRange:Bool = false) {
