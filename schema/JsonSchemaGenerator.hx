@@ -31,7 +31,7 @@ class JsonSchemaGenerator {
 		switch (main.expr) {
 			case EObjectDecl(fields):
 				fields.push({field: "definitions", expr: definitions});
-				fields.push({field: "@$__hx__$schema", expr: macro "http://json-schema.org/schema#"});
+				fields.push({field: DollarName.DollarSchema, expr: macro "http://json-schema.org/schema#"});
 				if (id != null) {
 					fields.push({field: "id", expr: macro '$id'});
 				}
@@ -84,7 +84,7 @@ class JsonSchemaGenerator {
 							var schema = genSchema(dt.type.applyTypeParameters(dt.params, params), dt.name, dt.pos, doc, refs, -1, extendCB);
 							refs[dt.name] = schema;
 						}
-						return SchemaUtils.makeObjectDecl([{field: "@$__hx__$ref", expr: macro '#/definitions/${dt.name}'}], structInfo, order, pos);
+						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro '#/definitions/${dt.name}'}], structInfo, order, pos);
 				}
 
 			case TInst(_.get() => cl, params):
@@ -116,6 +116,8 @@ class JsonSchemaGenerator {
 						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "boolean"}], structInfo, order, pos);
 					case [{pack: [], name: "Any"}, []]:
 						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "object"}], structInfo, order, pos);
+					case [{pack: [], name: "Null"}, [t]]:
+						return genSchema(t, typeName, pos, null, refs, -1, extendCB);
 					default:
 						if (ab.meta.has(":enum")) {
 							if (structInfo == null) structInfo = SchemaUtils.makeStructInfo(ab.name, ab.doc);

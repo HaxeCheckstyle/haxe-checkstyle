@@ -121,8 +121,7 @@ class CheckstyleSchemaGenerator {
 							classFields.push({
 								field: "severity",
 								expr: JsonSchemaGenerator.genSchema(Context.getType("checkstyle.SeverityLevel"), typeName + ".severity", pos, null, refs,
-									classFields.length,
-									null)
+									classFields.length, null)
 							});
 
 							var doc:StructInfo = {name: name, doc: getDescMeta(cl.meta)};
@@ -134,7 +133,7 @@ class CheckstyleSchemaGenerator {
 							var classExpr:Expr = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(checkFields, null, -1, pos), doc, [], -1, pos);
 							refs[name] = classExpr;
 						}
-						return SchemaUtils.makeObjectDecl([{field: "@$__hx__$ref", expr: macro '#/definitions/${name}'}], null, order, pos);
+						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro '#/definitions/${name}'}], null, order, pos);
 					default:
 				}
 			default:

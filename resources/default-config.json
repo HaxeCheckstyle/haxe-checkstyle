@@ -199,6 +199,10 @@
 			"type": "IndentationCharacter"
 		},
 		{
+			"props": {},
+			"type": "InlineFinal"
+		},
+		{
 			"props": {
 				"ignoreReturnAssignments": false
 			},
@@ -310,7 +314,8 @@
 					"PUBLIC_PRIVATE",
 					"STATIC",
 					"INLINE",
-					"DYNAMIC"
+					"DYNAMIC",
+					"FINAL"
 				]
 			},
 			"type": "ModifierOrder"
