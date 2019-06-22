@@ -101,6 +101,11 @@ class CheckstyleSchemaGenerator {
 			if (name.length <= 0) {
 				continue;
 			}
+			#if (haxe_ver < 4)
+			if (name == "InlineFinalCheck") {
+				continue;
+			}
+			#end
 			var fullPath:String = ~/[\/\\]/g.replace(Path.join([path, name]), ".");
 			name = name.substr(0, name.length - 5);
 			checks.push({name: name, path: fullPath});

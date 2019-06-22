@@ -65,7 +65,11 @@ class ConfigParserTest {
 			Assert.fail(message);
 		});
 
+		#if (haxe_ver >= 4.0)
 		Assert.areEqual(74, configParser.getCheckCount());
+		#else
+		Assert.areEqual(73, configParser.getCheckCount());
+		#end
 	}
 
 	@Test
@@ -76,7 +80,11 @@ class ConfigParserTest {
 
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
+		#if (haxe_ver >= 4.0)
 		Assert.areEqual(74, configParser.getUsedCheckCount());
+		#else
+		Assert.areEqual(73, configParser.getUsedCheckCount());
+		#end
 	}
 
 	@Test
