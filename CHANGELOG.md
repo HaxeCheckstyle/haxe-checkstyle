@@ -3,6 +3,7 @@
 ## dev branch / next version (2.x.x)
 
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)
+- **Breaking Change** using `--` for long options in cli
 - New check BlockBreakingConditional ([#471](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/471))
 - New check InlineFinal
 - Added `afterDocCommentField` to ExtendedEmptyLinesCheck ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
