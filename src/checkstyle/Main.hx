@@ -71,27 +71,27 @@ class Main {
 			@doc("Set reporter style (XSLT)")
 			["-x", "--xslt"] => function(style:String) STYLE = style,
 			@doc("Sets the number of checker threads")
-			["-checkerthreads"] => function(num:Int) configParser.overrideCheckerThreads = num,
+			["--checkerthreads"] => function(num:Int) configParser.overrideCheckerThreads = num,
 			@doc("Generate a default config and exit")
-			["-default-config", "--default-config"] => function(path) generateDefaultConfig(path),
+			["--default-config"] => function(path) generateDefaultConfig(path),
 			@doc("Try to detect your coding style (experimental)")
-			["-detect"] => function(path) detectCodingStyle(path),
+			["--detect"] => function(path) detectCodingStyle(path),
 			@doc("Return number of failed checks in exitcode")
-			["-exitcode"] => function() EXIT_CODE = true,
+			["--exitcode"] => function() EXIT_CODE = true,
 			@doc("List all available checks and exit")
-			["-list-checks", "--list-checks"] => function() listChecks(),
+			["--list-checks"] => function() listChecks(),
 			@doc("List all available reporters and exit")
-			["-list-reporters", "--list-reporters"] => function() listReporters(),
+			["--list-reporters"] => function() listReporters(),
 			@doc("Omit styling in output summary")
-			["-nostyle"] => function() NO_STYLE = true,
+			["--nostyle"] => function() NO_STYLE = true,
 			@doc("Do not use checker threads")
-			["-nothreads"] => function() disableThreads = true,
+			["--nothreads"] => function() disableThreads = true,
 			@doc("Show percentage progress")
-			["-progress"] => function() SHOW_PROGRESS = true,
+			["--progress"] => function() SHOW_PROGRESS = true,
 			@doc("Show checks missing from active config")
-			["-show-missing-checks"] => function() SHOW_MISSING_CHECKS = true,
+			["--show-missing-checks"] => function() SHOW_MISSING_CHECKS = true,
 			@doc("Adds error messages for files that checkstyle fails to parse")
-			["-show-parser-errors"] => function() ReporterManager.SHOW_PARSE_ERRORS = true,
+			["--show-parser-errors"] => function() ReporterManager.SHOW_PARSE_ERRORS = true,
 			_ => function(arg:String) failWith("Unknown command: " + arg)
 		]);
 
@@ -227,9 +227,7 @@ class Main {
 		files.sortStrings();
 
 		var i:Int = 0;
-		return [
-			for (file in files) {name: file, content: null, index: i++}
-		];
+		return [for (file in files) {name: file, content: null, index: i++}];
 	}
 
 	function traverse(path:String, files:Array<String>) {
