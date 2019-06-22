@@ -19,9 +19,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 	@Test
 	public function testExcludeAllConfig() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -39,9 +37,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 	@Test
 	public function testExcludeAllConfig2() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -61,9 +57,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 	@Test
 	public function testExcludeConfigDynamic() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -84,9 +78,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 	@Test
 	public function testExcludeConfigDynamicRange() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -107,9 +99,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 	@Test
 	public function testExcludeConfigAllRange() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -127,6 +117,10 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 
 		assertNoMsg(new DynamicCheck(), CHECKSINFO, CHECKSINFO_FILE_NAME);
 		assertNoMsg(new ReturnCheck(), CHECKSINFO, CHECKSINFO_FILE_NAME);
+	}
+
+	function reportConfigParserFailure(message:String) {
+		Assert.fail(message);
 	}
 }
 
