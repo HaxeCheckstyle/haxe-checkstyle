@@ -15,7 +15,11 @@ class ModifierOrderCheck extends Check {
 
 	public function new() {
 		super(AST);
+		#if (haxe_ver >= 4.0)
 		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC, FINAL];
+		#else
+		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC];
+		#end
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
