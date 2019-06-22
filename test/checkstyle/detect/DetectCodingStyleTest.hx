@@ -313,7 +313,7 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.modifier
-	#if (haxe_ver >= 4.0)
+	#if haxe4
 	@Test
 	public function testDetectInlineFinal() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InlineFinalCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);

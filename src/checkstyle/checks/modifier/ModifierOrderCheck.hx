@@ -16,7 +16,7 @@ class ModifierOrderCheck extends Check {
 	public function new() {
 		super(AST);
 		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC];
-		#if (haxe_ver >= 4.0)
+		#if haxe4
 		modifiers.push(FINAL);
 		#end
 		categories = [Category.STYLE, Category.CLARITY];
@@ -78,7 +78,7 @@ abstract ModifierOrderCheckModifier(String) {
 	var OVERRIDE = "OVERRIDE";
 	var MACRO = "MACRO";
 	var DYNAMIC = "DYNAMIC";
-	#if (haxe_ver >= 4.0)
+	#if haxe4
 	var EXTERN = "EXTERN";
 	var FINAL = "FINAL";
 	#end
@@ -92,7 +92,7 @@ abstract ModifierOrderCheckModifier(String) {
 			case AOverride: OVERRIDE;
 			case AMacro: MACRO;
 			case ADynamic: DYNAMIC;
-			#if (haxe_ver >= 4.0)
+			#if haxe4
 			case AExtern: EXTERN;
 			case AFinal: FINAL;
 			#end
