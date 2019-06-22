@@ -7,9 +7,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testCheckstyleConfig() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -23,9 +21,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testExtendsConfigPath() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -40,9 +36,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testValidateParserThread() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 0}, "");
 		Assert.areEqual(5, configParser.numberOfCheckerThreads);
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 10}, "");
@@ -61,9 +55,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testCheckCount() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		#if (haxe_ver >= 4.0)
 		Assert.areEqual(74, configParser.getCheckCount());
@@ -74,9 +66,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testUnusedChecks() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
@@ -89,17 +79,13 @@ class ConfigParserTest {
 
 	@Test
 	public function testConfig() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		configParser.addAllChecks();
 		var config:Config = ConfigUtils.makeConfigFromChecker(configParser.checker);
 		config.numberOfCheckerThreads = 11;
 
-		configParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		configParser = new ConfigParser(reportConfigParserFailure);
 		configParser.parseAndValidateConfig(config, "");
 		Assert.areEqual(configParser.getCheckCount(), configParser.getUsedCheckCount());
 		Assert.areEqual(11, configParser.numberOfCheckerThreads);
@@ -107,9 +93,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testConfigVersion1() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -143,9 +127,7 @@ class ConfigParserTest {
 
 	@Test
 	public function testExcludeConfigVersion1() {
-		var configParser:ConfigParser = new ConfigParser(function(message:String) {
-			Assert.fail(message);
-		});
+		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		Assert.isNotNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
@@ -201,5 +183,9 @@ class ConfigParserTest {
 		configParser.validateMode = STRICT;
 		configParser.parseAndValidateConfig(config, LOCAL_PATH);
 		Assert.areEqual("Check Trace has no property named 'non_existing_property'", failMessage);
+	}
+
+	function reportConfigParserFailure(message:String) {
+		Assert.fail(message);
 	}
 }
