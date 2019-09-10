@@ -4,7 +4,7 @@ package checkstyle.checks.comments;
 	Checks code documentation style (/** vs /*)
 **/
 @name("DocCommentStyle")
-@desc("Checks code documentation style (/**…**/ vs /*…*/)")
+@desc("Checks code documentation style (/**...**/ vs /*...*/)")
 class DocCommentStyleCheck extends Check {
 	/**
 		Defines how doc comments should start / end:

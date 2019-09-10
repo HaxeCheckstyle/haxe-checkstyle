@@ -183,8 +183,19 @@ class ComplexTypeUtils {
 				walkExpr(e, cb);
 			case EVars(vars):
 				for (v in vars) walkVar(v, e.pos, cb);
+			#if (haxe_ver < 4.0)
 			case EFunction(name, f):
 				walkFunction(f, name, e.pos, cb);
+			#else
+			case EFunction(kind, f):
+				var name:Null<String> = switch (kind) {
+					case null: null;
+					case FAnonymous: null;
+					case FNamed(name, inlined): name;
+					case FArrow: null;
+				}
+				walkFunction(f, name, e.pos, cb);
+			#end
 			case EBlock(exprs):
 				for (e in exprs) walkExpr(e, cb);
 			case EFor(it, expr):

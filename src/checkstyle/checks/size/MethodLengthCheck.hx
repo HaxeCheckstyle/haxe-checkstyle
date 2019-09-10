@@ -62,8 +62,21 @@ class MethodLengthCheck extends Check {
 		var lmax = checker.getLinePos(f.pos.max).line;
 		var fname = "(anonymous)";
 		switch (f.expr) {
+			#if (haxe_ver < 4.0)
 			case EFunction(name, ff):
 				if (name != null) fname = name;
+			#else
+			case EFunction(kind, ff):
+				switch (kind) {
+					case null:
+					case FAnonymous:
+						var fname = "(anonymous)";
+					case FNamed(name, inlined):
+						fname = name;
+					case FArrow:
+						var fname = "(anonymous arrow)";
+				}
+			#end
 			default:
 				throw "EFunction only";
 		}

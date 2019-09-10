@@ -24,8 +24,9 @@
 - Fixed Java regexp issue in IndentationCheck ([#468](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/468))
 - Fixed empty lines between types with conditionals ([#469](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/469))
 - Fixed empty lines before comments with conditionals ([#472](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/472))
+- Fixed EFunction changes in Haxe 4rc4
 - Changed return block indentation [#453](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/453)
-- Changed to use formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
+- Changed applied formatter [#461](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/461)
 - Refactored coverage reporting [#462](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/462)
 
 ## version 2.4.2 (2018-07-01)
