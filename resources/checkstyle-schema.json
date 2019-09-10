@@ -354,18 +354,18 @@
             "type": "object"
         },
         "DocCommentStyleCheck": {
-            "description": "Checks code documentation style (/**…**/ vs /*…*/)",
+            "description": "Checks code documentation style (/**...**/ vs /*...*/)",
             "additionalProperties": false,
             "properties": {
                 "type": {
-                    "description": "Checks code documentation style (/**…**/ vs /*…*/)",
+                    "description": "Checks code documentation style (/**...**/ vs /*...*/)",
                     "type": "string",
                     "enum": [
                         "DocCommentStyle"
                     ]
                 },
                 "props": {
-                    "description": "Checks code documentation style (/**…**/ vs /*…*/)",
+                    "description": "Checks code documentation style (/**...**/ vs /*...*/)",
                     "additionalProperties": false,
                     "properties": {
                         "lineStyle": {

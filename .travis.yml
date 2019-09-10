@@ -36,7 +36,7 @@ matrix:
       install:
         - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
         - haxelib git hxparse https://github.com/simn/hxparse
-        - haxelib git haxeparser https://github.com/AlexHaxe/haxeparser add_final
+        - haxelib git haxeparser https://github.com/simn/haxeparser
         - haxelib git mcover https://github.com/massiveinteractive/mcover master src
         - haxelib git munit https://github.com/massiveinteractive/MassiveUnit master src
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master

@@ -64,9 +64,21 @@ class ReturnCheck extends Check {
 	function checkInlineFunctions() {
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
+				#if (haxe_ver < 4.0)
 				case EFunction(fname, f):
 					var funNoReturn:Bool = (f.ret == null);
 					walkExpr(f.expr, funNoReturn, fname, e.pos);
+				#else
+				case EFunction(kind, f):
+					var name:Null<String> = switch (kind) {
+						case null: null;
+						case FAnonymous: null;
+						case FNamed(name, inlined): name;
+						case FArrow: null;
+					}
+					var funNoReturn:Bool = (f.ret == null);
+					walkExpr(f.expr, funNoReturn, name, e.pos);
+				#end
 				default:
 			}
 		});
