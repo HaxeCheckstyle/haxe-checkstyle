@@ -1,9 +1,11 @@
 package checkstyle;
 
+import checkstyle.ChecksInfo;
 import checkstyle.checks.Check;
 import checkstyle.config.ConfigParser;
 import checkstyle.config.CheckConfig;
 import checkstyle.config.ExcludeManager;
+import checkstyle.detect.DetectCodingStyle;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
@@ -12,7 +14,6 @@ import checkstyle.reporter.XMLReporter;
 import checkstyle.reporter.CodeClimateReporter;
 import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.ReporterManager;
-import checkstyle.detect.DetectCodingStyle;
 import checkstyle.utils.ConfigUtils;
 import haxe.CallStack;
 import haxe.Json;
@@ -153,9 +154,16 @@ class Main {
 
 	function listChecks() {
 		var count = 0;
-		for (check in configParser.getSortedCheckInfos()) {
-			Sys.println(check.name + ":");
-			Sys.println("  " + check.description + "\n");
+		var maxLength:Int = 0;
+		var checkList:Array<CheckInfo> = configParser.getSortedCheckInfos();
+		for (check in checkList) {
+			if (check.name.length > maxLength) {
+				maxLength = check.name.length;
+			}
+		}
+
+		for (check in checkList) {
+			Sys.println(check.name.rpad(" ", maxLength + 2) + "- " + check.description);
 			if (~/\[DEPRECATED/.match(check.description)) continue;
 			count++;
 		}
@@ -285,6 +293,21 @@ class Main {
 
 		try {
 			args = Sys.args();
+
+			#if neko
+			// use the faster JS version if possible
+			try {
+				var process = new sys.io.Process("node", ["-v"]);
+				var nodeExists = process.exitCode() == 0;
+				process.close();
+				if (nodeExists && FileSystem.exists("haxecheckstyle.js")) {
+					var exitCode = Sys.command("node", ["haxecheckstyle.js"].concat(args));
+					Sys.exit(exitCode);
+				}
+			}
+			catch (e:Any) {}
+			#end
+
 			cwd = Sys.getCwd();
 			if (Sys.getEnv("HAXELIB_RUN") != null) {
 				cwd = args.pop();
