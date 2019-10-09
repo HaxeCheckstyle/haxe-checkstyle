@@ -90,7 +90,6 @@ class ExtendedEmptyLinesCheck extends Check {
 		buildPolicyMap();
 		var emptyLines:ListOfEmptyLines = detectEmptyLines();
 		if (max <= 0) max = 1;
-
 		checkPackages(emptyLines);
 		checkImports(emptyLines);
 		checkTypes(emptyLines);
@@ -336,7 +335,8 @@ class ExtendedEmptyLinesCheck extends Check {
 		var brOpen = findTypeBrOpen(typeToken);
 		if (brOpen == null) return;
 		checkBetweenToken(emptyLines, typeToken, brOpen, getPolicy(TYPE_DEFINITION), "between type definition and left curly");
-		var brClose:TokenTree = brOpen.getLastChild();
+		var brClose:Null<TokenTree> = brOpen.getLastChild();
+		if (brClose == null) return;
 		var start:Int = checker.getLinePos(brOpen.pos.max).line;
 		var end:Int = checker.getLinePos(brClose.pos.min).line;
 		if (start == end) return;

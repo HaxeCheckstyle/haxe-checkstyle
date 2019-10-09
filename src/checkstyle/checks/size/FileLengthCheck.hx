@@ -22,6 +22,7 @@ class FileLengthCheck extends Check {
 	}
 
 	override function actualRun() {
+		if (checker.ast == null) return;
 		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass(d):

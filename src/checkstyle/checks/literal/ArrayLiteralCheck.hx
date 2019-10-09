@@ -12,6 +12,7 @@ class ArrayLiteralCheck extends Check {
 	}
 
 	override function actualRun() {
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e:Expr) {
 			switch (e.expr) {
 				case ENew({pack: [], name: "Array"}, _):

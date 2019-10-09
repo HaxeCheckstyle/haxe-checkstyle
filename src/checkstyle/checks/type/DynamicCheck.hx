@@ -15,6 +15,7 @@ class DynamicCheck extends Check {
 	}
 
 	override function actualRun() {
+		if (checker.ast == null) return;
 		ComplexTypeUtils.walkFile(checker.ast, callbackComplexType);
 	}
 

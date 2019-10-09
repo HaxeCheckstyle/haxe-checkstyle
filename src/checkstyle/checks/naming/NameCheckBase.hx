@@ -40,6 +40,7 @@ class NameCheckBase<T> extends Check {
 	}
 
 	function checkClassFields() {
+		if (checker.ast == null) return;
 		for (td in checker.ast.decls) {
 			switch (td.decl) {
 				case EClass(d):

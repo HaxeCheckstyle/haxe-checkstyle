@@ -62,6 +62,7 @@ class ReturnCheck extends Check {
 	}
 
 	function checkInlineFunctions() {
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				#if (haxe_ver < 4.0)

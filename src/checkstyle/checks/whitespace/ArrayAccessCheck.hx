@@ -26,6 +26,7 @@ class ArrayAccessCheck extends Check {
 	override function actualRun() {
 		var lastExpr = null;
 
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e:Expr) {
 			if (lastExpr == null) {
 				lastExpr = e;
