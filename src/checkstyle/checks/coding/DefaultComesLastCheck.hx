@@ -19,6 +19,7 @@ class DefaultComesLastCheck extends Check {
 
 		for (token in acceptableTokens) {
 			var tokens:Array<TokenTree> = token.filter([Kwd(KwdCase), Kwd(KwdDefault)], FIRST);
+			if (tokens.length <= 0) continue;
 			if (tokens[tokens.length - 1].is(Kwd(KwdDefault))) continue;
 
 			for (i in 0...tokens.length) {

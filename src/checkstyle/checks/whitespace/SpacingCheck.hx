@@ -99,6 +99,7 @@ class SpacingCheck extends Check {
 
 		var lastExpr = null;
 
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e) {
 			if (lastExpr == null) {
 				lastExpr = e;

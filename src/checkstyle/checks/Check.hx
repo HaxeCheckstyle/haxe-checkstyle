@@ -90,6 +90,7 @@ class Check {
 	}
 
 	function forEachField(cb:Field -> ParentType -> Void) {
+		if (checker.ast == null) return;
 		if (checker.ast.decls == null) return;
 		for (td in checker.ast.decls) {
 			var fields:Array<Field> = switch (td.decl) {
@@ -134,6 +135,7 @@ class Check {
 	}
 
 	function isCharPosExtern(pos:Int):Bool {
+		if (checker.ast == null) return false;
 		if (checker.ast.decls == null) return false;
 		for (td in checker.ast.decls) {
 			switch (td.decl) {

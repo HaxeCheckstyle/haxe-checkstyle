@@ -27,6 +27,7 @@ class AnonymousCheck extends Check {
 	}
 
 	function checkLocalVars() {
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				case EVars(vars):

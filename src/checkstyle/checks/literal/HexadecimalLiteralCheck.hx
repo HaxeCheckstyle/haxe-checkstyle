@@ -21,6 +21,7 @@ class HexadecimalLiteralCheck extends Check {
 	}
 
 	override function actualRun() {
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e:Expr) {
 			switch (e.expr) {
 				case EConst(CInt(s)):

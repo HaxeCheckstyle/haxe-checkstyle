@@ -14,6 +14,7 @@ class AvoidInlineConditionalsCheck extends Check {
 	}
 
 	override function actualRun() {
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e:Expr) {
 			if (isPosSuppressed(e.pos)) return;
 			switch (e.expr) {

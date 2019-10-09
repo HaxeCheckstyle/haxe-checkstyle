@@ -13,6 +13,7 @@ class LocalVariableNameCheck extends NameCheckBase<String> {
 
 	override function actualRun() {
 		formatRE = new EReg(format, "");
+		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
 				case EVars(vars):
