@@ -14,12 +14,12 @@
     ],
     "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
     "contributors": [
-        "adireddy",
         "AlexHaxe",
+        "adireddy",
         "Gama11"
     ],
-    "releasenote": "new checks for doc comments (type, field and style) and redundant @:access/@:allow metas - see CHANGELOG",
-    "version": "2.4.2",
+    "releasenote": "breaking changes: command line options and OperatorWhitespace settings changed, new checks InlineFinal and BlockBreakingConditional, increased Haxe 4 compatibility, some formatter related fixes and a few bugfixes - see CHANGELOG",
+    "version": "2.5.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {}
 }
