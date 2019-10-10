@@ -27,6 +27,7 @@ matrix:
         - haxelib git mcover https://github.com/massiveinteractive/mcover master src
         - haxelib git munit https://github.com/massiveinteractive/MassiveUnit master src
         - haxelib install hxjava
+        - haxelib install hxcpp
         - haxelib install haxeparser 3.3.0
         - haxelib install compiletime 2.6.0
         - haxelib install hxargs 3.0.2
@@ -43,6 +44,7 @@ matrix:
         - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
         - haxelib git json2object https://github.com/elnabo/json2object
         - haxelib install hxjava
+        - haxelib install hxcpp
         - haxelib install mlib
         - haxelib install mconsole
         - haxelib install compiletime 2.6.0
