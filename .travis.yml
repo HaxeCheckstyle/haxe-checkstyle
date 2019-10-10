@@ -12,6 +12,7 @@ script:
   - haxe build.hxml
   - haxe buildDebug.hxml
   - haxe buildJS.hxml
+  - haxe buildCpp.hxml
   - haxe buildSchema.hxml
   - haxe -D codecov_json buildTest.hxml
   - haxe testJava.hxml

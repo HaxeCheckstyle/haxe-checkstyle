@@ -1,0 +1,10 @@
+buildGlobal.hxml
+# -lib hxcpp-debugger
+# -D HXCPP_DEBUGGER
+
+# -D HXCPP_STACK_TRACE
+# -D HXCPP_STACK_LINE
+
+# -debug
+-main checkstyle.Main
+-cpp out

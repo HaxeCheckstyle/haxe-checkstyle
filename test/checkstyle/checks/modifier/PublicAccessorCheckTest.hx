@@ -6,6 +6,7 @@ class PublicAccessorCheckTest extends CheckTestCase<PublicAccessorCheckTests> {
 	@Test
 	public function testNonAccessors() {
 		assertNoMsg(new PublicAccessorCheck(), NON_ACCESSOR);
+		assertNoMsg(new PublicAccessorCheck(), PRIVATE_ACCESSOR);
 	}
 
 	@Test
@@ -25,6 +26,11 @@ abstract PublicAccessorCheckTests(String) to String {
 	abstractAndClass Test {
 		public function _set_test() {}
 		public function _get_test() {}
+	}";
+	var PRIVATE_ACCESSOR = "
+	abstractAndClass Test {
+		private function set_test() {}
+		private function get_test() {}
 	}";
 	var PUBLIC_GETTER = "
 	abstractAndClass Test {

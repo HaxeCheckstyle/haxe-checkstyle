@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.5.0 (2019-10-10)
+
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)
 - **Breaking Change** using `--` for long options in cli ([#472](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/472))
 - New check BlockBreakingConditional ([#471](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/471))

@@ -22,13 +22,13 @@ class InlineFinalCheckTest extends CheckTestCase<InlineFinalCheckTests> {
 abstract InlineFinalCheckTests(String) to String {
 	var TEST_INLINE_FINAL = "
 	abstractAndClass Test {
-		public inline final test:String=0;
+		public inline final test:String='0';
 		final function test2() {
 		}
 	}";
 	var TEST_INLINE_VAR = "
 	abstractAndClass Test {
-		inline public var test:String=0;
+		inline public var test:String='0';
 		inline function test2() {
 		}
 	}";
