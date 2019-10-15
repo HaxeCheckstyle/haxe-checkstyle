@@ -1,0 +1,4 @@
+-D json2object=3.6.4
+# @install: lix --silent download "haxelib:/json2object#3.6.4" into json2object/3.6.4/haxelib
+-lib hxjsonast
+-cp ${HAXE_LIBCACHE}/json2object/3.6.4/haxelib/src
