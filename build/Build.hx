@@ -17,6 +17,9 @@ class Build {
 
 	/**
 		perform lix call and take build times
+
+		@param buildFile HXML build file
+		@param title description to use when printing build time
 	**/
 	public static function callLix(buildFile:String, title:String) {
 		var startTime = Timer.stamp();
