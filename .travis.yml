@@ -8,8 +8,11 @@ env:
   - HAXE_VERSION=haxe347
   - HAXE_VERSION=haxe4rc5
   - HAXE_VERSION=nightly
+  global:
+    - CC_TEST_REPORTER_ID=1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
 
 install:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; chmod +x ./cc-test-reporter
   - npm install
   - if [[ "$HAXE_VERSION" == "haxe347" ]]; then mv haxe_libraries haxe4_libraries; mv haxe3_libraries haxe_libraries; fi
   - if [[ "$HAXE_VERSION" == "haxe347" ]]; then npx lix download haxe 3.4.7; npx lix use haxe 3.4.7; fi
@@ -20,6 +23,9 @@ install:
   - npx neko -version
   - npx haxelib list
 
+before_script:
+  - ./cc-test-reporter before-build
+
 script:
   - npx haxe build.hxml
   - npx haxe buildDebug.hxml
@@ -28,6 +34,10 @@ script:
   - npx haxe buildSchema.hxml
   - npx haxe -D codecov_json buildTest.hxml
   - npx haxe testJava.hxml
+
+after_script:
+  - ./cc-test-reporter format-coverage -t lcov lcov.info
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
