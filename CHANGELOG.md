@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+- Refactored build system to use lix
+
 ## version 2.5.0 (2019-10-10)
 
 - **Breaking Change** split `OperatorWhitespaceCheck.functionArgPolicy` into `arrowFunctionPolicy`, `oldFunctionTypePolicy` and `newFunctionTypePolicy` [#467](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/467)

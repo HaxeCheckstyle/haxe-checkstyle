@@ -1,17 +1,2 @@
-build.hxml
-
---next
-
-buildDebug.hxml
-
---next
-
-buildJS.hxml
-
---next
-
-buildSchema.hxml
-
---next
-
-buildTest.hxml
+-cp build
+--run Build

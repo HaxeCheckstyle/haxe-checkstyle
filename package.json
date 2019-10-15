@@ -20,23 +20,17 @@
         "name": "Alexander Blum",
         "email": "Alexander.Blum@gmail.com"
     },
-    "contributors": [{
+    "contributors": [
+        {
             "name": "Adi Reddy Mora"
         },
         {
             "name": "Jens Fischer"
         }
     ],
-    "dependencies": {
-        "grunt": "latest",
-        "grunt-cli": "latest"
+    "devDependencies": {
+        "lix": "^15.5.4"
     },
     "bugs": "https://github.com/HaxeCheckstyle/haxe-checkstyle/issues",
-    "license": "MIT",
-    "devDependencies": {
-        "grunt": "^0.4.5",
-        "grunt-haxe": "^0.1.12",
-        "grunt-shell": "^1.1.1",
-        "grunt-zip": "^0.16.0"
-    }
+    "license": "MIT"
 }

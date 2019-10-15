@@ -1,53 +1,30 @@
-git:
-  depth: 1
-
-language: haxe
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+language: node_js
+node_js:
+  - "10"
 sudo: false
 dist: xenial
 
-script:
-  - haxe build.hxml
-  - haxe buildDebug.hxml
-  - haxe buildJS.hxml
-  - haxe buildCpp.hxml
-  - haxe buildSchema.hxml
-  - haxe -D codecov_json buildTest.hxml
-  - haxe testJava.hxml
+env:
+  - HAXE_VERSION=haxe347
+  - HAXE_VERSION=haxe4rc5
+  - HAXE_VERSION=nightly
 
-matrix:
-  include:
-    - haxe: 3.4.7
-      install:
-        - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
-        - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
-        - haxelib git json2object https://github.com/elnabo/json2object
-        - haxelib git mcover https://github.com/massiveinteractive/mcover master src
-        - haxelib git munit https://github.com/massiveinteractive/MassiveUnit master src
-        - haxelib install hxjava
-        - haxelib install hxcpp
-        - haxelib install haxeparser 3.3.0
-        - haxelib install compiletime 2.6.0
-        - haxelib install hxargs 3.0.2
-        - haxelib install mconsole
-        - haxelib install mlib
-        - haxelib install test-adapter
-    - haxe: development
-      install:
-        - haxelib git tokentree https://github.com/HaxeCheckstyle/tokentree master src
-        - haxelib git hxparse https://github.com/simn/hxparse
-        - haxelib git haxeparser https://github.com/simn/haxeparser
-        - haxelib git mcover https://github.com/massiveinteractive/mcover master src
-        - haxelib git munit https://github.com/massiveinteractive/MassiveUnit master src
-        - haxelib git hxnodejs https://github.com/HaxeFoundation/hxnodejs.git master
-        - haxelib git json2object https://github.com/elnabo/json2object
-        - haxelib install hxjava
-        - haxelib install hxcpp
-        - haxelib install mlib
-        - haxelib install mconsole
-        - haxelib install compiletime 2.6.0
-        - haxelib install hxargs 3.0.2
-        - haxelib install test-adapter
-        - sed -i 's/:3.3.0//' buildGlobal.hxml
+install:
+  - npm install
+  - if [[ "$HAXE_VERSION" == "haxe347" ]]; then mv haxe_libraries haxe4_libraries; mv haxe3_libraries haxe_libraries; fi
+  - if [[ "$HAXE_VERSION" == "haxe347" ]]; then npx lix download haxe 3.4.7; npx lix use haxe 3.4.7; fi
+  - if [[ "$HAXE_VERSION" == "haxe4rc5" ]]; then npx lix download haxe 4.0.0-rc.5; npx lix use haxe 4.0.0-rc.5; fi
+  - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
+  - npx lix download
+  - npx haxe -version
+  - npx neko -version
+  - npx haxelib list
+
+script:
+  - npx haxe build.hxml
+  - npx haxe buildDebug.hxml
+  - npx haxe buildJS.hxml
+  - npx haxe buildCpp.hxml
+  - npx haxe buildSchema.hxml
+  - npx haxe -D codecov_json buildTest.hxml
+  - npx haxe testJava.hxml
