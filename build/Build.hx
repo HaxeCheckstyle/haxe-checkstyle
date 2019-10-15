@@ -1,6 +1,12 @@
 import haxe.Timer;
 
+/**
+	helper class to build everything, avoids `--next`
+**/
 class Build {
+	/**
+		run all build files
+	**/
 	public static function main() {
 		callLix("build.hxml", "run.n");
 		callLix("buildDebug.hxml", "runD.n");
@@ -9,6 +15,9 @@ class Build {
 		callLix("buildTest.hxml", "Unittests");
 	}
 
+	/**
+		perform lix call and take build times
+	**/
 	public static function callLix(buildFile:String, title:String) {
 		var startTime = Timer.stamp();
 		Sys.command("npx", ["haxe", buildFile]);
