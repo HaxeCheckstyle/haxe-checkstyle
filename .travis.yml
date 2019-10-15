@@ -37,8 +37,9 @@ script:
   - npx haxe testJava.hxml
 
 after_script:
-  - ./cc-test-reporter format-coverage -t lcov lcov.info
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  - (cd src; ../cc-test-reporter format-coverage -t lcov lcov.info)
+  - (cd src; ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT)
+  - (cd src; ../cc-test-reporter upload-coverage)
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
