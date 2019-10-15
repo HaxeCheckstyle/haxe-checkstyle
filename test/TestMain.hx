@@ -18,7 +18,7 @@ class TestMain {
 		#if codecov_json
 		MCoverage.getLogger().addClient(new CodecovJsonPrintClient());
 		#else
-		MCoverage.getLogger().addClient(new LcovPrintClient("Formatter Unittests"));
+		MCoverage.getLogger().addClient(new LcovPrintClient("Checkstyle Unittests"));
 		#end
 		var runner:TestRunner = new TestRunner(client);
 		runner.completionHandler = completionHandler;
