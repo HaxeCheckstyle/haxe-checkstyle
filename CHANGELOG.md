@@ -2,7 +2,7 @@
 
 ## dev branch / next version (2.x.x)
 
-- Refactored build system to use lix
+- Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 
 ## version 2.5.0 (2019-10-10)
 
