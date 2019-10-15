@@ -38,7 +38,6 @@ script:
 
 after_script:
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
-  - (cd src; ../cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT)
   - (cd src; ../cc-test-reporter upload-coverage)
 
 after_success:
