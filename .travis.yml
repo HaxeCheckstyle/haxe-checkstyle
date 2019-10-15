@@ -5,10 +5,10 @@ sudo: false
 dist: xenial
 
 env:
+  global: CC_TEST_REPORTER_ID=1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
   - HAXE_VERSION=haxe347
   - HAXE_VERSION=haxe4rc5
   - HAXE_VERSION=nightly
-  - CC_TEST_REPORTER_ID=1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
 
 install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; chmod +x ./cc-test-reporter
