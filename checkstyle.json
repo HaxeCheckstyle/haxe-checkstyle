@@ -11,7 +11,10 @@
         },
         {
             "type": "AvoidStarImport"
-        },
+		},
+		{
+			"type": "BlockBreakingConditional"
+		},
         {
             "props": {
                 "format": "^(e)$"
@@ -153,7 +156,7 @@
                 "character": "tab"
             },
             "type": "IndentationCharacter"
-        },
+		},
         {
             "type": "InnerAssignment"
         },
