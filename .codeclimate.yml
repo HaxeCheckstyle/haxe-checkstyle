@@ -1,4 +1,5 @@
-engines:
+version: "2"
+plugins:
   haxe-checkstyle:
     enabled: true
   markdownlint:
@@ -11,10 +12,9 @@ engines:
       MD033:
         enabled: false
 
-exclude_paths:
-  - resources/**/*
-
-ratings:
-  paths:
-    - "**.hx"
-    - "**.md"
+exclude_patterns:
+  - "resources/"
+  - "node_modules/"
+  - "haxe_libraries/"
+  - "haxe3_libraries/"
+  - "haxe4_libraries/"

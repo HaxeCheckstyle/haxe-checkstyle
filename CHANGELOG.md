@@ -2,7 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
+- Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
+- Refactored / renamed AvoidInlineConditionals to AvoidTernaryOperator
 
 ## version 2.5.0 (2019-10-10)
 

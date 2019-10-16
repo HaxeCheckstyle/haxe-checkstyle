@@ -2,17 +2,17 @@ package checkstyle.checks.coding;
 
 import checkstyle.SeverityLevel;
 
-class AvoidInlineConditionalsCheckTest extends CheckTestCase<AvoidInlineConditionalsTests> {
+class AvoidTernaryOperatorCheckTest extends CheckTestCase<AvoidTernaryOperatorCheckTests> {
 	@Test
 	public function testInlineCondition() {
-		var check = new AvoidInlineConditionalsCheck();
+		var check = new AvoidTernaryOperatorCheck();
 		check.severity = SeverityLevel.INFO;
-		assertMsg(check, TEST1, "Avoid inline conditionals");
+		assertMsg(check, TEST1, "Avoid ternary operator");
 	}
 }
 
 @:enum
-abstract AvoidInlineConditionalsTests(String) to String {
+abstract AvoidTernaryOperatorCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var a:Array<Int> = [];
