@@ -128,7 +128,7 @@ abstract CodeSimilarityCheckTests(String) to String {
 	var SIMILAR_CODE_WHILE = "
 	class Test {
 		function a() {
-			while (count < 100) {
+			while (true) {
 				switch (param1) {
 					case 1:
 						trace ('');
@@ -144,7 +144,7 @@ abstract CodeSimilarityCheckTests(String) to String {
 				}
 			}
 
-			while (count > 100) {
+			while (false) {
 				switch (param2) {
 					case 1:
 						trace ('');

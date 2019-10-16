@@ -160,6 +160,8 @@ class CodeSimilarityCheck extends Check {
 				return "";
 			case IntInterval(_):
 				return "...";
+			case Kwd(KwdTrue), Kwd(KwdFalse):
+				return "const_bool";
 			default:
 				return '${token.tok}';
 		}
