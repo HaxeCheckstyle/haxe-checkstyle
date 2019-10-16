@@ -8,6 +8,7 @@ import checkstyle.checks.block.BlockBreakingConditionalCheck;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
+import checkstyle.checks.coding.CodeSimilarityCheck;
 import checkstyle.checks.coding.HiddenFieldCheck;
 import checkstyle.checks.coding.InnerAssignmentCheck;
 import checkstyle.checks.coding.NestedForDepthCheck;
@@ -106,6 +107,16 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.coding
+	@Test
+	public function testDetectCodeSimilarity() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CodeSimilarityCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("CodeSimilarity", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(8, props.thresholdIdentical);
+		Assert.areEqual(12, props.thresholdSimilar);
+	}
+
 	@Test
 	public function testDetectHiddenField() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new HiddenFieldCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);

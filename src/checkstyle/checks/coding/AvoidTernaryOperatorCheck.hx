@@ -4,7 +4,7 @@ package checkstyle.checks.coding;
 	Detects ternary operators. Useful for developers who find ternary operators hard to read and want forbid them.
 **/
 @name("AvoidTernaryOperator", "AvoidInlineConditionals")
-@desc("Detects inline conditionals. Useful for developers who find ternary operators hard to read and want forbid them.")
+@desc("Detects ternary operators. Useful for developers who find ternary operators hard to read and want forbid them.")
 class AvoidTernaryOperatorCheck extends Check {
 	public function new() {
 		super(AST);

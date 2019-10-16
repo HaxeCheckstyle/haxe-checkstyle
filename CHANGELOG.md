@@ -2,7 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
+- New check  CodeSimilarity to check for similar or identical code blocks
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
+- Fixed allow excluding construtor (`new`) via range exclusion
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Refactored / renamed AvoidInlineConditionals to AvoidTernaryOperator
 
