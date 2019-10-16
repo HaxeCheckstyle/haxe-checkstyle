@@ -176,7 +176,11 @@ class ExcludeManager {
 	function makeIdentifierRange(checker:Checker, checkName:String, name:String):Array<ExcludeRange> {
 		var identifierExcludes:Array<ExcludeRange> = [];
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter([Const(CIdent(name))], ALL);
+		var filterTokens:Array<TokenDef> = [Const(CIdent(name))];
+		if (name == "new") {
+			filterTokens.push(Kwd(KwdNew));
+		}
+		var allTokens:Array<TokenTree> = root.filter(filterTokens, ALL);
 		for (token in allTokens) {
 			identifierExcludes.push(makeTokenExcludeRange(checker, checkName, token));
 		}
