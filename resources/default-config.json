@@ -21,11 +21,11 @@
 			"props": {}
 		},
 		{
-			"type": "AvoidInlineConditionals",
+			"type": "AvoidStarImport",
 			"props": {}
 		},
 		{
-			"type": "AvoidStarImport",
+			"type": "AvoidTernaryOperator",
 			"props": {}
 		},
 		{
@@ -36,6 +36,14 @@
 			"type": "CatchParameterName",
 			"props": {
 				"format": "^(e|t|ex|[a-z][a-z][a-zA-Z]+)$"
+			}
+		},
+		{
+			"type": "CodeSimilarity",
+			"props": {
+				"severityIdentical": "WARNING",
+				"thresholdIdentical": 8,
+				"thresholdSimilar": 12
 			}
 		},
 		{
