@@ -17,7 +17,16 @@ class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
 		assertMsg(check, SIMILAR_CODE_WHILE, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		assertMsg(check, SIMILAR_CODE_DO_WHILE, "Found similar code block - first seen in Test.hx:4");
+
+		check = newCheck();
 		assertMsg(check, SIMILAR_CODE_FOR, "Found similar code block - first seen in Test.hx:4");
+
+		check = newCheck();
+		assertMsg(check, SIMILAR_CODE_TRY, "Found similar code block - first seen in Test.hx:4");
+
+		check = newCheck();
+		assertMsg(check, SIMILAR_CODE_BROPEN, "Found similar code block - first seen in Test.hx:4");
 	}
 
 	@Test
@@ -34,6 +43,10 @@ class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
 		assertNoMsg(check, NOT_SIMILAR_CODE);
 		assertNoMsg(check, SIMILAR_CODE);
 		assertNoMsg(check, SIMILAR_CODE_IF);
+		assertNoMsg(check, SIMILAR_CODE_WHILE);
+		assertNoMsg(check, SIMILAR_CODE_DO_WHILE);
+		assertNoMsg(check, SIMILAR_CODE_TRY);
+		assertNoMsg(check, SIMILAR_CODE_BROPEN);
 		assertNoMsg(check, IDENTICAL_CODE);
 	}
 
@@ -161,6 +174,42 @@ abstract CodeSimilarityCheckTests(String) to String {
 			}
 		}
 	}";
+	var SIMILAR_CODE_DO_WHILE = "
+	class Test {
+		function a() {
+			do {
+				switch (param1) {
+					case 1:
+						trace ('');
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			} while (true);
+
+			do {
+				switch (param2) {
+					case 1:
+						trace ('');
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			} while (false);
+		}
+	}";
 	var SIMILAR_CODE_FOR = "
 	class Test {
 		function a() {
@@ -184,6 +233,80 @@ abstract CodeSimilarityCheckTests(String) to String {
 				switch (param2) {
 					case 1:
 						trace ('');
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			}
+		}
+	}";
+	var SIMILAR_CODE_TRY = "
+	class Test {
+		function a() {
+			try {
+				switch (param1) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			}
+			catch (e:Any) {
+				trace ('');
+			}
+
+			try {
+				switch (param2) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			}
+			catch (e:Any) {
+				trace ('');
+			}
+		}
+	}";
+	var SIMILAR_CODE_BROPEN = "
+	class Test {
+		function a() {
+			if (true) {
+				switch (param1) {
+					case 1:
+					case 2:
+					case 3:
+					case 4:
+					case 5:
+					case 6:
+					case 7:
+					case 8:
+					case 9:
+					default:
+				}
+			}
+
+			if (a == b) {
+				switch (param2) {
+					case 1:
 					case 2:
 					case 3:
 					case 4:

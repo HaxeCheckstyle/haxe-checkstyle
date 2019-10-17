@@ -60,7 +60,11 @@ class CodeSimilarityCheck extends Check {
 				case Kwd(KwdWhile):
 					if ((token.parent != null) && (token.parent.is(Kwd(KwdDo)))) return SKIP_SUBTREE;
 					skipSubTree = checkFunctionSimilarity(token);
+				case Kwd(KwdTry):
+					skipSubTree = checkFunctionSimilarity(token);
 				case Kwd(KwdSwitch):
+					skipSubTree = checkFunctionSimilarity(token);
+				case BrOpen:
 					skipSubTree = checkFunctionSimilarity(token);
 				default:
 			}
