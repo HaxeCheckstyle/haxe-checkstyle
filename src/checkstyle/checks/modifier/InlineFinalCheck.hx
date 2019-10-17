@@ -1,6 +1,6 @@
 package checkstyle.checks.modifier;
 
-#if (haxe_ver >= 4.0)
+#if (haxe4)
 /**
 	Checks for places that use inline var instead of inline final (Haxe 4+)
 **/

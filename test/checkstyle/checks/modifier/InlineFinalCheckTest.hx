@@ -1,6 +1,6 @@
 package checkstyle.checks.modifier;
 
-#if haxe_ver4
+#if haxe4
 class InlineFinalCheckTest extends CheckTestCase<InlineFinalCheckTests> {
 	static inline var ERROR:String = 'Consider using "inline final" for field "test"';
 
