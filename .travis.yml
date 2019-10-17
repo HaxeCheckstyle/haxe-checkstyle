@@ -35,10 +35,10 @@ script:
   - npx haxe buildSchema.hxml
   - npx haxe -D codecov_json buildTest.hxml
   - npx haxe testJava.hxml
+  - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info; rm ../lcov.info)
 
 after_script:
-  - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
-  - (cd src; ../cc-test-reporter upload-coverage)
+  - if [[ "$HAXE_VERSION" == "haxe4rc5" ]]; then (cd src; ../cc-test-reporter upload-coverage); fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
