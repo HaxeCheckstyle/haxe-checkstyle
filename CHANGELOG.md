@@ -2,7 +2,7 @@
 
 ## dev branch / next version (2.x.x)
 
-- New check  CodeSimilarity to check for similar or identical code blocks ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
+- New check CodeSimilarity to check for similar or identical code blocks ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479) + [#480](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/480))
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Fixed allow excluding construtor (`new`) via range exclusion ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
