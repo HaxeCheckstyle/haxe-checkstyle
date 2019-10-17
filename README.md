@@ -48,7 +48,7 @@ haxelib run checkstyle -s src
 ### Automatic detection of your coding style (experimental)
 
 ```
-haxelib run checkstyle -s src -detect detectedCheckstyle.json
+haxelib run checkstyle -s src --detect detectedCheckstyle.json
 ```
 
 ### VSCode integration
