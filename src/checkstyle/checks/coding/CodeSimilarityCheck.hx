@@ -42,6 +42,7 @@ class CodeSimilarityCheck extends Check {
 		severityIdentical = WARNING;
 		thresholdIdentical = 8;
 		thresholdSimilar = 12;
+		categories = [STYLE, DUPLICATION];
 	}
 
 	override function actualRun() {
