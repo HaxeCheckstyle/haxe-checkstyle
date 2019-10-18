@@ -58,7 +58,20 @@ There is a VSCode extension for haxe-checkstyle available in the VSCode marketpl
 ### Compiling checkstyle
 
 ```bash
+git clone https://github.com/HaxeCheckstyle/haxe-checkstyle.git
 npm install
+lix download
+haxe buildAll.hxml # for Neko and NodeJS version + run Unittests and create schema
+haxe buildCpp.hxml # for C++ version
+```
+
+Compiling with Haxe 3
+```bash
+git clone https://github.com/HaxeCheckstyle/haxe-checkstyle.git
+mv haxe_libraries haxe4_libraries
+mv haxe3_libraries haxe_libraries
+npm install
+lix use haxe 3.4.7
 lix download
 haxe buildAll.hxml # for Neko and NodeJS version + run Unittests and create schema
 haxe buildCpp.hxml # for C++ version
