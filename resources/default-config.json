@@ -135,6 +135,12 @@
 			}
 		},
 		{
+			"type": "EnforceVarTypeHint",
+			"props": {
+				"ignoreEnumAbstractValues": true
+			}
+		},
+		{
 			"type": "ExtendedEmptyLines",
 			"props": {
 				"max": 1,
