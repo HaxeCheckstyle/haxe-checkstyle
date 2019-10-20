@@ -11,8 +11,8 @@ class EnforceVarTypeHintCheckTest extends CheckTestCase<EnforceVarTypeHintCheckT
 		#if haxe4
 		assertNoMsg(check, FINAL_FUNCTION);
 		assertMsg(check, FINAL_VAR, 'Variable "a" has no type hint');
-		#end
 		assertMsg(check, DOLLAR_VAR, 'Variable "$$a" has no type hint');
+		#end
 
 		check.ignoreEnumAbstractValues = false;
 		assertMsg(check, ABSTRACT_ENUM, 'Variable "STYLE" has no type hint');
