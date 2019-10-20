@@ -43,10 +43,10 @@ class EnforceVarTypeHintCheck extends Check {
 		if (isPosSuppressed(token.pos)) return;
 		var name:Null<TokenTree> = token.access().firstChild().token;
 		if (name == null) return;
-		var colon:Null<TokenTree> = token.access().firstChild().isCIdent().firstOf(DblDot).token;
+		var colon:Null<TokenTree> = name.access().firstOf(DblDot).token;
 		if (colon != null) return;
 		if (ignoreEnumAbstractValues && isEnumAbstractValue(token)) return;
-		error(name.toString(), token.pos);
+		error(name.toString(), name.pos);
 	}
 
 	function isEnumAbstractValue(token:TokenTree):Bool {
