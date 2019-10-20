@@ -11,6 +11,8 @@ class EnforceVarTypeHintCheckTest extends CheckTestCase<EnforceVarTypeHintCheckT
 		#if haxe4
 		assertNoMsg(check, FINAL_FUNCTION);
 		assertMsg(check, FINAL_VAR, 'Variable "a" has no type hint');
+
+		assertNoMsg(check, DOLLAR_VAR_CORRECT);
 		assertMsg(check, DOLLAR_VAR, 'Variable "$$a" has no type hint');
 		#end
 
@@ -25,7 +27,6 @@ abstract EnforceVarTypeHintCheckTests(String) to String {
 	var CORRECT_TYPE_HINTS = "
 	abstractAndClass Test {
 		var a:Int;
-		var $a:Int;
 
 		@SuppressWarnings('checkstyle:EnforceVarTypeHint')
 		var _b;
@@ -53,5 +54,9 @@ abstract EnforceVarTypeHintCheckTests(String) to String {
 	var DOLLAR_VAR = "
 	abstractAndClass Test {
 		var $a;
+	}";
+	var DOLLAR_VAR_CORRECT = "
+	abstractAndClass Test {
+		var $a:Int;
 	}";
 }
