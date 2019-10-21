@@ -4,6 +4,7 @@
 
 - New check `CodeSimilarity` to check for similar or identical code blocks ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479) + [#480](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/480))
 - New check `EnforceVarTypeHint` to enforce type hints for all variables and finals, fixes [#464](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/464) ([#481](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/481) + [#482](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/482))
+- New check `AvoidIdentifier` marks identifiers to avoid ([#483](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/483))
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Fixed allow excluding construtor (`new`) via range exclusion ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
