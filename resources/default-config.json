@@ -21,6 +21,12 @@
 			"props": {}
 		},
 		{
+			"type": "AvoidIdentifier",
+			"props": {
+				"avoidIdentifiers": []
+			}
+		},
+		{
 			"type": "AvoidStarImport",
 			"props": {}
 		},
