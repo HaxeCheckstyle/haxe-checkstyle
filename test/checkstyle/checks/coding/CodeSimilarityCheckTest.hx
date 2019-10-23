@@ -63,6 +63,7 @@ abstract CodeSimilarityCheckTests(String) to String {
 	var SIMILAR_CODE = "
 	class Test {
 		function a(param1:String, param2:Int):Int {
+			var regex = ~/.*/;
 			switch (param2) {
 				case 1:
 					param1 = '111';
@@ -72,9 +73,13 @@ abstract CodeSimilarityCheckTests(String) to String {
 					param1 = '111';
 				case 4:
 				case 5: /* test 2 */
+					return param1 && param2;
 				case 6:
+					param1 += param2;
 				case 7:
+					param1 = param2 + 100;
 				case 8:
+					return param1 & param2;
 				case 9:
 					param1 = --param2;
 			}
@@ -82,6 +87,7 @@ abstract CodeSimilarityCheckTests(String) to String {
 		}
 
 		function b(paramA:String, paramB:Int):Int {
+			var regex = ~/[a-z]+/;
 			switch (paramB) {
 				case 10:
 					paramA = '222222';
@@ -91,9 +97,13 @@ abstract CodeSimilarityCheckTests(String) to String {
 					paramA = '111';
 				case 40:
 				case 50:
+					return param1 || param2;
 				case 60:
+					param1 *= param2;
 				case 70:
+					param1 = param2 - 50;
 				case 80: // comment
+					return param1 | param2;
 				case 90:
 					paramA = ++paramB;
 			}
