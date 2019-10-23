@@ -21,6 +21,10 @@
 			"props": {}
 		},
 		{
+			"type": "ArrowFunction",
+			"props": {}
+		},
+		{
 			"type": "AvoidIdentifier",
 			"props": {
 				"avoidIdentifiers": []
