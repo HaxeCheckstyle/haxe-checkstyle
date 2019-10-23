@@ -22,7 +22,12 @@
 		},
 		{
 			"type": "ArrowFunction",
-			"props": {}
+			"props": {
+				"allowReturn": false,
+				"allowFunction": false,
+				"allowCurlyBody": false,
+				"allowSingleArgParens": false
+			}
 		},
 		{
 			"type": "AvoidIdentifier",
