@@ -8,6 +8,7 @@ import checkstyle.checks.block.BlockBreakingConditionalCheck;
 import checkstyle.checks.block.ConditionalCompilationCheck;
 import checkstyle.checks.block.LeftCurlyCheck;
 import checkstyle.checks.block.RightCurlyCheck;
+import checkstyle.checks.coding.ArrowFunctionCheck;
 import checkstyle.checks.coding.CodeSimilarityCheck;
 import checkstyle.checks.coding.HiddenFieldCheck;
 import checkstyle.checks.coding.InnerAssignmentCheck;
@@ -107,6 +108,20 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.coding
+	@Test
+	public function testDetectArrowFunction() {
+		#if haxe4
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ArrowFunctionCheck()], [buildCheckFile(SAMPLE_CODING_STYLE_HAXE_4)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("ArrowFunction", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(true, props.allowReturn);
+		Assert.areEqual(true, props.allowFunction);
+		Assert.areEqual(true, props.allowCurlyBody);
+		Assert.areEqual(true, props.allowSingleArgParens);
+		#end
+	}
+
 	@Test
 	public function testDetectCodeSimilarity() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CodeSimilarityCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
@@ -709,6 +724,19 @@ class Test {
 
 		#if true doNothing(); #end
 	}
+}
+";
+	var SAMPLE_CODING_STYLE_HAXE_4 = "
+package;
+
+import checkstyle.checks.Check;
+
+/**
+	code documentation
+ **/
+class Test {
+	var f:()->Void;
+	var f = (args) -> { return trace(''); };
 }
 ";
 }

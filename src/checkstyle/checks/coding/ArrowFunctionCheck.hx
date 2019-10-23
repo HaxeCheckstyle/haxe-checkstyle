@@ -112,8 +112,17 @@ class ArrowFunctionCheck extends Check {
 		return [{
 			fixed: [],
 			properties: [{
-				propertyName: "severity",
-				values: [SeverityLevel.WARNING]
+				propertyName: "allowReturn",
+				values: [false, true]
+			}, {
+				propertyName: "allowFunction",
+				values: [false, true]
+			}, {
+				propertyName: "allowCurlyBody",
+				values: [false, true]
+			}, {
+				propertyName: "allowSingleArgParens",
+				values: [false, true]
 			}]
 		}];
 	}
