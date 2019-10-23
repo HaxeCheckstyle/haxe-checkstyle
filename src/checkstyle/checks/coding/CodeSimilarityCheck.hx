@@ -87,7 +87,7 @@ class CodeSimilarityCheck extends Check {
 
 		var hashes:CodeHashes = makeCodeHashes(token);
 		var codeBlock:HashedCodeBlock = {
-			token: token,
+			fileName: token.pos.file,
 			lineStart: lineStart,
 			lineEnd: lineEnd,
 			startColumn: offsetToColumn(lineStart),
@@ -112,7 +112,7 @@ class CodeSimilarityCheck extends Check {
 	}
 
 	function formatFirstFound(existing:HashedCodeBlock):String {
-		return 'first seen in ${existing.token.pos.file}:${existing.lineStart.line + 1}';
+		return 'first seen in ${existing.fileName}:${existing.lineStart.line + 1}';
 	}
 
 	function checkOrAddHash(hash:String, codeBlock:HashedCodeBlock, hashTable:Map<String, HashedCodeBlock>):Null<HashedCodeBlock> {
@@ -157,6 +157,18 @@ class CodeSimilarityCheck extends Check {
 				return "$name";
 			case Unop(_):
 				return "unop";
+			case Binop(OpAssign):
+				return "assign";
+			case Binop(OpAssignOp(_)):
+				return "opassign";
+			case Binop(OpAdd), Binop(OpSub), Binop(OpMult), Binop(OpDiv), Binop(OpMod):
+				return "oparithmetic";
+			case Binop(OpShl), Binop(OpShr), Binop(OpUShr), Binop(OpAnd), Binop(OpOr), Binop(OpXor):
+				return "opbitwise";
+			case Binop(OpBoolAnd), Binop(OpBoolOr):
+				return "oplogical";
+			case Binop(OpEq), Binop(OpNotEq), Binop(OpLt), Binop(OpLte), Binop(OpGt), Binop(OpGte):
+				return "opcompare";
 			case Binop(_):
 				return "binop";
 			case Comment(_):
@@ -219,7 +231,7 @@ abstract CodeSimilarityCode(String) to String {
 }
 
 typedef HashedCodeBlock = {
-	var token:TokenTree;
+	var fileName:String;
 	var lineStart:LinePos;
 	var lineEnd:LinePos;
 	var startColumn:Int;
