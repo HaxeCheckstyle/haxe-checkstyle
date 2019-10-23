@@ -238,6 +238,21 @@
                     "description": "Checks for use of curlies, nested (non-arrow) functions or returns in arrow functions.",
                     "additionalProperties": false,
                     "properties": {
+                        "allowFunction": {
+                            "description": "allow using `function` inside arrow function bodies",
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "allowReturn": {
+                            "description": "allow using `return` inside arrow function bodies",
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "allowSingleArgParens": {
+                            "description": "allow using parenthesis around single argument arrow function (`(arg) -> arg * 2`)",
+                            "type": "boolean",
+                            "propertyOrder": 3
+                        },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "type": "string",
@@ -247,7 +262,12 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 0
+                            "propertyOrder": 4
+                        },
+                        "allowCurlyBody": {
+                            "description": "allow using curly block as arrow function body (`{...}`)",
+                            "type": "boolean",
+                            "propertyOrder": 2
                         }
                     },
                     "type": "object"
