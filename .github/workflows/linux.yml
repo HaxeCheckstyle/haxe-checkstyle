@@ -1,0 +1,99 @@
+name: Haxe-Checkstyle Linux
+
+on:
+  push:
+    branches:
+    - dev
+  pull_request:
+    branches:
+    - dev
+
+jobs:
+  haxe4-rc5:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: Installing codeclimate client
+      run: |
+        curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; \
+        chmod +x ./cc-test-reporter \
+        ./cc-test-reporter before-build
+    - name: NPM install
+      run: npm ci
+    - name: Lix download
+      run: npx lix download
+    - name: Print versions
+      run: |
+        npx haxe -version
+        npx neko -version
+        npx haxelib list
+    - name: Build neko versions
+      run: |
+        npx haxe build.hxml
+        npx haxe buildDebug.hxml
+    - name: Build NodeJs version
+      run: npx haxe buildJS.hxml
+    - name: Build C++ version
+      run: npx haxe buildCpp.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Run eval tests
+      run: npx haxe -D codecov_json buildTest.hxml
+    - name: Run Java tests
+      run: npx haxe testJava.hxml
+    - name: Format and upload codeclimate coverage
+      if: success()
+      run: |
+        ( \
+          cd src; \
+          ../cc-test-reporter format-coverage -t lcov ../lcov.info; \
+          ../cc-test-reporter upload-coverage; \
+        )
+    - name: Upload results to codecov
+      if: success()
+      run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+
+  haxe347:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: NPM install
+      run: npm ci
+    - name: Prepare Haxe 3.4.7
+      run: |
+        npx lix use haxe 3.4.7
+        mv haxe_libraries haxe4_libraries
+        mv haxe3_libraries haxe_libraries
+    - name: Lix download
+      run: npx lix download
+    - name: Print versions
+      run: |
+        npx haxe -version
+        npx neko -version
+        npx haxelib list
+    - name: Build neko versions
+      run: |
+        npx haxe build.hxml
+        npx haxe buildDebug.hxml
+    - name: Build NodeJs version
+      run: npx haxe buildJS.hxml
+    - name: Build C++ version
+      run: npx haxe buildCpp.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Run eval tests
+      run: npx haxe -D codecov_json buildTest.hxml
+    - name: Run Java tests
+      run: npx haxe testJava.hxml
