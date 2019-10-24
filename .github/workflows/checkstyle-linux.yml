@@ -24,6 +24,10 @@ jobs:
         ./cc-test-reporter before-build
     - name: NPM install
       run: npm ci
+    - name: Prepare Haxe 4.0.0-rc.5
+      run: |
+        npx lix download haxe 4.0.0-rc.5
+        npx lix use haxe 4.0.0-rc.5
     - name: Lix download
       run: npx lix download
     - name: Print versions
@@ -71,6 +75,7 @@ jobs:
       run: npm ci
     - name: Prepare Haxe 3.4.7
       run: |
+        npx lix download haxe 3.4.7
         npx lix use haxe 3.4.7
         mv haxe_libraries haxe4_libraries
         mv haxe3_libraries haxe_libraries
