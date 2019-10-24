@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
     - dev
+  schedule:
+    - cron: '15 23 * * *'
 
 jobs:
   haxe4-rc5:
@@ -65,6 +67,44 @@ jobs:
       if: success()
       run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
 
+  haxe4-nightly:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 10
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10
+    - name: NPM install
+      run: npm ci
+    - name: Prepare Haxe 4 nightly
+      run: |
+        npx lix download haxe nightly
+        npx lix use haxe nightly
+    - name: Lix download
+      run: npx lix download
+    - name: Print versions
+      run: |
+        npx haxe -version
+        npx neko -version
+        npx haxelib list
+    - name: Build neko versions
+      run: |
+        npx haxe build.hxml
+        npx haxe buildDebug.hxml
+    - name: Build NodeJs version
+      run: npx haxe buildJS.hxml
+    - name: Build C++ version
+      run: npx haxe buildCpp.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Build JSON schema
+      run: npx haxe buildSchema.hxml
+    - name: Run eval tests
+      run: npx haxe -D codecov_json buildTest.hxml
+    - name: Run Java tests
+      run: npx haxe testJava.hxml
+
   haxe347:
     runs-on: ubuntu-latest
     steps:
@@ -100,7 +140,7 @@ jobs:
       run: npx haxe buildSchema.hxml
     - name: Build JSON schema
       run: npx haxe buildSchema.hxml
-    - name: Run eval tests
+    - name: Run neko tests
       run: npx haxe -D codecov_json buildTest.hxml
     - name: Run Java tests
       run: npx haxe testJava.hxml
