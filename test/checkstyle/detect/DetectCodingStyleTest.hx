@@ -12,6 +12,7 @@ import checkstyle.checks.coding.ArrowFunctionCheck;
 import checkstyle.checks.coding.CodeSimilarityCheck;
 import checkstyle.checks.coding.HiddenFieldCheck;
 import checkstyle.checks.coding.InnerAssignmentCheck;
+import checkstyle.checks.coding.NestedControlFlowCheck;
 import checkstyle.checks.coding.NestedForDepthCheck;
 import checkstyle.checks.coding.NestedIfDepthCheck;
 import checkstyle.checks.coding.NestedTryDepthCheck;
@@ -147,6 +148,15 @@ class DetectCodingStyleTest {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InnerAssignmentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		// ignored not enough data points
 		Assert.areEqual(0, detectedChecks.length);
+	}
+
+	@Test
+	public function testDetectNestedControlFlowC() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedControlFlowCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("NestedControlFlow", detectedChecks[0].type);
+		var props = cast detectedChecks[0].props;
+		Assert.areEqual(3, props.max);
 	}
 
 	@Test

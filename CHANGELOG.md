@@ -6,6 +6,7 @@
 - New check `EnforceVarTypeHint` to enforce type hints for all variables and finals, fixes [#464](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/464) ([#481](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/481) + [#482](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/482))
 - New check `AvoidIdentifier` marks identifiers to avoid ([#483](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/483))
 - New check `ArrowFunction` to check for curlies, nested functions and returns in arrow functions ([#484](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/484))
+- New check `NestedControlFlow` to check for nested control flow expressions (e.g. `if`, `for`, `while`, `do/while`, `switch` and `try`)
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Fixed allow excluding construtor (`new`) via range exclusion ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))

@@ -77,7 +77,7 @@ class UnusedLocalVarCheck extends Check {
 		});
 		if (nameList.length > 1) return;
 
-		logPos('Unused local variable $name', v.parent.getPos());
+		logPos('Unused local variable $name', v.pos);
 	}
 
 	function checkStringInterpolation(tok:TokenTree, name:String, s:String):FilterResult {
