@@ -4,6 +4,7 @@ import checkstyle.utils.ConfigUtils;
 
 class ConfigParserTest {
 	static inline var LOCAL_PATH:String = "./";
+	static inline var TEST_COUNT:Int = 79;
 
 	@Test
 	public function testCheckstyleConfig() {
@@ -58,9 +59,9 @@ class ConfigParserTest {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
 		#if haxe4
-		Assert.areEqual(78, configParser.getCheckCount());
+		Assert.areEqual(TEST_COUNT, configParser.getCheckCount());
 		#else
-		Assert.areEqual(77, configParser.getCheckCount());
+		Assert.areEqual(TEST_COUNT - 1, configParser.getCheckCount());
 		#end
 	}
 
@@ -71,9 +72,9 @@ class ConfigParserTest {
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
 		#if haxe4
-		Assert.areEqual(78, configParser.getUsedCheckCount());
+		Assert.areEqual(TEST_COUNT, configParser.getUsedCheckCount());
 		#else
-		Assert.areEqual(77, configParser.getUsedCheckCount());
+		Assert.areEqual(TEST_COUNT - 1, configParser.getUsedCheckCount());
 		#end
 	}
 
