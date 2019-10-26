@@ -58,9 +58,11 @@ jobs:
       run: npx haxe buildCpp.hxml
     - name: Build JSON schema
       run: npx haxe buildSchema.hxml
-    - name: Build JSON schema
-      run: npx haxe buildSchema.hxml
+    - name: Run neko tests
+      if: matrix.haxe-version == '3.4.7'
+      run: npx haxe -D codecov_json buildTest.hxml
     - name: Run eval tests
+      if: matrix.haxe-version != '3.4.7'
       run: npx haxe -D codecov_json buildTest.hxml
     - name: Run Java tests
       run: npx haxe testJava.hxml
