@@ -910,6 +910,11 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
+                            "propertyOrder": 2
+                        },
+                        "ignoreEmptyLines": {
+                            "description": "ignores or includes empty lines when counting total file length",
+                            "type": "boolean",
                             "propertyOrder": 1
                         }
                     },
@@ -3513,12 +3518,12 @@
                     "additionalProperties": false,
                     "properties": {
                         "thresholdSimilar": {
-                            "description": "threshold for similar code blocks",
+                            "description": "maximum number of tokens allowed before detecting similar code blocks",
                             "type": "integer",
                             "propertyOrder": 2
                         },
                         "thresholdIdentical": {
-                            "description": "threshold for identical code blocks",
+                            "description": "maximum number of tokens allowed before detecting identical code blocks",
                             "type": "integer",
                             "propertyOrder": 1
                         },
@@ -3927,11 +3932,6 @@
                     "description": "Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.",
                     "additionalProperties": false,
                     "properties": {
-                        "countEmpty": {
-                            "description": "maximum includes empty lines / should ignore empty lines",
-                            "type": "boolean",
-                            "propertyOrder": 1
-                        },
                         "max": {
                             "description": "maximum number of lines per method (default: 50)",
                             "type": "integer",
@@ -3947,6 +3947,11 @@
                                 "IGNORE"
                             ],
                             "propertyOrder": 2
+                        },
+                        "ignoreEmptyLines": {
+                            "description": "ignores or includes empty lines when counting method length",
+                            "type": "boolean",
+                            "propertyOrder": 1
                         }
                     },
                     "type": "object"

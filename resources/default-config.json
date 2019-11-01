@@ -57,8 +57,8 @@
 			"type": "CodeSimilarity",
 			"props": {
 				"severityIdentical": "WARNING",
-				"thresholdIdentical": 8,
-				"thresholdSimilar": 12
+				"thresholdIdentical": 60,
+				"thresholdSimilar": 120
 			}
 		},
 		{
@@ -192,7 +192,8 @@
 		{
 			"type": "FileLength",
 			"props": {
-				"max": 2000
+				"max": 1000,
+				"ignoreEmptyLines": true
 			}
 		},
 		{
@@ -323,7 +324,7 @@
 			"type": "MethodLength",
 			"props": {
 				"max": 50,
-				"countEmpty": false
+				"ignoreEmptyLines": true
 			}
 		},
 		{

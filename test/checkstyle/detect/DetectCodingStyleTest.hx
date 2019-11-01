@@ -129,8 +129,8 @@ class DetectCodingStyleTest {
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("CodeSimilarity", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(8, props.thresholdIdentical);
-		Assert.areEqual(12, props.thresholdSimilar);
+		Assert.areEqual(60, props.thresholdIdentical);
+		Assert.areEqual(120, props.thresholdSimilar);
 	}
 
 	@Test
@@ -410,7 +410,7 @@ class DetectCodingStyleTest {
 		Assert.areEqual("MethodLength", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual(35, props.max);
-		Assert.isFalse(props.countEmpty);
+		Assert.isFalse(props.ignoreEmptyLines);
 	}
 
 	@Test

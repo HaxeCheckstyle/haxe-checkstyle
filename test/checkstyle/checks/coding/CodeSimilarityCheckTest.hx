@@ -8,30 +8,38 @@ class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
 		var check = newCheck();
 		assertNoMsg(check, NOT_SIMILAR_CODE);
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE, "Found similar code block - first seen in Test.hx:3");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_IF, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_WHILE, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_DO_WHILE, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_FOR, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_TRY, "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
+		check.thresholdSimilar = 30;
 		assertMsg(check, SIMILAR_CODE_BROPEN, "Found similar code block - first seen in Test.hx:4");
 	}
 
 	@Test
 	public function testIdenticalCodeBlocks() {
 		var check = newCheck();
+		check.thresholdIdentical = 30;
 		assertMsg(check, IDENTICAL_CODE, "Found identical code block - first seen in Test.hx:4");
 	}
 

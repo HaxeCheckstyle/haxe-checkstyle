@@ -88,7 +88,7 @@ class ExtendedEmptyLinesCheck extends Check {
 
 	override function actualRun() {
 		buildPolicyMap();
-		var emptyLines:ListOfEmptyLines = detectEmptyLines();
+		var emptyLines:ListOfEmptyLines = ListOfEmptyLines.detectEmptyLines(checker);
 		if (max <= 0) max = 1;
 		checkPackages(emptyLines);
 		checkImports(emptyLines);
@@ -97,14 +97,6 @@ class ExtendedEmptyLinesCheck extends Check {
 		checkFile(emptyLines);
 		checkFunctions(emptyLines);
 		checkComments(emptyLines);
-	}
-
-	function detectEmptyLines():ListOfEmptyLines {
-		var emptyLines:ListOfEmptyLines = new ListOfEmptyLines();
-		for (index in 0...checker.lines.length) {
-			if (~/^\s*$/.match(checker.lines[index])) emptyLines.add(index);
-		}
-		return emptyLines;
 	}
 
 	function checkPackages(emptyLines:ListOfEmptyLines) {

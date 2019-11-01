@@ -1,5 +1,7 @@
 package checkstyle.checks.size;
 
+import checkstyle.checks.whitespace.ListOfEmptyLines;
+
 /**
 	Checks for long methods. If a method becomes very long it is hard to understand.
 	Therefore long methods should usually be refactored into several individual methods that focus on a specific task.
@@ -15,84 +17,54 @@ class MethodLengthCheck extends Check {
 	public var max:Int;
 
 	/**
-		maximum includes empty lines / should ignore empty lines
+		ignores or includes empty lines when counting method length
 	**/
-	public var countEmpty:Bool;
+	public var ignoreEmptyLines:Bool;
 
 	public function new() {
-		super(AST);
+		super(TOKEN);
 		max = DEFAULT_MAX_LENGTH;
-		countEmpty = false;
+		ignoreEmptyLines = true;
 		categories = [Category.COMPLEXITY, Category.CLARITY];
 		points = 8;
 	}
 
 	override public function actualRun() {
-		forEachField(searchField);
-	}
+		var root:TokenTree = checker.getTokenTree();
+		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], FIRST);
 
-	function searchField(f:Field, _) {
-		switch (f.kind) {
-			case FFun(ff):
-				checkMethod(f);
-			default:
+		var emptyLines:ListOfEmptyLines = ListOfEmptyLines.detectEmptyLines(checker);
+		for (func in functions) {
+			if (isPosSuppressed(func.pos)) continue;
+			checkMethod(func, emptyLines);
 		}
-
-		f.walkField(function(e) {
-			switch (e.expr) {
-				case EFunction(name, ff):
-					checkFunction(e);
-				default:
-			}
-		});
 	}
 
-	function checkMethod(f:Field) {
-		var lp = checker.getLinePos(f.pos.min);
-		var lmin = lp.line;
-		var lmax = checker.getLinePos(f.pos.max).line;
-
-		var len = getLineCount(lmin, lmax);
-		if (len > max) warnFunctionLength(len, f.name, f.pos);
-	}
-
-	function checkFunction(f:Expr) {
-		var lp = checker.getLinePos(f.pos.min);
-		var lmin = lp.line;
-		var lmax = checker.getLinePos(f.pos.max).line;
-		var fname = "(anonymous)";
-		switch (f.expr) {
-			#if (haxe_ver < 4.0)
-			case EFunction(name, ff):
-				if (name != null) fname = name;
-			#else
-			case EFunction(kind, ff):
-				switch (kind) {
-					case null:
-					case FAnonymous:
-						var fname = "(anonymous)";
-					case FNamed(name, inlined):
-						fname = name;
-					case FArrow:
-						var fname = "(anonymous arrow)";
-				}
-			#end
-			default:
-				throw "EFunction only";
-		}
-
-		var len = getLineCount(lmin, lmax);
-		if (len > max) warnFunctionLength(len, fname, f.pos);
-	}
-
-	function getLineCount(lmin:Int, lmax:Int):Int {
-		var emptyLines = 0;
-		if (countEmpty) {
-			for (i in lmin...lmax) {
-				if (~/^\s*$/.match(checker.lines[i]) || ~/^\s*\/\/.*/.match(checker.lines[i])) emptyLines++;
+	function checkMethod(token:TokenTree, emptyLines:ListOfEmptyLines) {
+		var pos:Position = token.getPos();
+		var lmin:Int = checker.getLinePos(pos.min).line;
+		var lmax:Int = checker.getLinePos(pos.max).line;
+		var len:Int = getLineCount(lmin, lmax, emptyLines);
+		var name:String = "(anonymous)";
+		var nameTok:Null<TokenTree> = token.access().firstChild().token;
+		if (nameTok != null) {
+			switch (nameTok.tok) {
+				case Const(CIdent(text)):
+					name = text;
+				case Kwd(KwdNew):
+					name = "new";
+				case _:
 			}
 		}
-		return lmax - lmin - emptyLines;
+		if (len > max) warnFunctionLength(len, name, pos);
+	}
+
+	function getLineCount(lmin:Int, lmax:Int, emptyLines:ListOfEmptyLines):Int {
+		var emptyLineCount = 0;
+		if (ignoreEmptyLines) {
+			emptyLineCount = emptyLines.countEmptylinesBetween(lmin, lmax);
+		}
+		return lmax - lmin - emptyLineCount;
 	}
 
 	function warnFunctionLength(len:Int, name:String, pos:Position) {
@@ -106,7 +78,7 @@ class MethodLengthCheck extends Check {
 				propertyName: "max",
 				values: [for (i in 0...17) 20 + i * 5]
 			}, {
-				propertyName: "countEmpty",
+				propertyName: "ignoreEmptyLines",
 				values: [true, false]
 			}]
 		}];

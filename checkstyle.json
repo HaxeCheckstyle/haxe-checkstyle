@@ -134,9 +134,6 @@
 			}
 		},
 		{
-			"props": {
-				"max": 2000
-			},
 			"type": "FileLength"
 		},
 		{
