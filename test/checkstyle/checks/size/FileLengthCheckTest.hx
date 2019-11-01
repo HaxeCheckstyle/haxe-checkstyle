@@ -3,19 +3,31 @@ package checkstyle.checks.size;
 class FileLengthCheckTest extends CheckTestCase<FileLengthCheckTests> {
 	@Test
 	public function testCorrectLineCount() {
-		assertNoMsg(new FileLengthCheck(), TEST2000);
-		assertNoMsg(new FileLengthCheck(), TEST41);
+		var check = new FileLengthCheck();
+		check.ignoreEmptyLines = false;
+		assertNoMsg(check, TEST41);
+
+		check.ignoreEmptyLines = true;
+		assertNoMsg(check, TEST2000);
+		assertNoMsg(check, TEST2001);
+
+		check.ignoreEmptyLines = false;
+		check.max = 2000;
+		assertNoMsg(check, TEST2000);
 	}
 
 	@Test
 	public function testDefaultFileLength() {
-		assertMsg(new FileLengthCheck(), TEST2001, "File length is 2001 lines (max allowed is 2000)");
+		var check = new FileLengthCheck();
+		check.ignoreEmptyLines = false;
+		assertMsg(check, TEST2001, "File length is 2001 lines (max allowed is 1000)");
 	}
 
 	@Test
 	public function testConfigurableFileLength() {
 		var check = new FileLengthCheck();
 		check.max = 40;
+		check.ignoreEmptyLines = false;
 		assertMsg(check, TEST41, "File length is 42 lines (max allowed is 40)");
 	}
 

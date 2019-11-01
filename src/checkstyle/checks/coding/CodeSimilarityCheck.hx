@@ -28,20 +28,20 @@ class CodeSimilarityCheck extends Check {
 	public var severityIdentical:SeverityLevel;
 
 	/**
-		threshold for identical code blocks
+		maximum number of tokens allowed before detecting identical code blocks
 	**/
 	public var thresholdIdentical:Int;
 
 	/**
-		threshold for similar code blocks
+		maximum number of tokens allowed before detecting similar code blocks
 	**/
 	public var thresholdSimilar:Int;
 
 	public function new() {
 		super(TOKEN);
 		severityIdentical = WARNING;
-		thresholdIdentical = 8;
-		thresholdSimilar = 12;
+		thresholdIdentical = 60;
+		thresholdSimilar = 120;
 		categories = [STYLE, DUPLICATION];
 	}
 
@@ -82,10 +82,9 @@ class CodeSimilarityCheck extends Check {
 
 		var lineStart:LinePos = checker.getLinePos(pos.min);
 		var lineEnd:LinePos = checker.getLinePos(pos.max);
-		var lines:Int = lineEnd.line - lineStart.line;
-		if (lines <= Math.min(thresholdIdentical, thresholdSimilar)) return false;
 
 		var hashes:CodeHashes = makeCodeHashes(token);
+		if (hashes.tokenCount <= Math.min(thresholdIdentical, thresholdSimilar)) return false;
 		var codeBlock:HashedCodeBlock = {
 			fileName: token.pos.file,
 			lineStart: lineStart,
@@ -94,15 +93,15 @@ class CodeSimilarityCheck extends Check {
 			endColumn: offsetToColumn(lineEnd)
 		}
 
-		if (lines > thresholdIdentical) {
+		if (hashes.tokenCount > thresholdIdentical) {
 			var existing:Null<HashedCodeBlock> = checkOrAddHash(hashes.identicalHash, codeBlock, IDENTICAL_HASHES);
 			if (existing != null) {
-				logRange("Found identical code block - " + formatFirstFound(existing), pos.min, pos.max, SIMILAR_BLOCK, ERROR);
+				logRange("Found identical code block - " + formatFirstFound(existing), pos.min, pos.max, SIMILAR_BLOCK, severityIdentical);
 				return true;
 			}
 		}
 
-		if (lines > thresholdSimilar) {
+		if (hashes.tokenCount > thresholdSimilar) {
 			var existing:Null<HashedCodeBlock> = checkOrAddHash(hashes.similarHash, codeBlock, SIMILAR_HASHES);
 			if (existing == null) return false;
 			logRange("Found similar code block - " + formatFirstFound(existing), pos.min, pos.max, SIMILAR_BLOCK);
@@ -126,19 +125,26 @@ class CodeSimilarityCheck extends Check {
 	function makeCodeHashes(token:TokenTree):CodeHashes {
 		var similar:StringBuf = new StringBuf();
 		var identical:StringBuf = new StringBuf();
-		makeCodeHashesRecursive(token, similar, identical);
+		var tokenCount:Int = makeCodeHashesRecursive(token, similar, identical);
 		return {
 			identicalHash: identical.toString(),
-			similarHash: similar.toString()
+			similarHash: similar.toString(),
+			tokenCount: tokenCount
 		};
 	}
 
-	function makeCodeHashesRecursive(token:TokenTree, similar:StringBuf, identical:StringBuf) {
+	function makeCodeHashesRecursive(token:TokenTree, similar:StringBuf, identical:StringBuf):Int {
 		similar.add(similarTokenText(token));
-		identical.add(identicalTokenText(token));
-		if (token.children != null) {
-			for (child in token.children) makeCodeHashesRecursive(child, similar, identical);
+		var count:Int = 0;
+		var identicalText:Null<String> = identicalTokenText(token);
+		if (identicalText != null) {
+			count++;
+			identical.add(identicalText);
 		}
+		if (token.children != null) {
+			for (child in token.children) count += makeCodeHashesRecursive(child, similar, identical);
+		}
+		return count;
 	}
 
 	function similarTokenText(token:TokenTree):String {
@@ -184,7 +190,7 @@ class CodeSimilarityCheck extends Check {
 		}
 	}
 
-	function identicalTokenText(token:TokenTree):String {
+	function identicalTokenText(token:TokenTree):Null<String> {
 		switch (token.tok) {
 			case Const(CFloat(f)):
 				return '$f';
@@ -203,9 +209,9 @@ class CodeSimilarityCheck extends Check {
 			case Binop(op):
 				return '$op';
 			case Comment(_):
-				return "";
+				return null;
 			case CommentLine(_):
-				return "";
+				return null;
 			case IntInterval(i):
 				return '...$i';
 			default:
@@ -241,4 +247,5 @@ typedef HashedCodeBlock = {
 typedef CodeHashes = {
 	var identicalHash:String;
 	var similarHash:String;
+	var tokenCount:Int;
 }

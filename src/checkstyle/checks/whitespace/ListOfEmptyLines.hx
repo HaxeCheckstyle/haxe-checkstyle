@@ -7,12 +7,30 @@ import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 	line numbers start at 0
 **/
 class ListOfEmptyLines {
-	var lines:Array<Int>;
 	var lineRanges:Array<EmptyLineRange>;
+
+	/**
+		list of empty line indexes
+	**/
+	public var lines:Array<Int>;
 
 	public function new() {
 		lines = [];
 		lineRanges = null;
+	}
+
+	/**
+		detects empty lines and constructs a ListOfEmptyLines object
+
+		@param checker - checker holding lines of current file
+		@return populated ListOfEmptyLines instance
+	**/
+	public static function detectEmptyLines(checker:Checker):ListOfEmptyLines {
+		var emptyLines:ListOfEmptyLines = new ListOfEmptyLines();
+		for (index in 0...checker.lines.length) {
+			if (~/^\s*$/.match(checker.lines[index])) emptyLines.add(index);
+		}
+		return emptyLines;
 	}
 
 	/**
@@ -167,6 +185,22 @@ class ListOfEmptyLines {
 			results.push(RANGE(start, current));
 		}
 		return results;
+	}
+
+	/**
+		counts empty lines between starting and ending line
+		@param startLine first line of range
+		@param endLine last line of range
+		@return Int number of empty lines inbetween start and end line
+	**/
+	public function countEmptylinesBetween(startLine:Int, endLine:Int):Int {
+		var count:Int = 0;
+		for (line in lines) {
+			if (line < startLine) continue;
+			if (line > endLine) continue;
+			count++;
+		}
+		return count;
 	}
 
 	public function toString():String {
