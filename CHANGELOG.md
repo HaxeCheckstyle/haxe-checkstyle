@@ -10,15 +10,15 @@
 - New check `NestedControlFlow` to check for nested control flow expressions (e.g. `if`, `for`, `while`, `do/while`, `switch` and `try`) ([#485](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/485))
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Added `ignoreEmptyLines` in `FileLengthCheck` to ignore empty lines (default = true) ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
-- Added support for final in `DocCommentStyle` and `FieldDocComment` checks
-- Added suggestion to use `final` for `public static var` fields in `Final` check
+- Added support for final in `DocCommentStyle` and `FieldDocComment` checks ([#487](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/487))
+- Added suggestion to use `final` for `public static var` fields in `Final` check ([#487](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/487))
 - Changed default value for `max` in `FileLengthCheck` to 1000 ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed `MethodLength` check to use tokentree ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
-- Changed reported position for `FieldDocComment` and `MethodLength` to only include function signature
+- Changed reported position for `FieldDocComment` and `MethodLength` to only include function signature ([#487](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/487))
 - Fixed range exclusion to allow excluding construtor (`new`) ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Refactored / renamed `AvoidInlineConditionals` to `AvoidTernaryOperator` ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
-- Refactored / renamed `InlineFinal` to `Final`
+- Refactored / renamed `InlineFinal` to `Final` ([#487](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/487))
 
 ## version 2.5.0 (2019-10-10)
 
