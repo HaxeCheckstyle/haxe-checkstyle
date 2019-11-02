@@ -11,6 +11,7 @@
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
 - Added `ignoreEmptyLines` in `FileLengthCheck` to ignore empty lines (default = true) ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Added support for final in `DocCommentStyle` and `FieldDocComment` checks
+- Added suggestion to use `final` for `public static var` fields in `Final` check
 - Changed default value for `max` in `FileLengthCheck` to 1000 ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed `MethodLength` check to use tokentree ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed reported position for `FieldDocComment` and `MethodLength` to only include function signature

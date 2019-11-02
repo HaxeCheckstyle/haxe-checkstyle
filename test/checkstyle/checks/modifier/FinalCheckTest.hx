@@ -3,7 +3,7 @@ package checkstyle.checks.modifier;
 #if haxe4
 class FinalCheckTest extends CheckTestCase<FinalCheckTests> {
 	static inline var ERROR_INLINE_VAR:String = 'Consider using "inline final" for field "test"';
-	static inline var ERROR_PUBLIC_STATIC:String = 'Consider using "final" for field "test"';
+	static inline var ERROR_PUBLIC_STATIC:String = 'Public static field "test" should be "final"';
 
 	@Test
 	public function testInlineFinal() {

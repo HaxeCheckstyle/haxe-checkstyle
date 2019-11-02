@@ -35,12 +35,12 @@ class FinalCheck extends Check {
 		if (!f.access.contains(APublic)) return;
 		if (!f.access.contains(AStatic)) return;
 
-		logPos('Consider using "final" for field "${f.name}"', f.pos);
+		logPos('Public static field "${f.name}" should be "final"', f.pos, SHOULD_BE_PUBLIC_FINAL);
 	}
 
 	function checkInlineVar(f:Field) {
 		if (!f.access.contains(AInline)) return;
-		logPos('Consider using "inline final" for field "${f.name}"', f.pos);
+		logPos('Consider using "inline final" for field "${f.name}"', f.pos, USE_INLINE_FINAL);
 	}
 
 	override public function detectableInstances():DetectableInstances {
@@ -52,5 +52,11 @@ class FinalCheck extends Check {
 			}]
 		}];
 	}
+}
+
+@:enum
+abstract FinalCode(String) to String {
+	var USE_INLINE_FINAL = "UseInlineFinal";
+	var SHOULD_BE_PUBLIC_FINAL = "ShouldBePublicFinal";
 }
 #end
