@@ -76,4 +76,6 @@ jobs:
         )
     - name: Upload results to codecov
       if: success() && matrix.haxe-version == '4.0.0'
-      run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
+      uses: codecov/codecov-action@v1.0.3
+      with:
+        token: ${{secrets.CODECOV_TOKEN}}
