@@ -197,6 +197,10 @@
 			}
 		},
 		{
+			"type": "Final",
+			"props": {}
+		},
+		{
 			"type": "HexadecimalLiteral",
 			"props": {
 				"option": "upperCase"
@@ -226,10 +230,6 @@
 				"character": "tab",
 				"ignorePattern": "^$"
 			}
-		},
-		{
-			"type": "InlineFinal",
-			"props": {}
 		},
 		{
 			"type": "InnerAssignment",
