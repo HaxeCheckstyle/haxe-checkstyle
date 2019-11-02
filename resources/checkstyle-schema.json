@@ -1679,38 +1679,6 @@
             },
             "type": "object"
         },
-        "InlineFinalCheck": {
-            "description": "Checks for places that use inline var instead of inline final (Haxe 4+).",
-            "additionalProperties": false,
-            "properties": {
-                "type": {
-                    "description": "Checks for places that use inline var instead of inline final (Haxe 4+).",
-                    "type": "string",
-                    "enum": [
-                        "InlineFinal"
-                    ]
-                },
-                "props": {
-                    "description": "Checks for places that use inline var instead of inline final (Haxe 4+).",
-                    "additionalProperties": false,
-                    "properties": {
-                        "severity": {
-                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
-                            "type": "string",
-                            "enum": [
-                                "INFO",
-                                "WARNING",
-                                "ERROR",
-                                "IGNORE"
-                            ],
-                            "propertyOrder": 0
-                        }
-                    },
-                    "type": "object"
-                }
-            },
-            "type": "object"
-        },
         "Threshold": {
             "description": "threshold for code complexity",
             "required": [
@@ -3059,6 +3027,10 @@
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 19
                 },
+                "Final": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 28
+                },
                 "MultipleStringLiterals": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 45
@@ -3124,7 +3096,7 @@
                 },
                 "HexadecimalLiteral": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 28
+                    "propertyOrder": 29
                 },
                 "WhitespaceAfter": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -3158,10 +3130,6 @@
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 52
                 },
-                "InlineFinal": {
-                    "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 32
-                },
                 "AvoidStarImport": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 9
@@ -3180,7 +3148,7 @@
                 },
                 "HiddenField": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 29
+                    "propertyOrder": 30
                 },
                 "UnnecessaryConstructor": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -3264,7 +3232,7 @@
                 },
                 "Indentation": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 30
+                    "propertyOrder": 31
                 },
                 "version": {
                     "maximum": 1,
@@ -3297,7 +3265,7 @@
                 },
                 "IndentationCharacter": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 31
+                    "propertyOrder": 32
                 },
                 "MagicNumber": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -3709,6 +3677,38 @@
                                 "IGNORE"
                             ],
                             "propertyOrder": 3
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "FinalCheck": {
+            "description": "Checks for places that use var instead of final (Haxe 4+).",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "description": "Checks for places that use var instead of final (Haxe 4+).",
+                    "type": "string",
+                    "enum": [
+                        "Final"
+                    ]
+                },
+                "props": {
+                    "description": "Checks for places that use var instead of final (Haxe 4+).",
+                    "additionalProperties": false,
+                    "properties": {
+                        "severity": {
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
+                            "type": "string",
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "propertyOrder": 0
                         }
                     },
                     "type": "object"
@@ -4300,6 +4300,9 @@
                                 "$ref": "#/definitions/FileLengthCheck"
                             },
                             {
+                                "$ref": "#/definitions/FinalCheck"
+                            },
+                            {
                                 "$ref": "#/definitions/HexadecimalLiteralCheck"
                             },
                             {
@@ -4310,9 +4313,6 @@
                             },
                             {
                                 "$ref": "#/definitions/IndentationCharacterCheck"
-                            },
-                            {
-                                "$ref": "#/definitions/InlineFinalCheck"
                             },
                             {
                                 "$ref": "#/definitions/InnerAssignmentCheck"

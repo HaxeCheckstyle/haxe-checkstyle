@@ -38,6 +38,7 @@ class DocCommentStyleCheck extends Check {
 			Kwd(KwdInterface),
 			Kwd(KwdTypedef),
 			Kwd(KwdVar),
+			#if haxe4 Kwd(KwdFinal) #else Const(CIdent("final")) #end,
 			Kwd(KwdFunction)
 		], ALL);
 

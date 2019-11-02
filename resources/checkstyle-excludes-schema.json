@@ -24,6 +24,10 @@
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 19
                 },
+                "Final": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 28
+                },
                 "MultipleStringLiterals": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 45
@@ -89,7 +93,7 @@
                 },
                 "HexadecimalLiteral": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 28
+                    "propertyOrder": 29
                 },
                 "WhitespaceAfter": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -123,10 +127,6 @@
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 52
                 },
-                "InlineFinal": {
-                    "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 32
-                },
                 "AvoidStarImport": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 9
@@ -145,7 +145,7 @@
                 },
                 "HiddenField": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 29
+                    "propertyOrder": 30
                 },
                 "UnnecessaryConstructor": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -229,7 +229,7 @@
                 },
                 "Indentation": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 30
+                    "propertyOrder": 31
                 },
                 "version": {
                     "maximum": 1,
@@ -262,7 +262,7 @@
                 },
                 "IndentationCharacter": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 31
+                    "propertyOrder": 32
                 },
                 "MagicNumber": {
                     "$ref": "#/definitions/ExcludeFilterList",

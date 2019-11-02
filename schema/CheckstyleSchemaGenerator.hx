@@ -102,7 +102,7 @@ class CheckstyleSchemaGenerator {
 				continue;
 			}
 			#if (haxe_ver < 4)
-			if (name == "InlineFinalCheck") {
+			if (name == "FinalCheck") {
 				continue;
 			}
 			#end

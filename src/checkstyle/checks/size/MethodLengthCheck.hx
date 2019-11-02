@@ -1,5 +1,6 @@
 package checkstyle.checks.size;
 
+import checkstyle.checks.comments.FieldDocCommentCheck;
 import checkstyle.checks.whitespace.ListOfEmptyLines;
 
 /**
@@ -56,7 +57,7 @@ class MethodLengthCheck extends Check {
 				case _:
 			}
 		}
-		if (len > max) warnFunctionLength(len, name, pos);
+		if (len > max) warnFunctionLength(len, name, FieldDocCommentCheck.getReportPos(token));
 	}
 
 	function getLineCount(lmin:Int, lmax:Int, emptyLines:ListOfEmptyLines):Int {

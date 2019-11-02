@@ -18,6 +18,7 @@ jobs:
         haxe-version: ['3.4.7', '4.0.0', 'nightly']
     env:
       CC_TEST_REPORTER_ID: 1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
+      CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
     steps:
     - uses: actions/checkout@v1
     - name: Use Node.js 10
