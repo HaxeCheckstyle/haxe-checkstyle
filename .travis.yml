@@ -41,4 +41,4 @@ after_script:
   - if [[ "$HAXE_VERSION" == "haxe4" ]]; then (cd src; ../cc-test-reporter upload-coverage); fi
 
 after_success:
-  - if [[ "$HAXE_VERSION" == "haxe4" ]]; then bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"; fi
+  - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
