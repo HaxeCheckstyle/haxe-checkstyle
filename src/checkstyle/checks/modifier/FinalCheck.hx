@@ -2,11 +2,11 @@ package checkstyle.checks.modifier;
 
 #if (haxe4)
 /**
-	Checks for places that use inline var instead of inline final (Haxe 4+)
+	Checks for places that use var instead of final (Haxe 4+).
 **/
-@name("InlineFinal")
-@desc("Checks for places that use inline var instead of inline final (Haxe 4+).")
-class InlineFinalCheck extends Check {
+@name("Final", "InlineFinal")
+@desc("Checks for places that use var instead of final (Haxe 4+).")
+class FinalCheck extends Check {
 	public function new() {
 		super(AST);
 		categories = [Category.STYLE, Category.CLARITY];
@@ -26,8 +26,20 @@ class InlineFinalCheck extends Check {
 				return;
 		}
 		if (f.access.contains(AFinal)) return;
-		if (!f.access.contains(AInline)) return;
 
+		checkPublicStatic(f);
+		checkInlineVar(f);
+	}
+
+	function checkPublicStatic(f:Field) {
+		if (!f.access.contains(APublic)) return;
+		if (!f.access.contains(AStatic)) return;
+
+		logPos('Consider using "final" for field "${f.name}"', f.pos);
+	}
+
+	function checkInlineVar(f:Field) {
+		if (!f.access.contains(AInline)) return;
 		logPos('Consider using "inline final" for field "${f.name}"', f.pos);
 	}
 

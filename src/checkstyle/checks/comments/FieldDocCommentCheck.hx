@@ -80,7 +80,14 @@ class FieldDocCommentCheck extends Check {
 		var typeTokens = root.filter(typeTokenDefs, ALL);
 
 		var fieldTokenDefs:Array<TokenDef> = [];
-		if ((fieldType == VARS) || (fieldType == BOTH)) fieldTokenDefs.push(Kwd(KwdVar));
+		if ((fieldType == VARS) || (fieldType == BOTH)) {
+			fieldTokenDefs.push(Kwd(KwdVar));
+			#if haxe4
+			fieldTokenDefs.push(Kwd(KwdFinal));
+			#else
+			fieldTokenDefs.push(Const(CIdent("final")));
+			#end
+		}
 		if ((fieldType == FUNCTIONS) || (fieldType == BOTH)) fieldTokenDefs.push(Kwd(KwdFunction));
 
 		for (typeToken in typeTokens) {
@@ -112,8 +119,9 @@ class FieldDocCommentCheck extends Check {
 		var name:String = getTypeName(token);
 		if (excludeNames.indexOf(name) >= 0) return;
 		var prevToken:TokenTree = token.previousSibling;
+
 		if (prevToken == null || !prevToken.isComment()) {
-			logPos('Field "$name" should have documentation', token.getPos());
+			logPos('Field "$name" should have documentation', getReportPos(token));
 			return;
 		}
 		switch (prevToken.tok) {
@@ -121,6 +129,29 @@ class FieldDocCommentCheck extends Check {
 				checkComment(name, token, prevToken, text);
 			default:
 		}
+	}
+
+	/**
+		report function signature not body
+		@param token function or var token
+		@return Position token position without body
+	**/
+	public static function getReportPos(token:TokenTree):Position {
+		var pos:Position = token.getPos();
+		var body:Null<TokenTree> = token.access().firstChild().firstOf(POpen).token;
+		if (body == null) return pos;
+		body = body.nextSibling;
+		if (body == null) return pos;
+		switch (body.tok) {
+			case BrOpen:
+			case DblDot:
+				body = body.nextSibling;
+			default:
+				return pos;
+		}
+		if (body == null) return pos;
+		pos.max = body.pos.min;
+		return pos;
 	}
 
 	function checkIgnoreOverride(token:TokenTree):Bool {

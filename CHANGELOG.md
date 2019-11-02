@@ -2,19 +2,22 @@
 
 ## dev branch / next version (2.x.x)
 
-- **Breaking Change** changed `MethodLength.countEmpty` into `ignoreEmptyLines`
+- **Breaking Change** changed `MethodLength.countEmpty` into `ignoreEmptyLines` ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - New check `CodeSimilarity` to check for similar or identical code blocks ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479) + [#480](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/480) + [#484](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/484) + [#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - New check `EnforceVarTypeHint` to enforce type hints for all variables and finals, fixes [#464](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/464) ([#481](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/481) + [#482](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/482))
 - New check `AvoidIdentifier` marks identifiers to avoid ([#483](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/483))
 - New check `ArrowFunction` to check for curlies, nested functions and returns in arrow functions ([#484](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/484))
 - New check `NestedControlFlow` to check for nested control flow expressions (e.g. `if`, `for`, `while`, `do/while`, `switch` and `try`) ([#485](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/485))
 - Added coverage upload to codeclimate ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
-- Added `ignoreEmptyLines` in FileLengthCheck to ignore empty lines (default = true) ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
+- Added `ignoreEmptyLines` in `FileLengthCheck` to ignore empty lines (default = true) ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
+- Added support for final in `DocCommentStyle` and `FieldDocComment` checks
 - Changed default value for `max` in `FileLengthCheck` to 1000 ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed `MethodLength` check to use tokentree ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
-- Fixed allow excluding construtor (`new`) via range exclusion ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
+- Changed reported position for `FieldDocComment` and `MethodLength` to only include function signature
+- Fixed range exclusion to allow excluding construtor (`new`) ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
-- Refactored / renamed AvoidInlineConditionals to AvoidTernaryOperator ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
+- Refactored / renamed `AvoidInlineConditionals` to `AvoidTernaryOperator` ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
+- Refactored / renamed `InlineFinal` to `Final`
 
 ## version 2.5.0 (2019-10-10)
 
