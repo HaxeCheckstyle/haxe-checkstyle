@@ -206,9 +206,7 @@ class CodeSimilarityCheck extends Check {
 			case Const(CFloat(_)):
 				return "const_float";
 			case Const(CString(s)):
-				if (StringUtils.isStringInterpolation(s, checker.file.content, token.pos)) {
-					return "const_string_interpol";
-				}
+				if (StringUtils.isStringInterpolation(s, checker.file.content, token.pos)) return "const_string_interpol";
 				return "const_string";
 			case Const(CIdent(_)):
 				return "identifier";

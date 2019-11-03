@@ -631,6 +631,7 @@
 			"checkstyle/checks/metrics/CyclomaticComplexityCheck",
 			"checkstyle/checks/block/LeftCurlyCheck",
 			"checkstyle/checks/block/RightCurlyCheck",
+			"checkstyle/checks/coding/CodeSimilarityCheck",
 			"checkstyle/checks/naming/MethodNameCheck",
 			"checkstyle/checks/type/ReturnCheck",
 			"checkstyle/checks/whitespace/OperatorWrapCheck",
