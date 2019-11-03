@@ -1,7 +1,7 @@
 package checkstyle.checks.size;
 
-import checkstyle.checks.comments.FieldDocCommentCheck;
 import checkstyle.checks.whitespace.ListOfEmptyLines;
+import checkstyle.utils.PosHelper;
 
 /**
 	Checks for long methods. If a method becomes very long it is hard to understand.
@@ -57,7 +57,7 @@ class MethodLengthCheck extends Check {
 				case _:
 			}
 		}
-		if (len > max) warnFunctionLength(len, name, FieldDocCommentCheck.getReportPos(token));
+		if (len > max) warnFunctionLength(len, name, PosHelper.getReportPos(token));
 	}
 
 	function getLineCount(lmin:Int, lmax:Int, emptyLines:ListOfEmptyLines):Int {

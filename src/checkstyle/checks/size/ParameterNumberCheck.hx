@@ -1,5 +1,7 @@
 package checkstyle.checks.size;
 
+import checkstyle.utils.PosHelper;
+
 /**
 	Checks the number of parameters of a method.
 **/
@@ -35,7 +37,7 @@ class ParameterNumberCheck extends Check {
 		switch (f.kind) {
 			case FFun(fun):
 				if ((fun.args != null) && (fun.args.length > max)) {
-					warnMaxParameter(f.name, f.pos);
+					warnMaxParameter(f.name, PosHelper.makeFieldSignaturePosition(f));
 				}
 			default:
 		}

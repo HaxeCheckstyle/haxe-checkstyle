@@ -1,6 +1,7 @@
 package checkstyle.checks.comments;
 
 import checkstyle.checks.comments.TypeDocCommentCheck.TypeDocCommentToken;
+import checkstyle.utils.PosHelper;
 
 /**
 	Checks code documentation on type level
@@ -121,7 +122,7 @@ class FieldDocCommentCheck extends Check {
 		var prevToken:TokenTree = token.previousSibling;
 
 		if (prevToken == null || !prevToken.isComment()) {
-			logPos('Field "$name" should have documentation', getReportPos(token));
+			logPos('Field "$name" should have documentation', PosHelper.getReportPos(token));
 			return;
 		}
 		switch (prevToken.tok) {
@@ -129,29 +130,6 @@ class FieldDocCommentCheck extends Check {
 				checkComment(name, token, prevToken, text);
 			default:
 		}
-	}
-
-	/**
-		report function signature not body
-		@param token function or var token
-		@return Position token position without body
-	**/
-	public static function getReportPos(token:TokenTree):Position {
-		var pos:Position = token.getPos();
-		var body:Null<TokenTree> = token.access().firstChild().firstOf(POpen).token;
-		if (body == null) return pos;
-		body = body.nextSibling;
-		if (body == null) return pos;
-		switch (body.tok) {
-			case BrOpen:
-			case DblDot:
-				body = body.nextSibling;
-			default:
-				return pos;
-		}
-		if (body == null) return pos;
-		pos.max = body.pos.min;
-		return pos;
 	}
 
 	function checkIgnoreOverride(token:TokenTree):Bool {
