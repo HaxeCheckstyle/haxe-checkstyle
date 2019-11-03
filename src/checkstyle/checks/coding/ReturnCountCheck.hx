@@ -1,5 +1,7 @@
 package checkstyle.checks.coding;
 
+import checkstyle.utils.PosHelper;
+
 /**
 	Restricts the number of return statements in methods (2 by default). Ignores methods that matches "ignoreFormat" regex property.
 **/
@@ -36,10 +38,10 @@ class ReturnCountCheck extends Check {
 				default:
 			}
 			if (isPosSuppressed(fn.pos)) continue;
-			if (!fn.hasChildren()) throw "function has invalid structure!";
+			if (!fn.hasChildren()) continue;
 			var returns = fn.filterCallback(filterReturns);
 			if (returns.length > max) {
-				logPos('Return count is ${returns.length} (max allowed is ${max})', fn.pos);
+				logPos('Return count is ${returns.length} (max allowed is ${max})', PosHelper.getReportPos(fn));
 			}
 		}
 	}

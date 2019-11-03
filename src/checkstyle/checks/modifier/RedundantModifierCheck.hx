@@ -1,5 +1,7 @@
 package checkstyle.checks.modifier;
 
+import checkstyle.utils.PosHelper;
+
 /**
 	Checks for redundant modifiers.
 	Omitting the visibility modifier usually defaults the visibility to "private" in normal classes and "public" in interfaces and externs.
@@ -51,13 +53,13 @@ class RedundantModifierCheck extends Check {
 		var redundantCode:String = isDefaultPrivate ? REDUNDANT_PRIVATE : REDUNDANT_PUBLIC;
 		if (!f.access.contains(APublic) && !f.access.contains(APrivate)) {
 			if ((!isDefaultPrivate && forcePublic) || (isDefaultPrivate && forcePrivate)) {
-				logPos('Missing "$implicitAccess" keyword for "${f.name}"', f.pos, missingCode);
+				logPos('Missing "$implicitAccess" keyword for "${f.name}"', PosHelper.makeFieldSignaturePosition(f), missingCode);
 			}
 		}
 
 		if ((!forcePrivate && isDefaultPrivate && f.access.contains(APrivate))
 			|| (!forcePublic && !isDefaultPrivate && f.access.contains(APublic))) {
-			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', f.pos, redundantCode);
+			logPos('"$implicitAccess" keyword is redundant for "${f.name}"', PosHelper.makeFieldSignaturePosition(f), redundantCode);
 		}
 	}
 
