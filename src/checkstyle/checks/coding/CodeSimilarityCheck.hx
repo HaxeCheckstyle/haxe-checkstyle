@@ -21,6 +21,10 @@ class CodeSimilarityCheck extends Check {
 	static var SIMILAR_HASHES:Map<String, HashedCodeBlock> = new Map<String, HashedCodeBlock>();
 	static var IDENTICAL_HASHES:Map<String, HashedCodeBlock> = new Map<String, HashedCodeBlock>();
 	static var LOCK:Mutex = new Mutex();
+	#if use_similarity_ringbuffer
+	static var FILE_RINGBUFFER:Array<String> = [];
+	static var FILE_HASHES:Map<String, Array<CodeHashes>> = new Map<String, Array<CodeHashes>>();
+	#end
 
 	/**
 		severity level for identical code blocks
@@ -92,6 +96,9 @@ class CodeSimilarityCheck extends Check {
 			startColumn: offsetToColumn(lineStart),
 			endColumn: offsetToColumn(lineEnd)
 		}
+		#if use_similarity_ringbuffer
+		recordFileHashes(hashes, codeBlock);
+		#end
 
 		if (hashes.tokenCount > thresholdIdentical) {
 			var existing:Null<HashedCodeBlock> = checkOrAddHash(hashes.identicalHash, codeBlock, IDENTICAL_HASHES);
@@ -117,10 +124,57 @@ class CodeSimilarityCheck extends Check {
 	function checkOrAddHash(hash:String, codeBlock:HashedCodeBlock, hashTable:Map<String, HashedCodeBlock>):Null<HashedCodeBlock> {
 		LOCK.acquire();
 		var existing:Null<HashedCodeBlock> = hashTable.get(hash);
-		if (existing == null) hashTable.set(hash, codeBlock);
+		if (existing == null) {
+			hashTable.set(hash, codeBlock);
+		}
 		LOCK.release();
 		return existing;
 	}
+
+	#if use_similarity_ringbuffer
+	function recordFileHashes(hashes:CodeHashes, codeBlock:HashedCodeBlock) {
+		LOCK.acquire();
+		if (!FILE_RINGBUFFER.contains(codeBlock.fileName)) FILE_RINGBUFFER.push(codeBlock.fileName);
+		var fileHashes:Null<Array<CodeHashes>> = FILE_HASHES.get(codeBlock.fileName);
+		if (fileHashes == null) {
+			fileHashes = [];
+			FILE_HASHES.set(codeBlock.fileName, fileHashes);
+		}
+		fileHashes.push(hashes);
+		LOCK.release();
+	}
+
+	static function cleanupRingBuffer(maxFileCount:Int) {
+		LOCK.acquire();
+		while (FILE_RINGBUFFER.length > maxFileCount) {
+			var fileName:String = FILE_RINGBUFFER.shift();
+			var fileHashes:Null<Array<CodeHashes>> = FILE_HASHES.get(fileName);
+			if (fileHashes == null) {
+				continue;
+			}
+			for (hash in fileHashes) {
+				SIMILAR_HASHES.remove(hash.similarHash);
+				IDENTICAL_HASHES.remove(hash.identicalHash);
+			}
+			FILE_HASHES.remove(fileName);
+		}
+		LOCK.release();
+	}
+
+	static function cleanupFile(fileName:String) {
+		LOCK.acquire();
+		FILE_RINGBUFFER.remove(fileName);
+		var fileHashes:Null<Array<CodeHashes>> = FILE_HASHES.get(fileName);
+		if (fileHashes != null) {
+			for (hash in fileHashes) {
+				SIMILAR_HASHES.remove(hash.similarHash);
+				IDENTICAL_HASHES.remove(hash.identicalHash);
+			}
+			FILE_HASHES.remove(fileName);
+		}
+		LOCK.release();
+	}
+	#end
 
 	function makeCodeHashes(token:TokenTree):CodeHashes {
 		var similar:StringBuf = new StringBuf();
@@ -151,7 +205,10 @@ class CodeSimilarityCheck extends Check {
 		switch (token.tok) {
 			case Const(CFloat(_)):
 				return "const_float";
-			case Const(CString(_)):
+			case Const(CString(s)):
+				if (StringUtils.isStringInterpolation(s, checker.file.content, token.pos)) {
+					return "const_string_interpol";
+				}
 				return "const_string";
 			case Const(CIdent(_)):
 				return "identifier";
