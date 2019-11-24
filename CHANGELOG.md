@@ -16,7 +16,7 @@
 - Changed default value for `max` in `FileLengthCheck` to 1000 ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed `MethodLength` check to use tokentree ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - Changed reported position for `FieldDocComment` and `MethodLength` to only include function signature ([#487](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/487))
-- Changed `Dynamic` check implementation to tokentree, now only reports token location
+- Changed `Dynamic` check implementation to tokentree, now only reports token location ([#489](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/489))
 - Fixed range exclusion to allow excluding construtor (`new`) ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479))
 - Fixed reported positions for `FieldDocComment`, `MethodLength`, `ParameterNumber`, `RedundantModifier` and `ReturnCount` checks ([#488](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/488))
 - Refactored build system to use lix ([#478](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/478))
