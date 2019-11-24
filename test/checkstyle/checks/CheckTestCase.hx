@@ -1,11 +1,11 @@
 package checkstyle.checks;
 
 import byte.ByteData;
-import checkstyle.CheckMessage;
 import checkstyle.CheckFile;
+import checkstyle.CheckMessage;
+import checkstyle.Checker;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.ReporterManager;
-import checkstyle.Checker;
 
 class CheckTestCase<T:String> {
 	static inline var FILE_NAME:String = "Test.hx";

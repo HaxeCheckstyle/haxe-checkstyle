@@ -1,14 +1,14 @@
-import haxe.EntryPoint;
 import massive.munit.TestRunner;
+import mcover.coverage.MCoverage;
 import mcover.coverage.munit.client.MCoverPrintClient;
+#if (neko || cpp || hl)
+import haxe.EntryPoint;
+#end
 #if codecov_json
 import mcover.coverage.client.CodecovJsonPrintClient;
 #else
 import mcover.coverage.client.LcovPrintClient;
 #end
-import mcover.coverage.MCoverage;
-
-using StringTools;
 
 class TestMain {
 	public function new() {

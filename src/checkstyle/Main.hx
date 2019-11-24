@@ -2,25 +2,25 @@ package checkstyle;
 
 import checkstyle.ChecksInfo;
 import checkstyle.checks.Check;
-import checkstyle.config.ConfigParser;
 import checkstyle.config.CheckConfig;
+import checkstyle.config.ConfigParser;
 import checkstyle.config.ExcludeManager;
 import checkstyle.detect.DetectCodingStyle;
+import checkstyle.reporter.CodeClimateReporter;
+import checkstyle.reporter.ExitCodeReporter;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.JSONReporter;
 import checkstyle.reporter.ProgressReporter;
+import checkstyle.reporter.ReporterManager;
 import checkstyle.reporter.TextReporter;
 import checkstyle.reporter.XMLReporter;
-import checkstyle.reporter.CodeClimateReporter;
-import checkstyle.reporter.ExitCodeReporter;
-import checkstyle.reporter.ReporterManager;
 import checkstyle.utils.ConfigUtils;
 import haxe.CallStack;
 import haxe.Json;
+import haxe.io.Path;
 import hxargs.Args;
 import sys.FileSystem;
 import sys.io.File;
-import haxe.io.Path;
 
 class Main {
 	static var DEFAULT_CONFIG:String = "checkstyle.json";
