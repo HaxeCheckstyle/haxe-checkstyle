@@ -1,8 +1,8 @@
 package checkstyle.config;
 
+import checkstyle.checks.CheckTestCase;
 import checkstyle.checks.type.DynamicCheck;
 import checkstyle.checks.type.ReturnCheck;
-import checkstyle.checks.CheckTestCase;
 
 class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	static inline var LOCAL_PATH:String = "./";
@@ -65,7 +65,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 		configParser.parseExcludes(cast {
 			version: 1,
 			path: ExcludePath.RELATIVE_TO_PROJECT,
-			Dynamic: ["src/checkstyle/checks/Check$", "test/checkstyle/checks/Check$"]
+			"Dynamic": ["src/checkstyle/checks/Check$", "test/checkstyle/checks/Check$"]
 		});
 
 		Assert.isTrue(ExcludeManager.isExcludedFromCheck(CHECK_FILE_NAME, DYNAMIC));
@@ -86,7 +86,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 		configParser.parseExcludes(cast {
 			version: 1,
 			path: ExcludePath.RELATIVE_TO_PROJECT,
-			Dynamic: [
+			"Dynamic": [
 				"src/checkstyle/checks/ChecksInfo$:10",
 				"src/checkstyle/checks/ChecksInfo$:14-16",
 				"src/checkstyle/checks/ChecksInfo$:usesDynamic",

@@ -1,12 +1,12 @@
 package checkstyle;
 
-import haxeparser.HaxeParser;
-import haxeparser.HaxeLexer;
-import sys.io.File;
 import checkstyle.checks.Check;
 import checkstyle.config.ExcludeManager;
 import checkstyle.config.ExcludeRange;
 import checkstyle.reporter.ReporterManager;
+import haxeparser.HaxeLexer;
+import haxeparser.HaxeParser;
+import sys.io.File;
 import tokentree.TokenTreeBuilder;
 
 class Checker {

@@ -67,6 +67,7 @@ haxe buildCpp.hxml # for C++ version
 ```
 
 Compiling with Haxe 3
+
 ```bash
 git clone https://github.com/HaxeCheckstyle/haxe-checkstyle.git
 mv haxe_libraries haxe4_libraries

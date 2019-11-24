@@ -1,6 +1,8 @@
 package checkstyle.checks.type;
 
 class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
+	public static inline var AVOID_USING_DYNAMIC_AS_TYPE:String = 'Avoid using "Dynamic" as type';
+
 	@Test
 	public function testNoDynamic() {
 		var check = new DynamicCheck();
@@ -10,12 +12,12 @@ class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 	@Test
 	public function testDetectDynamic() {
 		var check = new DynamicCheck();
-		assertMsg(check, TEST1, '"Count" type is "Dynamic"');
-		assertMsg(check, TEST2, '"test" type is "Dynamic"');
-		assertMsg(check, TEST3, '"Count" type is "Dynamic"');
-		assertMsg(check, TEST4, '"param" type is "Dynamic"');
-		assertMsg(check, TEST5, '"test" type is "Dynamic"');
-		assertMsg(check, TEST6, '"Test" type is "Dynamic"');
+		assertMsg(check, TEST1, AVOID_USING_DYNAMIC_AS_TYPE);
+		assertMsg(check, TEST2, AVOID_USING_DYNAMIC_AS_TYPE);
+		assertMsg(check, TEST3, AVOID_USING_DYNAMIC_AS_TYPE);
+		assertMsg(check, TEST4, AVOID_USING_DYNAMIC_AS_TYPE);
+		assertMsg(check, TEST5, AVOID_USING_DYNAMIC_AS_TYPE);
+		assertMsg(check, TEST6, AVOID_USING_DYNAMIC_AS_TYPE);
 
 		assertNoMsg(check, ISSUE_43);
 	}

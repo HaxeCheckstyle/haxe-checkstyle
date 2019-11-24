@@ -1,7 +1,6 @@
 package checkstyle.detect;
 
 import byte.ByteData;
-import checkstyle.config.CheckConfig;
 import checkstyle.CheckFile;
 import checkstyle.SeverityLevel;
 import checkstyle.checks.block.BlockBreakingConditionalCheck;
@@ -20,13 +19,13 @@ import checkstyle.checks.coding.NullableParameterCheck;
 import checkstyle.checks.coding.ReturnCountCheck;
 import checkstyle.checks.coding.TraceCheck;
 import checkstyle.checks.coding.UnusedLocalVarCheck;
-import checkstyle.checks.design.EmptyPackageCheck;
-import checkstyle.checks.design.InterfaceCheck;
-import checkstyle.checks.design.UnnecessaryConstructorCheck;
 import checkstyle.checks.comments.DocCommentStyleCheck;
 import checkstyle.checks.comments.FieldDocCommentCheck;
 import checkstyle.checks.comments.TODOCommentCheck;
 import checkstyle.checks.comments.TypeDocCommentCheck;
+import checkstyle.checks.design.EmptyPackageCheck;
+import checkstyle.checks.design.InterfaceCheck;
+import checkstyle.checks.design.UnnecessaryConstructorCheck;
 import checkstyle.checks.imports.AvoidStarImportCheck;
 import checkstyle.checks.imports.UnusedImportCheck;
 import checkstyle.checks.literal.StringLiteralCheck;
@@ -48,18 +47,17 @@ import checkstyle.checks.type.TypeCheck;
 import checkstyle.checks.whitespace.ArrayAccessCheck;
 import checkstyle.checks.whitespace.EmptyLinesCheck;
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck;
-import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPolicy;
 import checkstyle.checks.whitespace.IndentationCharacterCheck;
 import checkstyle.checks.whitespace.IndentationCheck;
 import checkstyle.checks.whitespace.OperatorWhitespaceCheck;
 import checkstyle.checks.whitespace.OperatorWrapCheck;
-import checkstyle.checks.whitespace.SeparatorWrapCheck;
 import checkstyle.checks.whitespace.SeparatorWhitespaceCheck;
+import checkstyle.checks.whitespace.SeparatorWrapCheck;
 import checkstyle.checks.whitespace.SpacingCheck;
-import checkstyle.checks.whitespace.SpacingCheck.SpacingPolicy;
 import checkstyle.checks.whitespace.TrailingWhitespaceCheck;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
+import checkstyle.config.CheckConfig;
 
 class DetectCodingStyleTest {
 	// checkstyle.checks.block
