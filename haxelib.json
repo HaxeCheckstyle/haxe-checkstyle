@@ -17,9 +17,9 @@
         "AlexHaxe",
         "adireddy",
         "Gama11"
-    ],
-    "releasenote": "breaking changes: command line options and OperatorWhitespace settings changed, new checks InlineFinal and BlockBreakingConditional, increased Haxe 4 compatibility, some formatter related fixes and a few bugfixes - see CHANGELOG",
-    "version": "2.5.0",
+	],
+    "releasenote": "breaking changes: MethodLength settings changed, new checks CodeSimilarity, EnforceVarTypeHint, AvoidIdentifier, ArrowFunction and NestedControlFlow, some Haxe 4 fixes and a few bugfixes - see CHANGELOG",
+    "version": "2.6.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {}
 }

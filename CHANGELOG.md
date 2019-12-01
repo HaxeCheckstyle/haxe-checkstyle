@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.6.0 (2019-12-01)
+
 - **Breaking Change** changed `MethodLength.countEmpty` into `ignoreEmptyLines` ([#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486))
 - New check `CodeSimilarity` to check for similar or identical code blocks ([#479](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/479) + [#480](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/480) + [#484](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/484) + [#486](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/486) + [#488](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/488))
 - New check `EnforceVarTypeHint` to enforce type hints for all variables and finals, fixes [#464](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/464) ([#481](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/481) + [#482](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/482))
