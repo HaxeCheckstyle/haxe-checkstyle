@@ -3900,6 +3900,11 @@
                     "description": "Checks for instance variables that are initialised at class level.",
                     "additionalProperties": false,
                     "properties": {
+                        "allowFinal": {
+                            "description": "final fields must be initialised either immediately or in constructor\n\t\twhen allowFinal is true then VariableInitialisation won't complain about initialisation at class level for final fields",
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "type": "string",
@@ -3909,7 +3914,7 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 0
+                            "propertyOrder": 1
                         }
                     },
                     "type": "object"
