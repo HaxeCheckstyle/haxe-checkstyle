@@ -2,7 +2,7 @@
 
 ## dev branch / next version (2.x.x)
 
-- Added `allowFinal` setting to `VariableInitialisation`, fixes [#491](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/491)
+- Added `allowFinal` setting to `VariableInitialisation`, fixes [#491](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/491) ([#492](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/492))
 
 ## version 2.6.0 (2019-12-01)
 
