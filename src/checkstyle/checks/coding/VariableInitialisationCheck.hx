@@ -6,10 +6,17 @@ package checkstyle.checks.coding;
 @name("VariableInitialisation")
 @desc("Checks for instance variables that are initialised at class level.")
 class VariableInitialisationCheck extends Check {
+	/**
+		final fields must be initialised either immediately or in constructor
+		when allowFinal is true then VariableInitialisation won't complain about initialisation at class level for final fields
+	**/
+	public var allowFinal:Bool;
+
 	public function new() {
 		super(AST);
 		categories = [Category.STYLE, Category.CLARITY];
 		points = 2;
+		allowFinal = false;
 	}
 
 	override function actualRun() {
@@ -21,13 +28,19 @@ class VariableInitialisationCheck extends Check {
 
 		var isPrivate = false;
 		var isPublic = false;
-		var isInline = false;
-		var isStatic = false;
+		var isInline = f.access.contains(AInline);
+		var isStatic = f.access.contains(AStatic);
+		var isFinal = false;
 
-		if (f.access.contains(AInline)) isInline = true;
-		else if (f.access.contains(AStatic)) isStatic = true;
-		else if (f.access.contains(APublic)) isPublic = true;
+		if (isInline || isStatic) return;
+
+		if (f.access.contains(APublic)) isPublic = true;
 		else isPrivate = true;
+
+		#if haxe4
+		if (f.access.contains(AFinal)) isFinal = true;
+		#end
+		if (allowFinal && isFinal) return;
 
 		if (isPrivate || isPublic) {
 			switch (f.kind) {
@@ -40,6 +53,6 @@ class VariableInitialisationCheck extends Check {
 	}
 
 	function warnVarInit(name:String, pos:Position) {
-		logPos('Invalid variable "${name}" initialisation (move initialisation to constructor or function)', pos);
+		logPos('Invalid variable initialisation for "${name}" (move initialisation to constructor or function)', pos);
 	}
 }

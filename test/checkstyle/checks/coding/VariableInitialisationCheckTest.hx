@@ -3,7 +3,7 @@ package checkstyle.checks.coding;
 class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisationCheckTests> {
 	@Test
 	public function testVar() {
-		assertMsg(new VariableInitialisationCheck(), TEST1, 'Invalid variable "_a" initialisation (move initialisation to constructor or function)');
+		assertMsg(new VariableInitialisationCheck(), TEST1, 'Invalid variable initialisation for "_a" (move initialisation to constructor or function)');
 	}
 
 	@Test
@@ -14,6 +14,16 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 	@Test
 	public function testEnumAbstract() {
 		assertNoMsg(new VariableInitialisationCheck(), TEST3);
+	}
+
+	@Test
+	public function testFinal() {
+		var check:VariableInitialisationCheck = new VariableInitialisationCheck();
+		assertMsg(check, FINAL, 'Invalid variable initialisation for "VALUE" (move initialisation to constructor or function)');
+		assertNoMsg(check, FINAL_CONSTRUCTOR);
+		check.allowFinal = true;
+		assertNoMsg(check, FINAL);
+		assertNoMsg(check, FINAL_CONSTRUCTOR);
 	}
 }
 
@@ -31,6 +41,7 @@ abstract VariableInitialisationCheckTests(String) to String {
 	var TEST2 = "
 	abstractAndClass Test {
 		static inline var TEST:Int = 1;
+		inline var TEST2:Int = 1;
 
 		public function new() {}
 	}";
@@ -38,5 +49,17 @@ abstract VariableInitialisationCheckTests(String) to String {
 	@:enum
 	abstract Test(Int) {
 		var VALUE = 0;
+	}";
+	var FINAL = "
+	abstractAndClass Test {
+		final VALUE = 0;
+	}";
+	var FINAL_CONSTRUCTOR = "
+	abstractAndClass Test {
+		final VALUE;
+
+		public function new() {
+			VALUE = 1;
+		}
 	}";
 }
