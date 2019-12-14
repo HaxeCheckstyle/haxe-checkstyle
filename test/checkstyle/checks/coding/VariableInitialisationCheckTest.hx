@@ -16,6 +16,7 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 		assertNoMsg(new VariableInitialisationCheck(), TEST3);
 	}
 
+	#if haxe4
 	@Test
 	public function testFinal() {
 		var check:VariableInitialisationCheck = new VariableInitialisationCheck();
@@ -25,6 +26,7 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 		assertNoMsg(check, FINAL);
 		assertNoMsg(check, FINAL_CONSTRUCTOR);
 	}
+	#end
 }
 
 @:enum
