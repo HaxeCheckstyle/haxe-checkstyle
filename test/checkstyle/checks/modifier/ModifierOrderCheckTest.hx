@@ -1,8 +1,6 @@
 package checkstyle.checks.modifier;
 
 class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
-	static inline var ERROR:String = '"test" modifier order is invalid (modifier: "PUBLIC_PRIVATE")';
-
 	@Test
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
@@ -15,19 +13,19 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 	@Test
 	public function testWrongOrder() {
 		var check = new ModifierOrderCheck();
-		assertMsg(check, TEST2, '"test" modifier order is invalid (modifier: "OVERRIDE")');
-		assertMsg(check, TEST3, '"test" modifier order is invalid (modifier: "STATIC")');
-		assertMsg(check, TEST4, '"test" modifier order is invalid (modifier: "MACRO")');
-		assertMsg(check, TEST5, ERROR);
-		assertMsg(check, TEST7, ERROR);
-		assertMsg(check, TEST8, ERROR);
+		assertMsg(check, TEST2, 'modifier order for field "test" is "public override" but should be "override public"');
+		assertMsg(check, TEST3, 'modifier order for field "test" is "public inline static" but should be "public static inline"');
+		assertMsg(check, TEST4, 'modifier order for field "test" is "public macro" but should be "macro public"');
+		assertMsg(check, TEST5, 'modifier order for field "test" is "dynamic public" but should be "public dynamic"');
+		assertMsg(check, TEST7, 'modifier order for field "test" is "inline public" but should be "public inline"');
+		assertMsg(check, TEST8, 'modifier order for field "test" is "inline public" but should be "public inline"');
 	}
 
 	@Test
 	public function testModifiers() {
 		var check = new ModifierOrderCheck();
 		check.modifiers = [DYNAMIC, PUBLIC_PRIVATE, OVERRIDE, INLINE, STATIC, MACRO];
-		assertMsg(check, TEST1, '"test6" modifier order is invalid (modifier: "INLINE")');
+		assertMsg(check, TEST1, 'modifier order for field "test6" is "public static inline" but should be "public inline static"');
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);

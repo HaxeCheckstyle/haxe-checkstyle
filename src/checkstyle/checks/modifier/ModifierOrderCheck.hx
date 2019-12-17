@@ -30,16 +30,26 @@ class ModifierOrderCheck extends Check {
 		var lastIndex:Int = -1;
 		var index:Int;
 
+		var actual:Array<String> = [];
+		var expected:Array<String> = [];
+		expected.resize(modifiers.length);
+
+		var compliant:Bool = true;
+
 		for (access in f.access) {
 			var modifier:ModifierOrderCheckModifier = access;
 			index = modifiers.indexOf(modifier);
+			if (index < 0) continue;
+			actual.push(ModifierOrderCheckModifier.accessToString(access));
+			expected[index] = ModifierOrderCheckModifier.accessToString(access);
 			if (index < lastIndex) {
-				var pos = calcPos(f);
-				warnOrder(f.name, modifier, pos);
-				return;
+				compliant = false;
 			}
 			lastIndex = index;
 		}
+		if (compliant) return;
+		var pos = calcPos(f);
+		warnOrder(f.name, actual, expected, pos);
 	}
 
 	function calcPos(f:Field):Position {
@@ -54,8 +64,9 @@ class ModifierOrderCheck extends Check {
 		}
 	}
 
-	function warnOrder(name:String, modifier:ModifierOrderCheckModifier, pos:Position) {
-		logPos('"${name}" modifier order is invalid (modifier: "${modifier}")', pos);
+	function warnOrder(name:String, actual:Array<String>, expected:Array<String>, pos:Position) {
+		expected = expected.filter(function(f:String):Bool return (f != null));
+		logPos('modifier order for field "${name}" is "${actual.join(" ")}" but should be "${expected.join(" ")}"', pos);
 	}
 }
 
@@ -95,6 +106,22 @@ abstract ModifierOrderCheckModifier(String) {
 			#if haxe4
 			case AExtern: EXTERN;
 			case AFinal: FINAL;
+			#end
+		}
+	}
+
+	public static function accessToString(access:Access):String {
+		return switch (access) {
+			case APublic: "public";
+			case APrivate: "private";
+			case AStatic: "static";
+			case AInline: "inline";
+			case AOverride: "override";
+			case AMacro: "macro";
+			case ADynamic: "dynamic";
+			#if haxe4
+			case AExtern: "extern";
+			case AFinal: "final";
 			#end
 		}
 	}
