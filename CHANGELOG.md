@@ -5,7 +5,7 @@
 ## version 2.6.1 (2019-12-17)
 
 - Added `allowFinal` setting to `VariableInitialisation`, fixes [#491](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/491) ([#492](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/492))
-- Changed message of `Final` check when detecting `public static var`
+- Changed message of `Final` check when detecting `public static var` ([#493](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/493))
 - Changed message of `ModifierOrder` check to include actual and expected modifier order
 
 ## version 2.6.0 (2019-12-01)

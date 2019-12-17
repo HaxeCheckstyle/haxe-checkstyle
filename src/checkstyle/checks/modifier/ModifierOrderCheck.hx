@@ -32,7 +32,11 @@ class ModifierOrderCheck extends Check {
 
 		var actual:Array<String> = [];
 		var expected:Array<String> = [];
+		#if haxe4
 		expected.resize(modifiers.length);
+		#else
+		for (mod in modifiers) expected.push(null);
+		#end
 
 		var compliant:Bool = true;
 
