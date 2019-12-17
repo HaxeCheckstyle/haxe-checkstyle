@@ -27,20 +27,22 @@ class FinalCheck extends Check {
 		}
 		if (f.access.contains(AFinal)) return;
 
-		checkPublicStatic(f);
-		checkInlineVar(f);
+		if (checkInlineVar(f)) {
+			logPos('Consider using "inline final" for field "${f.name}"', f.pos, USE_INLINE_FINAL);
+			return;
+		}
+		if (checkPublicStatic(f)) {
+			logPos('Consider making public static field "${f.name}" "final" or "private"', f.pos, SHOULD_BE_PUBLIC_FINAL);
+			return;
+		}
 	}
 
-	function checkPublicStatic(f:Field) {
-		if (!f.access.contains(APublic)) return;
-		if (!f.access.contains(AStatic)) return;
-
-		logPos('Public static field "${f.name}" should be "final"', f.pos, SHOULD_BE_PUBLIC_FINAL);
+	function checkPublicStatic(f:Field):Bool {
+		return (f.access.contains(APublic)) && (f.access.contains(AStatic));
 	}
 
-	function checkInlineVar(f:Field) {
-		if (!f.access.contains(AInline)) return;
-		logPos('Consider using "inline final" for field "${f.name}"', f.pos, USE_INLINE_FINAL);
+	function checkInlineVar(f:Field):Bool {
+		return (f.access.contains(AInline));
 	}
 
 	override public function detectableInstances():DetectableInstances {

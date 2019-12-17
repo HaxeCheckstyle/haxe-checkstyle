@@ -2,7 +2,7 @@
 
 npm install
 npx lix download
-npx lix use haxe 4.0.3
+npx lix use haxe 4.0.5
 
 npx haxe buildAll.hxml
 
