@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+- Added support for final in `MagicNumber`, fixes [#494](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/494) ([#495](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/495))
+
 ## version 2.6.1 (2019-12-17)
 
 - Added `allowFinal` setting to `VariableInitialisation`, fixes [#491](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/491) ([#492](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/492))

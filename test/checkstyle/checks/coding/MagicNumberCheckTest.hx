@@ -6,6 +6,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		var check = new MagicNumberCheck();
 		assertNoMsg(check, STANDARD_MAGIC_NUMBERS);
 		assertNoMsg(check, ALLOWED_MAGIC_NUMBER);
+		assertNoMsg(check, META_NUMBER);
 	}
 
 	@Test
@@ -43,6 +44,15 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertNoMsg(check, ENUM_ABSTRACT_WITH_CLASS);
 		assertNoMsg(check, HAXE4_ENUM_ABSTRACT);
 	}
+
+	#if haxe4
+	@Test
+	public function testFinal() {
+		var check = new MagicNumberCheck();
+		assertNoMsg(check, HAXE4_FINAL_VAR);
+		assertMsg(check, HAXE4_FINAL_FUNCTION, '"7" is a magic number');
+	}
+	#end
 }
 
 @:enum
@@ -117,5 +127,23 @@ abstract MagicNumberCheckTests(String) to String {
 		var RED = 91;
 		var BLUE = 94;
 		var MAGENTA = 95;
+	}";
+	var HAXE4_FINAL_VAR = "
+	abstractAndClass Test {
+		static inline final VAL1 = 5;
+		static final VAL2 = 6;
+		final VAL3 = 7;
+	}";
+	var HAXE4_FINAL_FUNCTION = "
+	abstractAndClass Test {
+		final function test() {
+			val = 7;
+		}
+	}";
+	var META_NUMBER = "
+	abstractAndClass Test {
+		@meta(100)
+		function test() {
+		}
 	}";
 }

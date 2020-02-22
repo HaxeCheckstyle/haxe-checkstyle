@@ -4,6 +4,8 @@ import haxe.Timer;
 	helper class to build everything, avoids `--next`
 **/
 class Build {
+	private static var exitCode:Int = 0;
+
 	/**
 		run all build files
 	**/
@@ -13,6 +15,7 @@ class Build {
 		callLix("buildJS.hxml", "run.js");
 		callLix("buildSchema.hxml", "Json schema");
 		callLix("buildTest.hxml", "Unittests");
+		Sys.exit(exitCode);
 	}
 
 	/**
@@ -23,7 +26,10 @@ class Build {
 	**/
 	public static function callLix(buildFile:String, title:String) {
 		var startTime = Timer.stamp();
-		Sys.command("npx", ["haxe", buildFile]);
+		var result:Int = Sys.command("npx", ["haxe", buildFile]);
 		Sys.println('building $title (${Timer.stamp() - startTime})');
+		if (result != 0) {
+			exitCode = result;
+		}
 	}
 }
