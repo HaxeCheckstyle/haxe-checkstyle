@@ -45,7 +45,7 @@ class MagicNumberCheck extends Check {
 
 		for (numberToken in allNumbers) {
 			if (isPosSuppressed(numberToken.pos)) continue;
-			if (!filterNumber(numberToken)) continue;
+			if (filterNumber(numberToken)) continue;
 			switch (numberToken.tok) {
 				case Const(CInt(n)):
 					var number:Int = Std.parseInt(n);
@@ -61,10 +61,16 @@ class MagicNumberCheck extends Check {
 	}
 
 	function filterNumber(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return true;
+		if ((token == null) || (token.tok == null)) return false;
 		return switch (token.tok) {
-			case At: false;
-			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) false; else true;
+			case At: true;
+			#if haxe4
+			case Kwd(KwdFinal): true;
+			#else
+			case Const(CIdent("final")): true;
+			#end
+			case BrOpen: false;
+			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) true; else false;
 			default: filterNumber(token.parent);
 		}
 	}
