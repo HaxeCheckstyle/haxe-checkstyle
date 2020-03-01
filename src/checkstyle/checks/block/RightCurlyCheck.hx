@@ -70,13 +70,9 @@ class RightCurlyCheck extends Check {
 			switch (type) {
 				case BLOCK:
 				case TYPEDEFDECL:
-					if (!hasToken(TYPEDEF_DEF)) {
-						continue;
-					}
+					if (!hasToken(TYPEDEF_DEF)) continue;
 				case OBJECTDECL:
-					if (!hasToken(OBJECT_DECL)) {
-						continue;
-					}
+					if (!hasToken(OBJECT_DECL)) continue;
 				case ANONTYPE:
 				case UNKNOWN:
 			}
