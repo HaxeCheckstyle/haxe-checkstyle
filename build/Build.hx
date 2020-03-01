@@ -4,7 +4,7 @@ import haxe.Timer;
 	helper class to build everything, avoids `--next`
 **/
 class Build {
-	private static var exitCode:Int = 0;
+	static var exitCode:Int = 0;
 
 	/**
 		run all build files

@@ -191,7 +191,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 	@Test
 	public function testArrayComprehension() {
 		var check = new RightCurlyCheck();
-		check.tokens = [ARRAY_COMPREHENSION];
+		check.tokens = [ARRAY_COMPREHENSION, OBJECT_DECL];
 		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
@@ -202,6 +202,45 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		check.option = ALONE;
 		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		check.tokens = [ARRAY_COMPREHENSION];
+		check.option = ALONE_OR_SINGLELINE;
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		check.option = SAME;
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+
+		check.option = ALONE;
+		assertNoMsg(check, ARRAY_COMPREHENSION_ISSUE_114);
+		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
+	}
+
+	@Test
+	public function testTokenIfNoObjectDecl() {
+		var check = new RightCurlyCheck();
+		check.tokens = [IF];
+		check.option = ALONE;
+
+		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+
+		assertNoMsg(check, SINGLELINE_FUNCTION);
+		assertNoMsg(check, SINGLELINE_FOR);
+		assertNoMsg(check, SINGLELINE_WHILE);
+		assertNoMsg(check, SINGLELINE_TRY_CATCH);
+		assertNoMsg(check, SINGLELINE_INTERFACE);
+		assertNoMsg(check, SINGLELINE_CLASS);
+		assertNoMsg(check, SINGLELINE_TYPEDEF);
+		assertNoMsg(check, SINGLELINE_SWITCH);
+		assertNoMsg(check, SINGLELINE_CASE);
+		assertNoMsg(check, SINGLELINE_OBJECT);
+		assertNoMsg(check, SINGLELINE_ABSTRACT);
+		assertNoMsg(check, SINGLELINE_ENUM);
+		assertNoMsg(check, SINGLELINE_NESTED_OBJECT);
+
+		assertNoMsg(check, CONSTRUCTOR_OBJECT_DECL_ISSUE_152);
+		assertNoMsg(check, SINGLELINE_PATTERN_OBJECT);
 	}
 }
 
@@ -546,5 +585,14 @@ abstract RightCurlyCheckTests(String) to String {
 	var CONSTRUCTOR_OBJECT_DECL_ISSUE_152 = "
 	class Test {
 		var field = new Object({x:0});
+	}";
+	var SINGLELINE_PATTERN_OBJECT = "
+	class Test {
+		public function foo() {
+			var obj = {x: 1, y: 2};
+			switch (obj) {
+				case {x: 2, y: b}:
+			}
+		}
 	}";
 }
