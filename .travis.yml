@@ -31,7 +31,7 @@ script:
   - npx haxe build.hxml
   - npx haxe buildDebug.hxml
   - npx haxe buildJS.hxml
-  - npx haxe buildCpp.hxml
+  - if [[ "$HAXE_VERSION" != "nightly" ]]; then npx haxe buildCpp.hxml; fi
   - npx haxe buildSchema.hxml
   - npx haxe -D codecov_json buildTest.hxml
   - npx haxe testJava.hxml
