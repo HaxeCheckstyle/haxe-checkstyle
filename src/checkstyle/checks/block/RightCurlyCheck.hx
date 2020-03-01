@@ -74,6 +74,9 @@ class RightCurlyCheck extends Check {
 						continue;
 					}
 				case OBJECTDECL:
+					if (!hasToken(OBJECT_DECL)) {
+						continue;
+					}
 				case ANONTYPE:
 				case UNKNOWN:
 			}

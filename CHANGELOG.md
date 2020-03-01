@@ -3,6 +3,7 @@
 ## dev branch / next version (2.x.x)
 
 - Added support for final in `MagicNumber`, fixes [#494](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/494) ([#495](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/495))
+- Fixed handling `OBJECT_DECL` token in `RightCurly`, fixes [#496](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/496)
 
 ## version 2.6.1 (2019-12-17)
 
