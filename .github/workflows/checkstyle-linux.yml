@@ -37,9 +37,6 @@ jobs:
       run: |
         npx lix download haxe ${{ matrix.haxe-version }}
         npx lix use haxe ${{ matrix.haxe-version }}
-    - name: Prepare Haxe nightly dependencies
-      if: matrix.haxe-version == 'nightly'
-      run: npx lix install github:HaxeFoundation/hxcpp
     - name: Prepare Haxe 3 dependencies
       if: matrix.haxe-version == '3.4.7'
       run: |
@@ -61,7 +58,6 @@ jobs:
     - name: Build NodeJs version
       run: npx haxe buildJS.hxml
     - name: Build C++ version
-      if: matrix.haxe-version != 'nightly'
       run: npx haxe buildCpp.hxml
     - name: Build JSON schema
       run: npx haxe buildSchema.hxml
