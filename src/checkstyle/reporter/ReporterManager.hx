@@ -1,18 +1,8 @@
 package checkstyle.reporter;
 
-#if ((haxe_ver >= 4.0) && (neko || macro || eval || cpp || hl || java))
-import sys.thread.Mutex;
-#elseif neko
-import neko.vm.Mutex;
-#elseif cpp
-import cpp.vm.Mutex;
-#elseif java
-import java.vm.Mutex;
-#else
-import checkstyle.utils.Mutex;
-#end
 import checkstyle.CheckMessage;
 import checkstyle.checks.Category;
+import checkstyle.utils.Mutex;
 
 class ReporterManager {
 	public static var INSTANCE:ReporterManager = new ReporterManager();

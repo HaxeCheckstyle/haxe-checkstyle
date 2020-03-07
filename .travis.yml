@@ -20,6 +20,7 @@ install:
   - if [[ "$HAXE_VERSION" == "haxe4" ]]; then npx lix download haxe 4.0.5; npx lix use haxe 4.0.5; fi
   - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
   - npx lix download
+  - if [[ "$HAXE_VERSION" == "haxe347" ]]; then ./fixHaxeshim.sh fi
   - npx haxe -version
   - npx neko -version
   - npx haxelib list
