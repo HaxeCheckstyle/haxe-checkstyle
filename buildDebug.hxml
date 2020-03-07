@@ -1,4 +1,4 @@
-buildGlobal.hxml
+build/common.hxml
 -main checkstyle.Main
 -debug
 -neko runD.n

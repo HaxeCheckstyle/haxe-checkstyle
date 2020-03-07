@@ -2,9 +2,9 @@ package checkstyle.utils;
 
 import checkstyle.Checker;
 import checkstyle.ChecksInfo.CheckInfo;
-import checkstyle.config.Config;
-import checkstyle.config.CheckConfig;
 import checkstyle.checks.Check;
+import checkstyle.config.CheckConfig;
+import checkstyle.config.Config;
 import haxe.Json;
 import haxe.ds.ArraySort;
 import sys.io.File;
@@ -86,15 +86,19 @@ class ConfigUtils {
 			"messages",
 			"checker",
 			"placemap",
-			"metaName"
+			"metaName",
+			"ignoreRE"
 		];
 		var checkConfig:CheckConfig = {
 			type: check.getModuleName(),
 			props: {}
 		};
-		for (prop in Reflect.fields(check)) {
+		for (prop in Type.getInstanceFields(Type.getClass(check))) {
 			if (propsNotAllowed.contains(prop)) continue;
-			Reflect.setField(checkConfig.props, prop, Reflect.field(check, prop));
+
+			var value = Reflect.field(check, prop);
+			if (Reflect.isFunction(value)) continue;
+			Reflect.setField(checkConfig.props, prop, value);
 		}
 		return checkConfig;
 	}

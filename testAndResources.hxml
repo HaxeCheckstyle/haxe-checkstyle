@@ -1,11 +1,5 @@
-buildGlobal.hxml
--cp test
--lib mcover
--lib munit
--lib test-adapter
--D unittest
+build/commonTest.hxml
 -x TestMain
---macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
 
 -cmd neko run -s src -s test -s schema -s build -p resources/static-analysis.txt
 -cmd neko run --default-config resources/default-config.json

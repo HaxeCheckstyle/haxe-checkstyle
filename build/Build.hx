@@ -14,7 +14,11 @@ class Build {
 		callLix("buildDebug.hxml", "runD.n");
 		callLix("buildJS.hxml", "run.js");
 		callLix("buildSchema.hxml", "Json schema");
-		callLix("buildTest.hxml", "Unittests");
+		callLix("testAndResources.hxml", "Unittests neko / eval + generate resoucres");
+		callLix("testJava.hxml", "Unittests Java");
+		#if haxe4
+		callLix("testJvm.hxml", "Unittests Jvm");
+		#end
 		Sys.exit(exitCode);
 	}
 
@@ -27,7 +31,7 @@ class Build {
 	public static function callLix(buildFile:String, title:String) {
 		var startTime = Timer.stamp();
 		var result:Int = Sys.command("npx", ["haxe", buildFile]);
-		Sys.println('building $title (${Timer.stamp() - startTime})');
+		Sys.println('building $title (took ${Timer.stamp() - startTime})');
 		if (result != 0) {
 			exitCode = result;
 		}

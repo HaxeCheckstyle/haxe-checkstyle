@@ -182,11 +182,11 @@
 				"modifier": "PUBLIC",
 				"requireParams": true,
 				"requireReturn": true,
+				"ignoreOverride": true,
 				"excludeNames": [
 					"new",
 					"toString"
-				],
-				"ignoreOverride": true
+				]
 			}
 		},
 		{
@@ -219,9 +219,9 @@
 			"props": {
 				"character": "tab",
 				"ignoreConditionals": false,
+				"conditionalPolicy": "aligned",
 				"ignoreComments": true,
-				"wrapPolicy": "larger",
-				"conditionalPolicy": "aligned"
+				"wrapPolicy": "larger"
 			}
 		},
 		{
@@ -352,9 +352,9 @@
 		{
 			"type": "MultipleStringLiterals",
 			"props": {
-				"ignore": "^\\s+$",
 				"allowDuplicates": 2,
-				"minLength": 2
+				"minLength": 2,
+				"ignore": "^\\s+$"
 			}
 		},
 		{
@@ -424,7 +424,6 @@
 		{
 			"type": "OperatorWrap",
 			"props": {
-				"option": "eol",
 				"tokens": [
 					"=",
 					"+",
@@ -461,7 +460,8 @@
 					"=>",
 					"++",
 					"--"
-				]
+				],
+				"option": "eol"
 			}
 		},
 		{
@@ -544,17 +544,17 @@
 			"props": {
 				"dotPolicy": "none",
 				"commaPolicy": "after",
-				"semicolonPolicy": "after",
-				"allowTrailingComma": false
+				"allowTrailingComma": false,
+				"semicolonPolicy": "after"
 			}
 		},
 		{
 			"type": "SeparatorWrap",
 			"props": {
-				"option": "eol",
 				"tokens": [
 					","
-				]
+				],
+				"option": "eol"
 			}
 		},
 		{
@@ -568,13 +568,13 @@
 		{
 			"type": "Spacing",
 			"props": {
+				"spaceAroundBinop": true,
+				"noSpaceAroundUnop": true,
 				"spaceIfCondition": "should",
 				"spaceForLoop": "should",
 				"spaceWhileLoop": "should",
 				"spaceSwitchCase": "should",
 				"spaceCatch": "should",
-				"spaceAroundBinop": true,
-				"noSpaceAroundUnop": true,
 				"ignoreRangeOperator": true
 			}
 		},

@@ -33,8 +33,9 @@ script:
   - npx haxe buildJS.hxml
   - if [[ "$HAXE_VERSION" != "nightly" ]]; then npx haxe buildCpp.hxml; fi
   - npx haxe buildSchema.hxml
-  - npx haxe -D codecov_json buildTest.hxml
+  - npx haxe -D codecov_json testAndResources.hxml
   - npx haxe testJava.hxml
+  - if [[ "$HAXE_VERSION" != "haxe347" ]]; npx haxe testJvm.hxml
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
 
 after_script:

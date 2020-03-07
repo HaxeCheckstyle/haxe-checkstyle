@@ -1,4 +1,4 @@
-buildGlobal.hxml
+build/common.hxml
 -lib hxtelemetry
 
 -D HXCPP_STACK_TRACE

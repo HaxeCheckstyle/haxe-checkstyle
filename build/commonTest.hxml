@@ -1,0 +1,8 @@
+build/common.hxml
+-cp test
+-lib mcover
+-lib munit
+-lib test-adapter
+-D unittest
+# -debug
+--macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
