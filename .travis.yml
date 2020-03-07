@@ -36,7 +36,7 @@ script:
   - npx haxe buildSchema.hxml
   - npx haxe -D codecov_json testAndResources.hxml
   - npx haxe testJava.hxml
-  - if [[ "$HAXE_VERSION" != "haxe347" ]]; npx haxe testJvm.hxml; fi
+  - if [[ "$HAXE_VERSION" != "haxe347" ]]; then npx haxe testJvm.hxml; fi
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
 
 after_script:
