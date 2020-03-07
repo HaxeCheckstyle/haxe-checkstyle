@@ -47,8 +47,7 @@ jobs:
         mv haxe3_libraries haxe_libraries
     - name: Run lix download
       run: npx lix download
-    - name: Fix haxeshim for Haxe 3
-      if: matrix.haxe-version == '3.4.7'
+    - name: Fix haxeshim for "-x"
       run: ./fixHaxeshim.sh
     - name: Print versions
       run: |
