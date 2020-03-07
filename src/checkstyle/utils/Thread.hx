@@ -15,9 +15,3 @@ typedef Thread = java.vm.Thread;
 #else
 typedef Thread = DummyThread;
 #end
-
-class DummyThread {
-	public static function create(f:Void -> Void) {
-		f();
-	}
-}

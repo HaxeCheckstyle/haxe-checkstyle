@@ -15,11 +15,3 @@ typedef Mutex = java.vm.Mutex;
 #else
 typedef Mutex = DummyMutex;
 #end
-
-class DummyMutex {
-	public function new() {}
-
-	public function acquire() {}
-
-	public function release() {}
-}
