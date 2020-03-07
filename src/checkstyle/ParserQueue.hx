@@ -1,21 +1,7 @@
 package checkstyle;
 
-#if ((haxe_ver >= 4.0) && (neko || macro || eval || cpp || hl || java))
-import sys.thread.Mutex;
-import sys.thread.Thread;
-#elseif neko
-import neko.vm.Mutex;
-import neko.vm.Thread;
-#elseif cpp
-import cpp.vm.Mutex;
-import cpp.vm.Thread;
-#elseif java
-import java.vm.Mutex;
-import java.vm.Thread;
-#else
 import checkstyle.utils.Mutex;
 import checkstyle.utils.Thread;
-#end
 
 class ParserQueue {
 	static inline var SLEEP_TIME:Float = 0.1;

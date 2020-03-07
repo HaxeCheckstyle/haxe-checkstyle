@@ -44,6 +44,8 @@ jobs:
         mv haxe3_libraries haxe_libraries
     - name: Run lix download
       run: npx lix download
+    - name: Fix haxeshim for "-x"
+      run: ./fixHaxeshim.sh
     - name: Print versions
       run: |
         npx haxe -version
@@ -62,12 +64,15 @@ jobs:
       run: npx haxe buildSchema.hxml
     - name: Run neko tests
       if: matrix.haxe-version == '3.4.7'
-      run: npx haxe -D codecov_json buildTest.hxml
+      run: npx haxe -D codecov_json testAndResources.hxml
     - name: Run eval tests
       if: matrix.haxe-version != '3.4.7'
-      run: npx haxe -D codecov_json buildTest.hxml
+      run: npx haxe -D codecov_json testAndResources.hxml
     - name: Run Java tests
       run: npx haxe testJava.hxml
+    - name: Run Jvm tests
+      if: matrix.haxe-version != '3.4.7'
+      run: npx haxe testJvm.hxml
     - name: Format and upload codeclimate coverage
       if: success() && matrix.haxe-version == '4.0.5'
       run: |

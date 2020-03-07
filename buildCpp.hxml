@@ -1,4 +1,4 @@
-buildGlobal.hxml
+build/common.hxml
 # -lib hxcpp-debugger
 # -D HXCPP_DEBUGGER
 

@@ -1,4 +1,4 @@
-buildGlobal.hxml
+build/common.hxml
 -lib hxnodejs
 -main checkstyle.Main
 -js haxecheckstyle.js

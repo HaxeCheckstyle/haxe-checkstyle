@@ -1,0 +1,6 @@
+build/commonTest.hxml
+-x TestMain
+
+-cmd neko run -s src -s test -s schema -s build -p resources/static-analysis.txt
+-cmd neko run --default-config resources/default-config.json
+-cmd neko run -c resources/default-config.json

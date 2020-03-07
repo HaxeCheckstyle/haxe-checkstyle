@@ -20,6 +20,7 @@ install:
   - if [[ "$HAXE_VERSION" == "haxe4" ]]; then npx lix download haxe 4.0.5; npx lix use haxe 4.0.5; fi
   - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
   - npx lix download
+  - ./fixHaxeshim.sh
   - npx haxe -version
   - npx neko -version
   - npx haxelib list
@@ -33,8 +34,9 @@ script:
   - npx haxe buildJS.hxml
   - if [[ "$HAXE_VERSION" != "nightly" ]]; then npx haxe buildCpp.hxml; fi
   - npx haxe buildSchema.hxml
-  - npx haxe -D codecov_json buildTest.hxml
+  - npx haxe -D codecov_json testAndResources.hxml
   - npx haxe testJava.hxml
+  - if [[ "$HAXE_VERSION" != "haxe347" ]]; then npx haxe testJvm.hxml; fi
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
 
 after_script:
