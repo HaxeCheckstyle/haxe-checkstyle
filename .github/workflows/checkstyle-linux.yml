@@ -44,8 +44,6 @@ jobs:
         mv haxe3_libraries haxe_libraries
     - name: Run lix download
       run: npx lix download
-    - name: Fix haxeshim for "-x"
-      run: ./fixHaxeshim.sh
     - name: Print versions
       run: |
         npx haxe -version
