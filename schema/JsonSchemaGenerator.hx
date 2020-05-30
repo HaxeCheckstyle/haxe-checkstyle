@@ -4,8 +4,8 @@ import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
 
-using haxe.macro.Tools;
 using StringTools;
+using haxe.macro.Tools;
 
 typedef ExtendedFieldsCB = Array<ObjectDeclField> -> String -> Position -> DynamicAccess<Expr> -> Void;
 #end
@@ -33,7 +33,7 @@ class JsonSchemaGenerator {
 				fields.push({field: "definitions", expr: definitions});
 				fields.push({field: DollarName.DollarSchema, expr: macro "http://json-schema.org/schema#"});
 				if (id != null) {
-					fields.push({field: "id", expr: macro '$id'});
+					fields.push({field: "id", expr: macro $v{id}});
 				}
 			default:
 		}
@@ -84,7 +84,8 @@ class JsonSchemaGenerator {
 							var schema = genSchema(dt.type.applyTypeParameters(dt.params, params), dt.name, dt.pos, doc, refs, -1, extendCB);
 							refs[dt.name] = schema;
 						}
-						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro '#/definitions/${dt.name}'}], structInfo, order, pos);
+						var name:String = '#/definitions/${dt.name}';
+						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro $v{name}}], structInfo, order, pos);
 				}
 
 			case TInst(_.get() => cl, params):
