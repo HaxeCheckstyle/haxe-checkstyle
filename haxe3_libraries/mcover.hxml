@@ -1,5 +1,5 @@
--D mcover=2.2.1
-# @install: lix --silent download "haxelib:/mcover#2.2.1" into mcover/2.2.1/haxelib
+# @install: lix --silent download "haxelib:/mcover#2.2.2" into mcover/2.2.2/haxelib
 -lib mconsole
 -lib munit
--cp ${HAXE_LIBCACHE}/mcover/2.2.1/haxelib/
+-cp ${HAXE_LIBCACHE}/mcover/2.2.2/haxelib/
+-D mcover=2.2.2
