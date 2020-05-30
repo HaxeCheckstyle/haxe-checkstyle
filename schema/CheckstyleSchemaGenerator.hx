@@ -1,11 +1,11 @@
 #if macro
 import haxe.DynamicAccess;
+import haxe.ds.ArraySort;
+import haxe.io.Path;
 import haxe.macro.Context;
 import haxe.macro.Expr;
 import haxe.macro.Type;
 import sys.FileSystem;
-import haxe.io.Path;
-import haxe.ds.ArraySort;
 
 using StringTools;
 
@@ -131,14 +131,15 @@ class CheckstyleSchemaGenerator {
 
 							var doc:StructInfo = {name: name, doc: getDescMeta(cl.meta)};
 							var props = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(classFields, null, -1, pos), doc, [], -1, pos);
-							var checkName:Array<Expr> = [macro '$typeName'];
+							var checkName:Array<Expr> = [macro $v{typeName}];
 							var typeExpr:Expr = macro $a{checkName};
 							var type = SchemaUtils.makeEnum(typeExpr, doc, -1, pos);
 							var checkFields:Array<ObjectDeclField> = [{field: "type", expr: type}, {field: "props", expr: props}];
 							var classExpr:Expr = SchemaUtils.makeObject(SchemaUtils.makeObjectDecl(checkFields, null, -1, pos), doc, [], -1, pos);
 							refs[name] = classExpr;
 						}
-						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro '#/definitions/${name}'}], null, order, pos);
+						var defName:String = '#/definitions/${name}';
+						return SchemaUtils.makeObjectDecl([{field: DollarName.DollarRef, expr: macro $v{defName}}], null, order, pos);
 					default:
 				}
 			default:
