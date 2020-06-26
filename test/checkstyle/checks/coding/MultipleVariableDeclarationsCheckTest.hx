@@ -12,7 +12,7 @@ class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariab
 
 	@Test
 	public function testMultiVarsInOneLine() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), TEST3, MSG_MULTI_VAR);
+		assertMessages(new MultipleVariableDeclarationsCheck(), TEST3, [MSG_MULTI_VAR, MSG_MULTI_VAR, MSG_MULTI_VAR]);
 	}
 
 	@Test

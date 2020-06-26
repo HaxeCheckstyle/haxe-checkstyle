@@ -53,7 +53,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		var check = new RightCurlyCheck();
 		assertMsg(check, SAMELINE_IF, MSG_ALONE);
 		assertMsg(check, SAMELINE_TRY_CATCH, MSG_ALONE);
-		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
+		assertMessages(check, SAMELINE_NESTED_OBJECT, [MSG_ALONE, MSG_ALONE]);
 	}
 
 	@Test
@@ -84,19 +84,19 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 	public function testIncorrectSame() {
 		var check = new RightCurlyCheck();
 		check.option = SAME;
-		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_IF, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_FOR, MSG_NOT_SAME_LINE);
 		assertMsg(check, SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_TRY_CATCH, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_CLASS, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
 		assertMsg(check, SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_CASE, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_ABSTRACT, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_NESTED_OBJECT, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 
 		assertMsg(check, ALONE_IF, MSG_SAME_LINE);
 		assertMsg(check, ALONE_TRY_CATCH, MSG_SAME_LINE);
@@ -127,24 +127,24 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 	public function testIncorrectAlone() {
 		var check = new RightCurlyCheck();
 		check.option = ALONE;
-		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_IF, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_FUNCTION, MSG_NOT_SAME_LINE);
 		assertMsg(check, SINGLELINE_FOR, MSG_NOT_SAME_LINE);
 		assertMsg(check, SINGLELINE_WHILE, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_TRY_CATCH, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_TRY_CATCH, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_INTERFACE, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_CLASS, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_CLASS, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_TYPEDEF, MSG_NOT_SAME_LINE);
 		assertMsg(check, SINGLELINE_SWITCH, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_CASE, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_CASE, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_OBJECT, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_ABSTRACT, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_ABSTRACT, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertMsg(check, SINGLELINE_ENUM, MSG_NOT_SAME_LINE);
-		assertMsg(check, SINGLELINE_NESTED_OBJECT, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_NESTED_OBJECT, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 
 		assertMsg(check, SAMELINE_IF, MSG_ALONE);
 		assertMsg(check, SAMELINE_TRY_CATCH, MSG_ALONE);
-		assertMsg(check, SAMELINE_NESTED_OBJECT, MSG_ALONE);
+		assertMessages(check, SAMELINE_NESTED_OBJECT, [MSG_ALONE, MSG_ALONE]);
 	}
 
 	@Test
@@ -159,7 +159,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, ALONE_FOR);
 
 		check.option = SAME;
-		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_IF, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertNoMsg(check, SINGLELINE_FOR);
 		assertNoMsg(check, SAMELINE_IF);
 		assertNoMsg(check, SAMELINE_TRY_CATCH);
@@ -167,7 +167,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, ALONE_FOR);
 
 		check.option = ALONE;
-		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_IF, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertNoMsg(check, SINGLELINE_FOR);
 		assertMsg(check, SAMELINE_IF, MSG_ALONE);
 		assertNoMsg(check, SAMELINE_TRY_CATCH);
@@ -182,10 +182,10 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, MACRO_REIFICATION);
 
 		check.option = SAME;
-		assertMsg(check, MACRO_REIFICATION, MSG_NOT_SAME_LINE);
+		assertMessages(check, MACRO_REIFICATION, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 
 		check.option = ALONE;
-		assertMsg(check, MACRO_REIFICATION, MSG_NOT_SAME_LINE);
+		assertMessages(check, MACRO_REIFICATION, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 	}
 
 	@Test
@@ -196,11 +196,11 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
 		check.option = SAME;
-		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertMessages(check, ARRAY_COMPREHENSION_ISSUE_114, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
 		check.option = ALONE;
-		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NOT_SAME_LINE);
+		assertMessages(check, ARRAY_COMPREHENSION_ISSUE_114, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 
 		check.tokens = [ARRAY_COMPREHENSION];
@@ -223,7 +223,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		check.tokens = [IF];
 		check.option = ALONE;
 
-		assertMsg(check, SINGLELINE_IF, MSG_NOT_SAME_LINE);
+		assertMessages(check, SINGLELINE_IF, [MSG_NOT_SAME_LINE, MSG_NOT_SAME_LINE]);
 
 		assertNoMsg(check, SINGLELINE_FUNCTION);
 		assertNoMsg(check, SINGLELINE_FOR);

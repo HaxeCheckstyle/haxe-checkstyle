@@ -20,7 +20,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertMsg(check, IF_RETURN_EXPR, MSG_INNER_ASSIGNMENT);
 		assertMsg(check, WHILE_COND_RETURN, MSG_INNER_ASSIGNMENT);
 		assertMsg(check, SWITCH, MSG_INNER_ASSIGNMENT);
-		assertMsg(check, SETTER_GETTER_ISSUE_259, MSG_INNER_ASSIGNMENT);
+		assertMessages(check, SETTER_GETTER_ISSUE_259, [MSG_INNER_ASSIGNMENT, MSG_INNER_ASSIGNMENT]);
 	}
 
 	@Test

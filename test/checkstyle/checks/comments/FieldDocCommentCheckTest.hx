@@ -1,8 +1,14 @@
 package checkstyle.checks.comments;
 
 class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> {
-	static inline var MSG_DOC_FUNC8:String = 'Field "func8" should have documentation';
+	static inline var MSG_DOC_FIELD1:String = 'Field "field1" should have documentation';
+	static inline var MSG_DOC_FIELD2:String = 'Field "field2" should have documentation';
 	static inline var MSG_DOC_FUNC4:String = 'Field "func4" should have documentation';
+	static inline var MSG_DOC_FUNC5:String = 'Field "func5" should have documentation';
+	static inline var MSG_DOC_FUNC5A:String = 'Field "func5a" should have documentation';
+	static inline var MSG_DOC_FUNC6:String = 'Field "func6" should have documentation';
+	static inline var MSG_DOC_FUNC7:String = 'Field "func7" should have documentation';
+	static inline var MSG_DOC_FUNC8:String = 'Field "func8" should have documentation';
 	static inline var MSG_DOC_PARAM1_FUNC8:String = 'Documentation for parameter "param1" of field "func8" missing';
 	static inline var MSG_DOC_RETURN_FUNC8:String = 'Documentation for return value of field "func8" missing';
 
@@ -16,8 +22,15 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		assertNoMsg(check, INTERFACE);
 		assertNoMsg(check, TYPEDEF);
 
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
-		assertMsg(check, NO_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
+		assertMessages(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD2, MSG_DOC_FUNC8]);
+		assertMessages(check, NO_CLASS_FIELDS_COMMENTED, [
+			MSG_DOC_FIELD2,
+			MSG_DOC_FUNC5,
+			MSG_DOC_FUNC5A,
+			MSG_DOC_FUNC6,
+			MSG_DOC_FUNC7,
+			MSG_DOC_FUNC8
+		]);
 
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
@@ -38,8 +51,15 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		assertNoMsg(check, INTERFACE);
 		assertNoMsg(check, TYPEDEF);
 
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
-		assertMsg(check, NO_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
+		assertMessages(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD2, MSG_DOC_FUNC8]);
+		assertMessages(check, NO_CLASS_FIELDS_COMMENTED, [
+			MSG_DOC_FIELD2,
+			MSG_DOC_FUNC5,
+			MSG_DOC_FUNC5A,
+			MSG_DOC_FUNC6,
+			MSG_DOC_FUNC7,
+			MSG_DOC_FUNC8
+		]);
 
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
@@ -63,21 +83,21 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		check.modifier = PUBLIC;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
+		assertMessages(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD2, MSG_DOC_FUNC8]);
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
 
 		check.modifier = PRIVATE;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
-		assertMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC4);
+		assertMessages(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD1, MSG_DOC_FUNC4]);
 		assertNoMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, MISSING_PARAM);
 		assertNoMsg(check, MISSING_RETURN);
 
 		check.modifier = BOTH;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
-		assertMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC4);
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
+		assertMessages(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD1, MSG_DOC_FUNC4]);
+		assertMessages(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD2, MSG_DOC_FUNC8]);
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
 	}
@@ -88,7 +108,7 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		check.fieldType = VARS;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, 'Field "field2" should have documentation');
+		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FIELD2);
 		assertNoMsg(check, MISSING_PARAM);
 		assertNoMsg(check, MISSING_RETURN);
 
@@ -102,7 +122,7 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 		check.fieldType = BOTH;
 		assertNoMsg(check, ALL_CLASS_FIELDS_COMMENTED);
 		assertNoMsg(check, ONLY_PUBLIC_CLASS_FIELDS_COMMENTED);
-		assertMsg(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, MSG_DOC_FUNC8);
+		assertMessages(check, ONLY_PRIVATE_CLASS_FIELDS_COMMENTED, [MSG_DOC_FIELD2, MSG_DOC_FUNC8]);
 		assertMsg(check, MISSING_PARAM, MSG_DOC_PARAM1_FUNC8);
 		assertMsg(check, MISSING_RETURN, MSG_DOC_RETURN_FUNC8);
 	}

@@ -28,7 +28,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 	public function testClassWithEnforceMissing() {
 		var check = new RedundantModifierCheck();
 		check.enforcePublicPrivate = true;
-		assertMsg(check, TEST, 'Missing "private" keyword for "_onUpdate"');
+		assertMessages(check, TEST, ['Missing "private" keyword for "a"', 'Missing "private" keyword for "_onUpdate"']);
 	}
 
 	@Test

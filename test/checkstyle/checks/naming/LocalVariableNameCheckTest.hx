@@ -34,7 +34,10 @@ class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTes
 		var check = new LocalVariableNameCheck();
 		check.format = "^[A-Za-z_]*$";
 
-		assertMsg(check, TEST, 'Invalid local var signature: "count2" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST, [
+			'Invalid local var signature: "count1" (name should be "~/${check.format}/")',
+			'Invalid local var signature: "count2" (name should be "~/${check.format}/")'
+		]);
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);

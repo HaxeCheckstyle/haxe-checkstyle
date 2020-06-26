@@ -4,7 +4,22 @@ class TypeDocCommentCheckTest extends CheckTestCase<TypeDocCommentCheckTests> {
 	@Test
 	public function testDefault() {
 		var check = new TypeDocCommentCheck();
-		checkComments(check, "TTest");
+
+		var shouldHaveExtra:Array<String> = [
+			for (t in ["ATest", "CTest", "ETest", "ITest", "TTest"]) 'Documentation for type "$t" should have at least one extra line of text'
+		];
+		var shouldContain:Array<String> = [
+			for (t in ["ATest", "CTest", "ETest", "ITest", "TTest"]) 'Documentation for type "$t" should contain text'
+		];
+		var shouldHave:Array<String> = [
+			for (t in ["ATest", "CTest", "ETest", "ITest", "TTest"]) 'Type "$t" should have documentation'
+		];
+
+		assertNoMsg(check, ALL_TYPES_COMMENTED);
+		assertMessages(check, EMPTY_COMMENTS, shouldHaveExtra);
+		assertMessages(check, EMPTY_COMMENTS_2, shouldHaveExtra);
+		assertMessages(check, EMPTY_COMMENTS_3, shouldContain);
+		assertMessages(check, NO_COMMENTS, shouldHave);
 	}
 
 	@Test

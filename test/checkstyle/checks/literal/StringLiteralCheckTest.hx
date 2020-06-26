@@ -9,7 +9,12 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, SINGLE_QUOTE);
 		assertNoMsg(check, INTERPOLATION);
 		assertNoMsg(check, NO_INTERPOLATION);
-		assertMsg(check, DOUBLE_QUOTE, 'String "test" uses double quotes instead of single quotes');
+		assertMessages(check, DOUBLE_QUOTE, [
+			'String "check" uses double quotes instead of single quotes',
+			'String "test" uses double quotes instead of single quotes',
+			'String "xml" uses double quotes instead of single quotes',
+			'String "test" uses double quotes instead of single quotes'
+		]);
 		assertMsg(check, SINGLE_QUOTE_WITH_EXCEPTION, "String \"test 'xml' \" uses double quotes instead of single quotes");
 	}
 
@@ -22,7 +27,12 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, INTERPOLATION);
 		assertNoMsg(check, NO_INTERPOLATION);
 		assertNoMsg(check, SINGLE_QUOTE_WITH_EXCEPTION);
-		assertMsg(check, DOUBLE_QUOTE, 'String "test" uses double quotes instead of single quotes');
+		assertMessages(check, DOUBLE_QUOTE, [
+			'String "check" uses double quotes instead of single quotes',
+			'String "test" uses double quotes instead of single quotes',
+			'String "xml" uses double quotes instead of single quotes',
+			'String "test" uses double quotes instead of single quotes'
+		]);
 	}
 
 	@Test
@@ -31,8 +41,28 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		check.policy = ONLY_DOUBLE;
 		check.allowException = false;
 		assertNoMsg(check, DOUBLE_QUOTE);
-		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
-		assertMsg(check, INTERPOLATION, 'String "$$value is $${i++} $$i" uses single quotes instead of double quotes');
+		assertMessages(check, SINGLE_QUOTE, [
+			'String "check" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes',
+			'String "xml" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes'
+		]);
+		assertMessages(check, INTERPOLATION, [
+			'String "Value is $$i" uses single quotes instead of double quotes',
+			'String "Value is $$i" uses single quotes instead of double quotes',
+			'String "$$value is i" uses single quotes instead of double quotes',
+			'String "$$value is i" uses single quotes instead of double quotes',
+			'String "$$value" uses single quotes instead of double quotes',
+			'String "$$value" uses single quotes instead of double quotes',
+			'String "Value is $${i++}" uses single quotes instead of double quotes',
+			'String "Value is $${i++}" uses single quotes instead of double quotes',
+			'String "Value is $${i++}$$" uses single quotes instead of double quotes',
+			'String "Value is $${i++}$$" uses single quotes instead of double quotes',
+			'String "Value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "Value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "$$value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "$$value is $${i++} $$i" uses single quotes instead of double quotes'
+		]);
 		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
 		#end
@@ -46,8 +76,28 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		check.allowException = true;
 		assertNoMsg(check, DOUBLE_QUOTE);
 		assertNoMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION);
-		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
-		assertMsg(check, INTERPOLATION, 'String "$$value is $${i++} $$i" uses single quotes instead of double quotes');
+		assertMessages(check, SINGLE_QUOTE, [
+			'String "check" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes',
+			'String "xml" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes'
+		]);
+		assertMessages(check, INTERPOLATION, [
+			'String "Value is $$i" uses single quotes instead of double quotes',
+			'String "Value is $$i" uses single quotes instead of double quotes',
+			'String "$$value is i" uses single quotes instead of double quotes',
+			'String "$$value is i" uses single quotes instead of double quotes',
+			'String "$$value" uses single quotes instead of double quotes',
+			'String "$$value" uses single quotes instead of double quotes',
+			'String "Value is $${i++}" uses single quotes instead of double quotes',
+			'String "Value is $${i++}" uses single quotes instead of double quotes',
+			'String "Value is $${i++}$$" uses single quotes instead of double quotes',
+			'String "Value is $${i++}$$" uses single quotes instead of double quotes',
+			'String "Value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "Value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "$$value is $${i++} $$i" uses single quotes instead of double quotes',
+			'String "$$value is $${i++} $$i" uses single quotes instead of double quotes'
+		]);
 		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
 		#end
@@ -59,7 +109,12 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		check.allowException = false;
 		assertNoMsg(check, DOUBLE_QUOTE);
 		assertNoMsg(check, INTERPOLATION);
-		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
+		assertMessages(check, SINGLE_QUOTE, [
+			'String "check" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes',
+			'String "xml" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes'
+		]);
 		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
 		#end
@@ -73,7 +128,12 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 		assertNoMsg(check, DOUBLE_QUOTE);
 		assertNoMsg(check, INTERPOLATION);
 		assertNoMsg(check, DOUBLE_QUOTE_WITH_EXCEPTION);
-		assertMsg(check, SINGLE_QUOTE, 'String "test" uses single quotes instead of double quotes');
+		assertMessages(check, SINGLE_QUOTE, [
+			'String "check" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes',
+			'String "xml" uses single quotes instead of double quotes',
+			'String "test" uses single quotes instead of double quotes'
+		]);
 		#if (haxeparser < "3.3.0")
 		assertMsg(check, NO_INTERPOLATION, 'String "value $$$$is i" uses single quotes instead of double quotes');
 		#end

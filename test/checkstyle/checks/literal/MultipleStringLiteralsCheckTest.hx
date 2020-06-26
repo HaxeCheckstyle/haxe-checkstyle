@@ -17,7 +17,10 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		var check = new MultipleStringLiteralsCheck();
 		assertMsg(check, THREE_XML, 'String "xml" appears 3 times in the file');
 		assertMsg(check, THREE_XML_SWITCH, 'String "xml" appears 3 times in the file');
-		assertMsg(check, OBJECT_FIELD_VALUES_ISSUE_116, 'String "duplicate" appears 4 times in the file');
+		assertMessages(check, OBJECT_FIELD_VALUES_ISSUE_116, [
+			'String "duplicate" appears 3 times in the file',
+			'String "duplicate" appears 4 times in the file'
+		]);
 		assertMsg(check, EXAGGERATION_ISSUE_318, 'String "user.name" appears 3 times in the file');
 	}
 

@@ -1,6 +1,7 @@
 package checkstyle.checks.block;
 
 class BlockBreakingConditionalCheckTest extends CheckTestCase<BlockBreakingConditionalCheckTests> {
+	static inline var MSG_LEFT_CURLY:String = "Left curly has no matching right curly";
 	static inline var MSG_RIGHT_CURLY:String = "Right curly has no matching left curly";
 
 	@Test
@@ -14,11 +15,21 @@ class BlockBreakingConditionalCheckTest extends CheckTestCase<BlockBreakingCondi
 	@Test
 	public function testBlockBreakingConditionals() {
 		var check:BlockBreakingConditionalCheck = new BlockBreakingConditionalCheck();
-		assertMsg(check, CONDITIONAL_IF, MSG_RIGHT_CURLY);
-		assertMsg(check, CONDITIONAL_IF_2, MSG_RIGHT_CURLY);
-		assertMsg(check, CONDITIONAL_IF_ELSE, MSG_RIGHT_CURLY);
-		assertMsg(check, CONDITIONAL_NESTED, MSG_RIGHT_CURLY);
-		assertMsg(check, CONDITIONAL_NESTED_2, MSG_RIGHT_CURLY);
+		assertMessages(check, CONDITIONAL_IF, [MSG_LEFT_CURLY, MSG_RIGHT_CURLY]);
+		assertMessages(check, CONDITIONAL_IF_2, [MSG_LEFT_CURLY, MSG_RIGHT_CURLY]);
+		assertMessages(check, CONDITIONAL_IF_ELSE, [MSG_LEFT_CURLY, MSG_LEFT_CURLY, MSG_RIGHT_CURLY]);
+		assertMessages(check, CONDITIONAL_NESTED, [MSG_LEFT_CURLY, MSG_LEFT_CURLY, MSG_RIGHT_CURLY]);
+		assertMessages(check, CONDITIONAL_NESTED_2, [
+			MSG_LEFT_CURLY,
+			MSG_LEFT_CURLY,
+			MSG_LEFT_CURLY,
+			MSG_LEFT_CURLY,
+			MSG_RIGHT_CURLY,
+			MSG_LEFT_CURLY,
+			MSG_LEFT_CURLY,
+			MSG_RIGHT_CURLY,
+			MSG_RIGHT_CURLY
+		]);
 	}
 }
 

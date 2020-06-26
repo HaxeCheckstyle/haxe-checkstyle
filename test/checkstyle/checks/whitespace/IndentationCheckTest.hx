@@ -11,7 +11,29 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, FUNCTION_BODY_NO_BRACES);
 		assertNoMsg(check, CORRECT_DOUBLE_FOR);
 		assertNoMsg(check, CORRECT_ARROW_INDENT);
-		assertMsg(check, CORRECT_SPACE_INDENT, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertMessages(check, CORRECT_SPACE_INDENT, [
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation'
+		]);
 	}
 
 	@Test
@@ -20,7 +42,113 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.character = cast "  ";
 		check.severity = SeverityLevel.INFO;
 		assertNoMsg(check, CORRECT_SPACE_INDENT);
-		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: "  "[1], actual: no indentation');
+		assertMessages(check, CORRECT_TAB_INDENT, [
+			'Indentation mismatch: expected: "  "[1], actual: no indentation',
+			'Indentation mismatch: expected: "  "[1], actual: no indentation',
+			'Indentation mismatch: expected: "  "[1], actual: no indentation',
+			'Indentation mismatch: expected: "  "[1], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "        "[4], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "    "[2], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "      "[3], actual: no indentation',
+			'Indentation mismatch: expected: "  "[1], actual: no indentation'
+		]);
 	}
 
 	@Test
@@ -28,7 +156,10 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		var check = new IndentationCheck();
 		check.severity = SeverityLevel.INFO;
 
-		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertMessages(check, WRONG_CONDITIONAL, [
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation'
+		]);
 		check.ignoreConditionals = true;
 		assertNoMsg(check, WRONG_CONDITIONAL);
 		assertNoMsg(check, CORRECT_TAB_INDENT);
@@ -40,16 +171,41 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 
 		check.conditionalPolicy = FIXED_ZERO;
 		assertNoMsg(check, WRONG_CONDITIONAL);
-		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]');
+		assertMessages(check, CORRECT_TAB_INDENT, [
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: no indentation, actual: "\\t\\t\\t"[3]'
+		]);
 
 		check.conditionalPolicy = ALIGNED;
-		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertMessages(check, WRONG_CONDITIONAL, [
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation'
+		]);
 		assertNoMsg(check, CORRECT_TAB_INDENT);
 
 		check.conditionalPolicy = ALIGNED_INCREASE;
-		assertMsg(check, WRONG_CONDITIONAL, 'Indentation mismatch: expected: "\\t"[1], actual: no indentation');
+		assertMessages(check, WRONG_CONDITIONAL, [
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]',
+			'Indentation mismatch: expected: "\\t"[1], actual: no indentation'
+		]);
 		assertNoMsg(check, CONDITIONAL_INCREASE);
-		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: "\\t\\t\\t\\t\\t"[5], actual: "\\t\\t\\t\\t"[4]');
+		assertMessages(check, CORRECT_TAB_INDENT, [
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t"[4], actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t"[4], actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t"[4], actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: "\\t\\t\\t"[3], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t"[4], actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t\\t"[5], actual: "\\t\\t\\t\\t"[4]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t\\t"[5], actual: "\\t\\t\\t\\t"[4]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t"[4], actual: "\\t\\t\\t"[3]',
+			'Indentation mismatch: expected: "\\t\\t\\t\\t\\t"[5], actual: "\\t\\t\\t\\t"[4]'
+		]);
 	}
 
 	@Test
@@ -58,7 +214,10 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		check.severity = SeverityLevel.INFO;
 		check.ignoreComments = false;
 		assertNoMsg(check, CORRECT_COMMENTS);
-		assertMsg(check, CORRECT_TAB_INDENT, 'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation');
+		assertMessages(check, CORRECT_TAB_INDENT, [
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: no indentation'
+		]);
 	}
 
 	@Test
@@ -69,17 +228,40 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 		assertNoMsg(check, EXACT_WRAPPED_PARAMS);
 		assertNoMsg(check, WRAPPED_STRING);
 		assertNoMsg(check, CORRECT_PCLOSE_WRAPPING_ISSUE_450);
-		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
+		assertMessages(check, NONE_WRAPPED_PARAMS, [
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]'
+		]);
 		check.wrapPolicy = EXACT;
 		assertNoMsg(check, WRAPPED_STRING);
 		assertNoMsg(check, CORRECT_PCLOSE_WRAPPING_ISSUE_450);
-		assertMsg(check, LARGER_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]');
-		assertMsg(check, NONE_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]');
+		assertMessages(check, LARGER_WRAPPED_PARAMS, [
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t\\t\\t\\t\\t\\t"[6]'
+		]);
+		assertMessages(check, NONE_WRAPPED_PARAMS, [
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]',
+			'Indentation mismatch: expected: "\\t\\t"[2], actual: "\\t"[1]'
+		]);
 
 		check.wrapPolicy = NONE;
 		assertNoMsg(check, NONE_WRAPPED_PARAMS);
-		assertMsg(check, LARGER_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t\\t\\t\\t\\t"[6]');
-		assertMsg(check, EXACT_WRAPPED_PARAMS, 'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]');
+		assertMessages(check, LARGER_WRAPPED_PARAMS, [
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t\\t\\t\\t\\t"[6]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t\\t\\t\\t\\t"[6]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t\\t\\t\\t\\t"[6]'
+		]);
+		assertMessages(check, EXACT_WRAPPED_PARAMS, [
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]',
+			'Indentation mismatch: expected: "\\t"[1], actual: "\\t\\t"[2]'
+		]);
 	}
 }
 

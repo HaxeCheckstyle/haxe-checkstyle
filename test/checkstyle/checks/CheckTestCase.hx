@@ -18,6 +18,11 @@ class CheckTestCase<T:String> {
 
 	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?fileName:String, allowFailingAST:Bool = false,
 			?pos:PosInfos) {
+		assertMessages(check, testCase, [expected], defines, fileName, allowFailingAST, pos);
+	}
+
+	function assertMessages(check:Check, testCase:T, expected:Array<String>, ?defines:Array<Array<String>>, ?fileName:String, allowFailingAST:Bool = false,
+			?pos:PosInfos) {
 		var re = ~/abstractAndClass ([a-zA-Z0-9]*)/g;
 		if (re.match(testCase)) {
 			actualAssertMsg(check, re.replace(testCase, "class $1"), expected, fileName, allowFailingAST, pos);
@@ -27,17 +32,26 @@ class CheckTestCase<T:String> {
 	}
 
 	function assertNoMsg(check:Check, testCase:T, ?fileName:String, allowFailingAST:Bool = false, ?pos:PosInfos) {
-		assertMsg(check, testCase, "", null, fileName, allowFailingAST, pos);
+		assertMessages(check, testCase, [], null, fileName, allowFailingAST, pos);
 	}
 
-	function actualAssertMsg(check:Check, testCase:String, expected:String, ?defines:Array<Array<String>>, ?fileName:String, allowFailingAST:Bool = false,
-			?pos:PosInfos) {
-		var msg = checkMessage(testCase, check, defines, fileName, allowFailingAST, pos);
-		Assert.areEqual(expected, msg, pos);
+	function actualAssertMsg(check:Check, testCase:String, expected:Array<String>, ?defines:Array<Array<String>>, ?fileName:String,
+			allowFailingAST:Bool = false, ?pos:PosInfos) {
+		var messages:Array<CheckMessage> = checkMessages(testCase, check, defines, fileName, allowFailingAST, pos);
+		if ((expected.length == 1) && (expected.length != messages.length)) {
+			for (i in 0...messages.length) {
+				Assert.areEqual(expected[0], messages[i].message, pos);
+			}
+		}
+
+		Assert.areEqual(expected.length, messages.length, pos);
+		for (i in 0...expected.length) {
+			Assert.areEqual(expected[i], messages[i].message, pos);
+		}
 	}
 
-	function checkMessage(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, allowFailingAST:Bool = false,
-			?pos:PosInfos):String {
+	function checkMessages(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, allowFailingAST:Bool = false,
+			?pos:PosInfos):Array<CheckMessage> {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independent checkMessage calls in a single test
 		checker = new Checker(allowFailingAST);
@@ -49,7 +63,7 @@ class CheckTestCase<T:String> {
 		ReporterManager.INSTANCE.clear();
 		ReporterManager.INSTANCE.addReporter(reporter);
 		checker.process([{name: fileName, content: ByteData.ofString(src), index: 0}]);
-		return reporter.message;
+		return reporter.messages;
 	}
 
 	@After
@@ -60,10 +74,10 @@ class CheckTestCase<T:String> {
 }
 
 class TestReporter implements IReporter {
-	public var message:String;
+	public var messages:Array<CheckMessage>;
 
 	public function new() {
-		message = "";
+		messages = [];
 	}
 
 	public function start() {}
@@ -75,6 +89,6 @@ class TestReporter implements IReporter {
 	public function fileFinish(f:CheckFile) {}
 
 	public function addMessage(m:CheckMessage) {
-		message = m.message;
+		messages.push(m);
 	}
 }

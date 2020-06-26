@@ -36,7 +36,13 @@ class ParameterNameCheckTest extends CheckTestCase<ParameterNameCheckTests> {
 		var check = new ParameterNameCheck();
 		check.format = "^[A-Z][a-zA-Z]*$";
 
-		assertMsg(check, TEST, 'Invalid parameter name signature: "paramName" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST, [
+			'Invalid parameter name signature: "param1" (name should be "~/${check.format}/")',
+			'Invalid parameter name signature: "paramName" (name should be "~/${check.format}/")',
+			'Invalid parameter name signature: "param" (name should be "~/${check.format}/")',
+			'Invalid parameter name signature: "param1" (name should be "~/${check.format}/")',
+			'Invalid parameter name signature: "paramName" (name should be "~/${check.format}/")'
+		]);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST1);
 		assertMsg(check, TEST3, 'Invalid parameter name signature: "param1" (name should be "~/${check.format}/")');

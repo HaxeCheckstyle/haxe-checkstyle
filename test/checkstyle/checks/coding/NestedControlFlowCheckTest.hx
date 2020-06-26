@@ -29,7 +29,11 @@ class NestedControlFlowCheckTest extends CheckTestCase<NestedControlFlowCheckTes
 
 		check.max = 1;
 		assertNoMsg(check, COMPLIANT_NESTING);
-		assertMsg(check, TOO_MANY_FORS, "Nested control flow depth is 4 (max allowed is 1)");
+		assertMessages(check, TOO_MANY_FORS, [
+			"Nested control flow depth is 2 (max allowed is 1)",
+			"Nested control flow depth is 3 (max allowed is 1)",
+			"Nested control flow depth is 4 (max allowed is 1)"
+		]);
 	}
 }
 

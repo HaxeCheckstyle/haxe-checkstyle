@@ -21,7 +21,12 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 		var check = new TypeNameCheck();
 		check.format = FORMAT_CLASS;
 
-		assertMsg(check, TEST, 'Invalid typedef signature: "Test3" (name should be "~/^C[A-Z][a-z]*$/")');
+		assertMessages(check, TEST, [
+			'Invalid class signature: "Test" (name should be "~/^C[A-Z][a-z]*$/")',
+			'Invalid interface signature: "ITest" (name should be "~/^C[A-Z][a-z]*$/")',
+			'Invalid enum signature: "Test2" (name should be "~/^C[A-Z][a-z]*$/")',
+			'Invalid typedef signature: "Test3" (name should be "~/^C[A-Z][a-z]*$/")'
+		]);
 		assertNoMsg(check, TEST1);
 		assertMsg(check, TEST2, 'Invalid interface signature: "Test" (name should be "~/^C[A-Z][a-z]*$/")');
 		assertMsg(check, TEST3, 'Invalid typedef signature: "TTest" (name should be "~/^C[A-Z][a-z]*$/")');

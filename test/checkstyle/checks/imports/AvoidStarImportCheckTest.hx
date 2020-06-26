@@ -15,7 +15,7 @@ class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> 
 		assertMsg(check, STAR_IMPORT, MSG_STAR_IMPORT);
 		assertMsg(check, CONDITIONAL_STAR_IMPORT_ISSUE_160, MSG_STAR_IMPORT);
 		assertMsg(check, CONDITIONAL_ELSE_STAR_IMPORT, MSG_STAR_IMPORT);
-		assertMsg(check, CONDITIONAL_ELSEIF_STAR_IMPORT, MSG_STAR_IMPORT);
+		assertMessages(check, CONDITIONAL_ELSEIF_STAR_IMPORT, [MSG_STAR_IMPORT, MSG_STAR_IMPORT, MSG_STAR_IMPORT]);
 	}
 }
 

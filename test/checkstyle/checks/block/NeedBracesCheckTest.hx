@@ -46,9 +46,17 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		var check = new NeedBracesCheck();
 		check.allowSingleLineStatement = false;
 
-		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
+		assertMessages(check, TEST, [
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_ELSE,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_FOR,
+			MSG_SAME_LINE_WHILE
+		]);
 		assertMsg(check, TEST1, MSG_IF);
-		assertMsg(check, TEST2, MSG_ELSE);
+		assertMessages(check, TEST2, [MSG_SAME_LINE_IF, MSG_ELSE]);
 		assertNoMsg(check, TEST3);
 		assertMsg(check, TEST4, MSG_IF);
 		assertNoMsg(check, TEST5);
@@ -57,7 +65,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST8);
 		assertMsg(check, TEST9, MSG_SAME_LINE_FOR);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMessages(check, TEST11, [MSG_IF, MSG_SAME_LINE_ELSE]);
 		assertMsg(check, TEST12, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
 		assertNoMsg(check, TEST14);
@@ -113,9 +121,15 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, TEST, MSG_SAME_LINE_IF);
+		assertMessages(check, TEST, [
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_ELSE,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF
+		]);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMessages(check, TEST11, [MSG_IF, MSG_SAME_LINE_ELSE]);
 		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
 		assertNoMsg(check, TEST14);
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
@@ -143,9 +157,15 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST14);
 
 		check.allowSingleLineStatement = false;
-		assertMsg(check, TEST, MSG_SAME_LINE_IF);
+		assertMessages(check, TEST, [
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_ELSE,
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF
+		]);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
-		assertMsg(check, TEST11, MSG_SAME_LINE_ELSE);
+		assertMessages(check, TEST11, [MSG_IF, MSG_SAME_LINE_ELSE]);
 		assertMsg(check, TEST12, MSG_SAME_LINE_IF);
 		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
 		assertNoMsg(check, TEST14);

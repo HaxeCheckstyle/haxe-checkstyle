@@ -1,7 +1,7 @@
 package checkstyle.checks.whitespace;
 
-import haxe.PosInfos;
 import checkstyle.checks.whitespace.ExtendedEmptyLinesCheck.EmptyLinesPlace;
+import haxe.PosInfos;
 
 class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckTests> {
 	static inline var MSG_NONE:String = "should not have empty line(s)";
@@ -24,12 +24,12 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testBetweenImports() {
-		runChecks(BETWEEN_IMPORTS, " between imports/using");
+		runChecks(BETWEEN_IMPORTS, " between imports/using", 2);
 	}
 
 	@Test
 	public function testBeforeUsing() {
-		runChecks(BEFORE_USING, " between import and using");
+		runChecks(BEFORE_USING, " between import and using", 2);
 	}
 
 	@Test
@@ -39,12 +39,12 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testAnywhereInFile() {
-		runChecks(ANYWHERE_IN_FILE, " anywhere in file", false);
+		runChecks(ANYWHERE_IN_FILE, " anywhere in file", false, 67);
 	}
 
 	@Test
 	public function testBetweenTypes() {
-		runChecks(BETWEEN_TYPES, " between types");
+		runChecks(BETWEEN_TYPES, " between types", 4);
 	}
 
 	@Test
@@ -54,22 +54,22 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testInFunction() {
-		runChecks(IN_FUNCTION, " inside functions", false);
+		runChecks(IN_FUNCTION, " inside functions", false, 15);
 	}
 
 	@Test
 	public function testAfterLeftCurly() {
-		runChecks(AFTER_LEFT_CURLY, " after left curly");
+		runChecks(AFTER_LEFT_CURLY, " after left curly", 7);
 	}
 
 	@Test
 	public function testBeforeRightCurly() {
-		runChecks(BEFORE_RIGHT_CURLY, " before right curly");
+		runChecks(BEFORE_RIGHT_CURLY, " before right curly", 7);
 	}
 
 	@Test
 	public function testTypeDefinition() {
-		runChecks(TYPE_DEFINITION, " between type definition and left curly");
+		runChecks(TYPE_DEFINITION, " between type definition and left curly", 5);
 	}
 
 	@Test
@@ -149,7 +149,7 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testBetweenTypedefFields() {
-		runChecks(BETWEEN_TYPEDEF_FIELDS, " between type fields", false);
+		runChecks(BETWEEN_TYPEDEF_FIELDS, " between type fields", false, 2);
 	}
 
 	@Test
@@ -179,7 +179,7 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testBeforeSingleLineComment() {
-		runChecks(BEFORE_SINGLELINE_COMMENT, " before comment");
+		runChecks(BEFORE_SINGLELINE_COMMENT, " before comment", 5);
 	}
 
 	@Test
@@ -189,7 +189,7 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 	@Test
 	public function testAfterSingleLineComment() {
-		runChecks(AFTER_SINGLELINE_COMMENT, " after comment");
+		runChecks(AFTER_SINGLELINE_COMMENT, " after comment", 5);
 	}
 
 	@Test
@@ -197,54 +197,63 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 		runChecks(AFTER_MULTILINE_COMMENT, " after comment");
 	}
 
-	function runChecks(fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
+	function runChecks(fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, msgCount:Int = 1, ?pos:PosInfos) {
 		var check:ExtendedEmptyLinesCheck = makeIgnoredCheck(1);
 		assertNoMsg(check, TEST_EXACT_1);
 		assertNoMsg(check, TEST_EXACT_2);
 		assertNoMsg(check, TEST_NONE);
 
-		runChecksMax1(check, fieldName, postfix, hasFixedPosition, pos);
-		runChecksMax2(check, fieldName, postfix, hasFixedPosition, pos);
+		runChecksMax1(check, fieldName, postfix, hasFixedPosition, msgCount, pos);
+		runChecksMax2(check, fieldName, postfix, hasFixedPosition, msgCount, pos);
 	}
 
-	function runChecksMax1(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
+	function runChecksMax1(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, msgCount:Int = 1,
+			?pos:PosInfos) {
 		check.max = 1;
 		check.exact = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
-		assertMsg(check, TEST_EXACT_2, MSG_EXACT_1 + postfix);
-		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_EXACT_1 + postfix);
+		var messages:Array<String> = [for (i in 0...msgCount) MSG_EXACT_1 + postfix];
+		assertMessages(check, TEST_EXACT_2, messages);
+		if (hasFixedPosition) assertMessages(check, TEST_NONE, messages);
 
 		check.exact = [];
 		check.none = [fieldName];
-		assertMsg(check, TEST_EXACT_1, MSG_NONE + postfix);
-		assertMsg(check, TEST_EXACT_2, MSG_NONE + postfix);
+		messages = [for (i in 0...msgCount) MSG_NONE + postfix];
+		assertMessages(check, TEST_EXACT_1, messages);
+		assertMessages(check, TEST_EXACT_2, messages);
 		assertNoMsg(check, TEST_NONE);
 
 		check.none = [];
 		check.upto = [fieldName];
+		messages = [for (i in 0...msgCount) MSG_UPTO_1 + postfix];
 		assertNoMsg(check, TEST_EXACT_1);
-		assertMsg(check, TEST_EXACT_2, MSG_UPTO_1 + postfix);
+		assertMessages(check, TEST_EXACT_2, messages);
 		assertNoMsg(check, TEST_NONE);
 
 		check.upto = [];
 		check.atleast = [fieldName];
 		assertNoMsg(check, TEST_EXACT_1);
 		assertNoMsg(check, TEST_EXACT_2);
-		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_ATLEAST_1 + postfix);
+
+		messages = [for (i in 0...msgCount) MSG_ATLEAST_1 + postfix];
+		if (hasFixedPosition) assertMessages(check, TEST_NONE, messages);
 	}
 
-	function runChecksMax2(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, ?pos:PosInfos) {
+	function runChecksMax2(check:ExtendedEmptyLinesCheck, fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, msgCount:Int = 1,
+			?pos:PosInfos) {
 		check.max = 2;
 		check.atleast = [];
 		check.exact = [fieldName];
-		assertMsg(check, TEST_EXACT_1, MSG_EXACT_2 + postfix);
+		var messages:Array<String> = [for (i in 0...msgCount) MSG_EXACT_2 + postfix];
+		assertMessages(check, TEST_EXACT_1, messages);
 		assertNoMsg(check, TEST_EXACT_2);
-		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_EXACT_2 + postfix);
+		if (hasFixedPosition) assertMessages(check, TEST_NONE, messages);
 
 		check.exact = [];
 		check.none = [fieldName];
-		assertMsg(check, TEST_EXACT_1, MSG_NONE + postfix);
-		assertMsg(check, TEST_EXACT_2, MSG_NONE + postfix);
+		messages = [for (i in 0...msgCount) MSG_NONE + postfix];
+		assertMessages(check, TEST_EXACT_1, messages);
+		assertMessages(check, TEST_EXACT_2, messages);
 		assertNoMsg(check, TEST_NONE);
 
 		check.none = [];
@@ -255,9 +264,10 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 
 		check.upto = [];
 		check.atleast = [fieldName];
-		assertMsg(check, TEST_EXACT_1, MSG_ATLEAST_2 + postfix);
+		messages = [for (i in 0...msgCount) MSG_ATLEAST_2 + postfix];
+		assertMessages(check, TEST_EXACT_1, messages);
 		assertNoMsg(check, TEST_EXACT_2);
-		if (hasFixedPosition) assertMsg(check, TEST_NONE, MSG_ATLEAST_2 + postfix);
+		if (hasFixedPosition) assertMessages(check, TEST_NONE, messages);
 	}
 
 	function makeIgnoredCheck(max:Int, skipSingleLineTypes:Bool = true):ExtendedEmptyLinesCheck {
