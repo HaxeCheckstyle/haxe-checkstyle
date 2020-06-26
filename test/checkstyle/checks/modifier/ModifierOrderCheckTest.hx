@@ -25,7 +25,11 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 	public function testModifiers() {
 		var check = new ModifierOrderCheck();
 		check.modifiers = [DYNAMIC, PUBLIC_PRIVATE, OVERRIDE, INLINE, STATIC, MACRO];
-		assertMsg(check, TEST1, 'modifier order for field "test6" is "public static inline" but should be "public inline static"');
+		assertMessages(check, TEST1, [
+			'modifier order for field "test1" is "override public" but should be "public override"',
+			'modifier order for field "test2" is "override private" but should be "private override"',
+			'modifier order for field "test6" is "public static inline" but should be "public inline static"'
+		]);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);

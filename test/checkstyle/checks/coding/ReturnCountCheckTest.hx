@@ -27,7 +27,7 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 	public function testIgnoreRE() {
 		var check = new ReturnCountCheck();
 		check.ignoreFormat = "^equals$";
-		assertMsg(check, TEST5, "");
+		assertNoMsg(check, TEST5);
 	}
 
 	@Test

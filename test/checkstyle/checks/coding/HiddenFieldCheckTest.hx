@@ -31,7 +31,10 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR, 'Variable definition of "field2" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
-		assertMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT, 'Variable definition of "field2" masks member of same name');
+		assertMessages(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT, [
+			'Variable definition of "field2" masks member of same name',
+			'Variable definition of "field2" masks member of same name'
+		]);
 	}
 
 	@Test
@@ -43,7 +46,10 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR);
 		assertNoMsg(check, HIDDEN_FIELDS_CONSTRUCTOR_VAR_WITH_COMMENT);
-		assertMsg(check, HIDDEN_FIELDS_SETTER, 'Parameter definition of "field2" masks member of same name');
+		assertMessages(check, HIDDEN_FIELDS_SETTER, [
+			'Parameter definition of "field1" masks member of same name',
+			'Parameter definition of "field2" masks member of same name'
+		]);
 		assertMsg(check, HIDDEN_FIELDS_FUNC, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
 	}

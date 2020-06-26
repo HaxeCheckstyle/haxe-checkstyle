@@ -14,9 +14,16 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST1, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST2, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST5, 'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [
+			'Invalid enum member signature: "VALUE_TEST_" (name should be "~/^[a-z][a-zA-Z0-9]*$/")',
+			'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")'
+		]);
 		assertMsg(check, PROPERTY_NAME, 'Invalid member signature: "Example" (name should be "~/^[a-z][a-zA-Z0-9]*$/")');
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 	}
 
 	@Test
@@ -30,7 +37,10 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertMsg(check, TEST2, memberMessage);
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST4, memberMessage);
-		assertMsg(check, TEST5, 'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [
+			'Invalid enum member signature: "VALUE_TEST_" (name should be "~/^[a-z][a-zA-Z0-9]*$/")',
+			'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")'
+		]);
 	}
 
 	@Test
@@ -124,8 +134,14 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST6, 'Invalid enum member signature: "VALUE" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [
+			'Invalid enum member signature: "VALUE_TEST_" (name should be "~/${check.format}/")',
+			'Invalid enum member signature: "VALUE_TEST" (name should be "~/${check.format}/")'
+		]);
+		assertMessages(check, TEST6, [
+			'Invalid enum member signature: "VALUE_" (name should be "~/${check.format}/")',
+			'Invalid enum member signature: "VALUE" (name should be "~/${check.format}/")'
+		]);
 		assertNoMsg(check, ABSTRACT_FIELDS);
 	}
 
@@ -147,14 +163,27 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		var check = new MemberNameCheck();
 		check.format = "^[A-Z_]*$";
 
-		assertMsg(check, TEST, 'Invalid typedef member signature: "count2" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST, [
+			'Invalid member signature: "a" (name should be "~/${check.format}/")',
+			'Invalid member signature: "b" (name should be "~/${check.format}/")',
+			'Invalid member signature: "example" (name should be "~/${check.format}/")',
+			'Invalid member signature: "count5" (name should be "~/${check.format}/")',
+			'Invalid enum member signature: "count" (name should be "~/${check.format}/")',
+			'Invalid enum member signature: "a" (name should be "~/${check.format}/")',
+			'Invalid typedef member signature: "count1" (name should be "~/${check.format}/")',
+			'Invalid typedef member signature: "count2" (name should be "~/${check.format}/")'
+		]);
 		assertMsg(check, TEST1, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST2, 'Invalid member signature: "Count" (name should be "~/${check.format}/")');
 		assertMsg(check, TEST3, 'Invalid typedef member signature: "Count" (name should be "~/${check.format}/")');
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
 		assertNoMsg(check, TEST6);
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 
 		check.format = "^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$";
 		assertMsg(check, TEST5, 'Invalid enum member signature: "VALUE_TEST_" (name should be "~/${check.format}/")');
@@ -168,11 +197,19 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		check.format = "^[A-Z_]*$";
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 
 		check.tokens = [ABSTRACT];
 		assertNoMsg(check, TEST);
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 
 		check.tokens = [ABSTRACT, PRIVATE];
 		assertNoMsg(check, ABSTRACT_FIELDS);
@@ -184,13 +221,25 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 		assertNoMsg(check, ABSTRACT_FIELDS);
 
 		check.tokens = [ABSTRACT, PUBLIC];
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 
 		check.tokens = [PUBLIC];
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 
 		check.tokens = [ABSTRACT, CLASS, PUBLIC];
-		assertMsg(check, ABSTRACT_FIELDS, 'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")');
+		assertMessages(check, ABSTRACT_FIELDS, [
+			'Invalid member signature: "EnumConstructor1" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor2" (name should be "~/${check.format}/")',
+			'Invalid member signature: "EnumConstructor3" (name should be "~/${check.format}/")'
+		]);
 	}
 
 	@Test

@@ -21,8 +21,8 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 	public function testIncorrectWrap() {
 		var check = new SeparatorWrapCheck();
 		assertMsg(check, NL_WRAP_FUNC, MSG_COMMA_EOL);
-		assertMsg(check, NL_WRAP_OBJECT_DECL, MSG_COMMA_EOL);
-		assertMsg(check, NL_WRAP_ARRAY, MSG_COMMA_EOL);
+		assertMessages(check, NL_WRAP_OBJECT_DECL, [MSG_COMMA_EOL, MSG_COMMA_EOL]);
+		assertMessages(check, NL_WRAP_ARRAY, [MSG_COMMA_EOL, MSG_COMMA_EOL, MSG_COMMA_EOL]);
 	}
 
 	@Test
@@ -42,8 +42,8 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 		assertNoMsg(check, EOL_WRAP_IMPORT);
 
 		check.tokens = [",", "."];
-		assertMsg(check, CORRECT_WRAP, MSG_COMMA_NL);
-		assertMsg(check, EOL_WRAP_ARRAY, MSG_COMMA_NL);
+		assertMessages(check, CORRECT_WRAP, [MSG_DOT_NL, MSG_COMMA_NL, MSG_COMMA_NL, MSG_COMMA_NL, MSG_COMMA_NL, MSG_COMMA_NL]);
+		assertMessages(check, EOL_WRAP_ARRAY, [MSG_COMMA_NL, MSG_COMMA_NL, MSG_COMMA_NL]);
 		assertMsg(check, EOL_WRAP_IMPORT, MSG_DOT_NL);
 	}
 }

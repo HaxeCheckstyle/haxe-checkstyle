@@ -14,9 +14,18 @@ class RedundantAllowMetaCheckTest extends CheckTestCase<RedundantAllowMetaCheckT
 	public function testProhibitMeta() {
 		var check = new RedundantAllowMetaCheck();
 		check.prohibitMeta = true;
-		assertMsg(check, CORRECT_ACCESS, 'Consider removing "@:allow(pack.age.Test2)"');
-		assertMsg(check, REDUNDANT_ACCESS, 'Consider removing "@:allow(pack.age.Test)"');
-		assertMsg(check, REDUNDANT_ACCESS_PACKAGE, 'Consider removing "@:allow(pack.age.Test)"');
+		assertMessages(check, CORRECT_ACCESS, [
+			'Consider removing "@:allow(pack.age.Test)"',
+			'Consider removing "@:allow(pack.age.Test2)"'
+		]);
+		assertMessages(check, REDUNDANT_ACCESS, [
+			'Consider removing "@:allow(pack.age.Test)"',
+			'Consider removing "@:allow(pack.age.Test)"'
+		]);
+		assertMessages(check, REDUNDANT_ACCESS_PACKAGE, [
+			'Consider removing "@:allow(pack.age)"',
+			'Consider removing "@:allow(pack.age.Test)"'
+		]);
 		assertMsg(check, REDUNDANT_ACCESS_PUBLIC, 'Consider removing "@:allow(pack.age.Test)"');
 
 		check.prohibitMeta = false;

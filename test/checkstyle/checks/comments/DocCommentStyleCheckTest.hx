@@ -12,7 +12,7 @@ class DocCommentStyleCheckTest extends CheckTestCase<DocCommentStyleCheckTests> 
 		assertNoMsg(check, TWO_STAR_NO_STAR_TWO_STAR);
 		assertNoMsg(check, MANY_STARS_NO_STAR_MANY_STARS);
 		assertMsg(check, ONE_STAR_NO_STAR_ONE_STAR, MSG_SHOULD_USE_TWO_STARS);
-		assertMsg(check, ONE_STAR_ONE_STAR_ONE_STAR, MSG_SHOULD_NOT_START_WITH_STAR);
+		assertMessages(check, ONE_STAR_ONE_STAR_ONE_STAR, [MSG_SHOULD_USE_TWO_STARS, MSG_SHOULD_NOT_START_WITH_STAR]);
 		assertMsg(check, TWO_STAR_ONE_STAR_TWO_STAR, MSG_SHOULD_NOT_START_WITH_STAR);
 		assertMsg(check, TWO_STAR_TWO_STARS_TWO_STAR, MSG_SHOULD_NOT_START_WITH_STAR);
 	}

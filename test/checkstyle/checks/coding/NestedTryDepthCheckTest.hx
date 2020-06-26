@@ -1,6 +1,9 @@
 package checkstyle.checks.coding;
 
 class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
+	static inline var NESTED_TRY_DEPTH_IS_2_MAX_ALLOWED_IS_1 = "Nested try depth is 2 (max allowed is 1)";
+	static inline var NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0 = "Nested try depth is 1 (max allowed is 0)";
+
 	@Test
 	public function testDefault() {
 		var check = new NestedTryDepthCheck();
@@ -10,7 +13,10 @@ class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 	@Test
 	public function testDefaultTooMany() {
 		var check = new NestedTryDepthCheck();
-		assertMsg(check, TEST2, "Nested try depth is 2 (max allowed is 1)");
+		assertMessages(check, TEST2, [
+			NESTED_TRY_DEPTH_IS_2_MAX_ALLOWED_IS_1,
+			NESTED_TRY_DEPTH_IS_2_MAX_ALLOWED_IS_1
+		]);
 	}
 
 	@Test
@@ -23,7 +29,14 @@ class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 
 		check.max = 0;
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, "Nested try depth is 1 (max allowed is 0)");
+		assertMessages(check, TEST2, [
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0,
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0,
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0,
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0,
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0,
+			NESTED_TRY_DEPTH_IS_1_MAX_ALLOWED_IS_0
+		]);
 	}
 }
 

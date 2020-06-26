@@ -25,7 +25,11 @@ class IndentationCharacterCheckTest extends CheckTestCase<IndentationCharacterCh
 		check.character = SPACE;
 
 		assertNoMsg(check, SPACE_INDENTATION);
-		assertMsg(check, TEST3, "Wrong indentation character (should be space)");
+		assertMessages(check, TEST3, [
+			"Wrong indentation character (should be space)",
+			"Wrong indentation character (should be space)",
+			"Wrong indentation character (should be space)"
+		]);
 	}
 
 	@Test

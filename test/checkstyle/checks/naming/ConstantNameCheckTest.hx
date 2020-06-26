@@ -25,7 +25,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 		assertNoMsg(check, TEST);
 		assertMsg(check, TEST1, message);
 		assertMsg(check, TEST2, message);
-		assertMsg(check, TEST3, message);
+		assertMessages(check, TEST3, [message, message]);
 	}
 
 	@Test
@@ -55,7 +55,10 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 		var check = new ConstantNameCheck();
 		check.format = "^[A-Z][a-z]*$";
 
-		assertMsg(check, TEST, 'Invalid const signature: "COUNT2" (name should be "~/^[A-Z][a-z]*$/")');
+		assertMessages(check, TEST, [
+			'Invalid const signature: "COUNT" (name should be "~/^[A-Z][a-z]*$/")',
+			'Invalid const signature: "COUNT2" (name should be "~/^[A-Z][a-z]*$/")'
+		]);
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);

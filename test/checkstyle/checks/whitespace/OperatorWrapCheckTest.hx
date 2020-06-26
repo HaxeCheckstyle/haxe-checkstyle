@@ -2,6 +2,8 @@ package checkstyle.checks.whitespace;
 
 class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 	static inline var MSG_PLUS_EOL:String = 'Token "+" must be at the end of the line';
+	static inline var MSG_PLUS_NL:String = 'Token "+" must be on a new line';
+	static inline var MSG_LT_NL:String = 'Token "<" must be on a new line';
 	static inline var MSG_GT_NL:String = 'Token ">" must be on a new line';
 
 	@Test
@@ -28,7 +30,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 		assertNoMsg(check, CORRECT_NL_WRAP_GT);
 		assertNoMsg(check, TYPE_PARAM);
 
-		assertMsg(check, CORRECT_EOL_WRAP, MSG_GT_NL);
+		assertMessages(check, CORRECT_EOL_WRAP, [MSG_PLUS_NL, MSG_LT_NL, MSG_GT_NL]);
 	}
 }
 

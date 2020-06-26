@@ -11,7 +11,7 @@ class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 		var check = new ArrayAccessCheck();
 		assertMsg(check, TEST2, "Space between [ and index");
 		assertMsg(check, TEST3, "Space between index and ]");
-		assertMsg(check, TEST4, "Space between index and ]");
+		assertMessages(check, TEST4, ["Space between [ and index", "Space between index and ]"]);
 	}
 
 	@Test

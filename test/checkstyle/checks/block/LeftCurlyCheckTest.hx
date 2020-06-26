@@ -35,7 +35,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, TEST5, MSG_EOL);
 		assertMsg(check, TEST7, MSG_EOL);
 		assertMsg(check, TEST10, MSG_EOL);
-		assertMsg(check, NL_CASEBLOCK, MSG_EOL);
+		assertMessages(check, NL_CASEBLOCK, [MSG_EOL, MSG_EOL, MSG_EOL]);
 		assertMsg(check, NLOW_CASEBLOCK, MSG_EOL);
 	}
 
@@ -44,16 +44,16 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		var check = new LeftCurlyCheck();
 		check.option = NL;
 
-		assertMsg(check, TEST, MSG_NL);
+		assertMessages(check, TEST, [MSG_NL, MSG_NL, MSG_NL, MSG_NL, MSG_NL, MSG_NL, MSG_NL, MSG_NL]);
 		assertNoMsg(check, TEST13);
 
 		check.tokens = [OBJECT_DECL];
 		assertMsg(check, TEST4, MSG_NL);
 		assertNoMsg(check, TEST14);
-		assertMsg(check, NESTED_OBJECT_LITERAL, MSG_NL);
+		assertMessages(check, NESTED_OBJECT_LITERAL, [MSG_NL, MSG_NL]);
 
 		check.tokens = [TYPEDEF_DEF];
-		assertMsg(check, TEST14, MSG_NL);
+		assertMessages(check, TEST14, [MSG_NL, MSG_NL]);
 
 		check.tokens = [IF];
 		assertNoMsg(check, TEST1);
@@ -73,8 +73,8 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		check.option = NL;
 		assertNoMsg(check, TEST15);
 		assertNoMsg(check, NL_CASEBLOCK);
-		assertMsg(check, EOL_CASEBLOCK, MSG_NL);
-		assertMsg(check, NLOW_CASEBLOCK, MSG_NL);
+		assertMessages(check, EOL_CASEBLOCK, [MSG_NL, MSG_NL, MSG_NL]);
+		assertMessages(check, NLOW_CASEBLOCK, [MSG_NL, MSG_NL]);
 	}
 
 	@Test
@@ -85,7 +85,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST16);
 		assertNoMsg(check, NLOW_CASEBLOCK);
-		assertMsg(check, TEST17, MSG_NLOW);
+		assertMessages(check, TEST17, [MSG_NLOW, MSG_NLOW]);
 		assertMsg(check, TEST18, MSG_NL_SPLIT);
 		assertMsg(check, TEST19, MSG_NL_SPLIT);
 		assertMsg(check, WRAPPED_FUNCTION, MSG_NL_SPLIT);
@@ -95,7 +95,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 	public function testReification() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [REIFICATION];
-		assertMsg(check, MACRO_REIFICATION, MSG_EOL);
+		assertMessages(check, MACRO_REIFICATION, [MSG_EOL, MSG_EOL]);
 	}
 
 	@Test
@@ -116,16 +116,16 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		var check = new LeftCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION, OBJECT_DECL];
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
-		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_EOL);
+		assertMessages(check, ARRAY_COMPREHENSION_ISSUE_114, [MSG_EOL, MSG_EOL]);
 
 		check.option = NLOW;
 		assertNoMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114);
 		assertNoMsg(check, ARRAY_COMPREHENSION_NLOW_ISSUE_114);
-		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
+		assertMessages(check, ARRAY_COMPREHENSION_ISSUE_114, [MSG_NL, MSG_NL]);
 
 		check.option = NL;
-		assertMsg(check, ARRAY_COMPREHENSION_2_ISSUE_114, MSG_NL);
-		assertMsg(check, ARRAY_COMPREHENSION_ISSUE_114, MSG_NL);
+		assertMessages(check, ARRAY_COMPREHENSION_2_ISSUE_114, [MSG_NL, MSG_NL]);
+		assertMessages(check, ARRAY_COMPREHENSION_ISSUE_114, [MSG_NL, MSG_NL]);
 	}
 }
 

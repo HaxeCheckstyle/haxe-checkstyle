@@ -13,8 +13,8 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 	public function testIncorrectSeparatorWhitespaceToken() {
 		var check = new SeparatorWhitespaceCheck();
 		check.commaPolicy = AFTER;
-		assertMsg(check, COMMA_WHITESPACE_NONE, MSG_AFTER);
-		assertMsg(check, WHITESPACE_AROUND, MSG_AFTER);
+		assertMessages(check, COMMA_WHITESPACE_NONE, [MSG_AFTER, MSG_AFTER]);
+		assertMessages(check, WHITESPACE_AROUND, [MSG_AFTER, MSG_AFTER, MSG_AFTER, MSG_AFTER]);
 	}
 
 	@Test

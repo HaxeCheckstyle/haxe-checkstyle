@@ -11,11 +11,14 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	@Test
 	public function testWrongNaming() {
 		var check = new MethodNameCheck();
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
-		assertMsg(check, TEST1, test3Message);
-		assertMsg(check, TEST2, test3Message);
+		assertMessages(check, TEST1, [testMessage, test2Message, test3Message]);
+		assertMessages(check, TEST2, [testMessage, test1Message, test2Message, test3Message]);
 		assertMsg(check, TEST3, 'Invalid method name signature: "Test" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST5, test3Message);
+		assertMessages(check, TEST5, [testMessage, test1Message, test3Message]);
 	}
 
 	@Test
@@ -24,23 +27,29 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		check.ignoreExtern = false;
 
 		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, test3Message);
-		assertMsg(check, TEST2, test3Message);
+		assertMessages(check, TEST1, [testMessage, test2Message, test3Message]);
+		assertMessages(check, TEST2, [testMessage, test1Message, test2Message, test3Message]);
 		assertMsg(check, TEST3, testMessage);
 		assertMsg(check, TEST4, testMessage);
-		assertMsg(check, TEST5, test3Message);
+		assertMessages(check, TEST5, [testMessage, test1Message, test3Message]);
 	}
 
 	@Test
 	public function testTokenPUBLIC() {
 		var check = new MethodNameCheck();
 		check.tokens = [PUBLIC];
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
+		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST2, 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST1, [testMessage, test2Message, test3Message]);
+		assertMessages(check, TEST2, [testMessage, test1Message, test2Message]);
 		assertMsg(check, TEST3, 'Invalid method name signature: "Test" (name should be "~/${check.format}/")');
 		assertNoMsg(check, TEST4);
 		assertNoMsg(check, TEST5);
@@ -51,38 +60,51 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		var check = new MethodNameCheck();
 		check.tokens = [PRIVATE];
 
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
+		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST1);
-		assertMsg(check, TEST2, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
+		assertMsg(check, TEST2, test3Message);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [testMessage, test1Message, test3Message]);
 	}
 
 	@Test
 	public function testTokenSTATIC() {
 		var check = new MethodNameCheck();
 		check.tokens = [STATIC];
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
+		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST2, 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST1, [testMessage, test3Message]);
+		assertMessages(check, TEST2, [testMessage, test1Message]);
 		assertNoMsg(check, TEST3);
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [testMessage, test1Message]);
 	}
 
 	@Test
 	public function testTokenNOTSTATIC() {
 		var check = new MethodNameCheck();
 		check.tokens = [NOTSTATIC];
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
+		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST2, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST3, 'Invalid method name signature: "Test" (name should be "~/${check.format}/")');
+		assertMsg(check, TEST1, test2Message);
+		assertMessages(check, TEST2, [test2Message, test3Message]);
+
+		assertMsg(check, TEST3, testMessage);
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
+		assertMsg(check, TEST5, test3Message);
 	}
 
 	@Test
@@ -102,13 +124,17 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	public function testTokenNOTINLINE() {
 		var check = new MethodNameCheck();
 		check.tokens = [NOTINLINE];
+		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
+		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
+		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
+		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
 		assertNoMsg(check, TEST);
-		assertMsg(check, TEST1, 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST2, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
-		assertMsg(check, TEST3, 'Invalid method name signature: "Test" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST1, [testMessage, test2Message]);
+		assertMessages(check, TEST2, [testMessage, test2Message, test3Message]);
+		assertMsg(check, TEST3, testMessage);
 		assertNoMsg(check, TEST4);
-		assertMsg(check, TEST5, 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST5, [testMessage, test3Message]);
 	}
 
 	@Test
@@ -116,7 +142,13 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		var check = new MethodNameCheck();
 		check.format = "^[A-Z][a-z0-9]*$";
 
-		assertMsg(check, TEST, 'Invalid method name signature: "testName" (name should be "~/${check.format}/")');
+		assertMessages(check, TEST, [
+			'Invalid method name signature: "test" (name should be "~/${check.format}/")',
+			'Invalid method name signature: "testName" (name should be "~/${check.format}/")',
+			'Invalid method name signature: "testValue" (name should be "~/${check.format}/")',
+			'Invalid method name signature: "test" (name should be "~/${check.format}/")',
+			'Invalid method name signature: "testName" (name should be "~/${check.format}/")'
+		]);
 		assertNoMsg(check, TEST1);
 		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
