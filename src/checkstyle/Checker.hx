@@ -132,8 +132,7 @@ class Checker {
 				t = lexer.token(haxeparser.HaxeLexer.tok);
 			}
 		}
-		catch (e:haxe.Exception) {
-			trace(e.details());
+		catch (e:Any) {
 			ErrorUtils.handleException(e, file, "makeTokens");
 		}
 	}
@@ -161,8 +160,7 @@ class Checker {
 		try {
 			return parser.parse();
 		}
-		catch (e:haxe.Exception) {
-			trace(e.details());
+		catch (e:Any) {
 			if (!allowFailingAST) {
 				ErrorUtils.handleException(e, file, "makeAST [" + defines.join(",") + "]");
 			}
