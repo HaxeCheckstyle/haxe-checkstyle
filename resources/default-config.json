@@ -150,12 +150,6 @@
 			}
 		},
 		{
-			"type": "EnforceVarTypeHint",
-			"props": {
-				"ignoreEnumAbstractValues": true
-			}
-		},
-		{
 			"type": "ExtendedEmptyLines",
 			"props": {
 				"max": 1,
@@ -645,6 +639,13 @@
 		{
 			"type": "UnusedLocalVar",
 			"props": {}
+		},
+		{
+			"type": "VarTypeHint",
+			"props": {
+				"typeHintPolicy": "infer_new_or_const",
+				"ignoreEnumAbstractValues": true
+			}
 		},
 		{
 			"type": "VariableInitialisation",
