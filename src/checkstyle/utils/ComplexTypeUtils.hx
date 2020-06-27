@@ -19,8 +19,10 @@ class ComplexTypeUtils {
 				walkTypedef(d, td.pos, cb);
 			case EUsing(path):
 				walkTypePath(path, path.name, td.pos, cb);
+			#if haxe4
 			case EStatic(s):
 				walkStatic(s, td.pos, cb);
+			#end
 		}
 	}
 
@@ -87,9 +89,11 @@ class ComplexTypeUtils {
 		}
 	}
 
+	#if haxe4
 	public static function walkStatic(s:Definition<StaticFlag, FieldType>, pos:Position, cb:ComplexTypeCallback) {
 		walkField(cast s, cb);
 	}
+	#end
 
 	public static function walkVar(v:Var, pos:Position, cb:ComplexTypeCallback) {
 		if (v.type != null) walkComplexType(v.type, v.name, pos, cb);
