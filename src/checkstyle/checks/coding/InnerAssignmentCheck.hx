@@ -32,7 +32,7 @@ class InnerAssignmentCheck extends Check {
 			Binop(OpAssignOp(OpAnd)),
 			Binop(OpAssignOp(OpOr)),
 			Binop(OpAssignOp(OpXor))
-		], ALL);
+		], All);
 		for (assignToken in allAssignments) {
 			if (isPosSuppressed(assignToken.pos) || !filterAssignment(assignToken)) continue;
 			logPos("Inner assignment detected", assignToken.pos);
@@ -40,7 +40,7 @@ class InnerAssignmentCheck extends Check {
 	}
 
 	function filterAssignment(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
+		if ((token == null) || (token.tok == Root)) return false;
 		if (token.previousSibling != null) {
 			// tokenizer does not treat >= as OpGte
 			// creates OpGt and OpAssign instead
@@ -58,7 +58,7 @@ class InnerAssignmentCheck extends Check {
 	}
 
 	function filterPOpen(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
+		if ((token == null) || (token.tok == Root)) return false;
 		return switch (token.tok) {
 			case Kwd(KwdFunction): false;
 			case Kwd(KwdVar): false;
@@ -78,12 +78,11 @@ class InnerAssignmentCheck extends Check {
 		// - return is only statement inside block
 		// - it is inside of setter function
 		var allBinops:Array<TokenTree> = token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Binop(_): FOUND_GO_DEEPER;
-				case Unop(_): FOUND_GO_DEEPER;
-				case POpen, BkOpen, BrOpen: FOUND_GO_DEEPER;
-				default: GO_DEEPER;
+				case Binop(_): FoundGoDeeper;
+				case Unop(_): FoundGoDeeper;
+				case POpen, BkOpen, BrOpen: FoundGoDeeper;
+				default: GoDeeper;
 			}
 		});
 

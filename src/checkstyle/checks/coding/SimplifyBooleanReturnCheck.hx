@@ -14,10 +14,10 @@ class SimplifyBooleanReturnCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf)], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf)], All);
 
 		for (token in acceptableTokens) {
-			var elseLiteral = token.filter([Kwd(KwdElse)], FIRST)[0];
+			var elseLiteral = token.filter([Kwd(KwdElse)], First)[0];
 			if (elseLiteral == null) continue;
 
 			var elseStatement = elseLiteral.getFirstChild();

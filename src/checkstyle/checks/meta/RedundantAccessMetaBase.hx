@@ -22,7 +22,7 @@ class RedundantAccessMetaBase extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var docTokens = root.filter([At], ALL);
+		var docTokens = root.filter([At], All);
 
 		var infos:Array<RedundantAccessMetaInfo> = [];
 

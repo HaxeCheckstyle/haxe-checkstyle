@@ -5,6 +5,7 @@
 - Added support for final in `MagicNumber`, fixes [#494](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/494) ([#495](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/495))
 - Fixed handling `OBJECT_DECL` token in `RightCurly`, fixes [#496](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/496) ([#497](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/497))
 - Reorganised build files ([#498](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/498))
+- Refactored for tokentree API change
 
 ## version 2.6.1 (2019-12-17)
 

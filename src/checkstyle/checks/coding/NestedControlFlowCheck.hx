@@ -23,19 +23,19 @@ class NestedControlFlowCheck extends Check {
 		var controlFlowTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
 			return switch (token.tok) {
 				case Kwd(KwdFor):
-					FOUND_GO_DEEPER;
+					FoundGoDeeper;
 				case Kwd(KwdIf):
-					FOUND_GO_DEEPER;
+					FoundGoDeeper;
 				case Kwd(KwdSwitch):
-					FOUND_GO_DEEPER;
+					FoundGoDeeper;
 				case Kwd(KwdDo):
-					FOUND_GO_DEEPER;
+					FoundGoDeeper;
 				case Kwd(KwdWhile):
-					if ((token.parent != null) && (token.parent.is(Kwd(KwdDo)))) GO_DEEPER; else FOUND_GO_DEEPER;
+					if ((token.parent != null) && (token.parent.is(Kwd(KwdDo)))) GoDeeper; else FoundGoDeeper;
 				case Kwd(KwdTry):
-					FOUND_GO_DEEPER;
+					FoundGoDeeper;
 				default:
-					GO_DEEPER;
+					GoDeeper;
 			}
 		});
 		for (token in controlFlowTokens) {
@@ -52,7 +52,7 @@ class NestedControlFlowCheck extends Check {
 	function calcDepth(token:TokenTree):Int {
 		var parent:TokenTree = token.parent;
 		var count:Int = 1;
-		while ((parent != null) && (parent.tok != null)) {
+		while ((parent != null) && (parent.tok != Root)) {
 			switch (parent.tok) {
 				case Kwd(KwdFor):
 					count++;

@@ -54,7 +54,7 @@ class FieldUtils {
 				var kind = a.meta.hasMeta(metaName) ? ENUM_ABSTRACT : ABSTRACT;
 				return {decl: decl, kind: kind};
 			case ETypedef(d):
-				return return {decl: decl, kind: TYPEDEF};
+				return {decl: decl, kind: TYPEDEF};
 			default:
 				return null;
 		}
@@ -70,6 +70,6 @@ enum FieldParentKind {
 }
 
 typedef ParentType = {
-	var decl:TypeDef;
+	var decl:haxeparser.Data.TypeDef;
 	var kind:FieldParentKind;
 }

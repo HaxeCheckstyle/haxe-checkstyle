@@ -19,6 +19,8 @@ class ExprUtils {
 				walkTypedef(d, cb);
 			case EUsing(path):
 				walkTypePath(path, cb);
+			case EStatic(s):
+				walkStatic(s, td.pos, cb);
 		}
 	}
 
@@ -83,6 +85,10 @@ class ExprUtils {
 				}
 			}
 		}
+	}
+
+	public static function walkStatic(s:Definition<StaticFlag, FieldType>, pos:Position, cb:Expr -> Void) {
+		walkField(cast s, cb);
 	}
 
 	public static function walkVar(v:Var, cb:Expr -> Void) {

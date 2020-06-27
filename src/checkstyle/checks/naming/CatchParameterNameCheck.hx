@@ -19,7 +19,7 @@ class CatchParameterNameCheck extends Check {
 	override function actualRun() {
 		var formatRE = new EReg(format, "");
 		var root:TokenTree = checker.getTokenTree();
-		var catchTokens = root.filter([Kwd(KwdCatch)], ALL);
+		var catchTokens = root.filter([Kwd(KwdCatch)], All);
 
 		for (tkn in catchTokens) {
 			for (item in tkn.children) {

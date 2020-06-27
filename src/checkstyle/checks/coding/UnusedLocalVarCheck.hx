@@ -14,21 +14,21 @@ class UnusedLocalVarCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], ALL);
+		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], All);
 
 		for (f in functions) {
 			if (isPosSuppressed(f.pos)) continue;
 			var skipFirstFunction:Bool = true;
 			var localVars:Array<TokenTree> = f.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 				return switch (tok.tok) {
-					case Kwd(KwdVar): FOUND_SKIP_SUBTREE;
+					case Kwd(KwdVar): FoundSkipSubtree;
 					case Kwd(KwdFunction):
 						if (skipFirstFunction) {
 							skipFirstFunction = false;
-							GO_DEEPER;
+							GoDeeper;
 						}
-						else SKIP_SUBTREE;
-					default: GO_DEEPER;
+						else SkipSubtree;
+					default: GoDeeper;
 				}
 			});
 			checkLocalVars(f, localVars);
@@ -53,26 +53,26 @@ class UnusedLocalVarCheck extends Check {
 			if (ignoreFunctionSignature) {
 				switch (tok.tok) {
 					case Kwd(KwdPublic), Kwd(KwdPrivate):
-						return SKIP_SUBTREE;
+						return SkipSubtree;
 					case At:
-						return SKIP_SUBTREE;
+						return SkipSubtree;
 					case Comment(_), CommentLine(_):
-						return SKIP_SUBTREE;
+						return SkipSubtree;
 					case POpen:
 						ignoreFunctionSignature = false;
-						return SKIP_SUBTREE;
+						return SkipSubtree;
 					default:
-						return GO_DEEPER;
+						return GoDeeper;
 				}
 			}
 			return switch (tok.tok) {
 				case Dollar(n):
-					if (n == name) FOUND_GO_DEEPER; else GO_DEEPER;
+					if (n == name) FoundGoDeeper; else GoDeeper;
 				case Const(CIdent(n)):
-					if (n == name) FOUND_GO_DEEPER; else GO_DEEPER;
+					if (n == name) FoundGoDeeper; else GoDeeper;
 				case Const(CString(s)):
 					checkStringInterpolation(tok, name, s);
-				default: GO_DEEPER;
+				default: GoDeeper;
 			}
 		});
 		if (nameList.length > 1) return;
@@ -82,23 +82,23 @@ class UnusedLocalVarCheck extends Check {
 
 	function checkStringInterpolation(tok:TokenTree, name:String, s:String):FilterResult {
 		if (!StringUtils.isStringInterpolation(s, checker.file.content, tok.pos)) {
-			return GO_DEEPER;
+			return GoDeeper;
 		}
 
 		// $name
 		var format:String = "\\$" + name + "([^_0-9a-zA-Z]|$)";
 		var r:EReg = new EReg(format, "");
 		if (r.match(s)) {
-			return FOUND_GO_DEEPER;
+			return FoundGoDeeper;
 		}
 
 		// '${name.doSomething()} or ${doSomething(name)} or ${name}
 		format = "\\$\\{(|.*[^_0-9a-zA-Z])" + name + "([^_0-9a-zA-Z].*|)\\}";
 		r = new EReg(format, "");
 		if (r.match(s)) {
-			return FOUND_GO_DEEPER;
+			return FoundGoDeeper;
 		}
-		return GO_DEEPER;
+		return GoDeeper;
 	}
 
 	override public function detectableInstances():DetectableInstances {

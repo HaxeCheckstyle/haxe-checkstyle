@@ -61,7 +61,7 @@ class WhitespaceAroundCheck extends Check {
 	}
 
 	override function actualRun() {
-		var tokenList:Array<TokenDef> = [];
+		var tokenList:Array<TokenTreeDef> = [];
 
 		if (hasToken(",")) tokenList.push(Comma);
 		if (hasToken(";")) tokenList.push(Semicolon);
@@ -122,9 +122,9 @@ class WhitespaceAroundCheck extends Check {
 		checkTokens(tokenList);
 	}
 
-	function checkTokens(tokenList:Array<TokenDef>) {
+	function checkTokens(tokenList:Array<TokenTreeDef>) {
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter(tokenList, ALL);
+		var allTokens:Array<TokenTree> = root.filter(tokenList, All);
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;

@@ -36,7 +36,7 @@ class NeedBracesCheck extends Check {
 	}
 
 	override function actualRun() {
-		var tokenList:Array<TokenDef> = [];
+		var tokenList:Array<TokenTreeDef> = [];
 
 		if (hasToken(FUNCTION)) tokenList.push(Kwd(KwdFunction));
 		if (hasToken(FOR)) tokenList.push(Kwd(KwdFor));
@@ -51,7 +51,7 @@ class NeedBracesCheck extends Check {
 		if (tokenList.length <= 0) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter(tokenList, ALL);
+		var allTokens:Array<TokenTree> = root.filter(tokenList, All);
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;

@@ -59,7 +59,7 @@ class EmptyBlockCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], ALL);
+		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], All);
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;
@@ -78,7 +78,7 @@ class EmptyBlockCheck extends Check {
 	}
 
 	function filterParentToken(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
+		if ((token == null) || (token.tok == Root)) return false;
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return !hasToken(CLASS_DEF);

@@ -1,8 +1,8 @@
 package checkstyle.checks.whitespace;
 
-import tokentree.utils.TokenTreeCheckUtils;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespaceUnaryPolicy;
+import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	Checks that whitespace is present or absent around a operators.
@@ -178,7 +178,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkUnaryOps(root:TokenTree) {
 		if ((unaryOpPolicy == null) || (unaryOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Unop(OpNegBits), Unop(OpNot), Unop(OpIncrement), Unop(OpDecrement)], ALL);
+		var tokens:Array<TokenTree> = root.filter([Unop(OpNegBits), Unop(OpNot), Unop(OpIncrement), Unop(OpDecrement)], All);
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
@@ -188,7 +188,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkTernaryOps(root:TokenTree) {
 		if ((ternaryOpPolicy == null) || (ternaryOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Question], ALL);
+		var tokens:Array<TokenTree> = root.filter([Question], All);
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
@@ -233,11 +233,10 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	function checkIntervalOps(root:TokenTree) {
 		if ((intervalOpPolicy == null) || (intervalOpPolicy == IGNORE)) return;
 		var tokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Binop(OpInterval): FOUND_SKIP_SUBTREE;
-				case IntInterval(_): FOUND_SKIP_SUBTREE;
-				default: GO_DEEPER;
+				case Binop(OpInterval): FoundSkipSubtree;
+				case IntInterval(_): FoundSkipSubtree;
+				default: GoDeeper;
 			}
 		});
 		checkTokenList(tokens, intervalOpPolicy);
@@ -245,7 +244,7 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkArrowOps(root:TokenTree) {
 		if ((arrowPolicy == null) || (arrowPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Binop(OpArrow)], ALL);
+		var tokens:Array<TokenTree> = root.filter([Binop(OpArrow)], All);
 		checkTokenList(tokens, arrowPolicy);
 	}
 
@@ -255,16 +254,16 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 			&& ((newFunctionTypePolicy == null) || (newFunctionTypePolicy == IGNORE))) {
 			return;
 		}
-		var tokens:Array<TokenTree> = root.filter([Arrow], ALL);
+		var tokens:Array<TokenTree> = root.filter([Arrow], All);
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			var type:ArrowType = TokenTreeCheckUtils.getArrowType(token);
 			switch (type) {
-				case ARROW_FUNCTION:
+				case ArrowFunction:
 					checkWhitespace(token, arrowFunctionPolicy);
-				case FUNCTION_TYPE_HAXE3:
+				case OldFunctionType:
 					checkWhitespace(token, oldFunctionTypePolicy);
-				case FUNCTION_TYPE_HAXE4:
+				case NewFunctionType:
 					checkWhitespace(token, newFunctionTypePolicy);
 			}
 		}

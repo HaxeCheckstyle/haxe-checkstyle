@@ -40,19 +40,19 @@ class ArrowFunctionCheck extends Check {
 		var arrowTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
 			return switch (token.tok) {
 				case Arrow:
-					if (isPosSuppressed(token.pos)) SKIP_SUBTREE;
-					FOUND_GO_DEEPER;
+					if (isPosSuppressed(token.pos)) SkipSubtree;
+					FoundGoDeeper;
 				default:
-					GO_DEEPER;
+					GoDeeper;
 			}
 		});
 
 		for (token in arrowTokens) {
 			var type:ArrowType = TokenTreeCheckUtils.determineArrowType(token);
 			switch (type) {
-				case ARROW_FUNCTION:
+				case ArrowFunction:
 					checkArrowFunction(token);
-				case FUNCTION_TYPE_HAXE3, FUNCTION_TYPE_HAXE4:
+				case OldFunctionType | NewFunctionType:
 					continue;
 			}
 		}
@@ -66,8 +66,8 @@ class ArrowFunctionCheck extends Check {
 				case BrOpen:
 					var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(body);
 					switch (type) {
-						case OBJECTDECL:
-						case BLOCK, TYPEDEFDECL, ANONTYPE, UNKNOWN:
+						case ObjectDecl:
+						case Block | TypedefDecl | AnonType | Unknown:
 							logPos("Arrow function should not have curlies", body.getPos());
 					}
 				default:
@@ -76,23 +76,23 @@ class ArrowFunctionCheck extends Check {
 		arrow.filterCallback(function(token:TokenTree, index:Int):FilterResult {
 			switch (token.tok) {
 				case Arrow:
-					if (token.index == arrow.index) return GO_DEEPER;
-					return SKIP_SUBTREE;
+					if (token.index == arrow.index) return GoDeeper;
+					return SkipSubtree;
 				case Kwd(KwdFunction):
-					if (allowFunction) return SKIP_SUBTREE;
+					if (allowFunction) return SkipSubtree;
 					logPos("Arrow function should not include nested functions", token.pos);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				case Kwd(KwdReturn):
-					if (allowReturn) return GO_DEEPER;
+					if (allowReturn) return GoDeeper;
 					logPos("Arrow function should not have explicit returns", token.pos);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				default:
-					return GO_DEEPER;
+					return GoDeeper;
 			}
 		});
 		if (allowSingleArgParens) return;
 		var parent:Null<TokenTree> = arrow.parent;
-		if ((parent == null) || (parent.tok == null)) return;
+		if ((parent == null) || (parent.tok == Root)) return;
 		if (!parent.is(POpen)) return;
 		var count:Int = 0;
 		for (child in parent.children) {

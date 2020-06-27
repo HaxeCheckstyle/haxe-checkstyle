@@ -1,7 +1,7 @@
 package checkstyle.checks.imports;
 
-import tokentree.utils.TokenTreeCheckUtils;
 import haxe.io.Path;
+import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	Checks for unused or duplicate imports.
@@ -33,24 +33,24 @@ class UnusedImportCheck extends Check {
 		if (isImportHx()) return;
 		var root:TokenTree = checker.getTokenTree();
 		var packageName:String = detectPackageName(root);
-		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], ALL);
+		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], All);
 		var idents:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
 				case Const(CIdent(_)):
-					if (TokenTreeCheckUtils.isImport(token)) return GO_DEEPER;
-					return FOUND_GO_DEEPER;
+					if (TokenTreeCheckUtils.isImport(token)) return GoDeeper;
+					return FoundGoDeeper;
 				default:
 			}
-			return GO_DEEPER;
+			return GoDeeper;
 		});
 		var stringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
 				case Const(CString(text)):
-					if (checker.getString(token.pos.min, token.pos.min + 1) != "'") return GO_DEEPER;
-					if (~/\$\{[^\}]+\.[^\}]+\}/.match(text)) return FOUND_GO_DEEPER;
+					if (checker.getString(token.pos.min, token.pos.min + 1) != "'") return GoDeeper;
+					if (~/\$\{[^\}]+\.[^\}]+\}/.match(text)) return FoundGoDeeper;
 				default:
 			}
-			return GO_DEEPER;
+			return GoDeeper;
 		});
 		for (imp in imports) {
 			var typeName:String = detectTypeName(imp);
@@ -83,7 +83,7 @@ class UnusedImportCheck extends Check {
 	}
 
 	function detectPackageName(root:TokenTree):String {
-		var packageToken:Array<TokenTree> = root.filter([Kwd(KwdPackage)], ALL);
+		var packageToken:Array<TokenTree> = root.filter([Kwd(KwdPackage)], All);
 		if ((packageToken == null) || (packageToken.length <= 0)) return null;
 
 		var packageName:String = detectModuleName(packageToken[0]);

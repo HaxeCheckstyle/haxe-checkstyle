@@ -24,7 +24,7 @@ class SimplifyBooleanExpressionCheck extends Check {
 			Binop(OpAnd),
 			Binop(OpBoolOr),
 			Binop(OpBoolAnd)
-		], ALL);
+		], All);
 
 		for (token in acceptableTokens) {
 			if (isPosSuppressed(token.pos)) continue;

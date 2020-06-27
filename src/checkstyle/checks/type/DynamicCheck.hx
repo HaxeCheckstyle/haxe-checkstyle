@@ -17,11 +17,11 @@ class DynamicCheck extends Check {
 		root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
 			switch token.tok {
 				case Const(CIdent("Dynamic")):
-					if (isPosSuppressed(token.pos)) return SKIP_SUBTREE;
+					if (isPosSuppressed(token.pos)) return SkipSubtree;
 					logPos('Avoid using "Dynamic" as type', token.pos);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				default:
-					return GO_DEEPER;
+					return GoDeeper;
 			}
 		});
 	}

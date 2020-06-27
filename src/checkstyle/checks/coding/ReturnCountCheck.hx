@@ -29,7 +29,7 @@ class ReturnCountCheck extends Check {
 	override function actualRun() {
 		var ignoreFormatRE:EReg = new EReg(ignoreFormat, "");
 		var root:TokenTree = checker.getTokenTree();
-		var functions = root.filter([Kwd(KwdFunction)], ALL);
+		var functions = root.filter([Kwd(KwdFunction)], All);
 		for (fn in functions) {
 			if (fn.children == null) continue;
 			switch (fn.getFirstChild().tok) {
@@ -50,9 +50,9 @@ class ReturnCountCheck extends Check {
 		return switch (token.tok) {
 			case Kwd(KwdFunction):
 				// top node is always a function node
-				if (depth == 0) GO_DEEPER; else SKIP_SUBTREE;
-			case Kwd(KwdReturn): FOUND_SKIP_SUBTREE;
-			default: GO_DEEPER;
+				if (depth == 0) GoDeeper; else SkipSubtree;
+			case Kwd(KwdReturn): FoundSkipSubtree;
+			default: GoDeeper;
 		}
 	}
 

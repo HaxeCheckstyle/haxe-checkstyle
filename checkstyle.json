@@ -154,15 +154,6 @@
 			"type": "HiddenField"
 		},
 		{
-			"type": "Indentation"
-		},
-		{
-			"props": {
-				"character": "tab"
-			},
-			"type": "IndentationCharacter"
-		},
-		{
 			"type": "InnerAssignment"
 		},
 		{

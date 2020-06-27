@@ -127,7 +127,7 @@ class IndentationCheck extends Check {
 	function calcLineIndentation():Array<Int> {
 		var lineIndentation:Array<Int> = [for (i in 0...checker.lines.length) 0];
 
-		var searchFor:Array<TokenDef> = [
+		var searchFor:Array<TokenTreeDef> = [
 			BrOpen,
 			BkOpen,
 			Sharp("if"),
@@ -144,7 +144,7 @@ class IndentationCheck extends Check {
 			Kwd(KwdCase),
 			Kwd(KwdDefault)
 		];
-		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
+		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, All);
 		for (token in tokenList) {
 			switch (token.tok) {
 				case BkOpen:
@@ -289,7 +289,7 @@ class IndentationCheck extends Check {
 	function calcWrapStatements():Array<Bool> {
 		var wrapped:Array<Bool> = [for (i in 0...checker.lines.length) false];
 
-		var searchFor:Array<TokenDef> = [
+		var searchFor:Array<TokenTreeDef> = [
 			POpen,
 			Dot,
 			Kwd(KwdReturn),
@@ -309,7 +309,7 @@ class IndentationCheck extends Check {
 			Binop(OpAssignOp(OpAnd)),
 			Binop(OpAssignOp(OpXor))
 		];
-		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, ALL);
+		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, All);
 		for (token in tokenList) {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();
@@ -351,12 +351,11 @@ class IndentationCheck extends Check {
 		var ignoreIndentation:Array<Bool> = [for (i in 0...checker.lines.length) false];
 
 		var tokenList:Array<TokenTree> = checker.getTokenTree().filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Comment(_): FOUND_SKIP_SUBTREE;
-				case CommentLine(_): FOUND_SKIP_SUBTREE;
-				case Const(CString(_)): FOUND_SKIP_SUBTREE;
-				default: GO_DEEPER;
+				case Comment(_): FoundSkipSubtree;
+				case CommentLine(_): FoundSkipSubtree;
+				case Const(CString(_)): FoundSkipSubtree;
+				default: GoDeeper;
 			}
 		});
 		for (token in tokenList) {

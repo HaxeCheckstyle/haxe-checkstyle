@@ -34,7 +34,7 @@ class MethodCountCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdFunction)], FIRST);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdFunction)], First);
 
 		if (acceptableTokens.length > maxTotal) {
 			logPos('Total number of methods is ${acceptableTokens.length} (max allowed is $maxTotal)', acceptableTokens[maxTotal].pos);
@@ -44,7 +44,7 @@ class MethodCountCheck extends Check {
 		var privateTokens = [];
 		var publicTokens = [];
 		for (token in acceptableTokens) {
-			if (token.filter([Kwd(KwdPublic)], FIRST).length > 0) publicTokens.push(token);
+			if (token.filter([Kwd(KwdPublic)], First).length > 0) publicTokens.push(token);
 			else privateTokens.push(token);
 		}
 

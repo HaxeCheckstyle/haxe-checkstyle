@@ -1,10 +1,10 @@
 package checkstyle.detect;
 
-import checkstyle.config.CheckConfig;
 import checkstyle.Checker;
 import checkstyle.checks.Check;
-import checkstyle.utils.ConfigUtils;
+import checkstyle.config.CheckConfig;
 import checkstyle.reporter.ReporterManager;
+import checkstyle.utils.ConfigUtils;
 import haxe.ds.ArraySort;
 
 class DetectCodingStyle {
@@ -70,16 +70,16 @@ class DetectCodingStyle {
 
 	static function iterateProperty(check:Check, property:DetectablePropertyList, file:CheckFile):DetectionResult {
 		if (property.values.length <= 0) {
-			return NO_CHANGE;
+			return DetectionResult.NO_CHANGE;
 		}
 		if (property.values.length == 1) {
-			return CHANGE_DETECTED(property.values[0]);
+			return DetectionResult.CHANGE_DETECTED(property.values[0]);
 		}
 
 		var checker:Checker = new Checker();
 		checker.addCheck(check);
 		checker.loadFileContent(file);
-		if (!checker.createContext(file)) return NO_CHANGE;
+		if (!checker.createContext(file)) return DetectionResult.NO_CHANGE;
 
 		var lastCount:Int = -1;
 		var lowestCountValue:Any = null;
@@ -102,14 +102,14 @@ class DetectCodingStyle {
 		}
 		if (changed) {
 			var index:Int = property.values.indexOf(lowestCountValue);
-			if (index <= 0) return CHANGE_DETECTED(lowestCountValue);
+			if (index <= 0) return DetectionResult.CHANGE_DETECTED(lowestCountValue);
 			property.values = property.values.slice(index);
 			if (property.values.length > 2) {
-				return REDUCED_VALUE_LIST(lowestCountValue);
+				return DetectionResult.REDUCED_VALUE_LIST(lowestCountValue);
 			}
-			return CHANGE_DETECTED(lowestCountValue);
+			return DetectionResult.CHANGE_DETECTED(lowestCountValue);
 		}
-		return NO_CHANGE;
+		return DetectionResult.NO_CHANGE;
 	}
 
 	static function runCheck(checker:Checker, fileList:Array<CheckFile>):Int {

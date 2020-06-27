@@ -18,7 +18,7 @@ class EmptyPackageCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var packageTokens = root.filter([Kwd(KwdPackage)], ALL);
+		var packageTokens = root.filter([Kwd(KwdPackage)], All);
 		if (enforceEmptyPackage) {
 			if (packageTokens.length == 0) log("Missing package declaration", 1, 0, 1, 0, MISSING_PACKAGE);
 		}

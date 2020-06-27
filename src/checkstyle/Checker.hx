@@ -132,7 +132,8 @@ class Checker {
 				t = lexer.token(haxeparser.HaxeLexer.tok);
 			}
 		}
-		catch (e:Any) {
+		catch (e:haxe.Exception) {
+			trace(e.details());
 			ErrorUtils.handleException(e, file, "makeTokens");
 		}
 	}
@@ -160,7 +161,8 @@ class Checker {
 		try {
 			return parser.parse();
 		}
-		catch (e:Any) {
+		catch (e:haxe.Exception) {
+			trace(e.details());
 			if (!allowFailingAST) {
 				ErrorUtils.handleException(e, file, "makeAST [" + defines.join(",") + "]");
 			}
@@ -210,7 +212,8 @@ class Checker {
 			getTokenTree();
 			excludesRanges = ExcludeManager.INSTANCE.getPosExcludes(this);
 		}
-		catch (e:Any) {
+		catch (e:haxe.Exception) {
+			trace(e.details());
 			ErrorUtils.handleException(e, file, "createContext");
 			return false;
 		}

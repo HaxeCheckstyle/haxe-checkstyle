@@ -41,10 +41,9 @@ class MultipleStringLiteralsCheck extends Check {
 
 		var allLiterals:Map<String, Int> = new Map<String, Int>();
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Const(CString(_)): FOUND_GO_DEEPER;
-				default: GO_DEEPER;
+				case Const(CString(_)): FoundGoDeeper;
+				default: GoDeeper;
 			}
 		});
 
@@ -74,10 +73,10 @@ class MultipleStringLiteralsCheck extends Check {
 	}
 
 	function filterLiteral(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return true;
+		if ((token == null) || (token.tok == Root)) return true;
 		return switch (token.tok) {
 			case At: false;
-			case Kwd(KwdVar): !(token.filter([Kwd(KwdStatic)], FIRST).length > 0);
+			case Kwd(KwdVar): !(token.filter([Kwd(KwdStatic)], First).length > 0);
 			default: filterLiteral(token.parent);
 		}
 	}

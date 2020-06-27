@@ -24,7 +24,7 @@ class AvoidIdentifierCheck extends Check {
 					checkIdent(ident, token);
 				default:
 			}
-			return GO_DEEPER;
+			return GoDeeper;
 		});
 	}
 

@@ -13,7 +13,7 @@ class TraceCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var traces = root.filter([Const(CIdent("trace"))], ALL);
+		var traces = root.filter([Const(CIdent("trace"))], All);
 		for (tr in traces) {
 			if (!tr.getFirstChild().tok.match(POpen)) continue;
 			if (filterTrace(tr.parent)) continue;

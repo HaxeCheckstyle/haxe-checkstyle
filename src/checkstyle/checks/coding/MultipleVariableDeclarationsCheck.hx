@@ -14,7 +14,7 @@ class MultipleVariableDeclarationsCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], All);
 
 		var lastVarLineNo = -1;
 		for (v in acceptableTokens) {

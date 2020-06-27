@@ -40,7 +40,7 @@ class DocCommentStyleCheck extends Check {
 			Kwd(KwdVar),
 			#if haxe4 Kwd(KwdFinal) #else Const(CIdent("final")) #end,
 			Kwd(KwdFunction)
-		], ALL);
+		], All);
 
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;
