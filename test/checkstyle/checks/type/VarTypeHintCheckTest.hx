@@ -25,10 +25,10 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		}];
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
+		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		#end
 
 		assertNoMsg(check, ENUM);
-		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
 	}
 
@@ -63,9 +63,9 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		];
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
+		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		#end
 		assertNoMsg(check, ENUM);
-		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
 	}
 
@@ -97,9 +97,9 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		];
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
+		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		#end
 		assertNoMsg(check, ENUM);
-		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
 	}
 
