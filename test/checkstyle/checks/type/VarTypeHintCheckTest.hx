@@ -13,7 +13,7 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 			"test15", "test26", "test27", "test28", "test31",
 			"test32", "test33", "test34", "test39", "test41"
 		]) {
-			return '"$t" should have a type hint';
+			'"$t" should have a type hint';
 		}];
 
 		assertMessages(check, LOCAL_VARS, messages);
@@ -21,7 +21,7 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertMessages(check, LOCAL_FINALS, messages);
 
 		messages = [for (t in ["test1", "test9", "test13", "test26", "test32", "test39"]) {
-			return '"$t" should have a type hint';
+			'"$t" should have a type hint';
 		}];
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
@@ -39,15 +39,15 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertNoMsg(check, SUPPRESSED_LOCAL_VARS);
 
 		var messages:Array<String> = [for (t in ["test1", "test2", "test3", "test6", "test12"]) {
-			return '"$t" should have a type hint';
+			'"$t" should have a type hint';
 		}];
 		messages = messages.concat([
 			for (t in ["test16", "test17", "test20", "test21", "test22", "test29", "test30"]) {
-				return '"$t" type hint not needed';
+				'"$t" type hint not needed';
 			}
 		]);
 		messages = messages.concat([for (t in ["test32", "test33", "test34"]) {
-			return '"$t" should have a type hint';
+			'"$t" should have a type hint';
 		}]);
 		messages.push('"test40" type hint not needed');
 
@@ -75,13 +75,13 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		check.typeHintPolicy = INFER_ALL;
 		assertNoMsg(check, SUPPRESSED_LOCAL_VARS);
 		var messages:Array<String> = [for (t in ["test1", "test2", "test3", "test6", "test12"]) {
-			return '"$t" should have a type hint';
+			'"$t" should have a type hint';
 		}];
 		messages = messages.concat([for (t in [
 			"test16", "test17", "test20", "test21", "test22", "test29",
 			"test30", "test35", "test36", "test37", "test38", "test40"
 		]) {
-			return '"$t" type hint not needed';
+			'"$t" type hint not needed';
 		}]);
 
 		assertMessages(check, LOCAL_VARS, messages);
