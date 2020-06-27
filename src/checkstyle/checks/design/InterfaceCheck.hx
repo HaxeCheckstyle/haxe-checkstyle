@@ -26,10 +26,10 @@ class InterfaceCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var interfaces:Array<TokenTree> = root.filter([Kwd(KwdInterface)], ALL);
+		var interfaces:Array<TokenTree> = root.filter([Kwd(KwdInterface)], All);
 		for (intr in interfaces) {
-			var functions:Array<TokenTree> = intr.filter([Kwd(KwdFunction)], ALL);
-			var vars:Array<TokenTree> = intr.filter([Kwd(KwdVar)], ALL);
+			var functions:Array<TokenTree> = intr.filter([Kwd(KwdFunction)], All);
+			var vars:Array<TokenTree> = intr.filter([Kwd(KwdVar)], All);
 
 			if (functions.length == 0 && vars.length == 0) {
 				if (allowMarkerInterfaces) continue;

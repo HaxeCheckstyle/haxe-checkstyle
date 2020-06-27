@@ -14,7 +14,7 @@ class SeparatorWrapCheck extends WrapCheckBase {
 	}
 
 	override function actualRun() {
-		var tokenList:Array<TokenDef> = [];
+		var tokenList:Array<TokenTreeDef> = [];
 
 		if (hasToken(",")) tokenList.push(Comma);
 		if (hasToken(".")) tokenList.push(Dot);

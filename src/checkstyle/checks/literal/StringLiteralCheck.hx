@@ -33,10 +33,9 @@ class StringLiteralCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 
 		var allStringLiterals:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Const(CString(_)): FOUND_GO_DEEPER;
-				default: GO_DEEPER;
+				case Const(CString(_)): FoundGoDeeper;
+				default: GoDeeper;
 			}
 		});
 

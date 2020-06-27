@@ -26,7 +26,7 @@ class MagicNumberCheck extends Check {
 			Kwd(KwdEnum),
 			Kwd(KwdInterface),
 			Kwd(KwdTypedef)
-		], FIRST);
+		], First);
 		for (type in allTypes) {
 			if (TokenTreeCheckUtils.isTypeEnumAbstract(type)) continue;
 			checkForNumbers(type);
@@ -35,11 +35,10 @@ class MagicNumberCheck extends Check {
 
 	function checkForNumbers(parent:TokenTree) {
 		var allNumbers:Array<TokenTree> = parent.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
-			if (token.tok == null) return GO_DEEPER;
 			return switch (token.tok) {
-				case Const(CInt(_)): FOUND_GO_DEEPER;
-				case Const(CFloat(_)): FOUND_GO_DEEPER;
-				default: GO_DEEPER;
+				case Const(CInt(_)): FoundGoDeeper;
+				case Const(CFloat(_)): FoundGoDeeper;
+				default: GoDeeper;
 			}
 		});
 
@@ -61,7 +60,7 @@ class MagicNumberCheck extends Check {
 	}
 
 	function filterNumber(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
+		if ((token == null) || (token.tok == Root)) return false;
 		return switch (token.tok) {
 			case At: true;
 			#if haxe4
@@ -70,7 +69,7 @@ class MagicNumberCheck extends Check {
 			case Const(CIdent("final")): true;
 			#end
 			case BrOpen: false;
-			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], FIRST).length > 0) true; else false;
+			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], First).length > 0) true; else false;
 			default: filterNumber(token.parent);
 		}
 	}

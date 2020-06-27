@@ -62,7 +62,6 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 
 		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
 		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
-		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST1);
@@ -78,7 +77,6 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		check.tokens = [STATIC];
 		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
 		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
-		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
 		assertNoMsg(check, TEST);
@@ -94,7 +92,6 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		var check = new MethodNameCheck();
 		check.tokens = [NOTSTATIC];
 		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
-		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
 		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 
@@ -125,7 +122,6 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		var check = new MethodNameCheck();
 		check.tokens = [NOTINLINE];
 		var testMessage = 'Invalid method name signature: "Test" (name should be "~/${check.format}/")';
-		var test1Message = 'Invalid method name signature: "Test1" (name should be "~/${check.format}/")';
 		var test2Message = 'Invalid method name signature: "Test2" (name should be "~/${check.format}/")';
 		var test3Message = 'Invalid method name signature: "Test3" (name should be "~/${check.format}/")';
 

@@ -35,14 +35,14 @@ class HiddenFieldCheck extends Check {
 	override function actualRun() {
 		var ignoreFormatRE:EReg = new EReg(ignoreFormat, "");
 		var root:TokenTree = checker.getTokenTree();
-		checkClasses(root.filter([Kwd(KwdClass)], ALL), ignoreFormatRE);
+		checkClasses(root.filter([Kwd(KwdClass)], All), ignoreFormatRE);
 	}
 
 	function checkClasses(classes:Array<TokenTree>, ignoreFormatRE:EReg) {
 		for (clazz in classes) {
 			if (isPosSuppressed(clazz.pos)) continue;
 			var memberNames:Array<String> = collectMemberNames(clazz);
-			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], FIRST);
+			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], First);
 			for (method in methods) {
 				if (isPosSuppressed(method.pos)) continue;
 				checkMethod(method, memberNames, ignoreFormatRE);
@@ -90,7 +90,7 @@ class HiddenFieldCheck extends Check {
 		//      |- POpen
 		//          |- parameters
 		//          |- PClose
-		var paramDef:Array<TokenTree> = method.filter([POpen], FIRST, 2);
+		var paramDef:Array<TokenTree> = method.filter([POpen], First, 2);
 		if ((paramDef == null) || (paramDef.length != 1)) {
 			throw "function parameters have invalid structure!";
 		}
@@ -99,7 +99,7 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkVars(method:TokenTree, memberNames:Array<String>) {
-		var vars:Array<TokenTree> = method.filter([Kwd(KwdVar)], ALL);
+		var vars:Array<TokenTree> = method.filter([Kwd(KwdVar)], All);
 		for (v in vars) {
 			if (!v.hasChildren()) throw "var has invalid structure!";
 			checkName(v.children[0], memberNames, "Variable definition");
@@ -107,9 +107,9 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkForLoops(method:TokenTree, memberNames:Array<String>) {
-		var fors:Array<TokenTree> = method.filter([Kwd(KwdFor)], ALL);
+		var fors:Array<TokenTree> = method.filter([Kwd(KwdFor)], All);
 		for (f in fors) {
-			var popens:Array<TokenTree> = f.filter([POpen], FIRST, 2);
+			var popens:Array<TokenTree> = f.filter([POpen], First, 2);
 			if (popens.length <= 0) continue;
 			var pOpen:TokenTree = popens[0];
 			if (!pOpen.hasChildren()) continue;
@@ -135,7 +135,7 @@ class HiddenFieldCheck extends Check {
 		//          |- Kwd(KwdVar)
 		//          |- Kwd(KwdVar)
 		//          |- Kwd(KwdFunction)
-		var varFields:Array<TokenTree> = clazz.filter([Kwd(KwdVar)], FIRST, MAX_FIELD_LEVEL);
+		var varFields:Array<TokenTree> = clazz.filter([Kwd(KwdVar)], First, MAX_FIELD_LEVEL);
 		for (member in varFields) {
 			if (!member.hasChildren()) continue;
 			switch (member.children[0].tok) {

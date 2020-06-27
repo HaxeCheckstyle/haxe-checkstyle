@@ -32,7 +32,7 @@ class MethodLengthCheck extends Check {
 
 	override public function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], FIRST);
+		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], First);
 
 		var emptyLines:ListOfEmptyLines = ListOfEmptyLines.detectEmptyLines(checker);
 		for (func in functions) {

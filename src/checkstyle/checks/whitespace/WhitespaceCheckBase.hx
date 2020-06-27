@@ -13,9 +13,9 @@ class WhitespaceCheckBase extends Check {
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
-	function checkTokens(root:TokenTree, tokens:Array<TokenDef>, policy:WhitespacePolicy) {
+	function checkTokens(root:TokenTree, tokens:Array<TokenTreeDef>, policy:WhitespacePolicy) {
 		if ((policy == null) || (policy == IGNORE)) return;
-		var tokenList:Array<TokenTree> = root.filter(tokens, ALL);
+		var tokenList:Array<TokenTree> = root.filter(tokens, All);
 		checkTokenList(tokenList, policy);
 	}
 

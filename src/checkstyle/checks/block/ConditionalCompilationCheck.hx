@@ -29,7 +29,7 @@ class ConditionalCompilationCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		checkSharpIf(root.filter([Sharp("if")], ALL));
+		checkSharpIf(root.filter([Sharp("if")], All));
 	}
 
 	function checkSharpIf(tokens:Array<TokenTree>) {

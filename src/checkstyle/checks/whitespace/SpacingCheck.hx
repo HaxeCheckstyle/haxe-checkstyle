@@ -78,7 +78,7 @@ class SpacingCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf), Kwd(KwdFor), Kwd(KwdWhile), Kwd(KwdSwitch), Kwd(KwdCatch)], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf), Kwd(KwdFor), Kwd(KwdWhile), Kwd(KwdSwitch), Kwd(KwdCatch)], All);
 
 		for (token in acceptableTokens) {
 			var firstChild:TokenTree = token.getFirstChild();

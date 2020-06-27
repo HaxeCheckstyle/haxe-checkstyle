@@ -60,7 +60,7 @@ class RightCurlyCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrClose:Array<TokenTree> = root.filter([BrClose], ALL);
+		var allBrClose:Array<TokenTree> = root.filter([BrClose], All);
 
 		for (brClose in allBrClose) {
 			if (isPosSuppressed(brClose.pos)) continue;
@@ -68,13 +68,13 @@ class RightCurlyCheck extends Check {
 			if ((brOpen == null) || (brOpen.pos == null)) continue;
 			var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(brOpen);
 			switch (type) {
-				case BLOCK:
-				case TYPEDEFDECL:
+				case Block:
+				case TypedefDecl:
 					if (!hasToken(TYPEDEF_DEF)) continue;
-				case OBJECTDECL:
+				case ObjectDecl:
 					if (!hasToken(OBJECT_DECL)) continue;
-				case ANONTYPE:
-				case UNKNOWN:
+				case AnonType:
+				case Unknown:
 			}
 			if (filterParentToken(brOpen.parent)) continue;
 			check(brClose, type, isSingleLine(brOpen.pos.min, brClose.pos.max));
@@ -82,7 +82,7 @@ class RightCurlyCheck extends Check {
 	}
 
 	function filterParentToken(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) return false;
+		if ((token == null) || (token.tok == Root)) return false;
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return !hasToken(CLASS_DEF);
@@ -176,9 +176,9 @@ class RightCurlyCheck extends Check {
 			var curlyAlone:Bool = false;
 
 			switch (type) {
-				case BLOCK, TYPEDEFDECL, UNKNOWN:
+				case Block | TypedefDecl | Unknown:
 					curlyAlone = ~/^\s*\}(|\..*|\).*|\].*|,\s*|;\s*)(|\/\/.*)$/.match(line);
-				case OBJECTDECL, ANONTYPE:
+				case ObjectDecl | AnonType:
 					curlyAlone = ~/^\s*\}(|\..*|\).*|\].*|,.*|;\s*)(|\/\/.*)$/.match(line);
 			}
 			logErrorIf(!curlyAlone

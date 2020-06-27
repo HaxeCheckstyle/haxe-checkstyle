@@ -12,7 +12,7 @@ class BlockBreakingConditionalCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrs:Array<TokenTree> = root.filter([BrOpen, BrClose], ALL);
+		var allBrs:Array<TokenTree> = root.filter([BrOpen, BrClose], All);
 
 		for (br in allBrs) {
 			if (isPosSuppressed(br.pos)) continue;

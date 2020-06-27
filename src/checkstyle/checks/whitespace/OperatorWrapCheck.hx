@@ -50,7 +50,7 @@ class OperatorWrapCheck extends WrapCheckBase {
 	}
 
 	override function actualRun() {
-		var tokenList:Array<TokenDef> = [];
+		var tokenList:Array<TokenTreeDef> = [];
 
 		if (hasToken("=")) tokenList.push(Binop(OpAssign));
 		if (hasToken("+")) tokenList.push(Binop(OpAdd));

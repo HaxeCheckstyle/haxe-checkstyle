@@ -4,8 +4,7 @@ import checkstyle.checks.whitespace.ListOfEmptyLines.EmptyLineRange;
 
 /**
 	Checks for consecutive empty lines.
-**/
-@name("ExtendedEmptyLines")
+**/ @name("ExtendedEmptyLines")
 @desc("Checks for consecutive empty lines.")
 class ExtendedEmptyLinesCheck extends Check {
 	/**
@@ -103,7 +102,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([BEFORE_PACKAGE, AFTER_PACKAGE])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var packages:Array<TokenTree> = root.filter([Kwd(KwdPackage)], ALL);
+		var packages:Array<TokenTree> = root.filter([Kwd(KwdPackage)], All);
 
 		for (pack in packages) {
 			checkBetweenToken(emptyLines, null, pack, getPolicy(BEFORE_PACKAGE), "before package");
@@ -115,7 +114,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([AFTER_IMPORTS, BEFORE_USING, BETWEEN_IMPORTS])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport), Kwd(KwdUsing)], ALL);
+		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport), Kwd(KwdUsing)], All);
 
 		if (imports.length <= 0) return;
 
@@ -160,7 +159,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			Kwd(KwdEnum),
 			Kwd(KwdInterface),
 			Kwd(KwdTypedef)
-		], FIRST);
+		], First);
 
 		if (types.length <= 0) return;
 
@@ -295,8 +294,8 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
 			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
 
-			var isStaticChild:Bool = (child.filter([Kwd(KwdStatic)], FIRST).length > 0);
-			var isStaticNext:Bool = (next.filter([Kwd(KwdStatic)], FIRST).length > 0);
+			var isStaticChild:Bool = (child.filter([Kwd(KwdStatic)], First).length > 0);
+			var isStaticNext:Bool = (next.filter([Kwd(KwdStatic)], First).length > 0);
 
 			if (isStaticChild && isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_STATIC_VARS), "between class static vars");
 			if (!isStaticChild && !isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_VARS), "between class vars");
@@ -362,8 +361,8 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (parent == null) return null;
 		var brOpens:Array<TokenTree> = parent.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 			return switch (tok.tok) {
-				case BrOpen: FOUND_SKIP_SUBTREE;
-				default: GO_DEEPER;
+				case BrOpen: FoundSkipSubtree;
+				default: GoDeeper;
 			}
 		});
 		if (brOpens.length <= 0) return null;
@@ -406,7 +405,7 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([IN_FUNCTION, AFTER_LEFT_CURLY, BEFORE_RIGHT_CURLY])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var funcs:Array<TokenTree> = root.filter([Kwd(KwdFunction)], ALL);
+		var funcs:Array<TokenTree> = root.filter([Kwd(KwdFunction)], All);
 
 		if (funcs.length <= 0) return;
 
@@ -416,7 +415,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			var end:Int = checker.getLinePos(pos.max).line;
 			checkLines(emptyLines, getPolicy(IN_FUNCTION), start, end, "inside functions", true);
 
-			var brOpen:Array<TokenTree> = func.filter([BrOpen], ALL);
+			var brOpen:Array<TokenTree> = func.filter([BrOpen], All);
 			for (open in brOpen) {
 				var close:TokenTree = open.getLastChild();
 				if (close == null) continue;
@@ -442,9 +441,9 @@ class ExtendedEmptyLinesCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var comments:Array<TokenTree> = root.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 			return switch (tok.tok) {
-				case Comment(_): FOUND_SKIP_SUBTREE;
-				case CommentLine(_): FOUND_SKIP_SUBTREE;
-				default: GO_DEEPER;
+				case Comment(_): FoundSkipSubtree;
+				case CommentLine(_): FoundSkipSubtree;
+				default: GoDeeper;
 			}
 		});
 		for (comment in comments) {
@@ -474,7 +473,7 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function checkPreviousSiblingComment(token:TokenTree):Bool {
-		if ((token == null) || (token.tok == null)) {
+		if ((token == null) || (token.tok == Root)) {
 			return false;
 		}
 		switch (token.tok) {
@@ -484,7 +483,7 @@ class ExtendedEmptyLinesCheck extends Check {
 				return false;
 			case POpen, Const(CIdent(_)):
 				var parent:Null<TokenTree> = token.parent;
-				if ((parent != null) && (parent.tok != null)) {
+				if (parent != null) {
 					switch (parent.tok) {
 						case Sharp(_):
 							return false;

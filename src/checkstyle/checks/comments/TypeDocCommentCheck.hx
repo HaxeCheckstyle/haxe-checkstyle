@@ -27,13 +27,13 @@ class TypeDocCommentCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var tokenList:Array<TokenDef> = [];
+		var tokenList:Array<TokenTreeDef> = [];
 		if (hasToken(ABSTRACT_DEF)) tokenList.push(Kwd(KwdAbstract));
 		if (hasToken(CLASS_DEF)) tokenList.push(Kwd(KwdClass));
 		if (hasToken(ENUM_DEF)) tokenList.push(Kwd(KwdEnum));
 		if (hasToken(INTERFACE_DEF)) tokenList.push(Kwd(KwdInterface));
 		if (hasToken(TYPEDEF_DEF)) tokenList.push(Kwd(KwdTypedef));
-		var docTokens = root.filter(tokenList, ALL);
+		var docTokens = root.filter(tokenList, All);
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			var name:String = getTypeName(token);
@@ -77,7 +77,7 @@ class TypeDocCommentCheck extends Check {
 						Kwd(KwdTypedef),
 						Kwd(KwdImport),
 						Kwd(KwdUsing)
-					], FIRST);
+					], First);
 					if (notAllowed.length > 0) {
 						return null;
 					}

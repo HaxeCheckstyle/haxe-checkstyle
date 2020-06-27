@@ -72,15 +72,15 @@ class FieldDocCommentCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var typeTokenDefs:Array<TokenDef> = [];
+		var typeTokenDefs:Array<TokenTreeDef> = [];
 		if (hasToken(ABSTRACT_DEF)) typeTokenDefs.push(Kwd(KwdAbstract));
 		if (hasToken(CLASS_DEF)) typeTokenDefs.push(Kwd(KwdClass));
 		if (hasToken(ENUM_DEF)) typeTokenDefs.push(Kwd(KwdEnum));
 		if (hasToken(INTERFACE_DEF)) typeTokenDefs.push(Kwd(KwdInterface));
 		if (hasToken(TYPEDEF_DEF)) typeTokenDefs.push(Kwd(KwdTypedef));
-		var typeTokens = root.filter(typeTokenDefs, ALL);
+		var typeTokens = root.filter(typeTokenDefs, All);
 
-		var fieldTokenDefs:Array<TokenDef> = [];
+		var fieldTokenDefs:Array<TokenTreeDef> = [];
 		if ((fieldType == VARS) || (fieldType == BOTH)) {
 			fieldTokenDefs.push(Kwd(KwdVar));
 			#if haxe4
@@ -93,7 +93,7 @@ class FieldDocCommentCheck extends Check {
 
 		for (typeToken in typeTokens) {
 			if (isPosSuppressed(typeToken.pos)) continue;
-			var fieldTokens:Array<TokenTree> = typeToken.filter(fieldTokenDefs, FIRST);
+			var fieldTokens:Array<TokenTree> = typeToken.filter(fieldTokenDefs, First);
 			for (token in fieldTokens) {
 				checkField(token, isDefaultPublic(typeToken));
 			}
@@ -134,14 +134,14 @@ class FieldDocCommentCheck extends Check {
 
 	function checkIgnoreOverride(token:TokenTree):Bool {
 		if (!ignoreOverride) return false;
-		var ignoreTokens:Array<TokenTree> = token.filter([Kwd(KwdOverride)], FIRST);
+		var ignoreTokens:Array<TokenTree> = token.filter([Kwd(KwdOverride)], First);
 		return (ignoreTokens.length > 0);
 	}
 
 	function matchesModifier(token:TokenTree, defaultPublic:Bool):Bool {
 		if (modifier == BOTH) return true;
 
-		var modifierList:Array<TokenTree> = token.filter([Kwd(KwdPublic), Kwd(KwdPrivate)], FIRST);
+		var modifierList:Array<TokenTree> = token.filter([Kwd(KwdPublic), Kwd(KwdPrivate)], First);
 		var isPublic:Bool = defaultPublic;
 		for (modToken in modifierList) {
 			switch (modToken.tok) {

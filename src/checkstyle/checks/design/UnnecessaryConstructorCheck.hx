@@ -14,26 +14,26 @@ class UnnecessaryConstructorCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var classes:Array<TokenTree> = root.filter([Kwd(KwdClass)], ALL);
+		var classes:Array<TokenTree> = root.filter([Kwd(KwdClass)], All);
 		for (cls in classes) {
 			if (extendsBaseClass(cls)) {
 				continue;
 			}
 			if (isPosSuppressed(cls.pos)) continue;
 
-			var acceptableTokens:Array<TokenTree> = cls.filter([Kwd(KwdFunction), Kwd(KwdVar)], FIRST);
+			var acceptableTokens:Array<TokenTree> = cls.filter([Kwd(KwdFunction), Kwd(KwdVar)], First);
 
 			var haveConstructor:Bool = false;
 			var staticTokens:Int = 0;
 			var constructorPos = null;
 			for (token in acceptableTokens) {
-				if (token.filter([Kwd(KwdNew)], FIRST, 2).length > 0) {
+				if (token.filter([Kwd(KwdNew)], First, 2).length > 0) {
 					haveConstructor = true;
 					constructorPos = token.getPos();
 					continue;
 				}
 
-				if (token.filter([Kwd(KwdStatic)], FIRST, 2).length > 0) {
+				if (token.filter([Kwd(KwdStatic)], First, 2).length > 0) {
 					staticTokens++;
 					continue;
 				}

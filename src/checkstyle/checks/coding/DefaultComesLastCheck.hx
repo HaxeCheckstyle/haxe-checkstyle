@@ -15,10 +15,10 @@ class DefaultComesLastCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdSwitch)], ALL);
+		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdSwitch)], All);
 
 		for (token in acceptableTokens) {
-			var tokens:Array<TokenTree> = token.filter([Kwd(KwdCase), Kwd(KwdDefault)], FIRST);
+			var tokens:Array<TokenTree> = token.filter([Kwd(KwdCase), Kwd(KwdDefault)], First);
 			if (tokens.length <= 0) continue;
 			if (tokens[tokens.length - 1].is(Kwd(KwdDefault))) continue;
 

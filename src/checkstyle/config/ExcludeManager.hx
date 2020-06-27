@@ -27,13 +27,13 @@ class ExcludeManager {
 	}
 
 	static function createExcludeDefinition(filter:String, range:String):ExcludeDefinition {
-		if ((range == null) || (range == "")) return FULL(filter);
-		if (~/^[1-9][0-9]*$/.match(range)) return LINE(filter, Std.parseInt(range));
+		if ((range == null) || (range == "")) return ExcludeDefinition.FULL(filter);
+		if (~/^[1-9][0-9]*$/.match(range)) return ExcludeDefinition.LINE(filter, Std.parseInt(range));
 		if (~/^[1-9][0-9]*-[1-9][0-9]*$/.match(range)) {
 			var parts = range.split("-");
-			return RANGE(filter, Std.parseInt(parts[0]), Std.parseInt(parts[1]));
+			return ExcludeDefinition.RANGE(filter, Std.parseInt(parts[0]), Std.parseInt(parts[1]));
 		}
-		return IDENTIFIER(filter, range);
+		return ExcludeDefinition.IDENTIFIER(filter, range);
 	}
 
 	public static function isExcludedFromAll(fileName:String):Bool {
@@ -133,7 +133,7 @@ class ExcludeManager {
 	function getInlineExcludes(checker:Checker):Array<ExcludeRange> {
 		var inlineExcludes:Array<ExcludeRange> = [];
 		var root:TokenTree = checker.getTokenTree();
-		var allAtTokens:Array<TokenTree> = root.filter([At], ALL);
+		var allAtTokens:Array<TokenTree> = root.filter([At], All);
 		for (atToken in allAtTokens) {
 			var child:TokenTree = atToken.getFirstChild();
 			if (child == null) continue;
@@ -146,11 +146,11 @@ class ExcludeManager {
 			pOpen.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 				switch (token.tok) {
 					case Const(CString(name)):
-						if (!StringTools.startsWith(name, "checkstyle:")) return SKIP_SUBTREE;
+						if (!StringTools.startsWith(name, "checkstyle:")) return SkipSubtree;
 						checkNames.push(name.substr(11));
-						return SKIP_SUBTREE;
+						return SkipSubtree;
 					default:
-						return GO_DEEPER;
+						return GoDeeper;
 				}
 			});
 			for (name in checkNames) {
@@ -176,11 +176,11 @@ class ExcludeManager {
 	function makeIdentifierRange(checker:Checker, checkName:String, name:String):Array<ExcludeRange> {
 		var identifierExcludes:Array<ExcludeRange> = [];
 		var root:TokenTree = checker.getTokenTree();
-		var filterTokens:Array<TokenDef> = [Const(CIdent(name))];
+		var filterTokens:Array<TokenTreeDef> = [Const(CIdent(name))];
 		if (name == "new") {
 			filterTokens.push(Kwd(KwdNew));
 		}
-		var allTokens:Array<TokenTree> = root.filter(filterTokens, ALL);
+		var allTokens:Array<TokenTree> = root.filter(filterTokens, All);
 		for (token in allTokens) {
 			identifierExcludes.push(makeTokenExcludeRange(checker, checkName, token));
 		}

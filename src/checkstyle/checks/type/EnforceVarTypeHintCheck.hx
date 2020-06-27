@@ -24,17 +24,17 @@ class EnforceVarTypeHintCheck extends Check {
 				#if haxe4
 				case Kwd(KwdFinal):
 					checkVar(token);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				#else
 				case Const(CIdent("final")):
 					checkVar(token);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				#end
 				case Kwd(KwdVar):
 					checkVar(token);
-					return SKIP_SUBTREE;
+					return SkipSubtree;
 				default:
-					return GO_DEEPER;
+					return GoDeeper;
 			}
 		});
 	}
@@ -51,7 +51,7 @@ class EnforceVarTypeHintCheck extends Check {
 
 	function isEnumAbstractValue(token:TokenTree):Bool {
 		var parent:Null<TokenTree> = token.parent;
-		while ((parent != null) && (parent.tok != null)) {
+		while ((parent != null) && (parent.tok != Root)) {
 			switch (parent.tok) {
 				case Kwd(KwdAbstract):
 					return TokenTreeCheckUtils.isTypeEnumAbstract(parent);

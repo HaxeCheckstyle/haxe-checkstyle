@@ -29,9 +29,9 @@ class WrapCheckBase extends Check {
 		return (tokens.length == 0 || tokens.contains(token));
 	}
 
-	function checkTokens(tokenList:Array<TokenDef>) {
+	function checkTokens(tokenList:Array<TokenTreeDef>) {
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter(tokenList, ALL);
+		var allTokens:Array<TokenTree> = root.filter(tokenList, All);
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;

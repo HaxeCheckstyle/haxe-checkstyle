@@ -72,21 +72,21 @@ class LeftCurlyCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], ALL);
+		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], All);
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;
 			if (skipSingleLine(brOpen)) continue;
 			var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(brOpen);
 			switch (type) {
-				case BLOCK:
-				case TYPEDEFDECL:
+				case Block:
+				case TypedefDecl:
 					if (!hasToken(TYPEDEF_DEF)) continue;
-				case OBJECTDECL:
+				case ObjectDecl:
 					if (!hasToken(OBJECT_DECL)) continue;
-				case ANONTYPE:
+				case AnonType:
 					if (!hasToken(ANON_TYPE)) continue;
-				case UNKNOWN:
+				case Unknown:
 			}
 			var parent:ParentToken = findParentToken(brOpen.parent);
 			if (!parent.hasToken) continue;
@@ -108,7 +108,7 @@ class LeftCurlyCheck extends Check {
 		find effective parent token and check against configured tokens
 	**/
 	function findParentToken(token:TokenTree):ParentToken {
-		if ((token == null) || (token.tok == null)) return {token: token, hasToken: false};
+		if ((token == null) || (token.tok == Root)) return {token: token, hasToken: false};
 		switch (token.tok) {
 			case Kwd(KwdClass):
 				return {token: token, hasToken: hasToken(CLASS_DEF)};
@@ -159,22 +159,22 @@ class LeftCurlyCheck extends Check {
 	}
 
 	function findParentTokenDblDot(token:TokenTree):ParentToken {
-		if ((token == null) || (token.tok == null)) return {token: token, hasToken: false};
+		if ((token == null) || (token.tok == Root)) return {token: token, hasToken: false};
 		var type:ColonType = TokenTreeCheckUtils.getColonType(token);
 		switch (type) {
-			case SWITCH_CASE:
+			case SwitchCase:
 				return {token: token, hasToken: hasToken(SWITCH)};
-			case TYPE_HINT:
+			case TypeHint:
 				return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
-			case TYPE_CHECK:
+			case TypeCheck:
 				return {token: token, hasToken: hasToken(TYPEDEF_DEF)};
-			case TERNARY:
+			case Ternary:
 				return {token: token, hasToken: false};
-			case OBJECT_LITERAL:
+			case ObjectLiteral:
 				return {token: token, hasToken: hasToken(OBJECT_DECL)};
-			case AT:
+			case At:
 				return {token: token, hasToken: false};
-			case UNKNOWN:
+			case Unknown:
 				return {token: token, hasToken: false};
 		}
 	}
