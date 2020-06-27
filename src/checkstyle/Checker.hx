@@ -212,8 +212,7 @@ class Checker {
 			getTokenTree();
 			excludesRanges = ExcludeManager.INSTANCE.getPosExcludes(this);
 		}
-		catch (e:haxe.Exception) {
-			trace(e.details());
+		catch (e:Any) {
 			ErrorUtils.handleException(e, file, "createContext");
 			return false;
 		}
