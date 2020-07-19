@@ -19,7 +19,14 @@ class CatchParameterNameCheck extends Check {
 	override function actualRun() {
 		var formatRE = new EReg(format, "");
 		var root:TokenTree = checker.getTokenTree();
-		var catchTokens = root.filter([Kwd(KwdCatch)], All);
+		var catchTokens = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdCatch):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (tkn in catchTokens) {
 			for (item in tkn.children) {
@@ -27,7 +34,7 @@ class CatchParameterNameCheck extends Check {
 				if (child == null) continue;
 				switch (child.tok) {
 					case Const(CIdent(name)):
-						if (item.is(POpen)) {
+						if (item.matches(POpen)) {
 							if (!formatRE.match(name)) logPos('"$name" must match pattern "~/${format}/"', item.pos);
 							continue;
 						}

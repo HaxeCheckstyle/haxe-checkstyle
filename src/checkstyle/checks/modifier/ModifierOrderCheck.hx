@@ -96,6 +96,7 @@ abstract ModifierOrderCheckModifier(String) {
 	#if haxe4
 	var EXTERN = "EXTERN";
 	var FINAL = "FINAL";
+	var ABSTRACT = "ABSTRACT";
 	#end
 
 	@:from
@@ -110,6 +111,9 @@ abstract ModifierOrderCheckModifier(String) {
 			#if haxe4
 			case AExtern: EXTERN;
 			case AFinal: FINAL;
+			#if (haxe > version("4.1.9999"))
+			case AAbstract: ABSTRACT;
+			#end
 			#end
 		}
 	}
@@ -126,6 +130,9 @@ abstract ModifierOrderCheckModifier(String) {
 			#if haxe4
 			case AExtern: "extern";
 			case AFinal: "final";
+			#if (haxe > version("4.1.9999"))
+			case AAbstract: "abstract";
+			#end
 			#end
 		}
 	}

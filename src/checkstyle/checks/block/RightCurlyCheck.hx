@@ -60,7 +60,14 @@ class RightCurlyCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrClose:Array<TokenTree> = root.filter([BrClose], All);
+		var allBrClose:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case BrClose:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (brClose in allBrClose) {
 			if (isPosSuppressed(brClose.pos)) continue;

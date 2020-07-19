@@ -71,29 +71,41 @@ class FieldDocCommentCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = checker.getTokenTree();
-		var typeTokenDefs:Array<TokenTreeDef> = [];
-		if (hasToken(ABSTRACT_DEF)) typeTokenDefs.push(Kwd(KwdAbstract));
-		if (hasToken(CLASS_DEF)) typeTokenDefs.push(Kwd(KwdClass));
-		if (hasToken(ENUM_DEF)) typeTokenDefs.push(Kwd(KwdEnum));
-		if (hasToken(INTERFACE_DEF)) typeTokenDefs.push(Kwd(KwdInterface));
-		if (hasToken(TYPEDEF_DEF)) typeTokenDefs.push(Kwd(KwdTypedef));
-		var typeTokens = root.filter(typeTokenDefs, All);
-
-		var fieldTokenDefs:Array<TokenTreeDef> = [];
-		if ((fieldType == VARS) || (fieldType == BOTH)) {
-			fieldTokenDefs.push(Kwd(KwdVar));
-			#if haxe4
-			fieldTokenDefs.push(Kwd(KwdFinal));
-			#else
-			fieldTokenDefs.push(Const(CIdent("final")));
-			#end
-		}
-		if ((fieldType == FUNCTIONS) || (fieldType == BOTH)) fieldTokenDefs.push(Kwd(KwdFunction));
+		var typeTokens:Array<TokenTree> = checker.getTokenTree().filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdAbstract) if (hasToken(ABSTRACT_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdClass) if (hasToken(CLASS_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdEnum) if (hasToken(ENUM_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdInterface) if (hasToken(INTERFACE_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdTypedef) if (hasToken(TYPEDEF_DEF)):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (typeToken in typeTokens) {
 			if (isPosSuppressed(typeToken.pos)) continue;
-			var fieldTokens:Array<TokenTree> = typeToken.filter(fieldTokenDefs, First);
+			var fieldTokens:Array<TokenTree> = typeToken.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdVar) if ((fieldType == VARS) || (fieldType == BOTH)):
+						FoundSkipSubtree;
+					#if haxe4
+					case Kwd(KwdFinal) if ((fieldType == VARS) || (fieldType == BOTH)):
+						FoundSkipSubtree;
+					#end
+					case Const(CIdent("final")) if ((fieldType == VARS) || (fieldType == BOTH)):
+						FoundSkipSubtree;
+					case Kwd(KwdFunction) if ((fieldType == FUNCTIONS) || (fieldType == BOTH)):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			});
 			for (token in fieldTokens) {
 				checkField(token, isDefaultPublic(typeToken));
 			}
@@ -134,14 +146,28 @@ class FieldDocCommentCheck extends Check {
 
 	function checkIgnoreOverride(token:TokenTree):Bool {
 		if (!ignoreOverride) return false;
-		var ignoreTokens:Array<TokenTree> = token.filter([Kwd(KwdOverride)], First);
+		var ignoreTokens:Array<TokenTree> = token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdOverride):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 		return (ignoreTokens.length > 0);
 	}
 
 	function matchesModifier(token:TokenTree, defaultPublic:Bool):Bool {
 		if (modifier == BOTH) return true;
 
-		var modifierList:Array<TokenTree> = token.filter([Kwd(KwdPublic), Kwd(KwdPrivate)], First);
+		var modifierList:Array<TokenTree> = token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdPublic) | Kwd(KwdPrivate):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 		var isPublic:Bool = defaultPublic;
 		for (modToken in modifierList) {
 			switch (modToken.tok) {
@@ -198,7 +224,7 @@ class FieldDocCommentCheck extends Check {
 		if (dblDotToken == null) {
 			return;
 		}
-		var identToken:TokenTree = access.firstChild().is(Const(CIdent("Void"))).token;
+		var identToken:TokenTree = access.firstChild().matches(Const(CIdent("Void"))).token;
 		if (identToken != null) return;
 		checkReturn(name, docToken, text);
 	}

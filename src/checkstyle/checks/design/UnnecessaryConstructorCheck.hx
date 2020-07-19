@@ -13,27 +13,47 @@ class UnnecessaryConstructorCheck extends Check {
 	}
 
 	override function actualRun() {
-		var root:TokenTree = checker.getTokenTree();
-		var classes:Array<TokenTree> = root.filter([Kwd(KwdClass)], All);
+		var classes:Array<TokenTree> = findClasses();
 		for (cls in classes) {
-			if (extendsBaseClass(cls)) {
-				continue;
-			}
+			if (extendsBaseClass(cls)) continue;
 			if (isPosSuppressed(cls.pos)) continue;
 
-			var acceptableTokens:Array<TokenTree> = cls.filter([Kwd(KwdFunction), Kwd(KwdVar)], First);
+			var acceptableTokens:Array<TokenTree> = cls.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdFunction) | Kwd(KwdVar):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			});
 
 			var haveConstructor:Bool = false;
 			var staticTokens:Int = 0;
 			var constructorPos = null;
 			for (token in acceptableTokens) {
-				if (token.filter([Kwd(KwdNew)], First, 2).length > 0) {
+				if (token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+					if (depth > 2) return SkipSubtree;
+					return switch (token.tok) {
+						case Kwd(KwdNew):
+							FoundSkipSubtree;
+						default:
+							GoDeeper;
+					}
+				}).length > 0) {
 					haveConstructor = true;
 					constructorPos = token.getPos();
 					continue;
 				}
 
-				if (token.filter([Kwd(KwdStatic)], First, 2).length > 0) {
+				if (token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+					if (depth > 2) return SkipSubtree;
+					return switch (token.tok) {
+						case Kwd(KwdStatic):
+							FoundSkipSubtree;
+						default:
+							GoDeeper;
+					}
+				}).length > 0) {
 					staticTokens++;
 					continue;
 				}
@@ -45,10 +65,21 @@ class UnnecessaryConstructorCheck extends Check {
 		}
 	}
 
+	function findClasses():Array<TokenTree> {
+		return checker.getTokenTree().filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdClass):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
+	}
+
 	function extendsBaseClass(cls:TokenTree):Bool {
 		var clsName:TokenTree = cls.getFirstChild();
 		for (child in clsName.children) {
-			if (child.is(Kwd(KwdExtends))) {
+			if (child.matches(Kwd(KwdExtends))) {
 				return true;
 			}
 		}

@@ -20,19 +20,16 @@ class InnerAssignmentCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allAssignments:Array<TokenTree> = root.filter([
-			Binop(OpAssign),
-			Binop(OpAssignOp(OpAdd)),
-			Binop(OpAssignOp(OpSub)),
-			Binop(OpAssignOp(OpDiv)),
-			Binop(OpAssignOp(OpMult)),
-			Binop(OpAssignOp(OpShl)),
-			Binop(OpAssignOp(OpShr)),
-			Binop(OpAssignOp(OpUShr)),
-			Binop(OpAssignOp(OpAnd)),
-			Binop(OpAssignOp(OpOr)),
-			Binop(OpAssignOp(OpXor))
-		], All);
+		var allAssignments:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Binop(OpAssign) | Binop(OpAssignOp(OpAdd)) | Binop(OpAssignOp(OpSub)) | Binop(OpAssignOp(OpDiv)) | Binop(OpAssignOp(OpMult)) |
+					Binop(OpAssignOp(OpShl)) | Binop(OpAssignOp(OpShr)) | Binop(OpAssignOp(OpUShr)) | Binop(OpAssignOp(OpAnd)) | Binop(OpAssignOp(OpOr)) |
+					Binop(OpAssignOp(OpXor)):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (assignToken in allAssignments) {
 			if (isPosSuppressed(assignToken.pos) || !filterAssignment(assignToken)) continue;
 			logPos("Inner assignment detected", assignToken.pos);
@@ -44,7 +41,7 @@ class InnerAssignmentCheck extends Check {
 		if (token.previousSibling != null) {
 			// tokenizer does not treat >= as OpGte
 			// creates OpGt and OpAssign instead
-			if (token.previousSibling.is(Binop(OpGt))) return false;
+			if (token.previousSibling.matches(Binop(OpGt))) return false;
 		}
 		return switch (token.tok) {
 			case Kwd(KwdVar): false;

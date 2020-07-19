@@ -13,9 +13,15 @@ class WhitespaceCheckBase extends Check {
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
+	@:access(tokentree.TokenTree)
 	function checkTokens(root:TokenTree, tokens:Array<TokenTreeDef>, policy:WhitespacePolicy) {
 		if ((policy == null) || (policy == IGNORE)) return;
-		var tokenList:Array<TokenTree> = root.filter(tokens, All);
+		var tokenList:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.matchesAny(tokens)) {
+				return FoundGoDeeper;
+			}
+			return GoDeeper;
+		});
 		checkTokenList(tokenList, policy);
 	}
 

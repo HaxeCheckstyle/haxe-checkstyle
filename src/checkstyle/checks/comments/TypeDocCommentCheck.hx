@@ -27,13 +27,23 @@ class TypeDocCommentCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var tokenList:Array<TokenTreeDef> = [];
-		if (hasToken(ABSTRACT_DEF)) tokenList.push(Kwd(KwdAbstract));
-		if (hasToken(CLASS_DEF)) tokenList.push(Kwd(KwdClass));
-		if (hasToken(ENUM_DEF)) tokenList.push(Kwd(KwdEnum));
-		if (hasToken(INTERFACE_DEF)) tokenList.push(Kwd(KwdInterface));
-		if (hasToken(TYPEDEF_DEF)) tokenList.push(Kwd(KwdTypedef));
-		var docTokens = root.filter(tokenList, All);
+
+		var docTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdAbstract) if (hasToken(ABSTRACT_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdClass) if (hasToken(CLASS_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdEnum) if (hasToken(ENUM_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdInterface) if (hasToken(INTERFACE_DEF)):
+					FoundSkipSubtree;
+				case Kwd(KwdTypedef) if (hasToken(TYPEDEF_DEF)):
+					FoundSkipSubtree;
+				case _:
+					GoDeeper;
+			}
+		});
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			var name:String = getTypeName(token);
@@ -69,15 +79,15 @@ class TypeDocCommentCheck extends Check {
 		while (docToken != null) {
 			switch (docToken.tok) {
 				case Sharp(s):
-					var notAllowed:Array<TokenTree> = docToken.filter([
-						Kwd(KwdAbstract),
-						Kwd(KwdClass),
-						Kwd(KwdEnum),
-						Kwd(KwdInterface),
-						Kwd(KwdTypedef),
-						Kwd(KwdImport),
-						Kwd(KwdUsing)
-					], First);
+					var notAllowed:Array<TokenTree> = docToken.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+						return switch (token.tok) {
+							case Kwd(KwdAbstract) | Kwd(KwdClass) | Kwd(KwdEnum) | Kwd(KwdInterface) | Kwd(KwdTypedef) | Kwd(KwdImport) | Kwd(KwdUsing):
+								FoundSkipSubtree;
+							default:
+								GoDeeper;
+						}
+					});
+
 					if (notAllowed.length > 0) {
 						return null;
 					}

@@ -102,7 +102,16 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([BEFORE_PACKAGE, AFTER_PACKAGE])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var packages:Array<TokenTree> = root.filter([Kwd(KwdPackage)], All);
+		var packages:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdPackage):
+					FoundSkipSubtree;
+				case Kwd(_):
+					SkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (pack in packages) {
 			checkBetweenToken(emptyLines, null, pack, getPolicy(BEFORE_PACKAGE), "before package");
@@ -114,7 +123,14 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([AFTER_IMPORTS, BEFORE_USING, BETWEEN_IMPORTS])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport), Kwd(KwdUsing)], All);
+		var imports:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdImport) | Kwd(KwdUsing):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 
 		if (imports.length <= 0) return;
 
@@ -131,14 +147,14 @@ class ExtendedEmptyLinesCheck extends Check {
 			var imp:TokenTree = imports[index];
 			var prev:TokenTree = imp.previousSibling;
 			if (prev == null) continue;
-			if (imp.is(Kwd(KwdUsing))) {
-				if (prev.is(Kwd(KwdImport))) {
+			if (imp.matches(Kwd(KwdUsing))) {
+				if (prev.matches(Kwd(KwdImport))) {
 					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFORE_USING), "between import and using");
 					continue;
 				}
 			}
 			else {
-				if (prev.is(Kwd(KwdUsing))) {
+				if (prev.matches(Kwd(KwdUsing))) {
 					checkBetweenToken(emptyLines, prev, imp, getPolicy(BEFORE_USING), "between import and using");
 					continue;
 				}
@@ -153,13 +169,14 @@ class ExtendedEmptyLinesCheck extends Check {
 
 	function checkTypes(emptyLines:ListOfEmptyLines) {
 		var root:TokenTree = checker.getTokenTree();
-		var types:Array<TokenTree> = root.filter([
-			Kwd(KwdAbstract),
-			Kwd(KwdClass),
-			Kwd(KwdEnum),
-			Kwd(KwdInterface),
-			Kwd(KwdTypedef)
-		], First);
+		var types:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdAbstract) | Kwd(KwdClass) | Kwd(KwdEnum) | Kwd(KwdInterface) | Kwd(KwdTypedef):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 
 		if (types.length <= 0) return;
 
@@ -250,8 +267,8 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (hasDocComment(child)) {
 				return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
 			}
-			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
-			var isVarChild:Bool = child.is(Kwd(KwdVar));
+			var isFuncChild:Bool = child.matches(Kwd(KwdFunction));
+			var isVarChild:Bool = child.matches(Kwd(KwdVar));
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
@@ -285,8 +302,8 @@ class ExtendedEmptyLinesCheck extends Check {
 			}
 			if (next == null) return null;
 
-			var isFuncChild:Bool = child.is(Kwd(KwdFunction));
-			var isVarChild:Bool = child.is(Kwd(KwdVar));
+			var isFuncChild:Bool = child.matches(Kwd(KwdFunction));
+			var isVarChild:Bool = child.matches(Kwd(KwdVar));
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
@@ -294,8 +311,22 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (isVarChild && (type == FUNCTION)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
 			if (isFuncChild && (type == VAR)) return makePolicyAndWhat(getPolicy(AFTER_CLASS_VARS), "after class vars");
 
-			var isStaticChild:Bool = (child.filter([Kwd(KwdStatic)], First).length > 0);
-			var isStaticNext:Bool = (next.filter([Kwd(KwdStatic)], First).length > 0);
+			var isStaticChild:Bool = (child.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdStatic):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			}).length > 0);
+			var isStaticNext:Bool = (next.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdStatic):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			}).length > 0);
 
 			if (isStaticChild && isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_STATIC_VARS), "between class static vars");
 			if (!isStaticChild && !isStaticNext) return makePolicyAndWhat(getPolicy(BETWEEN_CLASS_VARS), "between class vars");
@@ -304,14 +335,14 @@ class ExtendedEmptyLinesCheck extends Check {
 	}
 
 	function detectNextFieldType(field:TokenTree):EmptyLinesFieldType {
-		if (field.is(Kwd(KwdFunction))) return FUNCTION;
-		if (field.is(Kwd(KwdVar))) return VAR;
+		if (field.matches(Kwd(KwdFunction))) return FUNCTION;
+		if (field.matches(Kwd(KwdVar))) return VAR;
 		if (!field.isComment()) return OTHER;
 
 		var after:TokenTree = field.nextSibling;
 		while (after != null) {
-			if (after.is(Kwd(KwdFunction))) return FUNCTION;
-			if (after.is(Kwd(KwdVar))) return VAR;
+			if (after.matches(Kwd(KwdFunction))) return FUNCTION;
+			if (after.matches(Kwd(KwdVar))) return VAR;
 			if (after.isComment()) {
 				after = after.nextSibling;
 				continue;
@@ -405,7 +436,14 @@ class ExtendedEmptyLinesCheck extends Check {
 		if (isIgnored([IN_FUNCTION, AFTER_LEFT_CURLY, BEFORE_RIGHT_CURLY])) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var funcs:Array<TokenTree> = root.filter([Kwd(KwdFunction)], All);
+		var funcs:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdFunction):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		if (funcs.length <= 0) return;
 
@@ -415,7 +453,14 @@ class ExtendedEmptyLinesCheck extends Check {
 			var end:Int = checker.getLinePos(pos.max).line;
 			checkLines(emptyLines, getPolicy(IN_FUNCTION), start, end, "inside functions", true);
 
-			var brOpen:Array<TokenTree> = func.filter([BrOpen], All);
+			var brOpen:Array<TokenTree> = func.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case BrOpen:
+						FoundGoDeeper;
+					default:
+						GoDeeper;
+				}
+			});
 			for (open in brOpen) {
 				var close:TokenTree = open.getLastChild();
 				if (close == null) continue;

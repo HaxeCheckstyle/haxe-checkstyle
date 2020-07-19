@@ -22,7 +22,14 @@ class RedundantAccessMetaBase extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var docTokens = root.filter([At], All);
+		var docTokens = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case At:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		var infos:Array<RedundantAccessMetaInfo> = [];
 
@@ -30,11 +37,11 @@ class RedundantAccessMetaBase extends Check {
 			if (isPosSuppressed(token.pos)) continue;
 			var target:TokenTree = TokenTreeAccessHelper.access(token)
 				.firstChild()
-				.is(DblDot)
+				.matches(DblDot)
 				.firstChild()
-				.is(Const(CIdent(metaName)))
+				.matches(Const(CIdent(metaName)))
 				.firstChild()
-				.is(POpen)
+				.matches(POpen)
 				.firstChild()
 				.token;
 

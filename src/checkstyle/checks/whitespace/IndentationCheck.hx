@@ -127,24 +127,15 @@ class IndentationCheck extends Check {
 	function calcLineIndentation():Array<Int> {
 		var lineIndentation:Array<Int> = [for (i in 0...checker.lines.length) 0];
 
-		var searchFor:Array<TokenTreeDef> = [
-			BrOpen,
-			BkOpen,
-			Sharp("if"),
-			Sharp("else"),
-			Sharp("elseif"),
-			Sharp("end"),
-			Sharp("error"),
-			Kwd(KwdFunction),
-			Kwd(KwdIf),
-			Kwd(KwdElse),
-			Kwd(KwdFor),
-			Kwd(KwdDo),
-			Kwd(KwdWhile),
-			Kwd(KwdCase),
-			Kwd(KwdDefault)
-		];
-		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, All);
+		var tokenList:Array<TokenTree> = checker.getTokenTree().filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case BrOpen | BkOpen | Sharp("if") | Sharp("else") | Sharp("elseif") | Sharp("end") | Sharp("error") | Kwd(KwdFunction) | Kwd(KwdIf) |
+					Kwd(KwdElse) | Kwd(KwdFor) | Kwd(KwdDo) | Kwd(KwdWhile) | Kwd(KwdCase) | Kwd(KwdDefault):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (token in tokenList) {
 			switch (token.tok) {
 				case BkOpen:
@@ -191,7 +182,7 @@ class IndentationCheck extends Check {
 	function calcLineIndentationBkOpen(token:TokenTree, lineIndentation:Array<Int>) {
 		var child:TokenTree = token.getFirstChild();
 		if (child == null) return;
-		if ((child.is(BrOpen)) || (child.is(BkOpen))) {
+		if ((child.matches(BrOpen)) || (child.matches(BkOpen))) {
 			// only indent once, if directly next to each other `[{`
 			if (token.pos.min + 1 == child.pos.min) return;
 		}
@@ -202,7 +193,7 @@ class IndentationCheck extends Check {
 	function calcLineIndentationFunction(token:TokenTree, lineIndentation:Array<Int>) {
 		var body:TokenTree = TokenTreeAccessHelper.access(token).firstChild().lastChild().token;
 		if (body == null) return;
-		if (body.is(BrOpen)) return;
+		if (body.matches(BrOpen)) return;
 		increaseIndentIfNextLine(token, body, lineIndentation);
 	}
 
@@ -211,15 +202,15 @@ class IndentationCheck extends Check {
 			case Kwd(KwdIf):
 				var child:TokenTree = token.getLastChild();
 				if (child == null) return;
-				if (child.is(Kwd(KwdElse))) {
+				if (child.matches(Kwd(KwdElse))) {
 					child = token.children[token.children.length - 2];
 				}
-				if (child.is(BrOpen)) return;
+				if (child.matches(BrOpen)) return;
 				increaseIndentIfNextLine(token, child, lineIndentation);
 			case Kwd(KwdElse):
 				var child:TokenTree = token.getFirstChild();
 				if (child == null) return;
-				if (child.is(BrOpen)) return;
+				if (child.matches(BrOpen)) return;
 				increaseIndentIfNextLine(token, child, lineIndentation);
 			default:
 		}
@@ -264,8 +255,8 @@ class IndentationCheck extends Check {
 			case Kwd(KwdFor):
 				var child:TokenTree = token.getLastChild();
 				if (child == null) return;
-				if (child.is(BrOpen)) return;
-				if (child.is(BkOpen)) return;
+				if (child.matches(BrOpen)) return;
+				if (child.matches(BkOpen)) return;
 				while (child.getLastChild() != null) {
 					child = child.getLastChild();
 				}
@@ -275,12 +266,12 @@ class IndentationCheck extends Check {
 			case Kwd(KwdDo):
 				var child:TokenTree = token.getFirstChild();
 				if (child == null) return;
-				if (child.is(BrOpen)) return;
+				if (child.matches(BrOpen)) return;
 				increaseIndentIfNextLine(token, child, lineIndentation);
 			case Kwd(KwdWhile):
 				var child:TokenTree = token.getLastChild();
 				if (child == null) return;
-				if (child.is(BrOpen)) return;
+				if (child.matches(BrOpen)) return;
 				increaseIndentIfNextLine(token, child, lineIndentation);
 			default:
 		}
@@ -289,27 +280,16 @@ class IndentationCheck extends Check {
 	function calcWrapStatements():Array<Bool> {
 		var wrapped:Array<Bool> = [for (i in 0...checker.lines.length) false];
 
-		var searchFor:Array<TokenTreeDef> = [
-			POpen,
-			Dot,
-			Kwd(KwdReturn),
-			Kwd(KwdCase),
-			Binop(OpAssign),
-			Binop(OpArrow),
-			Binop(OpAssignOp(OpShr)),
-			Binop(OpAssignOp(OpAdd)),
-			Binop(OpAssignOp(OpSub)),
-			Binop(OpAssignOp(OpMult)),
-			Binop(OpAssignOp(OpDiv)),
-			Binop(OpAssignOp(OpMod)),
-			Binop(OpAssignOp(OpShl)),
-			Binop(OpAssignOp(OpShr)),
-			Binop(OpAssignOp(OpUShr)),
-			Binop(OpAssignOp(OpOr)),
-			Binop(OpAssignOp(OpAnd)),
-			Binop(OpAssignOp(OpXor))
-		];
-		var tokenList:Array<TokenTree> = checker.getTokenTree().filter(searchFor, All);
+		var tokenList:Array<TokenTree> = checker.getTokenTree().filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case POpen | Dot | Kwd(KwdReturn) | Kwd(KwdCase) | Binop(OpAssign) | Binop(OpArrow) | Binop(OpAssignOp(OpAdd)) | Binop(OpAssignOp(OpSub)) |
+					Binop(OpAssignOp(OpMult)) | Binop(OpAssignOp(OpDiv)) | Binop(OpAssignOp(OpMod)) | Binop(OpAssignOp(OpShl)) | Binop(OpAssignOp(OpShr)) |
+					Binop(OpAssignOp(OpUShr)) | Binop(OpAssignOp(OpOr)) | Binop(OpAssignOp(OpAnd)) | Binop(OpAssignOp(OpXor)):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (token in tokenList) {
 			var pos = token.getPos();
 			var child:TokenTree = token.getFirstChild();

@@ -76,7 +76,15 @@ class MultipleStringLiteralsCheck extends Check {
 		if ((token == null) || (token.tok == Root)) return true;
 		return switch (token.tok) {
 			case At: false;
-			case Kwd(KwdVar): !(token.filter([Kwd(KwdStatic)], First).length > 0);
+			case Kwd(KwdVar): !(token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+					return switch (token.tok) {
+						case Kwd(KwdStatic):
+							FoundSkipSubtree;
+						default:
+							GoDeeper;
+					}
+				}).length > 0);
+
 			default: filterLiteral(token.parent);
 		}
 	}

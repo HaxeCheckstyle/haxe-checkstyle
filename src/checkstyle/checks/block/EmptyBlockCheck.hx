@@ -59,7 +59,14 @@ class EmptyBlockCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], All);
+		var allBrOpen:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case BrOpen:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;
@@ -128,7 +135,7 @@ class EmptyBlockCheck extends Check {
 			return;
 		}
 		var lastChild:TokenTree = brOpen.getLastChild();
-		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)) {
+		if ((brOpen.children.length == 2) && lastChild.matches(Semicolon)) {
 			logPos("Empty block should contain a comment or a statement", brOpen.getPos());
 			return;
 		}
@@ -140,7 +147,7 @@ class EmptyBlockCheck extends Check {
 			return;
 		}
 		var lastChild:TokenTree = brOpen.getLastChild();
-		if ((brOpen.children.length == 2) && lastChild.is(Semicolon)) {
+		if ((brOpen.children.length == 2) && lastChild.matches(Semicolon)) {
 			logPos("Empty block should contain a statement", brOpen.getPos());
 			return;
 		}
@@ -163,14 +170,14 @@ class EmptyBlockCheck extends Check {
 		if (brOpen.children.length <= 0) return;
 
 		var lastChild:TokenTree = brOpen.getLastChild();
-		if (brOpen.access().lastChild().is(Semicolon).exists()) {
+		if (brOpen.access().lastChild().matches(Semicolon).exists()) {
 			if (brOpen.children.length > 2) return;
 		}
 		else {
 			if (brOpen.children.length > 1) return;
 		}
 
-		var brClose:TokenTree = brOpen.access().firstChild().is(BrClose).token;
+		var brClose:TokenTree = brOpen.access().firstChild().matches(BrClose).token;
 		if (brClose == null) return;
 		if (brOpen.pos.max != brClose.pos.min) logPos('Empty block should be written as "{}"', brOpen.getPos());
 	}

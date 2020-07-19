@@ -14,21 +14,19 @@ class SimplifyBooleanExpressionCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([
-			Kwd(KwdTrue),
-			Kwd(KwdFalse),
-			Binop(OpEq),
-			Binop(OpNotEq),
-			Unop(OpNot),
-			Binop(OpOr),
-			Binop(OpAnd),
-			Binop(OpBoolOr),
-			Binop(OpBoolAnd)
-		], All);
+		var acceptableTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdTrue) | Kwd(KwdFalse) | Binop(OpEq) | Binop(OpNotEq) | Unop(OpNot) | Binop(OpOr) | Binop(OpAnd) | Binop(OpBoolOr) |
+					Binop(OpBoolAnd):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (token in acceptableTokens) {
 			if (isPosSuppressed(token.pos)) continue;
-			if (token.is(Kwd(KwdTrue)) || token.is(Kwd(KwdFalse))) checkToken(token);
+			if (token.matches(Kwd(KwdTrue)) || token.matches(Kwd(KwdFalse))) checkToken(token);
 		}
 	}
 

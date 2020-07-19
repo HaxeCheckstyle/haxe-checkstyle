@@ -90,9 +90,15 @@ class WhitespaceAfterCheck extends Check {
 		checkTokens(tokenList);
 	}
 
+	@:access(tokentree.TokenTree)
 	function checkTokens(tokenList:Array<TokenTreeDef>) {
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter(tokenList, All);
+		var allTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.matchesAny(tokenList)) {
+				return FoundGoDeeper;
+			}
+			return GoDeeper;
+		});
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
