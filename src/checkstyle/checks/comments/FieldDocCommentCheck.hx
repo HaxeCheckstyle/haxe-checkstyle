@@ -94,8 +94,10 @@ class FieldDocCommentCheck extends Check {
 				return switch (token.tok) {
 					case Kwd(KwdVar) if ((fieldType == VARS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
+					#if haxe4
 					case Kwd(KwdFinal) if ((fieldType == VARS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
+					#end
 					case Const(CIdent("final")) if ((fieldType == VARS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
 					case Kwd(KwdFunction) if ((fieldType == FUNCTIONS) || (fieldType == BOTH)):
