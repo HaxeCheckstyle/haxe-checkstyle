@@ -93,7 +93,7 @@ class ArrowFunctionCheck extends Check {
 		if (allowSingleArgParens) return;
 		var parent:Null<TokenTree> = arrow.parent;
 		if ((parent == null) || (parent.tok == Root)) return;
-		if (!parent.is(POpen)) return;
+		if (!parent.matches(POpen)) return;
 		var count:Int = 0;
 		for (child in parent.children) {
 			switch (child.tok) {

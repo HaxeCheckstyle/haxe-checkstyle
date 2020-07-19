@@ -31,7 +31,7 @@ class NestedControlFlowCheck extends Check {
 				case Kwd(KwdDo):
 					FoundGoDeeper;
 				case Kwd(KwdWhile):
-					if ((token.parent != null) && (token.parent.is(Kwd(KwdDo)))) GoDeeper; else FoundGoDeeper;
+					if ((token.parent != null) && (token.parent.matches(Kwd(KwdDo)))) GoDeeper; else FoundGoDeeper;
 				case Kwd(KwdTry):
 					FoundGoDeeper;
 				default:
@@ -63,7 +63,7 @@ class NestedControlFlowCheck extends Check {
 				case Kwd(KwdDo):
 					count++;
 				case Kwd(KwdWhile):
-					if ((parent.parent == null) || (!parent.parent.is(Kwd(KwdDo)))) count++;
+					if ((parent.parent == null) || (!parent.parent.matches(Kwd(KwdDo)))) count++;
 				case Kwd(KwdTry):
 					count++;
 				default:

@@ -14,10 +14,24 @@ class SimplifyBooleanReturnCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdIf)], All);
+		var acceptableTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdIf):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (token in acceptableTokens) {
-			var elseLiteral = token.filter([Kwd(KwdElse)], First)[0];
+			var elseLiteral = token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdElse):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			})[0];
 			if (elseLiteral == null) continue;
 
 			var elseStatement = elseLiteral.getFirstChild();
@@ -36,7 +50,7 @@ class SimplifyBooleanReturnCheck extends Check {
 
 	function isBooleanLiteralReturnStatement(tkn:TokenTree):Bool {
 		var booleanReturnStatement = false;
-		if (tkn != null && tkn.is(Kwd(KwdReturn))) {
+		if (tkn != null && tkn.matches(Kwd(KwdReturn))) {
 			var expr = tkn.getFirstChild();
 			booleanReturnStatement = isBooleanLiteralType(expr);
 		}
@@ -44,6 +58,6 @@ class SimplifyBooleanReturnCheck extends Check {
 	}
 
 	function isBooleanLiteralType(tkn:TokenTree):Bool {
-		return tkn.is(Kwd(KwdTrue)) || tkn.is(Kwd(KwdFalse));
+		return tkn.matches(Kwd(KwdTrue)) || tkn.matches(Kwd(KwdFalse));
 	}
 }

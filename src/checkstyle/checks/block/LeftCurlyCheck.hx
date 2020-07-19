@@ -72,7 +72,14 @@ class LeftCurlyCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrOpen:Array<TokenTree> = root.filter([BrOpen], All);
+		var allBrOpen:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case BrOpen:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (brOpen in allBrOpen) {
 			if (isPosSuppressed(brOpen.pos)) continue;

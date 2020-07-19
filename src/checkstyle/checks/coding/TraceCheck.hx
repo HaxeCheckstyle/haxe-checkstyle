@@ -13,7 +13,14 @@ class TraceCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var traces = root.filter([Const(CIdent("trace"))], All);
+		var traces = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Const(CIdent("trace")):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (tr in traces) {
 			if (!tr.getFirstChild().tok.match(POpen)) continue;
 			if (filterTrace(tr.parent)) continue;

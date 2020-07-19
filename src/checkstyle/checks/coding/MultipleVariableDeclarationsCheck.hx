@@ -14,7 +14,14 @@ class MultipleVariableDeclarationsCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var acceptableTokens:Array<TokenTree> = root.filter([Kwd(KwdVar)], All);
+		var acceptableTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdVar):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		var lastVarLineNo = -1;
 		for (v in acceptableTokens) {

@@ -133,14 +133,21 @@ class ExcludeManager {
 	function getInlineExcludes(checker:Checker):Array<ExcludeRange> {
 		var inlineExcludes:Array<ExcludeRange> = [];
 		var root:TokenTree = checker.getTokenTree();
-		var allAtTokens:Array<TokenTree> = root.filter([At], All);
+		var allAtTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case At:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (atToken in allAtTokens) {
 			var child:TokenTree = atToken.getFirstChild();
 			if (child == null) continue;
-			if (!child.is(Const(CIdent("SuppressWarnings")))) continue;
+			if (!child.matches(Const(CIdent("SuppressWarnings")))) continue;
 			var pOpen:TokenTree = child.getFirstChild();
 			if (pOpen == null) continue;
-			if (!pOpen.is(POpen)) continue;
+			if (!pOpen.matches(POpen)) continue;
 
 			var checkNames:Array<String> = [];
 			pOpen.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
@@ -173,6 +180,7 @@ class ExcludeManager {
 		return map;
 	}
 
+	@:access(tokentree.TokenTree)
 	function makeIdentifierRange(checker:Checker, checkName:String, name:String):Array<ExcludeRange> {
 		var identifierExcludes:Array<ExcludeRange> = [];
 		var root:TokenTree = checker.getTokenTree();
@@ -180,7 +188,12 @@ class ExcludeManager {
 		if (name == "new") {
 			filterTokens.push(Kwd(KwdNew));
 		}
-		var allTokens:Array<TokenTree> = root.filter(filterTokens, All);
+		var allTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.matchesAny(filterTokens)) {
+				return FoundGoDeeper;
+			}
+			return GoDeeper;
+		});
 		for (token in allTokens) {
 			identifierExcludes.push(makeTokenExcludeRange(checker, checkName, token));
 		}

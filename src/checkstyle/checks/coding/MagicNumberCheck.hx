@@ -20,13 +20,14 @@ class MagicNumberCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allTypes:Array<TokenTree> = root.filter([
-			Kwd(KwdAbstract),
-			Kwd(KwdClass),
-			Kwd(KwdEnum),
-			Kwd(KwdInterface),
-			Kwd(KwdTypedef)
-		], First);
+		var allTypes:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdAbstract) | Kwd(KwdClass) | Kwd(KwdEnum) | Kwd(KwdInterface) | Kwd(KwdTypedef):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 		for (type in allTypes) {
 			if (TokenTreeCheckUtils.isTypeEnumAbstract(type)) continue;
 			checkForNumbers(type);
@@ -69,7 +70,19 @@ class MagicNumberCheck extends Check {
 			case Const(CIdent("final")): true;
 			#end
 			case BrOpen: false;
-			case Kwd(KwdVar): if (token.filter([Kwd(KwdStatic)], First).length > 0) true; else false;
+			case Kwd(KwdVar): if (token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+					return switch (token.tok) {
+						case Kwd(KwdStatic):
+							FoundSkipSubtree;
+						default:
+							GoDeeper;
+					}
+				}).length > 0) {
+					true;
+				}
+				else {
+					false;
+				}
 			default: filterNumber(token.parent);
 		}
 	}

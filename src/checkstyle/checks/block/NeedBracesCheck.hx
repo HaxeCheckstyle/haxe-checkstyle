@@ -36,22 +36,34 @@ class NeedBracesCheck extends Check {
 	}
 
 	override function actualRun() {
-		var tokenList:Array<TokenTreeDef> = [];
+		var wantFunction = hasToken(FUNCTION);
+		var wantFor = hasToken(FOR);
+		var wantIf = hasToken(IF);
+		var wantWhile = hasToken(WHILE);
+		var wantDoWhile = hasToken(DO_WHILE);
+		var wantCatch = hasToken(CATCH);
 
-		if (hasToken(FUNCTION)) tokenList.push(Kwd(KwdFunction));
-		if (hasToken(FOR)) tokenList.push(Kwd(KwdFor));
-		if (hasToken(IF)) {
-			tokenList.push(Kwd(KwdIf));
-			tokenList.push(Kwd(KwdElse));
-		}
-		if (hasToken(WHILE)) tokenList.push(Kwd(KwdWhile));
-		if (hasToken(DO_WHILE)) tokenList.push(Kwd(KwdDo));
-		if (hasToken(CATCH)) tokenList.push(Kwd(KwdCatch));
-
-		if (tokenList.length <= 0) return;
+		if (!(wantFunction || wantFor || wantIf || wantWhile || wantDoWhile || wantCatch)) return;
 
 		var root:TokenTree = checker.getTokenTree();
-		var allTokens:Array<TokenTree> = root.filter(tokenList, All);
+		var allTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdFunction) if (wantFunction):
+					FoundGoDeeper;
+				case Kwd(KwdFor) if (wantFor):
+					FoundGoDeeper;
+				case Kwd(KwdIf) | Kwd(KwdElse) if (wantIf):
+					FoundGoDeeper;
+				case Kwd(KwdWhile) if (wantWhile):
+					FoundGoDeeper;
+				case Kwd(KwdDo) if (wantDoWhile):
+					FoundGoDeeper;
+				case Kwd(KwdCatch) if (wantCatch):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (tok in allTokens) {
 			if (isPosSuppressed(tok.pos)) continue;
@@ -61,7 +73,7 @@ class NeedBracesCheck extends Check {
 				case Kwd(KwdElse):
 					var firstChild = tok.getFirstChild();
 					if (firstChild == null) continue;
-					if (firstChild.is(Kwd(KwdIf))) checkIfChild(firstChild);
+					if (firstChild.matches(Kwd(KwdIf))) checkIfChild(firstChild);
 					else checkLastChild(tok);
 				case Kwd(KwdFunction):
 					checkFunctionChild(tok);
@@ -102,14 +114,14 @@ class NeedBracesCheck extends Check {
 			return;
 		}
 		body = body.nextSibling;
-		if (body.is(DblDot)) {
+		if (body.matches(DblDot)) {
 			var lastChild:TokenTree = TokenTreeCheckUtils.getLastToken(token);
-			if (lastChild.is(Semicolon)) {
+			if (lastChild.matches(Semicolon)) {
 				return;
 			}
 			body = body.nextSibling;
 		}
-		if ((body == null) || (body.is(BrOpen))) {
+		if ((body == null) || (body.matches(BrOpen))) {
 			return;
 		}
 		checkNoBraces(token, body);

@@ -18,7 +18,16 @@ class EmptyPackageCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var packageTokens = root.filter([Kwd(KwdPackage)], All);
+		var packageTokens = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdPackage):
+					FoundSkipSubtree;
+				case Kwd(_):
+					SkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 		if (enforceEmptyPackage) {
 			if (packageTokens.length == 0) log("Missing package declaration", 1, 0, 1, 0, MISSING_PACKAGE);
 		}
@@ -28,7 +37,7 @@ class EmptyPackageCheck extends Check {
 	function checkPackageNames(entries:Array<TokenTree>) {
 		for (entry in entries) {
 			var firstChild = entry.getFirstChild();
-			if (firstChild.is(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max, REDUNDANT_PACKAGE);
+			if (firstChild.matches(Semicolon)) logRange("Found empty package", entry.pos.min, firstChild.pos.max, REDUNDANT_PACKAGE);
 		}
 	}
 

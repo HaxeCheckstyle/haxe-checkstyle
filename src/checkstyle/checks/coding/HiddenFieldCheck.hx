@@ -35,14 +35,28 @@ class HiddenFieldCheck extends Check {
 	override function actualRun() {
 		var ignoreFormatRE:EReg = new EReg(ignoreFormat, "");
 		var root:TokenTree = checker.getTokenTree();
-		checkClasses(root.filter([Kwd(KwdClass)], All), ignoreFormatRE);
+		checkClasses(root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdClass):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		}), ignoreFormatRE);
 	}
 
 	function checkClasses(classes:Array<TokenTree>, ignoreFormatRE:EReg) {
 		for (clazz in classes) {
 			if (isPosSuppressed(clazz.pos)) continue;
 			var memberNames:Array<String> = collectMemberNames(clazz);
-			var methods:Array<TokenTree> = clazz.filter([Kwd(KwdFunction)], First);
+			var methods:Array<TokenTree> = clazz.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Kwd(KwdFunction):
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			});
 			for (method in methods) {
 				if (isPosSuppressed(method.pos)) continue;
 				checkMethod(method, memberNames, ignoreFormatRE);
@@ -55,7 +69,7 @@ class HiddenFieldCheck extends Check {
 
 		// handle constructor and setters
 		var methodName:TokenTree = method.children[0];
-		if (methodName.is(Kwd(KwdNew)) && ignoreConstructorParameter) return;
+		if (methodName.matches(Kwd(KwdNew)) && ignoreConstructorParameter) return;
 		if (ignoreSetter && isSetterFunction(methodName, memberNames)) return;
 		switch (methodName.tok) {
 			case Const(CIdent(name)):
@@ -90,7 +104,16 @@ class HiddenFieldCheck extends Check {
 		//      |- POpen
 		//          |- parameters
 		//          |- PClose
-		var paramDef:Array<TokenTree> = method.filter([POpen], First, 2);
+		var paramDef:Array<TokenTree> = method.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (depth > 2) return SkipSubtree;
+			return switch (token.tok) {
+				case POpen:
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
+
 		if ((paramDef == null) || (paramDef.length != 1)) {
 			throw "function parameters have invalid structure!";
 		}
@@ -99,7 +122,14 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkVars(method:TokenTree, memberNames:Array<String>) {
-		var vars:Array<TokenTree> = method.filter([Kwd(KwdVar)], All);
+		var vars:Array<TokenTree> = method.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdVar):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (v in vars) {
 			if (!v.hasChildren()) throw "var has invalid structure!";
 			checkName(v.children[0], memberNames, "Variable definition");
@@ -107,9 +137,24 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkForLoops(method:TokenTree, memberNames:Array<String>) {
-		var fors:Array<TokenTree> = method.filter([Kwd(KwdFor)], All);
+		var fors:Array<TokenTree> = method.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdFor):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (f in fors) {
-			var popens:Array<TokenTree> = f.filter([POpen], First, 2);
+			var popens:Array<TokenTree> = f.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				if (depth > 2) return SkipSubtree;
+				return switch (token.tok) {
+					case POpen:
+						FoundSkipSubtree;
+					default:
+						GoDeeper;
+				}
+			});
 			if (popens.length <= 0) continue;
 			var pOpen:TokenTree = popens[0];
 			if (!pOpen.hasChildren()) continue;
@@ -135,7 +180,15 @@ class HiddenFieldCheck extends Check {
 		//          |- Kwd(KwdVar)
 		//          |- Kwd(KwdVar)
 		//          |- Kwd(KwdFunction)
-		var varFields:Array<TokenTree> = clazz.filter([Kwd(KwdVar)], First, MAX_FIELD_LEVEL);
+		var varFields:Array<TokenTree> = clazz.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (depth > MAX_FIELD_LEVEL) return SkipSubtree;
+			return switch (token.tok) {
+				case Kwd(KwdVar):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
 		for (member in varFields) {
 			if (!member.hasChildren()) continue;
 			switch (member.children[0].tok) {

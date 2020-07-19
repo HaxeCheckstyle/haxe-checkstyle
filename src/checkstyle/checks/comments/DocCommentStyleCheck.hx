@@ -31,16 +31,20 @@ class DocCommentStyleCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var docTokens = root.filter([
-			Kwd(KwdAbstract),
-			Kwd(KwdClass),
-			Kwd(KwdEnum),
-			Kwd(KwdInterface),
-			Kwd(KwdTypedef),
-			Kwd(KwdVar),
-			#if haxe4 Kwd(KwdFinal) #else Const(CIdent("final")) #end,
-			Kwd(KwdFunction)
-		], All);
+		var docTokens = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdAbstract) | Kwd(KwdClass) | Kwd(KwdEnum) | Kwd(KwdInterface) | Kwd(KwdTypedef) | Kwd(KwdVar) | Kwd(KwdFunction):
+					FoundGoDeeper;
+				#if haxe4
+				case Kwd(KwdFinal):
+					FoundGoDeeper;
+				#end
+				case Const(CIdent("final")):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (token in docTokens) {
 			if (isPosSuppressed(token.pos)) continue;

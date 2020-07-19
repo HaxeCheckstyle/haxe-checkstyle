@@ -29,7 +29,14 @@ class ReturnCountCheck extends Check {
 	override function actualRun() {
 		var ignoreFormatRE:EReg = new EReg(ignoreFormat, "");
 		var root:TokenTree = checker.getTokenTree();
-		var functions = root.filter([Kwd(KwdFunction)], All);
+		var functions = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdFunction):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (fn in functions) {
 			if (fn.children == null) continue;
 			switch (fn.getFirstChild().tok) {

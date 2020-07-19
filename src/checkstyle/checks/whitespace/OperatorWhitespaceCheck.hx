@@ -6,8 +6,7 @@ import tokentree.utils.TokenTreeCheckUtils;
 
 /**
 	Checks that whitespace is present or absent around a operators.
-**/
-@name("OperatorWhitespace")
+**/ @name("OperatorWhitespace")
 @desc("Checks that whitespace is present or absent around a operators.")
 class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 	/**
@@ -178,7 +177,14 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkUnaryOps(root:TokenTree) {
 		if ((unaryOpPolicy == null) || (unaryOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Unop(OpNegBits), Unop(OpNot), Unop(OpIncrement), Unop(OpDecrement)], All);
+		var tokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case Unop(OpNegBits) | Unop(OpNot) | Unop(OpIncrement) | Unop(OpDecrement):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
@@ -188,7 +194,14 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkTernaryOps(root:TokenTree) {
 		if ((ternaryOpPolicy == null) || (ternaryOpPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Question], All);
+		var tokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case Question:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
@@ -244,7 +257,14 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 
 	function checkArrowOps(root:TokenTree) {
 		if ((arrowPolicy == null) || (arrowPolicy == IGNORE)) return;
-		var tokens:Array<TokenTree> = root.filter([Binop(OpArrow)], All);
+		var tokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case Binop(OpArrow):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		checkTokenList(tokens, arrowPolicy);
 	}
 
@@ -254,7 +274,14 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 			&& ((newFunctionTypePolicy == null) || (newFunctionTypePolicy == IGNORE))) {
 			return;
 		}
-		var tokens:Array<TokenTree> = root.filter([Arrow], All);
+		var tokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Arrow:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		for (token in tokens) {
 			if (isPosSuppressed(token.pos)) continue;
 			var type:ArrowType = TokenTreeCheckUtils.getArrowType(token);

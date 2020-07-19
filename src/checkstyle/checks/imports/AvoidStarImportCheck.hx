@@ -14,12 +14,29 @@ class AvoidStarImportCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		checkImports(root.filter([Kwd(KwdImport)], All));
+		checkImports(root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdImport):
+					FoundSkipSubtree;
+				case Kwd(_):
+					SkipSubtree;
+				default:
+					GoDeeper;
+			}
+		}));
 	}
 
 	function checkImports(importEntries:Array<TokenTree>) {
 		for (entry in importEntries) {
-			var stars:Array<TokenTree> = entry.filter([Binop(OpMult)], All);
+			var stars:Array<TokenTree> = entry.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+				return switch (token.tok) {
+					case Binop(OpMult):
+						FoundGoDeeper;
+					default:
+						GoDeeper;
+				}
+			});
+
 			if (stars.length <= 0) continue;
 			logPos('Using the ".*" form of import should be avoided', entry.getPos());
 		}

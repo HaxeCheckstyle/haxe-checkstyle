@@ -14,7 +14,14 @@ class UnusedLocalVarCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var functions:Array<TokenTree> = root.filter([Kwd(KwdFunction)], All);
+		var functions:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdFunction):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (f in functions) {
 			if (isPosSuppressed(f.pos)) continue;

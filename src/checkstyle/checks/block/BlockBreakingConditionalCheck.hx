@@ -12,7 +12,14 @@ class BlockBreakingConditionalCheck extends Check {
 
 	override function actualRun() {
 		var root:TokenTree = checker.getTokenTree();
-		var allBrs:Array<TokenTree> = root.filter([BrOpen, BrClose], All);
+		var allBrs:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
+			return switch (token.tok) {
+				case BrOpen | BrClose:
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 
 		for (br in allBrs) {
 			if (isPosSuppressed(br.pos)) continue;
@@ -21,7 +28,7 @@ class BlockBreakingConditionalCheck extends Check {
 					if (br.access().firstOf(BrClose).exists()) continue;
 					logPos("Left curly has no matching right curly", br.pos);
 				case BrClose:
-					if (br.access().parent().is(BrOpen).exists()) continue;
+					if (br.access().parent().matches(BrOpen).exists()) continue;
 					logPos("Right curly has no matching left curly", br.pos);
 				default:
 					continue;

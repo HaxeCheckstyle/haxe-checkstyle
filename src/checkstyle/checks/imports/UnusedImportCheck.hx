@@ -33,7 +33,7 @@ class UnusedImportCheck extends Check {
 		if (isImportHx()) return;
 		var root:TokenTree = checker.getTokenTree();
 		var packageName:String = detectPackageName(root);
-		var imports:Array<TokenTree> = root.filter([Kwd(KwdImport)], All);
+		var imports:Array<TokenTree> = findImports(root);
 		var idents:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			switch (token.tok) {
 				case Const(CIdent(_)):
@@ -77,13 +77,31 @@ class UnusedImportCheck extends Check {
 		}
 	}
 
+	function findImports(root:TokenTree):Array<TokenTree> {
+		return root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdImport):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
+	}
+
 	function isImportHx():Bool {
 		var fileName:String = Path.withoutDirectory(checker.file.name);
 		return fileName == "import.hx";
 	}
 
 	function detectPackageName(root:TokenTree):String {
-		var packageToken:Array<TokenTree> = root.filter([Kwd(KwdPackage)], All);
+		var packageToken:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			return switch (token.tok) {
+				case Kwd(KwdPackage):
+					FoundGoDeeper;
+				default:
+					GoDeeper;
+			}
+		});
 		if ((packageToken == null) || (packageToken.length <= 0)) return null;
 
 		var packageName:String = detectModuleName(packageToken[0]);
