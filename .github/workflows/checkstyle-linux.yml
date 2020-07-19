@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        haxe-version: ['3.4.7', '4.0.5', '4.1.2', 'nightly']
+        haxe-version: ['3.4.7', '4.0.5', '4.1.2']
     env:
       CC_TEST_REPORTER_ID: 1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
       CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
