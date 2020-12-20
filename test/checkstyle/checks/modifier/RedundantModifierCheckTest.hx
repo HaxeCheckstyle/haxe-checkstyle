@@ -106,8 +106,7 @@ class RedundantModifierCheckTest extends CheckTestCase<RedundantModifierCheckTes
 	}
 }
 
-@:enum
-abstract RedundantModifierCheckTests(String) to String {
+enum abstract RedundantModifierCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		var a:Int;
@@ -144,32 +143,32 @@ abstract RedundantModifierCheckTests(String) to String {
 		function foo() {}
 	}";
 	var TEST7 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		public var value = 0;
 	}";
 	var TEST8 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		var value = 0;
 	}";
 	var TEST9 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		private static inline var CONSTANT = 0;
 	}";
 	var TEST10 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		static inline var CONSTANT = 0;
 	}";
 	var TEST11 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		private function foo() {}
 	}";
 	var TEST12 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		function foo() {}
 	}";

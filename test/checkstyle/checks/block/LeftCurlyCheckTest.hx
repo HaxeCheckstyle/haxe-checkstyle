@@ -129,8 +129,7 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 	}
 }
 
-@:enum
-abstract LeftCurlyCheckTests(String) to String {
+enum abstract LeftCurlyCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		function test() {

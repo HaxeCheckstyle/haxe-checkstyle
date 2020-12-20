@@ -32,8 +32,7 @@ class ArrayAccessCheckTest extends CheckTestCase<ArrayAccessCheckTests> {
 	}
 }
 
-@:enum
-abstract ArrayAccessCheckTests(String) to String {
+enum abstract ArrayAccessCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 

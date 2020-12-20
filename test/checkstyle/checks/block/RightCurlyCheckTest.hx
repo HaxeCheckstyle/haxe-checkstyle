@@ -244,8 +244,7 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 	}
 }
 
-@:enum
-abstract RightCurlyCheckTests(String) to String {
+enum abstract RightCurlyCheckTests(String) to String {
 	var ALONE_OR_SINGLELINE_CORRECT = "
 	class Test {
 		function test() {

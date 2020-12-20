@@ -65,11 +65,6 @@ class ReturnCheck extends Check {
 		if (checker.ast == null) return;
 		checker.ast.walkFile(function(e) {
 			switch (e.expr) {
-				#if (haxe_ver < 4.0)
-				case EFunction(fname, f):
-					var funNoReturn:Bool = (f.ret == null);
-					walkExpr(f.expr, funNoReturn, fname, e.pos);
-				#else
 				case EFunction(kind, f):
 					var name:Null<String> = switch (kind) {
 						case null: null;
@@ -79,7 +74,6 @@ class ReturnCheck extends Check {
 					}
 					var funNoReturn:Bool = (f.ret == null);
 					walkExpr(f.expr, funNoReturn, name, e.pos);
-				#end
 				default:
 			}
 		});

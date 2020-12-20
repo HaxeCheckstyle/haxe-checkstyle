@@ -7,8 +7,7 @@ package checkstyle;
 	- WARNING = all violations have warning / medium priority
 	- ERROR = all violations have error / highest priority
 **/
-@:enum
-abstract SeverityLevel(String) from String {
+enum abstract SeverityLevel(String) from String {
 	var INFO = "INFO";
 	var WARNING = "WARNING";
 	var ERROR = "ERROR";

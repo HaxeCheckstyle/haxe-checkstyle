@@ -19,10 +19,8 @@ class ComplexTypeUtils {
 				walkTypedef(d, td.pos, cb);
 			case EUsing(path):
 				walkTypePath(path, path.name, td.pos, cb);
-			#if haxe4
 			case EStatic(s):
 				walkStatic(s, td.pos, cb);
-			#end
 		}
 	}
 
@@ -89,11 +87,9 @@ class ComplexTypeUtils {
 		}
 	}
 
-	#if haxe4
 	public static function walkStatic(s:Definition<StaticFlag, FieldType>, pos:Position, cb:ComplexTypeCallback) {
 		walkField(cast s, cb);
 	}
-	#end
 
 	public static function walkVar(v:Var, pos:Position, cb:ComplexTypeCallback) {
 		if (v.type != null) walkComplexType(v.type, v.name, pos, cb);
@@ -157,12 +153,10 @@ class ComplexTypeUtils {
 				for (f in fields) walkField(f, cb);
 			case TOptional(t):
 				walkComplexType(t, name, pos, cb);
-			#if (haxe_ver >= 4.0)
 			case TNamed(n, t):
 				walkComplexType(t, n, pos, cb);
 			case TIntersection(types):
 				for (t in types) walkComplexType(t, name, pos, cb);
-			#end
 		}
 	}
 
@@ -193,10 +187,6 @@ class ComplexTypeUtils {
 				walkExpr(e, cb);
 			case EVars(vars):
 				for (v in vars) walkVar(v, e.pos, cb);
-			#if (haxe_ver < 4.0)
-			case EFunction(name, f):
-				walkFunction(f, name, e.pos, cb);
-			#else
 			case EFunction(kind, f):
 				var name:Null<String> = switch (kind) {
 					case null: null;
@@ -205,17 +195,11 @@ class ComplexTypeUtils {
 					case FArrow: null;
 				}
 				walkFunction(f, name, e.pos, cb);
-			#end
 			case EBlock(exprs):
 				for (e in exprs) walkExpr(e, cb);
 			case EFor(it, expr):
 				walkExpr(it, cb);
 				walkExpr(expr, cb);
-			#if (haxe_ver < 4.0)
-			case EIn(e1, e2):
-				walkExpr(e1, cb);
-				walkExpr(e2, cb);
-			#end
 			case EIf(econd, eif, eelse):
 				walkExpr(econd, cb);
 				walkExpr(eif, cb);
@@ -255,6 +239,11 @@ class ComplexTypeUtils {
 			case EMeta(s, e):
 				if (s.params != null) for (mp in s.params) walkExpr(mp, cb);
 				walkExpr(e, cb);
+			#if (haxe >= version("4.2.0-rc.1"))
+			case EIs(e, t):
+				walkExpr(e, cb);
+				walkComplexType(t, "", e.pos, cb);
+			#end
 		}
 	}
 }

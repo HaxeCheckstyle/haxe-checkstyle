@@ -124,8 +124,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	}
 }
 
-@:enum
-abstract ExcludeManagerTests(String) to String {
+enum abstract ExcludeManagerTests(String) to String {
 	var CHECKSINFO = "\n
 	class ChecksInfo {
 		public function new() {

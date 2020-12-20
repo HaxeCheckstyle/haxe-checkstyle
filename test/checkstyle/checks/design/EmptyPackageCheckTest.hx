@@ -23,8 +23,7 @@ class EmptyPackageCheckTest extends CheckTestCase<EmptyPackageCheckTests> {
 	}
 }
 
-@:enum
-abstract EmptyPackageCheckTests(String) to String {
+enum abstract EmptyPackageCheckTests(String) to String {
 	var TEST1 = "
 	package;
 

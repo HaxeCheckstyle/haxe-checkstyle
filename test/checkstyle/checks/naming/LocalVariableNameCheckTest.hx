@@ -44,8 +44,7 @@ class LocalVariableNameCheckTest extends CheckTestCase<LocalVariableNameCheckTes
 	}
 }
 
-@:enum
-abstract LocalVariableNameCheckTests(String) to String {
+enum abstract LocalVariableNameCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		public function test() {

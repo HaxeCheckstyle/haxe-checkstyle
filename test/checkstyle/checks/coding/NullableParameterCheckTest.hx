@@ -30,8 +30,7 @@ class NullableParameterCheckTest extends CheckTestCase<NullableParameterCheckTes
 	}
 }
 
-@:enum
-abstract NullableParameterCheckTests(String) to String {
+enum abstract NullableParameterCheckTests(String) to String {
 	var NO_DEFAULT = "
 	class Test {
 		function foo(arg:Int) {}

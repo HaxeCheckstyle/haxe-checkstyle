@@ -39,8 +39,7 @@ class FileLengthCheckTest extends CheckTestCase<FileLengthCheckTests> {
 	}
 }
 
-@:enum
-abstract FileLengthCheckTests(String) to String {
+enum abstract FileLengthCheckTests(String) to String {
 	var TEST2001 = "\n
 	class Test {
 		public function new() {

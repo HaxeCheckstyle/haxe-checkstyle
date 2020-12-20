@@ -29,8 +29,7 @@ class TraceCheckTest extends CheckTestCase<TraceCheckTests> {
 	}
 }
 
-@:enum
-abstract TraceCheckTests(String) to String {
+enum abstract TraceCheckTests(String) to String {
 	var TRACE_TEXT = "
 	abstractAndClass Test {
 		function a() {

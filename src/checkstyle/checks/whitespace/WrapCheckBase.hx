@@ -73,8 +73,7 @@ class WrapCheckBase extends Check {
 	- eol = wrapping token should be at end of line
 	- nl = wrapping token should start a new line
 **/
-@:enum
-abstract WrapCheckBaseOption(String) {
+enum abstract WrapCheckBaseOption(String) {
 	var EOL = "eol";
 	var NL = "nl";
 }

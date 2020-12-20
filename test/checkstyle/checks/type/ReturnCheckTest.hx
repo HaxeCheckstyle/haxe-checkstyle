@@ -106,8 +106,7 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	}
 }
 
-@:enum
-abstract ReturnCheckTests(String) to String {
+enum abstract ReturnCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test():Void {}

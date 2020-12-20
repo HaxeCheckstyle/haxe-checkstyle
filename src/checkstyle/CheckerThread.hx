@@ -1,19 +1,9 @@
 package checkstyle;
 
-#if ((haxe_ver >= 4.0) && (neko || macro || eval || cpp || hl || java))
-import sys.thread.Thread;
-#elseif neko
-import neko.vm.Thread;
-#elseif cpp
-import cpp.vm.Thread;
-#elseif java
-import java.vm.Thread;
-#else
-import checkstyle.utils.Thread;
-#end
 import checkstyle.checks.Check;
 import checkstyle.config.ExcludeManager;
 import checkstyle.reporter.ReporterManager;
+import checkstyle.utils.Thread;
 
 class CheckerThread {
 	static inline var SLEEP_TIME:Float = 0.1;

@@ -54,8 +54,7 @@ class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 	- ABSTRACT = all abstract types
 	- TYPEDEF = all typedef types
 **/
-@:enum
-abstract TypeNameCheckToken(String) {
+enum abstract TypeNameCheckToken(String) {
 	var INTERFACE = "INTERFACE";
 	var CLASS = "CLASS";
 	var ENUM = "ENUM";

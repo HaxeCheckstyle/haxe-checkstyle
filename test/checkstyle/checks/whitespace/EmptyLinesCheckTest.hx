@@ -75,8 +75,7 @@ class EmptyLinesCheckTest extends CheckTestCase<EmptyLinesCheckTests> {
 	}
 }
 
-@:enum
-abstract EmptyLinesCheckTests(String) to String {
+enum abstract EmptyLinesCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 

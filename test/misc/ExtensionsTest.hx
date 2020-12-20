@@ -10,8 +10,7 @@ class ExtensionsTest extends CheckTestCase<ExtensionsTests> {
 	}
 }
 
-@:enum
-abstract ExtensionsTests(String) to String {
+enum abstract ExtensionsTests(String) to String {
 	var TEST1 = "
 	typedef TypedefName = {
 		> OneTypedef,

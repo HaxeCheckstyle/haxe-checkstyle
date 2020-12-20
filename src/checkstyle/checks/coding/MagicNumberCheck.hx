@@ -64,11 +64,7 @@ class MagicNumberCheck extends Check {
 		if ((token == null) || (token.tok == Root)) return false;
 		return switch (token.tok) {
 			case At: true;
-			#if haxe4
 			case Kwd(KwdFinal): true;
-			#else
-			case Const(CIdent("final")): true;
-			#end
 			case BrOpen: false;
 			case Kwd(KwdVar): if (token.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 					return switch (token.tok) {

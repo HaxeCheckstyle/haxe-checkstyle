@@ -56,8 +56,7 @@ class FinalCheck extends Check {
 	}
 }
 
-@:enum
-abstract FinalCode(String) to String {
+enum abstract FinalCode(String) to String {
 	var USE_INLINE_FINAL = "UseInlineFinal";
 	var SHOULD_BE_PUBLIC_FINAL = "ShouldBePublicFinal";
 }

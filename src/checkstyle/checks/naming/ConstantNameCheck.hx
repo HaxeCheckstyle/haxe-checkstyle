@@ -81,14 +81,12 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 	- INLINE = "static inline var"
 	- NOTINLINE = "static var"
 **/
-@:enum
-abstract ConstantNameCheckToken(String) {
+enum abstract ConstantNameCheckToken(String) {
 	var INLINE = "INLINE";
 	var NOTINLINE = "NOTINLINE";
 }
 
-@:enum
-abstract ConstantNameCheckFormt(String) to String {
+enum abstract ConstantNameCheckFormt(String) to String {
 	var UPPER_CASE = "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$";
 	var CAMEL_CASE = "^[A-Z]+[a-zA-Z0-9]*$";
 	var LOWER_CASE = "^[a-z][a-zA-Z0-9]*$";

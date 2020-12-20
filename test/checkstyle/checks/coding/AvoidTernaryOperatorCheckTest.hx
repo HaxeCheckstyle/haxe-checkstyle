@@ -11,8 +11,7 @@ class AvoidTernaryOperatorCheckTest extends CheckTestCase<AvoidTernaryOperatorCh
 	}
 }
 
-@:enum
-abstract AvoidTernaryOperatorCheckTests(String) to String {
+enum abstract AvoidTernaryOperatorCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var a:Array<Int> = [];

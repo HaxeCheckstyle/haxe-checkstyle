@@ -101,8 +101,7 @@ class MemberNameCheck extends NameCheckBase<MemberNameCheckToken> {
 	- ABSTRACT = all abstract fields, use in combination with PUBLIC and PRIVATE to only match public/private abstract fields
 	- TYPEDEF = all typedef fields
 **/
-@:enum
-abstract MemberNameCheckToken(String) {
+enum abstract MemberNameCheckToken(String) {
 	var PUBLIC = "PUBLIC";
 	var PRIVATE = "PRIVATE";
 	var ENUM = "ENUM";

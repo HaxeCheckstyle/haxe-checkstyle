@@ -27,13 +27,8 @@ class VarTypeHintCheck extends Check {
 		var root:TokenTree = checker.getTokenTree();
 		var varList:Array<TokenTree> = root.filterCallback(function(token:TokenTree, index:Int):FilterResult {
 			return switch (token.tok) {
-				#if haxe4
 				case Kwd(KwdFinal):
 					FoundSkipSubtree;
-				#else
-				case Const(CIdent("final")):
-					FoundSkipSubtree;
-				#end
 				case Kwd(KwdVar):
 					FoundSkipSubtree;
 				default:
@@ -142,8 +137,7 @@ class VarTypeHintCheck extends Check {
 	infer_new_or_const = var / final require a type hint unless you assign a number, a string or new <Object>
 	infer_all = var / final only require a type hint if you do not assign anything
 **/
-@:enum
-abstract VarTypeHintPolicy(String) {
+enum abstract VarTypeHintPolicy(String) {
 	var ENFORCE_ALL = "enforce_all";
 	var INFER_NEW_OR_CONST = "infer_new_or_const";
 	var INFER_ALL = "infer_all";

@@ -56,8 +56,7 @@ class IndentationCharacterCheck extends LineCheckBase {
 	- tab = tabs
 	- space = space
 **/
-@:enum
-abstract IndentationCharacterCheckCharacter(String) {
+enum abstract IndentationCharacterCheckCharacter(String) {
 	var TAB = "tab";
 	var SPACE = "space";
 }

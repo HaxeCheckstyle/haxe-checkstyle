@@ -37,8 +37,7 @@ class NestedControlFlowCheckTest extends CheckTestCase<NestedControlFlowCheckTes
 	}
 }
 
-@:enum
-abstract NestedControlFlowCheckTests(String) to String {
+enum abstract NestedControlFlowCheckTests(String) to String {
 	var COMPLIANT_NESTING = "
 	abstractAndClass Test {
 		public function test(param:Int):Void {

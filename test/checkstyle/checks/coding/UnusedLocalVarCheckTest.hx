@@ -21,8 +21,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 	}
 }
 
-@:enum
-abstract UnusedLocalVarCheckTests(String) to String {
+enum abstract UnusedLocalVarCheckTests(String) to String {
 	var USED_INDEX = "
 	abstractAndClass Test {
 		function a() {

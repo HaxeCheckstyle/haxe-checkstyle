@@ -23,8 +23,7 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 	}
 }
 
-@:enum
-abstract SimplifyBooleanExpressionCheckTests(String) to String {
+enum abstract SimplifyBooleanExpressionCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		function test() {

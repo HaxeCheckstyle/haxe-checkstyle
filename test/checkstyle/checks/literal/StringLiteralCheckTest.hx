@@ -140,8 +140,7 @@ class StringLiteralCheckTest extends CheckTestCase<StringLiteralCheckTests> {
 	}
 }
 
-@:enum
-abstract StringLiteralCheckTests(String) to String {
+enum abstract StringLiteralCheckTests(String) to String {
 	var SINGLE_QUOTE = "
 	class Test {
 		static var a:String = 'check';

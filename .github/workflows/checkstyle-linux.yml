@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        haxe-version: ['3.4.7', '4.0.5', '4.1.2']
+        haxe-version: ['4.0.5', '4.1.4', 'nightly']
     env:
       CC_TEST_REPORTER_ID: 1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
       CODECOV_TOKEN: ${{secrets.CODECOV_TOKEN}}
@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: 10
     - name: Installing codeclimate client
-      if: matrix.haxe-version == '4.1.2'
+      if: matrix.haxe-version == '4.1.4'
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
@@ -37,11 +37,6 @@ jobs:
       run: |
         npx lix download haxe ${{ matrix.haxe-version }}
         npx lix use haxe ${{ matrix.haxe-version }}
-    - name: Prepare Haxe 3 dependencies
-      if: matrix.haxe-version == '3.4.7'
-      run: |
-        mv haxe_libraries haxe4_libraries
-        mv haxe3_libraries haxe_libraries
     - name: Run lix download
       run: npx lix download
     - name: Print versions
@@ -60,19 +55,12 @@ jobs:
       run: echo "y" | npx haxe buildCpp.hxml
     - name: Build JSON schema
       run: npx haxe buildSchema.hxml
-    - name: Run neko tests
-      if: matrix.haxe-version == '3.4.7'
-      run: npx haxe -D codecov_json testAndResources.hxml
     - name: Run eval tests
-      if: matrix.haxe-version != '3.4.7'
       run: npx haxe -D codecov_json testAndResources.hxml
     - name: Run Java tests
       run: npx haxe testJava.hxml
-    - name: Run Jvm tests
-      if: matrix.haxe-version != '3.4.7'
-      run: npx haxe testJvm.hxml
     - name: Format and upload codeclimate coverage
-      if: success() && matrix.haxe-version == '4.1.2'
+      if: success() && matrix.haxe-version == '4.1.4'
       run: |
         ( \
           cd src; \
@@ -80,5 +68,5 @@ jobs:
           ../cc-test-reporter upload-coverage; \
         )
     - name: Upload results to codecov
-      if: success() && (matrix.haxe-version == '3.4.7' || matrix.haxe-version == '4.1.2')
+      if: success() && (matrix.haxe-version == '4.1.4')
       run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

@@ -80,8 +80,7 @@ class RedundantModifierCheck extends Check {
 	}
 }
 
-@:enum
-abstract RedundantModifierCode(String) to String {
+enum abstract RedundantModifierCode(String) to String {
 	var MISSING_PUBLIC = "MissingPublic";
 	var MISSING_PRIVATE = "MissingPrivate";
 	var REDUNDANT_PUBLIC = "RedundantPublic";

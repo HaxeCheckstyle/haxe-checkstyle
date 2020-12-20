@@ -2,3 +2,5 @@ build/common.hxml
 -lib hxnodejs
 -main checkstyle.Main
 -js haxecheckstyle.js
+
+-cmd mkdir -p bin && cp haxecheckstyle.js bin/checkstyle.js

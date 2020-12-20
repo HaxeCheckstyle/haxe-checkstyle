@@ -52,8 +52,7 @@ class EmptyPackageCheck extends Check {
 	}
 }
 
-@:enum
-abstract EmptyPackageCode(String) to String {
+enum abstract EmptyPackageCode(String) to String {
 	var MISSING_PACKAGE = "MissingPackage";
 	var REDUNDANT_PACKAGE = "RedundantPackage";
 }

@@ -20,8 +20,7 @@ class PublicAccessorCheckTest extends CheckTestCase<PublicAccessorCheckTests> {
 	}
 }
 
-@:enum
-abstract PublicAccessorCheckTests(String) to String {
+enum abstract PublicAccessorCheckTests(String) to String {
 	var NON_ACCESSOR = "
 	abstractAndClass Test {
 		public function _set_test() {}

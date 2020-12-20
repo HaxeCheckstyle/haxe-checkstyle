@@ -12,8 +12,7 @@ class AnonymousCheckTest extends CheckTestCase<AnonymousCheckTests> {
 	}
 }
 
-@:enum
-abstract AnonymousCheckTests(String) to String {
+enum abstract AnonymousCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var anonymous:{a:Int, b:Int};

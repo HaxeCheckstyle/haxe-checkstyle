@@ -1,4 +1,0 @@
--D haxeparser=3.3.0
-# @install: lix --silent download "haxelib:/haxeparser#3.3.0" into haxeparser/3.3.0/haxelib
--lib hxparse
--cp ${HAXE_LIBCACHE}/haxeparser/3.3.0/haxelib/src

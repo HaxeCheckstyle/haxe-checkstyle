@@ -15,10 +15,7 @@ class ModifierOrderCheck extends Check {
 
 	public function new() {
 		super(AST);
-		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC];
-		#if haxe4
-		modifiers.push(FINAL);
-		#end
+		modifiers = [MACRO, OVERRIDE, PUBLIC_PRIVATE, STATIC, INLINE, DYNAMIC, FINAL];
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
@@ -32,11 +29,7 @@ class ModifierOrderCheck extends Check {
 
 		var actual:Array<String> = [];
 		var expected:Array<String> = [];
-		#if haxe4
 		expected.resize(modifiers.length);
-		#else
-		for (mod in modifiers) expected.push(null);
-		#end
 
 		var compliant:Bool = true;
 
@@ -85,19 +78,17 @@ class ModifierOrderCheck extends Check {
 	- EXTERN = extern modifier
 	- FINAL = final modifier
 **/
-@:enum
-abstract ModifierOrderCheckModifier(String) {
+enum abstract ModifierOrderCheckModifier(String) {
 	var PUBLIC_PRIVATE = "PUBLIC_PRIVATE";
 	var INLINE = "INLINE";
 	var STATIC = "STATIC";
 	var OVERRIDE = "OVERRIDE";
 	var MACRO = "MACRO";
 	var DYNAMIC = "DYNAMIC";
-	#if haxe4
 	var EXTERN = "EXTERN";
 	var FINAL = "FINAL";
 	var ABSTRACT = "ABSTRACT";
-	#end
+	var OVERLOAD = "OVERLOAD";
 
 	@:from
 	public static function fromAccess(access:Access):ModifierOrderCheckModifier {
@@ -108,12 +99,11 @@ abstract ModifierOrderCheckModifier(String) {
 			case AOverride: OVERRIDE;
 			case AMacro: MACRO;
 			case ADynamic: DYNAMIC;
-			#if haxe4
 			case AExtern: EXTERN;
 			case AFinal: FINAL;
-			#if (haxe > version("4.1.9999"))
+			#if (haxe >= version("4.2.0-rc.1"))
 			case AAbstract: ABSTRACT;
-			#end
+			case AOverload: OVERLOAD;
 			#end
 		}
 	}
@@ -127,12 +117,11 @@ abstract ModifierOrderCheckModifier(String) {
 			case AOverride: "override";
 			case AMacro: "macro";
 			case ADynamic: "dynamic";
-			#if haxe4
 			case AExtern: "extern";
 			case AFinal: "final";
-			#if (haxe > version("4.1.9999"))
+			#if (haxe >= version("4.2.0-rc.1"))
 			case AAbstract: "abstract";
-			#end
+			case AOverload: "overload";
 			#end
 		}
 	}

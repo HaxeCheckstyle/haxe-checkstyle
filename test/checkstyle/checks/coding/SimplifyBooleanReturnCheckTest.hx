@@ -19,8 +19,7 @@ class SimplifyBooleanReturnCheckTest extends CheckTestCase<SimplifyBooleanReturn
 	}
 }
 
-@:enum
-abstract SimplifyBooleanReturnCheckTests(String) to String {
+enum abstract SimplifyBooleanReturnCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		function test() {

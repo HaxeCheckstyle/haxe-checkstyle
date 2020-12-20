@@ -69,8 +69,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 	}
 }
 
-@:enum
-abstract HiddenFieldCheckTests(String) to String {
+enum abstract HiddenFieldCheckTests(String) to String {
 	var NO_HIDDEN_FIELDS = "
 	class Test {
 		var field1:Int;

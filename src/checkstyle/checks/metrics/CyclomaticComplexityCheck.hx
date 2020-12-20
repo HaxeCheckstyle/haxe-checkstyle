@@ -75,9 +75,6 @@ class CyclomaticComplexityCheck extends Check {
 					return total + evaluateExpr(e);
 				}, 0);
 			case ExprDef.EFor(it, e): 1 + evaluateExpr(it) + evaluateExpr(e);
-			#if (haxe_ver < 4.0)
-			case ExprDef.EIn(e1, e2): evaluateExpr(e1) + evaluateExpr(e2);
-			#end
 			case ExprDef.EIf(econd, eif, eelse): 1 + evaluateExpr(econd) + evaluateExpr(eif) + evaluateExpr(eelse);
 			case ExprDef.EWhile(econd, e, _): 1 + evaluateExpr(econd) + evaluateExpr(e);
 			case ExprDef.ESwitch(e, cases, def):

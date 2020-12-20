@@ -1,6 +1,4 @@
-# @install: lix --silent download "haxelib:/munit#2.3.4" into munit/2.3.4/haxelib
-# @run: haxelib run-dir munit ${HAXE_LIBCACHE}/munit/2.3.4/haxelib
--lib mcover
+# @install: lix --silent download "gh://github.com/AlexHaxe/MassiveUnit#645952947a10d27f2460321eb9c6c9e2a93b997d" into MassiveUnit/0.0.0/github/645952947a10d27f2460321eb9c6c9e2a93b997d
 -lib mlib
--cp ${HAXE_LIBCACHE}/munit/2.3.4/haxelib/
--D munit=2.3.4
+-cp ${HAXE_LIBCACHE}/MassiveUnit/0.0.0/github/645952947a10d27f2460321eb9c6c9e2a93b997d/src
+-D munit=2.3.5

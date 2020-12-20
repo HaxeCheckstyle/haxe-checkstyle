@@ -65,8 +65,7 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 	- INLINE = all inline methods
 	- NOTINLINE = all non-inline methods
 **/
-@:enum
-abstract MethodNameCheckToken(String) {
+enum abstract MethodNameCheckToken(String) {
 	var PUBLIC = "PUBLIC";
 	var PRIVATE = "PRIVATE";
 	var STATIC = "STATIC";

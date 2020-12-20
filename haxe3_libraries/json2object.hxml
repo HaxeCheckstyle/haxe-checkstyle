@@ -1,4 +1,0 @@
--D json2object=3.6.4
-# @install: lix --silent download "gh://github.com/elnabo/json2object#bd00ad1713bf6bda06d8a7c9ddc90888e8a6094c" into json2object/3.6.4/github/bd00ad1713bf6bda06d8a7c9ddc90888e8a6094c
--lib hxjsonast
--cp ${HAXE_LIBCACHE}/json2object/3.6.4/github/bd00ad1713bf6bda06d8a7c9ddc90888e8a6094c/src

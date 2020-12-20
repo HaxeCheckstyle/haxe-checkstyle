@@ -34,8 +34,7 @@ class OperatorWrapCheckTest extends CheckTestCase<OperatorWrapCheckTests> {
 	}
 }
 
-@:enum
-abstract OperatorWrapCheckTests(String) to String {
+enum abstract OperatorWrapCheckTests(String) to String {
 	var CORRECT_EOL_WRAP = "
 	class Test {
 		function test(param1:String, param2:String) {

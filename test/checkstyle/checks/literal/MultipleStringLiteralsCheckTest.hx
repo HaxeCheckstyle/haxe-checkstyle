@@ -44,8 +44,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 	}
 }
 
-@:enum
-abstract MultipleStringLiteralsCheckTests(String) to String {
+enum abstract MultipleStringLiteralsCheckTests(String) to String {
 	var LESS_THAN_THREE = "
 	class Test {
 		static var a:String = 'check';

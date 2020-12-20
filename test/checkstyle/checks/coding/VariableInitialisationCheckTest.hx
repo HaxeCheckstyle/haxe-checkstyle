@@ -16,7 +16,6 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 		assertNoMsg(new VariableInitialisationCheck(), TEST3);
 	}
 
-	#if haxe4
 	@Test
 	public function testFinal() {
 		var check:VariableInitialisationCheck = new VariableInitialisationCheck();
@@ -26,11 +25,9 @@ class VariableInitialisationCheckTest extends CheckTestCase<VariableInitialisati
 		assertNoMsg(check, FINAL);
 		assertNoMsg(check, FINAL_CONSTRUCTOR);
 	}
-	#end
 }
 
-@:enum
-abstract VariableInitialisationCheckTests(String) to String {
+enum abstract VariableInitialisationCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var _a:Int = 1;
@@ -48,7 +45,7 @@ abstract VariableInitialisationCheckTests(String) to String {
 		public function new() {}
 	}";
 	var TEST3 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		var VALUE = 0;
 	}";

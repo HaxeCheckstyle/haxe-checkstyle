@@ -83,15 +83,13 @@ class StringLiteralCheck extends Check {
 	}
 }
 
-@:enum
-abstract StringLiteralPolicy(String) {
+enum abstract StringLiteralPolicy(String) {
 	var ONLY_SINGLE = "onlySingle";
 	var ONLY_DOUBLE = "onlyDouble";
 	var DOUBLE_AND_INTERPOLATION = "doubleAndInterpolation";
 }
 
-@:enum
-abstract StringLiteralCode(String) to String {
+enum abstract StringLiteralCode(String) to String {
 	var USE_DOUBLE_QUOTES = "UseDoubleQuotes";
 	var USE_SINGLE_QUOTES = "UseSingleQuotes";
 }

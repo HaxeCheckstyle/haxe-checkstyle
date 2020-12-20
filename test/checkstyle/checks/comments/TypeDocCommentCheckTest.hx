@@ -67,8 +67,7 @@ class TypeDocCommentCheckTest extends CheckTestCase<TypeDocCommentCheckTests> {
 	}
 }
 
-@:enum
-abstract TypeDocCommentCheckTests(String) to String {
+enum abstract TypeDocCommentCheckTests(String) to String {
 	var ALL_TYPES_COMMENTED = "
 	/**
 		comment
@@ -183,7 +182,7 @@ abstract TypeDocCommentCheckTests(String) to String {
 	@:fileXml('file.xml')
 	@:noDebug
 	#end
-	@:enum abstract Main(Null<Int>)
+	enum abstract Main(Null<Int>)
 	{
 		/**
 			text

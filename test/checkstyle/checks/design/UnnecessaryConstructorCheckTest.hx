@@ -48,8 +48,7 @@ class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstruct
 	}
 }
 
-@:enum
-abstract UnnecessaryConstructorCheckTests(String) to String {
+enum abstract UnnecessaryConstructorCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		public function new() {}

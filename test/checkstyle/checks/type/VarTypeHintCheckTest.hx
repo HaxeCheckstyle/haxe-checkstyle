@@ -17,7 +17,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		}];
 
 		assertMessages(check, LOCAL_VARS, messages);
-		#if haxe4
 		assertMessages(check, LOCAL_FINALS, messages);
 
 		messages = [for (t in ["test1", "test9", "test13", "test26", "test32", "test39"]) {
@@ -26,7 +25,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
 		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
-		#end
 
 		assertNoMsg(check, ENUM);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
@@ -52,7 +50,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		messages.push('"test40" type hint not needed');
 
 		assertMessages(check, LOCAL_VARS, messages);
-		#if haxe4
 		assertMessages(check, LOCAL_FINALS, messages);
 
 		messages = [
@@ -64,7 +61,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
 		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
-		#end
 		assertNoMsg(check, ENUM);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
 	}
@@ -85,7 +81,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		}]);
 
 		assertMessages(check, LOCAL_VARS, messages);
-		#if haxe4
 		assertMessages(check, LOCAL_FINALS, messages);
 
 		messages = [
@@ -98,7 +93,6 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertMessages(check, MODULE_LEVEL_VARS, messages);
 		assertMessages(check, MODULE_LEVEL_FINALS, messages);
 		assertMessages(check, TYPEDEF, ['"test0" should have a type hint', '"test1" should have a type hint']);
-		#end
 		assertNoMsg(check, ENUM);
 		assertMessages(check, INTERFACE, ['"test0" should have a type hint']);
 	}
@@ -112,13 +106,11 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 		assertNoMsg(check, ABSTRACT_ENUM);
 		assertNoMsg(check, ABSTRACT_ENUM2);
 		assertMsg(check, TYPEDEF_OLD, '"risk" should have a type hint');
-		#if haxe4
 		assertNoMsg(check, FINAL_FUNCTION);
 		assertMsg(check, FINAL_VAR, '"a" should have a type hint');
 
 		assertNoMsg(check, DOLLAR_VAR_CORRECT);
 		assertMsg(check, DOLLAR_VAR, '"$$a" should have a type hint');
-		#end
 
 		check.ignoreEnumAbstractValues = false;
 		assertMsg(check, ABSTRACT_ENUM, '"STYLE" should have a type hint');
@@ -126,8 +118,7 @@ class VarTypeHintCheckTest extends CheckTestCase<VarTypeHintCheckTests> {
 	}
 }
 
-@:enum
-abstract VarTypeHintCheckTests(String) to String {
+enum abstract VarTypeHintCheckTests(String) to String {
 	var MODULE_LEVEL_VARS = "
 	var test0:Int;
 	var test1;
@@ -280,7 +271,7 @@ abstract VarTypeHintCheckTests(String) to String {
 	}
 	";
 	var ENUM = "
-	@:enum abstract Category(String) {
+	enum abstract Category(String) {
 		var STYLE = 'Style';
 	}
 	enum abstract Category(String) {
@@ -312,7 +303,7 @@ abstract VarTypeHintCheckTests(String) to String {
 		var _b;
 	}";
 	var ABSTRACT_ENUM = "
-	@:enum abstract Category(String) {
+	enum abstract Category(String) {
 		var STYLE = 'Style';
 	}";
 	var ABSTRACT_ENUM2 = "

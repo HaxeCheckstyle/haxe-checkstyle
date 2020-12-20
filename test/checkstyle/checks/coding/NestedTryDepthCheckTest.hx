@@ -37,8 +37,7 @@ class NestedTryDepthCheckTest extends CheckTestCase<NestedTryDepthCheckTests> {
 	}
 }
 
-@:enum
-abstract NestedTryDepthCheckTests(String) to String {
+enum abstract NestedTryDepthCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test() {

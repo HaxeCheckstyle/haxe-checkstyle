@@ -265,8 +265,7 @@ class IndentationCheckTest extends CheckTestCase<IndentationCheckTests> {
 	}
 }
 
-@:enum
-abstract IndentationCheckTests(String) to String {
+enum abstract IndentationCheckTests(String) to String {
 	var CORRECT_TAB_INDENT = "
 class Test {
 	static inline var INDENTATION_CHARACTER_CHECK_TEST:Int = 100;

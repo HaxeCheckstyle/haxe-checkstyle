@@ -34,8 +34,7 @@ class RedundantAccessMetaCheckTest extends CheckTestCase<RedundantAccessMetaChec
 	}
 }
 
-@:enum
-abstract RedundantAccessMetaCheckTests(String) to String {
+enum abstract RedundantAccessMetaCheckTests(String) to String {
 	var CORRECT_ACCESS = "
 	@:access(pack.age.Test)
 	abstractAndClass Test {

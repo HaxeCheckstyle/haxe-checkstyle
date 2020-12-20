@@ -18,8 +18,7 @@ class TabForAligningCheckTest extends CheckTestCase<TabForAligningCheckTests> {
 	}
 }
 
-@:enum
-abstract TabForAligningCheckTests(String) to String {
+enum abstract TabForAligningCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		static inline var TAB_FOR_ALIGNING_TEST:Int = 	1;

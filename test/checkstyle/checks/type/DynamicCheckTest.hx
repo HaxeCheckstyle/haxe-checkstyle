@@ -23,8 +23,7 @@ class DynamicCheckTest extends CheckTestCase<DynamicCheckTests> {
 	}
 }
 
-@:enum
-abstract DynamicCheckTests(String) to String {
+enum abstract DynamicCheckTests(String) to String {
 	var TEST = "
 	import checkstyle.check.type.DynamicCheck;
 

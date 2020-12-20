@@ -82,8 +82,7 @@ class EmptyBlockCheckTest extends CheckTestCase<EmptyBlockCheckTests> {
 	}
 }
 
-@:enum
-abstract EmptyBlockCheckTests(String) to String {
+enum abstract EmptyBlockCheckTests(String) to String {
 	var EMPTY_BLOCK = "
 	class Test {
 		public function new() {}

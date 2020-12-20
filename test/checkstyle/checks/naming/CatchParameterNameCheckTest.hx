@@ -21,8 +21,7 @@ class CatchParameterNameCheckTest extends CheckTestCase<CatchParameterNameCheckT
 	}
 }
 
-@:enum
-abstract CatchParameterNameCheckTests(String) to String {
+enum abstract CatchParameterNameCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		public function test() {

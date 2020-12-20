@@ -34,8 +34,7 @@ class InterfaceCheckTest extends CheckTestCase<InterfaceCheckTests> {
 	}
 }
 
-@:enum
-abstract InterfaceCheckTests(String) to String {
+enum abstract InterfaceCheckTests(String) to String {
 	var TEST1 = "
 	interface IComponentController {
 		var a:Int = 1;

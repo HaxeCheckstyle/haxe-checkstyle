@@ -58,11 +58,7 @@ class ConfigParserTest {
 	public function testCheckCount() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		#if haxe4
 		Assert.areEqual(TEST_COUNT, configParser.getCheckCount());
-		#else
-		Assert.areEqual(TEST_COUNT - 1, configParser.getCheckCount());
-		#end
 	}
 
 	@Test
@@ -71,11 +67,7 @@ class ConfigParserTest {
 
 		Assert.areEqual(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
-		#if haxe4
 		Assert.areEqual(TEST_COUNT, configParser.getUsedCheckCount());
-		#else
-		Assert.areEqual(TEST_COUNT - 1, configParser.getUsedCheckCount());
-		#end
 	}
 
 	@Test

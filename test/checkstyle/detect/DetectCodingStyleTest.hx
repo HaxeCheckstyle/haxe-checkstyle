@@ -109,7 +109,6 @@ class DetectCodingStyleTest {
 	// checkstyle.checks.coding
 	@Test
 	public function testDetectArrowFunction() {
-		#if haxe4
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ArrowFunctionCheck()], [buildCheckFile(SAMPLE_CODING_STYLE_HAXE_4)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("ArrowFunction", detectedChecks[0].type);
@@ -118,7 +117,6 @@ class DetectCodingStyleTest {
 		Assert.areEqual(true, props.allowFunction);
 		Assert.areEqual(true, props.allowCurlyBody);
 		Assert.areEqual(true, props.allowSingleArgParens);
-		#end
 	}
 
 	@Test
@@ -347,14 +345,12 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.modifier
-	#if haxe4
 	@Test
 	public function testDetectInlineFinal() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FinalCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("Final", detectedChecks[0].type);
 	}
-	#end
 
 	@Test
 	public function testDetectRedundantModifier() {
@@ -589,8 +585,7 @@ class DetectCodingStyleTest {
 	}
 }
 
-@:enum
-abstract DetectCodingStyleTests(String) to String {
+enum abstract DetectCodingStyleTests(String) to String {
 	var SAMPLE_CODING_STYLE = "
 package;
 

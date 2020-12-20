@@ -64,8 +64,7 @@ class WhitespaceAfterCheckTest extends CheckTestCase<WhitespaceAfterCheckTests> 
 	}
 }
 
-@:enum
-abstract WhitespaceAfterCheckTests(String) to String {
+enum abstract WhitespaceAfterCheckTests(String) to String {
 	var CORRECT_WHITESPACE_AFTER = "
 	class Test {
 		function test(param1:String, param2:String) {

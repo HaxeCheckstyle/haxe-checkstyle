@@ -1,14 +1,20 @@
 package checkstyle.config;
 
-import checkstyle.ChecksInfo;
 import checkstyle.Checker;
+import checkstyle.ChecksInfo;
 import checkstyle.checks.Check;
 import checkstyle.errors.Error;
 import checkstyle.utils.ConfigUtils;
 import haxe.Json;
+import haxe.io.Path;
 import sys.FileSystem;
 import sys.io.File;
-import haxe.io.Path;
+
+#if (haxe >= version("4.1.0"))
+import Std.isOfType as isOfType;
+#else
+import Std.is as isOfType;
+#end
 
 class ConfigParser {
 	public var paths:Array<String>;
@@ -179,7 +185,7 @@ class ConfigParser {
 			}
 			catch (e:Any) {
 				var message = 'Failed to configure $prop setting for ${check.getModuleName()}: ';
-				message += (Std.is(e, Error) ? (e : Error).message : Std.string(e));
+				message += (isOfType(e, Error) ? (e : Error).message : Std.string(e));
 				failWith(message);
 			}
 		}

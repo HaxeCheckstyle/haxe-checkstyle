@@ -1,6 +1,5 @@
 package checkstyle.checks.modifier;
 
-#if haxe4
 class FinalCheckTest extends CheckTestCase<FinalCheckTests> {
 	static inline var ERROR_INLINE_VAR:String = 'Consider using "inline final" for field "test"';
 	static inline var ERROR_PUBLIC_STATIC:String = 'Consider making public static field "test" "final" or "private"';
@@ -18,10 +17,8 @@ class FinalCheckTest extends CheckTestCase<FinalCheckTests> {
 		assertMsg(check, TEST_PUBLIC_STATIC_VAR, ERROR_PUBLIC_STATIC);
 	}
 }
-#end
 
-@:enum
-abstract FinalCheckTests(String) to String {
+enum abstract FinalCheckTests(String) to String {
 	var TEST_INLINE_FINAL = "
 	abstractAndClass Test {
 		public inline final test:String = '0';

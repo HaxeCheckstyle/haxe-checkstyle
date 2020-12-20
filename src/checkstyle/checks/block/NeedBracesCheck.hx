@@ -177,8 +177,7 @@ class NeedBracesCheck extends Check {
 	}
 }
 
-@:enum
-abstract NeedBracesCheckToken(String) {
+enum abstract NeedBracesCheckToken(String) {
 	var FUNCTION = "FUNCTION";
 	var FOR = "FOR";
 	var IF = "IF";

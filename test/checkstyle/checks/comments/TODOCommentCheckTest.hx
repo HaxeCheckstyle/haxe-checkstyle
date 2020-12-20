@@ -53,8 +53,7 @@ class TODOCommentCheckTest extends CheckTestCase<TODOCommentCheckTests> {
 	}
 }
 
-@:enum
-abstract TODOCommentCheckTests(String) to String {
+enum abstract TODOCommentCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		// TODO: remove test
