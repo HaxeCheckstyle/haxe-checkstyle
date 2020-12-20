@@ -37,8 +37,7 @@ class ReturnCountCheckTest extends CheckTestCase<ReturnCountCheckTests> {
 	}
 }
 
-@:enum
-abstract ReturnCountCheckTests(String) to String {
+enum abstract ReturnCountCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		function a() {

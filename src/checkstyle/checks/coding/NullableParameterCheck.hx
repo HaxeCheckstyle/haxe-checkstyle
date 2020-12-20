@@ -62,8 +62,7 @@ class NullableParameterCheck extends Check {
 	- questionMark = nullable parameters should use "?name:Type"
 	- nullDefault = nullable parameters should use "name:Type = null"
 **/
-@:enum
-abstract NullableParameterCheckOption(String) {
+enum abstract NullableParameterCheckOption(String) {
 	var QUESTION_MARK = "questionMark";
 	var NULL_DEFAULT = "nullDefault";
 }

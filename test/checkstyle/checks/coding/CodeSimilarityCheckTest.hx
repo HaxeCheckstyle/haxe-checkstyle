@@ -66,8 +66,7 @@ class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
 	}
 }
 
-@:enum
-abstract CodeSimilarityCheckTests(String) to String {
+enum abstract CodeSimilarityCheckTests(String) to String {
 	var SIMILAR_CODE = "
 	class Test {
 		function a(param1:String, param2:Int):Int {

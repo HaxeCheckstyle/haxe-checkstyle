@@ -45,8 +45,7 @@ class MethodLengthCheckTest extends CheckTestCase<MethodLengthCheckTests> {
 	}
 }
 
-@:enum
-abstract MethodLengthCheckTests(String) to String {
+enum abstract MethodLengthCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test() {

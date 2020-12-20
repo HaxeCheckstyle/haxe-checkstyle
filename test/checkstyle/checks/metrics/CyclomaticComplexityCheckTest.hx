@@ -12,8 +12,7 @@ class CyclomaticComplexityCheckTest extends CheckTestCase<CyclomaticComplexityCh
 	}
 }
 
-@:enum
-abstract CyclomaticComplexityCheckTests(String) to String {
+enum abstract CyclomaticComplexityCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		function test() {

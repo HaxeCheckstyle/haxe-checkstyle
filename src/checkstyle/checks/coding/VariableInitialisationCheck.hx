@@ -37,9 +37,7 @@ class VariableInitialisationCheck extends Check {
 		if (f.access.contains(APublic)) isPublic = true;
 		else isPrivate = true;
 
-		#if haxe4
 		if (f.access.contains(AFinal)) isFinal = true;
-		#end
 		if (allowFinal && isFinal) return;
 
 		if (isPrivate || isPublic) {

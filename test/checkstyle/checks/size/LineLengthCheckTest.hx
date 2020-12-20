@@ -19,8 +19,7 @@ class LineLengthCheckTest extends CheckTestCase<LineLengthCheckTests> {
 	}
 }
 
-@:enum
-abstract LineLengthCheckTests(String) to String {
+enum abstract LineLengthCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		var _a:Int;

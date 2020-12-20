@@ -94,11 +94,7 @@ class FieldDocCommentCheck extends Check {
 				return switch (token.tok) {
 					case Kwd(KwdVar) if ((fieldType == VARS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
-					#if haxe4
 					case Kwd(KwdFinal) if ((fieldType == VARS) || (fieldType == BOTH)):
-						FoundSkipSubtree;
-					#end
-					case Const(CIdent("final")) if ((fieldType == VARS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
 					case Kwd(KwdFunction) if ((fieldType == FUNCTIONS) || (fieldType == BOTH)):
 						FoundSkipSubtree;
@@ -339,8 +335,7 @@ class FieldDocCommentCheck extends Check {
 	- FUNCTIONS = only functions;
 	- BOTH = both vars and functions;
 **/
-@:enum
-abstract FieldDocCommentType(String) {
+enum abstract FieldDocCommentType(String) {
 	var VARS = "VARS";
 	var FUNCTIONS = "FUNCTIONS";
 	var BOTH = "BOTH";
@@ -352,8 +347,7 @@ abstract FieldDocCommentType(String) {
 	- PRIVATE = only private fields
 	- BOTH = public and private fields
 **/
-@:enum
-abstract FieldDocCommentModifier(String) {
+enum abstract FieldDocCommentModifier(String) {
 	var PUBLIC = "PUBLIC";
 	var PRIVATE = "PRIVATE";
 	var BOTH = "BOTH";

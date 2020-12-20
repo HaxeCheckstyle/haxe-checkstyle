@@ -123,8 +123,7 @@ class BaseReporter implements IReporter {
 	}
 }
 
-@:enum
-abstract Style(Int) {
+enum abstract Style(Int) {
 	var BOLD = 1;
 	var RED = 91;
 	var BLUE = 94;

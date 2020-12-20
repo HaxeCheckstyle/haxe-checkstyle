@@ -196,8 +196,7 @@ class SpacingCheck extends Check {
 	- shouldNot = no space should between statement and condition
 	- any = ignored by space check
 **/
-@:enum
-abstract SpacingPolicy(String) {
+enum abstract SpacingPolicy(String) {
 	var SHOULD = "should";
 	var SHOULD_NOT = "should_not";
 	var ANY = "any";

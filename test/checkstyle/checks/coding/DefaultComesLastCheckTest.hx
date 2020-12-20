@@ -19,8 +19,7 @@ class DefaultComesLastCheckTest extends CheckTestCase<DefaultComesLastCheckTests
 	}
 }
 
-@:enum
-abstract DefaultComesLastCheckTests(String) to String {
+enum abstract DefaultComesLastCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 

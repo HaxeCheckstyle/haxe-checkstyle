@@ -46,8 +46,7 @@ class DocCommentStyleCheckTest extends CheckTestCase<DocCommentStyleCheckTests> 
 	}
 }
 
-@:enum
-abstract DocCommentStyleCheckTests(String) to String {
+enum abstract DocCommentStyleCheckTests(String) to String {
 	var TWO_STAR_NO_STAR_TWO_STAR = "
 	/**
 		comment

@@ -33,8 +33,7 @@ class BlockBreakingConditionalCheckTest extends CheckTestCase<BlockBreakingCondi
 	}
 }
 
-@:enum
-abstract BlockBreakingConditionalCheckTests(String) to String {
+enum abstract BlockBreakingConditionalCheckTests(String) to String {
 	var CORRECT_BLOCKS = "
 	class Main {
 		public function main () {

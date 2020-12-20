@@ -105,8 +105,7 @@ typedef WhitespacePolicyCheck = Bool -> Bool -> Void;
 	- none = enforce no whitespace before and after operator
 	- ignore = skip checks
 **/
-@:enum
-abstract WhitespacePolicy(String) {
+enum abstract WhitespacePolicy(String) {
 	var BEFORE = "before";
 	var AFTER = "after";
 	var AROUND = "around";
@@ -120,8 +119,7 @@ abstract WhitespacePolicy(String) {
 	- none = enforce no whitespace between unary operator and operand
 	- ignore = skip checks
 **/
-@:enum
-abstract WhitespaceUnaryPolicy(String) {
+enum abstract WhitespaceUnaryPolicy(String) {
 	var INNER = "inner";
 	var NONE = "none";
 	var IGNORE = "ignore";

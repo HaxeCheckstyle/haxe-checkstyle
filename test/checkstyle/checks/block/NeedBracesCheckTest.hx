@@ -255,8 +255,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 	}
 }
 
-@:enum
-abstract NeedBracesCheckTests(String) to String {
+enum abstract NeedBracesCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		function test() {

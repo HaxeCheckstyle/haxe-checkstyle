@@ -68,8 +68,7 @@ class ConstantNameCheckTest extends CheckTestCase<ConstantNameCheckTests> {
 	}
 }
 
-@:enum
-abstract ConstantNameCheckTests(String) to String {
+enum abstract ConstantNameCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		static var COUNT:Int = 1;

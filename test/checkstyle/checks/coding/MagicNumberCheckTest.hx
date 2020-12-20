@@ -45,18 +45,15 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertNoMsg(check, HAXE4_ENUM_ABSTRACT);
 	}
 
-	#if haxe4
 	@Test
 	public function testFinal() {
 		var check = new MagicNumberCheck();
 		assertNoMsg(check, HAXE4_FINAL_VAR);
 		assertMsg(check, HAXE4_FINAL_FUNCTION, '"7" is a magic number');
 	}
-	#end
 }
 
-@:enum
-abstract MagicNumberCheckTests(String) to String {
+enum abstract MagicNumberCheckTests(String) to String {
 	var STANDARD_MAGIC_NUMBERS = "
 	abstractAndClass Test {
 		public function new() {
@@ -103,14 +100,14 @@ abstract MagicNumberCheckTests(String) to String {
 		}
 	}";
 	var ENUM_ABSTRACT = "
-	@:enum abstract Style(Int) {
+	enum abstract Style(Int) {
 		var BOLD = 1;
 		var RED = 91;
 		var BLUE = 94;
 		var MAGENTA = 95;
 	}";
 	var ENUM_ABSTRACT_WITH_CLASS = "
-	@:enum abstract Style(Int) {
+	enum abstract Style(Int) {
 		var BOLD = 1;
 		var RED = 91;
 		var BLUE = 94;

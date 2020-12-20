@@ -46,8 +46,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 	}
 }
 
-@:enum
-abstract InnerAssignmentCheckTests(String) to String {
+enum abstract InnerAssignmentCheckTests(String) to String {
 	var IF_COND = "
 	abstractAndClass Test {
 		public function new() {

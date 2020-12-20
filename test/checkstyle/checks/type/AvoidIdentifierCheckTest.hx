@@ -16,8 +16,7 @@ class AvoidIdentifierCheckTest extends CheckTestCase<AvoidIdentifierCheckTests> 
 	}
 }
 
-@:enum
-abstract AvoidIdentifierCheckTests(String) to String {
+enum abstract AvoidIdentifierCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		var a:Int;

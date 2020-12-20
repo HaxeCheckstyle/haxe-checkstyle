@@ -184,8 +184,7 @@ class FieldDocCommentCheckTest extends CheckTestCase<FieldDocCommentCheckTests> 
 	}
 }
 
-@:enum
-abstract FieldDocCommentCheckTests(String) to String {
+enum abstract FieldDocCommentCheckTests(String) to String {
 	var ALL_CLASS_FIELDS_COMMENTED = "
 	class Test1 {}
 	class Test2 {

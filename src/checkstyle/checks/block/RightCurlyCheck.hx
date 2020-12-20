@@ -252,8 +252,7 @@ class RightCurlyCheck extends Check {
 	}
 }
 
-@:enum
-abstract RightCurlyCheckToken(String) {
+enum abstract RightCurlyCheckToken(String) {
 	var CLASS_DEF = "CLASS_DEF";
 	var ENUM_DEF = "ENUM_DEF";
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
@@ -271,8 +270,7 @@ abstract RightCurlyCheckToken(String) {
 	var ARRAY_COMPREHENSION = "ARRAY_COMPREHENSION";
 }
 
-@:enum
-abstract RightCurlyCheckOption(String) {
+enum abstract RightCurlyCheckOption(String) {
 	var SAME = "same";
 	var ALONE = "alone";
 	var ALONE_OR_SINGLELINE = "aloneorsingle";

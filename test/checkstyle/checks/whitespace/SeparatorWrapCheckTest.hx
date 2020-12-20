@@ -48,8 +48,7 @@ class SeparatorWrapCheckTest extends CheckTestCase<SeparatorWrapCheckTests> {
 	}
 }
 
-@:enum
-abstract SeparatorWrapCheckTests(String) to String {
+enum abstract SeparatorWrapCheckTests(String) to String {
 	var CORRECT_WRAP = "
 	package checkstyle.
 			tests;

@@ -14,8 +14,7 @@ class ListenerNameCheckTest extends CheckTestCase<ListenerNameCheckTests> {
 	}
 }
 
-@:enum
-abstract ListenerNameCheckTests(String) to String {
+enum abstract ListenerNameCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		var a:Stage;

@@ -284,8 +284,7 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 	}
 }
 
-@:enum
-abstract ExtendedEmptyLinesCheckTests(String) to String {
+enum abstract ExtendedEmptyLinesCheckTests(String) to String {
 	var TEST_NONE = "package checkstyle;
 	import checkstyle.Checker;
 	import checkstyle.SeverityLevel;
@@ -329,7 +328,7 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 		VALUE1;
 		VALUE2;
 	}
-	@:enum
+	enum
 	abstract Test(String) {
 		var val1 = 'test';
 		var val2 = 'test2';
@@ -441,7 +440,7 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 
 	}
 
-	@:enum
+	enum
 	abstract Test(String)
 
 	{
@@ -622,7 +621,7 @@ abstract ExtendedEmptyLinesCheckTests(String) to String {
 	}
 
 
-	@:enum
+	enum
 	abstract Test(String)
 
 

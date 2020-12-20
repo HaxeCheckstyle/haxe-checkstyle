@@ -27,8 +27,7 @@ class NestedForDepthCheckTest extends CheckTestCase<NestedForDepthCheckTests> {
 	}
 }
 
-@:enum
-abstract NestedForDepthCheckTests(String) to String {
+enum abstract NestedForDepthCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		public function test(params:Array<Int>):Void {

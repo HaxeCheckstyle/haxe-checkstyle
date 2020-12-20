@@ -22,8 +22,7 @@ class ERegLiteralCheckTest extends CheckTestCase<ERegLiteralCheckTests> {
 	}
 }
 
-@:enum
-abstract ERegLiteralCheckTests(String) to String {
+enum abstract ERegLiteralCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var _reg:EReg = new EReg('test', 'i');

@@ -123,15 +123,9 @@ class UnusedImportCheck extends Check {
 				case Kwd(KwdPackage):
 				case Semicolon:
 					return moduleName.toString();
-				#if (haxe_ver < 4.0)
-				case Kwd(KwdIn):
-					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
-					else moduleName.add(" in ");
-				#else
 				case Binop(OpIn):
 					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" in ");
-				#end
 				case Const(CIdent("as")):
 					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" as ");
@@ -229,8 +223,7 @@ class UnusedImportCheck extends Check {
 	}
 }
 
-@:enum
-abstract UnusedImportCode(String) to String {
+enum abstract UnusedImportCode(String) to String {
 	var UNUSED_IMPORT = "UnusedImport";
 	var TOPLEVEL_IMPORT = "ToplevelImport";
 	var SAME_PACKAGE = "SamePackage";

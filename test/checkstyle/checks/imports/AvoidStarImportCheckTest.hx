@@ -19,8 +19,7 @@ class AvoidStarImportCheckTest extends CheckTestCase<AvoidStarImportCheckTests> 
 	}
 }
 
-@:enum
-abstract AvoidStarImportCheckTests(String) to String {
+enum abstract AvoidStarImportCheckTests(String) to String {
 	var IMPORT = "
 	package haxe.checkstyle;
 

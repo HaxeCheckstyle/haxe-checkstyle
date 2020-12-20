@@ -47,8 +47,7 @@ class ParameterNumberCheckTest extends CheckTestCase<ParameterNumberCheckTests> 
 	}
 }
 
-@:enum
-abstract ParameterNumberCheckTests(String) to String {
+enum abstract ParameterNumberCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var testVar1:Int;

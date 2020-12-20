@@ -36,8 +36,7 @@ class RedundantAllowMetaCheckTest extends CheckTestCase<RedundantAllowMetaCheckT
 	}
 }
 
-@:enum
-abstract RedundantAllowMetaCheckTests(String) to String {
+enum abstract RedundantAllowMetaCheckTests(String) to String {
 	var CORRECT_ACCESS = "
 	@:allow(pack.age.Test)
 	abstractAndClass Test {

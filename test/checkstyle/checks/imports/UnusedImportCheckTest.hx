@@ -76,8 +76,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 	}
 }
 
-@:enum
-abstract UnusedImportCheckTests(String) to String {
+enum abstract UnusedImportCheckTests(String) to String {
 	var ALL_IMPORTS_USED = "
 	package checkstyle.test;
 

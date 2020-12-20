@@ -183,8 +183,7 @@ class EmptyBlockCheck extends Check {
 	}
 }
 
-@:enum
-abstract EmptyBlockCheckToken(String) {
+enum abstract EmptyBlockCheckToken(String) {
 	var CLASS_DEF = "CLASS_DEF";
 	var ENUM_DEF = "ENUM_DEF";
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
@@ -201,8 +200,7 @@ abstract EmptyBlockCheckToken(String) {
 	var REIFICATION = "REIFICATION";
 }
 
-@:enum
-abstract EmptyBlockCheckOption(String) {
+enum abstract EmptyBlockCheckOption(String) {
 	// allow empty blocks but enforce "{}" notation
 	var EMPTY = "empty";
 	// empty blocks must contain something apart from whitespace (comment or statement)

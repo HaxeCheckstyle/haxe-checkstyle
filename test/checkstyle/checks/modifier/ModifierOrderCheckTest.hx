@@ -5,9 +5,7 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 	public function testCorrectOrder() {
 		var check = new ModifierOrderCheck();
 		assertNoMsg(check, TEST1);
-		#if haxe4
 		assertNoMsg(check, TEST_FINAL);
-		#end
 	}
 
 	@Test
@@ -45,8 +43,7 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 	}
 }
 
-@:enum
-abstract ModifierOrderCheckTests(String) to String {
+enum abstract ModifierOrderCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		override public function test1() {}

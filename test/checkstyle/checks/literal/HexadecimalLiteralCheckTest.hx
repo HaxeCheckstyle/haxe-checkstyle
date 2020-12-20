@@ -19,8 +19,7 @@ class HexadecimalLiteralCheckTest extends CheckTestCase<HexadecimalLiteralCheckT
 	}
 }
 
-@:enum
-abstract HexadecimalLiteralCheckTests(String) to String {
+enum abstract HexadecimalLiteralCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var clr = 0xffffff;

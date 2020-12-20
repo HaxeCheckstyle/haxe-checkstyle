@@ -60,8 +60,7 @@ class WhitespaceAroundCheckTest extends CheckTestCase<WhitespaceAroundCheckTests
 	}
 }
 
-@:enum
-abstract WhitespaceAroundCheckTests(String) to String {
+enum abstract WhitespaceAroundCheckTests(String) to String {
 	var CORRECT_WHITESPACE_AROUND = "
 	import haxe.macro.*;
 

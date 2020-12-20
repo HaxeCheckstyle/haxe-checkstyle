@@ -22,8 +22,7 @@ class TypeCheckTest extends CheckTestCase<TypeCheckTests> {
 	}
 }
 
-@:enum
-abstract TypeCheckTests(String) to String {
+enum abstract TypeCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		var _a;
@@ -36,12 +35,12 @@ abstract TypeCheckTests(String) to String {
 		static inline var A = 1;
 	}";
 	var TEST3 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		var VALUE = 0;
 	}";
 	var TEST4 = "
-	@:enum
+	enum
 	abstract Test(Int) {
 		static inline var VALUE = 0;
 	}";

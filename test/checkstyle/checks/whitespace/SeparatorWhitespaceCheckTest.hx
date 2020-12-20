@@ -52,8 +52,7 @@ class SeparatorWhitespaceCheckTest extends CheckTestCase<SeparatorWhitespaceChec
 	}
 }
 
-@:enum
-abstract SeparatorWhitespaceCheckTests(String) to String {
+enum abstract SeparatorWhitespaceCheckTests(String) to String {
 	var CORRECT_WHITESPACE = "
 	import haxe.macro.*;
 

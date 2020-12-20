@@ -105,8 +105,7 @@ class SpacingCheckTest extends CheckTestCase<SpacingCheckTests> {
 	}
 }
 
-@:enum
-abstract SpacingCheckTests(String) to String {
+enum abstract SpacingCheckTests(String) to String {
 	var TEST1A = "
 	class Test {
 		public function test() {

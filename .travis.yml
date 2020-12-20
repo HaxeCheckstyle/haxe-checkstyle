@@ -8,7 +8,6 @@ env:
   global:
     - CC_TEST_REPORTER_ID=1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
   matrix:
-    - HAXE_VERSION=haxe347
     - HAXE_VERSION=haxe4
     - HAXE_VERSION=haxe41
     - HAXE_VERSION=nightly
@@ -16,10 +15,8 @@ env:
 install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; chmod +x ./cc-test-reporter
   - npm install
-  - if [[ "$HAXE_VERSION" == "haxe347" ]]; then mv haxe_libraries haxe4_libraries; mv haxe3_libraries haxe_libraries; fi
-  - if [[ "$HAXE_VERSION" == "haxe347" ]]; then npx lix download haxe 3.4.7; npx lix use haxe 3.4.7; fi
   - if [[ "$HAXE_VERSION" == "haxe4" ]]; then npx lix download haxe 4.0.5; npx lix use haxe 4.0.5; fi
-  - if [[ "$HAXE_VERSION" == "haxe41" ]]; then npx lix download haxe 4.1.2; npx lix use haxe 4.1.2; fi
+  - if [[ "$HAXE_VERSION" == "haxe41" ]]; then npx lix download haxe 4.1.4; npx lix use haxe 4.1.4; fi
   - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
   - npx lix download
   - npx haxe -version
@@ -37,7 +34,6 @@ script:
   - npx haxe buildSchema.hxml
   - npx haxe -D codecov_json testAndResources.hxml
   - npx haxe testJava.hxml
-  - if [[ "$HAXE_VERSION" != "haxe347" ]]; then npx haxe testJvm.hxml; fi
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
 
 after_script:

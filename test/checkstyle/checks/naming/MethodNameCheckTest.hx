@@ -153,8 +153,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 	}
 }
 
-@:enum
-abstract MethodNameCheckTests(String) to String {
+enum abstract MethodNameCheckTests(String) to String {
 	var TEST = "
 	abstractAndClass Test {
 		function test() {}

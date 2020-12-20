@@ -103,8 +103,7 @@ class TypeNameCheckTest extends CheckTestCase<TypeNameCheckTests> {
 	}
 }
 
-@:enum
-abstract TypeNameCheckTests(String) to String {
+enum abstract TypeNameCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		public var a:Int;

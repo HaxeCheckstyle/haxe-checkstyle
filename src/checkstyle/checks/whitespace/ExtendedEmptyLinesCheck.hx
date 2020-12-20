@@ -655,8 +655,7 @@ typedef PolicyAndWhat = {
 	- upto = up to "max" empty line(s) allowed (0 - "max")
 	- atleast = at least "max" empty lines required
 **/
-@:enum
-abstract EmptyLinesPolicy(String) {
+enum abstract EmptyLinesPolicy(String) {
 	var IGNORE = "ignore";
 	var NONE = "none";
 	var EXACT = "exact";
@@ -708,8 +707,7 @@ enum EmptyLinesFieldType {
 	- inFunction = anywhere inside function body
 	- typeDefinition = between type and left curly
 **/
-@:enum
-abstract EmptyLinesPlace(String) {
+enum abstract EmptyLinesPlace(String) {
 	var BEFORE_PACKAGE = "beforePackage";
 	var AFTER_PACKAGE = "afterPackage";
 	var BETWEEN_IMPORTS = "betweenImports";

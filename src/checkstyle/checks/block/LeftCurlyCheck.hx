@@ -305,8 +305,7 @@ typedef ParentToken = {
 	var hasToken:Bool;
 }
 
-@:enum
-abstract LeftCurlyCheckToken(String) {
+enum abstract LeftCurlyCheckToken(String) {
 	var CLASS_DEF = "CLASS_DEF";
 	var ENUM_DEF = "ENUM_DEF";
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
@@ -325,8 +324,7 @@ abstract LeftCurlyCheckToken(String) {
 	var ARRAY_COMPREHENSION = "ARRAY_COMPREHENSION";
 }
 
-@:enum
-abstract LeftCurlyCheckOption(String) {
+enum abstract LeftCurlyCheckOption(String) {
 	var EOL = "eol";
 	var NL = "nl";
 	var NLOW = "nlow";

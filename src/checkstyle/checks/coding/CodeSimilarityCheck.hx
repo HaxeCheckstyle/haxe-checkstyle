@@ -275,8 +275,7 @@ class CodeSimilarityCheck extends Check {
 	}
 }
 
-@:enum
-abstract CodeSimilarityCode(String) to String {
+enum abstract CodeSimilarityCode(String) to String {
 	var SIMILAR_BLOCK = "SimilarBlock";
 	var IDENTICAL_BLOCK = "IdenticalBlock";
 }

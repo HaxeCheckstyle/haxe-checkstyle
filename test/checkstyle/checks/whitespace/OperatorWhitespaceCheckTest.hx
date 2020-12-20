@@ -245,8 +245,7 @@ class OperatorWhitespaceCheckTest extends CheckTestCase<OperatorWhitespaceCheckT
 	}
 }
 
-@:enum
-abstract OperatorWhitespaceCheckTests(String) to String {
+enum abstract OperatorWhitespaceCheckTests(String) to String {
 	var CORRECT_WHITESPACE_AROUND = "
 	import haxe.macro.*;
 

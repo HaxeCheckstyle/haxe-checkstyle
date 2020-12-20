@@ -126,8 +126,7 @@ class TypeDocCommentCheck extends Check {
 	}
 }
 
-@:enum
-abstract TypeDocCommentToken(String) {
+enum abstract TypeDocCommentToken(String) {
 	var ABSTRACT_DEF = "ABSTRACT_DEF";
 	var CLASS_DEF = "CLASS_DEF";
 	var ENUM_DEF = "ENUM_DEF";

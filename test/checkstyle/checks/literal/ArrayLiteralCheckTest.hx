@@ -12,8 +12,7 @@ class ArrayLiteralCheckTest extends CheckTestCase<ArrayLiteralCheckTests> {
 	}
 }
 
-@:enum
-abstract ArrayLiteralCheckTests(String) to String {
+enum abstract ArrayLiteralCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		var _arr:Array<Int> = new Array<Int>();

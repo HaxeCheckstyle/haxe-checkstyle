@@ -22,8 +22,7 @@ class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariab
 	}
 }
 
-@:enum
-abstract MultipleVariableDeclarationsCheckTests(String) to String {
+enum abstract MultipleVariableDeclarationsCheckTests(String) to String {
 	var TEST1 = "
 	abstractAndClass Test {
 		function a() {

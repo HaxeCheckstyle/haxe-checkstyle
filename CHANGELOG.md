@@ -7,6 +7,8 @@
 - Fixed handling `OBJECT_DECL` token in `RightCurly`, fixes [#496](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/496) ([#497](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/497))
 - Reorganised build files ([#498](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/498))
 - Refactored for tokentree API change ([#500](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/500) + [#501](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/501))
+- Updated haxeparser lib with latest syntax changes ([#502](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/502))
+- Retired Haxe 3.4.7 compile support ([#502](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/502))
 
 ## version 2.6.1 (2019-12-17)
 

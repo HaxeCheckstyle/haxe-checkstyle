@@ -35,11 +35,7 @@ class DocCommentStyleCheck extends Check {
 			return switch (token.tok) {
 				case Kwd(KwdAbstract) | Kwd(KwdClass) | Kwd(KwdEnum) | Kwd(KwdInterface) | Kwd(KwdTypedef) | Kwd(KwdVar) | Kwd(KwdFunction):
 					FoundGoDeeper;
-				#if haxe4
 				case Kwd(KwdFinal):
-					FoundGoDeeper;
-				#end
-				case Const(CIdent("final")):
 					FoundGoDeeper;
 				default:
 					GoDeeper;
@@ -111,16 +107,14 @@ class DocCommentStyleCheck extends Check {
 	- onestar = *
 	- twostar = **
 **/
-@:enum
-abstract DocCommentStyle(String) {
+enum abstract DocCommentStyle(String) {
 	var IGNORE = "ignore";
 	var NONE = "none";
 	var ONE_STAR = "onestar";
 	var TWO_STARS = "twostars";
 }
 
-@:enum
-abstract DocCommentStyleCode(String) to String {
+enum abstract DocCommentStyleCode(String) to String {
 	var ONE_STAR_START = "OneStarStart";
 	var TWO_STARS_START = "TwoStarsStart";
 	var NO_STARS_LINES = "NoStarsLine";

@@ -16,9 +16,7 @@ class Build {
 		callLix("buildSchema.hxml", "Json schema");
 		callLix("testAndResources.hxml", "Unittests neko / eval + generate resoucres");
 		callLix("testJava.hxml", "Unittests Java");
-		#if haxe4
 		callLix("testJvm.hxml", "Unittests Jvm");
-		#end
 		Sys.exit(exitCode);
 	}
 

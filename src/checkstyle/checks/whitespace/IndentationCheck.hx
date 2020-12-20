@@ -435,23 +435,20 @@ class IndentationCheck extends Check {
 	}
 }
 
-@:enum
-abstract WrappedIndentationPolicy(String) {
+enum abstract WrappedIndentationPolicy(String) {
 	var NONE = "none";
 	var EXACT = "exact";
 	var LARGER = "larger";
 }
 
-@:enum
-abstract ConditionalIndentationPolicy(String) {
+enum abstract ConditionalIndentationPolicy(String) {
 	var IGNORE = "ignore";
 	var FIXED_ZERO = "fixed_zero";
 	var ALIGNED = "aligned";
 	var ALIGNED_INCREASE = "aligned_increase";
 }
 
-@:enum
-abstract IndentationCheckCharacter(String) to String {
+enum abstract IndentationCheckCharacter(String) to String {
 	var TAB = "tab";
 	var ONE_SPACE = " ";
 	var TWO_SPACES = "  ";

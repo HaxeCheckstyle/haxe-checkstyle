@@ -11,8 +11,7 @@ class TrailingWhitespaceCheckTest extends CheckTestCase<TrailingWhitespaceCheckT
 	}
 }
 
-@:enum
-abstract TrailingWhitespaceCheckTests(String) to String {
+enum abstract TrailingWhitespaceCheckTests(String) to String {
 	var TEST1 = "
 	class Test {
 		public function test() {} " + "

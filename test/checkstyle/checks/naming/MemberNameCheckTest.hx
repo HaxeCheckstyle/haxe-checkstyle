@@ -250,8 +250,7 @@ class MemberNameCheckTest extends CheckTestCase<MemberNameCheckTests> {
 	}
 }
 
-@:enum
-abstract MemberNameCheckTests(String) to String {
+enum abstract MemberNameCheckTests(String) to String {
 	var TEST = "
 	class Test {
 		public var a:Int;
@@ -309,7 +308,7 @@ abstract MemberNameCheckTests(String) to String {
 		VALUE;
 	}";
 	var ABSTRACT_FIELDS = "
-	@:enum abstract MyAbstract(Int) from Int to Int
+	enum abstract MyAbstract(Int) from Int to Int
 	{
 		static public inline var NORMAL_CONST = 'hello, world';
 
