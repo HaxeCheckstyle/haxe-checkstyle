@@ -1,6 +1,6 @@
 {
     "name": "@haxecheckstyle/haxe-checkstyle",
-    "version": "2.6.1",
+    "version": "2.7.0",
     "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
     "repository": {
         "type": "git",
@@ -29,20 +29,20 @@
         }
     ],
     "devDependencies": {
-        "lix": "^15.9.0"
+        "lix": "^15.10.1"
     },
     "bugs": "https://github.com/HaxeCheckstyle/haxe-checkstyle/issues",
     "license": "MIT",
-	"bin": {
-		"haxe-checkstyle": "bin/checkstyle.js"
-	},
-	"files": [
-		"bin"
-	],
-	"publishConfig": {
-		"registry": "https://npm.pkg.github.com/"
-	},
-	"scripts": {
-		"build": "haxe buildAll.hxml"
-	}
+    "bin": {
+        "haxe-checkstyle": "bin/checkstyle.js"
+    },
+    "files": [
+        "bin"
+    ],
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/"
+    },
+    "scripts": {
+        "build": "haxe buildAll.hxml"
+    }
 }
