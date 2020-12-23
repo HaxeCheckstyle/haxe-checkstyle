@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.7.0 (2020-12-23)
+
 - **Breaking Change** replaced `EnforceVarTypeHint` with `VarTypeHint` check ([#500](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/500))
 - Added support for final in `MagicNumber`, fixes [#494](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/494) ([#495](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/495))
 - Fixed handling `OBJECT_DECL` token in `RightCurly`, fixes [#496](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/496) ([#497](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/497))
