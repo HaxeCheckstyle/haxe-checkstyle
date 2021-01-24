@@ -2,6 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
+- Fixed Haxe nightly compilation ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
+- Updated to Haxe 4.1.5 ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
+
 ## version 2.7.0 (2020-12-23)
 
 - **Breaking Change** replaced `EnforceVarTypeHint` with `VarTypeHint` check ([#500](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/500))

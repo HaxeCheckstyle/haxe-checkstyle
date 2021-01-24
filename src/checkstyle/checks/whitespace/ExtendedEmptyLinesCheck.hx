@@ -707,7 +707,7 @@ enum EmptyLinesFieldType {
 	- inFunction = anywhere inside function body
 	- typeDefinition = between type and left curly
 **/
-enum abstract EmptyLinesPlace(String) {
+enum abstract EmptyLinesPlace(String) to String {
 	var BEFORE_PACKAGE = "beforePackage";
 	var AFTER_PACKAGE = "afterPackage";
 	var BETWEEN_IMPORTS = "betweenImports";
