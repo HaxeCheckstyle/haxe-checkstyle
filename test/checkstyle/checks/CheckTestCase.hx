@@ -2,7 +2,7 @@ package checkstyle.checks;
 
 import byte.ByteData;
 import checkstyle.CheckFile;
-import checkstyle.CheckMessage;
+import checkstyle.Message;
 import checkstyle.Checker;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.ReporterManager;
@@ -37,7 +37,7 @@ class CheckTestCase<T:String> {
 
 	function actualAssertMsg(check:Check, testCase:String, expected:Array<String>, ?defines:Array<Array<String>>, ?fileName:String,
 			allowFailingAST:Bool = false, ?pos:PosInfos) {
-		var messages:Array<CheckMessage> = checkMessages(testCase, check, defines, fileName, allowFailingAST, pos);
+		var messages:Array<Message> = checkMessages(testCase, check, defines, fileName, allowFailingAST, pos);
 		if ((expected.length == 1) && (expected.length != messages.length)) {
 			for (i in 0...messages.length) {
 				Assert.areEqual(expected[0], messages[i].message, pos);
@@ -51,7 +51,7 @@ class CheckTestCase<T:String> {
 	}
 
 	function checkMessages(src:String, check:Check, defines:Array<Array<String>>, fileName:String = FILE_NAME, allowFailingAST:Bool = false,
-			?pos:PosInfos):Array<CheckMessage> {
+			?pos:PosInfos):Array<Message> {
 		// a fresh Checker and Reporter for every checkMessage
 		// to allow multiple independent checkMessage calls in a single test
 		checker = new Checker(allowFailingAST);
@@ -74,7 +74,7 @@ class CheckTestCase<T:String> {
 }
 
 class TestReporter implements IReporter {
-	public var messages:Array<CheckMessage>;
+	public var messages:Array<Message>;
 
 	public function new() {
 		messages = [];
@@ -84,11 +84,9 @@ class TestReporter implements IReporter {
 
 	public function finish() {}
 
-	public function fileStart(f:CheckFile) {}
+	public function addFile(f:CheckFile) {}
 
-	public function fileFinish(f:CheckFile) {}
-
-	public function addMessage(m:CheckMessage) {
+	public function addMessage(m:Message) {
 		messages.push(m);
 	}
 }

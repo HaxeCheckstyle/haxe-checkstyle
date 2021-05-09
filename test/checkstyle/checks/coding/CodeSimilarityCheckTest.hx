@@ -3,44 +3,51 @@ package checkstyle.checks.coding;
 import checkstyle.checks.coding.CodeSimilarityCheck.HashedCodeBlock;
 
 class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
+	static inline var MSG_IDENTICAL:String = "identical code blocks";
+	static inline var MSG_SIMILAR:String = "similar code blocks";
+
 	@Test
 	public function testSimilarCodeBlocks() {
 		var check = newCheck();
 		assertNoMsg(check, NOT_SIMILAR_CODE);
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE, "Found similar code block - first seen in Test.hx:3");
+		assertMsg(check, SIMILAR_CODE, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_IF, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_IF, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_WHILE, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_WHILE, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_DO_WHILE, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_DO_WHILE, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_FOR, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_FOR, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_TRY, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_TRY, MSG_SIMILAR);
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_BROPEN, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_BROPEN, MSG_SIMILAR);
+
+		check = newCheck();
+		check.thresholdSimilar = 30;
+		assertMsg(check, MULTIPLE_SIMILAR_CODES, MSG_SIMILAR);
 	}
 
 	@Test
 	public function testIdenticalCodeBlocks() {
 		var check = newCheck();
 		check.thresholdIdentical = 30;
-		assertMsg(check, IDENTICAL_CODE, "Found identical code block - first seen in Test.hx:4");
+		assertMsg(check, IDENTICAL_CODE, MSG_IDENTICAL);
 	}
 
 	@Test
@@ -401,6 +408,79 @@ enum abstract CodeSimilarityCheckTests(String) to String {
 				case 7:
 				case 8:
 				case 9:
+			}
+			return Std.parseInt(paramA);
+		}
+	}";
+	var MULTIPLE_SIMILAR_CODES = "
+	class Test {
+		function a(param1:String, param2:Int):Int {
+			var regex = ~/.*/;
+			switch (param2) {
+				case 1:
+					param1 = '111';
+				case 2:
+					param1 = 1.0;
+				case 3: // test
+					param1 = '111';
+				case 4:
+				case 5: /* test 2 */
+					return param1 && param2;
+				case 6:
+					param1 += param2;
+				case 7:
+					param1 = param2 + 100;
+				case 8:
+					return param1 & param2;
+				case 9:
+					param1 = --param2;
+			}
+			return Std.parseInt(param1);
+		}
+
+		function b(paramA:String, paramB:Int):Int {
+			var regex = ~/[a-z]+/;
+			switch (paramB) {
+				case 10:
+					paramA = '222222';
+				case 20:
+					paramA = 100.0;
+				case 30:
+					paramA = '111';
+				case 40:
+				case 50:
+					return param1 || param2;
+				case 60:
+					param1 *= param2;
+				case 70:
+					param1 = param2 - 50;
+				case 80: // comment
+					return param1 | param2;
+				case 90:
+					paramA = ++paramB;
+			}
+			return Std.parseInt(paramA);
+		}
+		function c(paramA:String, paramB:Int):Int {
+			var regex = ~/[a-z]+/;
+			switch (paramB) {
+				case 10:
+					paramA = '3333';
+				case 20:
+					paramA = 100.0;
+				case 30:
+					paramA = '111';
+				case 40:
+				case 50:
+					return param1 || param2;
+				case 60:
+					param1 *= param2;
+				case 70:
+					param1 = param2 - 50;
+				case 80: // comment
+					return param1 | param2;
+				case 90:
+					paramA = ++paramB;
 			}
 			return Std.parseInt(paramA);
 		}

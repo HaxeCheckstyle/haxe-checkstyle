@@ -9,7 +9,7 @@ class Check {
 	public var points:Int;
 	public var desc:String;
 
-	var messages:Array<CheckMessage>;
+	var messages:Array<Message>;
 	var moduleName:String;
 	var checker:Checker;
 
@@ -30,7 +30,7 @@ class Check {
 		Reflect.setField(this, name, value);
 	}
 
-	public function run(checker:Checker):Array<CheckMessage> {
+	public function run(checker:Checker):Array<Message> {
 		reset();
 		this.checker = checker;
 		if (severity != SeverityLevel.IGNORE) {
@@ -48,16 +48,14 @@ class Check {
 		throw "Unimplemented";
 	}
 
-	public function logPos(msg:String, pos:Position, ?code:String, ?sev:SeverityLevel) {
-		logRange(msg, pos.min, pos.max, code, sev);
+	public function logPos(msg:String, pos:Position, ?code:String, ?sev:SeverityLevel):Message {
+		return logRange(msg, pos.min, pos.max, code, sev);
 	}
 
-	public function logRange(msg:String, startPos:Int, endPos:Int, ?code:String, ?sev:SeverityLevel) {
-		var lpStart = checker.getLinePos(startPos);
-		var lpEnd = checker.getLinePos(endPos);
-		var startColumn:Int = offsetToColumn(lpStart);
-		var endColumn:Int = offsetToColumn(lpEnd);
-		log(msg, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn, code, sev);
+	public function logRange(msg:String, startPos:Int, endPos:Int, ?code:String, ?sev:SeverityLevel):Message {
+		var message:Message = createRangeMessage(msg, startPos, endPos, code, sev);
+		messages.push(message);
+		return message;
 	}
 
 	function offsetToColumn(lp:LinePos):Int {
@@ -66,21 +64,66 @@ class Check {
 		return line.getString(0, lp.ofs).length;
 	}
 
-	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?code:String, ?sev:SeverityLevel) {
+	public function log(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?code:String, ?sev:SeverityLevel):Message {
+		var message:Message = createMessage(msg, startLine, startColumn, endLine, endColumn, code, sev);
+		messages.push(message);
+		return message;
+	}
+
+	public function createRangeMessage(msg:String, startPos:Int, endPos:Int, ?code:String, ?sev:SeverityLevel):Message {
+		var lpStart = checker.getLinePos(startPos);
+		var lpEnd = checker.getLinePos(endPos);
+		var startColumn:Int = offsetToColumn(lpStart);
+		var endColumn:Int = offsetToColumn(lpEnd);
+		return createMessage(msg, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn, code, sev);
+	}
+
+	function createMessage(msg:String, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int, ?code:String, ?sev:SeverityLevel):Message {
 		if (sev == null) sev = severity;
-		messages.push({
+		return {
 			fileName: checker.file.name,
 			message: msg,
 			code: code,
 			desc: desc,
-			startLine: startLine,
-			endLine: endLine,
-			startColumn: startColumn,
-			endColumn: endColumn,
 			severity: sev,
 			moduleName: getModuleName(),
 			categories: categories,
-			points: points
+			points: points,
+			range: {
+				start: {
+					line: startLine,
+					column: startColumn
+				},
+				end: {
+					line: endLine,
+					column: endColumn
+				}
+			},
+			related: []
+		}
+	}
+
+	public function addRelatedRange(message:Message, msg:String, startPos:Int, endPos:Int) {
+		var lpStart = checker.getLinePos(startPos);
+		var lpEnd = checker.getLinePos(endPos);
+		var startColumn:Int = offsetToColumn(lpStart);
+		var endColumn:Int = offsetToColumn(lpEnd);
+		addRelatedMessage(message, lpStart.line + 1, startColumn, lpEnd.line + 1, endColumn);
+	}
+
+	public function addRelatedMessage(message:Message, startLine:Int, startColumn:Int, endLine:Int, endColumn:Int) {
+		message.related.push({
+			fileName: checker.file.name,
+			range: {
+				start: {
+					line: startLine,
+					column: startColumn
+				},
+				end: {
+					line: endLine,
+					column: endColumn
+				}
+			}
 		});
 	}
 

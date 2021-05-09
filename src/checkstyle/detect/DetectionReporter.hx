@@ -13,11 +13,9 @@ class DetectionReporter implements IReporter {
 
 	public function finish() {}
 
-	public function fileStart(f:CheckFile) {}
+	public function addFile(f:CheckFile) {}
 
-	public function fileFinish(f:CheckFile) {}
-
-	public function addMessage(m:CheckMessage) {
+	public function addMessage(m:Message) {
 		messageCount++;
 	}
 }

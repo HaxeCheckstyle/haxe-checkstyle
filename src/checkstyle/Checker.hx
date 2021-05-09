@@ -1,6 +1,7 @@
 package checkstyle;
 
 import checkstyle.checks.Check;
+import checkstyle.checks.coding.CodeSimilarityCheck;
 import checkstyle.config.ExcludeManager;
 import checkstyle.config.ExcludeRange;
 import checkstyle.reporter.ReporterManager;
@@ -175,6 +176,7 @@ class Checker {
 		advanceFrame = function() hxt.advance_frame();
 		#end
 
+		ReporterManager.INSTANCE.addDelayedMessageCallback(CodeSimilarityCheck.delayedMessagesCallback);
 		ReporterManager.INSTANCE.start();
 		for (checkFile in files) {
 			loadFileContent(checkFile);
@@ -199,7 +201,7 @@ class Checker {
 
 	public function createContext(checkFile:CheckFile):Bool {
 		file = checkFile;
-		ReporterManager.INSTANCE.fileStart(file);
+		ReporterManager.INSTANCE.addFile(file);
 		try {
 			findLineSeparator();
 			makeLines();
@@ -234,10 +236,9 @@ class Checker {
 			}
 			ReporterManager.INSTANCE.addMessages(messages);
 		}
-		ReporterManager.INSTANCE.fileFinish(file);
 	}
 
-	function runCheck(check:Check):Array<CheckMessage> {
+	function runCheck(check:Check):Array<Message> {
 		try {
 			if (ExcludeManager.isExcludedFromCheck(file.name, check.getModuleName())) return [];
 			return check.run(this);

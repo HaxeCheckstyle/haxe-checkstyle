@@ -10,6 +10,10 @@ import checkstyle.utils.Mutex;
 class CodeSimilarityCheck extends Check {
 	static var SIMILAR_HASHES:Map<String, HashedCodeBlock> = new Map<String, HashedCodeBlock>();
 	static var IDENTICAL_HASHES:Map<String, HashedCodeBlock> = new Map<String, HashedCodeBlock>();
+
+	static var SIMILAR_MESSAGES:Map<String, Message> = new Map<String, Message>();
+	static var IDENTICAL_MESSAGES:Map<String, Message> = new Map<String, Message>();
+
 	static var LOCK:Mutex = new Mutex();
 	#if use_similarity_ringbuffer
 	static var FILE_RINGBUFFER:Array<String> = [];
@@ -93,7 +97,7 @@ class CodeSimilarityCheck extends Check {
 		if (hashes.tokenCount > thresholdIdentical) {
 			var existing:Null<HashedCodeBlock> = checkOrAddHash(hashes.identicalHash, codeBlock, IDENTICAL_HASHES);
 			if (existing != null) {
-				logRange("Found identical code block - " + formatFirstFound(existing), pos.min, pos.max, SIMILAR_BLOCK, severityIdentical);
+				logCodeBlock(hashes.identicalHash, existing, pos, IDENTICAL_MESSAGES, "identical code blocks");
 				return true;
 			}
 		}
@@ -101,10 +105,20 @@ class CodeSimilarityCheck extends Check {
 		if (hashes.tokenCount > thresholdSimilar) {
 			var existing:Null<HashedCodeBlock> = checkOrAddHash(hashes.similarHash, codeBlock, SIMILAR_HASHES);
 			if (existing == null) return false;
-			logRange("Found similar code block - " + formatFirstFound(existing), pos.min, pos.max, SIMILAR_BLOCK);
+			logCodeBlock(hashes.similarHash, existing, pos, SIMILAR_MESSAGES, "similar code blocks");
 			return true;
 		}
 		return false;
+	}
+
+	function logCodeBlock(hash:String, existing:HashedCodeBlock, pos:Position, messages:Map<String, Message>, msg:String) {
+		var message:Null<Message> = messages.get(hash);
+		if (message == null) {
+			message = createMessage(msg, existing.lineStart.line + 1, existing.startColumn, existing.lineEnd.line + 1, existing.endColumn);
+			message.fileName = existing.fileName;
+			messages.set(hash, message);
+		}
+		addRelatedRange(message, msg, pos.min, pos.max);
 	}
 
 	function formatFirstFound(existing:HashedCodeBlock):String {
@@ -144,7 +158,9 @@ class CodeSimilarityCheck extends Check {
 			}
 			for (hash in fileHashes) {
 				SIMILAR_HASHES.remove(hash.similarHash);
+				SIMILAR_MESSAGES.remove(hash.similarHash);
 				IDENTICAL_HASHES.remove(hash.identicalHash);
+				IDENTICAL_MESSAGES.remove(hash.identicalHash);
 			}
 			FILE_HASHES.remove(fileName);
 		}
@@ -158,7 +174,9 @@ class CodeSimilarityCheck extends Check {
 		if (fileHashes != null) {
 			for (hash in fileHashes) {
 				SIMILAR_HASHES.remove(hash.similarHash);
+				SIMILAR_MESSAGES.remove(hash.similarHash);
 				IDENTICAL_HASHES.remove(hash.identicalHash);
+				IDENTICAL_MESSAGES.remove(hash.identicalHash);
 			}
 			FILE_HASHES.remove(fileName);
 		}
@@ -236,32 +254,50 @@ class CodeSimilarityCheck extends Check {
 	}
 
 	function identicalTokenText(token:TokenTree):Null<String> {
-		switch (token.tok) {
+		return switch (token.tok) {
 			case Const(CFloat(f)):
-				return '$f';
+				'$f';
 			case Const(CString(s)):
-				return '"$s"';
+				'"$s"';
 			case Const(CIdent(i)):
-				return '$i';
+				'$i';
 			case Const(CRegexp(r, op)):
-				return '$r,$op';
+				'$r,$op';
 			case Const(CInt(i)):
-				return '$i';
+				'$i';
 			case Dollar(n):
-				return '$n';
+				'$n';
 			case Unop(op):
-				return '$op';
+				'$op';
 			case Binop(op):
-				return '$op';
+				'$op';
 			case Comment(_):
-				return null;
+				null;
 			case CommentLine(_):
-				return null;
+				null;
 			case IntInterval(i):
-				return '...$i';
+				'...$i';
 			default:
-				return '${token.tok}';
+				'${token.tok}';
 		}
+	}
+
+	/**
+		similar or identical code blocks can occur in just one file or distríbuted over the
+		full code base, so we need to collect all locations before emitting a checkstyle message
+		@return Array<Message> list of checkstyle message findings
+	**/
+	public static function delayedMessagesCallback():Array<Message> {
+		var delayedMessages:Array<Message> = [];
+		for (_ => message in SIMILAR_MESSAGES) {
+			delayedMessages.push(message);
+		}
+		SIMILAR_MESSAGES.clear();
+		for (_ => message in IDENTICAL_MESSAGES) {
+			delayedMessages.push(message);
+		}
+		IDENTICAL_MESSAGES.clear();
+		return delayedMessages;
 	}
 
 	override public function detectableInstances():DetectableInstances {
