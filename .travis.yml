@@ -5,8 +5,6 @@ sudo: false
 dist: xenial
 
 env:
-  global:
-    - CC_TEST_REPORTER_ID=1dff6f89d7179dff5db635c6b4fe64acdd5694c9ed44d7da5f12f0f7d3d163b7
   matrix:
     - HAXE_VERSION=haxe4
     - HAXE_VERSION=haxe41
