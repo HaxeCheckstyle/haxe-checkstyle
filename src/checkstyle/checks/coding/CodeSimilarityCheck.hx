@@ -1,6 +1,5 @@
 package checkstyle.checks.coding;
 
-import checkstyle.Message.MessageLocation;
 import checkstyle.utils.Mutex;
 
 /**
