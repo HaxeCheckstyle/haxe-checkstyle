@@ -1,6 +1,6 @@
 package checkstyle.reporter;
 
-import checkstyle.CheckMessage;
+import checkstyle.Message;
 import checkstyle.checks.Category;
 import checkstyle.utils.Mutex;
 
@@ -9,6 +9,7 @@ class ReporterManager {
 	public static var SHOW_PARSE_ERRORS:Bool = false;
 
 	var reporters:Array<IReporter>;
+	var delayedMessageCallbacks:Array<DelayedMessageCallback>;
 	var lock:Mutex;
 
 	function new() {
@@ -21,6 +22,11 @@ class ReporterManager {
 
 	public function clear() {
 		reporters = [];
+		delayedMessageCallbacks = [];
+	}
+
+	public function addDelayedMessageCallback(callback:DelayedMessageCallback) {
+		delayedMessageCallbacks.push(callback);
 	}
 
 	public function addReporter(r:IReporter) {
@@ -32,18 +38,15 @@ class ReporterManager {
 	}
 
 	public function finish() {
+		for (delayedMessage in delayedMessageCallbacks) {
+			addMessages(delayedMessage());
+		}
 		for (reporter in reporters) reporter.finish();
 	}
 
-	public function fileStart(f:CheckFile) {
+	public function addFile(f:CheckFile) {
 		lock.acquire();
-		for (reporter in reporters) reporter.fileStart(f);
-		lock.release();
-	}
-
-	public function fileFinish(f:CheckFile) {
-		lock.acquire();
-		for (reporter in reporters) reporter.fileFinish(f);
+		for (reporter in reporters) reporter.addFile(f);
 		lock.release();
 	}
 
@@ -54,7 +57,7 @@ class ReporterManager {
 		lock.release();
 	}
 
-	public function addMessages(messages:Array<CheckMessage>) {
+	public function addMessages(messages:Array<Message>) {
 		if ((messages == null) || (messages.length <= 0)) return;
 		lock.acquire();
 		messages = filterDuplicateMessages(messages);
@@ -62,7 +65,7 @@ class ReporterManager {
 		lock.release();
 	}
 
-	function filterDuplicateMessages(messages:Array<CheckMessage>):Array<CheckMessage> {
+	function filterDuplicateMessages(messages:Array<Message>):Array<Message> {
 		var filteredMessages = [];
 		for (message in messages) {
 			var anyDuplicates = false;
@@ -77,32 +80,61 @@ class ReporterManager {
 		return filteredMessages;
 	}
 
-	function areMessagesSame(message1:CheckMessage, message2:CheckMessage):Bool {
-		return (message1.fileName == message2.fileName
-			&& message1.message == message2.message
-			&& message1.code == message2.code
-			&& message1.startLine == message2.startLine
-			&& message1.startColumn == message2.startColumn
-			&& message1.endLine == message2.endLine
-			&& message1.endColumn == message2.endColumn
-			&& message1.severity == message2.severity
-			&& message1.moduleName == message2.moduleName);
+	function areMessagesSame(a:Message, b:Message):Bool {
+		if (a.message != b.message || a.severity != b.severity || a.moduleName != b.moduleName || !messageLocationSame(a, b)) {
+			return false;
+		}
+		if ((a.code == null && b.code != null) || (a.code != null && b.code == null) || (a.code != b.code)) {
+			return false;
+		}
+		if (a.related == null && b.related == null) {
+			return true;
+		}
+		if (a.related == null || b.related == null) {
+			return false;
+		}
+		if (a.related.length != b.related.length) {
+			return false;
+		}
+		for (index in 0...a.related.length) {
+			if (!messageLocationSame(a.related[index], b.related[index])) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	function getErrorMessage(e:Any, fileName:String, step:String):CheckMessage {
+	function messageLocationSame(a:MessageLocation, b:MessageLocation):Bool {
+		return (a.fileName == b.fileName && messageRangeSame(a.range, b.range));
+	}
+
+	function messageRangeSame(a:MessageRange, b:MessageRange):Bool {
+		return ((a.start.line == b.start.line) && (a.start.column == b.start.column) && (a.end.line == b.end.line) && (a.end.column == b.end.column));
+	}
+
+	function getErrorMessage(e:Any, fileName:String, step:String):Message {
 		return {
 			fileName: fileName,
-			startLine: 1,
-			endLine: 1,
-			startColumn: 0,
-			endColumn: 0,
+			range: {
+				start: {
+					line: 1,
+					column: 0
+				},
+				end: {
+					line: 1,
+					column: 0
+				}
+			},
 			severity: ERROR,
 			moduleName: "Checker",
 			categories: [Category.STYLE],
 			points: 1,
 			desc: "",
 			code: '$e',
-			message: '$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues'
+			message: '$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues',
+			related: null
 		};
 	}
 }
+
+typedef DelayedMessageCallback = () -> Array<Message>;

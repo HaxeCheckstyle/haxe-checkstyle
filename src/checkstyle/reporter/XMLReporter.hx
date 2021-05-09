@@ -1,8 +1,10 @@
 package checkstyle.reporter;
 
+import checkstyle.Message.MessageLocation;
+
 class XMLReporter extends BaseReporter {
 	var style:String;
-	var messageCache:Map<String, Array<CheckMessage>>;
+	var files:Array<String>;
 
 	/**
 		Solution from mustache.js
@@ -21,8 +23,8 @@ class XMLReporter extends BaseReporter {
 
 	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {
 		super(numFiles, checkCount, usedCheckCount, path, ns);
-		messageCache = new Map<String, Array<CheckMessage>>();
 		style = s;
+		files = [];
 	}
 
 	override public function start() {
@@ -39,30 +41,39 @@ class XMLReporter extends BaseReporter {
 
 	override public function finish() {
 		var sb = new StringBuf();
+		for (file in files) {
+			makeFileTag(sb, file);
+		}
+
 		sb.add("</checkstyle>\n");
 		if (file != null) report.add(sb.toString());
 
 		super.finish();
 	}
 
+	function makeFileTag(sb:StringBuf, file:String) {
+		sb.add('\t<file name="${encode(file)}>\n');
+		for (message in messages) {
+			if (file == message.fileName) {
+				sb.add(formatMessage(message, message));
+				continue;
+			}
+			for (related in message.related) {
+				if (related.fileName != file) {
+					continue;
+				}
+				sb.add(formatMessage(message, related));
+			}
+		}
+		sb.add("\t</file>\n");
+	}
+
 	function encode(s:String):String {
 		return escapeXML(s);
 	}
 
-	override public function fileStart(f:CheckFile) {
-		messageCache.set(f.name, []);
-	}
-
-	override public function fileFinish(f:CheckFile) {
-		var sb = new StringBuf();
-		sb.add("\t<file name=\"");
-		sb.add(encode(f.name));
-		sb.add("\">\n");
-		var messages:Array<CheckMessage> = messageCache.get(f.name);
-		for (m in messages) sb.add(formatMessage(m));
-		messageCache.remove(f.name);
-		sb.add("\t</file>\n");
-		if (file != null) report.add(sb.toString());
+	override public function addFile(f:CheckFile) {
+		files.push(f.name);
 	}
 
 	static function replace(str:String, re:EReg):String {
@@ -75,33 +86,28 @@ class XMLReporter extends BaseReporter {
 		return replace(string, ENTITY_RE);
 	}
 
-	override public function addMessage(m:CheckMessage) {
-		if (!messageCache.exists(m.fileName)) messageCache.set(m.fileName, [m]);
-		else messageCache.get(m.fileName).push(m);
-	}
-
-	function formatMessage(m:CheckMessage):String {
+	function formatMessage(message:Message, location:MessageLocation):String {
 		var sb:StringBuf = new StringBuf();
 
 		sb.add("\t\t<error line=\"");
-		sb.add(m.startLine);
+		sb.add(location.range.start.line);
 		sb.add("\"");
-		if (m.startColumn >= 0) {
+		if (location.range.start.column >= 0) {
 			sb.add(" column=\"");
-			sb.add(m.startColumn);
+			sb.add(location.range.start.column);
 			sb.add("\"");
 		}
 		sb.add(" severity=\"");
-		sb.add(BaseReporter.severityString(m.severity));
+		sb.add(BaseReporter.severityString(message.severity));
 		sb.add("\"");
 		sb.add(" message=\"");
-		sb.add(encode(m.moduleName) + " - " + encode(m.message));
+		sb.add(encode(message.moduleName) + " - " + encode(message.message));
 		sb.add("\"");
 		sb.add(" source=\"");
-		sb.add(encode(m.fileName));
+		sb.add(encode(location.fileName));
 		sb.add("\"/>\n");
 
-		switch (m.severity) {
+		switch (message.severity) {
 			case ERROR:
 				errors++;
 			case WARNING:
@@ -111,7 +117,7 @@ class XMLReporter extends BaseReporter {
 			default:
 		}
 
-		Sys.print(applyColour(getMessage(m).toString(), m.severity));
+		Sys.print(applyColour(getMessage(message).toString(), message.severity));
 
 		return sb.toString();
 	}

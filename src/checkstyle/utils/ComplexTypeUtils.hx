@@ -227,8 +227,10 @@ class ComplexTypeUtils {
 				if (t != null) walkComplexType(t, "", e.pos, cb);
 			case EDisplay(e, displayKind):
 				walkExpr(e, cb);
+			#if (haxe < version("4.3.0-rc.1"))
 			case EDisplayNew(t):
 				walkTypePath(t, t.name, e.pos, cb);
+			#end
 			case ETernary(econd, eif, eelse):
 				walkExpr(econd, cb);
 				walkExpr(eif, cb);

@@ -2,6 +2,7 @@
 
 ## dev branch / next version (2.x.x)
 
+- Added related messages to reporters for `CodeSimilarity` check
 - Fixed Haxe nightly compilation ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
 - Updated to Haxe 4.1.5 ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
 

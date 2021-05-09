@@ -3,44 +3,47 @@ package checkstyle.checks.coding;
 import checkstyle.checks.coding.CodeSimilarityCheck.HashedCodeBlock;
 
 class CodeSimilarityCheckTest extends CheckTestCase<CodeSimilarityCheckTests> {
+	static inline var MSG_IDENTICAL:String = "identical code blocks";
+	static inline var MSG_SIMILAR:String = "similar code blocks";
+
 	@Test
 	public function testSimilarCodeBlocks() {
 		var check = newCheck();
 		assertNoMsg(check, NOT_SIMILAR_CODE);
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE, "Found similar code block - first seen in Test.hx:3");
+		assertMsg(check, SIMILAR_CODE, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:3");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_IF, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_IF, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_WHILE, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_WHILE, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_DO_WHILE, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_DO_WHILE, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_FOR, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_FOR, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_TRY, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_TRY, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 
 		check = newCheck();
 		check.thresholdSimilar = 30;
-		assertMsg(check, SIMILAR_CODE_BROPEN, "Found similar code block - first seen in Test.hx:4");
+		assertMsg(check, SIMILAR_CODE_BROPEN, MSG_SIMILAR); // "Found similar code block - first seen in Test.hx:4");
 	}
 
 	@Test
 	public function testIdenticalCodeBlocks() {
 		var check = newCheck();
 		check.thresholdIdentical = 30;
-		assertMsg(check, IDENTICAL_CODE, "Found identical code block - first seen in Test.hx:4");
+		assertMsg(check, IDENTICAL_CODE, MSG_IDENTICAL); // "Found identical code block - first seen in Test.hx:4");
 	}
 
 	@Test

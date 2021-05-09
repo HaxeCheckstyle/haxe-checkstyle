@@ -91,10 +91,9 @@ class CheckerThread {
 			}
 			ReporterManager.INSTANCE.addMessages(messages);
 		}
-		ReporterManager.INSTANCE.fileFinish(checker.file);
 	}
 
-	function runCheck(check:Check, checker:Checker):Array<CheckMessage> {
+	function runCheck(check:Check, checker:Checker):Array<Message> {
 		try {
 			if (ExcludeManager.isExcludedFromCheck(checker.file.name, check.getModuleName())) return [];
 			return check.run(checker);

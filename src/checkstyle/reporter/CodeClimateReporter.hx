@@ -1,5 +1,6 @@
 package checkstyle.reporter;
 
+import checkstyle.Message.MessageLocation;
 import haxe.Json;
 
 using StringTools;
@@ -14,37 +15,45 @@ class CodeClimateReporter extends BaseReporter {
 
 	override public function finish() {}
 
-	override public function addMessage(m:CheckMessage) {
-		var file = ~/^\/code\//.replace(m.fileName, "");
+	override public function addMessage(message:Message) {
+		Sys.print(Json.stringify(createIssue(message, message)));
+		Sys.stdout().writeByte(0);
+		for (related in message.related) {
+			Sys.print(Json.stringify(createIssue(message, related)));
+			Sys.stdout().writeByte(0);
+		}
+	}
+
+	function createIssue(message:Message, location:MessageLocation):Any {
+		var file = ~/^\/code\//.replace(location.fileName, "");
 		file = ~/\/\//.replace(file, "/");
 
 		var issue = {
 			type: "issue",
-			check_name: m.moduleName,
-			description: m.message.replace("\"", "`"),
+			check_name: message.moduleName,
+			description: message.message.replace("\"", "`"),
 			content: {
-				body: m.desc
+				body: message.desc
 			},
-			severity: getSeverity(m.severity),
-			categories: m.categories,
-			remediation_points: m.points * REMEDIATION_BASE,
+			severity: getSeverity(message.severity),
+			categories: message.categories,
+			remediation_points: message.points * REMEDIATION_BASE,
 			location: {
 				path: file,
 				positions: {
 					begin: {
-						line: m.startLine,
-						column: m.startColumn
+						line: location.range.start.line,
+						column: location.range.start.column
 					},
 					end: {
-						line: m.endLine,
-						column: m.endColumn
+						line: location.range.end.line,
+						column: location.range.end.column
 					}
 				}
 			}
 		};
 
-		Sys.print(Json.stringify(issue));
-		Sys.stdout().writeByte(0);
+		return issue;
 	}
 
 	function getSeverity(severity:SeverityLevel):String {

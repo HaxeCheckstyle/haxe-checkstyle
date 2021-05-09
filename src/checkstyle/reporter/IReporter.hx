@@ -6,9 +6,7 @@ interface IReporter {
 	// After all files checked
 	function finish():Void;
 	// Before file checked
-	function fileStart(f:CheckFile):Void;
-	// After file checked
-	function fileFinish(f:CheckFile):Void;
+	function addFile(file:CheckFile):Void;
 	// When issue found
-	function addMessage(m:CheckMessage):Void;
+	function addMessage(message:Message):Void;
 }

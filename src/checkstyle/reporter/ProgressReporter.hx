@@ -14,7 +14,7 @@ class ProgressReporter implements IReporter {
 		clear();
 	}
 
-	public function fileStart(f:CheckFile) {
+	public function addFile(f:CheckFile) {
 		clear();
 		var percentage = Math.floor((f.index + 1) / numFiles * 100);
 		var line = '${percentage}% - ${f.name}';
@@ -30,7 +30,5 @@ class ProgressReporter implements IReporter {
 		Sys.print("\r");
 	}
 
-	public function fileFinish(f:CheckFile) {}
-
-	public function addMessage(m:CheckMessage) {}
+	public function addMessage(m:Message) {}
 }

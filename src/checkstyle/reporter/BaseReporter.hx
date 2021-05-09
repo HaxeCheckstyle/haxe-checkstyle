@@ -16,12 +16,14 @@ class BaseReporter implements IReporter {
 	var numChecks:Int;
 	var numUsedChecks:Int;
 	var noStyle:Bool;
+	var messages:Array<Message>;
 
 	public function new(fileCount:Int, checkCount:Int, usedCheckCount:Int, path:String, ns:Bool) {
 		numFiles = fileCount;
 		numChecks = checkCount;
 		numUsedChecks = usedCheckCount;
 		noStyle = ns;
+		messages = [];
 		if (path != null) {
 			var folder = Path.directory(path);
 			if (folder.length > 0 && !FileSystem.exists(folder)) FileSystem.createDirectory(folder);
@@ -67,11 +69,11 @@ class BaseReporter implements IReporter {
 		else Sys.println(styleText("No issues found.", Style.BOLD));
 	}
 
-	public function fileStart(f:CheckFile) {}
+	public function addFile(f:CheckFile) {}
 
-	public function fileFinish(f:CheckFile) {}
-
-	public function addMessage(m:CheckMessage) {}
+	public function addMessage(m:Message) {
+		messages.push(m);
+	}
 
 	function styleText(s:String, style:Style):String {
 		if (Sys.systemName() == "Windows" || noStyle) return s;
@@ -87,28 +89,42 @@ class BaseReporter implements IReporter {
 		}
 	}
 
-	function getMessage(m:CheckMessage):StringBuf {
+	function getMessage(message:Message):StringBuf {
 		var sb:StringBuf = new StringBuf();
-		sb.add(m.fileName);
+		sb.add(message.fileName);
 		sb.add(":");
-		sb.add(m.startLine);
-		if (m.startColumn >= 0) {
-			var isRange = m.startColumn != m.endColumn;
+		sb.add(message.range.start.line);
+		if (message.range.start.column >= 0) {
+			var isRange = message.range.start.column != message.range.end.column;
 			sb.add(': character${isRange ? "s" : ""} ');
-			sb.add(m.startColumn);
+			sb.add(message.range.start.column);
 			if (isRange) {
 				sb.add("-");
-				sb.add(m.endColumn);
+				sb.add(message.range.end.column);
 			}
 			sb.add(" ");
 		}
 		sb.add(": ");
-		sb.add(m.moduleName);
+		sb.add(message.moduleName);
 		sb.add(" - ");
-		sb.add(BaseReporter.severityString(m.severity));
+		sb.add(BaseReporter.severityString(message.severity));
 		sb.add(": ");
-		sb.add(m.message);
+		sb.add(message.message);
 		sb.add("\n");
+		for (related in message.related) {
+			sb.add(' - see also: ${related.fileName}:${related.range.start.line}');
+			if (related.range.start.column >= 0) {
+				var isRange = related.range.start.column != related.range.end.column;
+				sb.add(': character${isRange ? "s" : ""} ');
+				sb.add(related.range.start.column);
+				if (isRange) {
+					sb.add("-");
+					sb.add(related.range.end.column);
+				}
+				sb.add(" ");
+			}
+			sb.add("\n");
+		}
 
 		return sb;
 	}

@@ -1,39 +1,62 @@
 package checkstyle.reporter;
 
+import checkstyle.Message.MessageLocation;
 import haxe.Json;
 
 class JSONReporter extends BaseReporter {
-	var jsonReport:GlobalReport;
-	var fileReport:FileReport;
+	var files:Array<String>;
 
 	override public function start() {
-		jsonReport = [];
 		super.start();
 	}
 
-	override public function fileStart(f:CheckFile) {
-		fileReport = {
-			fileName: f.name,
-			messages: []
-		};
-		jsonReport.push(fileReport);
+	override public function addFile(f:CheckFile) {
+		files.push(f.name);
 	}
 
 	override public function finish() {
+		var jsonReport:GlobalReport = [];
+		for (file in files) {
+			var fileReport:FileReport = makeFileReport(file);
+			jsonReport.push(fileReport);
+		}
+
 		if (file != null) report.add(Json.stringify(jsonReport));
 		super.finish();
 	}
 
-	override public function addMessage(m:CheckMessage) {
-		var reportMessage:ReportMessage = {
-			line: m.startLine,
-			column: m.startColumn,
-			severity: BaseReporter.severityString(m.severity),
-			message: m.message
+	function makeFileReport(file:String):FileReport {
+		var fileReport:FileReport = {
+			fileName: file,
+			messages: []
 		};
-		fileReport.messages.push(reportMessage);
+		for (message in messages) {
+			if (file == message.fileName) {
+				fileReport.messages.push(makeReportMessage(message, message));
+				continue;
+			}
+			for (related in message.related) {
+				if (related.fileName != file) {
+					continue;
+				}
+				fileReport.messages.push(makeReportMessage(message, related));
+			}
+		}
+		return fileReport;
+	}
 
-		switch (m.severity) {
+	function makeReportMessage(message:Message, location:MessageLocation):ReportMessage {
+		return {
+			line: location.range.start.line,
+			column: location.range.start.column,
+			severity: BaseReporter.severityString(message.severity),
+			message: message.message
+		};
+	}
+
+	override public function addMessage(message:Message) {
+		super.addMessage(message);
+		switch (message.severity) {
 			case ERROR:
 				errors++;
 			case WARNING:
@@ -43,7 +66,7 @@ class JSONReporter extends BaseReporter {
 			default:
 		}
 
-		Sys.print(applyColour(getMessage(m).toString(), m.severity));
+		Sys.print(applyColour(getMessage(message).toString(), message.severity));
 	}
 }
 

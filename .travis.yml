@@ -10,6 +10,7 @@ env:
   matrix:
     - HAXE_VERSION=haxe4
     - HAXE_VERSION=haxe41
+    - HAXE_VERSION=haxe42
     - HAXE_VERSION=nightly
 
 install:
@@ -17,6 +18,7 @@ install:
   - npm install
   - if [[ "$HAXE_VERSION" == "haxe4" ]]; then npx lix download haxe 4.0.5; npx lix use haxe 4.0.5; fi
   - if [[ "$HAXE_VERSION" == "haxe41" ]]; then npx lix download haxe 4.1.5; npx lix use haxe 4.1.5; fi
+  - if [[ "$HAXE_VERSION" == "haxe42" ]]; then npx lix download haxe 4.2.1; npx lix use haxe 4.2.1; fi
   - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
   - npx lix download
   - npx haxe -version
@@ -37,7 +39,7 @@ script:
   - (cd src; ../cc-test-reporter format-coverage -t lcov ../lcov.info)
 
 after_script:
-  - if [[ "$HAXE_VERSION" == "haxe41" ]]; then (cd src; ../cc-test-reporter upload-coverage); fi
+  - if [[ "$HAXE_VERSION" == "haxe42" ]]; then (cd src; ../cc-test-reporter upload-coverage); fi
 
 after_success:
   - bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

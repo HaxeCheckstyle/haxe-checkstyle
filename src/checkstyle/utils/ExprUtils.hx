@@ -221,8 +221,10 @@ class ExprUtils {
 				if (t != null) walkComplexType(t, cb);
 			case EDisplay(e, displayKind):
 				walkExpr(e, cb);
+			#if (haxe < version("4.3.0-rc.1"))
 			case EDisplayNew(t):
 				walkTypePath(t, cb);
+			#end
 			case ETernary(econd, eif, eelse):
 				walkExpr(econd, cb);
 				walkExpr(eif, cb);
