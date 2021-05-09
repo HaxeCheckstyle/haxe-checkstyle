@@ -114,16 +114,12 @@ class CodeSimilarityCheck extends Check {
 
 	function logCodeBlock(hash:String, existing:HashedCodeBlock, pos:Position, messages:Map<String, Message>, msg:String) {
 		var message:Null<Message> = messages.get(hash);
-		var relatedMsg:MessageLocation = createRangeMessage(msg, pos.min, pos.max);
 		if (message == null) {
 			message = createMessage(msg, existing.lineStart.line + 1, existing.startColumn, existing.lineEnd.line + 1, existing.endColumn);
 			message.fileName = existing.fileName;
-			message.related = [relatedMsg];
 			messages.set(hash, message);
 		}
-		else {
-			message.related.push(relatedMsg);
-		}
+		addRelatedRange(message, msg, pos.min, pos.max);
 	}
 
 	function formatFirstFound(existing:HashedCodeBlock):String {
