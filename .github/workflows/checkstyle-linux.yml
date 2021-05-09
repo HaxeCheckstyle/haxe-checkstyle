@@ -65,7 +65,7 @@ jobs:
         ( \
           cd src; \
           ../cc-test-reporter format-coverage -t lcov ../lcov.info; \
-          ../cc-test-reporter upload-coverage -r ${{ secrets.CC_TEST_REPORTER_ID }}; \
+          ../cc-test-reporter upload-coverage -r "$CC_TEST_REPORTER_ID"; \
         )
     - name: Upload results to codecov
       if: success() && (matrix.haxe-version == '4.2.1')
