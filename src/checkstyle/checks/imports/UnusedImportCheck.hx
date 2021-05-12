@@ -81,6 +81,9 @@ class UnusedImportCheck extends Check {
 		return root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			return switch (token.tok) {
 				case Kwd(KwdImport):
+					if (TokenTreeCheckUtils.isMetadata(token)) {
+						return SkipSubtree;
+					}
 					FoundGoDeeper;
 				default:
 					GoDeeper;
@@ -116,6 +119,7 @@ class UnusedImportCheck extends Check {
 		var moduleName:StringBuf = new StringBuf();
 
 		while (true) {
+			if (token == null) return moduleName.toString();
 			switch (token.tok) {
 				case Binop(OpMult):
 					return null;
@@ -140,6 +144,7 @@ class UnusedImportCheck extends Check {
 	function detectTypeName(token:TokenTree):String {
 		var lastName:String = null;
 		while (true) {
+			if (token == null) return lastName;
 			switch (token.tok) {
 				case Binop(OpMult):
 					return null;
