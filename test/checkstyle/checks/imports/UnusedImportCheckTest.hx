@@ -18,6 +18,7 @@ class UnusedImportCheckTest extends CheckTestCase<UnusedImportCheckTests> {
 		assertNoMsg(check, IMPORT_BASE_CLASS);
 		assertNoMsg(check, IMPORT_AS);
 		assertNoMsg(check, IMPORT_IN_STATIC_FUNC);
+		assertNoMsg(check, METADATA_IMPORT);
 	}
 
 	@Test
@@ -257,5 +258,12 @@ enum abstract UnusedImportCheckTests(String) to String {
 		public function new() {
 			trace ('${Check3}');
 		}
+	}";
+	var METADATA_IMPORT = "
+	abstractAndClass Test {
+		private static var SRC =
+        {
+            @:import h3d.shader.BaseMesh;
+        };
 	}";
 }
