@@ -4,7 +4,7 @@
 
 - Added related messages to reporters for `CodeSimilarity` check ([#506](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/506))
 - Fixed Haxe nightly compilation ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
-- Fixed null pointer exception in `UnusedImport` check
+- Fixed null pointer exception in `UnusedImport` check ([#507](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/507))
 - Updated to Haxe 4.1.5 ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
 
 ## version 2.7.0 (2020-12-23)
