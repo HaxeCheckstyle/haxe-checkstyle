@@ -148,14 +148,6 @@ class IndentationCheck extends Check {
 							continue;
 						default:
 					}
-				// var type:BrOpenType = TokenTreeCheckUtils.getBrOpenType(token);
-				// switch (type) {
-				// 	case BLOCK:
-				// 	case TYPEDEFDECL:
-				// 	case OBJECTDECL:
-				// 	case ANONTYPE:
-				// 	case UNKNOWN:
-				// }
 				case Kwd(KwdFunction):
 					calcLineIndentationFunction(token, lineIndentation);
 				case Kwd(KwdIf), Kwd(KwdElse):

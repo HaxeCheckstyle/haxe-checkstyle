@@ -62,6 +62,10 @@
 			}
 		},
 		{
+			"type": "CommentedOutCode",
+			"props": {}
+		},
+		{
 			"type": "ConditionalCompilation",
 			"props": {
 				"policy": "aligned",

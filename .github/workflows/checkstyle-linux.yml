@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        haxe-version: ['4.0.5', '4.1.5', '4.2.1', 'nightly']
+        haxe-version: ['4.0.5', '4.1.5', '4.2.4', 'nightly']
     env:
       CC_TEST_REPORTER_ID: c4eda639526d39fbcab7ab9fc68c4046d4e597df56dbcb552b42d27b3580b758
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: 10
     - name: Installing codeclimate client
-      if: matrix.haxe-version == '4.2.1'
+      if: matrix.haxe-version == '4.2.4'
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
@@ -60,7 +60,7 @@ jobs:
     - name: Run Java tests
       run: npx haxe testJava.hxml
     - name: Format and upload codeclimate coverage
-      if: success() && matrix.haxe-version == '4.2.1'
+      if: success() && matrix.haxe-version == '4.2.4'
       run: |
         ( \
           cd src; \
@@ -68,5 +68,5 @@ jobs:
           ../cc-test-reporter upload-coverage; \
         )
     - name: Upload results to codecov
-      if: success() && (matrix.haxe-version == '4.2.1')
+      if: success() && (matrix.haxe-version == '4.2.4')
       run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

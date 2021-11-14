@@ -2,10 +2,12 @@
 
 ## dev branch / next version (2.x.x)
 
-- Added related messages to reporters for `CodeSimilarity` check ([#506](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/506))
+- New check `CommentedOutCode` to check comments for commented out code fragments
 - Fixed Haxe nightly compilation ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
+- Added related messages to reporters for `CodeSimilarity` check ([#506](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/506))
 - Fixed null pointer exception in `UnusedImport` check ([#507](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/507))
 - Updated to Haxe 4.1.5 ([#505](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/505))
+- Updated to Haxe 4.2.4
 
 ## version 2.7.0 (2020-12-23)
 
