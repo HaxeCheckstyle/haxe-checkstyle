@@ -19,6 +19,7 @@ import checkstyle.checks.coding.NullableParameterCheck;
 import checkstyle.checks.coding.ReturnCountCheck;
 import checkstyle.checks.coding.TraceCheck;
 import checkstyle.checks.coding.UnusedLocalVarCheck;
+import checkstyle.checks.comments.CommentedOutCodeCheck;
 import checkstyle.checks.comments.DocCommentStyleCheck;
 import checkstyle.checks.comments.FieldDocCommentCheck;
 import checkstyle.checks.comments.TODOCommentCheck;
@@ -215,6 +216,13 @@ class DetectCodingStyleTest {
 	}
 
 	// checkstyle.checks.comments
+	@Test
+	public function testCommentedOutCode() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CommentedOutCodeCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("CommentedOutCode", detectedChecks[0].type);
+	}
+
 	@Test
 	public function testDetectDocCommentStyle() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new DocCommentStyleCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);

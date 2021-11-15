@@ -2,8 +2,8 @@ package checkstyle.checks;
 
 import byte.ByteData;
 import checkstyle.CheckFile;
-import checkstyle.Message;
 import checkstyle.Checker;
+import checkstyle.Message;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.ReporterManager;
 
@@ -43,7 +43,6 @@ class CheckTestCase<T:String> {
 				Assert.areEqual(expected[0], messages[i].message, pos);
 			}
 		}
-		// trace(messages.map(m -> m.message));
 		Assert.areEqual(expected.length, messages.length, pos);
 		for (i in 0...expected.length) {
 			Assert.areEqual(expected[i], messages[i].message, pos);

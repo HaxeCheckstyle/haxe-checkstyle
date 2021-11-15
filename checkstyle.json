@@ -54,6 +54,9 @@
 			"type": "DefaultComesLast"
 		},
 		{
+			"type": "CommentedOutCode"
+		},
+		{
 			"type": "DocCommentStyle"
 		},
 		{

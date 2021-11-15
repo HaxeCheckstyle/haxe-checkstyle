@@ -208,7 +208,6 @@ class Checker {
 			makePosIndices();
 			makeTokens();
 			makeASTs();
-			// if (asts.length <= 0) return false;
 			getTokenTree();
 			excludesRanges = ExcludeManager.INSTANCE.getPosExcludes(this);
 		}

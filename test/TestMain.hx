@@ -31,7 +31,6 @@ class TestMain {
 	}
 
 	function completionHandler(success:Bool) {
-		// setupCoverageReport();
 		#if eval
 		if (!success) {
 			Sys.exit(1);

@@ -6,7 +6,6 @@ dist: xenial
 
 env:
   matrix:
-    - HAXE_VERSION=haxe4
     - HAXE_VERSION=haxe41
     - HAXE_VERSION=haxe42
     - HAXE_VERSION=nightly
@@ -14,9 +13,8 @@ env:
 install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter; chmod +x ./cc-test-reporter
   - npm install
-  - if [[ "$HAXE_VERSION" == "haxe4" ]]; then npx lix download haxe 4.0.5; npx lix use haxe 4.0.5; fi
   - if [[ "$HAXE_VERSION" == "haxe41" ]]; then npx lix download haxe 4.1.5; npx lix use haxe 4.1.5; fi
-  - if [[ "$HAXE_VERSION" == "haxe42" ]]; then npx lix download haxe 4.2.1; npx lix use haxe 4.2.1; fi
+  - if [[ "$HAXE_VERSION" == "haxe42" ]]; then npx lix download haxe 4.2.4; npx lix use haxe 4.2.4; fi
   - if [[ "$HAXE_VERSION" == "nightly" ]]; then npx lix download haxe nightly; npx lix use haxe nightly; fi
   - npx lix download
   - npx haxe -version

@@ -52,7 +52,7 @@ class XMLReporter extends BaseReporter {
 	}
 
 	function makeFileTag(sb:StringBuf, file:String) {
-		sb.add('\t<file name="${encode(file)}>\n');
+		sb.add('\t<file name="${encode(file)}">\n');
 		for (message in messages) {
 			if (file == message.fileName) {
 				sb.add(formatMessage(message, message));
