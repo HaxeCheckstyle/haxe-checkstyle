@@ -18,8 +18,8 @@
         "adireddy",
         "Gama11"
 	],
-    "releasenote": "breaking change: EnforceVarTypeHint renamed to VarTypeHint - see CHANGELOG",
-    "version": "2.7.0",
+    "releasenote": "added CommentedOutCode check - see CHANGELOG",
+    "version": "2.8.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {}
 }

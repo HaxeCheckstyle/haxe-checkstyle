@@ -1,6 +1,6 @@
 {
     "name": "@haxecheckstyle/haxe-checkstyle",
-    "version": "2.7.0",
+    "version": "2.8.0",
     "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
     "repository": {
         "type": "git",
@@ -29,7 +29,7 @@
         }
     ],
     "devDependencies": {
-        "lix": "^15.11.6"
+        "lix": "^15.12.0"
     },
     "bugs": "https://github.com/HaxeCheckstyle/haxe-checkstyle/issues",
     "license": "MIT",
