@@ -5,6 +5,7 @@
 ## version 2.8.1 (2022-09-07)
 
 - Added support for inline markup ([#513](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/513))
+- Retired Haxe 4.1.5 compile support ([#513](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/513))
 
 ## version 2.8.0 (2022-08-24)
 
