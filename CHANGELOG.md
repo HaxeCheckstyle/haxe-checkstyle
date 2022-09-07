@@ -2,6 +2,11 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.8.1 (2022-09-07)
+
+- Added support for inline markup ([#513](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/513))
+- Retired Haxe 4.1.5 compile support ([#513](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/513))
+
 ## version 2.8.0 (2022-08-24)
 
 - New check `CommentedOutCode` to check comments for commented out code fragments ([#512](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/512))
