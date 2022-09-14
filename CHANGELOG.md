@@ -2,11 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
-- Updated haxeparser and tokentree libs to support latest Haxe nightly syntax
-
 ## version 2.8.2 (2022-09-14)
 
-
+- Updated haxeparser and tokentree libs to support latest Haxe nightly syntax ([#514](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/514))
 
 ## version 2.8.1 (2022-09-07)
 
