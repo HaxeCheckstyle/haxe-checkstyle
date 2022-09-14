@@ -127,7 +127,7 @@ class UnusedImportCheck extends Check {
 				case Kwd(KwdPackage):
 				case Semicolon:
 					return moduleName.toString();
-				case Binop(OpIn):
+				case Kwd(KwdIn) | Binop(OpIn):
 					if (token.parent.tok.match(Dot)) moduleName.add(token.toString());
 					else moduleName.add(" in ");
 				case Const(CIdent("as")):

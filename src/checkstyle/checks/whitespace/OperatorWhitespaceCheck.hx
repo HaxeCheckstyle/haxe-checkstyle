@@ -249,6 +249,14 @@ class OperatorWhitespaceCheck extends WhitespaceCheckBase {
 			return switch (token.tok) {
 				case Binop(OpInterval): FoundSkipSubtree;
 				case IntInterval(_): FoundSkipSubtree;
+				case Spread:
+					if (token.parent == null) return GoDeeper;
+					switch (token.parent.tok) {
+						case POpen:
+							return GoDeeper;
+						default:
+							FoundSkipSubtree;
+					}
 				default: GoDeeper;
 			}
 		});
