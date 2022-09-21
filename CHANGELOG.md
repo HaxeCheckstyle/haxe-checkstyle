@@ -4,7 +4,7 @@
 
 ## version 2.8.3 (2022-09-21)
 
-- Fixed MagicNumber check to support numeric separators and suffixes
+- Fixed MagicNumber check to support numeric separators and suffixes ([#515](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/515))
 
 ## version 2.8.2 (2022-09-14)
 
