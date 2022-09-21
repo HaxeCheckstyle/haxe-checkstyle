@@ -110,7 +110,7 @@ class ListOfEmptyLines {
 		@return EmptyLineRange matching range or NONE
 	**/
 	public function checkPolicySingleRange(policy:EmptyLinesPolicy, max:Int, start:Int, end:Int):EmptyLineRange {
-		if (start > end) throw "*** wrong order!! *** " + start + " " + end;
+		if (start > end) throw new Exception("*** wrong order!! *** " + start + " " + end);
 		var range:Array<EmptyLineRange> = getRanges(start, end);
 
 		switch (policy) {

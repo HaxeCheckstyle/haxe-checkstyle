@@ -65,7 +65,7 @@ class HiddenFieldCheck extends Check {
 	}
 
 	function checkMethod(method:TokenTree, memberNames:Array<String>, ignoreFormatRE:EReg) {
-		if (!method.hasChildren()) throw "function has invalid structure!";
+		if (!method.hasChildren()) throw new Exception("function has invalid structure!");
 
 		// handle constructor and setters
 		var methodName:TokenTree = method.children[0];
@@ -115,7 +115,7 @@ class HiddenFieldCheck extends Check {
 		});
 
 		if ((paramDef == null) || (paramDef.length != 1)) {
-			throw "function parameters have invalid structure!";
+			throw new Exception("function parameters have invalid structure!");
 		}
 		var paramList:Array<TokenTree> = paramDef[0].children;
 		for (param in paramList) checkName(param, memberNames, "Parameter definition");
@@ -131,7 +131,7 @@ class HiddenFieldCheck extends Check {
 			}
 		});
 		for (v in vars) {
-			if (!v.hasChildren()) throw "var has invalid structure!";
+			if (!v.hasChildren()) throw new Exception("var has invalid structure!");
 			checkName(v.children[0], memberNames, "Variable definition");
 		}
 	}

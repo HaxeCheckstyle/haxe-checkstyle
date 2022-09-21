@@ -195,7 +195,7 @@ class RightCurlyCheck extends Check {
 			logErrorIf(shouldHaveSameOption && (option == SAME), 'Right curly should be on same line as following block (e.g. "} else" or "} catch")',
 				curlyPos);
 		}
-		catch (e:String) {
+		catch (e:Exception) {
 			// one of the error messages fired -> do nothing
 		}
 	}
@@ -203,7 +203,7 @@ class RightCurlyCheck extends Check {
 	function logErrorIf(condition:Bool, msg:String, pos:Position) {
 		if (condition) {
 			logPos(msg, pos);
-			throw "exit";
+			throw new Exception("exit");
 		}
 	}
 

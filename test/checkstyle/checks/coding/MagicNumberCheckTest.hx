@@ -51,6 +51,26 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertNoMsg(check, HAXE4_FINAL_VAR);
 		assertMsg(check, HAXE4_FINAL_FUNCTION, '"7" is a magic number');
 	}
+
+	#if (haxe >= version("4.3.0-rc.1"))
+	@Test
+	public function testNumberSeparatorAndSuffixes() {
+		var check = new MagicNumberCheck();
+		assertMessages(check, NUMBER_SEPARATOR_AND_SUFFIX, [
+			'"1_000.1e2f64" is a magic number',
+			'"1_000i64" is a magic number',
+			'"0xabcdei32" is a magic number',
+			'"0xabcdeu32" is a magic number',
+			'"1.1E+3f64" is a magic number',
+			'"1.E+3f64" is a magic number',
+			'"1E+3f64" is a magic number',
+			'"1.1f64" is a magic number',
+			'"5f64" is a magic number',
+			'".1f64" is a magic number',
+			'"5i64" is a magic number',
+		]);
+	}
+	#end
 }
 
 enum abstract MagicNumberCheckTests(String) to String {
@@ -142,5 +162,19 @@ enum abstract MagicNumberCheckTests(String) to String {
 		@meta(100)
 		function test() {
 		}
+	}";
+	var NUMBER_SEPARATOR_AND_SUFFIX = "
+	abstractAndClass Test {
+		var x = 1_000.1e2f64;
+		var y = 1_000i64;
+		var z = 0xabcdei32;
+		var x0 = 0xabcdeu32;
+		var x1 = 1.1E+3f64;
+		var x2 = 1.E+3f64;
+		var x3 = 1E+3f64;
+		var x4 = 1.1f64;
+		var x5 = 5f64;
+		var x6 = .1f64;
+		var x7 = 5i64;
 	}";
 }

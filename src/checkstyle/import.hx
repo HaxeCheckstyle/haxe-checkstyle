@@ -4,6 +4,7 @@ import checkstyle.Checker.LinePos;
 import checkstyle.SeverityLevel;
 import checkstyle.detect.DetectableInstances;
 import checkstyle.utils.ErrorUtils;
+import haxe.Exception;
 import haxe.io.Bytes;
 import haxe.macro.Expr;
 import haxeparser.Data;
