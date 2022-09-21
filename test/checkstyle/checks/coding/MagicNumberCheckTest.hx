@@ -52,6 +52,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 		assertMsg(check, HAXE4_FINAL_FUNCTION, '"7" is a magic number');
 	}
 
+	#if (haxe >= version("4.3.0-rc.1"))
 	@Test
 	public function testNumberSeparatorAndSuffixes() {
 		var check = new MagicNumberCheck();
@@ -69,6 +70,7 @@ class MagicNumberCheckTest extends CheckTestCase<MagicNumberCheckTests> {
 			'"5i64" is a magic number',
 		]);
 	}
+	#end
 }
 
 enum abstract MagicNumberCheckTests(String) to String {
@@ -161,7 +163,6 @@ enum abstract MagicNumberCheckTests(String) to String {
 		function test() {
 		}
 	}";
-
 	var NUMBER_SEPARATOR_AND_SUFFIX = "
 	abstractAndClass Test {
 		var x = 1_000.1e2f64;
