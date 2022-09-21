@@ -241,7 +241,7 @@ class LeftCurlyCheck extends Check {
 			logErrorIf((option == NLOW) && !wrapped, "Left curly should be at EOL (previous expression is not split over multiple lines)", pos);
 			logErrorIf((option != NL) && (option != NLOW), "Left curly unknown option ${option}", pos);
 		}
-		catch (e:String) {
+		catch (e:Exception) {
 			// one of the error messages fired -> do nothing
 		}
 	}
@@ -249,7 +249,7 @@ class LeftCurlyCheck extends Check {
 	function logErrorIf(condition:Bool, msg:String, pos:Position) {
 		if (condition) {
 			logPos(msg, pos);
-			throw "exit";
+			throw new Exception("exit");
 		}
 	}
 

@@ -37,7 +37,7 @@ class Check {
 			try {
 				actualRun();
 			}
-			catch (e:String) {
+			catch (e:Exception) {
 				ErrorUtils.handleException(e, checker.file, getModuleName());
 			}
 		}
@@ -45,7 +45,7 @@ class Check {
 	}
 
 	function actualRun() {
-		throw "Unimplemented";
+		throw new Exception("Unimplemented");
 	}
 
 	public function logPos(msg:String, pos:Position, ?code:String, ?sev:SeverityLevel):Message {

@@ -47,14 +47,16 @@ class MagicNumberCheck extends Check {
 			if (isPosSuppressed(numberToken.pos)) continue;
 			if (filterNumber(numberToken)) continue;
 			switch (numberToken.tok) {
-				case Const(CInt(n)):
-					var number:Int = Std.parseInt(n);
+				case Const(CInt(n, s)):
+					var number:Int = Std.parseInt(n.replace("_", ""));
 					if (ignoreNumbers.contains(number)) continue;
-					logPos('"$n" is a magic number', numberToken.pos);
-				case Const(CFloat(n)):
-					var number:Float = Std.parseFloat(n);
+					if (s == null) s = "";
+					logPos('"$n$s" is a magic number', numberToken.pos);
+				case Const(CFloat(n, s)):
+					var number:Float = Std.parseFloat(n.replace("_", ""));
 					if (ignoreNumbers.contains(number)) continue;
-					logPos('"$n" is a magic number', numberToken.pos);
+					if (s == null) s = "";
+					logPos('"$n$s" is a magic number', numberToken.pos);
 				default:
 			}
 		}
