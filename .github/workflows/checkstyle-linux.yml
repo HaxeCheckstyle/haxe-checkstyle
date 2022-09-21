@@ -61,7 +61,7 @@ jobs:
     - name: Run JVM tests
       run: npx haxe testJvm.hxml
     - name: Format and upload codeclimate coverage
-      if: success() && matrix.haxe-version == '4.2.5'
+      if: success() && matrix.haxe-version == 'nightly'
       run: |
         ( \
           cd src; \
@@ -69,5 +69,5 @@ jobs:
           ../cc-test-reporter upload-coverage; \
         )
     - name: Upload results to codecov
-      if: success() && (matrix.haxe-version == '4.2.5')
+      if: success() && (matrix.haxe-version == 'nightly')
       run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"
