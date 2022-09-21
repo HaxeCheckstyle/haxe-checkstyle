@@ -26,7 +26,7 @@ jobs:
       with:
         node-version: 12
     - name: Installing codeclimate client
-      if: matrix.haxe-version == '4.2.5'
+      if: matrix.haxe-version == 'nightly'
       run: |
         curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         chmod +x ./cc-test-reporter
