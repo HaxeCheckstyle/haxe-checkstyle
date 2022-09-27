@@ -4,7 +4,7 @@ import checkstyle.Message.MessageLocation;
 import haxe.Json;
 
 class JSONReporter extends BaseReporter {
-	var files:Array<String>;
+	var files:Array<String> = [];
 
 	override public function start() {
 		super.start();
