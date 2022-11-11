@@ -49,8 +49,8 @@ jobs:
         cd ~/haxe/haxe_libraries/hxcpp/4.2.0/github
         cd `ls`
         npx haxelib dev hxcpp .
-        (cd tools/build; haxe compile.hxml)
-        (cd tools/hxcpp; haxe compile.hxml)
+        (cd tools/build; npx haxe compile.hxml)
+        (cd tools/hxcpp; npx haxe compile.hxml)
     - name: Build neko versions
       run: |
         npx haxe build.hxml
