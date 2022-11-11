@@ -44,6 +44,13 @@ jobs:
         npx haxe -version
         npx neko -version
         npx haxelib list
+    - name: Build hxcpp binary
+      run: |
+        cd ~/haxe/haxe_libraries/hxcpp/4.2.0/github
+        cd `ls`
+        npx haxelib dev hxcpp .
+        (cd tools/build; haxe compile.hxml)
+        (cd tools/hxcpp; haxe compile.hxml)
     - name: Build neko versions
       run: |
         npx haxe build.hxml
