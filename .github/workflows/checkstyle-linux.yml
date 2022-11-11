@@ -32,7 +32,9 @@ jobs:
         chmod +x ./cc-test-reporter
         ./cc-test-reporter before-build
     - name: Run npm install
-      run: npm i -g
+      run: |
+        npm ci
+        npm i -g lix
     - name: Install Haxe version ${{ matrix.haxe-version }}
       run: |
         npx lix download haxe ${{ matrix.haxe-version }}
