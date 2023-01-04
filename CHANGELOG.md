@@ -4,7 +4,7 @@
 
 ## version 2.8.4 (2023-01-05)
 
-- Fixed null pointer reference in BaseReporter, fixes [#517](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/517)
+- Fixed null pointer reference in BaseReporter, fixes [#517](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/517) ([#518](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/518))
 - Fixed null pointer reference in JSONReporter ([#516](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/516))
 - Fixed C++ compilation on nightly
 
