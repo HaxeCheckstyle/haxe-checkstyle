@@ -10,7 +10,7 @@ typedef Message = MessageLocation & {
 	var moduleName:String;
 	var categories:Array<Category>;
 	var points:Int;
-	@:optional var related:Array<MessageLocation>;
+	var related:Array<MessageLocation>;
 };
 
 typedef MessageLocation = {

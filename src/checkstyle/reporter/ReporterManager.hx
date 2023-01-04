@@ -132,7 +132,7 @@ class ReporterManager {
 			desc: "",
 			code: '$e',
 			message: '$step failed: $e\nPlease file a github issue at https://github.com/HaxeCheckstyle/haxe-checkstyle/issues',
-			related: null
+			related: []
 		};
 	}
 }
