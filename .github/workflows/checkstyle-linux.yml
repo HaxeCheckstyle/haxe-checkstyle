@@ -58,7 +58,7 @@ jobs:
         npx haxe buildDebug.hxml
     - name: Build NodeJs version
       run: |
-        npx haxe buildJS.hxml \
+        npx haxe buildJS.hxml
         bash uglifyCheckstyle.sh
     - name: Build C++ version
       run: echo "y" | npx haxe buildCpp.hxml
