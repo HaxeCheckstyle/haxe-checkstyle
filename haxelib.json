@@ -18,8 +18,8 @@
         "adireddy",
         "Gama11"
 	],
-    "releasenote": "fixed null pointer crashes in reporters - see CHANGELOG",
-    "version": "2.8.4",
+    "releasenote": "updated tokentree lib - see CHANGELOG",
+    "version": "2.8.5",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
     "dependencies": {}
 }

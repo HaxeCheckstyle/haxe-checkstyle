@@ -2,6 +2,10 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.8.5 (2023-02-15)
+
+- Updated tokentree lib
+
 ## version 2.8.4 (2023-01-05)
 
 - Fixed null pointer reference in BaseReporter, fixes [#517](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/517) ([#518](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/518))

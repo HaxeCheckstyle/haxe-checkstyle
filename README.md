@@ -7,7 +7,6 @@
 <!-- [![Code Climate](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/badges/gpa.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle)
 [![Code Climate Issues](https://img.shields.io/codeclimate/issues/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues)
 [![Code Climate Issues](https://img.shields.io/codeclimate/tech-debt/HaxeCheckstyle/haxe-checkstyle.svg)](https://codeclimate.com/github/HaxeCheckstyle/haxe-checkstyle/issues) -->
-[![Gitter chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/HaxeCheckstyle/haxe-checkstyle)
 
 **Haxe Checkstyle** is a static analysis tool to help developers write Haxe code that adheres to a coding standard.
 
