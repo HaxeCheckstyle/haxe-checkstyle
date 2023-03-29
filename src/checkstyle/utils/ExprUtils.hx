@@ -235,11 +235,9 @@ class ExprUtils {
 			case EMeta(s, e):
 				if (s.params != null) for (mp in s.params) walkExpr(mp, cb);
 				walkExpr(e, cb);
-			#if (haxe >= version("4.2.0-rc.1"))
 			case EIs(e, t):
 				walkExpr(e, cb);
 				walkComplexType(t, cb);
-			#end
 		}
 	}
 

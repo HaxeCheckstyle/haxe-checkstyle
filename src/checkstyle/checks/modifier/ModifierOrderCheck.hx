@@ -101,10 +101,8 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case ADynamic: DYNAMIC;
 			case AExtern: EXTERN;
 			case AFinal: FINAL;
-			#if (haxe >= version("4.2.0-rc.1"))
 			case AAbstract: ABSTRACT;
 			case AOverload: OVERLOAD;
-			#end
 		}
 	}
 
@@ -119,10 +117,8 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case ADynamic: "dynamic";
 			case AExtern: "extern";
 			case AFinal: "final";
-			#if (haxe >= version("4.2.0-rc.1"))
 			case AAbstract: "abstract";
 			case AOverload: "overload";
-			#end
 		}
 	}
 }

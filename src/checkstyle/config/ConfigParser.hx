@@ -1,5 +1,6 @@
 package checkstyle.config;
 
+import Std.isOfType as isOfType;
 import checkstyle.Checker;
 import checkstyle.ChecksInfo;
 import checkstyle.checks.Check;
@@ -9,12 +10,6 @@ import haxe.Json;
 import haxe.io.Path;
 import sys.FileSystem;
 import sys.io.File;
-
-#if (haxe >= version("4.1.0"))
-import Std.isOfType as isOfType;
-#else
-import Std.is as isOfType;
-#end
 
 class ConfigParser {
 	public var paths:Array<String>;
