@@ -11,6 +11,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertNoMsg(check, MEMBER_DEF);
 		assertNoMsg(check, METHOD_DEF);
 		assertNoMsg(check, BRACELESS_ANON_FUNC_ISSUE_113);
+		assertNoMsg(check, ARROW_FUNCTION);
 	}
 
 	@Test
@@ -33,6 +34,7 @@ class InnerAssignmentCheckTest extends CheckTestCase<InnerAssignmentCheckTests> 
 		assertNoMsg(check, METHOD_DEF);
 		assertNoMsg(check, BRACELESS_ANON_FUNC_ISSUE_113);
 		assertNoMsg(check, SETTER_GETTER_ISSUE_259);
+		assertNoMsg(check, ARROW_FUNCTION);
 
 		assertMsg(check, IF_COND, MSG_INNER_ASSIGNMENT);
 		assertMsg(check, IF_RETURN_EXPR, MSG_INNER_ASSIGNMENT);
@@ -140,5 +142,11 @@ enum abstract InnerAssignmentCheckTests(String) to String {
 	var INCORRECT_SETTER_GETTER_CALL_ISSUE_259 = "
 	class Test {
 		private function set_value(value : String) : String { return this.value = StringTools.trim(value); }
+	}";
+	var ARROW_FUNCTION = "
+	class Test {
+		public function foo() {
+			Lamba.iter(sounds, s -> s.volume = 0.75);
+		}
 	}";
 }

@@ -49,6 +49,7 @@ class InnerAssignmentCheck extends Check {
 			case Kwd(KwdSwitch): true;
 			case Kwd(KwdReturn): filterReturn(token);
 			case BrOpen, DblDot: false;
+			case Arrow: false;
 			case POpen: filterPOpen(token.parent);
 			default: filterAssignment(token.parent);
 		}

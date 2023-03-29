@@ -4,6 +4,7 @@
 
 ## version 2.8.5 (2023-02-15)
 
+- Fixed inner assignement check to allow assignment in arrow functions, fixes [#259](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/259)
 - Updated tokentree lib
 
 ## version 2.8.4 (2023-01-05)
