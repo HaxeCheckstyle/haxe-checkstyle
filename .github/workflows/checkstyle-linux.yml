@@ -48,7 +48,7 @@ jobs:
         npx haxelib list
     - name: Build hxcpp binary
       run: |
-        cd ~/haxe/haxe_libraries/hxcpp/4.2.0/github/3e96dbd3e24d6497803eba87542a1684ed633948/
+        cd ~/haxe/haxe_libraries/hxcpp/4.2.0/github/96f5f9a69744e5fd07717e5af9d5b45bd3a8890a/
         npx haxelib dev hxcpp .
         cd tools/hxcpp
         npx haxe compile.hxml
