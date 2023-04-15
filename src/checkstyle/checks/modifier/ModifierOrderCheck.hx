@@ -89,6 +89,9 @@ enum abstract ModifierOrderCheckModifier(String) {
 	var FINAL = "FINAL";
 	var ABSTRACT = "ABSTRACT";
 	var OVERLOAD = "OVERLOAD";
+	#if (haxe > version("4.3.0"))
+	var ENUM = "OVERLOAD";
+	#end
 
 	@:from
 	public static function fromAccess(access:Access):ModifierOrderCheckModifier {
@@ -103,6 +106,9 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case AFinal: FINAL;
 			case AAbstract: ABSTRACT;
 			case AOverload: OVERLOAD;
+			#if (haxe > version("4.3.0"))
+			case AEnum: ENUM;
+			#end
 		}
 	}
 
@@ -119,6 +125,9 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case AFinal: "final";
 			case AAbstract: "abstract";
 			case AOverload: "overload";
+			#if (haxe > version("4.3.0"))
+			case AEnum: "enum";
+			#end
 		}
 	}
 }
