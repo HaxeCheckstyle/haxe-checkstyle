@@ -32,12 +32,12 @@ class ReturnCheck extends Check {
 
 	override function actualRun() {
 		forEachField(function(field, parent) {
-			if (!field.isConstructor() && parent.kind != INTERFACE) checkField(field);
+			if (!field.isConstructor() && parent.kind != INTERFACE) checkField(field, parent);
 		});
 		checkInlineFunctions();
 	}
 
-	function checkField(f:Field) {
+	function checkField(f:Field, p:ParentType) {
 		if (isPosExtern(f.pos)) return;
 		var noReturn = false;
 		switch (f.kind) {
@@ -51,7 +51,7 @@ class ReturnCheck extends Check {
 				if (!noReturn) {
 					switch (fun.ret) {
 						case TPath(val):
-							if (!enforceReturnType && Std.string(val.name) == "Void") warnVoid(f.name, f.pos);
+							if (!enforceReturnType && Std.string(val.name) == "Void" && !f.isAbstract(p)) warnVoid(f.name, f.pos);
 						default:
 					}
 				}
