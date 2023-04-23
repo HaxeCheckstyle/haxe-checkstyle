@@ -21,6 +21,10 @@ class FieldUtils {
 		return f.access.contains(AStatic);
 	}
 
+	public static function isAbstract(f:Field, p:ParentType):Bool {
+		return f.access.contains(AAbstract);
+	}
+
 	public static function isDefaultPrivate(f:Field, p:ParentType):Bool {
 		if (p.kind == INTERFACE) return false;
 		if (p.kind == ENUM_ABSTRACT && !f.access.contains(AStatic) && f.kind.match(FVar(_, _))) return false;

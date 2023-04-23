@@ -37,6 +37,11 @@ class ReturnCheckTest extends CheckTestCase<ReturnCheckTests> {
 	}
 
 	@Test
+	public function testAbstractVoid() {
+		assertNoMsg(new ReturnCheck(), TEST1A, MSG_VOID_RETURN);
+	}
+
+	@Test
 	public function testNoReturnType() {
 		var check = new ReturnCheck();
 		assertMsg(check, TEST2, MSG_NOT_TEST1_RETURN);
@@ -111,6 +116,12 @@ enum abstract ReturnCheckTests(String) to String {
 	abstractAndClass Test {
 		public function test():Void {}
 	}";
+
+	var TEST1A = "
+	abstractAndClass Test {
+		abstract public function test():Void;
+	}";
+
 	var TEST2 = "
 	abstractAndClass Test {
 		public function test1() {
