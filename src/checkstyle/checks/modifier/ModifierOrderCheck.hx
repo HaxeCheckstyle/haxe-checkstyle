@@ -106,7 +106,7 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case AFinal: FINAL;
 			case AAbstract: ABSTRACT;
 			case AOverload: OVERLOAD;
-			#if (haxe > version("4.3.0"))
+			#if (haxe >= version("5.0.0-alpha"))
 			case AEnum: ENUM;
 			#end
 		}
@@ -125,7 +125,7 @@ enum abstract ModifierOrderCheckModifier(String) {
 			case AFinal: "final";
 			case AAbstract: "abstract";
 			case AOverload: "overload";
-			#if (haxe > version("4.3.0"))
+			#if (haxe >= version("5.0.0-alpha"))
 			case AEnum: "enum";
 			#end
 		}
