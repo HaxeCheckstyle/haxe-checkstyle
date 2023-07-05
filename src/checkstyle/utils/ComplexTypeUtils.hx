@@ -59,7 +59,7 @@ class ComplexTypeUtils {
 		walkCommonDefinition(d, pos, cb);
 		for (f in d.flags) {
 			switch (f) {
-				case AFromType(ct) | AToType(ct) | AIsType(ct):
+				case AbFrom(ct) | AbTo(ct) | AbOver(ct):
 					walkComplexType(ct, f.getName(), pos, cb);
 				default:
 			}

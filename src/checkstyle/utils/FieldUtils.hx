@@ -56,6 +56,13 @@ class FieldUtils {
 			case EAbstract(a):
 				var metaName = #if (haxeparser > "3.2.0") ":enum" #else ":kwdenum" #end;
 				var kind = a.meta.hasMeta(metaName) ? ENUM_ABSTRACT : ABSTRACT;
+				for (flag in a.flags) {
+					switch (flag) {
+						case AbEnum:
+							kind = ENUM_ABSTRACT;
+						default:
+					}
+				}
 				return {decl: decl, kind: kind};
 			case ETypedef(d):
 				return {decl: decl, kind: TYPEDEF};
