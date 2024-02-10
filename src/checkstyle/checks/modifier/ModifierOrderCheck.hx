@@ -89,8 +89,8 @@ enum abstract ModifierOrderCheckModifier(String) {
 	var FINAL = "FINAL";
 	var ABSTRACT = "ABSTRACT";
 	var OVERLOAD = "OVERLOAD";
-	#if (haxe > version("4.3.0"))
-	var ENUM = "OVERLOAD";
+	#if (haxe >= version("5.0.0-alpha"))
+	var ENUM = "ENUM";
 	#end
 
 	@:from

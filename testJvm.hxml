@@ -1,7 +1,0 @@
-build/commonTest.hxml
--D jvm
-
--java out
--main TestMain
-
--cmd java -jar out/TestMain.jar

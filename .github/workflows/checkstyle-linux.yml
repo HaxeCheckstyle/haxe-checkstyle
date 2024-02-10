@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        haxe-version: ['4.3.2', 'nightly']
+        haxe-version: ['4.3.3', 'nightly']
     env:
       CC_TEST_REPORTER_ID: c4eda639526d39fbcab7ab9fc68c4046d4e597df56dbcb552b42d27b3580b758
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
@@ -66,10 +66,8 @@ jobs:
       run: npx haxe buildSchema.hxml
     - name: Run eval tests
       run: npx haxe -D codecov_json testAndResources.hxml
-    - name: Run Java tests
-      run: npx haxe testJava.hxml
     - name: Run JVM tests
-      run: npx haxe testJvm.hxml
+      run: npx haxe testJava.hxml
     - name: Format and upload codeclimate coverage
       if: success() && matrix.haxe-version == 'nightly'
       run: |
