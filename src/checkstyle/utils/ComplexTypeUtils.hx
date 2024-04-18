@@ -69,7 +69,7 @@ class ComplexTypeUtils {
 
 	public static function walkImport(sl, mode, cb:ComplexTypeCallback) {}
 
-	public static function walkTypedef(d:Definition<EnumFlag, ComplexType>, pos:Position, cb:ComplexTypeCallback) {
+	public static function walkTypedef(d:Definition<TypedefFlag, ComplexType>, pos:Position, cb:ComplexTypeCallback) {
 		walkCommonDefinition(d, pos, cb);
 		walkComplexType(d.data, d.name, pos, cb);
 	}

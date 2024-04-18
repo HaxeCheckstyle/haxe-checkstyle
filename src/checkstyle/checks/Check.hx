@@ -188,13 +188,13 @@ class Check {
 				case EEnum(d):
 					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
 				case ETypedef(d):
-					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(EExtern);
+					if ((pos <= td.pos.max) && (pos >= td.pos.min)) return d.flags.contains(TDExtern);
 					switch (d.data) {
 						case TAnonymous(fields):
 							for (field in fields) {
 								if (pos > field.pos.max) continue;
 								if (pos < field.pos.min) continue;
-								return d.flags.contains(EExtern);
+								return d.flags.contains(TDExtern);
 							}
 						default:
 					}

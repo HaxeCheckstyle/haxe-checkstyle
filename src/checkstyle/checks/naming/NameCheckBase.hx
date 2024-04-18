@@ -62,7 +62,7 @@ class NameCheckBase<T> extends Check {
 
 	function checkAbstractType(decl:TypeDef, d:Definition<AbstractFlag, Array<Field>>, pos:Position) {}
 
-	function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {}
+	function checkTypedefType(decl:TypeDef, d:Definition<TypedefFlag, ComplexType>, pos:Position) {}
 
 	function matchTypeName(type:String, name:String, pos:Position) {
 		if (!formatRE.match(name)) {

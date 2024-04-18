@@ -21,8 +21,8 @@ class MethodNameCheck extends NameCheckBase<MethodNameCheckToken> {
 		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (ignoreExtern && d.flags.contains(EExtern)) return;
+	override function checkTypedefType(decl:TypeDef, d:Definition<TypedefFlag, ComplexType>, pos:Position) {
+		if (ignoreExtern && d.flags.contains(TDExtern)) return;
 
 		var p = decl.toParentType();
 		switch (d.data) {

@@ -38,9 +38,9 @@ class TypeNameCheck extends NameCheckBase<TypeNameCheckToken> {
 		matchTypeName("abstract", d.name, pos);
 	}
 
-	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
+	override function checkTypedefType(decl:TypeDef, d:Definition<TypedefFlag, ComplexType>, pos:Position) {
 		if (!hasToken(TYPEDEF)) return;
-		if (ignoreExtern && d.flags.contains(EExtern)) return;
+		if (ignoreExtern && d.flags.contains(TDExtern)) return;
 
 		matchTypeName("typedef", d.name, pos);
 	}

@@ -69,7 +69,7 @@ class ExprUtils {
 
 	public static function walkImport(sl, mode, cb:Expr -> Void) {}
 
-	public static function walkTypedef(d:Definition<EnumFlag, ComplexType>, cb:Expr -> Void) {
+	public static function walkTypedef(d:Definition<TypedefFlag, ComplexType>, cb:Expr -> Void) {
 		walkCommonDefinition(d, cb);
 		walkComplexType(d.data, cb);
 	}

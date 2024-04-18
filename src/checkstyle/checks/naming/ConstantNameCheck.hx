@@ -24,7 +24,7 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 		checkFields(d.data, decl.toParentType());
 	}
 
-	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {}
+	override function checkTypedefType(decl:TypeDef, d:Definition<TypedefFlag, ComplexType>, pos:Position) {}
 
 	function checkFields(d:Array<Field>, p:ParentType) {
 		for (field in d) {

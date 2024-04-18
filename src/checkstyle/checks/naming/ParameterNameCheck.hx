@@ -25,8 +25,8 @@ class ParameterNameCheck extends NameCheckBase<String> {
 		checkFields(d.data);
 	}
 
-	override function checkTypedefType(decl:TypeDef, d:Definition<EnumFlag, ComplexType>, pos:Position) {
-		if (ignoreExtern && d.flags.contains(EExtern)) return;
+	override function checkTypedefType(decl:TypeDef, d:Definition<TypedefFlag, ComplexType>, pos:Position) {
+		if (ignoreExtern && d.flags.contains(TDExtern)) return;
 		switch (d.data) {
 			case TAnonymous(f):
 				checkFields(f);
