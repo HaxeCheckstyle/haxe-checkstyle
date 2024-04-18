@@ -1,4 +1,4 @@
-# @install: lix --silent download "gh://github.com/HaxeCheckstyle/haxeparser#aaba9287c53af55b253b2d1069582731ffa5f93f" into haxeparser/4.3.0-rc.1/github/aaba9287c53af55b253b2d1069582731ffa5f93f
+# @install: lix --silent download "gh://github.com/HaxeCheckstyle/haxeparser#a5fce2ecf5fb3bdfebfd7efd8b05329d456ec0d2" into haxeparser/4.3.0-rc.1/github/a5fce2ecf5fb3bdfebfd7efd8b05329d456ec0d2
 -lib hxparse
--cp ${HAXE_LIBCACHE}/haxeparser/4.3.0-rc.1/github/aaba9287c53af55b253b2d1069582731ffa5f93f/src
+-cp ${HAXE_LIBCACHE}/haxeparser/4.3.0-rc.1/github/a5fce2ecf5fb3bdfebfd7efd8b05329d456ec0d2/src
 -D haxeparser=4.3.0-rc.1
