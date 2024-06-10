@@ -10,16 +10,9 @@ class XMLReporter extends BaseReporter {
 		Solution from mustache.js
 		https://github.com/janl/mustache.js/blob/master/mustache.js#L49
 	**/
-	static var ENTITY_MAP:Map<String, String> = [
-		"&" => "&amp;",
-		"<" => "&lt;",
-		">" => "&gt;",
-		'"' => "&quot;",
-		"'" => "&#39;",
-		"/" => "&#x2F;"
-	];
+	static var ENTITY_MAP:Map<String, String> = ["&" => "&amp;", "<" => "&lt;", ">" => "&gt;", '"' => "&quot;", "'" => "&#39;"];
 
-	static var ENTITY_RE:EReg = ~/[&<>"'\/]/g;
+	static var ENTITY_RE:EReg = ~/[&<>"']/g;
 
 	public function new(numFiles:Int, checkCount:Int, usedCheckCount:Int, path:String, s:String, ns:Bool) {
 		super(numFiles, checkCount, usedCheckCount, path, ns);

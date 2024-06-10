@@ -143,6 +143,9 @@
 			"type": "FileLength"
 		},
 		{
+			"type": "FileNameCase"
+		},
+		{
 			"props": {
 				"option": "upperCase"
 			},
