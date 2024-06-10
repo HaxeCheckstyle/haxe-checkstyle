@@ -36,6 +36,7 @@ import checkstyle.checks.metrics.CyclomaticComplexityCheck;
 import checkstyle.checks.modifier.FinalCheck;
 import checkstyle.checks.modifier.RedundantModifierCheck;
 import checkstyle.checks.naming.ConstantNameCheck;
+import checkstyle.checks.naming.FileNameCaseCheck;
 import checkstyle.checks.size.FileLengthCheck;
 import checkstyle.checks.size.LineLengthCheck;
 import checkstyle.checks.size.MethodCountCheck;
@@ -72,8 +73,7 @@ class DetectCodingStyleTest {
 
 	@Test
 	public function testDetectConditionalCompilation() {
-		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()],
-			[buildCheckFile(SAMPLE_CODING_STYLE)]);
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("ConditionalCompilation", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
@@ -288,8 +288,7 @@ class DetectCodingStyleTest {
 
 	@Test
 	public function testDetectUnnecessaryConstructor() {
-		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()],
-			[buildCheckFile(SAMPLE_CODING_STYLE)]);
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		Assert.areEqual(1, detectedChecks.length);
 		Assert.areEqual("UnnecessaryConstructor", detectedChecks[0].type);
 	}
@@ -379,6 +378,13 @@ class DetectCodingStyleTest {
 		Assert.areEqual("ConstantName", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.areEqual("^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$", props.format);
+	}
+
+	@Test
+	public function testDetectFileNameCase() {
+		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FileNameCaseCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
+		Assert.areEqual(1, detectedChecks.length);
+		Assert.areEqual("FileNameCase", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.size

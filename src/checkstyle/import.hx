@@ -1,7 +1,6 @@
 package checkstyle;
 
 import checkstyle.Checker.LinePos;
-import checkstyle.SeverityLevel;
 import checkstyle.detect.DetectableInstances;
 import checkstyle.utils.ErrorUtils;
 import haxe.Exception;
@@ -19,3 +18,7 @@ using checkstyle.utils.ExprUtils;
 using checkstyle.utils.FieldUtils;
 using checkstyle.utils.StringUtils;
 using tokentree.TokenTreeAccessHelper;
+
+#if !macro
+import checkstyle.SeverityLevel;
+#end

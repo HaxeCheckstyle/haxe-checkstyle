@@ -4,7 +4,7 @@ import checkstyle.utils.ConfigUtils;
 
 class ConfigParserTest {
 	static inline var LOCAL_PATH:String = "./";
-	static inline var TEST_COUNT:Int = 80;
+	static inline var TEST_COUNT:Int = 81;
 
 	@Test
 	public function testCheckstyleConfig() {

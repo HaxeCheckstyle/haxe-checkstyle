@@ -2,6 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
+- New check `FileNameCase` to check file names match module names
+- Fixed XMLReporter to no longer escape `/` to `&#x2F;`
+
 ## version 2.8.5 (2023-02-15)
 
 - Fixed inner assignement check to allow assignment in arrow functions, fixes [#259](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/259)

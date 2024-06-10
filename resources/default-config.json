@@ -195,6 +195,10 @@
 			}
 		},
 		{
+			"type": "FileNameCase",
+			"props": {}
+		},
+		{
 			"type": "Final",
 			"props": {}
 		},
