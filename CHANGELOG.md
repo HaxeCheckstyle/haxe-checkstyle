@@ -2,6 +2,8 @@
 
 ## dev branch / next version (2.x.x)
 
+## version 2.9.0 (2024-06-10)
+
 - New check `FileNameCase` to check file names match module names
 - Fixed XMLReporter to no longer escape `/` to `&#x2F;`
 
