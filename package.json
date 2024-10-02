@@ -4,7 +4,7 @@
     "description": "Automated code analysis ideal for projects that want to enforce a coding standard.",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/HaxeCheckstyle/haxe-checkstyle"
+        "url": "git+https://github.com/HaxeCheckstyle/haxe-checkstyle.git"
     },
     "keywords": [
         "checkstyle",
@@ -30,7 +30,7 @@
     ],
     "devDependencies": {
         "lix": "^15.12.0",
-		"uglify-js-es6": "^2.8.9"
+        "uglify-js-es6": "^2.8.9"
     },
     "bugs": "https://github.com/HaxeCheckstyle/haxe-checkstyle/issues",
     "license": "MIT",

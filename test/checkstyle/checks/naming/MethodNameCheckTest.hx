@@ -6,6 +6,7 @@ class MethodNameCheckTest extends CheckTestCase<MethodNameCheckTests> {
 		var check = new MethodNameCheck();
 		assertNoMsg(check, TEST);
 		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST_SUPPRESS_CLASS);
 	}
 
 	@Test
@@ -195,6 +196,14 @@ enum abstract MethodNameCheckTests(String) to String {
 	abstractAndClass Test {
 		static function Test() {}
 		static inline function Test1() {}
+		function Test3() {}
+	}";
+	var TEST_SUPPRESS_CLASS = "
+	@SuppressWarnings('checkstyle:MethodName')
+	abstractAndClass Test {
+		static public function Test() {}
+		static inline public function Test1() {}
+		public function Test2() {}
 		function Test3() {}
 	}";
 }

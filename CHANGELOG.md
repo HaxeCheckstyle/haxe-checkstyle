@@ -4,8 +4,8 @@
 
 ## version 2.9.0 (2024-06-10)
 
-- New check `FileNameCase` to check file names match module names
-- Fixed XMLReporter to no longer escape `/` to `&#x2F;`
+- New check `FileNameCase` to check file names match module names ([#527](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/527))
+- Fixed XMLReporter to no longer escape `/` to `&#x2F;` ([#527](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/527))
 
 ## version 2.8.5 (2023-02-15)
 
