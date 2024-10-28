@@ -1,6 +1,7 @@
 package checkstyle.checks;
 
 import checkstyle.config.ExcludeRange;
+import haxe.Timer;
 
 class Check {
 	public var severity:SeverityLevel;
@@ -31,6 +32,10 @@ class Check {
 	}
 
 	public function run(checker:Checker):Array<Message> {
+		var startTime = Timer.stamp();
+		if (checker.verbose) {
+			Sys.println('${checker.file.name} - [${getModuleName()}] start');
+		}
 		reset();
 		this.checker = checker;
 		if (severity != SeverityLevel.IGNORE) {
@@ -40,6 +45,10 @@ class Check {
 			catch (e:Exception) {
 				ErrorUtils.handleException(e, checker.file, getModuleName());
 			}
+		}
+		var endTime = Timer.stamp();
+		if (checker.verbose) {
+			Sys.println('${checker.file.name} - [${getModuleName()}] done. (${(endTime - startTime) * 1000}ms)');
 		}
 		return messages;
 	}

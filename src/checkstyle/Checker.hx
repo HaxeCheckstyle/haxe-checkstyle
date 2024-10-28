@@ -22,6 +22,7 @@ class Checker {
 	public var defineCombinations:Array<Array<String>>;
 	public var linesIdx:Array<LineIds>;
 	public var lineSeparator:String;
+	public var verbose:Bool;
 
 	var tokenTree:TokenTree;
 	var allowFailingAST:Bool;
@@ -34,6 +35,7 @@ class Checker {
 		baseDefines = [];
 		defineCombinations = [];
 		linesIdx = [];
+		verbose = false;
 		this.allowFailingAST = allowFailingAST;
 	}
 

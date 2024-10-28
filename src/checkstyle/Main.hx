@@ -70,7 +70,9 @@ class Main {
 				TEXT_PATH = path;
 			},
 			@doc("Set reporter style (XSLT)")
-			["-x", "--xslt"] => function(style:String) STYLE = style,
+			["-x", "--xslt"] => function(style:String) STYLE = style, 
+			@doc("verbose logging")
+			["-v", "--verbose"] => function() checker.verbose = true,
 			@doc("Sets the number of checker threads")
 			["--checkerthreads"] => function(num:Int) configParser.overrideCheckerThreads = num,
 			@doc("Generate a default config and exit")

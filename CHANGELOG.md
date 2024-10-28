@@ -2,6 +2,9 @@
 
 ## dev branch / next version (2.x.x)
 
+- Added -v / --verbose command line switch
+- Fixed null pointer exception with module level fields on static targets
+
 ## version 2.9.0 (2024-06-10)
 
 - New check `FileNameCase` to check file names match module names ([#527](https://github.com/HaxeCheckstyle/haxe-checkstyle/issues/527))

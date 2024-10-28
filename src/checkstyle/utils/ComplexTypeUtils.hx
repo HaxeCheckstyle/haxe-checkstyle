@@ -88,7 +88,9 @@ class ComplexTypeUtils {
 	}
 
 	public static function walkStatic(s:Definition<StaticFlag, FieldType>, pos:Position, cb:ComplexTypeCallback) {
-		walkField(cast s, cb);
+		var field:Field = cast s;
+		field.kind = s.data;
+		walkField(field, cb);
 	}
 
 	public static function walkVar(v:Var, pos:Position, cb:ComplexTypeCallback) {

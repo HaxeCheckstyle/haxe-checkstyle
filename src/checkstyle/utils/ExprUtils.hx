@@ -88,7 +88,9 @@ class ExprUtils {
 	}
 
 	public static function walkStatic(s:Definition<StaticFlag, FieldType>, pos:Position, cb:Expr -> Void) {
-		walkField(cast s, cb);
+		var field:Field = cast s;
+		field.kind = s.data;
+		walkField(field, cb);
 	}
 
 	public static function walkVar(v:Var, cb:Expr -> Void) {

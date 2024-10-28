@@ -37,6 +37,7 @@ class ParserQueue {
 			var checker:Checker = new Checker();
 			checker.baseDefines = templateChecker.baseDefines;
 			checker.defineCombinations = templateChecker.defineCombinations;
+			checker.verbose = templateChecker.verbose;
 			checker.loadFileContent(file);
 			if (!checker.createContext(file)) {
 				checker.unloadFileContent(file);
