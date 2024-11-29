@@ -4,6 +4,7 @@
 
 - Added -v / --verbose command line switch
 - Fixed null pointer exception with module level fields on static targets
+- Moved from munit+mcover to utest+instrument
 
 ## version 2.9.0 (2024-06-10)
 
