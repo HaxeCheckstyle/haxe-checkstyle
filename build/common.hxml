@@ -3,3 +3,4 @@
 -lib compiletime
 -lib hxargs
 -lib tokentree
+--macro CompileTime.importPackage("checkstyle.checks")

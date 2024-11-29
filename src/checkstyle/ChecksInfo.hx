@@ -8,7 +8,6 @@ class ChecksInfo {
 	public function new() {
 		checkInfos = new Map();
 
-		CompileTime.importPackage("checkstyle.checks");
 		var checksClasses = CompileTime.getAllClasses(Check);
 
 		for (cl in checksClasses) {
