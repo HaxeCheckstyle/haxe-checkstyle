@@ -63,9 +63,10 @@ class ThreadTest implements ITest {
 
 		var checkerPool = new CheckerPool(parseQueue, checker);
 		checkerPool.start(5);
-		Sys.sleep(1);
+		Sys.sleep(.2);
 		Assert.isFalse(parseQueue.isFinished());
 		Assert.isFalse(checkerPool.isFinished());
+		Sys.sleep(1);
 
 		var failCount:Int = 0;
 		while (true) {
