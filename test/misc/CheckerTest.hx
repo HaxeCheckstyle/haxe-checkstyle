@@ -2,7 +2,9 @@ package misc;
 
 import checkstyle.Checker;
 
-class CheckerTest {
+class CheckerTest implements ITest {
+	public function new() {}
+
 	@Test
 	public function testEmptyLinesIdx() {
 		var checker:Checker = new Checker();
@@ -53,9 +55,9 @@ class CheckerTest {
 	function checkLinePos(checker:Checker, ofs:Int, expectedLine:Int, expectedOfs:Int, ?pos:PosInfos) {
 		var linePos:LinePos = checker.getLinePos(ofs);
 
-		Assert.isNotNull(linePos, pos);
-		Assert.areEqual(expectedLine, linePos.line, pos);
-		Assert.areEqual(expectedOfs, linePos.ofs, pos);
+		Assert.notNull(linePos, pos);
+		Assert.equals(expectedLine, linePos.line, pos);
+		Assert.equals(expectedOfs, linePos.ofs, pos);
 	}
 
 	function throwsBadOffset(checker:Checker, ofs:Int, ?pos:PosInfos) {
@@ -64,7 +66,7 @@ class CheckerTest {
 			Assert.fail("line pos calculation should fail", pos);
 		}
 		catch (e:Any) {
-			Assert.areEqual("Bad offset", '$e', pos);
+			Assert.equals("Bad offset", '$e', pos);
 		}
 	}
 }

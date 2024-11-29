@@ -1,2 +1,3 @@
 import haxe.PosInfos;
-import massive.munit.Assert;
+import utest.Assert;
+import utest.ITest;

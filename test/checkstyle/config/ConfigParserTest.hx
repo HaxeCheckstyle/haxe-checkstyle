@@ -2,20 +2,22 @@ package checkstyle.config;
 
 import checkstyle.utils.ConfigUtils;
 
-class ConfigParserTest {
+class ConfigParserTest implements ITest {
 	static inline var LOCAL_PATH:String = "./";
 	static inline var TEST_COUNT:Int = 81;
+
+	public function new() {}
 
 	@Test
 	public function testCheckstyleConfig() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.loadConfig("checkstyle.json");
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length > 0);
 		Assert.isTrue(configParser.checker.checks.length != configParser.getCheckCount());
 	}
@@ -24,14 +26,14 @@ class ConfigParserTest {
 	public function testExtendsConfigPath() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseAndValidateConfig({
 			extendsConfigPath: "checkstyle.json"
 		}, LOCAL_PATH);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length > 0);
 	}
 
@@ -39,35 +41,35 @@ class ConfigParserTest {
 	public function testValidateParserThread() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 0}, "");
-		Assert.areEqual(5, configParser.numberOfCheckerThreads);
+		Assert.equals(5, configParser.numberOfCheckerThreads);
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 10}, "");
-		Assert.areEqual(10, configParser.numberOfCheckerThreads);
+		Assert.equals(10, configParser.numberOfCheckerThreads);
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 50}, "");
-		Assert.areEqual(15, configParser.numberOfCheckerThreads);
+		Assert.equals(15, configParser.numberOfCheckerThreads);
 
 		configParser.overrideCheckerThreads = 13;
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 14}, "");
-		Assert.areEqual(13, configParser.numberOfCheckerThreads);
+		Assert.equals(13, configParser.numberOfCheckerThreads);
 
 		configParser.overrideCheckerThreads = 18;
 		configParser.parseAndValidateConfig({numberOfCheckerThreads: 14}, "");
-		Assert.areEqual(15, configParser.numberOfCheckerThreads);
+		Assert.equals(15, configParser.numberOfCheckerThreads);
 	}
 
 	@Test
 	public function testCheckCount() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.areEqual(TEST_COUNT, configParser.getCheckCount());
+		Assert.equals(TEST_COUNT, configParser.getCheckCount());
 	}
 
 	@Test
 	public function testUnusedChecks() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.areEqual(0, configParser.getUsedCheckCount());
+		Assert.equals(0, configParser.getUsedCheckCount());
 		configParser.addAllChecks();
-		Assert.areEqual(TEST_COUNT, configParser.getUsedCheckCount());
+		Assert.equals(TEST_COUNT, configParser.getUsedCheckCount());
 	}
 
 	@Test
@@ -80,22 +82,22 @@ class ConfigParserTest {
 
 		configParser = new ConfigParser(reportConfigParserFailure);
 		configParser.parseAndValidateConfig(config, "");
-		Assert.areEqual(configParser.getCheckCount(), configParser.getUsedCheckCount());
-		Assert.areEqual(11, configParser.numberOfCheckerThreads);
+		Assert.equals(configParser.getCheckCount(), configParser.getUsedCheckCount());
+		Assert.equals(11, configParser.numberOfCheckerThreads);
 	}
 
 	@Test
 	public function testConfigVersion1() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseAndValidateConfig({
 			version: 1
 		}, LOCAL_PATH);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 	}
 
@@ -106,23 +108,23 @@ class ConfigParserTest {
 			failMessage = message;
 		});
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseAndValidateConfig({
 			version: 0
 		}, LOCAL_PATH);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
-		Assert.areEqual("configuration file has unknown version: 0", failMessage);
+		Assert.equals("configuration file has unknown version: 0", failMessage);
 	}
 
 	@Test
 	public function testExcludeConfigVersion1() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes({
@@ -137,14 +139,14 @@ class ConfigParserTest {
 			failMessage = message;
 		});
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes({
 			version: 0
 		});
 
-		Assert.areEqual("exclude configuration file has unknown version: 0", failMessage);
+		Assert.equals("exclude configuration file has unknown version: 0", failMessage);
 	}
 
 	@Test
@@ -155,7 +157,7 @@ class ConfigParserTest {
 		});
 		configParser.validateMode = RELAXED;
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		var config:Config = {
@@ -171,11 +173,11 @@ class ConfigParserTest {
 		};
 		configParser.parseAndValidateConfig(config, LOCAL_PATH);
 
-		Assert.areEqual("", failMessage);
+		Assert.equals("", failMessage);
 
 		configParser.validateMode = STRICT;
 		configParser.parseAndValidateConfig(config, LOCAL_PATH);
-		Assert.areEqual("Check Trace has no property named 'non_existing_property'", failMessage);
+		Assert.equals("Check Trace has no property named 'non_existing_property'", failMessage);
 	}
 
 	function reportConfigParserFailure(message:String) {

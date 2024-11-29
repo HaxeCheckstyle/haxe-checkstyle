@@ -4,20 +4,24 @@ import byte.ByteData;
 import checkstyle.CheckFile;
 import checkstyle.Checker;
 import checkstyle.Message;
+import checkstyle.config.ExcludeManager;
 import checkstyle.reporter.IReporter;
 import checkstyle.reporter.ReporterManager;
 
-class CheckTestCase<T:String> {
+class CheckTestCase<T:String> implements ITest {
 	static inline var FILE_NAME:String = "Test.hx";
 
 	var checker:Checker;
 	var reporter:TestReporter;
 
-	@Before
-	public function setup() {}
+	public function new() {}
 
-	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?fileName:String, allowFailingAST:Bool = false,
-			?pos:PosInfos) {
+	@Before
+	public function setup() {
+		ExcludeManager.INSTANCE.clear();
+	}
+
+	function assertMsg(check:Check, testCase:T, expected:String, ?defines:Array<Array<String>>, ?fileName:String, allowFailingAST:Bool = false, ?pos:PosInfos) {
 		assertMessages(check, testCase, [expected], defines, fileName, allowFailingAST, pos);
 	}
 
@@ -40,12 +44,12 @@ class CheckTestCase<T:String> {
 		var messages:Array<Message> = checkMessages(testCase, check, defines, fileName, allowFailingAST, pos);
 		if ((expected.length == 1) && (expected.length != messages.length)) {
 			for (i in 0...messages.length) {
-				Assert.areEqual(expected[0], messages[i].message, pos);
+				Assert.equals(expected[0], messages[i]?.message, pos);
 			}
 		}
-		Assert.areEqual(expected.length, messages.length, pos);
+		Assert.equals(expected.length, messages.length, pos);
 		for (i in 0...expected.length) {
-			Assert.areEqual(expected[i], messages[i].message, pos);
+			Assert.equals(expected[i], messages[i]?.message, pos);
 		}
 	}
 
@@ -66,7 +70,7 @@ class CheckTestCase<T:String> {
 	}
 
 	@After
-	public function tearDown() {
+	public function teardown() {
 		checker = null;
 		reporter = null;
 	}

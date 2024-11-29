@@ -2,19 +2,21 @@ package misc;
 
 import byte.ByteData;
 import checkstyle.CheckFile;
-import checkstyle.reporter.ReporterManager;
 import checkstyle.Checker;
-import checkstyle.ParserQueue;
 import checkstyle.CheckerPool;
+import checkstyle.ParserQueue;
+import checkstyle.checks.CheckTestCase.TestReporter;
 import checkstyle.checks.whitespace.IndentationCheck;
 import checkstyle.checks.whitespace.IndentationCheckTest.IndentationCheckTests;
-import checkstyle.checks.CheckTestCase.TestReporter;
+import checkstyle.reporter.ReporterManager;
 
-class ThreadTest {
+class ThreadTest implements ITest {
 	static inline var FILE_NAME:String = "Test.hx";
 
 	var checker:Checker;
 	var reporter:TestReporter;
+
+	public function new() {}
 
 	@Before
 	public function setup() {
@@ -30,9 +32,9 @@ class ThreadTest {
 
 		var parseQueue = new ParserQueue(files, checker);
 		parseQueue.start(1);
+		Sys.sleep(1);
 		Assert.isFalse(parseQueue.isFinished());
 
-		Sys.sleep(1);
 		var failCount:Int = 0;
 		var count:Int = 0;
 		Assert.isFalse(parseQueue.isFinished());
@@ -48,7 +50,7 @@ class ThreadTest {
 			if (count == 13) break;
 		}
 		Assert.isTrue(parseQueue.isFinished());
-		Assert.areEqual(13, count);
+		Assert.equals(13, count);
 		Assert.isNull(parseQueue.nextFile());
 	}
 
@@ -61,10 +63,10 @@ class ThreadTest {
 
 		var checkerPool = new CheckerPool(parseQueue, checker);
 		checkerPool.start(5);
+		Sys.sleep(1);
 		Assert.isFalse(parseQueue.isFinished());
 		Assert.isFalse(checkerPool.isFinished());
 
-		Sys.sleep(1);
 		var failCount:Int = 0;
 		while (true) {
 			if (failCount > 5) Assert.fail("parsing failed");
@@ -98,7 +100,7 @@ class ThreadTest {
 	}
 
 	@After
-	public function tearDown() {
+	public function teardown() {
 		checker = null;
 		reporter = null;
 	}

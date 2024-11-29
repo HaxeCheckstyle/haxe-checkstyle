@@ -1,4 +1,5 @@
 build/commonTest.hxml
+build/commonCoverage.hxml
 -x TestMain
 
 -cmd neko run -s src -s test -s schema -s build -p resources/static-analysis.txt

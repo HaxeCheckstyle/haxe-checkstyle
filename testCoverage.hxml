@@ -1,0 +1,3 @@
+build/commonTest.hxml
+build/commonCoverage.hxml
+-x TestMain

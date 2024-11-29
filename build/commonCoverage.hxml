@@ -1,0 +1,13 @@
+-lib instrument
+
+-D coverage-console-summary-reporter
+-D coverage-console-file-summary-reporter
+-D coverage-console-package-summary-reporter
+-D coverage-lcov-reporter
+-D coverage-codecov-reporter
+
+-lib instrument
+--macro instrument.Instrumentation.coverage(['checkstyle'], ['src'], [])
+# --macro instrument.Instrumentation.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
+
+#--macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])

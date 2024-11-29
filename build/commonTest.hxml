@@ -1,8 +1,12 @@
 build/common.hxml
 -cp test
--lib mcover
--lib munit
+-lib utest
 -lib test-adapter
 -D unittest
+-D UTEST_PRINT_TESTS
+# -D UTEST_FAILURE_THROW
+
 # -debug
---macro mcover.MCover.coverage(['checkstyle'], ['src'], ['checkstyle.reporter', 'checkstyle.Main'])
+
+--macro CompileTime.importPackage("checkstyle.checks")
+--macro CompileTime.importPackage("misc")

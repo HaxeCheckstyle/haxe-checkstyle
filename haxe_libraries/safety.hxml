@@ -1,0 +1,3 @@
+# @install: lix --silent download "haxelib:/safety#1.1.2" into safety/1.1.2/haxelib
+-cp ${HAXE_LIBCACHE}/safety/1.1.2/haxelib/src
+-D safety=1.1.2

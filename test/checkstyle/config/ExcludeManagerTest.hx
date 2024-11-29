@@ -21,7 +21,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	public function testExcludeAllConfig() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes({
@@ -39,7 +39,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	public function testExcludeAllConfig2() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.paths = ["src", "test"];
@@ -59,7 +59,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	public function testExcludeConfigDynamic() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes(cast {
@@ -80,7 +80,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	public function testExcludeConfigDynamicRange() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes(cast {
@@ -101,7 +101,7 @@ class ExcludeManagerTest extends CheckTestCase<ExcludeManagerTests> {
 	public function testExcludeConfigAllRange() {
 		var configParser:ConfigParser = new ConfigParser(reportConfigParserFailure);
 
-		Assert.isNotNull(configParser.checker.checks);
+		Assert.notNull(configParser.checker.checks);
 		Assert.isTrue(configParser.checker.checks.length == 0);
 
 		configParser.parseExcludes(cast {

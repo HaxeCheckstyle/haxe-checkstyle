@@ -65,22 +65,9 @@ jobs:
     - name: Build JSON schema
       run: npx haxe buildSchema.hxml
     - name: Run eval tests
-      run: npx haxe -D codecov_json testAndResources.hxml
+      run: npx haxe testAndResources.hxml
     - name: Run JVM tests
       run: npx haxe testJava.hxml
-    - name: Format and upload codeclimate coverage
-      if: success() && matrix.haxe-version == 'nightly'
-      run: |
-        ( \
-          cd src; \
-          ../cc-test-reporter format-coverage -t lcov ../lcov.info; \
-          ../cc-test-reporter upload-coverage; \
-        )
-    # - name: Checkstyle report annotations
-    #   if: success()
-    #   uses: jwgmeligmeyling/checkstyle-github-action@master
-    #   with:
-    #     path: '**/check-style-report.xml'
     - name: Upload results to codecov
       if: success() && (matrix.haxe-version == 'nightly')
       run: bash <(curl -s https://codecov.io/bash) || echo "Codecov did not collect coverage reports"

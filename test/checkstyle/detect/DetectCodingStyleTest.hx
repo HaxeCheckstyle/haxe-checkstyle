@@ -61,80 +61,82 @@ import checkstyle.checks.whitespace.WhitespaceCheckBase.WhitespacePolicy;
 import checkstyle.checks.whitespace.WrapCheckBase.WrapCheckBaseOption;
 import checkstyle.config.CheckConfig;
 
-class DetectCodingStyleTest {
+class DetectCodingStyleTest implements ITest {
+	public function new() {}
+
 	// checkstyle.checks.block
 	@Test
 	public function testBlockBreakingConditional() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new BlockBreakingConditionalCheck()],
 			[buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("BlockBreakingConditional", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("BlockBreakingConditional", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectConditionalCompilation() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConditionalCompilationCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ConditionalCompilation", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ConditionalCompilation", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("aligned", props.policy);
+		Assert.equals("aligned", props.policy);
 		Assert.isTrue(props.allowSingleline);
 	}
 
 	@Test
 	public function testDetectLeftCurly() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new LeftCurlyCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(2, detectedChecks.length);
-		Assert.areEqual("LeftCurly", detectedChecks[0].type);
+		Assert.equals(2, detectedChecks.length);
+		Assert.equals("LeftCurly", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("eol", props.option);
+		Assert.equals("eol", props.option);
 		Assert.isTrue(props.ignoreEmptySingleline);
-		Assert.areEqual("LeftCurly", detectedChecks[1].type);
+		Assert.equals("LeftCurly", detectedChecks[1].type);
 		props = cast detectedChecks[1].props;
-		Assert.areEqual("nl", props.option);
+		Assert.equals("nl", props.option);
 		Assert.isTrue(props.ignoreEmptySingleline);
 	}
 
 	@Test
 	public function testDetectRightCurly() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RightCurlyCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(2, detectedChecks.length);
-		Assert.areEqual("RightCurly", detectedChecks[0].type);
+		Assert.equals(2, detectedChecks.length);
+		Assert.equals("RightCurly", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("aloneorsingle", props.option);
-		Assert.areEqual("RightCurly", detectedChecks[1].type);
+		Assert.equals("aloneorsingle", props.option);
+		Assert.equals("RightCurly", detectedChecks[1].type);
 		var props = cast detectedChecks[1].props;
-		Assert.areEqual("same", props.option);
+		Assert.equals("same", props.option);
 	}
 
 	// checkstyle.checks.coding
 	@Test
 	public function testDetectArrowFunction() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ArrowFunctionCheck()], [buildCheckFile(SAMPLE_CODING_STYLE_HAXE_4)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ArrowFunction", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ArrowFunction", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(true, props.allowReturn);
-		Assert.areEqual(true, props.allowFunction);
-		Assert.areEqual(true, props.allowCurlyBody);
-		Assert.areEqual(true, props.allowSingleArgParens);
+		Assert.equals(true, props.allowReturn);
+		Assert.equals(true, props.allowFunction);
+		Assert.equals(true, props.allowCurlyBody);
+		Assert.equals(true, props.allowSingleArgParens);
 	}
 
 	@Test
 	public function testDetectCodeSimilarity() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CodeSimilarityCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("CodeSimilarity", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("CodeSimilarity", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(60, props.thresholdIdentical);
-		Assert.areEqual(120, props.thresholdSimilar);
+		Assert.equals(60, props.thresholdIdentical);
+		Assert.equals(120, props.thresholdSimilar);
 	}
 
 	@Test
 	public function testDetectHiddenField() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new HiddenFieldCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("HiddenField", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("HiddenField", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.ignoreSetter);
 		Assert.isTrue(props.ignoreConstructorParameter);
@@ -144,134 +146,134 @@ class DetectCodingStyleTest {
 	public function testDetectInnerAssignment() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InnerAssignmentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		// ignored not enough data points
-		Assert.areEqual(0, detectedChecks.length);
+		Assert.equals(0, detectedChecks.length);
 	}
 
 	@Test
 	public function testDetectNestedControlFlowC() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedControlFlowCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("NestedControlFlow", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("NestedControlFlow", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(3, props.max);
+		Assert.equals(3, props.max);
 	}
 
 	@Test
 	public function testDetectNestedForDepth() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedForDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("NestedForDepth", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("NestedForDepth", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(2, props.max);
+		Assert.equals(2, props.max);
 	}
 
 	@Test
 	public function testDetectNestedIfDepth() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedIfDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("NestedIfDepth", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("NestedIfDepth", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(2, props.max);
+		Assert.equals(2, props.max);
 	}
 
 	@Test
 	public function testDetectNestedTryDepth() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NestedTryDepthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("NestedTryDepth", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("NestedTryDepth", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(2, props.max);
+		Assert.equals(2, props.max);
 	}
 
 	@Test
 	public function testDetectNullableParameter() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new NullableParameterCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("NullableParameter", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("NullableParameter", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("questionMark", props.option);
+		Assert.equals("questionMark", props.option);
 	}
 
 	@Test
 	public function testDetectReturnCount() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ReturnCountCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ReturnCount", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ReturnCount", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(10, props.max);
+		Assert.equals(10, props.max);
 	}
 
 	@Test
 	public function testDetectTrace() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TraceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Trace", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Trace", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectUnusedLocalVar() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnusedLocalVarCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("UnusedLocalVar", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("UnusedLocalVar", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.comments
 	@Test
 	public function testCommentedOutCode() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CommentedOutCodeCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("CommentedOutCode", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("CommentedOutCode", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectDocCommentStyle() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new DocCommentStyleCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("DocCommentStyle", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("DocCommentStyle", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("twostars", props.startStyle);
-		Assert.areEqual("none", props.lineStyle);
+		Assert.equals("twostars", props.startStyle);
+		Assert.equals("none", props.lineStyle);
 	}
 
 	@Test
 	public function testDetectFieldDocComment() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FieldDocCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("FieldDocComment", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("FieldDocComment", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.isNotNull(props.tokens);
-		Assert.areEqual(5, props.tokens.length);
+		Assert.notNull(props.tokens);
+		Assert.equals(5, untyped props.tokens.length);
 		Assert.isFalse(props.requireParams);
 		Assert.isFalse(props.requireReturn);
-		Assert.isNotNull(props.excludeNames);
-		Assert.areEqual(2, props.excludeNames.length);
-		Assert.areEqual(FUNCTIONS, props.fieldType);
-		Assert.areEqual(PUBLIC, props.modifier);
+		Assert.notNull(props.excludeNames);
+		Assert.equals(2, untyped props.excludeNames.length);
+		Assert.equals(FUNCTIONS, props.fieldType);
+		Assert.equals(PUBLIC, props.modifier);
 	}
 
 	@Test
 	public function testDetectTODOComment() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TODOCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("TODOComment", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("TODOComment", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectTypeDocComment() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TypeDocCommentCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("TypeDocComment", detectedChecks[0].type);
-		var props = cast detectedChecks[0].props;
-		Assert.isNotNull(props.tokens);
-		Assert.areEqual(5, props.tokens.length);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("TypeDocComment", detectedChecks[0].type);
+		var props = detectedChecks[0].props;
+		Assert.notNull(untyped props.tokens);
+		Assert.equals(5, untyped props.tokens.length);
 	}
 
 	// checkstyle.checks.design
 	@Test
 	public function testDetectEmptyPackage() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new EmptyPackageCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("EmptyPackage", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("EmptyPackage", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isTrue(props.enforceEmptyPackage);
 	}
@@ -279,8 +281,8 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectInterface() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new InterfaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Interface", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Interface", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.allowProperties);
 		Assert.isTrue(props.allowMarkerInterfaces);
@@ -289,33 +291,33 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectUnnecessaryConstructor() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnnecessaryConstructorCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("UnnecessaryConstructor", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("UnnecessaryConstructor", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.imports
 	@Test
 	public function testDetectAvoidStarImport() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new AvoidStarImportCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("AvoidStarImport", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("AvoidStarImport", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectUnusedImport() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new UnusedImportCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("UnusedImport", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("UnusedImport", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.literal
 	@Test
 	public function testDetectStringLiteral() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new StringLiteralCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("StringLiteral", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("StringLiteral", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("onlySingle", props.policy);
+		Assert.equals("onlySingle", props.policy);
 		Assert.isTrue(props.allowException);
 	}
 
@@ -323,8 +325,8 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectRedundantAccessMeta() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantAccessMetaCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("RedundantAccessMeta", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("RedundantAccessMeta", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.prohibitMeta);
 	}
@@ -332,8 +334,8 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectRedundantAllowMeta() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantAllowMetaCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("RedundantAllowMeta", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("RedundantAllowMeta", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.prohibitMeta);
 	}
@@ -342,28 +344,28 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectCyclomaticComplexity() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new CyclomaticComplexityCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("CyclomaticComplexity", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("CyclomaticComplexity", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(11, props.thresholds[0].complexity);
-		Assert.areEqual(SeverityLevel.WARNING, props.thresholds[0].severity);
-		Assert.areEqual(21, props.thresholds[1].complexity);
-		Assert.areEqual(SeverityLevel.ERROR, props.thresholds[1].severity);
+		Assert.equals(11, props.thresholds[0].complexity);
+		Assert.equals(SeverityLevel.WARNING, props.thresholds[0].severity);
+		Assert.equals(21, props.thresholds[1].complexity);
+		Assert.equals(SeverityLevel.ERROR, props.thresholds[1].severity);
 	}
 
 	// checkstyle.checks.modifier
 	@Test
 	public function testDetectInlineFinal() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FinalCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Final", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Final", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectRedundantModifier() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new RedundantModifierCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("RedundantModifier", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("RedundantModifier", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.enforcePublicPrivate);
 		Assert.isTrue(props.enforcePublic);
@@ -374,17 +376,17 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectConstantName() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ConstantNameCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ConstantName", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ConstantName", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$", props.format);
+		Assert.equals("^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$", props.format);
 	}
 
 	@Test
 	public function testDetectFileNameCase() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FileNameCaseCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("FileNameCase", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("FileNameCase", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.size
@@ -392,42 +394,42 @@ class DetectCodingStyleTest {
 	public function testDetectFileLength() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new FileLengthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		// ignored not enough data points
-		Assert.areEqual(0, detectedChecks.length);
+		Assert.equals(0, detectedChecks.length);
 	}
 
 	@Test
 	public function testDetectLineLength() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new LineLengthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("LineLength", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("LineLength", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(100, props.max);
+		Assert.equals(100, props.max);
 	}
 
 	@Test
 	public function testDetectMethodCount() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new MethodCountCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
 		// ignored not enough data points
-		Assert.areEqual(0, detectedChecks.length);
+		Assert.equals(0, detectedChecks.length);
 	}
 
 	@Test
 	public function testDetectMethodLength() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new MethodLengthCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("MethodLength", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("MethodLength", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(35, props.max);
+		Assert.equals(35, props.max);
 		Assert.isFalse(props.ignoreEmptyLines);
 	}
 
 	@Test
 	public function testDetectParameterNumber() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ParameterNumberCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ParameterNumber", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ParameterNumber", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(6, props.max);
+		Assert.equals(6, props.max);
 		Assert.isFalse(props.ignoreOverriddenMethods);
 	}
 
@@ -435,22 +437,22 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectAnonymous() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new AnonymousCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Anonymous", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Anonymous", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectDynamic() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new DynamicCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Dynamic", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Dynamic", detectedChecks[0].type);
 	}
 
 	@Test
 	public function testDetectReturn() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ReturnCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Return", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Return", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.enforceReturnTypeForAnonymous);
 		Assert.isTrue(props.allowEmptyReturn);
@@ -460,16 +462,16 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectType() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TypeCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Type", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Type", detectedChecks[0].type);
 	}
 
 	// checkstyle.checks.whitespace
 	@Test
 	public function testDetectArrayAccess() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ArrayAccessCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ArrayAccess", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ArrayAccess", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isTrue(props.spaceBefore);
 		Assert.isTrue(props.spaceInside);
@@ -478,14 +480,14 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectEmptyLines() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new EmptyLinesCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("EmptyLines", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("EmptyLines", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
 		Assert.isFalse(props.requireEmptyLineAfterPackage);
 		Assert.isFalse(props.requireEmptyLineAfterInterface);
 		Assert.isFalse(props.requireEmptyLineAfterAbstract);
 		Assert.isTrue(props.allowEmptyLineAfterSingleLineComment);
-		Assert.areEqual(1, props.max);
+		Assert.equals(1, props.max);
 		Assert.isFalse(props.requireEmptyLineAfterClass);
 		Assert.isTrue(props.allowEmptyLineAfterMultiLineComment);
 	}
@@ -493,105 +495,105 @@ class DetectCodingStyleTest {
 	@Test
 	public function testDetectExtendedEmptyLines() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new ExtendedEmptyLinesCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("ExtendedEmptyLines", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("ExtendedEmptyLines", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(1, props.max);
-		Assert.areEqual(true, props.skipSingleLineTypes);
-		Assert.areEqual(EmptyLinesPolicy.UPTO, props.defaultPolicy);
+		Assert.equals(1, props.max);
+		Assert.equals(true, props.skipSingleLineTypes);
+		Assert.equals(EmptyLinesPolicy.UPTO, props.defaultPolicy);
 	}
 
 	@Test
 	public function testDetectIndentationCharacter() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new IndentationCharacterCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("IndentationCharacter", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("IndentationCharacter", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("tab", props.character);
+		Assert.equals("tab", props.character);
 	}
 
 	@Test
 	public function testDetectIndentation() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new IndentationCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Indentation", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Indentation", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("tab", props.character);
+		Assert.equals("tab", props.character);
 		Assert.isFalse(props.ignoreConditionals);
 		Assert.isFalse(props.ignoreComments);
-		Assert.areEqual("exact", props.wrapPolicy);
+		Assert.equals("exact", props.wrapPolicy);
 	}
 
 	@Test
 	public function testDetectOperatorWhitespace() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new OperatorWhitespaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("OperatorWhitespace", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("OperatorWhitespace", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.ternaryOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.unaryOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.boolOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.intervalOpPolicy);
-		Assert.areEqual(WhitespacePolicy.AROUND, props.assignOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.oldFunctionTypePolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.newFunctionTypePolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.arrowFunctionPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.bitwiseOpPolicy);
-		Assert.areEqual(WhitespacePolicy.AROUND, props.arithmeticOpPolicy);
-		Assert.areEqual(WhitespacePolicy.AROUND, props.compareOpPolicy);
-		Assert.areEqual(WhitespacePolicy.IGNORE, props.arrowPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.ternaryOpPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.unaryOpPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.boolOpPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.intervalOpPolicy);
+		Assert.equals(WhitespacePolicy.AROUND, props.assignOpPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.oldFunctionTypePolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.newFunctionTypePolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.arrowFunctionPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.bitwiseOpPolicy);
+		Assert.equals(WhitespacePolicy.AROUND, props.arithmeticOpPolicy);
+		Assert.equals(WhitespacePolicy.AROUND, props.compareOpPolicy);
+		Assert.equals(WhitespacePolicy.IGNORE, props.arrowPolicy);
 	}
 
 	@Test
 	public function testDetectOperatorWrap() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new OperatorWrapCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("OperatorWrap", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("OperatorWrap", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(WrapCheckBaseOption.EOL, props.option);
+		Assert.equals(WrapCheckBaseOption.EOL, props.option);
 	}
 
 	@Test
 	public function testDetectSeparatorWhitespace() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new SeparatorWhitespaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("SeparatorWhitespace", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("SeparatorWhitespace", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual("after", props.commaPolicy);
-		Assert.areEqual("after", props.semicolonPolicy);
-		Assert.areEqual("before", props.dotPolicy);
+		Assert.equals("after", props.commaPolicy);
+		Assert.equals("after", props.semicolonPolicy);
+		Assert.equals("before", props.dotPolicy);
 	}
 
 	@Test
 	public function testDetectSeparatorWrap() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new SeparatorWrapCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("SeparatorWrap", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("SeparatorWrap", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(WrapCheckBaseOption.EOL, props.option);
+		Assert.equals(WrapCheckBaseOption.EOL, props.option);
 	}
 
 	@Test
 	public function testDetectSpacing() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new SpacingCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("Spacing", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("Spacing", detectedChecks[0].type);
 		var props = cast detectedChecks[0].props;
-		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceIfCondition);
+		Assert.equals(SpacingPolicy.SHOULD, props.spaceIfCondition);
 		Assert.isFalse(props.spaceAroundBinop);
-		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceForLoop);
+		Assert.equals(SpacingPolicy.SHOULD, props.spaceForLoop);
 		Assert.isFalse(props.ignoreRangeOperator);
-		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceWhileLoop);
-		Assert.areEqual(SpacingPolicy.SHOULD_NOT, props.spaceCatch);
-		Assert.areEqual(SpacingPolicy.SHOULD, props.spaceSwitchCase);
+		Assert.equals(SpacingPolicy.SHOULD, props.spaceWhileLoop);
+		Assert.equals(SpacingPolicy.SHOULD_NOT, props.spaceCatch);
+		Assert.equals(SpacingPolicy.SHOULD, props.spaceSwitchCase);
 		Assert.isFalse(props.noSpaceAroundUnop);
 	}
 
 	@Test
 	public function testDetectTrailingWhitespace() {
 		var detectedChecks:Array<CheckConfig> = DetectCodingStyle.detectCodingStyle([new TrailingWhitespaceCheck()], [buildCheckFile(SAMPLE_CODING_STYLE)]);
-		Assert.areEqual(1, detectedChecks.length);
-		Assert.areEqual("TrailingWhitespace", detectedChecks[0].type);
+		Assert.equals(1, detectedChecks.length);
+		Assert.equals("TrailingWhitespace", detectedChecks[0].type);
 	}
 
 	function buildCheckFile(src:String):CheckFile {

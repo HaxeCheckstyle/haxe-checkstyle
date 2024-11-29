@@ -1,42 +1,45 @@
-import massive.munit.TestRunner;
-import mcover.coverage.MCoverage;
-import mcover.coverage.munit.client.MCoverPrintClient;
-#if (neko || cpp || hl)
-import haxe.EntryPoint;
-#end
-#if codecov_json
-import mcover.coverage.client.CodecovJsonPrintClient;
-#else
-import mcover.coverage.client.LcovPrintClient;
-#end
+import checkstyle.checks.CheckTestCase;
+import checkstyle.config.ConfigParserTest;
+import checkstyle.config.ExcludeManagerTest;
+import checkstyle.detect.DetectCodingStyleTest;
+import misc.CheckerTest;
+import misc.ThreadTest;
+import sys.io.File;
+import utest.Runner;
+import utest.ui.text.DiagnosticsReport;
 
 class TestMain {
 	public function new() {
-		var suites:Array<Class<massive.munit.TestSuite>> = [TestSuite];
+		var runner:Runner = new Runner();
 
-		var client:MCoverPrintClient = new MCoverPrintClient();
-		#if codecov_json
-		MCoverage.getLogger().addClient(new CodecovJsonPrintClient());
-		#else
-		MCoverage.getLogger().addClient(new LcovPrintClient("Checkstyle Unittests"));
-		#end
-		var runner:TestRunner = new TestRunner(client);
-		runner.completionHandler = completionHandler;
-		#if (neko || cpp || hl)
-		EntryPoint.addThread(function() {
-			while (true) Sys.sleep(1.0);
+		var failed = false;
+		runner.onProgress.add(r -> {
+			if (!r.result.allOk()) {
+				failed = true;
+			}
 		});
-		#end
-		runner.run(suites);
+		runner.onComplete.add(_ -> {
+			completionHandler(!failed);
+		});
+
+		new DiagnosticsReport(runner);
+
+		var testClasses = CompileTime.getAllClasses(CheckTestCase);
+		for (test in testClasses) {
+			runner.addCase(Type.createInstance(test, []));
+		}
+
+		runner.addCase(new CheckerTest());
+		runner.addCase(new ConfigParserTest());
+		runner.addCase(new DetectCodingStyleTest());
+		runner.addCase(new ThreadTest());
+
+		runner.run();
 	}
 
 	function completionHandler(success:Bool) {
-		#if eval
-		if (!success) {
-			Sys.exit(1);
-		}
-		#else
-		Sys.exit(success ? 0 : 1);
+		#if instrument
+		instrument.coverage.Coverage.endCoverage();
 		#end
 	}
 
