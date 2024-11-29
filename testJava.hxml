@@ -1,4 +1,5 @@
 build/commonTest.hxml
+build/commonCoverage.hxml
 
 --jvm out/TestMain.jar
 -main TestMain
