@@ -7,6 +7,6 @@ typedef ObjectDeclField = {
 	var expr:Expr;
 }
 #else
-typedef ObjectDeclField = haxe.macro.ObjectField;
+typedef ObjectDeclField = haxe.macro.Expr.ObjectField;
 #end
 #end
