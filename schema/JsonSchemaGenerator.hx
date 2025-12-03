@@ -31,7 +31,7 @@ class JsonSchemaGenerator {
 		switch (main.expr) {
 			case EObjectDecl(fields):
 				fields.push({field: "definitions", expr: definitions});
-				fields.push({field: DollarName.DollarSchema, expr: macro "http://json-schema.org/schema#"});
+				fields.push({field: DollarName.DollarSchema, expr: macro "https://json-schema.org/draft/2020-12/schema"});
 				if (id != null) {
 					fields.push({field: "id", expr: macro $v{id}});
 				}
@@ -91,7 +91,11 @@ class JsonSchemaGenerator {
 			case TInst(_.get() => cl, params):
 				switch [cl, params] {
 					case [{pack: [], name: "String"}, []]:
-						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "string"}], structInfo, order, pos);
+						var fields:Array<ObjectDeclField> = [
+							{field: "type", expr: macro "string"}
+						];
+						if (extendCB != null) extendCB(fields, typeName, pos, refs);
+						return SchemaUtils.makeObjectDecl(fields, structInfo, order, pos);
 					case [{pack: [], name: "Array"}, [elemType]]:
 						var fields:Array<ObjectDeclField> = [
 							{field: "type", expr: macro "array"},
@@ -112,11 +116,17 @@ class JsonSchemaGenerator {
 						if (extendCB != null) extendCB(fields, typeName, pos, refs);
 						return SchemaUtils.makeObjectDecl(fields, structInfo, order, pos);
 					case [{pack: [], name: "Float"}, []]:
-						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "number"}], structInfo, order, pos);
+						var fields:Array<ObjectDeclField> = [{field: "type", expr: macro "number"}];
+						if (extendCB != null) extendCB(fields, typeName, pos, refs);
+						return SchemaUtils.makeObjectDecl(fields, structInfo, order, pos);
 					case [{pack: [], name: "Bool"}, []]:
-						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "boolean"}], structInfo, order, pos);
+						var fields:Array<ObjectDeclField> = [{field: "type", expr: macro "boolean"}];
+						if (extendCB != null) extendCB(fields, typeName, pos, refs);
+						return SchemaUtils.makeObjectDecl(fields, structInfo, order, pos);
 					case [{pack: [], name: "Any"}, []]:
-						return SchemaUtils.makeObjectDecl([{field: "type", expr: macro "object"}], structInfo, order, pos);
+						var fields:Array<ObjectDeclField> = [{field: "type", expr: macro "object"}];
+						if (extendCB != null) extendCB(fields, typeName, pos, refs);
+						return SchemaUtils.makeObjectDecl(fields, structInfo, order, pos);
 					case [{pack: [], name: "Null"}, [t]]:
 						return genSchema(t, typeName, pos, null, refs, -1, extendCB);
 					default:

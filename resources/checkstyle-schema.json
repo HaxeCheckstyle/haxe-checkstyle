@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "definitions": {
         "TrailingWhitespaceCheck": {
             "description": "Checks if there are any trailing white spaces.",
@@ -28,10 +28,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "DynamicCheck": {
             "description": "Checks for use of Dynamic type anywhere in the code.",
@@ -60,10 +70,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "InterfaceCheck": {
             "description": "Checks and enforces interface style. Either to allow properties and methods or just methods. Has an option to `allowMarkerInterfaces`.",
@@ -102,10 +122,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TabForAligningCheck": {
             "description": "Checks if there are any tabs in the middle of a line.",
@@ -139,10 +169,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "IndentationCheck": {
             "description": "Checks correct indentation",
@@ -218,10 +258,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ArrowFunctionCheck": {
             "description": "Checks for use of curlies, nested (non-arrow) functions or returns in arrow functions.",
@@ -270,10 +320,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "UnusedLocalVarCheck": {
             "description": "Checks for unused local variables.",
@@ -302,10 +362,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ModifierOrderCheck": {
             "description": "Checks that the order of modifiers conforms to the standards.",
@@ -355,10 +425,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "StringLiteralCheck": {
             "description": "Checks for single or double quote string literals.",
@@ -402,10 +482,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "DocCommentStyleCheck": {
             "description": "Checks code documentation style (/**...**/ vs /*...*/)",
@@ -456,10 +546,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "DefaultComesLastCheck": {
             "description": "Check that the `default` is after all the cases in a `switch` statement. Haxe allows `default` anywhere within the `switch` statement. But it is more readable if it comes after the last `case`.",
@@ -488,10 +588,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MethodNameCheck": {
             "description": "Checks that method names conform to a format specified by the `format` property.",
@@ -547,10 +657,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "WhitespaceAfterCheck": {
             "description": "Checks for whitespace after a token.",
@@ -592,10 +712,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "InnerAssignmentCheck": {
             "description": "Checks for assignments in subexpressions, such as in `if ((a=b) > 0) return;`.",
@@ -629,10 +759,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MagicNumberCheck": {
             "description": "Checks that there are no magic numbers. By default, -1, 0, 1, and 2 are not considered to be magic numbers.",
@@ -669,10 +809,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "FieldDocCommentCheck": {
             "description": "Checks code documentation on fields",
@@ -759,10 +909,20 @@
                             "propertyOrder": 6
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "HexadecimalLiteralCheck": {
             "description": "Checks the letter case of hexadecimal literals.",
@@ -800,10 +960,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "LeftCurlyCheck": {
             "description": "Checks for the placement of left curly braces (`{`) for code blocks. The policy to verify is specified using the property `option`.",
@@ -878,10 +1048,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "FileLengthCheck": {
             "description": "Checks for long source files. If a source file becomes very long it is hard to understand. Therefore long classes should usually be refactored into several individual classes that focus on a specific task.",
@@ -920,10 +1100,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ConstantNameCheck": {
             "description": "Checks that the constants (static / static inline with initialisation) conform to a format specified by the `format` property.",
@@ -975,10 +1165,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "LocalVariableNameCheck": {
             "description": "Checks that the local variable names conform to a format specified by the `format` property.",
@@ -1025,10 +1225,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ParameterNumberCheck": {
             "description": "Checks the number of parameters of a method.",
@@ -1067,10 +1277,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ExtendedEmptyLinesCheck": {
             "description": "Checks for consecutive empty lines.",
@@ -1366,10 +1586,20 @@
                             "propertyOrder": 8
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "UnusedImportCheck": {
             "description": "Checks for unused or duplicate imports.",
@@ -1411,10 +1641,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "RedundantAllowMetaCheck": {
             "description": "Checks for redundant @:allow metadata",
@@ -1448,10 +1688,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "IndentationCharacterCheck": {
             "description": "Checks indentation character (tab/space, default is tab).",
@@ -1494,10 +1744,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TraceCheck": {
             "description": "Checks for trace calls in code.",
@@ -1526,10 +1786,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "OperatorWrapCheck": {
             "description": "Checks line wrapping with operators.",
@@ -1575,10 +1845,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "PublicAccessorCheck": {
             "description": "Checks for public accessors.",
@@ -1607,10 +1887,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NestedIfDepthCheck": {
             "description": "Restricts nested `if-else` blocks to a specified depth (default = 1).",
@@ -1644,10 +1934,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "AvoidTernaryOperatorCheck": {
             "description": "Detects ternary operators. Useful for developers who find ternary operators hard to read and want forbid them.",
@@ -1676,10 +1976,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "Threshold": {
             "description": "threshold for code complexity",
@@ -1706,7 +2016,12 @@
                     "propertyOrder": 1
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "CyclomaticComplexityCheck": {
             "description": "Checks the complexity of methods using McCabe simplified cyclomatic complexity check. Complexity levels can be customised using `thresholds` property.",
@@ -1743,10 +2058,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "SimplifyBooleanReturnCheck": {
             "description": "Checks for over-complicated boolean return statements.",
@@ -1775,10 +2100,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "SpacingCheck": {
             "description": "Spacing check on if, for, while, switch, try statements and around operators.",
@@ -1872,10 +2207,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "AvoidStarImportCheck": {
             "description": "Checks for import statements that use the * notation and using directives.",
@@ -1904,10 +2249,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "HiddenFieldCheck": {
             "description": "Checks that a local variable or a parameter does not shadow a field that is defined in the same class.",
@@ -1951,10 +2306,20 @@
                             "propertyOrder": 3
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "LineLengthCheck": {
             "description": "Checks for long lines. Long lines are hard to read.",
@@ -1993,10 +2358,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "RedundantAccessMetaCheck": {
             "description": "Checks for redundant @:access metadata",
@@ -2030,10 +2405,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ReturnCountCheck": {
             "description": "Restricts the number of return statements in methods (2 by default). Ignores methods that matches `ignoreFormat` regex property.",
@@ -2072,10 +2457,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TypeDocCommentCheck": {
             "description": "Checks code documentation on type level",
@@ -2119,10 +2514,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "FileNameCaseCheck": {
             "description": "Checks that file names match the case of their module name.",
@@ -2151,10 +2556,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ListenerNameCheck": {
             "description": "Checks the naming conventions of event listener functions specified using `listeners` property.",
@@ -2196,10 +2611,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NestedTryDepthCheck": {
             "description": "Restricts nested `try` blocks to a specified depth (default = 1).",
@@ -2233,10 +2658,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "CommentedOutCodeCheck": {
             "description": "Checks sections of commented out code",
@@ -2265,10 +2700,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MultipleVariableDeclarationsCheck": {
             "description": "Checks that each variable declaration is in its own statement and on its own line.",
@@ -2297,10 +2742,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ArrayLiteralCheck": {
             "description": "Checks if the array is instantiated using [] which is shorter and cleaner, not with new.",
@@ -2329,10 +2784,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "EmptyPackageCheck": {
             "description": "Checks for empty package names.",
@@ -2366,10 +2831,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TypeCheck": {
             "description": "Checks if type is specified or not for member variables.",
@@ -2403,10 +2878,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "RightCurlyCheck": {
             "description": "Checks the placement of right curly braces (`}`) for code blocks. The policy to verify is specified using the property `option`.",
@@ -2470,10 +2955,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ExcludeFilterList": {
             "description": "list of path filters, e.g.\n\t- full type names\n\t- names of individual folder or subfolders\n\t- partial folder or type names\n\n\teach line can have an additional range specification:\n\t- \":<linenumber>\" = only matches a specific line number - valid line number start at 1\n\t- \":<start>-<end>\" = matches line numbers from <start> to <end> (including both)\n\t- \":<identifier>\" = matches any line or block that has <identifier> name (Haxe keywords currently unsupported)",
@@ -2651,10 +3146,20 @@
                             "propertyOrder": 9
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TypeNameCheck": {
             "description": "Checks that type names conform to a format specified by the `format` property.",
@@ -2709,10 +3214,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "EmptyBlockCheck": {
             "description": "Checks for empty blocks. The policy to verify is specified using the property `option`.",
@@ -2775,10 +3290,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NestedControlFlowCheck": {
             "description": "Checks for maximium nesting depth of control flow expressions (`if`, `for`, `while`, `do/while`, `switch` and `try`).",
@@ -2812,10 +3337,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "EmptyLinesCheck": {
             "description": "Checks for consecutive empty lines (default is 1). Also have options to check empty line separators after package, single-line and multi-line comments and class/interface/abstract declarations.",
@@ -2879,10 +3414,20 @@
                             "propertyOrder": 3
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NestedForDepthCheck": {
             "description": "Restricts nested loop blocks to a specified depth (default = 1).",
@@ -2916,10 +3461,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ArrayAccessCheck": {
             "description": "Checks for spaces before array access or inside array elements. Finds code like `a [0], a[ 0]`, etc.",
@@ -2958,10 +3513,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "CatchParameterNameCheck": {
             "description": "Checks that catch parameter names conform to a format specified by the `format` property.",
@@ -2995,10 +3560,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "WhitespaceAroundCheck": {
             "description": "Checks that a token is surrounded by whitespace.",
@@ -3035,10 +3610,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ExcludeConfig": {
             "description": "defines filters to exclude folders, types or files from all or specific checks",
@@ -3389,7 +3974,12 @@
                     "propertyOrder": 26
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "RedundantModifierCheck": {
             "description": "Checks for redundant modifiers.",
@@ -3433,10 +4023,20 @@
                             "propertyOrder": 3
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "TODOCommentCheck": {
             "description": "A check for TODO/FIXME/HACK/XXX/BUG comments. The format can be customised by changing `format` property.",
@@ -3470,10 +4070,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "BlockBreakingConditionalCheck": {
             "description": "Checks for block breaking conditionals.",
@@ -3502,10 +4112,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "VarTypeHintCheck": {
             "description": "Checks type hints of variables.",
@@ -3549,10 +4169,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "CodeSimilarityCheck": {
             "description": "Checks for identical or similar code.",
@@ -3602,10 +4232,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "UnnecessaryConstructorCheck": {
             "description": "Checks for unnecessary constructor in classes that contain only static methods or fields.",
@@ -3634,10 +4274,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ParameterNameCheck": {
             "description": "Checks that parameter names conform to a format specified by the `format` property.",
@@ -3684,10 +4334,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "AnonymousCheck": {
             "description": "Check to find any anonymous type structures used.",
@@ -3716,10 +4376,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MethodCountCheck": {
             "description": "Checks the number of methods declared in each type. This includes the number of each scope (`private` and `public`) as well as an overall total.",
@@ -3763,10 +4433,20 @@
                             "propertyOrder": 3
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "FinalCheck": {
             "description": "Checks for places that use var instead of final (Haxe 4+).",
@@ -3795,10 +4475,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ConditionalCompilationCheck": {
             "description": "Checks placement and indentation of conditional compilation flags.",
@@ -3841,10 +4531,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MemberNameCheck": {
             "description": "Checks that instance variable names conform to a format specified by the `format` property.",
@@ -3900,10 +4600,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ERegLiteralCheck": {
             "description": "Checks for usage of EReg literals (between ~/ and /) instead of new.",
@@ -3932,10 +4642,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "SimplifyBooleanExpressionCheck": {
             "description": "Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.",
@@ -3964,10 +4684,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "VariableInitialisationCheck": {
             "description": "Checks for instance variables that are initialised at class level.",
@@ -4001,10 +4731,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MethodLengthCheck": {
             "description": "Checks for long methods. If a method becomes very long it is hard to understand. Therefore long methods should usually be refactored into several individual methods that focus on a specific task.",
@@ -4043,10 +4783,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "AvoidIdentifierCheck": {
             "description": "Checks for identifiers to avoid.",
@@ -4083,10 +4833,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NeedBracesCheck": {
             "description": "Checks for braces on function, if, for and while statements. It has an option to allow single line statements without braces using property `allowSingleLineStatement` like `if (b) return 10;`.",
@@ -4137,10 +4897,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "NullableParameterCheck": {
             "description": "Enforces a style for nullable parameters.",
@@ -4178,10 +4948,20 @@
                             "propertyOrder": 1
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "ReturnCheck": {
             "description": "Warns if Void is used for return or if return type is not specified when returning.",
@@ -4225,10 +5005,20 @@
                             "propertyOrder": 3
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "MultipleStringLiteralsCheck": {
             "description": "Checks for multiple occurrences of the same string literal within a single file. Code duplication makes maintenance more difficult, so it's better to replace the multiple occurrences with a constant.",
@@ -4272,10 +5062,20 @@
                             "propertyOrder": 0
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "Config": {
             "additionalProperties": false,
@@ -4306,6 +5106,7 @@
                     ]
                 },
                 "extendsConfigPath": {
+                    "description": "Choose a master config file to extend from.\nChecks and excludes are combined from both master and current config, and can continue chaining as long as it does not cycle.\nThere is no shadowing or overwriting. Checkstile runs every check and exclude regardless where it comes from.",
                     "type": "string"
                 },
                 "version": {
@@ -4572,7 +5373,12 @@
                     "minimum": 1
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "SeparatorWrapCheck": {
             "description": "Checks line wrapping with separators.",
@@ -4618,10 +5424,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         },
         "SeparatorWhitespaceCheck": {
             "description": "Checks that whitespace is present or absent around a separators.",
@@ -4691,10 +5507,20 @@
                             "propertyOrder": 2
                         }
                     },
-                    "type": "object"
+                    "type": "object",
+                    "patternProperties": {
+                        "^_.*": {
+                            "type": "string"
+                        }
+                    }
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         }
     },
     "$ref": "#/definitions/Config",

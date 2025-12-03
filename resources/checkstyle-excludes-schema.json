@@ -1,5 +1,5 @@
 {
-    "$schema": "http://json-schema.org/schema#",
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
     "definitions": {
         "ExcludeFilterList": {
             "description": "list of path filters, e.g.\n\t- full type names\n\t- names of individual folder or subfolders\n\t- partial folder or type names\n\n\teach line can have an additional range specification:\n\t- \":<linenumber>\" = only matches a specific line number - valid line number start at 1\n\t- \":<start>-<end>\" = matches line numbers from <start> to <end> (including both)\n\t- \":<identifier>\" = matches any line or block that has <identifier> name (Haxe keywords currently unsupported)",
@@ -357,7 +357,12 @@
                     "propertyOrder": 26
                 }
             },
-            "type": "object"
+            "type": "object",
+            "patternProperties": {
+                "^_.*": {
+                    "type": "string"
+                }
+            }
         }
     },
     "$ref": "#/definitions/ExcludeConfig",
