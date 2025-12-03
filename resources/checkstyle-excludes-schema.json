@@ -359,7 +359,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }

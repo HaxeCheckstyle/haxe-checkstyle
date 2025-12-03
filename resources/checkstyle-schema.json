@@ -30,7 +30,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -38,7 +38,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -72,7 +72,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -80,7 +80,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -124,7 +124,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -132,7 +132,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -171,7 +171,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -179,7 +179,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -260,7 +260,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -268,7 +268,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -322,7 +322,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -330,7 +330,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -364,7 +364,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -372,7 +372,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -427,7 +427,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -435,7 +435,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -484,7 +484,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -492,7 +492,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -548,7 +548,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -556,7 +556,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -590,7 +590,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -598,7 +598,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -659,7 +659,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -667,7 +667,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -714,7 +714,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -722,7 +722,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -761,7 +761,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -769,7 +769,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -811,7 +811,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -819,7 +819,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -911,7 +911,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -919,7 +919,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -962,7 +962,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -970,7 +970,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1050,7 +1050,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1058,7 +1058,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1102,7 +1102,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1110,7 +1110,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1167,7 +1167,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1175,7 +1175,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1227,7 +1227,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1235,7 +1235,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1279,7 +1279,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1287,7 +1287,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1588,7 +1588,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1596,7 +1596,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1643,7 +1643,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1651,7 +1651,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1690,7 +1690,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1698,7 +1698,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1746,7 +1746,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1754,7 +1754,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1788,7 +1788,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1796,7 +1796,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1847,7 +1847,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1855,7 +1855,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1889,7 +1889,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1897,7 +1897,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1936,7 +1936,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1944,7 +1944,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -1978,7 +1978,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -1986,7 +1986,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2018,7 +2018,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2060,7 +2060,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2068,7 +2068,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2102,7 +2102,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2110,7 +2110,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2209,7 +2209,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2217,7 +2217,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2251,7 +2251,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2259,7 +2259,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2308,7 +2308,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2316,7 +2316,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2360,7 +2360,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2368,7 +2368,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2407,7 +2407,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2415,7 +2415,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2459,7 +2459,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2467,7 +2467,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2516,7 +2516,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2524,7 +2524,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2558,7 +2558,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2566,7 +2566,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2613,7 +2613,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2621,7 +2621,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2660,7 +2660,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2668,7 +2668,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2702,7 +2702,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2710,7 +2710,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2744,7 +2744,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2752,7 +2752,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2786,7 +2786,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2794,7 +2794,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2833,7 +2833,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2841,7 +2841,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2880,7 +2880,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2888,7 +2888,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -2957,7 +2957,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -2965,7 +2965,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3148,7 +3148,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3156,7 +3156,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3216,7 +3216,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3224,7 +3224,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3292,7 +3292,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3300,7 +3300,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3339,7 +3339,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3347,7 +3347,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3416,7 +3416,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3424,7 +3424,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3463,7 +3463,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3471,7 +3471,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3515,7 +3515,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3523,7 +3523,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3562,7 +3562,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3570,7 +3570,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3612,7 +3612,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -3620,7 +3620,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -3976,7 +3976,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4025,7 +4025,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4033,7 +4033,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4072,7 +4072,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4080,7 +4080,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4114,7 +4114,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4122,7 +4122,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4171,7 +4171,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4179,7 +4179,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4234,7 +4234,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4242,7 +4242,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4276,7 +4276,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4284,7 +4284,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4336,7 +4336,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4344,7 +4344,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4378,7 +4378,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4386,7 +4386,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4435,7 +4435,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4443,7 +4443,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4477,7 +4477,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4485,7 +4485,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4533,7 +4533,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4541,7 +4541,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4602,7 +4602,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4610,7 +4610,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4644,7 +4644,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4652,7 +4652,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4686,7 +4686,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4694,7 +4694,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4733,7 +4733,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4741,7 +4741,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4785,7 +4785,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4793,7 +4793,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4835,7 +4835,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4843,7 +4843,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4899,7 +4899,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4907,7 +4907,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -4950,7 +4950,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -4958,7 +4958,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -5007,7 +5007,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -5015,7 +5015,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -5064,7 +5064,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -5072,7 +5072,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -5375,7 +5375,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -5426,7 +5426,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -5434,7 +5434,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }
@@ -5509,7 +5509,7 @@
                     },
                     "type": "object",
                     "patternProperties": {
-                        "^_.*": {
+                        "^comment$": {
                             "type": "string"
                         }
                     }
@@ -5517,7 +5517,7 @@
             },
             "type": "object",
             "patternProperties": {
-                "^_.*": {
+                "^comment$": {
                     "type": "string"
                 }
             }

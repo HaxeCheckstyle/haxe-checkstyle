@@ -13,7 +13,7 @@ class SchemaUtils {
 	public static function makeObject(props:Expr, structInfo:Null<StructInfo>, required:Array<String>, order:Int, pos:Position):Expr {
 		var patternProperties:Expr = macro {
 			// Enable "comments" by allowing ignored string properties that start with "_".
-			"^_.*": {
+			"^comment$": {
 				"type": "string"
 			}
 		};
