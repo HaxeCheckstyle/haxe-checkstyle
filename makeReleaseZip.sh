@@ -7,4 +7,4 @@ npx lix use haxe nightly
 npx haxe buildAll.hxml
 
 rm -f haxe-checkstyle.zip
-zip -9 -r -q haxe-checkstyle.zip src run.n haxecheckstyle.js resources/sample-config.json resources/logo.png resources/codeclimate_pr.png haxelib.json hxformat.json package.json README.md CHANGELOG.md LICENSE.md
+zip -9 -r -q haxe-checkstyle.zip src run.n haxecheckstyle.js resources/sample-config.json resources/logo.png resources/codeclimate_pr.png resources/meta.json haxelib.json hxformat.json package.json README.md CHANGELOG.md LICENSE.md

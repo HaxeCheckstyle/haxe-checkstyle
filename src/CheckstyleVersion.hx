@@ -11,20 +11,21 @@ class CheckstyleVersion {
 		@return haxe.macro.Expr.ExprOf<String>
 	**/
 	macro public static function getCheckstyleVersion():haxe.macro.Expr.ExprOf<String> {
-		#if !display
-		try {
-			var content:String = File.getContent("haxelib.json");
-			var haxelib = Json.parse(content);
-			var version:String = haxelib.version;
-			return macro $v{version};
-		}
-		catch (e:Any) {
+		if (haxe.macro.Context.defined("display")) {
 			var version:String = "dev";
 			return macro $v{version};
 		}
-		#else
-		var version:String = "dev";
-		return macro $v{version};
-		#end
+		else {
+			try {
+				var content:String = File.getContent("haxelib.json");
+				var haxelib = Json.parse(content);
+				var version:String = haxelib.version;
+				return macro $v{version};
+			}
+			catch (e:Any) {
+				var version:String = "dev";
+				return macro $v{version};
+			}
+		}
 	}
 }

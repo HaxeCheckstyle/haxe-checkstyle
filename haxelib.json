@@ -21,5 +21,8 @@
     "releasenote": "added FileNameCase check - see CHANGELOG",
     "version": "2.9.0",
     "url": "https://github.com/HaxeCheckstyle/haxe-checkstyle",
-    "dependencies": {}
+    "dependencies": {},
+	"documentation": {
+		"metadata": "resources/meta.json"
+	}
 }
