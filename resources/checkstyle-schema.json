@@ -4286,24 +4286,25 @@
             "type": "object"
         },
         "SwitchParenthesesCheck": {
-            "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+            "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`).",
             "additionalProperties": false,
             "properties": {
                 "type": {
-                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`).",
                     "type": "string",
                     "enum": [
                         "SwitchParentheses"
                     ]
                 },
                 "props": {
-                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`).",
                     "additionalProperties": false,
                     "properties": {
                         "policy": {
-                            "description": "policy for switch condition parentheses:\n\t\t- forbid = disallow parentheses (`switch value {}`)\n\t\t- require = require parentheses (`switch (value) {}`)",
+                            "description": "policy for switch condition parentheses\n\t\t- ignore = skip check\n\t\t- forbid = disallow parentheses (`switch value {}`)\n\t\t- require = require parentheses (`switch (value) {}`)",
                             "type": "string",
                             "enum": [
+                                "ignore",
                                 "forbid",
                                 "require"
                             ],
@@ -4341,13 +4342,13 @@
                     "description": "Requires trailing comma in multiline object and array literals.",
                     "additionalProperties": false,
                     "properties": {
-                        "checkObjectLiterals": {
-                            "description": "enables check on multiline object literals",
+                        "enforceObjectLiterals": {
+                            "description": "enforces trailing comma in multiline object literals",
                             "type": "boolean",
                             "propertyOrder": 0
                         },
-                        "checkArrayLiterals": {
-                            "description": "enables check on multiline array literals",
+                        "enforceArrayLiterals": {
+                            "description": "enforces trailing comma in multiline array literals",
                             "type": "boolean",
                             "propertyOrder": 1
                         },

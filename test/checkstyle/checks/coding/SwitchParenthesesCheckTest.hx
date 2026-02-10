@@ -1,43 +1,50 @@
 package checkstyle.checks.coding;
 
+import checkstyle.checks.coding.SwitchParenthesesCheck.SwitchParenthesesPolicy;
+
 class SwitchParenthesesCheckTest extends CheckTestCase<SwitchParenthesesCheckTests> {
 	static inline var FORBID_MSG:String = "Switch condition should not be wrapped in parentheses";
 	static inline var REQUIRE_MSG:String = "Switch condition should be wrapped in parentheses";
 
+	function configuredCheck(policy:SwitchParenthesesPolicy):SwitchParenthesesCheck {
+		var check = new SwitchParenthesesCheck();
+		check.policy = policy;
+		return check;
+	}
+
 	@Test
 	public function testWithParentheses() {
-		assertMsg(new SwitchParenthesesCheck(), WITH_PARENTHESES, FORBID_MSG);
+		assertMsg(configuredCheck(FORBID), WITH_PARENTHESES, FORBID_MSG);
 	}
 
 	@Test
 	public function testWithSpaceAndParentheses() {
-		assertMsg(new SwitchParenthesesCheck(), WITH_SPACE_AND_PARENTHESES, FORBID_MSG);
+		assertMsg(configuredCheck(FORBID), WITH_SPACE_AND_PARENTHESES, FORBID_MSG);
 	}
 
 	@Test
 	public function testWithoutParentheses() {
-		assertNoMsg(new SwitchParenthesesCheck(), WITHOUT_PARENTHESES);
+		assertNoMsg(configuredCheck(FORBID), WITHOUT_PARENTHESES);
 	}
 
 	@Test
 	public function testRequireWithParentheses() {
-		var check = new SwitchParenthesesCheck();
-		check.policy = REQUIRE;
-		assertNoMsg(check, WITH_PARENTHESES);
+		assertNoMsg(configuredCheck(REQUIRE), WITH_PARENTHESES);
 	}
 
 	@Test
 	public function testRequireWithSpaceAndParentheses() {
-		var check = new SwitchParenthesesCheck();
-		check.policy = REQUIRE;
-		assertNoMsg(check, WITH_SPACE_AND_PARENTHESES);
+		assertNoMsg(configuredCheck(REQUIRE), WITH_SPACE_AND_PARENTHESES);
 	}
 
 	@Test
 	public function testRequireWithoutParentheses() {
-		var check = new SwitchParenthesesCheck();
-		check.policy = REQUIRE;
-		assertMsg(check, WITHOUT_PARENTHESES, REQUIRE_MSG);
+		assertMsg(configuredCheck(REQUIRE), WITHOUT_PARENTHESES, REQUIRE_MSG);
+	}
+
+	@Test
+	public function testIgnoreByDefault() {
+		assertNoMsg(new SwitchParenthesesCheck(), WITH_PARENTHESES);
 	}
 }
 

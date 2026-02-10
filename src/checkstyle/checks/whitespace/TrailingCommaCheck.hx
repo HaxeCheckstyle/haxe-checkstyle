@@ -6,13 +6,13 @@ package checkstyle.checks.whitespace;
 @name("TrailingComma", "DanglingComma")
 @desc("Requires trailing comma in multiline object and array literals.")
 class TrailingCommaCheck extends Check {
-	public var checkObjectLiterals:Bool;
-	public var checkArrayLiterals:Bool;
+	public var enforceObjectLiterals:Bool;
+	public var enforceArrayLiterals:Bool;
 
 	public function new() {
 		super(AST);
-		checkObjectLiterals = true;
-		checkArrayLiterals = true;
+		enforceObjectLiterals = false;
+		enforceArrayLiterals = false;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
@@ -22,10 +22,10 @@ class TrailingCommaCheck extends Check {
 		checker.ast.walkFile(function(e:Expr) {
 			switch (e.expr) {
 				case EObjectDecl(fields):
-					if (!checkObjectLiterals || fields.length <= 0) return;
+					if (!enforceObjectLiterals || fields.length <= 0) return;
 					checkDelimited(e.pos, "{", "}", "object literal");
 				case EArrayDecl(values):
-					if (!checkArrayLiterals || values.length <= 0) return;
+					if (!enforceArrayLiterals || values.length <= 0) return;
 					checkDelimited(e.pos, "[", "]", "array literal");
 				default:
 			}
@@ -82,10 +82,10 @@ class TrailingCommaCheck extends Check {
 		return [{
 			fixed: [],
 			properties: [{
-				propertyName: "checkObjectLiterals",
+				propertyName: "enforceObjectLiterals",
 				values: [true, false]
 			}, {
-				propertyName: "checkArrayLiterals",
+				propertyName: "enforceArrayLiterals",
 				values: [true, false]
 			}]
 		}];

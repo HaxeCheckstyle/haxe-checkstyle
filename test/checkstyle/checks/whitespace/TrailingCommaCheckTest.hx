@@ -4,39 +4,46 @@ class TrailingCommaCheckTest extends CheckTestCase<TrailingCommaCheckTests> {
 	static inline var OBJECT_MSG:String = "Missing trailing comma in multiline object literal";
 	static inline var ARRAY_MSG:String = "Missing trailing comma in multiline array literal";
 
+	function configuredCheck():TrailingCommaCheck {
+		var check = new TrailingCommaCheck();
+		check.enforceObjectLiterals = true;
+		check.enforceArrayLiterals = true;
+		return check;
+	}
+
 	@Test
 	public function testObjectMissingTrailingComma() {
-		assertMsg(new TrailingCommaCheck(), OBJECT_MISSING, OBJECT_MSG);
+		assertMsg(configuredCheck(), OBJECT_MISSING, OBJECT_MSG);
 	}
 
 	@Test
 	public function testObjectWithTrailingComma() {
-		assertNoMsg(new TrailingCommaCheck(), OBJECT_OK);
+		assertNoMsg(configuredCheck(), OBJECT_OK);
 	}
 
 	@Test
 	public function testArrayMissingTrailingComma() {
-		assertMsg(new TrailingCommaCheck(), ARRAY_MISSING, ARRAY_MSG);
+		assertMsg(configuredCheck(), ARRAY_MISSING, ARRAY_MSG);
 	}
 
 	@Test
 	public function testArrayWithTrailingComma() {
-		assertNoMsg(new TrailingCommaCheck(), ARRAY_OK);
+		assertNoMsg(configuredCheck(), ARRAY_OK);
 	}
 
 	@Test
 	public function testSingleLineObjectIgnored() {
-		assertNoMsg(new TrailingCommaCheck(), OBJECT_SINGLE_LINE);
+		assertNoMsg(configuredCheck(), OBJECT_SINGLE_LINE);
 	}
 
 	@Test
 	public function testTrailingCommentWithComma() {
-		assertNoMsg(new TrailingCommaCheck(), OBJECT_WITH_COMMENT_AND_COMMA);
+		assertNoMsg(configuredCheck(), OBJECT_WITH_COMMENT_AND_COMMA);
 	}
 
 	@Test
 	public function testTrailingCommentWithoutComma() {
-		assertMsg(new TrailingCommaCheck(), OBJECT_WITH_COMMENT_NO_COMMA, OBJECT_MSG);
+		assertMsg(configuredCheck(), OBJECT_WITH_COMMENT_NO_COMMA, OBJECT_MSG);
 	}
 }
 

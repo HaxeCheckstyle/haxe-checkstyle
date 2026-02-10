@@ -1,13 +1,14 @@
 package checkstyle.checks.coding;
 
 /**
-	Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.
+	Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) when configured.
 **/
 @name("SwitchParentheses")
-@desc("Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.")
+@desc("Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) when configured.")
 class SwitchParenthesesCheck extends Check {
 	/**
 		policy for switch condition parentheses:
+		- ignore = skip check
 		- forbid = disallow parentheses (`switch value {}`)
 		- require = require parentheses (`switch (value) {}`)
 	**/
@@ -16,10 +17,12 @@ class SwitchParenthesesCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		categories = [Category.STYLE, Category.CLARITY];
-		policy = FORBID;
+		policy = IGNORE;
 	}
 
 	override function actualRun() {
+		if (policy == IGNORE) return;
+
 		var root:TokenTree = checker.getTokenTree();
 		var switchTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			return switch (token.tok) {
@@ -37,14 +40,15 @@ class SwitchParenthesesCheck extends Check {
 			if (conditionToken == null) continue;
 			var hasParentheses = conditionToken.matches(POpen);
 			switch (policy) {
-				case FORBID:
-					if (hasParentheses) {
-						logPos('Switch condition should not be wrapped in parentheses', conditionToken.pos, NO_SWITCH_PARENTHESES);
-					}
 				case REQUIRE:
 					if (!hasParentheses) {
 						logPos('Switch condition should be wrapped in parentheses', conditionToken.pos, REQUIRE_SWITCH_PARENTHESES);
 					}
+				case FORBID:
+					if (hasParentheses) {
+						logPos('Switch condition should not be wrapped in parentheses', conditionToken.pos, NO_SWITCH_PARENTHESES);
+					}
+				case IGNORE:
 			}
 		}
 	}
@@ -54,13 +58,14 @@ class SwitchParenthesesCheck extends Check {
 			fixed: [],
 			properties: [{
 				propertyName: "policy",
-				values: [FORBID, REQUIRE]
+				values: [IGNORE, FORBID, REQUIRE]
 			}]
 		}];
 	}
 }
 
 enum abstract SwitchParenthesesPolicy(String) {
+	var IGNORE = "ignore";
 	var FORBID = "forbid";
 	var REQUIRE = "require";
 }
