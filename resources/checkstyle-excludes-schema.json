@@ -355,6 +355,14 @@
                 "FieldDocComment": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 26
+                },
+                "SwitchParentheses": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 85
+                },
+                "TrailingComma": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 86
                 }
             },
             "type": "object"

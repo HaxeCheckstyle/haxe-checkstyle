@@ -3387,6 +3387,14 @@
                 "FieldDocComment": {
                     "$ref": "#/definitions/ExcludeFilterList",
                     "propertyOrder": 26
+                },
+                "SwitchParentheses": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 85
+                },
+                "TrailingComma": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 86
                 }
             },
             "type": "object"
@@ -4277,6 +4285,89 @@
             },
             "type": "object"
         },
+        "SwitchParenthesesCheck": {
+            "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+                    "type": "string",
+                    "enum": [
+                        "SwitchParentheses"
+                    ]
+                },
+                "props": {
+                    "description": "Checks switch condition parentheses usage (`switch value {}` vs `switch (value) {}`) according to policy.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "policy": {
+                            "description": "policy for switch condition parentheses:\n\t\t- forbid = disallow parentheses (`switch value {}`)\n\t\t- require = require parentheses (`switch (value) {}`)",
+                            "type": "string",
+                            "enum": [
+                                "forbid",
+                                "require"
+                            ],
+                            "propertyOrder": 0
+                        },
+                        "severity": {
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
+                            "type": "string",
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "propertyOrder": 1
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
+        "TrailingCommaCheck": {
+            "description": "Requires trailing comma in multiline object and array literals.",
+            "additionalProperties": false,
+            "properties": {
+                "type": {
+                    "description": "Requires trailing comma in multiline object and array literals.",
+                    "type": "string",
+                    "enum": [
+                        "TrailingComma"
+                    ]
+                },
+                "props": {
+                    "description": "Requires trailing comma in multiline object and array literals.",
+                    "additionalProperties": false,
+                    "properties": {
+                        "checkObjectLiterals": {
+                            "description": "enables check on multiline object literals",
+                            "type": "boolean",
+                            "propertyOrder": 0
+                        },
+                        "checkArrayLiterals": {
+                            "description": "enables check on multiline array literals",
+                            "type": "boolean",
+                            "propertyOrder": 1
+                        },
+                        "severity": {
+                            "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
+                            "type": "string",
+                            "enum": [
+                                "INFO",
+                                "WARNING",
+                                "ERROR",
+                                "IGNORE"
+                            ],
+                            "propertyOrder": 2
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        },
         "Config": {
             "additionalProperties": false,
             "properties": {
@@ -4518,6 +4609,9 @@
                                 "$ref": "#/definitions/StringLiteralCheck"
                             },
                             {
+                                "$ref": "#/definitions/SwitchParenthesesCheck"
+                            },
+                            {
                                 "$ref": "#/definitions/TODOCommentCheck"
                             },
                             {
@@ -4525,6 +4619,9 @@
                             },
                             {
                                 "$ref": "#/definitions/TraceCheck"
+                            },
+                            {
+                                "$ref": "#/definitions/TrailingCommaCheck"
                             },
                             {
                                 "$ref": "#/definitions/TrailingWhitespaceCheck"
