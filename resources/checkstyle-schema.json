@@ -4357,6 +4357,11 @@
                             "type": "boolean",
                             "propertyOrder": 1
                         },
+                        "enforceArrayComprehension": {
+                            "description": "forbids trailing comma in array comprehension (changes semantics)",
+                            "type": "boolean",
+                            "propertyOrder": 2
+                        },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "type": "string",
@@ -4366,7 +4371,7 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 2
+                            "propertyOrder": 3
                         }
                     },
                     "type": "object"
