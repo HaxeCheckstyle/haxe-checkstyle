@@ -8,11 +8,13 @@ package checkstyle.checks.whitespace;
 class TrailingCommaCheck extends Check {
 	public var enforceObjectLiterals:Bool;
 	public var enforceArrayLiterals:Bool;
+	public var enforceArrayComprehension:Bool;
 
 	public function new() {
 		super(AST);
 		enforceObjectLiterals = false;
 		enforceArrayLiterals = false;
+		enforceArrayComprehension = false;
 		categories = [Category.STYLE, Category.CLARITY];
 	}
 
@@ -25,11 +27,45 @@ class TrailingCommaCheck extends Check {
 					if (!enforceObjectLiterals || fields.length <= 0) return;
 					checkDelimited(e.pos, "{", "}", "object literal");
 				case EArrayDecl(values):
-					if (!enforceArrayLiterals || values.length <= 0) return;
-					checkDelimited(e.pos, "[", "]", "array literal");
+					if (values.length <= 0) return;
+					if (isArrayComprehension(values)) {
+						if (enforceArrayComprehension)
+							checkNoTrailingComma(e.pos, "[", "]", "array comprehension");
+						return;
+					}
+					if (enforceArrayLiterals)
+						checkDelimited(e.pos, "[", "]", "array literal");
 				default:
 			}
 		});
+	}
+
+	function isArrayComprehension(values:Array<Expr>):Bool {
+		for (v in values) {
+			switch (v.expr) {
+				case EFor(_, _) | EWhile(_, _, _):
+					return true;
+				default:
+			}
+		}
+		return false;
+	}
+
+	function checkNoTrailingComma(pos:Position, open:String, close:String, label:String) {
+		if (isPosSuppressed(pos)) return;
+
+		var source = checker.getString(pos.min, pos.max);
+		if (source == null || source.length == 0) return;
+
+		var openIndex = source.indexOf(open);
+		var closeIndex = source.lastIndexOf(close);
+		if (openIndex < 0 || closeIndex <= openIndex) return;
+
+		var inside = source.substring(openIndex + 1, closeIndex);
+		if (!hasTrailingComma(inside)) return;
+
+		var closePos = pos.min + closeIndex;
+		logRange('Trailing comma changes semantics in $label', closePos, closePos + 1, FORBIDDEN_TRAILING_COMMA);
 	}
 
 	function checkDelimited(pos:Position, open:String, close:String, label:String) {
@@ -87,6 +123,9 @@ class TrailingCommaCheck extends Check {
 			}, {
 				propertyName: "enforceArrayLiterals",
 				values: [true, false]
+			}, {
+				propertyName: "enforceArrayComprehension",
+				values: [true, false]
 			}]
 		}];
 	}
@@ -94,4 +133,5 @@ class TrailingCommaCheck extends Check {
 
 enum abstract TrailingCommaCode(String) to String {
 	var MISSING_TRAILING_COMMA = "MissingTrailingComma";
+	var FORBIDDEN_TRAILING_COMMA = "ForbiddenTrailingComma";
 }

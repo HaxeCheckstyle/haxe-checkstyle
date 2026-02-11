@@ -3,11 +3,18 @@ package checkstyle.checks.whitespace;
 class TrailingCommaCheckTest extends CheckTestCase<TrailingCommaCheckTests> {
 	static inline var OBJECT_MSG:String = "Missing trailing comma in multiline object literal";
 	static inline var ARRAY_MSG:String = "Missing trailing comma in multiline array literal";
+	static inline var COMPREHENSION_MSG:String = "Trailing comma changes semantics in array comprehension";
 
 	function configuredCheck():TrailingCommaCheck {
 		var check = new TrailingCommaCheck();
 		check.enforceObjectLiterals = true;
 		check.enforceArrayLiterals = true;
+		return check;
+	}
+
+	function comprehensionCheck():TrailingCommaCheck {
+		var check = new TrailingCommaCheck();
+		check.enforceArrayComprehension = true;
 		return check;
 	}
 
@@ -44,6 +51,31 @@ class TrailingCommaCheckTest extends CheckTestCase<TrailingCommaCheckTests> {
 	@Test
 	public function testTrailingCommentWithoutComma() {
 		assertMsg(configuredCheck(), OBJECT_WITH_COMMENT_NO_COMMA, OBJECT_MSG);
+	}
+
+	@Test
+	public function testArrayComprehensionIgnored() {
+		assertNoMsg(configuredCheck(), ARRAY_COMPREHENSION);
+	}
+
+	@Test
+	public function testArrayComprehensionWhileIgnored() {
+		assertNoMsg(configuredCheck(), ARRAY_COMPREHENSION_WHILE);
+	}
+
+	@Test
+	public function testEnforceComprehensionWithTrailingComma() {
+		assertMsg(comprehensionCheck(), ARRAY_COMPREHENSION_WITH_COMMA, COMPREHENSION_MSG);
+	}
+
+	@Test
+	public function testEnforceComprehensionWithoutTrailingComma() {
+		assertNoMsg(comprehensionCheck(), ARRAY_COMPREHENSION);
+	}
+
+	@Test
+	public function testEnforceComprehensionDefaultIgnoresArrayLiterals() {
+		assertNoMsg(comprehensionCheck(), ARRAY_MISSING);
 	}
 }
 
@@ -118,6 +150,43 @@ enum abstract TrailingCommaCheckTests(String) to String {
 				a: 1,
 				b: 2 // trailing item
 			};
+			return value;
+		}
+	}";
+
+	var ARRAY_COMPREHENSION = "
+	abstractAndClass Test {
+		function make() {
+			final value = [
+				for (i in 0...3) {
+					i;
+				}
+			];
+			return value;
+		}
+	}";
+
+	var ARRAY_COMPREHENSION_WITH_COMMA = "
+	abstractAndClass Test {
+		function make() {
+			final value = [
+				for (i in 0...3) {
+					i;
+				},
+			];
+			return value;
+		}
+	}";
+
+	var ARRAY_COMPREHENSION_WHILE = "
+	abstractAndClass Test {
+		function make() {
+			var i = 0;
+			final value = [
+				while (i < 3) {
+					i++;
+				}
+			];
 			return value;
 		}
 	}";
