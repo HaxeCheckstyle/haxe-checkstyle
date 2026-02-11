@@ -253,6 +253,11 @@
                             "type": "boolean",
                             "propertyOrder": 3
                         },
+                        "enforceArrowForNonMemberFunctions": {
+                            "description": "enforce using arrow syntax for non-member functions (`function (...) {}` -> `(...) -> ...`)",
+                            "type": "boolean",
+                            "propertyOrder": 4
+                        },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "type": "string",
@@ -262,7 +267,7 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 4
+                            "propertyOrder": 5
                         },
                         "allowCurlyBody": {
                             "description": "allow using curly block as arrow function body (`{...}`)",
