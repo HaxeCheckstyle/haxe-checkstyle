@@ -25,7 +25,7 @@ class TrailingCommaCheck extends Check {
 			switch (e.expr) {
 				case EObjectDecl(fields):
 					if (!enforceObjectLiterals || fields.length <= 0) return;
-					checkDelimited(e.pos, "{", "}", "object literal");
+					checkDelimited(e.pos, "{", "}", "object literal", true);
 				case EArrayDecl(values):
 					if (values.length <= 0) return;
 					if (isArrayComprehension(values)) {
@@ -68,7 +68,7 @@ class TrailingCommaCheck extends Check {
 		logRange('Trailing comma changes semantics in $label', closePos, closePos + 1, FORBIDDEN_TRAILING_COMMA);
 	}
 
-	function checkDelimited(pos:Position, open:String, close:String, label:String) {
+	function checkDelimited(pos:Position, open:String, close:String, label:String, enforceObjectContext:Bool = false) {
 		if (isPosSuppressed(pos)) return;
 
 		var source = checker.getString(pos.min, pos.max);
@@ -81,6 +81,7 @@ class TrailingCommaCheck extends Check {
 		var inside = source.substring(openIndex + 1, closeIndex);
 		if (inside.indexOf("\n") < 0 && inside.indexOf("\r") < 0) return;
 		if (inside.trim().length == 0) return;
+		if (enforceObjectContext && !isObjectLiteralContext(pos, openIndex)) return;
 		if (hasTrailingComma(inside)) return;
 
 		var closePos = pos.min + closeIndex;
@@ -88,21 +89,7 @@ class TrailingCommaCheck extends Check {
 	}
 
 	function hasTrailingComma(inside:String):Bool {
-		var tail = trimRight(inside);
-		if (tail.length == 0) return false;
-
-		var lineComment = ~/\/\/[^\n\r]*$/;
-		if (lineComment.match(tail)) {
-			tail = trimRight(tail.substring(0, lineComment.matchedPos().pos));
-		}
-
-		if (tail.length >= 2 && tail.substr(tail.length - 2, 2) == "*/") {
-			var blockStart = tail.lastIndexOf("/*");
-			if (blockStart >= 0) {
-				tail = trimRight(tail.substring(0, blockStart));
-			}
-		}
-
+		var tail = trimTrailingIgnoredTail(inside);
 		return tail.length > 0 && tail.charAt(tail.length - 1) == ",";
 	}
 
@@ -112,6 +99,89 @@ class TrailingCommaCheck extends Check {
 			end -= 1;
 		}
 		return value.substring(0, end);
+	}
+
+	function isObjectLiteralContext(pos:Position, openIndex:Int):Bool {
+		var root:TokenTree = checker.getTokenTree();
+		if (root == null) return true;
+
+		var openPos = pos.min + openIndex;
+		var openBrace = findOpenBraceToken(root, openPos);
+		if (openBrace == null || openBrace.parent == null) return true;
+
+		return !isBlockBraceParent(openBrace.parent.tok);
+	}
+
+	function findOpenBraceToken(root:TokenTree, offset:Int):TokenTree {
+		var matches = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (token.pos.min > offset) return SkipSubtree;
+			return switch (token.tok) {
+				case BrOpen if (token.pos.min == offset):
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
+		return (matches.length > 0) ? matches[0] : null;
+	}
+
+	function isBlockBraceParent(tok:TokenTreeDef):Bool {
+		return switch (tok) {
+			case Const(CIdent(_))
+				| Kwd(KwdIf)
+				| Kwd(KwdElse)
+				| Kwd(KwdFor)
+				| Kwd(KwdWhile)
+				| Kwd(KwdDo)
+				| Kwd(KwdTry)
+				| Kwd(KwdCatch)
+				| Kwd(KwdSwitch)
+				| Kwd(KwdMacro)
+				| Arrow
+				| Dollar(_):
+				true;
+			default:
+				false;
+		}
+	}
+
+	function trimTrailingIgnoredTail(value:String):String {
+		var tail = trimRight(value);
+		while (tail.length > 0) {
+			var lineComment = ~/\/\/[^\n\r]*$/;
+			if (lineComment.match(tail)) {
+				tail = trimRight(tail.substring(0, lineComment.matchedPos().pos));
+				continue;
+			}
+
+			if (tail.length >= 2 && tail.substr(tail.length - 2, 2) == "*/") {
+				var blockStart = tail.lastIndexOf("/*");
+				if (blockStart >= 0) {
+					tail = trimRight(tail.substring(0, blockStart));
+					continue;
+				}
+			}
+
+			var lineStart = tail.lastIndexOf("\n");
+			var carriageLineStart = tail.lastIndexOf("\r");
+			if (carriageLineStart > lineStart) {
+				lineStart = carriageLineStart;
+			}
+			var lastLine = (lineStart >= 0) ? tail.substring(lineStart + 1) : tail;
+			if (isConditionalDirective(lastLine)) {
+				tail = (lineStart >= 0) ? trimRight(tail.substring(0, lineStart)) : "";
+				continue;
+			}
+
+			break;
+		}
+		return tail;
+	}
+
+	function isConditionalDirective(line:String):Bool {
+		var trimmed = line.trim();
+		if (trimmed.length == 0) return false;
+		return ~/^#(if|elseif|else|end)\b/.match(trimmed);
 	}
 
 	override public function detectableInstances():DetectableInstances {

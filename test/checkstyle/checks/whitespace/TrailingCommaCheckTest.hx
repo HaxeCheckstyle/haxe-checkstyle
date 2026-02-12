@@ -77,6 +77,21 @@ class TrailingCommaCheckTest extends CheckTestCase<TrailingCommaCheckTests> {
 	public function testEnforceComprehensionDefaultIgnoresArrayLiterals() {
 		assertNoMsg(comprehensionCheck(), ARRAY_MISSING);
 	}
+
+	@Test
+	public function testConditionalCompilationWithTrailingComma() {
+		assertNoMsg(configuredCheck(), ARRAY_WITH_CONDITIONAL_OK);
+	}
+
+	@Test
+	public function testConditionalCompilationWithoutTrailingComma() {
+		assertMsg(configuredCheck(), ARRAY_WITH_CONDITIONAL_MISSING, ARRAY_MSG);
+	}
+
+	@Test
+	public function testMacroBlockIsNotObjectLiteral() {
+		assertNoMsg(configuredCheck(), MACRO_BLOCK);
+	}
 }
 
 enum abstract TrailingCommaCheckTests(String) to String {
@@ -188,6 +203,45 @@ enum abstract TrailingCommaCheckTests(String) to String {
 				}
 			];
 			return value;
+		}
+	}";
+
+	var ARRAY_WITH_CONDITIONAL_OK = "
+	abstractAndClass Test {
+		function make() {
+			final value = [
+				#if !macro
+				1,
+				#end
+			];
+			return value;
+		}
+	}";
+
+	var ARRAY_WITH_CONDITIONAL_MISSING = "
+	abstractAndClass Test {
+		function make() {
+			final value = [
+				#if !macro
+				1
+				#end
+			];
+			return value;
+		}
+	}";
+
+	var MACRO_BLOCK = "
+	class Test {
+		public static macro function build() {
+			return macro {
+				final value = 1;
+				if (value > 0) {
+					trace(value);
+				}
+				else {
+					trace(0);
+				}
+			};
 		}
 	}";
 }
