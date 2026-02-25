@@ -18,7 +18,7 @@
                 },
                 "UnusedImport": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 79
+                    "propertyOrder": 80
                 },
                 "Dynamic": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -30,15 +30,19 @@
                 },
                 "MultipleStringLiterals": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 46
+                    "propertyOrder": 47
+                },
+                "LongNumber": {
+                    "$ref": "#/definitions/ExcludeFilterList",
+                    "propertyOrder": 40
                 },
                 "NeedBraces": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 48
+                    "propertyOrder": 49
                 },
                 "SeparatorWhitespace": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 65
+                    "propertyOrder": 66
                 },
                 "all": {
                     "$ref": "#/definitions/ExcludeFilterList"
@@ -49,7 +53,7 @@
                 },
                 "NestedForDepth": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 50
+                    "propertyOrder": 51
                 },
                 "Anonymous": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -57,11 +61,11 @@
                 },
                 "MultipleVariableDeclarations": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 47
+                    "propertyOrder": 48
                 },
                 "NestedTryDepth": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 52
+                    "propertyOrder": 53
                 },
                 "BlockBreakingConditional": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -81,7 +85,7 @@
                 },
                 "ReturnCount": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 63
+                    "propertyOrder": 64
                 },
                 "DefaultComesLast": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -93,7 +97,7 @@
                 },
                 "WhitespaceAfter": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 83
+                    "propertyOrder": 84
                 },
                 "ConstantName": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -109,19 +113,19 @@
                 },
                 "WhitespaceAround": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 84
+                    "propertyOrder": 85
                 },
                 "NestedIfDepth": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 51
+                    "propertyOrder": 52
                 },
                 "ParameterName": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 56
+                    "propertyOrder": 57
                 },
                 "NullableParameter": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 53
+                    "propertyOrder": 54
                 },
                 "AvoidStarImport": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -129,7 +133,7 @@
                 },
                 "SeparatorWrap": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 66
+                    "propertyOrder": 67
                 },
                 "AvoidIdentifier": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -137,7 +141,7 @@
                 },
                 "RedundantAllowMeta": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 60
+                    "propertyOrder": 61
                 },
                 "HiddenField": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -145,11 +149,11 @@
                 },
                 "UnnecessaryConstructor": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 78
+                    "propertyOrder": 79
                 },
                 "SimplifyBooleanExpression": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 67
+                    "propertyOrder": 68
                 },
                 "path": {
                     "description": "filters excludes relative to\n\t- RELATIVE_TO_PROJECT = use project root\n\t- RELATIVE_TO_SOURCE = use path(s) specified via \"-s <path>\" command line switches",
@@ -161,23 +165,23 @@
                 },
                 "MethodCount": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 42
+                    "propertyOrder": 43
                 },
                 "UnusedLocalVar": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 80
+                    "propertyOrder": 81
                 },
                 "TabForAligning": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 72
+                    "propertyOrder": 73
                 },
                 "MethodName": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 44
+                    "propertyOrder": 45
                 },
                 "RightCurly": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 64
+                    "propertyOrder": 65
                 },
                 "AvoidTernaryOperator": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -185,7 +189,7 @@
                 },
                 "ParameterNumber": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 57
+                    "propertyOrder": 58
                 },
                 "ArrowFunction": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -193,7 +197,7 @@
                 },
                 "MethodLength": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 43
+                    "propertyOrder": 44
                 },
                 "ConditionalCompilation": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -205,7 +209,7 @@
                 },
                 "MemberName": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 41
+                    "propertyOrder": 42
                 },
                 "ERegLiteral": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -213,15 +217,15 @@
                 },
                 "RedundantModifier": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 61
+                    "propertyOrder": 62
                 },
                 "Type": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 75
+                    "propertyOrder": 76
                 },
                 "TypeName": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 77
+                    "propertyOrder": 78
                 },
                 "Indentation": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -242,31 +246,31 @@
                 },
                 "Return": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 62
+                    "propertyOrder": 63
                 },
                 "SimplifyBooleanReturn": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 68
+                    "propertyOrder": 69
                 },
                 "TODOComment": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 71
+                    "propertyOrder": 72
                 },
                 "VarTypeHint": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 81
+                    "propertyOrder": 82
                 },
                 "NestedControlFlow": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 49
+                    "propertyOrder": 50
                 },
                 "OperatorWhitespace": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 54
+                    "propertyOrder": 55
                 },
                 "Spacing": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 69
+                    "propertyOrder": 70
                 },
                 "IndentationCharacter": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -274,7 +278,7 @@
                 },
                 "MagicNumber": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 40
+                    "propertyOrder": 41
                 },
                 "ArrayLiteral": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -282,11 +286,11 @@
                 },
                 "TrailingWhitespace": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 74
+                    "propertyOrder": 75
                 },
                 "VariableInitialisation": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 82
+                    "propertyOrder": 83
                 },
                 "LineLength": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -306,11 +310,11 @@
                 },
                 "StringLiteral": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 70
+                    "propertyOrder": 71
                 },
                 "Trace": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 73
+                    "propertyOrder": 74
                 },
                 "ArrayAccess": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -318,7 +322,7 @@
                 },
                 "PublicAccessor": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 58
+                    "propertyOrder": 59
                 },
                 "DocCommentStyle": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -330,7 +334,7 @@
                 },
                 "RedundantAccessMeta": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 59
+                    "propertyOrder": 60
                 },
                 "CodeSimilarity": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -338,11 +342,11 @@
                 },
                 "OperatorWrap": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 55
+                    "propertyOrder": 56
                 },
                 "TypeDocComment": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 76
+                    "propertyOrder": 77
                 },
                 "LeftCurly": {
                     "$ref": "#/definitions/ExcludeFilterList",
@@ -350,7 +354,7 @@
                 },
                 "ModifierOrder": {
                     "$ref": "#/definitions/ExcludeFilterList",
-                    "propertyOrder": 45
+                    "propertyOrder": 46
                 },
                 "FieldDocComment": {
                     "$ref": "#/definitions/ExcludeFilterList",
