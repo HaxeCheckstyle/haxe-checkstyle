@@ -41,6 +41,15 @@ class ModifierOrderCheckTest extends CheckTestCase<ModifierOrderCheckTests> {
 		check.severity = "ignore";
 		assertNoMsg(check, TEST1);
 	}
+	
+	@Test
+	public function testIssue520() {
+		var check = new ModifierOrderCheck();
+		assertNoMsg(check, TEST_ISSUE520);
+
+		check.modifiers = [OVERRIDE, PUBLIC_PRIVATE, STATIC, MACRO, INLINE, DYNAMIC];
+		assertNoMsg(check, TEST_ISSUE520);
+	}
 }
 
 enum abstract ModifierOrderCheckTests(String) to String {
@@ -80,6 +89,10 @@ enum abstract ModifierOrderCheckTests(String) to String {
 	var TEST8 = "
 	abstractAndClass Test {
 		inline public var test(default,null):String=0;
+	}";
+	var TEST_ISSUE520 = "
+	abstractAndClass Test {
+		static final _point = new Point();
 	}";
 	var TEST_FINAL = "
 	abstractAndClass Test {
