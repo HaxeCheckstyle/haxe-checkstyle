@@ -11,11 +11,24 @@ class LongNumberCheck extends Check {
 	**/
 	public var ignoreNumbers:Array<Float>;
 
+	/**
+	 	whether to check hexadecimal (`0x12345678`) numbers
+	**/
+	public var checkHexadecimal:Bool;
+
+	/**
+	 	whether to check binary (`0b10001001`) numbers
+	**/
+	public var checkBinary:Bool;
+
 	public function new() {
 		super(TOKEN);
-		ignoreNumbers = [];
 		categories = [Category.CLARITY, Category.COMPLEXITY];
 		points = 3;
+
+		ignoreNumbers = [];
+		checkHexadecimal = false;
+		checkBinary = false;
 	}
 
 	override function actualRun() {
@@ -53,6 +66,9 @@ class LongNumberCheck extends Check {
 					var number:Int = Std.parseInt(n.replace("_", ""));
 					if (ignoreNumbers.contains(number)) continue;
 					if (s == null) s = "";
+
+					if (!checkHexadecimal && n.startsWith("0x")) continue;
+					if (!checkBinary && n.startsWith("0b")) continue;
 
 					if (longNumber.match(n)) logPos('"$n${s ?? ''}" is a long number, use _ as a separator', numberToken.pos);
 				case Const(CFloat(n, s)):
