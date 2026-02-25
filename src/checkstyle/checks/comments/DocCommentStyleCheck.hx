@@ -7,12 +7,20 @@ package checkstyle.checks.comments;
 @desc("Checks code documentation style (/**...**/ vs /*...*/)")
 class DocCommentStyleCheck extends Check {
 	/**
-		Defines how doc comments should start / end:
-		- ignore = accepts any start / end
+		Defines how doc comments should start:
+		- ignore = accepts any start
 		- onestar = /*
 		- twostar = /**
 	**/
 	public var startStyle:DocCommentStyle;
+
+	/**
+		Defines how doc comments should end:
+		- ignore = accepts any end
+		- onestar = * /
+		- twostar = ** /
+	**/
+	public var endStyle:DocCommentStyle;
 
 	/**
 		Defines how each doc comments line should start:
@@ -26,6 +34,7 @@ class DocCommentStyleCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		startStyle = TWO_STARS;
+		endStyle = TWO_STARS;
 		lineStyle = NONE;
 	}
 
@@ -56,28 +65,42 @@ class DocCommentStyleCheck extends Check {
 
 	function checkCommentStyle(token:TokenTree, text:String) {
 		if (text.length <= 0) return;
-		switch (startStyle) {
-			case IGNORE:
-			case NONE, ONE_STAR:
-				if ((text.indexOf("*") == 0) || (text.lastIndexOf("*") == text.length - 1)) {
-					logPos("Comment should use '/*…*/'", token.pos, ONE_STAR_START);
-				}
-			case TWO_STARS:
-				if ((text.indexOf("*") != 0) || (text.lastIndexOf("*") != text.length - 1)) {
-					logPos("Comment should use '/**…**/'", token.pos, TWO_STARS_START);
-				}
-		}
-		if (lineStyle == IGNORE) return;
+		// This is a list of lines that EXCLUDES the initial /* and */.
+		// Thus, on a one-star, the first line will be empty,
+		// and on a two-star, the first line will be `*`.
 		var lines:Array<String> = text.split(checker.lineSeparator);
-		var oneStar:EReg = ~/^\s*\*/;
-		var twoStar:EReg = ~/^\s*\*\*/;
-		// skip first line
-		for (i in 1...lines.length - 1) {
-			var line:String = lines[i];
+
+		var firstLine:String = lines[0];
+		var lastLine:String = lines[lines.length - 1];
+		var middleLines:Array<String> = lines.slice(1, lines.length - 1);
+
+		checkStartStyle(token, firstLine);
+		checkLineStyle(token, middleLines);
+		checkEndStyle(token, lastLine);
+	}
+
+	function checkStartStyle(token:TokenTree, line:String) {
+		switch (startStyle) {
+			case NONE, IGNORE:
+				return;
+			case ONE_STAR:
+				var oneStar:EReg = ~/^\s*$/;
+				if (!oneStar.match(line)) logPos("Comment should start with '/*…'", token.pos, ONE_STAR_START);
+			case TWO_STARS:
+				var twoStar:EReg = ~/^\*+$/;
+				if (!twoStar.match(line)) logPos("Comment should start with '/**…'", token.pos, TWO_STARS_START);
+		}
+	}
+
+	function checkLineStyle(token:TokenTree, lines:Array<String>) {
+		var oneStar:EReg = ~/^\s*\*[^*]/;
+		var twoStar:EReg = ~/^\s*\*+/;
+		for (line in lines) {
 			switch (lineStyle) {
 				case IGNORE:
+					return;
 				case NONE:
-					if (oneStar.match(line)) logPos("Comment lines should not start with '*'", token.pos, NO_STARS_LINES);
+					if (oneStar.match(line) || twoStar.match(line)) logPos("Comment lines should not start with '*'", token.pos, NO_STARS_LINES);
 				case ONE_STAR:
 					if (!oneStar.match(line)) logPos("Comment lines should start with '*'", token.pos, ONE_STAR_LINES);
 				case TWO_STARS:
@@ -86,11 +109,27 @@ class DocCommentStyleCheck extends Check {
 		}
 	}
 
+	function checkEndStyle(token:TokenTree, line:String) {
+		switch (endStyle) {
+			case NONE, IGNORE:
+				return;
+			case ONE_STAR:
+				var oneStar:EReg = ~/^\s*$/;
+				if (!oneStar.match(line)) logPos("Comment should end with '…*/'", token.pos, ONE_STAR_START);
+			case TWO_STARS:
+				var twoStars:EReg = ~/^\s*\*+$/;
+				if (!twoStars.match(line)) logPos("Comment should end with '…**/'", token.pos, TWO_STARS_START);
+		}
+	}
+
 	override public function detectableInstances():DetectableInstances {
 		return [{
 			fixed: [],
 			properties: [{
 				propertyName: "startStyle",
+				values: [ONE_STAR, TWO_STARS]
+			}, {
+				propertyName: "endStyle",
 				values: [ONE_STAR, TWO_STARS]
 			}, {
 				propertyName: "lineStyle",

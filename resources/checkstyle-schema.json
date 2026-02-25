@@ -422,6 +422,17 @@
                     "description": "Checks code documentation style (/**...**/ vs /*...*/)",
                     "additionalProperties": false,
                     "properties": {
+                        "endStyle": {
+                            "description": "Defines how doc comments should end:\n\t\t- ignore = accepts any end\n\t\t- onestar = * /\n\t\t- twostar = ** /",
+                            "type": "string",
+                            "enum": [
+                                "ignore",
+                                "none",
+                                "onestar",
+                                "twostars"
+                            ],
+                            "propertyOrder": 1
+                        },
                         "lineStyle": {
                             "description": "Defines how each doc comments line should start:\n\t\t- ignore = accepts any line prefix\n\t\t- none =\n\t\t- onestar = *\n\t\t- twostar = **",
                             "type": "string",
@@ -431,7 +442,7 @@
                                 "onestar",
                                 "twostars"
                             ],
-                            "propertyOrder": 1
+                            "propertyOrder": 2
                         },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
@@ -442,10 +453,10 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 2
+                            "propertyOrder": 3
                         },
                         "startStyle": {
-                            "description": "Defines how doc comments should start / end:\n\t\t- ignore = accepts any start / end\n\t\t- onestar = /*\n\t\t- twostar = /**",
+                            "description": "Defines how doc comments should start:\n\t\t- ignore = accepts any start\n\t\t- onestar = /*\n\t\t- twostar = /**",
                             "type": "string",
                             "enum": [
                                 "ignore",
