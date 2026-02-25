@@ -948,11 +948,13 @@
                         "tokens": {
                             "description": "list of tokens to limit where names should conform to \"format\"",
                             "items": {
-                                "description": "supports inline and non inline constants\n\t- INLINE = \"static inline var\"\n\t- NOTINLINE = \"static var\"",
+                                "description": "supports inline and non inline constants\n\t- INLINE = \"static inline var\"\n\t- NOTINLINE = \"static var\"\n\t- FINAL = \"static final\"\n\t- NOTFINAL = \"static var\"",
                                 "type": "string",
                                 "enum": [
                                     "INLINE",
-                                    "NOTINLINE"
+                                    "NOTINLINE",
+                                    "FINAL",
+                                    "NOTFINAL"
                                 ]
                             },
                             "type": "array",
