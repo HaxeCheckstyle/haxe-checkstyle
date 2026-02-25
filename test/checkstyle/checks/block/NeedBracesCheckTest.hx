@@ -25,6 +25,8 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
 		assertNoMsg(check, INTERFACE_DEF);
 		assertNoMsg(check, ANON_FUNCTION);
 		assertNoMsg(check, ANON_FUNCTION_NO_BRACES);
@@ -35,10 +37,24 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		var check = new NeedBracesCheck();
 		assertMsg(check, TEST1, MSG_IF);
 		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST3);
 		assertMsg(check, TEST4, MSG_IF);
+		assertNoMsg(check, TEST5);
 		assertMsg(check, TEST6, MSG_FOR);
 		assertMsg(check, TEST7, MSG_WHILE);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
 		assertMsg(check, TEST11, MSG_IF);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMessages(check, TEST17, [
+			MSG_IF,
+			MSG_ELSE
+		]);
 	}
 
 	@Test
@@ -71,6 +87,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST14);
 		assertNoMsg(check, INTERFACE_DEF);
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
+		assertMessages(check, TEST17, [MSG_IF, MSG_ELSE]);
 	}
 
 	@Test
@@ -93,6 +110,9 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertNoMsg(check, TEST17);
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, TEST, MSG_SAME_LINE_FOR);
@@ -106,7 +126,7 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 
 		assertNoMsg(check, TEST);
 		assertMsg(check, TEST1, MSG_IF);
-		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST2);
 		assertNoMsg(check, TEST3);
 		assertMsg(check, TEST4, MSG_IF);
 		assertNoMsg(check, TEST5);
@@ -119,18 +139,53 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMsg(check, TEST17, MSG_IF);
 
 		check.allowSingleLineStatement = false;
 		assertMessages(check, TEST, [
 			MSG_SAME_LINE_IF,
 			MSG_SAME_LINE_IF,
-			MSG_SAME_LINE_ELSE,
 			MSG_SAME_LINE_IF,
 			MSG_SAME_LINE_IF
 		]);
 		assertMsg(check, TEST10, MSG_SAME_LINE_IF);
-		assertMessages(check, TEST11, [MSG_IF, MSG_SAME_LINE_ELSE]);
+		assertMessages(check, TEST11, [MSG_IF]);
 		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST16);
+	}
+
+	@Test
+	public function testTokenElse() {
+		var check = new NeedBracesCheck();
+		check.tokens = [ELSE];
+
+		assertNoMsg(check, TEST);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, MSG_ELSE);
+		assertNoMsg(check, TEST3);
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertNoMsg(check, TEST11);
+		assertNoMsg(check, TEST12);
+		assertNoMsg(check, TEST13);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMsg(check, TEST17, MSG_ELSE);
+
+		check.allowSingleLineStatement = false;
+		assertMsg(check, TEST, MSG_SAME_LINE_ELSE);
+		assertNoMsg(check, TEST10);
+		assertMessages(check, TEST11, [MSG_SAME_LINE_ELSE]);
+		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
 	}
@@ -155,6 +210,12 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMessages(check, TEST17, [
+			MSG_IF,
+			MSG_ELSE
+		]);
 
 		check.allowSingleLineStatement = false;
 		assertMessages(check, TEST, [
@@ -171,6 +232,55 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST14);
 		assertNoMsg(check, TEST15);
 		assertMsg(check, TEST16, MSG_SAME_LINE_ELSE);
+	}
+
+	@Test
+	public function testTokenIfWithElse() {
+		var check = new NeedBracesCheck();
+		check.tokens = [IF_WITH_ELSE];
+
+		assertNoMsg(check, TEST); // allow single line
+		assertNoMsg(check, TEST1);
+		assertNoMsg(check, TEST2); // allow single line
+		assertNoMsg(check, TEST3); // correct braces
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertMsg(check, TEST11, MSG_IF); // missing braces!
+		assertNoMsg(check, TEST12); // allow single line
+		assertNoMsg(check, TEST13); // allow single line
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMsg(check, TEST17, MSG_IF); // missing braces!
+
+		check.allowSingleLineStatement = false;
+
+		assertMessages(check, TEST, [
+			MSG_SAME_LINE_IF,
+			MSG_SAME_LINE_IF
+		]);
+		assertNoMsg(check, TEST1);
+		assertMsg(check, TEST2, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST3); // correct braces
+		assertNoMsg(check, TEST4);
+		assertNoMsg(check, TEST5);
+		assertNoMsg(check, TEST6);
+		assertNoMsg(check, TEST7);
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+		assertNoMsg(check, TEST10);
+		assertMsg(check, TEST11, MSG_IF); // missing braces!
+		assertMsg(check, TEST12, MSG_SAME_LINE_IF);
+		assertMsg(check, TEST13, MSG_SAME_LINE_IF);
+		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertMsg(check, TEST17, MSG_IF); // missing braces!
 	}
 
 	@Test
@@ -193,6 +303,9 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertNoMsg(check, TEST17);
 
 		check.allowSingleLineStatement = false;
 		assertMsg(check, TEST, MSG_SAME_LINE_WHILE);
@@ -218,6 +331,9 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertNoMsg(check, TEST17);
 		assertNoMsg(check, ANON_FUNCTION);
 		assertNoMsg(check, ANON_FUNCTION_NO_BRACES);
 
@@ -246,6 +362,9 @@ class NeedBracesCheckTest extends CheckTestCase<NeedBracesCheckTests> {
 		assertNoMsg(check, TEST12);
 		assertNoMsg(check, TEST13);
 		assertNoMsg(check, TEST14);
+		assertNoMsg(check, TEST15);
+		assertNoMsg(check, TEST16);
+		assertNoMsg(check, TEST17);
 		assertNoMsg(check, DO_WHILE);
 		assertNoMsg(check, DO_WHILE_NO_BRACES);
 
@@ -421,6 +540,15 @@ enum abstract NeedBracesCheckTests(String) to String {
 				return;
 			}
 			else return;
+		}
+	}";
+	var TEST17 = "
+	class Test {
+		function test() {
+			if (true)
+				return;
+			else
+				return;
 		}
 	}";
 	var INTERFACE_DEF = "
