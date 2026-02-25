@@ -189,6 +189,8 @@ class ConfigParser {
 
 	function validateAllowedFields<T>(object:T, allowedFields:Array<String>, messagePrefix:String) {
 		for (field in Reflect.fields(object)) {
+			// Ignore comments.
+			if (field == "comment") continue;
 			if (!allowedFields.contains(field)) {
 				failWith(messagePrefix + " has unknown field '" + field + "'");
 			}

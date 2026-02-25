@@ -34,6 +34,12 @@ class CheckstyleSchemaGenerator {
 						expr: JsonSchemaGenerator.genSchema(filterListType, "ExcludeFilterList", pos, null, refs, order++, null)
 					});
 				}
+			case "Config.extendsConfigPath":
+				fields.push({field: "description",
+					expr: macro "Choose a master config file to extend from."+
+					"\nChecks and excludes are combined from both master and current config, and can continue chaining as long as it does not cycle."+
+					"\nThere is no shadowing or overwriting. Checkstile runs every check and exclude regardless where it comes from."
+				});
 			case "Config.checks":
 				fields.pop();
 				fields.pop();
