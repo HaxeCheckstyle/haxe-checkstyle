@@ -39,11 +39,14 @@ class NeedBracesCheck extends Check {
 		var wantFunction = hasToken(FUNCTION);
 		var wantFor = hasToken(FOR);
 		var wantIf = hasToken(IF);
+		var wantIfWithElse = hasToken(IF_WITH_ELSE);
+		var wantElseIf = hasToken(ELSE_IF);
+		var wantElse = hasToken(ELSE);
 		var wantWhile = hasToken(WHILE);
 		var wantDoWhile = hasToken(DO_WHILE);
 		var wantCatch = hasToken(CATCH);
 
-		if (!(wantFunction || wantFor || wantIf || wantWhile || wantDoWhile || wantCatch)) return;
+		if (!(wantFunction || wantFor || wantIf || wantIfWithElse || wantElseIf || wantElse || wantWhile || wantDoWhile || wantCatch)) return;
 
 		var root:TokenTree = checker.getTokenTree();
 		var allTokens:Array<TokenTree> = root.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
@@ -52,7 +55,9 @@ class NeedBracesCheck extends Check {
 					FoundGoDeeper;
 				case Kwd(KwdFor) if (wantFor):
 					FoundGoDeeper;
-				case Kwd(KwdIf) | Kwd(KwdElse) if (wantIf):
+				case Kwd(KwdIf) if (wantIf || wantIfWithElse):
+					FoundGoDeeper;
+				case Kwd(KwdElse) if (wantElseIf || wantElse):
 					FoundGoDeeper;
 				case Kwd(KwdWhile) if (wantWhile):
 					FoundGoDeeper;
@@ -69,11 +74,15 @@ class NeedBracesCheck extends Check {
 			if (isPosSuppressed(tok.pos)) continue;
 			switch (tok.tok) {
 				case Kwd(KwdIf):
+					if (wantIfWithElse && !wantIf && !hasElse(tok)) continue;
 					checkIfChild(tok);
 				case Kwd(KwdElse):
 					var firstChild = tok.getFirstChild();
 					if (firstChild == null) continue;
-					if (firstChild.matches(Kwd(KwdIf))) checkIfChild(firstChild);
+					if (firstChild.matches(Kwd(KwdIf))) {
+						if (!wantIf) continue;
+						checkIfChild(firstChild);
+					}
 					else checkLastChild(tok);
 				case Kwd(KwdFunction):
 					checkFunctionChild(tok);
@@ -85,6 +94,15 @@ class NeedBracesCheck extends Check {
 					checkLastChild(tok);
 			}
 		}
+	}
+
+	function hasElse(token:TokenTree):Bool {
+		for (child in token.children) {
+			if (child.matches(Kwd(KwdElse))) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	function checkIfChild(token:TokenTree) {
@@ -181,7 +199,9 @@ enum abstract NeedBracesCheckToken(String) {
 	var FUNCTION = "FUNCTION";
 	var FOR = "FOR";
 	var IF = "IF";
+	var IF_WITH_ELSE = "IF_WITH_ELSE";
 	var ELSE_IF = "ELSE_IF";
+	var ELSE = "ELSE";
 	var WHILE = "WHILE";
 	var DO_WHILE = "DO_WHILE";
 	var CATCH = "CATCH";
