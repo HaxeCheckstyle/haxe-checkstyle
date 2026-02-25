@@ -39,17 +39,25 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 
 	function checkField(f:Field, t:ComplexType, e:Expr, p:ParentType) {
 		if (e == null || e.expr == null || !f.isStatic(p)) return;
-		if (!hasToken(INLINE) && f.isInline(p)) return;
-		if (!hasToken(NOTINLINE) && !f.isInline(p)) return;
+
+		if (hasToken(INLINE) != hasToken(NOTINLINE)) { // != -> xor
+			if (!hasToken(INLINE) && f.isInline(p)) return;
+			if (!hasToken(NOTINLINE) && !f.isInline(p)) return;
+		}
+
+		if (hasToken(FINAL) != hasToken(NOTFINAL)) { // != -> xor
+			if (!hasToken(FINAL) && f.isFinal(p)) return;
+			if (!hasToken(NOTFINAL) && !f.isFinal(p)) return;
+		}
 
 		matchTypeName("const", f.name, f.pos);
 	}
 
 	override public function detectableInstances():DetectableInstances {
-		var instanceInline:DetectableInstance = {
+		return [{
 			fixed: [{
 				propertyName: "tokens",
-				value: [INLINE]
+				value: [FINAL, INLINE, NOTFINAL, NOTINLINE]
 			}],
 			properties: [{
 				propertyName: "format",
@@ -58,21 +66,7 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 				propertyName: "ignoreExtern",
 				values: [true, false]
 			}]
-		};
-		var instanceNotInline:DetectableInstance = {
-			fixed: [{
-				propertyName: "tokens",
-				value: [NOTINLINE]
-			}],
-			properties: [{
-				propertyName: "format",
-				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
-			}, {
-				propertyName: "ignoreExtern",
-				values: [true, false]
-			}]
-		}
-		return [instanceInline, instanceNotInline];
+		}];
 	}
 }
 
@@ -80,10 +74,14 @@ class ConstantNameCheck extends NameCheckBase<ConstantNameCheckToken> {
 	supports inline and non inline constants
 	- INLINE = "static inline var"
 	- NOTINLINE = "static var"
+	- FINAL = "static final"
+	- NOTFINAL = "static var"
 **/
 enum abstract ConstantNameCheckToken(String) {
 	var INLINE = "INLINE";
 	var NOTINLINE = "NOTINLINE";
+	var FINAL = "FINAL";
+	var NOTFINAL = "NOTFINAL";
 }
 
 enum abstract ConstantNameCheckFormt(String) to String {

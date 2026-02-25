@@ -21,6 +21,10 @@ class FieldUtils {
 		return f.access.contains(AStatic);
 	}
 
+	public static function isFinal(f:Field, p:ParentType):Bool {
+		return f.access.contains(AFinal);
+	}
+
 	public static function isAbstract(f:Field, p:ParentType):Bool {
 		return f.access.contains(AAbstract);
 	}
