@@ -112,6 +112,27 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 	}
 
 	@Test
+	public function testIgnoreSingleline() {
+		var check = new LeftCurlyCheck();
+		check.tokens = [TYPEDEF_DEF];
+		check.option = NL;
+
+		check.ignoreSingleline = false;
+		assertNoMsg(check, TEST);
+		assertMessages(check, TYPEDEF_CUDDLED, [MSG_NL, MSG_NL]);
+		assertNoMsg(check, TYPEDEF_WIDE);
+		// Single line is NOT valid!
+		assertMessages(check, TYPEDEF_SINGLELINE, [MSG_NL, MSG_NL]);
+
+		check.ignoreSingleline = true;
+		assertNoMsg(check, TEST);
+		assertMessages(check, TYPEDEF_CUDDLED, [MSG_NL, MSG_NL]);
+		assertNoMsg(check, TYPEDEF_WIDE);
+		// Single line IS valid!
+		assertNoMsg(check, TYPEDEF_SINGLELINE);
+	}
+
+	@Test
 	public function testArrayComprehension() {
 		var check = new LeftCurlyCheck();
 		check.tokens = [ARRAY_COMPREHENSION, OBJECT_DECL];
@@ -497,4 +518,27 @@ enum abstract LeftCurlyCheckTests(String) to String {
 			addClassFields(typeName, classFields, superClass.t.get().fields.get(), pos, refs);
 		}
 	}";
+	var TYPEDEF_CUDDLED = "
+	typedef Test = {
+		x:Int,
+		y:Int,
+		z:Int,
+		point:{
+			x:Int, y:Int, z:Int
+		}
+	}";
+	var TYPEDEF_WIDE = "
+	typedef Test =
+	{
+		x:Int,
+		y:Int,
+		z:Int,
+		point:
+		{
+			x:Int, y:Int, z:Int
+		}
+	}";
+	var TYPEDEF_SINGLELINE = "
+	typedef Test = { a:Int, b:String, c: { x:Int, y:Int } };
+	";
 }
