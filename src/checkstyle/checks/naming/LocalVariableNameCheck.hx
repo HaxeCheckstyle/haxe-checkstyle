@@ -5,10 +5,10 @@ package checkstyle.checks.naming;
 **/
 @name("LocalVariableName")
 @desc("Checks that the local variable names conform to a format specified by the `format` property.")
-class LocalVariableNameCheck extends NameCheckBase<String> {
+class LocalVariableNameCheck extends NameCheckBase<LocalVariableNameCheckToken> {
 	public function new() {
 		super();
-		format = "^[a-z][a-zA-Z0-9]*$";
+		format = LOWER_CASE;
 	}
 
 	override function actualRun() {
@@ -19,11 +19,49 @@ class LocalVariableNameCheck extends NameCheckBase<String> {
 				case EVars(vars):
 					if (ignoreExtern && isPosExtern(e.pos)) return;
 					if (isPosSuppressed(e.pos)) return;
+
 					for (v in vars) {
+						if (hasToken(FINAL) != hasToken(NOTFINAL)) { // != -> xor
+							trace('Checking ', v.name, ' ', hasToken(FINAL), ' ', hasToken(NOTFINAL), ' ', v.isFinal);
+							if (!hasToken(FINAL) && v.isFinal) continue;
+							if (!hasToken(NOTFINAL) && !v.isFinal) continue;
+						}
+
+						trace('Evaluating typename (${v.name} == ${format})');
+
 						matchTypeName("local var", v.name, e.pos);
 					}
 				default:
 			}
 		});
 	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [{
+				propertyName: "tokens",
+				value: [FINAL, NOTFINAL]
+			}],
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			}]
+		}];
+	}
+}
+
+/**
+	supports final and non final constants
+	- FINAL = "final"
+	- NOTFINAL = "var"
+**/
+enum abstract LocalVariableNameCheckToken(String) {
+	var FINAL = "FINAL";
+	var NOTFINAL = "NOTFINAL";
+}
+
+enum abstract LocalVariableNameCheckFormt(String) to String {
+	var UPPER_CASE = "^[A-Z][A-Z0-9]*(_[A-Z0-9_]+)*$";
+	var CAMEL_CASE = "^[A-Z]+[a-zA-Z0-9]*$";
+	var LOWER_CASE = "^[a-z][a-zA-Z0-9]*$";
 }
