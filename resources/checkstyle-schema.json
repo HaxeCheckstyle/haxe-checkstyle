@@ -1003,7 +1003,12 @@
                         "tokens": {
                             "description": "list of tokens to limit where names should conform to \"format\"",
                             "items": {
-                                "type": "string"
+                                "description": "supports final and non final constants\n\t- FINAL = \"final\"\n\t- NOTFINAL = \"var\"",
+                                "type": "string",
+                                "enum": [
+                                    "FINAL",
+                                    "NOTFINAL"
+                                ]
                             },
                             "type": "array",
                             "propertyOrder": 1

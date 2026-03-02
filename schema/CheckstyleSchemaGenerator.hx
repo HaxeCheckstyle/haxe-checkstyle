@@ -62,7 +62,7 @@ class CheckstyleSchemaGenerator {
 			case "ConstantName.tokens.items":
 				makeAnyOfAbstract(fields, "checkstyle.checks.naming.ConstantNameCheck.ConstantNameCheckToken", pos);
 			case "LocalVariableName.tokens.items":
-				fields.push({field: "type", expr: macro "string"});
+				makeAnyOfAbstract(fields, "checkstyle.checks.naming.LocalVariableNameCheck.LocalVariableNameCheckToken", pos);
 			case "MemberName.tokens.items":
 				makeAnyOfAbstract(fields, "checkstyle.checks.naming.MemberNameCheck.MemberNameCheckToken", pos);
 			case "MethodName.tokens.items":
