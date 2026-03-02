@@ -22,12 +22,9 @@ class LocalVariableNameCheck extends NameCheckBase<LocalVariableNameCheckToken> 
 
 					for (v in vars) {
 						if (hasToken(FINAL) != hasToken(NOTFINAL)) { // != -> xor
-							trace('Checking ', v.name, ' ', hasToken(FINAL), ' ', hasToken(NOTFINAL), ' ', v.isFinal);
 							if (!hasToken(FINAL) && v.isFinal) continue;
 							if (!hasToken(NOTFINAL) && !v.isFinal) continue;
 						}
-
-						trace('Evaluating typename (${v.name} == ${format})');
 
 						matchTypeName("local var", v.name, e.pos);
 					}
