@@ -1664,6 +1664,11 @@
                     "description": "Detects ternary operators. Useful for developers who find ternary operators hard to read and want forbid them.",
                     "additionalProperties": false,
                     "properties": {
+                        "maxDepth": {
+                            "description": "the maximum number of levels of depth a ternary operator can be nested in\n\t\t0 (default) = no ternaries allowed\n\t\t1 = no nested ternaries\n\t\t2 = no nested ternaries inside nested ternaries, etc.",
+                            "type": "integer",
+                            "propertyOrder": 0
+                        },
                         "severity": {
                             "description": "sets gravity of reported violations:\n\t- IGNORE = do not report violations, violations do not appear anywhere in output\n\t- INFO = all violations have info / lowest priority\n\t- WARNING = all violations have warning / medium priority\n\t- ERROR = all violations have error / highest priority",
                             "type": "string",
@@ -1673,7 +1678,7 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
-                            "propertyOrder": 0
+                            "propertyOrder": 1
                         }
                     },
                     "type": "object"
