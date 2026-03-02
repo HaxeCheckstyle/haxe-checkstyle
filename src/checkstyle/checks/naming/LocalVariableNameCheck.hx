@@ -40,7 +40,16 @@ class LocalVariableNameCheck extends NameCheckBase<LocalVariableNameCheckToken> 
 		return [{
 			fixed: [{
 				propertyName: "tokens",
-				value: [FINAL, NOTFINAL]
+				value: [FINAL]
+			}],
+			properties: [{
+				propertyName: "format",
+				values: [UPPER_CASE, CAMEL_CASE, LOWER_CASE]
+			}]
+		}, {
+			fixed: [{
+				propertyName: "tokens",
+				value: [NOTFINAL]
 			}],
 			properties: [{
 				propertyName: "format",
