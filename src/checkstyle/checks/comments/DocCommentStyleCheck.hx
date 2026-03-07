@@ -34,8 +34,8 @@ class DocCommentStyleCheck extends Check {
 	public function new() {
 		super(TOKEN);
 		startStyle = TWO_STARS;
-		endStyle = TWO_STARS;
 		lineStyle = NONE;
+		endStyle = NONE;
 	}
 
 	override function actualRun() {
