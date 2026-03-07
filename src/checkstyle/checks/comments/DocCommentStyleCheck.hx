@@ -93,7 +93,7 @@ class DocCommentStyleCheck extends Check {
 	}
 
 	function checkLineStyle(token:TokenTree, lines:Array<String>) {
-		var oneStar:EReg = ~/^\s*\*[^*]/;
+		var oneStar:EReg = ~/^\s*\*(?:[^\*].*)?$/;
 		var twoStar:EReg = ~/^\s*\*+/;
 		for (line in lines) {
 			switch (lineStyle) {
