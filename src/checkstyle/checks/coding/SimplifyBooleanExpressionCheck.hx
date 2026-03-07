@@ -52,16 +52,12 @@ class SimplifyBooleanExpressionCheck extends Check {
 		}
 	}
 
-		override public function detectableInstances():DetectableInstances {
+	override public function detectableInstances():DetectableInstances {
 		return [{
 			fixed: [],
 			properties: [{
 				propertyName: "allowEqualsFalse",
 				values: [true, false]
-			},
-			{
-				propertyName: "severity",
-				values: [SeverityLevel.INFO]
 			}]
 		}];
 	}
