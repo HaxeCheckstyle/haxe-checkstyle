@@ -3961,6 +3961,11 @@
                                 "ERROR",
                                 "IGNORE"
                             ],
+                            "propertyOrder": 1
+                        },
+                        "allowEqualsFalse": {
+                            "description": "specifically allow expressions equal to false",
+                            "type": "boolean",
                             "propertyOrder": 0
                         }
                     },

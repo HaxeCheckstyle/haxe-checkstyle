@@ -6,10 +6,17 @@ package checkstyle.checks.coding;
 @name("SimplifyBooleanExpression")
 @desc("Checks for over-complicated boolean expressions. Finds code like `if (b == true), b || true, !false`, etc.")
 class SimplifyBooleanExpressionCheck extends Check {
+	/**
+		specifically allow expressions equal to false
+	**/
+	public var allowEqualsFalse:Bool;
+
 	public function new() {
 		super(TOKEN);
 		categories = [Category.COMPLEXITY];
 		points = 3;
+
+		allowEqualsFalse = false;
 	}
 
 	override function actualRun() {
@@ -33,9 +40,25 @@ class SimplifyBooleanExpressionCheck extends Check {
 	function checkToken(token:TokenTree) {
 		var parent = token.parent;
 		switch (parent.tok) {
-			case Binop(OpEq), Binop(OpNotEq), Unop(OpNot), Binop(OpOr), Binop(OpAnd), Binop(OpBoolOr), Binop(OpBoolAnd):
+			case Binop(OpEq), Binop(OpNotEq):
+				if (allowEqualsFalse) {
+					if (token.matches(Kwd(KwdFalse))) return;
+				}
+				
+				logPos("Boolean expression can be simplified", token.pos);
+			case Unop(OpNot), Binop(OpOr), Binop(OpAnd), Binop(OpBoolOr), Binop(OpBoolAnd):
 				logPos("Boolean expression can be simplified", token.pos);
 			default:
 		}
+	}
+
+	override public function detectableInstances():DetectableInstances {
+		return [{
+			fixed: [],
+			properties: [{
+				propertyName: "allowEqualsFalse",
+				values: [true, false]
+			}]
+		}];
 	}
 }

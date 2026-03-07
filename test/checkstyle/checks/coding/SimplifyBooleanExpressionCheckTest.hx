@@ -21,6 +21,19 @@ class SimplifyBooleanExpressionCheckTest extends CheckTestCase<SimplifyBooleanEx
 	public function testSuppressExpression() {
 		assertNoMsg(new SimplifyBooleanExpressionCheck(), TEST7);
 	}
+
+	@Test
+	public function testAllowEqualsFalse() {
+		var check = new SimplifyBooleanExpressionCheck();
+		
+		check.allowEqualsFalse = false;
+		assertMsg(check, TEST8, MSG_SIMPLIFY);
+		assertMsg(check, TEST9, MSG_SIMPLIFY);
+
+		check.allowEqualsFalse = true;
+		assertNoMsg(check, TEST8);
+		assertNoMsg(check, TEST9);
+	}
 }
 
 enum abstract SimplifyBooleanExpressionCheckTests(String) to String {
@@ -72,6 +85,20 @@ enum abstract SimplifyBooleanExpressionCheckTests(String) to String {
 		public static function main() {
 			var value: Null<Bool> = null;
 			trace(value == true);
+		}
+	}";
+	var TEST8 = "
+	abstractAndClass Test {
+		function test() {
+			var bvar:Bool;
+			if (bvar == false) {}
+		}
+	}";
+	var TEST9 = "
+	abstractAndClass Test {
+		function test() {
+			var bvar:Bool;
+			if (bvar != false) {}
 		}
 	}";
 }
