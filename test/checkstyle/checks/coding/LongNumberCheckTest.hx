@@ -4,83 +4,139 @@ class LongNumberCheckTest extends CheckTestCase<LongNumberCheckTests> {
 	@Test
 	public function test() {
 		var check = new LongNumberCheck();
-		assertNoMsg(check, TEST_STANDARD_NUMBERS);
-		assertMessages(check, TEST_LONG_NUMBERS, [
-			"\"10123\" is a long number, use _ as a separator",
+
+		assertNoMsg(check, TEST_DECIMAL);
+		assertMessages(check, TEST_DECIMAL_LONG, [
+			"\"1012\" is a long number, use _ as a separator",
 			"\"20123\" is a long number, use _ as a separator",
-			"\"30123\" is a long number, use _ as a separator",
+			"\"3012\" is a long number, use _ as a separator",
 			"\"40123\" is a long number, use _ as a separator",
-			"\"50123\" is a long number, use _ as a separator",
-			"\"10.123456\" is a long number, use _ as a separator"
+			"\"50123\" is a long number, use _ as a separator"
 		]);
-		assertNoMsg(check, TEST_FIXED_LONG_NUMBERS);
+		assertNoMsg(check, TEST_DECIMAL_FIXED);
+
 		assertNoMsg(check, TEST_HEXADECIMAL);
+		assertMessages(check, TEST_HEXADECIMAL_LONG, [
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
+			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
+
 		assertNoMsg(check, TEST_BINARY);
+		assertMessages(check, TEST_BINARY_LONG, [
+			"\"0b1001_0001\" uses separators improperly, use _ every 8 digits",
+			"\"0b1001000101\" is a long binary number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_BINARY_FIXED);
 	}
 
 	@Test
-	public function testIgnore() {
+	public function testDecimalGroupSize() {
 		var check = new LongNumberCheck();
-		check.ignoreNumbers = [10_123, 30_123, 10.123_456];
+		check.decimalGroupSize = 4;
 
-		assertNoMsg(check, TEST_STANDARD_NUMBERS);
-		assertMessages(check, TEST_LONG_NUMBERS, [
+		assertNoMsg(check, TEST_DECIMAL);
+		assertMessages(check, TEST_DECIMAL_LONG, [
 			"\"20123\" is a long number, use _ as a separator",
 			"\"40123\" is a long number, use _ as a separator",
 			"\"50123\" is a long number, use _ as a separator"
 		]);
-		assertNoMsg(check, TEST_FIXED_LONG_NUMBERS);
+		assertMessages(check, TEST_DECIMAL_FIXED, [
+			"\"1_012\" uses separators improperly, use _ every 4 digits",
+			"\"20_123\" uses separators improperly, use _ every 4 digits",
+			"\"3_012\" uses separators improperly, use _ every 4 digits",
+			"\"40_123\" uses separators improperly, use _ every 4 digits",
+			"\"50_123\" uses separators improperly, use _ every 4 digits"
+		]);
+		
 		assertNoMsg(check, TEST_HEXADECIMAL);
+		assertMessages(check, TEST_HEXADECIMAL_LONG, [
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
+			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
+
 		assertNoMsg(check, TEST_BINARY);
+		assertMessages(check, TEST_BINARY_LONG, [
+			"\"0b1001_0001\" uses separators improperly, use _ every 8 digits",
+			"\"0b1001000101\" is a long binary number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_BINARY_FIXED);
 	}
 
 	@Test
-	public function testHexadecimal() {
+	public function testFractionalGroupSize() {
 		var check = new LongNumberCheck();
-		check.checkHexadecimal = true;
+		check.decimalGroupSize = 3;
+		check.fractionalGroupSize = 3;
 
-		assertNoMsg(check, TEST_STANDARD_NUMBERS);
-		assertMessages(check, TEST_LONG_NUMBERS, [
-			"\"10123\" is a long number, use _ as a separator",
+		assertNoMsg(check, TEST_DECIMAL);
+		assertMessages(check, TEST_DECIMAL_LONG, [
+			"\"1012\" is a long number, use _ as a separator",
 			"\"20123\" is a long number, use _ as a separator",
-			"\"30123\" is a long number, use _ as a separator",
+			"\"3012\" is a long number, use _ as a separator",
 			"\"40123\" is a long number, use _ as a separator",
 			"\"50123\" is a long number, use _ as a separator",
 			"\"10.123456\" is a long number, use _ as a separator"
 		]);
-		assertNoMsg(check, TEST_FIXED_LONG_NUMBERS);
+		assertMsg(check, TEST_DECIMAL_FIXED, "\"10.123456\" is a long number, use _ as a separator");
+
+		assertNoMsg(check, TEST_HEXADECIMAL);
+		assertMessages(check, TEST_HEXADECIMAL_LONG, [
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
+			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
+
+		assertNoMsg(check, TEST_BINARY);
+		assertMessages(check, TEST_BINARY_LONG, [
+			"\"0b1001_0001\" uses separators improperly, use _ every 8 digits",
+			"\"0b1001000101\" is a long binary number, use _ as a separator"
+		]);
+		assertNoMsg(check, TEST_BINARY_FIXED);
+	}
+
+	@Test
+	public function testHexadecimalGroupSize() {
+		var check = new LongNumberCheck();
+		check.decimalGroupSize = -1;
+		check.hexadecimalGroupSize = 4;
+
+		assertNoMsg(check, TEST_DECIMAL);
+		assertNoMsg(check, TEST_DECIMAL_LONG);
+		assertNoMsg(check, TEST_DECIMAL_FIXED);
 		assertMessages(check, TEST_HEXADECIMAL, [
-			"\"0x123456\" is a long number, use _ as a separator",
-			"\"0x10233023\" is a long number, use _ as a separator"
+			"\"0x123456\" is a long hexadecimal number, use _ as a separator",
+			"\"0x10233023\" is a long hexadecimal number, use _ as a separator"
 		]);
 		assertNoMsg(check, TEST_BINARY);
 	}
 
 	@Test
-	public function testBinary() {
+	public function testBinaryGroupSize() {
 		var check = new LongNumberCheck();
-		check.checkBinary = true;
+		check.decimalGroupSize = -1;
+		check.binaryGroupSize = 4;
 
-		assertNoMsg(check, TEST_STANDARD_NUMBERS);
-		assertMessages(check, TEST_LONG_NUMBERS, [
-			"\"10123\" is a long number, use _ as a separator",
-			"\"20123\" is a long number, use _ as a separator",
-			"\"30123\" is a long number, use _ as a separator",
-			"\"40123\" is a long number, use _ as a separator",
-			"\"50123\" is a long number, use _ as a separator",
-			"\"10.123456\" is a long number, use _ as a separator"
-		]);
-		assertNoMsg(check, TEST_FIXED_LONG_NUMBERS);
+		assertNoMsg(check, TEST_DECIMAL);
+		assertNoMsg(check, TEST_DECIMAL_LONG);
+		assertNoMsg(check, TEST_DECIMAL_FIXED);
 		assertNoMsg(check, TEST_HEXADECIMAL);
 		assertMessages(check, TEST_BINARY, [
-			"\"0b101010\" is a long number, use _ as a separator",
-			"\"0b10010001\" is a long number, use _ as a separator"
+			"\"0b101010\" is a long binary number, use _ as a separator",
+			"\"0b10010001\" is a long binary number, use _ as a separator"
+		]);
+		assertMessages(check, TEST_BINARY_LONG, [
+			"\"0b1001000101\" is a long binary number, use _ as a separator"
+		]);
+		assertMessages(check, TEST_BINARY_FIXED, [
+			"\"0b10_01000101\" uses separators improperly, use _ every 4 digits"
 		]);
 	}
 }
 
 enum abstract LongNumberCheckTests(String) to String {
-	var TEST_STANDARD_NUMBERS = "
+	var TEST_DECIMAL = "
 	abstractAndClass Test {
 		public function new() {
 			var a = 10;
@@ -92,31 +148,31 @@ enum abstract LongNumberCheckTests(String) to String {
 			var e = 10.123;
 		}
 	}";
-	var TEST_LONG_NUMBERS = "
+	var TEST_DECIMAL_LONG = "
 	abstractAndClass Test {
 		public function new() {
-			var a = 10123;
+			var a = 1012;
 			var b = 20123;
-			var c = 30123;
+			var c = 3012;
 			var d = 40123;
 			var d = 50123;
 
 			var e = 10.123456;
 		}
 	}";
-	var TEST_FIXED_LONG_NUMBERS = "
+	var TEST_DECIMAL_FIXED = "
 	abstractAndClass Test {
 		public function new() {
-			var a = 10_123;
+			var a = 1_012;
 			var b = 20_123;
-			var c = 30_123;
+			var c = 3_012;
 			var d = 40_123;
 			var d = 50_123;
 
-			var e = 10.123_456;
-			var f = 10.12_34_56;
+			var e = 10.123456;
 		}
 	}";
+	
 	var TEST_HEXADECIMAL = "
 	abstractAndClass Test {
 		public function new() {
@@ -125,12 +181,40 @@ enum abstract LongNumberCheckTests(String) to String {
 			var c = 0x10233023;
 		}
 	}";
+	var TEST_HEXADECIMAL_LONG = "
+	abstractAndClass Test {
+		public function new() {
+			var c = 0x1234_5678;
+			var c = 0x10233023AF;
+		}
+	}";
+	var TEST_HEXADECIMAL_FIXED = "
+	abstractAndClass Test {
+		public function new() {
+			var c = 0x12345678;
+			var c = 0x10_233023AF;
+		}
+	}";
+
 	var TEST_BINARY = "
 	abstractAndClass Test {
 		public function new() {
 			var a = 0b101;
 			var b = 0b101010;
 			var c = 0b10010001;
+		}
+	}";
+	var TEST_BINARY_LONG = "
+	abstractAndClass Test {
+		public function new() {
+			var c = 0b1001_0001;
+			var c = 0b1001000101;
+		}
+	}";
+	var TEST_BINARY_FIXED = "
+	abstractAndClass Test {
+		public function new() {
+			var c = 0b10_01000101;
 		}
 	}";
 }
