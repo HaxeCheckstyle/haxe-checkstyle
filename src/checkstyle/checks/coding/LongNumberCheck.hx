@@ -67,6 +67,13 @@ class LongNumberCheck extends Check {
 	}
 
 	/**
+		for decimal numbers, the minimum quantity before it's a long number
+		for example, if set to `1000000`, `999999` requires no separators but `1_000_000` does
+		defaults to `0` to disable the check
+	**/
+	public var decimalMinimum:Int;
+
+	/**
 		for floating point decimal numbers, the number of consecutive digits after the decimal pointbefore it's a long number
 		for example, where `1000` is a long number but `1_000` is valid
 		defaults to `-1` to disable the check
@@ -92,6 +99,13 @@ class LongNumberCheck extends Check {
 		if (initialized) updateRegex();
 		return hexadecimalGroupSize;
 	}
+
+	/**
+		for hexadecimal numbers, the minimum quantity before it's a long number
+		for example, if set to `0x1000000000`, `0x123456789` requires no separators but `0x12_34567890` does
+		defaults to `0` to disable the check
+	**/
+	public var hexadecimalMinimum:Int;
 
 	/**
 	 	for binary numbers, the number of consecutive digits before it's a long number
@@ -134,6 +148,10 @@ class LongNumberCheck extends Check {
 		fractionalGroupSize = -1;
 		hexadecimalGroupSize = 8;
 		binaryGroupSize = 8;
+
+		// minimum quantity
+		decimalMinimum = 0;
+		hexadecimalMinimum = 0;
 
 		initialized = true;
 
@@ -215,6 +233,7 @@ class LongNumberCheck extends Check {
 	function queryInteger(n:String, suffix:String, pos:Position) {
 		if (n.startsWith(HEXADECIMAL_PREFIX)) {
 			if (hexadecimalGroupRegex == null) return;
+			if (Std.parseInt(n) < hexadecimalMinimum) return;
 			if (hexadecimalGroupRegex.match(n)) return;
 
 			if (n.contains(SEPARATOR)) {
@@ -241,6 +260,7 @@ class LongNumberCheck extends Check {
 		}
 		else {
 			if (decimalGroupRegex == null) return;
+			if (Std.parseInt(n) < decimalMinimum) return;
 			if (decimalGroupRegex.match(n)) return;
 
 			if (n.contains(SEPARATOR)) {
@@ -257,6 +277,10 @@ class LongNumberCheck extends Check {
 	function queryFloat(n:String, suffix:String, pos:Position) {
 		if (decimalGroupSize <= 0) return;
 		if (decimalGroupRegex.match(n)) return;
+
+		var f = Std.parseFloat(n);
+		if (Math.isNaN(f)) return;
+		if (f < decimalMinimum) return;
 
 		if (n.contains(SEPARATOR)) {
 			if (n.contains(FRACTIONAL_SEPARATOR) && fractionalGroupSize <= 0) {

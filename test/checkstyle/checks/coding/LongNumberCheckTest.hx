@@ -130,6 +130,26 @@ class LongNumberCheckTest extends CheckTestCase<LongNumberCheckTests> {
 			"\"0b10_01000101\" uses separators improperly, use _ every 4 digits"
 		]);
 	}
+
+	@Test
+	public function testMinimum() {
+		var check = new LongNumberCheck();
+		check.decimalGroupSize = 3;
+		check.hexadecimalGroupSize = 4;
+		check.binaryGroupSize = 4;
+		check.decimalMinimum = 1_000_000;
+		check.hexadecimalMinimum = 0x100_0000;
+
+		assertNoMsg(check, TEST_DECIMAL);
+		assertNoMsg(check, TEST_DECIMAL_LONG);
+		assertNoMsg(check, TEST_DECIMAL_FIXED);
+		assertMessages(check, TEST_HEXADECIMAL, [
+			// Not long enough
+			// "\"0x123456\" is a long hexadecimal number, use _ as a separator",
+			// Long enough
+			"\"0x10233023\" is a long hexadecimal number, use _ as a separator"
+		]);
+	}
 }
 
 enum abstract LongNumberCheckTests(String) to String {
