@@ -17,8 +17,7 @@ class LongNumberCheckTest extends CheckTestCase<LongNumberCheckTests> {
 
 		assertNoMsg(check, TEST_HEXADECIMAL);
 		assertMessages(check, TEST_HEXADECIMAL_LONG, [
-			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
-			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits"
 		]);
 		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
 
@@ -51,8 +50,7 @@ class LongNumberCheckTest extends CheckTestCase<LongNumberCheckTests> {
 		
 		assertNoMsg(check, TEST_HEXADECIMAL);
 		assertMessages(check, TEST_HEXADECIMAL_LONG, [
-			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
-			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits"
 		]);
 		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
 
@@ -83,8 +81,7 @@ class LongNumberCheckTest extends CheckTestCase<LongNumberCheckTests> {
 
 		assertNoMsg(check, TEST_HEXADECIMAL);
 		assertMessages(check, TEST_HEXADECIMAL_LONG, [
-			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits",
-			"\"0x10233023AF\" is a long hexadecimal number, use _ as a separator"
+			"\"0x1234_5678\" uses separators improperly, use _ every 8 digits"
 		]);
 		assertNoMsg(check, TEST_HEXADECIMAL_FIXED);
 
@@ -185,14 +182,14 @@ enum abstract LongNumberCheckTests(String) to String {
 	abstractAndClass Test {
 		public function new() {
 			var c = 0x1234_5678;
-			var c = 0x10233023AF;
+			var c = 0x10233023;
 		}
 	}";
 	var TEST_HEXADECIMAL_FIXED = "
 	abstractAndClass Test {
 		public function new() {
 			var c = 0x12345678;
-			var c = 0x10_233023AF;
+			var c = 0x10233023;
 		}
 	}";
 
