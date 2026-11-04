@@ -45,12 +45,33 @@ class SwitchParenthesesCheck extends Check {
 						logPos('Switch condition should be wrapped in parentheses', conditionToken.pos, REQUIRE_SWITCH_PARENTHESES);
 					}
 				case FORBID:
-					if (hasParentheses) {
+					if (hasParentheses && !isTypeCheck(conditionToken)) {
 						logPos('Switch condition should not be wrapped in parentheses', conditionToken.pos, NO_SWITCH_PARENTHESES);
 					}
 				case IGNORE:
 			}
 		}
+	}
+
+	function isTypeCheck(parenOpen:TokenTree):Bool {
+		var colons:Array<TokenTree> = parenOpen.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
+			if (depth == 0) return GoDeeper;
+
+			return switch (token.tok) {
+				case POpen:
+					SkipSubtree;
+				case DblDot:
+					FoundSkipSubtree;
+				default:
+					GoDeeper;
+			}
+		});
+
+		for (colon in colons) {
+			if (TokenTreeCheckUtils.getColonType(colon).match(TypeCheck)) return true;
+		}
+
+		return false;
 	}
 
 	override public function detectableInstances():DetectableInstances {
