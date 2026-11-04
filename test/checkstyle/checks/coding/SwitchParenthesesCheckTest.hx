@@ -18,11 +18,6 @@ class SwitchParenthesesCheckTest extends CheckTestCase<SwitchParenthesesCheckTes
 	}
 
 	@Test
-	public function testWithTypeCheck() {
-		assertNoMsg(configuredCheck(FORBID), WITH_TYPE_CHECK);
-	}
-
-	@Test
 	public function testWithSpaceAndParentheses() {
 		assertMsg(configuredCheck(FORBID), WITH_SPACE_AND_PARENTHESES, FORBID_MSG);
 	}
@@ -45,6 +40,16 @@ class SwitchParenthesesCheckTest extends CheckTestCase<SwitchParenthesesCheckTes
 	@Test
 	public function testRequireWithoutParentheses() {
 		assertMsg(configuredCheck(REQUIRE), WITHOUT_PARENTHESES, REQUIRE_MSG);
+	}
+
+	@Test
+	public function testWithTypeCheck() {
+		assertNoMsg(configuredCheck(FORBID), WITH_TYPE_CHECK);
+	}
+
+	@Test
+	public function testWithNestedTypeCheck() {
+		assertMsg(configuredCheck(FORBID), WITH_NESTED_TYPE_CHECK, FORBID_MSG);
 	}
 
 	@Test
@@ -88,6 +93,16 @@ enum abstract SwitchParenthesesCheckTests(String) to String {
 	abstractAndClass Test {
 		function check(value:Int):Int {
 			switch (cast value : Color) {
+				case Red: return 1;
+				default: return 2;
+			}
+		}
+	}";
+
+	var WITH_NESTED_TYPE_CHECK = "
+	abstractAndClass Test {
+		function check(value:Int):Int {
+			switch ((cast value : Color)) {
 				case Red: return 1;
 				default: return 2;
 			}
