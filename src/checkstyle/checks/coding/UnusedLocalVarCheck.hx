@@ -28,7 +28,7 @@ class UnusedLocalVarCheck extends Check {
 			var skipFirstFunction:Bool = true;
 			var localVars:Array<TokenTree> = f.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 				return switch (tok.tok) {
-					case Kwd(KwdVar): FoundSkipSubtree;
+					case Kwd(KwdVar), Kwd(KwdFinal): FoundSkipSubtree;
 					case Kwd(KwdFunction):
 						if (skipFirstFunction) {
 							skipFirstFunction = false;
