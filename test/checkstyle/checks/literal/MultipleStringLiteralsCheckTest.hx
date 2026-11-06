@@ -6,6 +6,7 @@ class MultipleStringLiteralsCheckTest extends CheckTestCase<MultipleStringLitera
 		var check = new MultipleStringLiteralsCheck();
 		assertNoMsg(check, LESS_THAN_THREE);
 		assertNoMsg(check, CONSTANT_NOT_COUNTED);
+		assertNoMsg(check, FINAL_CONSTANT_NOT_COUNTED);
 		assertNoMsg(check, SINGLE_CHARS);
 		assertNoMsg(check, THREE_SPACE);
 		assertNoMsg(check, OBJECT_FIELD_KEYS_ISSUE_116);
@@ -57,6 +58,14 @@ enum abstract MultipleStringLiteralsCheckTests(String) to String {
 	var CONSTANT_NOT_COUNTED = "
 	class Test {
 		static var a:String = 'xml';
+		public function new(f:String = 'test') {
+			a = 'xml';
+			b = 'xml';
+		}
+	}";
+	var FINAL_CONSTANT_NOT_COUNTED = "
+	class Test {
+		static final a:String = 'xml';
 		public function new(f:String = 'test') {
 			a = 'xml';
 			b = 'xml';
