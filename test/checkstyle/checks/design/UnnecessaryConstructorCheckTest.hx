@@ -42,6 +42,11 @@ class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstruct
 	}
 
 	@Test
+	public function testFinalAndStatic() {
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_FINAL_AND_STATIC);
+	}
+
+	@Test
 	public function testSuppression() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), SUPPRESS);
 		assertNoMsg(new UnnecessaryConstructorCheck(), SUPPRESS_WITH_CONDITIONALS);
@@ -120,6 +125,16 @@ enum abstract UnnecessaryConstructorCheckTests(String) to String {
 		public function new()
 		{
 			super(VAR1);
+		}
+	}";
+	var TEST_FINAL_AND_STATIC = "
+	class Test {
+		final a:Int;
+		static var b:Int;
+
+		public function new() {
+			a = 1;
+			b = 1;
 		}
 	}";
 	var SUPPRESS = "
