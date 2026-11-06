@@ -126,6 +126,8 @@ class HiddenFieldCheck extends Check {
 			return switch (token.tok) {
 				case Kwd(KwdVar):
 					FoundGoDeeper;
+				case Kwd(KwdFinal) if (token.hasChildren()):
+					FoundGoDeeper;
 				default:
 					GoDeeper;
 			}
@@ -183,7 +185,7 @@ class HiddenFieldCheck extends Check {
 		var varFields:Array<TokenTree> = clazz.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 			if (depth > MAX_FIELD_LEVEL) return SkipSubtree;
 			return switch (token.tok) {
-				case Kwd(KwdVar):
+				case Kwd(KwdVar), Kwd(KwdFinal):
 					FoundSkipSubtree;
 				default:
 					GoDeeper;
