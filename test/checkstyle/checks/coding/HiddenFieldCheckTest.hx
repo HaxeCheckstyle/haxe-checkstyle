@@ -19,6 +19,7 @@ class HiddenFieldCheckTest extends CheckTestCase<HiddenFieldCheckTests> {
 		assertMsg(check, HIDDEN_FIELDS_FUNC_WITH_COMMENT, 'Parameter definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FOR, 'For loop definition of "field1" masks member of same name');
 		assertMsg(check, HIDDEN_FIELDS_FINAL, 'Variable definition of "field2" masks member of same name');
+		assertMsg(check, HIDDEN_FIELDS_FINAL_MEMBER, 'Variable definition of "field1" masks member of same name');
 	}
 
 	@Test
@@ -142,6 +143,14 @@ enum abstract HiddenFieldCheckTests(String) to String {
 		var field2:Int = 1;
 		public static function test() {
 			final field2:String = 'test';
+		}
+	}";
+	var HIDDEN_FIELDS_FINAL_MEMBER = "
+	class Test {
+		final field1:Int = 1;
+		var field2:Int = 1;
+		public function test() {
+			var field1:String = 'test';
 		}
 	}";
 	var HIDDEN_FIELDS_FOR = "
