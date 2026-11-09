@@ -268,7 +268,7 @@ class ExtendedEmptyLinesCheck extends Check {
 				return makePolicyAndWhat(getPolicy(AFTER_DOC_COMMENT_FIELD), "between type fields");
 			}
 			var isFuncChild:Bool = child.matches(Kwd(KwdFunction));
-			var isVarChild:Bool = child.matches(Kwd(KwdVar));
+			var isVarChild:Bool = child.matches(Kwd(KwdVar)) || child.matches(Kwd(KwdFinal));
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
@@ -303,7 +303,7 @@ class ExtendedEmptyLinesCheck extends Check {
 			if (next == null) return null;
 
 			var isFuncChild:Bool = child.matches(Kwd(KwdFunction));
-			var isVarChild:Bool = child.matches(Kwd(KwdVar));
+			var isVarChild:Bool = child.matches(Kwd(KwdVar)) || child.matches(Kwd(KwdFinal));
 			if (!isVarChild && !isFuncChild) return null;
 			var type:EmptyLinesFieldType = detectNextFieldType(next);
 			if (type == OTHER) return null;
@@ -336,13 +336,13 @@ class ExtendedEmptyLinesCheck extends Check {
 
 	function detectNextFieldType(field:TokenTree):EmptyLinesFieldType {
 		if (field.matches(Kwd(KwdFunction))) return FUNCTION;
-		if (field.matches(Kwd(KwdVar))) return VAR;
+		if (field.matches(Kwd(KwdVar)) || field.matches(Kwd(KwdFinal))) return VAR;
 		if (!field.isComment()) return OTHER;
 
 		var after:TokenTree = field.nextSibling;
 		while (after != null) {
 			if (after.matches(Kwd(KwdFunction))) return FUNCTION;
-			if (after.matches(Kwd(KwdVar))) return VAR;
+			if (after.matches(Kwd(KwdVar)) || after.matches(Kwd(KwdFinal))) return VAR;
 			if (after.isComment()) {
 				after = after.nextSibling;
 				continue;
