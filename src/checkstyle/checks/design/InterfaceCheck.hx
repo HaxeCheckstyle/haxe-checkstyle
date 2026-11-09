@@ -47,6 +47,8 @@ class InterfaceCheck extends Check {
 				return switch (token.tok) {
 					case Kwd(KwdVar):
 						FoundGoDeeper;
+					case Kwd(KwdFinal) if (token.hasChildren()):
+						FoundGoDeeper;
 					default:
 						GoDeeper;
 				}
