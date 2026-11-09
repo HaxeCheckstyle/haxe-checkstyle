@@ -7,6 +7,7 @@ class InterfaceCheckTest extends CheckTestCase<InterfaceCheckTests> {
 	@Test
 	public function testWithJustProperties() {
 		assertMsg(new InterfaceCheck(), TEST1, PROPERTIES_MSG);
+		assertMsg(new InterfaceCheck(), FINAL_VARIABLE, PROPERTIES_MSG);
 	}
 
 	@Test
@@ -19,6 +20,7 @@ class InterfaceCheckTest extends CheckTestCase<InterfaceCheckTests> {
 		var check = new InterfaceCheck();
 		check.allowMarkerInterfaces = false;
 		assertMsg(check, TEST2, MARKER_MSG);
+		assertMsg(check, FINAL_VARIABLE, PROPERTIES_MSG);
 	}
 
 	@Test
@@ -31,6 +33,7 @@ class InterfaceCheckTest extends CheckTestCase<InterfaceCheckTests> {
 		var check = new InterfaceCheck();
 		check.allowProperties = true;
 		assertNoMsg(check, TEST4);
+		assertNoMsg(check, FINAL_VARIABLE);
 	}
 }
 
@@ -50,5 +53,9 @@ enum abstract InterfaceCheckTests(String) to String {
 		var a:Int;
 		var b:String;
 		function init():Void;
+	}";
+	var FINAL_VARIABLE = "
+	interface IComponentController {
+		final a:Int;
 	}";
 }
