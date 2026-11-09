@@ -197,6 +197,16 @@ class ExtendedEmptyLinesCheckTest extends CheckTestCase<ExtendedEmptyLinesCheckT
 		runChecks(AFTER_MULTILINE_COMMENT, " after comment");
 	}
 
+	@Test
+	public function testFinalFields() {
+		var check:ExtendedEmptyLinesCheck = makeIgnoredCheck(1);
+		check.exact = [AFTER_CLASS_STATIC_VARS, AFTER_CLASS_VARS];
+		assertMessages(check, TEST_FINAL_CLASS, [MSG_EXACT_1 + " after class static vars", MSG_EXACT_1 + " after class vars"]);
+
+		check.exact = [AFTER_ABSTRACT_VARS];
+		assertMsg(check, TEST_FINAL_ABSTRACT, MSG_EXACT_1 + " after abstract vars");
+	}
+
 	function runChecks(fieldName:EmptyLinesPlace, postfix:String, hasFixedPosition:Bool = true, msgCount:Int = 1, ?pos:PosInfos) {
 		var check:ExtendedEmptyLinesCheck = makeIgnoredCheck(1);
 		assertNoMsg(check, TEST_EXACT_1);
@@ -688,4 +698,17 @@ enum abstract ExtendedEmptyLinesCheckTests(String) to String {
 	}
 
 	";
+	var TEST_FINAL_CLASS = "
+	class Test {
+		static final A:Int = 1;
+		final b:Int = 2;
+		function new() {}
+	}";
+	var TEST_FINAL_ABSTRACT = "
+	abstract Test(Int) {
+		static final ZERO:Int = 0;
+		public function new(i:Int) {
+			this = i;
+		}
+	}";
 }
