@@ -20,7 +20,9 @@ class UnnecessaryConstructorCheck extends Check {
 
 			var acceptableTokens:Array<TokenTree> = cls.filterCallback(function(token:TokenTree, depth:Int):FilterResult {
 				return switch (token.tok) {
-					case Kwd(KwdFunction) | Kwd(KwdVar) | Kwd(KwdFinal):
+					case Kwd(KwdFunction) | Kwd(KwdVar):
+						FoundSkipSubtree;
+					case Kwd(KwdFinal) if (token.hasChildren()):
 						FoundSkipSubtree;
 					default:
 						GoDeeper;
