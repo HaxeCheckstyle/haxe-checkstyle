@@ -28,7 +28,8 @@ class UnusedLocalVarCheck extends Check {
 			var skipFirstFunction:Bool = true;
 			var localVars:Array<TokenTree> = f.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 				return switch (tok.tok) {
-					case Kwd(KwdVar), Kwd(KwdFinal): FoundSkipSubtree;
+					case Kwd(KwdVar), Kwd(KwdFinal): FoundGoDeeper;
+					case DblDot if (isVarTypeHint(tok)): SkipSubtree;
 					case Kwd(KwdFunction):
 						if (skipFirstFunction) {
 							skipFirstFunction = false;
@@ -40,6 +41,18 @@ class UnusedLocalVarCheck extends Check {
 				}
 			});
 			checkLocalVars(f, localVars);
+		}
+	}
+
+	function isVarTypeHint(token:TokenTree):Bool {
+		var name:Null<TokenTree> = token.parent;
+		if (name == null || name.parent == null) {
+			return false;
+		}
+
+		return switch (name.parent.tok) {
+			case Kwd(KwdVar), Kwd(KwdFinal): true;
+			default: false;
 		}
 	}
 
