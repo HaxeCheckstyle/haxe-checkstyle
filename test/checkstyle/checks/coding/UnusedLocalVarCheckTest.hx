@@ -20,6 +20,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 		assertMsg(check, UNUSED_FINAL, MSG_UNUSED_VAR_INDEX);
 		assertMsg(check, STRING_INTERPOLATION_UNUSED, MSG_UNUSED_VAR_INDEX);
 		assertMsg(check, MACRO_UNUSED, MSG_UNUSED_VAR_INDEX);
+		assertMessages(check, UNUSED_IN_ARROW_FUNCTION, ["Unused local variable column", "Unused local variable row"]);
 	}
 }
 
@@ -112,6 +113,16 @@ enum abstract UnusedLocalVarCheckTests(String) to String {
 			$v{index2};
 			$i{index3};
 			$a{index4};
+		}
+	}";
+	var UNUSED_IN_ARROW_FUNCTION = "
+	abstractAndClass Test {
+		public function a() {
+			final callback = (arg:Dynamic) -> {
+				var column:Int;
+				final row:Int;
+			};
+			callback();
 		}
 	}";
 	var RETURN_ANONYMOUS_STRUCT_FIELDS = "
