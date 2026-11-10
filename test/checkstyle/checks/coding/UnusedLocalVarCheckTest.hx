@@ -9,6 +9,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 		assertNoMsg(check, USED_INDEX);
 		assertNoMsg(check, STRING_INTERPOLATION);
 		assertNoMsg(check, MACRO);
+		assertNoMsg(check, ANON_STRUCT_TYPE);
 		assertNoMsg(check, RETURN_ANONYMOUS_STRUCT_FIELDS);
 	}
 
@@ -20,7 +21,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 		assertMsg(check, UNUSED_FINAL, MSG_UNUSED_VAR_INDEX);
 		assertMsg(check, STRING_INTERPOLATION_UNUSED, MSG_UNUSED_VAR_INDEX);
 		assertMsg(check, MACRO_UNUSED, MSG_UNUSED_VAR_INDEX);
-		assertMessages(check, UNUSED_IN_ARROW_FUNCTION, ["Unused local variable column", "Unused local variable row"]);
+		assertMessages(check, UNUSED_IN_ARROW_FUNCTION, ["Unused local variable index", "Unused local variable index2"]);
 	}
 }
 
@@ -119,10 +120,18 @@ enum abstract UnusedLocalVarCheckTests(String) to String {
 	abstractAndClass Test {
 		public function a() {
 			final callback = (arg:Dynamic) -> {
-				var column:Int;
-				final row:Int;
+				var index:Int;
+				final index2:Int;
 			};
 			callback();
+		}
+	}";
+	var ANON_STRUCT_TYPE = "
+	abstractAndClass Test {
+		public function a() {
+			final anon:{var index:Int;} = null;
+			var anon2:{final index2:String;} = null;
+			trace(anon, anon2);
 		}
 	}";
 	var RETURN_ANONYMOUS_STRUCT_FIELDS = "
