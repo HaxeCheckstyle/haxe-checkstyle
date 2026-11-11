@@ -1,7 +1,7 @@
 package checkstyle.checks.coding;
 
 /**
-	Checks for identical or similar code.
+	Checks arrow function style.
 **/
 @name("ArrowFunction")
 @desc("Checks for use of curlies, nested (non-arrow) functions or returns in arrow functions.")
@@ -26,12 +26,18 @@ class ArrowFunctionCheck extends Check {
 	**/
 	public var allowSingleArgParens:Bool;
 
+	/**
+		enforce using arrow syntax for non-member functions (`function (...) {}` -> `(...) -> ...`)
+	**/
+	public var enforceArrowForNonMemberFunctions:Bool;
+
 	public function new() {
 		super(TOKEN);
 		allowReturn = false;
 		allowFunction = false;
 		allowCurlyBody = false;
 		allowSingleArgParens = false;
+		enforceArrowForNonMemberFunctions = false;
 		categories = [STYLE];
 	}
 
@@ -55,6 +61,10 @@ class ArrowFunctionCheck extends Check {
 				case OldFunctionType | NewFunctionType:
 					continue;
 			}
+		}
+
+		if (enforceArrowForNonMemberFunctions) {
+			checkNonMemberFunctions();
 		}
 	}
 
@@ -108,6 +118,22 @@ class ArrowFunctionCheck extends Check {
 		if (count == 1) logPos("Arrow function should not use parens for single argument invocation", parent.pos);
 	}
 
+	function checkNonMemberFunctions() {
+		if (checker.ast == null) return;
+		checker.ast.walkFile(function(e:Expr) {
+			if (isPosSuppressed(e.pos)) return;
+			switch (e.expr) {
+				case EFunction(kind, _):
+					switch (kind) {
+						case FArrow:
+						case FAnonymous, FNamed(_, _), null:
+							logPos("Non-member function should use arrow syntax", e.pos);
+					}
+				default:
+			}
+		});
+	}
+
 	override public function detectableInstances():DetectableInstances {
 		return [{
 			fixed: [],
@@ -122,6 +148,9 @@ class ArrowFunctionCheck extends Check {
 				values: [false, true]
 			}, {
 				propertyName: "allowSingleArgParens",
+				values: [false, true]
+			}, {
+				propertyName: "enforceArrowForNonMemberFunctions",
 				values: [false, true]
 			}]
 		}];

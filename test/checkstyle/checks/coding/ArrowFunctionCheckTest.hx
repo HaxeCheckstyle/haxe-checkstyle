@@ -59,6 +59,19 @@ class ArrowFunctionCheckTest extends CheckTestCase<ArrowFunctionCheckTests> {
 		assertMsg(check, ARROW_FUNCTION_WITH_CURLY, "Arrow function should not have curlies");
 		assertMsg(check, ARROW_FUNCTION_WITH_NESTED_FUNCTION, "Arrow function should not include nested functions");
 	}
+
+	@Test
+	public function testEnforceArrowForNonMemberFunctions() {
+		var check = new ArrowFunctionCheck();
+		check.enforceArrowForNonMemberFunctions = true;
+		check.allowReturn = true;
+		check.allowFunction = true;
+		check.allowCurlyBody = true;
+		check.allowSingleArgParens = true;
+		assertNoMsg(check, CORRECT_ARROW_FUNCTION);
+		assertMsg(check, FUNCTION_EXPRESSION, "Non-member function should use arrow syntax");
+		assertMsg(check, NAMED_LOCAL_FUNCTION, "Non-member function should use arrow syntax");
+	}
 }
 
 enum abstract ArrowFunctionCheckTests(String) to String {
@@ -97,5 +110,23 @@ enum abstract ArrowFunctionCheckTests(String) to String {
 	var ARROW_FUNCTION_WITH_SINGLE_ARGUMENT = "
 	abstractAndClass Test {
 		var f = (arg) -> {};
+	}";
+	var FUNCTION_EXPRESSION = "
+	abstractAndClass Test {
+		function main() {
+			final f = function(value:Int) {
+				return value + 1;
+			}
+			f(1);
+		}
+	}";
+	var NAMED_LOCAL_FUNCTION = "
+	abstractAndClass Test {
+		function main() {
+			function helper(value:Int):Int {
+				return value + 1;
+			}
+			helper(1);
+		}
 	}";
 }
