@@ -9,6 +9,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 		assertNoMsg(check, USED_INDEX);
 		assertNoMsg(check, STRING_INTERPOLATION);
 		assertNoMsg(check, MACRO);
+		assertNoMsg(check, RETURN_ANONYMOUS_STRUCT_FIELDS);
 	}
 
 	@Test
@@ -104,6 +105,12 @@ enum abstract UnusedLocalVarCheckTests(String) to String {
 			$v{index2};
 			$i{index3};
 			$a{index4};
+		}
+	}";
+	var RETURN_ANONYMOUS_STRUCT_FIELDS = "
+	abstractAndClass Test {
+		function a():{ var index:Int; final index2:Int; } {
+			return null;
 		}
 	}";
 }
