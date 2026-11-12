@@ -35,6 +35,7 @@ class UnusedLocalVarCheck extends Check {
 							GoDeeper;
 						}
 						else SkipSubtree;
+					case BrOpen if (TokenTreeCheckUtils.getBrOpenType(tok) == AnonType): SkipSubtree;
 					default: GoDeeper;
 				}
 			});
