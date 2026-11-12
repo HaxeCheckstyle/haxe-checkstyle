@@ -95,17 +95,25 @@ class ArrowFunctionCheck extends Check {
 		if ((parent == null) || (parent.tok == Root)) return;
 		if (!parent.matches(POpen)) return;
 		var count:Int = 0;
+		var singleArg:Null<TokenTree> = null;
 		for (child in parent.children) {
 			switch (child.tok) {
 				case Arrow:
 					break;
 				case PClose:
 					break;
+				case Comment(_), CommentLine(_):
+					continue;
 				default:
 					count++;
+					singleArg = child;
 			}
 		}
-		if (count == 1) logPos("Arrow function should not use parens for single argument invocation", parent.pos);
+		if (count != 1) return;
+
+		if (singleArg.hasChildren()) return;
+
+		logPos("Arrow function should not use parens for single argument invocation", parent.pos);
 	}
 
 	override public function detectableInstances():DetectableInstances {
