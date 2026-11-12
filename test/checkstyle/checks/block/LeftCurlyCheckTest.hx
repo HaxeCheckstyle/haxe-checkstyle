@@ -37,6 +37,8 @@ class LeftCurlyCheckTest extends CheckTestCase<LeftCurlyCheckTests> {
 		assertMsg(check, TEST10, MSG_EOL);
 		assertMessages(check, NL_CASEBLOCK, [MSG_EOL, MSG_EOL, MSG_EOL]);
 		assertMsg(check, NLOW_CASEBLOCK, MSG_EOL);
+		assertMsg(check, FINAL_WITH_INNER_LOOP, MSG_EOL);
+		assertMsg(check, FINAL_WITH_INNER_LOOP_IN_ARRAY, MSG_EOL);
 	}
 
 	@Test
@@ -495,6 +497,35 @@ enum abstract LeftCurlyCheckTests(String) to String {
 			if (superClass == null) return;
 			if (superClass.t.get().name == 'Check') return;
 			addClassFields(typeName, classFields, superClass.t.get().fields.get(), pos, refs);
+		}
+	}";
+	var FINAL_WITH_INNER_LOOP = "
+	class Test {
+		final total = {
+			var sum = 0;
+			for (i in 0...3)
+			{
+				sum += i;
+			}
+			sum;
+		}
+	}";
+	var FINAL_WITH_INNER_LOOP_IN_ARRAY = "
+	class Test {
+		function test() {
+			var rows = [
+				{
+					final total = {
+						var sum = 0;
+						for (i in 0...3)
+						{
+							sum += i;
+						}
+						sum;
+					}
+					total;
+				}
+			];
 		}
 	}";
 }

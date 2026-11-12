@@ -22,6 +22,8 @@ class UnnecessaryConstructorCheck extends Check {
 				return switch (token.tok) {
 					case Kwd(KwdFunction) | Kwd(KwdVar):
 						FoundSkipSubtree;
+					case Kwd(KwdFinal) if (token.hasChildren()):
+						FoundSkipSubtree;
 					default:
 						GoDeeper;
 				}

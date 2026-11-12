@@ -44,7 +44,7 @@ class InnerAssignmentCheck extends Check {
 			if (token.previousSibling.matches(Binop(OpGt))) return false;
 		}
 		return switch (token.tok) {
-			case Kwd(KwdVar): false;
+			case Kwd(KwdVar), Kwd(KwdFinal): false;
 			case Kwd(KwdFunction): false;
 			case Kwd(KwdSwitch): true;
 			case Kwd(KwdReturn): filterReturn(token);

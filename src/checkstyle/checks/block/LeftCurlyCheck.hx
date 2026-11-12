@@ -211,7 +211,7 @@ class LeftCurlyCheck extends Check {
 		return switch (token.tok) {
 			case BkOpen: true;
 			case Kwd(KwdFunction): false;
-			case Kwd(KwdVar): false;
+			case Kwd(KwdVar), Kwd(KwdFinal): false;
 			default: isArrayComprehension(token.parent);
 		}
 	}

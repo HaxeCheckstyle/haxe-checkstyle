@@ -42,6 +42,16 @@ class UnnecessaryConstructorCheckTest extends CheckTestCase<UnnecessaryConstruct
 	}
 
 	@Test
+	public function testFinalAndStatic() {
+		assertNoMsg(new UnnecessaryConstructorCheck(), TEST_FINAL_AND_STATIC);
+	}
+
+	@Test
+	public function testFinalClass() {
+		assertMsg(new UnnecessaryConstructorCheck(), TEST_FINAL_CLASS, "Unnecessary constructor found");
+	}
+
+	@Test
 	public function testSuppression() {
 		assertNoMsg(new UnnecessaryConstructorCheck(), SUPPRESS);
 		assertNoMsg(new UnnecessaryConstructorCheck(), SUPPRESS_WITH_CONDITIONALS);
@@ -121,6 +131,25 @@ enum abstract UnnecessaryConstructorCheckTests(String) to String {
 		{
 			super(VAR1);
 		}
+	}";
+	var TEST_FINAL_AND_STATIC = "
+	class Test {
+		final a:Int;
+		static var b:Int;
+
+		public function new() {
+			a = 1;
+			b = 1;
+		}
+	}";
+	var TEST_FINAL_CLASS = "
+	final class Test {
+		public function new() {}
+
+		static var a:Int = 1;
+		static inline var b:Int = 1;
+		public static function walkFile() {}
+		static function test() {}
 	}";
 	var SUPPRESS = "
 	@SuppressWarnings('checkstyle:UnnecessaryConstructor')

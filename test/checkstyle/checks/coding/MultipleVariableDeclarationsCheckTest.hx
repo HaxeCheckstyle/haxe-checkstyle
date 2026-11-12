@@ -6,19 +6,20 @@ class MultipleVariableDeclarationsCheckTest extends CheckTestCase<MultipleVariab
 
 	@Test
 	public function testMultiVarsStatement() {
-		assertMsg(new MultipleVariableDeclarationsCheck(), TEST1, MSG_MULTI_VAR_COMMA);
+		assertMessages(new MultipleVariableDeclarationsCheck(), TEST1, [MSG_MULTI_VAR_COMMA, MSG_MULTI_VAR_COMMA]);
 		assertMsg(new MultipleVariableDeclarationsCheck(), TEST2, MSG_MULTI_VAR_COMMA);
 	}
 
 	@Test
 	public function testMultiVarsInOneLine() {
-		assertMessages(new MultipleVariableDeclarationsCheck(), TEST3, [MSG_MULTI_VAR, MSG_MULTI_VAR, MSG_MULTI_VAR]);
+		assertMessages(new MultipleVariableDeclarationsCheck(), TEST3, [MSG_MULTI_VAR, MSG_MULTI_VAR, MSG_MULTI_VAR, MSG_MULTI_VAR, MSG_MULTI_VAR]);
 	}
 
 	@Test
 	public function testCorrectVariables() {
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST4);
 		assertNoMsg(new MultipleVariableDeclarationsCheck(), TEST5);
+		assertNoMsg(new MultipleVariableDeclarationsCheck(), FINAL_FUNCTION);
 	}
 }
 
@@ -27,6 +28,7 @@ enum abstract MultipleVariableDeclarationsCheckTests(String) to String {
 	abstractAndClass Test {
 		function a() {
 			var d,e = 2;
+			final f = 1, g = 2;
 		}
 	}";
 	var TEST2 = "
@@ -41,6 +43,8 @@ enum abstract MultipleVariableDeclarationsCheckTests(String) to String {
 			var d = 10; var e;
 			var d;var e;
 			var f; var g;
+			final h = 1; final i = 2;
+			var j = 3; final k = 4;
 		}
 	}";
 	var TEST4 = "
@@ -55,5 +59,9 @@ enum abstract MultipleVariableDeclarationsCheckTests(String) to String {
 		function foo() {
 			var s = 'var f';
 		}
+	}";
+	var FINAL_FUNCTION = "
+	abstractAndClass Test {
+		final function a() { var d = 1; }
 	}";
 }

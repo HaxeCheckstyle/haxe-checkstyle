@@ -54,6 +54,8 @@ class RightCurlyCheckTest extends CheckTestCase<RightCurlyCheckTests> {
 		assertMsg(check, SAMELINE_IF, MSG_ALONE);
 		assertMsg(check, SAMELINE_TRY_CATCH, MSG_ALONE);
 		assertMessages(check, SAMELINE_NESTED_OBJECT, [MSG_ALONE, MSG_ALONE]);
+		assertMsg(check, FINAL_WITH_INNER_LOOP, MSG_ALONE);
+		assertMsg(check, FINAL_WITH_INNER_LOOP_IN_ARRAY, MSG_ALONE);
 	}
 
 	@Test
@@ -592,6 +594,31 @@ enum abstract RightCurlyCheckTests(String) to String {
 			switch (obj) {
 				case {x: 2, y: b}:
 			}
+		}
+	}";
+	var FINAL_WITH_INNER_LOOP = "
+	class Test {
+		final total = {
+			var sum = 0;
+			for (i in 0...3) {
+				sum += i; }
+			sum;
+		}
+	}";
+	var FINAL_WITH_INNER_LOOP_IN_ARRAY = "
+	class Test {
+		function test() {
+			var rows = [
+				{
+					final total = {
+						var sum = 0;
+						for (i in 0...3) {
+							sum += i; }
+						sum;
+					}
+					total;
+				}
+			];
 		}
 	}";
 }
