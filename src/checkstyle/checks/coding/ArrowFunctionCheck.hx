@@ -105,7 +105,12 @@ class ArrowFunctionCheck extends Check {
 					count++;
 			}
 		}
-		if (count == 1) logPos("Arrow function should not use parens for single argument invocation", parent.pos);
+		if (count != 1) return;
+
+		var singleArg:TokenTree = parent.children[0];
+		if (singleArg.hasChildren()) return;
+
+		logPos("Arrow function should not use parens for single argument invocation", parent.pos);
 	}
 
 	override public function detectableInstances():DetectableInstances {
