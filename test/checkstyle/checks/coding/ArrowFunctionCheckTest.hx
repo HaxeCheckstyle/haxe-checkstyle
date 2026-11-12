@@ -71,6 +71,7 @@ enum abstract ArrowFunctionCheckTests(String) to String {
 			var f = () -> {};
 			var f = arg -> {};
 			var f = (arg:Int) -> {};
+			var f = (arg = 1) -> {};
 			var f = (arg1:Int, arg2:String) -> {};
 			fields.map(field -> field.type);
 		}
