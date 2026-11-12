@@ -10,6 +10,7 @@ class ArrowFunctionCheckTest extends CheckTestCase<ArrowFunctionCheckTests> {
 		assertMsg(check, ARROW_FUNCTION_WITH_RETURN, "Arrow function should not have explicit returns");
 		assertMsg(check, ARROW_FUNCTION_WITH_NESTED_FUNCTION, "Arrow function should not include nested functions");
 		assertMsg(check, ARROW_FUNCTION_WITH_SINGLE_ARGUMENT, "Arrow function should not use parens for single argument invocation");
+		assertMsg(check, ARROW_FUNCTION_WITH_COMMENT, "Arrow function should not use parens for single argument invocation");
 	}
 
 	@Test
@@ -72,6 +73,8 @@ enum abstract ArrowFunctionCheckTests(String) to String {
 			var f = arg -> {};
 			var f = (arg:Int) -> {};
 			var f = (arg = 1) -> {};
+			var f = (/* comment */) -> {};
+			var f = (/* comment */ arg:Int) -> {};
 			var f = (arg1:Int, arg2:String) -> {};
 			fields.map(field -> field.type);
 		}
@@ -99,5 +102,9 @@ enum abstract ArrowFunctionCheckTests(String) to String {
 	var ARROW_FUNCTION_WITH_SINGLE_ARGUMENT = "
 	abstractAndClass Test {
 		var f = (arg) -> {};
+	}";
+	var ARROW_FUNCTION_WITH_COMMENT = "
+	abstractAndClass Test {
+		var f = (arg /* comment */) -> {};
 	}";
 }
