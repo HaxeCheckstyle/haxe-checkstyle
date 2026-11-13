@@ -22,6 +22,7 @@ class UnusedLocalVarCheckTest extends CheckTestCase<UnusedLocalVarCheckTests> {
 		assertMsg(check, STRING_INTERPOLATION_UNUSED, MSG_UNUSED_VAR_INDEX);
 		assertMsg(check, MACRO_UNUSED, MSG_UNUSED_VAR_INDEX);
 		assertMessages(check, UNUSED_IN_ARROW_FUNCTION, ["Unused local variable index", "Unused local variable index2"]);
+		assertMessages(check, UNUSED_IN_CLASS_ARROW_FUNCTION, ["Unused local variable index", "Unused local variable index2"]);
 	}
 }
 
@@ -123,6 +124,16 @@ enum abstract UnusedLocalVarCheckTests(String) to String {
 				var index:Int;
 				final index2:Int;
 			};
+			callback();
+		}
+	}";
+	var UNUSED_IN_CLASS_ARROW_FUNCTION = "
+	abstractAndClass Test {
+		var callback = (arg:Dynamic) -> {
+			var index:Int;
+			final index2:Int;
+		};
+		public function a() {
 			callback();
 		}
 	}";
