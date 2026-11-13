@@ -38,8 +38,11 @@ enum abstract UnusedLocalVarCheckTests(String) to String {
 		function b() {
 			var index:Int;
 		}
-
 		function c() {
+			@SuppressWarnings('checkstyle:UnusedLocalVar')
+			var index:Int;
+		}
+		function d() {
 			var index:Int;
 			call(function() {
 				index++;
