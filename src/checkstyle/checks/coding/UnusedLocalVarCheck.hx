@@ -87,6 +87,7 @@ class UnusedLocalVarCheck extends Check {
 			for (child in localVar.children) {
 				switch (child.tok) {
 					case Const(CIdent(name)):
+						if (isPosSuppressed(child.pos)) continue;
 						checkLocalVar(f, child, name);
 					default:
 				}
