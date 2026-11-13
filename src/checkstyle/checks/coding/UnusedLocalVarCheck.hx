@@ -20,6 +20,8 @@ class UnusedLocalVarCheck extends Check {
 					FoundGoDeeper;
 				case Arrow if (isOutermostArrowFunction(token)):
 					FoundGoDeeper;
+				case Kwd(KwdMacro):
+					SkipSubtree;
 				default:
 					GoDeeper;
 			}
@@ -39,6 +41,7 @@ class UnusedLocalVarCheck extends Check {
 						}
 						else SkipSubtree;
 					case BrOpen if (TokenTreeCheckUtils.getBrOpenType(tok) == AnonType): SkipSubtree;
+					case Kwd(KwdMacro): SkipSubtree;
 					default: GoDeeper;
 				}
 			});
