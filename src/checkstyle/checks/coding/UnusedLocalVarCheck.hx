@@ -18,6 +18,8 @@ class UnusedLocalVarCheck extends Check {
 			return switch (token.tok) {
 				case Kwd(KwdFunction):
 					FoundGoDeeper;
+				case Arrow if (isOutermostArrowFunction(token)):
+					FoundGoDeeper;
 				default:
 					GoDeeper;
 			}
@@ -25,7 +27,7 @@ class UnusedLocalVarCheck extends Check {
 
 		for (f in functions) {
 			if (isPosSuppressed(f.pos)) continue;
-			var skipFirstFunction:Bool = true;
+			var skipFirstFunction:Bool = f.matches(Kwd(KwdFunction));
 			var localVars:Array<TokenTree> = f.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 				return switch (tok.tok) {
 					case Kwd(KwdVar), Kwd(KwdFinal): FoundGoDeeper;
@@ -56,6 +58,27 @@ class UnusedLocalVarCheck extends Check {
 		}
 	}
 
+	function isOutermostArrowFunction(token:TokenTree):Bool {
+		if (TokenTreeCheckUtils.determineArrowType(token) != ArrowFunction) {
+			return false;
+		}
+
+		var parent:Null<TokenTree> = token.parent;
+		while (parent != null) {
+			switch (parent.tok) {
+				case Kwd(KwdFunction):
+					return false;
+				case Arrow if (TokenTreeCheckUtils.determineArrowType(parent) == ArrowFunction):
+					return false;
+				default:
+			}
+
+			parent = parent.parent;
+		}
+
+		return true;
+	}
+
 	function checkLocalVars(f:TokenTree, localVars:Array<TokenTree>) {
 		for (localVar in localVars) {
 			for (child in localVar.children) {
@@ -69,7 +92,7 @@ class UnusedLocalVarCheck extends Check {
 	}
 
 	function checkLocalVar(f:TokenTree, v:TokenTree, name:String) {
-		var ignoreFunctionSignature:Bool = true;
+		var ignoreFunctionSignature:Bool = f.matches(Kwd(KwdFunction));
 		var nameList:Array<TokenTree> = f.filterCallback(function(tok:TokenTree, depth:Int):FilterResult {
 			if (ignoreFunctionSignature) {
 				switch (tok.tok) {
